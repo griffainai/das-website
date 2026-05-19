@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5 Things New Drivers Notice in the First 30 Days — Driver Appreciation Solutions</title>
+  <meta name="description" content="The first month sets the retention trajectory for a driver's entire tenure. Here's what high-retention fleets do differently — and the onboarding recognition framework that locks in loyalty before day 30.">
+  <link rel="canonical" href="https://website-griffainai.vercel.app/blog/first-30-days-onboarding.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="5 Things New Drivers Notice in the First 30 Days — Fleet Retention">
+  <meta property="og:description" content="The first month sets the retention trajectory for a driver's entire tenure. Here's what high-retention fleets do differently — and the onboarding recognition framework that locks in loyalty before day 30.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&fit=crop">
+  <meta property="og:url" content="https://website-griffainai.vercel.app/blog/first-30-days-onboarding.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="5 Things New Drivers Notice in the First 30 Days">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=80&fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <meta name="theme-color" content="#1A2E6E">
+  <style>
+    .article-hero { background: #0D1B45; padding: 72px 0 0; }
+    .article-meta-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .article-category { background: rgba(255,255,255,0.12); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
+    .article-readtime { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-date { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-title { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 24px; }
+    .article-subtitle { font-size: 1.125rem; color: rgba(255,255,255,0.70); line-height: 1.7; max-width: 680px; margin-bottom: 40px; }
+    .article-author-row { display: flex; align-items: center; gap: 14px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.10); }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .author-name { font-size: 0.9375rem; font-weight: 600; color: #fff; }
+    .author-title { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-hero-image { width: 100%; max-height: 520px; object-fit: cover; display: block; margin-top: 48px; }
+    .article-body { max-width: 740px; margin: 0 auto; padding: 64px 24px; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary); margin: 52px 0 18px; line-height: 1.25; }
+    .article-body h2:first-child { margin-top: 0; }
+    .article-body p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+    .article-body ul { margin: 20px 0 28px 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .article-body li { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; padding-left: 24px; position: relative; }
+    .article-body li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 0.875rem; top: 2px; }
+    .pull-quote { background: var(--gold-tint); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 28px 32px; margin: 44px 0; }
+    .pull-quote p { font-size: 1.1875rem; font-weight: 600; color: var(--text-primary); line-height: 1.6; font-style: italic; margin: 0; }
+    .article-figure { margin: 44px 0; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gold-border); }
+    .article-figure img { width: 100%; display: block; }
+    .article-figure figcaption { background: var(--black-2); padding: 14px 20px; font-size: 0.8125rem; color: var(--text-muted); border-top: 1px solid var(--gold-border); }
+    .article-blockquote { background: #0D1B45; border-radius: var(--radius-lg); padding: 36px 40px; margin: 44px 0; }
+    .article-blockquote p { font-size: 1.125rem; color: #fff; font-weight: 600; line-height: 1.65; margin: 0 0 12px; }
+    .article-blockquote cite { font-size: 0.875rem; color: rgba(255,255,255,0.55); font-style: normal; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; }
+    .stat-box { background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; }
+    .stat-box .stat-number { font-size: 2.25rem; font-weight: 800; color: var(--gold); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+    .stat-box .stat-label { font-size: 0.875rem; color: var(--text-muted); line-height: 1.4; }
+    .timeline-item { display: flex; gap: 20px; padding: 24px; background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); margin-bottom: 16px; }
+    .timeline-marker { width: 48px; height: 48px; border-radius: 50%; background: var(--gold); color: #fff; font-weight: 800; font-size: 0.875rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .timeline-content h4 { font-size: 1rem; font-weight: 700; color: var(--text-primary); margin: 0 0 6px; }
+    .timeline-content p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; margin: 0; }
+    .author-bio-section { background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-xl); padding: 36px 40px; margin: 64px 0 40px; display: flex; gap: 24px; align-items: flex-start; }
+    .author-bio-avatar { width: 64px; height: 64px; border-radius: 50%; background: #0D1B45; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
+    .author-bio-name { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .author-bio-role { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 12px; }
+    .author-bio-text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+    .related-posts { padding: 64px 0; background: var(--black-2); border-top: 1px solid var(--gold-border); }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+    @media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } .author-bio-section { flex-direction: column; } .article-blockquote { padding: 28px 24px; } .timeline-item { flex-direction: column; } }
+    @media (max-width: 640px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
+  <a href="../shop.html">Order recognition kits →</a>
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="../index.html"  class="nav-link">Home</a>
+        <a href="../shop.html"   class="nav-link">Shop</a>
+        <a href="../about.html"  class="nav-link">About</a>
+        <a href="../ideas.html"  class="nav-link active">Ideas</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="../cart.html" class="nav-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button class="mobile-close-btn">✕</button>
+  </div>
+  <a href="../index.html"  class="mobile-nav-link">Home</a>
+  <a href="../shop.html"   class="mobile-nav-link">Shop</a>
+  <a href="../about.html"  class="mobile-nav-link">About</a>
+  <a href="../ideas.html"  class="mobile-nav-link active">Ideas</a>
+  <a href="../contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="../cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="container">
+    <div style="max-width:800px;padding-top:16px">
+      <div style="margin-bottom:20px">
+        <a href="../ideas.html" style="font-size:0.8125rem;color:rgba(255,255,255,0.55);display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+          Back to Ideas
+        </a>
+      </div>
+      <div class="article-meta-bar">
+        <span class="article-category">Onboarding</span>
+        <span class="article-date">April 2026</span>
+        <span class="article-readtime">· 5 min read</span>
+      </div>
+      <h1 class="article-title">5 Things New Drivers Notice About Your Company in the First 30 Days</h1>
+      <p class="article-subtitle">The first month sets the retention trajectory for a driver's entire tenure. What high-retention fleets do in those 30 days is not complicated — but it is deliberate. Here is what your new drivers are watching for.</p>
+      <div class="article-author-row">
+        <div class="author-avatar">🚛</div>
+        <div>
+          <div class="author-name">Driver Appreciation Solutions Editorial Team</div>
+          <div class="author-title">Fleet Recognition Specialists</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img
+    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1400&q=80&fit=crop"
+    alt="New driver onboarding and training orientation"
+    class="article-hero-image"
+    loading="eager"
+    onerror="this.style.display='none'">
+</div>
+
+<!-- ARTICLE BODY -->
+<main>
+  <div class="article-body">
+
+    <h2>The Science Behind First Impressions in the Trucking Industry</h2>
+    <p>Behavioral research consistently shows that humans form organizational judgments quickly and revise them slowly. In employment contexts, the pattern is even more pronounced: the impressions formed in the first 30 days of a new job tend to crystallize into durable attitudes about the employer that persist for years — or until a significant disrupting event forces a reassessment.</p>
+    <p>For commercial drivers, who spend most of their workday physically separated from their employer — alone in a cab, on routes, in unfamiliar territory — the early impressions carry additional weight. There is no casual hallway conversation, no spontaneous positive interaction in a shared office space. The signals a new driver receives come exclusively through deliberate employer choices: how well their equipment is maintained, how their dispatcher communicates with them, whether their name appears on anything that feels personal, whether the company they just joined looks like a place that knew they were coming.</p>
+    <p>The statistics bear this out: 40 percent of drivers who leave a fleet in the first 90 days report that their departure decision was substantially influenced by impressions formed in the first 30 days. Conversely, drivers who report a strong first-month experience stay an average of 22 months longer than those who report a neutral or negative first month. The first 30 days are not a warmup — they are the main event.</p>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-number">40%</div>
+        <div class="stat-label">of drivers who leave in the first 90 days report the decision was influenced by first-30-day impressions</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">22 mo</div>
+        <div class="stat-label">additional average tenure for drivers who report a strong first-month experience vs. neutral/negative</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">3×</div>
+        <div class="stat-label">more likely to refer peers to a fleet when they rate their onboarding experience as "excellent" or "very good"</div>
+      </div>
+    </div>
+
+    <h2>Signal #1: Whether They Were Expected</h2>
+    <p>The most basic signal a new driver picks up on their first day is whether the company knew they were coming and prepared for them. This sounds obvious. It is surprisingly rare.</p>
+    <p>High-retention fleets have a first-day protocol that makes a new driver feel expected: equipment pre-assigned and clean, paperwork pre-staged, a named contact waiting for them (not "ask for whoever is at the front desk"), and a welcome package ready — not ordered — when they arrive. That welcome package does not need to be elaborate. A quality onboarding kit with their name on it, a route overview, and a personal welcome note from their manager is sufficient. The message it sends is: we planned for you. You are not a number we are processing. You are a person we were expecting.</p>
+    <p>Fleets that skip this signal — that have new drivers wait in a lobby, fill out forms for two hours before meeting anyone, and receive generic paperwork with no personal touch — start the relationship at a deficit that is difficult to recover from. The driver's first data point about "how this place works" is an impersonal, logistical experience that signals they are one of many replaceable units moving through a system.</p>
+
+    <div class="pull-quote">
+      <p>"A new driver's first day is a data collection exercise. They are cataloging everything: How clean is the yard? Does my manager know my name? Did anyone put thought into welcoming me? Does this feel like a place I want to build a career? Every detail is a data point."</p>
+    </div>
+
+    <h2>Signal #2: The Quality and Condition of Their Equipment</h2>
+    <p>Commercial drivers are professionals who take pride in their craft. Handing a new driver a truck that is dirty, mechanically questionable, or clearly the bottom of the fleet inventory communicates a precise message: this is where new drivers start, and new drivers are not worth the good equipment yet. Some drivers will accept that framing. The best drivers — the ones you most want to retain — will not.</p>
+    <p>High-retention fleets have a clear policy: new drivers get equipment that is clean, maintained, and appropriate to their routes. The rationale is partly about safety (new drivers should not be managing equipment defects while also learning routes and relationships), partly about morale (a clean truck is a point of professional pride), and partly about the signal it sends about how the company values its people from the beginning.</p>
+    <p>Equipment quality also directly impacts safety during the highest-risk period for new drivers. The first 90 days carry significantly higher accident risk as drivers learn routes, dispatchers, and equipment quirks. Giving new drivers the best-maintained trucks reduces this risk materially. It is both a safety decision and a retention decision, which is why high-performing fleets treat them as the same decision.</p>
+
+    <h2>Signal #3: Whether Their Manager Knows Their Name</h2>
+    <p>The relationship with a direct manager or dispatcher is the single most predictive variable in driver retention. Not compensation. Not routes. Not equipment. The relationship with the person a driver reports to every day. When that relationship starts with the manager knowing the driver's name, their background, why they joined, and something specific about their experience — it begins on a foundation of acknowledged personhood. When it starts with the manager being visibly unfamiliar with who just joined their team, it begins on a foundation of interchangeability.</p>
+    <p>Manager name recognition sounds like a low bar. In the trucking industry, with dispatchers managing 30 to 60 driver relationships simultaneously and administrative turnover creating frequent manager changes, it is not always met. High-retention fleets build it in deliberately through onboarding protocols that brief managers before a new hire's first day with their name, prior experience, any noted preferences or concerns from recruiting, and a specific prompt to introduce themselves personally within the first two hours.</p>
+
+    <figure class="article-figure">
+      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=75&fit=crop" alt="Fleet manager having a personal conversation with a new driver during onboarding" loading="lazy" onerror="this.style.display='none'">
+      <figcaption>The manager-driver relationship is the strongest predictor of long-term retention. It starts with a name — and the conversation that follows it on day one.</figcaption>
+    </figure>
+
+    <h2>Signal #4: Recognition at the Right Moments in Week One</h2>
+    <p>The first week is when new drivers are most alert to positive signals from their employer. They are watching for evidence that they made the right decision. Specific recognition during week one — acknowledgment of a successful first run, feedback on a clean pre-trip inspection, a mention by name in a team communication — arrives in a context where its impact is amplified by the driver's heightened attention to signals.</p>
+    <p>The most effective week-one recognition practices we see in high-retention fleets:</p>
+    <ul>
+      <li>A check-in call or text from the dispatcher at the end of day one — not about logistics, but to ask how the first day went</li>
+      <li>A brief written acknowledgment of the driver's first completed run, shared with the team or posted on the fleet board</li>
+      <li>A personalized day-seven note or card from the fleet manager acknowledging the driver by name and expressing specific confidence in their onboarding</li>
+      <li>A formal introduction to the broader team — not just a generic "we have a new hire" announcement, but a specific note about who the driver is and what they bring</li>
+    </ul>
+    <p>These touchpoints are not expensive in dollar terms. They are expensive in attention terms — they require someone to track the new driver's experience and decide that it warrants specific acknowledgment. That decision is itself the signal: this company pays attention to individuals.</p>
+
+    <div class="article-blockquote">
+      <p>"The fleets that retain drivers long-term are not doing anything magical in weeks two through fifty-two. They are doing something specific in week one: making the driver feel like a person, not a placement. Everything else builds from that foundation."</p>
+      <cite>— Driver Appreciation Solutions Fleet Strategy Team</cite>
+    </div>
+
+    <h2>Signal #5: What the 30-Day Mark Looks Like</h2>
+    <p>The 30-day mark is a natural checkpoint in the driver's internalized evaluation of whether this fleet is a fit. High-retention fleets make it a deliberate touchpoint rather than letting it pass unremarked. A 30-day check-in is not an HR formality — it is a structured conversation that communicates continued investment in the driver's experience and opens a channel for the driver to raise any concerns before they begin suppressing them.</p>
+    <p>Best practices for the 30-day recognition touchpoint:</p>
+    <ul>
+      <li>A brief face-to-face or video check-in with the direct manager — not HR, the manager who works with the driver daily</li>
+      <li>A specific question: "What has been better than expected? What has been harder than expected?" — and genuine listening without defensiveness</li>
+      <li>A small tangible recognition for completing the first month — a milestone card, a branded item, something that marks the milestone as significant</li>
+      <li>A concrete preview of what month two looks like — routes, assignments, development opportunities — that signals the company is thinking about the driver's future, not just their current assignment</li>
+    </ul>
+
+    <h2>Building Your 30-Day Onboarding Recognition Framework</h2>
+    <p>A structured 30-day onboarding recognition framework does not require significant budget. It requires a protocol, a small investment in quality materials, and the discipline to execute it consistently for every new hire — not just the ones who seem promising.</p>
+    <p>Here is the framework that high-retention fleets use:</p>
+    <ul>
+      <li><strong>Day 0 (before arrival):</strong> Equipment pre-staged, paperwork prepared, onboarding kit ordered with personalization (name, welcome message). Contact briefed with driver background.</li>
+      <li><strong>Day 1:</strong> Named contact meets driver at door. Onboarding kit presented. Manager introduction within first two hours, by name, with specific acknowledgment of who the driver is.</li>
+      <li><strong>Day 3:</strong> First-run acknowledgment — dispatcher check-in, brief positive feedback on initial performance.</li>
+      <li><strong>Day 7:</strong> Written acknowledgment from manager. Team introduction that names the driver and notes their specific background.</li>
+      <li><strong>Day 14:</strong> Mid-month pulse check — a brief conversation to catch any early concerns before they become departure decisions.</li>
+      <li><strong>Day 30:</strong> Formal 30-day milestone recognition — tangible item, structured conversation, preview of month two. Documentation of any concerns raised and follow-up commitments.</li>
+    </ul>
+    <p>The drivers who make it through a well-executed 30-day program convert to multi-year employees at dramatically higher rates. The math is straightforward: the cost of the onboarding kit and the manager time to execute this protocol is a fraction of the replacement cost you avoid when that driver is still on your roster three years later.</p>
+
+    <!-- Author Bio -->
+    <div class="author-bio-section">
+      <div class="author-bio-avatar">🚛</div>
+      <div>
+        <div class="author-bio-name">Driver Appreciation Solutions Editorial Team</div>
+        <div class="author-bio-role">Fleet Recognition Specialists · Driver Appreciation Solutions</div>
+        <p class="author-bio-text">Our onboarding framework content is built from retention research, exit interview analysis, and direct conversations with fleet operators who have cracked the first-30-day retention problem. Every recommendation in this article has been tested against real driver data.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RELATED POSTS -->
+  <section class="related-posts">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:8px">
+        <span class="section-eyebrow">Keep Reading</span>
+      </div>
+      <h2 class="section-title" style="text-align:center;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0">Related Articles</h2>
+      <div class="related-grid">
+
+        <a href="cost-of-driver-turnover.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=70&fit=crop" alt="Turnover cost analysis" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Retention</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">The True Cost of Losing a Driver (And How Recognition Changes the Math)</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">6 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="year-round-recognition-calendar.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=70&fit=crop" alt="Year round recognition planning" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Planning</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">How to Build a Year-Round Driver Recognition Calendar (With Budget Templates)</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">5 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="fleet-operators-guide-appreciation-week.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=70&fit=crop" alt="Fleet trucks appreciation week" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Planning</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">The Fleet Operator's Guide to Driver Appreciation Week 2026</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">8 min read</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="cta-banner-eyebrow">Start Right</div>
+        <h2 class="cta-banner-title">Make every first day unforgettable.</h2>
+        <p class="cta-banner-desc">Our onboarding kits are built to arrive on day one — personalized, professional, and designed to communicate that your company was ready for this driver before they ever walked through the door.</p>
+        <div class="cta-banner-actions">
+          <a href="../shop.html?category=onboarding" class="btn btn-primary btn-lg">Shop Onboarding Kits</a>
+          <a href="../contact.html" class="btn btn-secondary btn-lg">Get a Custom Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="nav-logo">
+          <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        </a>
+        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, and milestone awards built for the trucking industry.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="../shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
+          <li><a href="../shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
+          <li><a href="../shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="../about.html"   class="footer-link">About Us</a></li>
+          <li><a href="../ideas.html"   class="footer-link">Ideas Blog</a></li>
+          <li><a href="../contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="../customer-service.html" class="footer-link">Customer Service</a></li>
+          <li><a href="../return-policy.html" class="footer-link">Return Policy</a></li>
+          <li><a href="../refund-policy.html" class="footer-link">Refund &amp; Disputes</a></li>
+          <li><a href="../cancelation-policy.html" class="footer-link">Cancellation Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="../terms.html" class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="../cancelation-policy.html" class="footer-legal-link">Cancellation Policy</a>
+        <a href="../return-policy.html" class="footer-legal-link">Return Policy</a>
+        <a href="../refund-policy.html" class="footer-legal-link">Refund Policy</a>
+        <a href="../legal.html" class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script src="../js/cart.js"></script>
+</body>
+</html>

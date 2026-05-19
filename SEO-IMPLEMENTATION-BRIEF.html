@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAS SEO Implementation Brief — May 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 14px; color: #1a1a1a; line-height: 1.6; background: #fff; }
+  .page { max-width: 860px; margin: 0 auto; padding: 48px 40px; }
+  h1 { font-size: 28px; font-weight: 800; color: #0D1B45; letter-spacing: -0.03em; margin-bottom: 6px; }
+  h2 { font-size: 18px; font-weight: 700; color: #0D1B45; margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 2px solid #0D1B45; }
+  h3 { font-size: 14px; font-weight: 700; color: #1a1a1a; margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  h4 { font-size: 14px; font-weight: 700; color: #0D1B45; margin: 16px 0 6px; }
+  p { margin-bottom: 10px; color: #333; }
+  ul { margin: 8px 0 12px 20px; }
+  li { margin-bottom: 4px; color: #333; }
+  .meta { font-size: 12px; color: #666; margin-bottom: 32px; }
+  .badge { display: inline-block; background: #0D1B45; color: #fff; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 4px; letter-spacing: 0.05em; text-transform: uppercase; }
+  .badge-gold { background: #C8972B; }
+  .badge-green { background: #1a7a3c; }
+  .badge-red { background: #b91c1c; }
+  .spec-table { width: 100%; border-collapse: collapse; margin: 12px 0 24px; font-size: 13px; }
+  .spec-table th { background: #f0f2f7; text-align: left; padding: 8px 12px; font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; color: #555; }
+  .spec-table td { padding: 8px 12px; border-bottom: 1px solid #e8e8e8; vertical-align: top; }
+  .spec-table td:first-child { font-weight: 600; color: #0D1B45; white-space: nowrap; width: 160px; }
+  .spec-table tr:last-child td { border-bottom: none; }
+  code { font-family: 'Courier New', monospace; font-size: 12px; background: #f4f4f4; padding: 2px 5px; border-radius: 3px; color: #c7254e; }
+  pre { background: #f4f4f4; border: 1px solid #ddd; border-radius: 6px; padding: 16px; margin: 10px 0 20px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.6; white-space: pre-wrap; word-break: break-all; }
+  .box { background: #f8f9fc; border: 1px solid #dde2f0; border-radius: 6px; padding: 16px 20px; margin: 12px 0 20px; }
+  .box-warn { background: #fffbeb; border-color: #f59e0b; }
+  .box-ok { background: #f0fdf4; border-color: #22c55e; }
+  .box-critical { background: #fff1f2; border-color: #f43f5e; }
+  .divider { border: none; border-top: 1px solid #e8e8e8; margin: 32px 0; }
+  .toc { background: #f8f9fc; border: 1px solid #dde2f0; border-radius: 6px; padding: 20px 24px; margin: 24px 0 40px; }
+  .toc h3 { margin-top: 0; margin-bottom: 12px; }
+  .toc ol { margin-left: 20px; }
+  .toc li { margin-bottom: 6px; }
+  .toc a { color: #0D1B45; text-decoration: none; font-weight: 500; }
+  .checklist li { list-style: none; margin-left: 0; padding-left: 22px; position: relative; }
+  .checklist li::before { content: '☐'; position: absolute; left: 0; color: #0D1B45; font-size: 13px; }
+  .section-num { display: inline-block; background: #0D1B45; color: #fff; font-size: 11px; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; text-align: center; line-height: 22px; margin-right: 8px; }
+  @media print {
+    body { font-size: 12px; }
+    .page { padding: 24px; }
+    h2 { page-break-after: avoid; }
+    pre, .box { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:8px;">
+    <div>
+      <h1>DAS SEO Implementation Brief</h1>
+      <p class="meta">Driver Appreciation Solutions &nbsp;·&nbsp; Production site: <strong>https://website-griffainai.vercel.app</strong> &nbsp;·&nbsp; Prepared May 2026</p>
+    </div>
+    <span class="badge">v1.0</span>
+  </div>
+
+  <div class="box">
+    <strong>Purpose of this document:</strong> Complete spec for implementing the DAS SEO strategy. Hand this to any agent or developer to execute. All page content, schema, file structure, and deployment steps are included. Do not deviate from the design constraint in Section 2.
+  </div>
+
+  <div class="toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#s1">Site overview &amp; file structure</a></li>
+      <li><a href="#s2">Critical design constraint</a></li>
+      <li><a href="#s3">New page 1 — driver-appreciation-week-2026.html</a></li>
+      <li><a href="#s4">New page 2 — commercial-driver-gifts.html</a></li>
+      <li><a href="#s5">Homepage changes (index.html)</a></li>
+      <li><a href="#s6">Blog post schema additions (6 files)</a></li>
+      <li><a href="#s7">Footer internal links (all pages)</a></li>
+      <li><a href="#s8">Sitemap additions</a></li>
+      <li><a href="#s9">Deployment steps</a></li>
+      <li><a href="#s10">Pre-publish checklist</a></li>
+    </ol>
+  </div>
+
+
+  <!-- SECTION 1 -->
+  <h2 id="s1"><span class="section-num">1</span> Site Overview &amp; File Structure</h2>
+
+  <table class="spec-table">
+    <tr><td>Production URL</td><td><code>https://website-griffainai.vercel.app</code></td></tr>
+    <tr><td>Hosting</td><td>Vercel — static site, no build step</td></tr>
+    <tr><td>Deploy command</td><td><code>npx vercel --prod --scope griffainai --yes</code></td></tr>
+    <tr><td>CSS file</td><td><code>css/styles.css</code> (shared across all pages)</td></tr>
+    <tr><td>Blog directory</td><td><code>blog/</code> — all 6 articles live here</td></tr>
+    <tr><td>Images</td><td>Hosted on Unsplash CDN — no local images needed for new pages</td></tr>
+  </table>
+
+  <h3>Existing pages relevant to this brief</h3>
+  <ul>
+    <li><code>index.html</code> — homepage</li>
+    <li><code>blog/fleet-operators-guide-appreciation-week.html</code></li>
+    <li><code>blog/recognition-reduces-accidents.html</code></li>
+    <li><code>blog/cost-of-driver-turnover.html</code></li>
+    <li><code>blog/roi-of-recognition.html</code></li>
+    <li><code>blog/first-30-days-onboarding.html</code></li>
+    <li><code>blog/year-round-recognition-calendar.html</code></li>
+    <li>All <code>solution-*.html</code> pages, <code>about.html</code>, <code>shop.html</code>, <code>contact.html</code>, <code>ideas.html</code>, <code>product.html</code>, <code>favorites.html</code></li>
+  </ul>
+
+
+  <!-- SECTION 2 -->
+  <h2 id="s2"><span class="section-num">2</span> Critical Design Constraint</h2>
+
+  <div class="box box-critical">
+    <strong>The two new SEO pages MUST use the blog article layout — NOT the solution page layout.</strong><br><br>
+    The site has two layout types:<br>
+    (A) <strong>Solution pages</strong> (<code>solution-appreciation.html</code>, etc.) — large hero sections, visual stat cards, icon grids, CTA banners with big imagery. <em>Do not use this for the new SEO pages.</em><br><br>
+    (B) <strong>Blog article pages</strong> (<code>blog/cost-of-driver-turnover.html</code>, etc.) — dark header with title + author, then a clean text-body article with prose, pull quotes, and stat boxes. <em>Use this template for both new SEO pages.</em>
+  </div>
+
+  <h3>How to copy the blog template</h3>
+  <p>Open <code>blog/cost-of-driver-turnover.html</code>. Copy the entire file. Save as the new filename in the root directory (not inside <code>blog/</code>). Update all relative paths: change <code>../css/styles.css</code> to <code>css/styles.css</code>, change <code>../contact.html</code> to <code>contact.html</code>, etc. Then replace the content per Sections 3 and 4 below.</p>
+
+  <h3>Blog template structure (what to keep)</h3>
+  <ul>
+    <li>The entire <code>&lt;head&gt;</code> block (update meta tags per spec)</li>
+    <li>The <code>&lt;style&gt;</code> block with article CSS classes — keep all of it</li>
+    <li>The <code>&lt;nav&gt;</code> — keep exactly as-is</li>
+    <li>The <code>.article-hero</code> section — update title, subtitle, author, category, read time</li>
+    <li>The hero image (<code>.article-hero-image</code>) — update src to the Unsplash URL specified below</li>
+    <li>The <code>.article-body</code> section — replace content per spec</li>
+    <li>The related articles section — update the 3 links to appropriate related posts</li>
+    <li>The <code>&lt;footer&gt;</code> — keep exactly as-is</li>
+  </ul>
+
+
+  <!-- SECTION 3 -->
+  <h2 id="s3"><span class="section-num">3</span> New Page 1 — driver-appreciation-week-2026.html</h2>
+
+  <span class="badge badge-gold">P0 Keyword</span> &nbsp; Target: <strong>"driver appreciation week 2026"</strong> &nbsp;|&nbsp; Est. monthly searches: 1,200–2,400 (seasonal peak Aug–Sep)
+
+  <h3>File specs</h3>
+  <table class="spec-table">
+    <tr><td>File path</td><td><code>driver-appreciation-week-2026.html</code> (root, not in blog/)</td></tr>
+    <tr><td>Canonical URL</td><td><code>https://website-griffainai.vercel.app/driver-appreciation-week-2026.html</code></td></tr>
+    <tr><td>Title tag</td><td><code>Driver Appreciation Week 2026: Fleet Manager's Guide | DAS</code> (57 chars)</td></tr>
+    <tr><td>Meta description</td><td><code>Driver Appreciation Week 2026 runs September 13–19. Everything fleet operators need: NTDAW history, gift ideas, ordering deadlines, and a recognition checklist.</code> (154 chars)</td></tr>
+    <tr><td>H1</td><td>Driver Appreciation Week 2026: The Fleet Manager's Complete Guide</td></tr>
+    <tr><td>Hero image</td><td><code>https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=1400&q=80&fit=crop</code></td></tr>
+    <tr><td>Category badge</td><td>Fleet Operations</td></tr>
+    <tr><td>Read time</td><td>8 min read</td></tr>
+    <tr><td>Author</td><td>Driver Appreciation Solutions Editorial Team</td></tr>
+    <tr><td>Date</td><td>May 19, 2026</td></tr>
+  </table>
+
+  <h3>JSON-LD schema (paste inside &lt;head&gt;)</h3>
+  <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://website-griffainai.vercel.app/driver-appreciation-week-2026.html",
+      "url": "https://website-griffainai.vercel.app/driver-appreciation-week-2026.html",
+      "name": "Driver Appreciation Week 2026: Fleet Manager's Guide | DAS",
+      "description": "Driver Appreciation Week 2026 runs September 13–19. Everything fleet operators need: NTDAW history, gift ideas, ordering deadlines, and a recognition checklist.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-griffainai.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Driver Appreciation Week 2026" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "When is Driver Appreciation Week 2026?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Driver Appreciation Week 2026 runs September 13–19, 2026. It is the 38th Annual National Truck Driver Appreciation Week (NTDAW), recognized annually by the American Trucking Associations (ATA)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does NTDAW stand for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NTDAW stands for National Truck Driver Appreciation Week. It is an annual observance organized by the American Trucking Associations (ATA) to recognize the contributions of the nation's 3.5 million professional truck drivers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are the best Driver Appreciation Week gift ideas for fleets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most effective NTDAW gifts for fleets are recognition kits that include a personalized certificate or letter from leadership, a branded item drivers can use in the cab (tumbler, cooler bag, hat), and a handwritten or signed card. Kits ordered in bulk for 10–500 drivers typically run $35–$95 per driver depending on contents."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should I order Driver Appreciation Week gifts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Order by August 28, 2026 to guarantee delivery before September 13. Standard production and shipping for bulk fleet orders is 5–10 business days. Rush orders (3–5 business days) are available at a premium but supply is limited in late August."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does a Driver Appreciation Week program cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bulk recognition kits for NTDAW typically cost $35–$95 per driver depending on kit tier. A fleet of 50 drivers should budget $1,750–$4,750 for a complete program. This compares favorably to the industry average driver replacement cost of $8,234–$15,000 per departure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Driver Appreciation Week apply to all commercial drivers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NTDAW was created for CDL truck drivers, but most fleet operators extend recognition to all professional commercial drivers including LTL, flatbed, tanker, refrigerated, and owner-operators under their authority."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the history of National Truck Driver Appreciation Week?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NTDAW was established by the American Trucking Associations in 1988. The 2026 observance marks the 38th annual event. It takes place during the third full week of September each year."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does driver recognition reduce turnover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Research from the ATA and industry studies shows that drivers who feel recognized are significantly less likely to leave. Fleets that implement structured recognition programs report 15–25% lower annual turnover compared to fleets with no formal program."
+          }
+        }
+      ]
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+
+  <h3>Article body content outline (inside .article-body)</h3>
+  <p>Write ~1,800–2,200 words of informational prose using the H2/H3/p/ul structure of the blog template. Follow this outline:</p>
+
+  <h4>Opening paragraph (first 60 words — AI Overview bait, write this EXACTLY)</h4>
+  <div class="box">
+    Driver Appreciation Week 2026 runs September 13–19, 2026 — the 38th Annual National Truck Driver Appreciation Week (NTDAW), organized by the American Trucking Associations. For fleet operators managing 10 to 500 drivers, this is the highest-leverage week of the year to run a structured recognition program that measurably reduces turnover and improves safety scores.
+  </div>
+
+  <h4>H2: What Is National Truck Driver Appreciation Week?</h4>
+  <p>2–3 paragraphs. NTDAW history (est. 1988, ATA), 38th annual in 2026, third full week of September, 3.5 million CDL drivers in the US. Cite ATA as source.</p>
+
+  <h4>H2: Why Fleet Operators Should Run a Formal DAW Program</h4>
+  <p>3–4 paragraphs. Retention data: drivers who feel recognized are less likely to leave. The cost of replacing a driver ($8,234–$15,000 per the ATA/ATRI). Recognition ROI math. Use a <code>.stat-grid</code> with 3 stat boxes: "3.5M" (CDL drivers in US), "$15K" (avg driver replacement cost), "94%" (drivers who say recognition matters — ATA survey).</p>
+
+  <h4>H2: Planning Timeline for NTDAW 2026</h4>
+  <p>Use a simple numbered list. Key milestones: June (plan program, select kit tier), July (finalize driver count, get quotes), August 1–14 (place bulk orders), August 28 (order deadline for guaranteed delivery), September 13 (distribute kits on first day of NTDAW).</p>
+
+  <h4>H2: Driver Appreciation Week Gift Ideas for Fleets</h4>
+  <p>2–3 paragraphs plus a bulleted list. Cover: personalized recognition kits, cab-friendly branded items (tumblers, cooler bags, hats), handwritten/signed leadership letter, milestone inserts for drivers hitting anniversaries. Mention that generic corporate gifts underperform — drivers notice when a gift was built for trucking vs repurposed from a catalog.</p>
+
+  <h4>H2: How Much Does a DAW Program Cost?</h4>
+  <p>Use a <code>.cost-breakdown</code> table (matching the style in cost-of-driver-turnover.html). Three rows: Entry tier ($35–$50/driver), Standard tier ($55–$75/driver), Premium tier ($80–$95/driver). Add a note: "For a 50-driver fleet at the Standard tier, total budget is $2,750–$3,750 — roughly 25% of the cost of replacing one driver."</p>
+
+  <h4>H2: FAQ — Driver Appreciation Week 2026</h4>
+  <p>Render the 8 FAQ questions from the JSON-LD above as visible Q&amp;A pairs on the page. Use <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> accordion or plain H4/p pairs. The visible text MUST match the JSON-LD <code>acceptedAnswer.text</code> word-for-word. This is required for Google Rich Results validation.</p>
+
+  <h4>CTA paragraph (end of article body)</h4>
+  <div class="box">
+    Paragraph: "Driver Appreciation Solutions builds bulk recognition programs specifically for fleet operators. Programs ship in 5–10 business days and are sized for fleets of 10 to 500 drivers. [Link text: Request a program quote] or [browse the kit catalog]." Link "Request a program quote" to contact.html. Link "browse the kit catalog" to shop.html.
+  </div>
+
+  <h3>Related articles block (3 links)</h3>
+  <ul>
+    <li>Fleet Operator's Guide to NTDAW → <code>blog/fleet-operators-guide-appreciation-week.html</code></li>
+    <li>The True Cost of Losing a Driver → <code>blog/cost-of-driver-turnover.html</code></li>
+    <li>Year-Round Driver Recognition Calendar → <code>blog/year-round-recognition-calendar.html</code></li>
+  </ul>
+
+
+  <!-- SECTION 4 -->
+  <h2 id="s4"><span class="section-num">4</span> New Page 2 — commercial-driver-gifts.html</h2>
+
+  <span class="badge badge-gold">P0 Keyword</span> &nbsp; Target: <strong>"commercial driver gifts"</strong> &nbsp;|&nbsp; Est. monthly searches: 800–1,600
+
+  <h3>File specs</h3>
+  <table class="spec-table">
+    <tr><td>File path</td><td><code>commercial-driver-gifts.html</code> (root, not in blog/)</td></tr>
+    <tr><td>Canonical URL</td><td><code>https://website-griffainai.vercel.app/commercial-driver-gifts.html</code></td></tr>
+    <tr><td>Title tag</td><td><code>Commercial Driver Gifts for Fleets: Bulk B2B Buying Guide | DAS</code> (62 chars)</td></tr>
+    <tr><td>Meta description</td><td><code>How fleet operators buy commercial driver gifts in bulk — program tiers, per-driver cost, ordering deadlines, and what makes a driver gift actually work for CDL professionals.</code> (154 chars)</td></tr>
+    <tr><td>H1</td><td>Commercial Driver Gifts: A Fleet Operator's Buying Guide</td></tr>
+    <tr><td>Hero image</td><td><code>https://images.unsplash.com/photo-1494412519320-aa613dfb7738?w=1400&q=80&fit=crop</code></td></tr>
+    <tr><td>Category badge</td><td>Procurement Guide</td></tr>
+    <tr><td>Read time</td><td>7 min read</td></tr>
+    <tr><td>Author</td><td>Driver Appreciation Solutions Editorial Team</td></tr>
+    <tr><td>Date</td><td>May 19, 2026</td></tr>
+  </table>
+
+  <h3>JSON-LD schema (paste inside &lt;head&gt;)</h3>
+  <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://website-griffainai.vercel.app/commercial-driver-gifts.html",
+      "url": "https://website-griffainai.vercel.app/commercial-driver-gifts.html",
+      "name": "Commercial Driver Gifts for Fleets: Bulk B2B Buying Guide | DAS",
+      "description": "How fleet operators buy commercial driver gifts in bulk — program tiers, per-driver cost, ordering deadlines, and what makes a driver gift actually work for CDL professionals.",
+      "breadcrumb": {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-griffainai.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Commercial Driver Gifts" }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are commercial driver gifts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Commercial driver gifts are branded recognition items ordered in bulk by fleet operators and transportation companies for their professional CDL drivers. Unlike consumer gift catalogs, commercial driver programs are built for fleet procurement — priced per driver, shipped to a distribution point, and designed for cab-friendly use."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the minimum order size for bulk driver gifts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Most bulk driver gift programs have a minimum order of 10 units. Programs are typically tiered: 10–49 drivers (standard pricing), 50–149 drivers (volume discount), 150+ drivers (enterprise pricing with dedicated account management)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much do commercial driver gifts cost per driver?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Bulk commercial driver gift kits typically cost $35–$95 per driver depending on tier and contents. Entry-tier kits ($35–$50) include branded items and a recognition card. Premium kits ($75–$95) add personalization, a leadership letter, and milestone inserts. Compare this to the $8,234–$15,000 average cost of replacing a driver."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What items work best as driver gifts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The most effective commercial driver gifts are cab-friendly and practical: insulated tumblers, cooler bags, branded caps, and recognition certificates. Drivers consistently rate personalized items and leadership letters higher than generic merchandise. Items that don't fit in a cab or serve no road function are rarely remembered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When should fleets order driver appreciation gifts?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For National Truck Driver Appreciation Week (September 13–19, 2026), order by August 28 to guarantee delivery. For other programs (onboarding, milestones, holidays), allow 10–15 business days from order to delivery for standard bulk orders."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can driver gifts be personalized per driver?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Most commercial driver gift programs support driver-name personalization on certificates, letters, and some physical items. Personalization requires a driver roster submitted at order time. Fully personalized kits add 3–5 business days to production time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What occasions do fleets order driver gifts for?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The five most common occasions for bulk commercial driver gifts are: National Truck Driver Appreciation Week (September), driver onboarding (first 30 days), safety milestones (accident-free anniversaries), tenure milestones (1, 3, 5, 10 years), and the holiday season (November–December)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do commercial driver gift programs reduce turnover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Structured recognition programs, which include commercial driver gifts as a component, are associated with 15–25% lower annual turnover in fleets that implement them consistently, according to ATA and ATRI research. The mechanism is straightforward: drivers who feel valued are less likely to respond to competitor recruiting."
+          }
+        }
+      ]
+    }
+  ]
+}
+&lt;/script&gt;</pre>
+
+  <h3>Article body content outline</h3>
+  <p>Write ~1,600–2,000 words of informational prose. Follow this outline:</p>
+
+  <h4>Opening paragraph (first 60 words — AI Overview bait, write this EXACTLY)</h4>
+  <div class="box">
+    Commercial driver gifts are branded recognition items ordered in bulk by fleet operators, transportation companies, and logistics firms for their professional CDL drivers. Unlike consumer gift products, commercial driver programs are built for fleet procurement — priced per driver, shipped to a central distribution point, and designed around what a driver actually uses on the road.
+  </div>
+
+  <h4>H2: What Makes a Driver Gift Actually Work</h4>
+  <p>2–3 paragraphs. The distinction between a real driver gift and a generic corporate catalog item repurposed for trucking. Key criteria: cab-friendly size, practical road use, personalization signal, leadership involvement (signed letter). Cite the concept that drivers notice when something was built for them vs. when "driver" was added to a catalog SKU.</p>
+
+  <h4>H2: The 5 Occasions Fleets Use Driver Gift Programs</h4>
+  <p>Short intro + a 5-item numbered list with a sentence each: (1) NTDAW, (2) New driver onboarding kits, (3) Safety milestones, (4) Tenure anniversaries, (5) Holiday season. Link each to the relevant solution page where applicable.</p>
+
+  <h4>H2: Program Tiers and Per-Driver Cost</h4>
+  <p>Use a <code>.cost-breakdown</code> table with 3 rows. Entry ($35–$50/driver): branded item + card. Standard ($55–$75/driver): 2–3 items + personalized certificate + leadership letter. Premium ($80–$95/driver): curated kit, full personalization, milestone inserts, dedicated account rep. Add: "For a 100-driver fleet, a Standard program runs $5,500–$7,500 — roughly half the cost of losing one driver."</p>
+
+  <h4>H2: Ordering Process for Fleet Procurement</h4>
+  <p>3–4 paragraphs or a numbered process list. Steps: (1) Submit driver count + occasion + target ship date, (2) Select kit tier, (3) Submit driver roster for personalization (optional), (4) Approve proof, (5) Production 5–10 days, (6) Ships to one address or drop-shipped by region. Note: PO and net-30 payment terms available for fleets with 50+ drivers.</p>
+
+  <h4>H2: What to Avoid When Buying Driver Gifts</h4>
+  <p>Short but sharp. Common mistakes: ordering too late (after Aug 28 for NTDAW), buying consumer products from Amazon and repackaging them, skipping the personalization/leadership letter, ordering a single size for branded apparel without collecting sizes, picking items that don't fit in a cab.</p>
+
+  <h4>H2: FAQ — Commercial Driver Gifts</h4>
+  <p>Render all 8 FAQ questions from the JSON-LD as visible Q&amp;A on the page. Text must match JSON-LD acceptedAnswer.text word-for-word.</p>
+
+  <h4>CTA paragraph</h4>
+  <div class="box">
+    "Driver Appreciation Solutions ships bulk driver gift programs to fleets of 10–500 drivers. Programs include personalization, a leadership letter template, and guaranteed pre-NTDAW delivery when ordered by August 28. [Request a quote] or [view program catalog]." Link "Request a quote" → contact.html. Link "view program catalog" → shop.html.
+  </div>
+
+  <h3>Related articles block (3 links)</h3>
+  <ul>
+    <li>Driver Appreciation Week 2026 Guide → <code>driver-appreciation-week-2026.html</code></li>
+    <li>ROI of Driver Recognition → <code>blog/roi-of-recognition.html</code></li>
+    <li>First 30 Days: Driver Onboarding Kits → <code>blog/first-30-days-onboarding.html</code></li>
+  </ul>
+
+
+  <!-- SECTION 5 -->
+  <h2 id="s5"><span class="section-num">5</span> Homepage Changes (index.html)</h2>
+
+  <h3>Add FAQPage JSON-LD to the @graph array</h3>
+  <p>The homepage already has a <code>&lt;script type="application/ld+json"&gt;</code> block with an <code>@graph</code> array containing Organization and WebSite nodes. Add this FAQPage object as an additional item in that array (do not create a new script block — append to the existing @graph):</p>
+  <pre>{
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "When is Driver Appreciation Week 2026?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Driver Appreciation Week 2026 runs September 13–19, 2026. It is the 38th Annual National Truck Driver Appreciation Week (NTDAW), recognized annually by the American Trucking Associations (ATA)." }
+    },
+    {
+      "@type": "Question",
+      "name": "What are the best gifts for truck drivers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The best gifts for truck drivers are practical, cab-friendly items paired with personalized recognition: insulated tumblers, branded cooler bags, recognition certificates with a leadership signature, and branded caps. Fleet operators ordering in bulk should prioritize programs that include a personalized letter from management — drivers consistently rate this higher than any physical item." }
+    },
+    {
+      "@type": "Question",
+      "name": "How much does a driver recognition program cost?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Bulk driver recognition kits cost $35–$95 per driver depending on tier. A fleet of 50 drivers should budget $1,750–$4,750 for a complete NTDAW program. This compares favorably to the $8,234–$15,000 average cost of replacing a single driver per ATA and ATRI data." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is National Truck Driver Appreciation Week?",
+      "acceptedAnswer": { "@type": "Answer", "text": "National Truck Driver Appreciation Week (NTDAW) is an annual observance established by the American Trucking Associations in 1988. It takes place during the third full week of September each year — September 13–19 in 2026. The event recognizes the contributions of the 3.5 million professional CDL truck drivers in the United States." }
+    },
+    {
+      "@type": "Question",
+      "name": "Does driver recognition reduce accidents?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes. Fleets with structured driver recognition programs report fewer safety incidents. Recognition reinforces positive behavior — when drivers are acknowledged for safe driving milestones, safety culture improves. Industry research links employee recognition programs to 20–30% reductions in workplace incidents across high-risk occupations." }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I order driver appreciation kits for my fleet?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Submit your driver count, program occasion, and target ship date through the Driver Appreciation Solutions quote form. Standard bulk orders (10–499 drivers) ship within 5–10 business days. Enterprise orders (500+ drivers) receive a dedicated account manager. For NTDAW 2026, order by August 28 to guarantee September 13 delivery." }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the minimum order for driver recognition kits?",
+      "acceptedAnswer": { "@type": "Answer", "text": "The minimum order is 10 driver recognition kits. Programs are priced per driver with volume discounts at 50+ and 150+ driver thresholds. There is no maximum order size — enterprise fleets with 1,000+ drivers are accommodated with custom programs and phased delivery." }
+    }
+  ]
+}</pre>
+
+  <h3>Add footer links to the Company section</h3>
+  <p>In the footer <code>&lt;ul class="footer-links"&gt;</code> under the "Company" heading, add these two list items after the existing "Request a Quote" item:</p>
+  <pre>&lt;li&gt;&lt;a href="driver-appreciation-week-2026.html" class="footer-link"&gt;DAW 2026 Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="commercial-driver-gifts.html" class="footer-link"&gt;Commercial Driver Gifts&lt;/a&gt;&lt;/li&gt;</pre>
+
+
+  <!-- SECTION 6 -->
+  <h2 id="s6"><span class="section-num">6</span> Blog Post Schema Additions (6 files)</h2>
+
+  <p>Add a <code>BlogPosting</code> JSON-LD <code>&lt;script&gt;</code> block inside the <code>&lt;head&gt;</code> of each blog post. Use the template below, substituting the values from the table for each file.</p>
+
+  <h3>Template</h3>
+  <pre>&lt;script type="application/ld+json"&gt;
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "HEADLINE",
+  "description": "DESCRIPTION",
+  "url": "URL",
+  "datePublished": "2026-05-19",
+  "dateModified": "2026-05-19",
+  "image": "IMAGE_URL",
+  "author": {
+    "@type": "Organization",
+    "name": "Driver Appreciation Solutions",
+    "url": "https://website-griffainai.vercel.app/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Driver Appreciation Solutions",
+    "logo": { "@type": "ImageObject", "url": "https://website-griffainai.vercel.app/images/logo.png" }
+  },
+  "mainEntityOfPage": "URL",
+  "keywords": ["KEYWORD1", "KEYWORD2", "KEYWORD3", "KEYWORD4"]
+}
+&lt;/script&gt;</pre>
+
+  <h3>Values per file</h3>
+  <table class="spec-table">
+    <thead><tr><th>File</th><th>Headline</th><th>Keywords (4)</th></tr></thead>
+    <tr>
+      <td>fleet-operators-guide-appreciation-week.html</td>
+      <td>Fleet Operator's Complete Guide to Driver Appreciation Week</td>
+      <td>driver appreciation week, NTDAW 2026, fleet recognition program, truck driver appreciation</td>
+    </tr>
+    <tr>
+      <td>recognition-reduces-accidents.html</td>
+      <td>How Driver Recognition Reduces Fleet Accidents</td>
+      <td>driver safety recognition, fleet accident reduction, truck driver safety culture, recognition programs</td>
+    </tr>
+    <tr>
+      <td>cost-of-driver-turnover.html</td>
+      <td>The True Cost of Losing a Driver</td>
+      <td>driver turnover cost trucking, cost to replace truck driver, driver retention strategies, fleet driver recognition</td>
+    </tr>
+    <tr>
+      <td>roi-of-recognition.html</td>
+      <td>The ROI of Driver Recognition Programs</td>
+      <td>driver recognition ROI, fleet retention ROI, driver appreciation program cost, trucking HR metrics</td>
+    </tr>
+    <tr>
+      <td>first-30-days-onboarding.html</td>
+      <td>Driver Onboarding: Making the First 30 Days Count</td>
+      <td>driver onboarding program, new driver retention, first 30 days trucking, driver welcome kit</td>
+    </tr>
+    <tr>
+      <td>year-round-recognition-calendar.html</td>
+      <td>Year-Round Driver Recognition Calendar for Fleet Operators</td>
+      <td>driver recognition calendar, fleet recognition program, year round driver appreciation, trucking employee recognition</td>
+    </tr>
+  </table>
+
+  <p>For the <code>"image"</code> and <code>"url"</code> fields, use the Unsplash image already in the blog post's OG meta tag and the canonical URL already in the page's <code>&lt;link rel="canonical"&gt;</code> tag. Copy these values from each file's existing <code>&lt;head&gt;</code> — do not guess them.</p>
+
+
+  <!-- SECTION 7 -->
+  <h2 id="s7"><span class="section-num">7</span> Footer Internal Links (All Pages)</h2>
+
+  <p>On every HTML page in the site, add two new <code>&lt;li&gt;</code> items to the footer's Company section — after the last existing item in that list.</p>
+
+  <div class="box box-warn">
+    <strong>Note on relative paths:</strong> Root-level pages use <code>href="driver-appreciation-week-2026.html"</code>. Blog posts (inside the <code>blog/</code> subdirectory) use <code>href="../driver-appreciation-week-2026.html"</code>.
+  </div>
+
+  <h3>Root-level pages (14 files)</h3>
+  <p>Files: <code>index.html</code>, <code>about.html</code>, <code>contact.html</code>, <code>favorites.html</code>, <code>ideas.html</code>, <code>product.html</code>, <code>shop.html</code>, <code>solution-appreciation.html</code>, <code>solution-enterprise.html</code>, <code>solution-holiday.html</code>, <code>solution-milestone.html</code>, <code>solution-onboarding.html</code>, <code>solution-safety.html</code>, plus the two new SEO pages themselves.</p>
+  <pre>&lt;li&gt;&lt;a href="driver-appreciation-week-2026.html" class="footer-link"&gt;DAW 2026 Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="commercial-driver-gifts.html" class="footer-link"&gt;Commercial Driver Gifts&lt;/a&gt;&lt;/li&gt;</pre>
+
+  <h3>Blog pages (6 files)</h3>
+  <p>Files: all 6 files inside <code>blog/</code>.</p>
+  <pre>&lt;li&gt;&lt;a href="../driver-appreciation-week-2026.html" class="footer-link"&gt;DAW 2026 Guide&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="../commercial-driver-gifts.html" class="footer-link"&gt;Commercial Driver Gifts&lt;/a&gt;&lt;/li&gt;</pre>
+
+  <p>The footer Company <code>&lt;ul&gt;</code> currently ends with either <code>Contact</code> or <code>Request a Quote</code> as the last item — append after whichever is last.</p>
+
+
+  <!-- SECTION 8 -->
+  <h2 id="s8"><span class="section-num">8</span> Sitemap Additions</h2>
+
+  <p>In <code>sitemap.xml</code>, add the following two URL blocks. Insert them before the <code>&lt;!-- Solution pages --&gt;</code> comment:</p>
+  <pre>&lt;!-- SEO landing pages --&gt;
+&lt;url&gt;
+  &lt;loc&gt;https://website-griffainai.vercel.app/driver-appreciation-week-2026.html&lt;/loc&gt;
+  &lt;lastmod&gt;2026-05-19&lt;/lastmod&gt;
+  &lt;changefreq&gt;monthly&lt;/changefreq&gt;
+  &lt;priority&gt;1.0&lt;/priority&gt;
+&lt;/url&gt;
+&lt;url&gt;
+  &lt;loc&gt;https://website-griffainai.vercel.app/commercial-driver-gifts.html&lt;/loc&gt;
+  &lt;lastmod&gt;2026-05-19&lt;/lastmod&gt;
+  &lt;changefreq&gt;monthly&lt;/changefreq&gt;
+  &lt;priority&gt;0.9&lt;/priority&gt;
+&lt;/url&gt;</pre>
+
+
+  <!-- SECTION 9 -->
+  <h2 id="s9"><span class="section-num">9</span> Deployment Steps</h2>
+
+  <ol style="margin-left:20px;">
+    <li style="margin-bottom:8px;">Complete all file changes in Sections 3–8.</li>
+    <li style="margin-bottom:8px;">Verify both new pages open in browser without console errors.</li>
+    <li style="margin-bottom:8px;">Confirm FAQ visible text matches JSON-LD <code>acceptedAnswer.text</code> word-for-word on both new pages.</li>
+    <li style="margin-bottom:8px;">Run deploy: <code>npx vercel --prod --scope griffainai --yes</code> from the website root directory.</li>
+    <li style="margin-bottom:8px;">After deploy completes, confirm the production alias updated: the CLI output should show <code>Aliased: https://website-griffainai.vercel.app</code>.</li>
+    <li style="margin-bottom:8px;">Submit both new page URLs to Google Search Console (URL Inspection → Request Indexing).</li>
+    <li style="margin-bottom:8px;">Test both pages on <a href="https://search.google.com/test/rich-results" style="color:#0D1B45;">Google Rich Results Test</a> — FAQPage should show as eligible.</li>
+  </ol>
+
+
+  <!-- SECTION 10 -->
+  <h2 id="s10"><span class="section-num">10</span> Pre-Publish Checklist</h2>
+
+  <p>Check every item before deploying. Both new pages must pass this list.</p>
+
+  <ul class="checklist" style="column-count:2; column-gap:32px;">
+    <li>Title tag 50–62 chars, primary keyword in first 30 chars</li>
+    <li>Meta description 140–155 chars, includes CTA phrase</li>
+    <li>Canonical URL set correctly</li>
+    <li>OG and Twitter meta tags present</li>
+    <li>H1 contains primary keyword</li>
+    <li>Primary keyword in first 60 words of body</li>
+    <li>3–5 H2 headings present</li>
+    <li>FAQPage JSON-LD valid (no syntax errors)</li>
+    <li>FAQ visible text matches JSON-LD word-for-word</li>
+    <li>BlogPosting schema on all 6 blog posts</li>
+    <li>FAQPage schema on homepage @graph</li>
+    <li>Footer links on all pages (root + blog)</li>
+    <li>Sitemap updated with 2 new entries</li>
+    <li>All relative paths correct (css/, images/, ../)</li>
+    <li>No console errors in browser dev tools</li>
+    <li>Mobile layout tested</li>
+    <li>Page uses blog article template (not solution page template)</li>
+    <li>Both new pages link to each other in related articles</li>
+    <li>Google Rich Results Test passes for FAQPage</li>
+    <li>Both new URLs submitted to Google Search Console</li>
+  </ul>
+
+  <hr class="divider">
+
+  <div class="box box-ok" style="margin-top:32px;">
+    <strong>Questions or context?</strong> The full SEO strategy document lives at <code>marketing/seo/seo-strategy.md</code> in the workspace. The tactical playbook (on-page specs, AI Overview optimization rules, content calendar) is at <code>marketing/seo/seo-tactical-playbook.md</code>. This brief is a self-contained implementation spec — everything above can be executed without those documents.
+  </div>
+
+  <p style="margin-top:24px; font-size:12px; color:#999;">Driver Appreciation Solutions &nbsp;·&nbsp; SEO Implementation Brief &nbsp;·&nbsp; Generated May 2026 &nbsp;·&nbsp; GRIFFAIN AI</p>
+
+</div>
+</body>
+</html>

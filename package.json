@@ -1,0 +1,17 @@
+{
+  "name": "driver-appreciation-solutions",
+  "version": "1.0.0",
+  "description": "Driver Appreciation Solutions — fleet recognition e-commerce site",
+  "private": true,
+  "scripts": {
+    "dev": "echo 'Static site — run: npx vercel dev --listen 8888'",
+    "build": "echo 'Static site — no build step required'",
+    "deploy": "npx vercel --prod"
+  },
+  "dependencies": {
+    "stripe": "^14.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

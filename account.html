@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fleet Portal — Driver Appreciation Solutions</title>
+  <meta name="description" content="Manage your fleet recognition programs, orders, and driver roster.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <style>
+    body { overflow-x: hidden; }
+
+    /* ── Portal shell ── */
+    #portal-wrap { display: flex; min-height: 100vh; background: #F1F4F7; }
+    #portal-wrap[hidden] { display: none !important; }
+
+    /* ── Sidebar ── */
+    #portal-sidebar {
+      width: 248px; min-width: 248px;
+      background: #0C1840; color: #fff;
+      display: flex; flex-direction: column;
+      position: sticky; top: 0; height: 100vh;
+      overflow-y: auto; z-index: 50;
+      scrollbar-width: none;
+    }
+    #portal-sidebar::-webkit-scrollbar { display: none; }
+    .sb-logo { padding: 18px 16px 14px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px; }
+    .sb-logo-mark { width: 32px; height: 32px; background: rgba(255,255,255,0.12); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 800; color: #fff; flex-shrink: 0; }
+    .sb-logo-text { font-size: 0.8rem; font-weight: 700; color: rgba(255,255,255,0.85); }
+    .sb-logo-sub { font-size: 0.6rem; color: rgba(255,255,255,0.35); margin-top: 1px; }
+    .sb-user { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; gap: 10px; }
+    #sb-avatar { width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.8rem; color: #fff; flex-shrink: 0; overflow: hidden; }
+    #sb-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    #sb-company { font-size: 0.8rem; font-weight: 600; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 148px; }
+    #sb-tier { font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 100px; margin-top: 3px; display: inline-block; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.8); }
+    .sb-nav { flex: 1; padding: 8px 10px; }
+    .sb-nav-label { font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.28); padding: 10px 8px 3px; }
+    .sb-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 8px; color: rgba(255,255,255,0.6); font-size: 0.8rem; font-weight: 500; transition: all 150ms ease; cursor: pointer; text-decoration: none; margin-bottom: 1px; border: none; background: none; width: 100%; text-align: left; }
+    .sb-item:hover { background: rgba(255,255,255,0.07); color: #fff; }
+    .sb-item.active { background: rgba(255,255,255,0.13); color: #fff; font-weight: 600; }
+    .sb-item svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .sb-footer { padding: 8px 10px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .sb-signout { display: flex; align-items: center; gap: 9px; padding: 8px 10px; border-radius: 8px; color: rgba(255,255,255,0.4); font-size: 0.8rem; background: none; border: none; cursor: pointer; width: 100%; transition: all 150ms ease; }
+    .sb-signout:hover { color: rgba(255,255,255,0.75); background: rgba(255,255,255,0.07); }
+    .sb-signout svg { width: 15px; height: 15px; }
+
+    /* ── Body ── */
+    .portal-body { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+    .portal-topbar { display: none; height: 52px; background: #fff; border-bottom: 1px solid #DEE3E9; padding: 0 16px; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 40; }
+    #sb-toggle { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #DEE3E9; background: none; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    #sb-toggle svg { width: 18px; height: 18px; }
+    .topbar-title { font-size: 0.875rem; font-weight: 700; color: #0F172A; }
+    #sb-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 45; }
+
+    /* ── Sections ── */
+    .portal-main { flex: 1; }
+    .p-sec { display: none; padding: 28px 32px; }
+    .p-sec.active { display: block; }
+    .p-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 22px; flex-wrap: wrap; }
+    .p-title { font-size: 1.25rem; font-weight: 700; color: #0F172A; }
+    .p-sub { font-size: 0.8rem; color: #6B7280; margin-top: 2px; }
+    .p-actions { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
+
+    /* ── Cards ── */
+    .p-card { background: #fff; border-radius: 14px; border: 1px solid #DEE3E9; overflow: hidden; }
+    .p-card + .p-card { margin-top: 16px; }
+    .p-card-head { padding: 14px 18px; border-bottom: 1px solid #DEE3E9; display: flex; align-items: center; justify-content: space-between; }
+    .p-card-title { font-size: 0.875rem; font-weight: 600; color: #0F172A; }
+    .p-card-body { padding: 18px; }
+
+    /* ── Stats ── */
+    .stat-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+    .stat-card { background: #fff; border-radius: 12px; border: 1px solid #DEE3E9; padding: 16px 18px; }
+    .stat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; margin-bottom: 6px; }
+    .stat-value { font-size: 1.5rem; font-weight: 700; color: #0F172A; line-height: 1; }
+    .stat-hint { font-size: 0.68rem; color: #6B7280; margin-top: 4px; }
+
+    /* ── Tier banner ── */
+    .tier-banner { background: #1A2E6E; color: #fff; border-radius: 14px; padding: 16px 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: 20px; }
+    .tier-left { display: flex; align-items: center; gap: 12px; }
+    .tier-icon { font-size: 1.375rem; }
+    .tier-name-txt { font-size: 1rem; font-weight: 700; }
+    .tier-desc-txt { font-size: 0.75rem; opacity: 0.72; margin-top: 1px; }
+    .tier-right { flex: 1; min-width: 160px; }
+    .tier-bar { height: 4px; background: rgba(255,255,255,0.18); border-radius: 100px; margin-top: 6px; overflow: hidden; }
+    .tier-bar-fill { height: 100%; background: #fff; border-radius: 100px; transition: width 0.6s ease; }
+    .tier-bar-label { font-size: 0.68rem; opacity: 0.65; margin-top: 4px; }
+
+    /* ── Quick actions ── */
+    .quick-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 20px; }
+    .qa { background: #fff; border: 1px solid #DEE3E9; border-radius: 14px; padding: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; cursor: pointer; transition: all 150ms ease; text-align: left; text-decoration: none; color: inherit; }
+    .qa:hover { border-color: rgba(26,46,110,0.28); box-shadow: 0 4px 14px rgba(26,46,110,0.1); transform: translateY(-1px); }
+    .qa-icon { width: 32px; height: 32px; border-radius: 8px; background: rgba(26,46,110,0.06); display: flex; align-items: center; justify-content: center; color: #1A2E6E; }
+    .qa-icon svg { width: 15px; height: 15px; }
+    .qa-label { font-size: 0.8rem; font-weight: 600; color: #0F172A; }
+    .qa-sub { font-size: 0.68rem; color: #6B7280; }
+
+    /* ── Two-col layouts ── */
+    .col-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    /* ── Events ── */
+    .ev-item { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid #DEE3E9; }
+    .ev-item:last-child { border-bottom: none; }
+    .ev-emoji { width: 32px; height: 32px; background: #E8F3FF; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; flex-shrink: 0; }
+    .ev-name { font-size: 0.8rem; font-weight: 600; color: #0F172A; }
+    .ev-date { font-size: 0.7rem; color: #6B7280; margin-top: 1px; }
+    .ev-days { margin-left: auto; font-size: 0.72rem; font-weight: 700; color: #1A2E6E; white-space: nowrap; }
+    .ev-days.late { color: #E41E3F; }
+
+    /* ── Tables ── */
+    .p-table-wrap { overflow-x: auto; }
+    .p-table { width: 100%; border-collapse: collapse; font-size: 0.8125rem; }
+    .p-table th { text-align: left; padding: 9px 14px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; border-bottom: 1px solid #DEE3E9; white-space: nowrap; }
+    .p-table td { padding: 11px 14px; border-bottom: 1px solid #DEE3E9; color: #374151; vertical-align: middle; }
+    .p-table tr:last-child td { border-bottom: none; }
+    .p-table tr:hover td { background: #F8F9FB; }
+    .fw6 { font-weight: 600; color: #0F172A !important; }
+
+    /* ── Badges ── */
+    .bdg { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 100px; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+    .bdg-green  { background: #DCFCE7; color: #166534; }
+    .bdg-blue   { background: #DBEAFE; color: #1E40AF; }
+    .bdg-yellow { background: #FEF3C7; color: #92400E; }
+    .bdg-gray   { background: #F1F4F7; color: #6B7280; }
+    .bdg-red    { background: #FEE2E2; color: #991B1B; }
+    .bdg-purple { background: #EDE9FE; color: #5B21B6; }
+
+    /* ── Forms ── */
+    .fg { margin-bottom: 14px; }
+    .fl { display: block; font-size: 0.78rem; font-weight: 600; color: #374151; margin-bottom: 5px; }
+    .fi, .fs, .ft { width: 100%; padding: 9px 12px; border: 1px solid #DEE3E9; border-radius: 8px; font-size: 0.875rem; color: #0F172A; background: #fff; transition: border-color 150ms ease; font-family: inherit; }
+    .fi:focus, .fs:focus, .ft:focus { outline: none; border-color: #1A2E6E; box-shadow: 0 0 0 3px rgba(26,46,110,0.07); }
+    .ft { resize: vertical; min-height: 80px; }
+    .fgrid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    /* ── Empty states ── */
+    .p-empty { padding: 36px 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 9px; }
+    .p-empty-icon { width: 48px; height: 48px; border-radius: 50%; background: #F1F4F7; display: flex; align-items: center; justify-content: center; color: #6B7280; }
+    .p-empty-icon svg { width: 22px; height: 22px; }
+    .p-empty-title { font-size: 0.9375rem; font-weight: 600; color: #0F172A; }
+    .p-empty-msg { font-size: 0.8rem; color: #6B7280; max-width: 300px; line-height: 1.5; }
+
+    /* ── Program cards ── */
+    .prog-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 14px; }
+    .prog-card { background: #fff; border: 1px solid #DEE3E9; border-radius: 14px; padding: 16px; }
+    .prog-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 10px; }
+    .prog-type { font-size: 0.62rem; font-weight: 700; padding: 3px 8px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .prog-name { font-size: 0.875rem; font-weight: 600; color: #0F172A; margin-bottom: 6px; }
+    .prog-meta { font-size: 0.72rem; color: #6B7280; display: flex; flex-direction: column; gap: 2px; margin-bottom: 12px; }
+    .prog-footer { display: flex; align-items: center; justify-content: flex-end; gap: 6px; padding-top: 10px; border-top: 1px solid #DEE3E9; }
+
+    /* ── ROI calculator ── */
+    .roi-result { background: rgba(26,46,110,0.05); border: 1px solid rgba(26,46,110,0.12); border-radius: 12px; padding: 16px; margin-top: 14px; display: none; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .roi-result.show { display: grid; }
+    .roi-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6B7280; }
+    .roi-value { font-size: 1.25rem; font-weight: 700; color: #1A2E6E; margin-top: 2px; }
+
+    /* ── Modals ── */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: #fff; border-radius: 18px; width: 100%; max-width: 520px; max-height: 90vh; overflow-y: auto; box-shadow: 0 24px 48px rgba(0,0,0,0.2); }
+    .modal-head { padding: 16px 20px; border-bottom: 1px solid #DEE3E9; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; background: #fff; z-index: 1; }
+    .modal-title { font-size: 1rem; font-weight: 700; color: #0F172A; }
+    .modal-close { width: 28px; height: 28px; border-radius: 7px; background: #F1F4F7; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; color: #6B7280; }
+    .modal-close svg { width: 13px; height: 13px; }
+    .modal-body { padding: 20px; }
+    .modal-foot { padding: 14px 20px; border-top: 1px solid #DEE3E9; display: flex; justify-content: flex-end; gap: 10px; }
+
+    /* ── Onboarding ── */
+    .ob-overlay { display: none; position: fixed; inset: 0; background: rgba(9,18,48,0.72); z-index: 300; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(6px); }
+    .ob-overlay.open { display: flex; }
+    .ob-card { background: #fff; border-radius: 20px; width: 100%; max-width: 490px; box-shadow: 0 24px 64px rgba(0,0,0,0.28); overflow: hidden; }
+    .ob-head { background: #1A2E6E; padding: 24px 24px 16px; }
+    .ob-eyebrow { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.55); margin-bottom: 5px; }
+    .ob-htitle { font-size: 1.2rem; font-weight: 700; color: #fff; }
+    .ob-hsub { font-size: 0.8rem; color: rgba(255,255,255,0.68); margin-top: 3px; }
+    .ob-progress { display: flex; gap: 5px; padding-top: 14px; }
+    .ob-dot { height: 3px; flex: 1; border-radius: 100px; background: rgba(255,255,255,0.18); transition: background 200ms ease; }
+    .ob-dot.cur, .ob-dot.done { background: #fff; }
+    .ob-body { padding: 24px; }
+    .ob-step { display: none; }
+    .ob-step.active { display: block; }
+    .ob-q { font-size: 0.9375rem; font-weight: 600; color: #0F172A; margin-bottom: 14px; }
+    .ob-opts { display: flex; flex-direction: column; gap: 8px; }
+    .ob-opt { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border: 1.5px solid #DEE3E9; border-radius: 12px; cursor: pointer; transition: all 150ms ease; user-select: none; }
+    .ob-opt:hover { border-color: rgba(26,46,110,0.3); background: rgba(26,46,110,0.03); }
+    .ob-opt.sel { border-color: #1A2E6E; background: rgba(26,46,110,0.05); }
+    .ob-radio { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #DEE3E9; flex-shrink: 0; display: flex; align-items: center; justify-content: center; transition: all 150ms ease; }
+    .ob-opt.sel .ob-radio { background: #1A2E6E; border-color: #1A2E6E; }
+    .ob-opt.sel .ob-radio::after { content:''; width: 6px; height: 6px; background: #fff; border-radius: 50%; }
+    .ob-opt-txt { font-size: 0.875rem; font-weight: 500; color: #0F172A; }
+    .ob-foot { padding: 0 24px 24px; display: flex; align-items: center; justify-content: space-between; }
+    .ob-step-num { font-size: 0.78rem; color: #6B7280; }
+
+    /* ── Portal buttons ── */
+    .btn-p { padding: 8px 16px; border-radius: 8px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: none; transition: all 150ms ease; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; }
+    .btn-p svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-p-primary { background: #1A2E6E; color: #fff; }
+    .btn-p-primary:hover { background: #112050; }
+    .btn-p-ghost { background: #fff; color: #0F172A; border: 1px solid #DEE3E9; }
+    .btn-p-ghost:hover { border-color: rgba(26,46,110,0.28); background: rgba(26,46,110,0.04); }
+    .btn-p-sm { padding: 6px 12px; font-size: 0.75rem; }
+    .btn-p-danger { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
+    .btn-p-danger:hover { background: #FECACA; }
+
+    /* ── Support resources ── */
+    .support-resources { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
+    .support-res { background: #fff; border: 1px solid #DEE3E9; border-radius: 12px; padding: 16px; text-align: center; }
+    .support-res-icon { font-size: 1.375rem; margin-bottom: 6px; }
+    .support-res-label { font-size: 0.8rem; font-weight: 600; color: #0F172A; }
+    .support-res-val { font-size: 0.75rem; color: #6B7280; margin-top: 2px; }
+
+    /* ── Referral code ── */
+    .ref-code-box { display: flex; align-items: center; gap: 10px; background: #F1F4F7; border-radius: 10px; padding: 12px 16px; }
+    .ref-code { font-family: monospace; font-size: 1.1rem; font-weight: 700; color: #1A2E6E; letter-spacing: 0.06em; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1100px) {
+      .stat-grid { grid-template-columns: repeat(2,1fr); }
+      .quick-grid { grid-template-columns: repeat(2,1fr); }
+      .col-2 { grid-template-columns: 1fr; }
+      .support-resources { grid-template-columns: repeat(2,1fr); }
+    }
+    @media (max-width: 768px) {
+      #portal-sidebar { position: fixed; left: -260px; top: 0; height: 100vh; z-index: 50; transition: left 200ms ease; }
+      #portal-sidebar.open { left: 0; }
+      #sb-overlay.open { display: block; }
+      .portal-topbar { display: flex; }
+      .p-sec { padding: 18px 14px; }
+    }
+    @media (max-width: 540px) {
+      .stat-grid { grid-template-columns: 1fr 1fr; }
+      .quick-grid { grid-template-columns: 1fr 1fr; }
+      .fgrid2 { grid-template-columns: 1fr; }
+      .support-resources { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     ONBOARDING OVERLAY
+════════════════════════════════════════════ -->
+<div class="ob-overlay" id="ob-overlay">
+  <div class="ob-card">
+    <div class="ob-head">
+      <div class="ob-eyebrow">Driver Appreciation Solutions</div>
+      <div class="ob-htitle">Set up your Fleet Portal</div>
+      <div class="ob-hsub">Four quick questions to personalize your experience.</div>
+      <div class="ob-progress">
+        <div class="ob-dot cur" id="ob-dot-1"></div>
+        <div class="ob-dot" id="ob-dot-2"></div>
+        <div class="ob-dot" id="ob-dot-3"></div>
+        <div class="ob-dot" id="ob-dot-4"></div>
+      </div>
+    </div>
+    <div class="ob-body">
+      <!-- Step 1 -->
+      <div class="ob-step active" id="ob-step-1">
+        <div class="ob-q">What's your role?</div>
+        <div class="ob-opts">
+          <div class="ob-opt" data-step="1" data-val="Fleet Admin" onclick="obSelect(1,'Fleet Admin',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Fleet Admin / Operations Manager</span></div>
+          <div class="ob-opt" data-step="1" data-val="Procurement" onclick="obSelect(1,'Procurement',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Procurement / Purchasing</span></div>
+          <div class="ob-opt" data-step="1" data-val="HR" onclick="obSelect(1,'HR',this)"><div class="ob-radio"></div><span class="ob-opt-txt">HR / People & Culture</span></div>
+          <div class="ob-opt" data-step="1" data-val="Finance" onclick="obSelect(1,'Finance',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Finance / Accounting</span></div>
+        </div>
+      </div>
+      <!-- Step 2 -->
+      <div class="ob-step" id="ob-step-2">
+        <div class="ob-q">How many drivers in your fleet?</div>
+        <div class="ob-opts">
+          <div class="ob-opt" data-step="2" data-val="<25" onclick="obSelect(2,'<25',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Under 25 drivers</span></div>
+          <div class="ob-opt" data-step="2" data-val="25-100" onclick="obSelect(2,'25-100',this)"><div class="ob-radio"></div><span class="ob-opt-txt">25 – 100 drivers</span></div>
+          <div class="ob-opt" data-step="2" data-val="100-500" onclick="obSelect(2,'100-500',this)"><div class="ob-radio"></div><span class="ob-opt-txt">100 – 500 drivers</span></div>
+          <div class="ob-opt" data-step="2" data-val="500+" onclick="obSelect(2,'500+',this)"><div class="ob-radio"></div><span class="ob-opt-txt">500+ drivers (Enterprise)</span></div>
+        </div>
+      </div>
+      <!-- Step 3 -->
+      <div class="ob-step" id="ob-step-3">
+        <div class="ob-q">What's your main priority right now?</div>
+        <div class="ob-opts">
+          <div class="ob-opt" data-step="3" data-val="Retention" onclick="obSelect(3,'Retention',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Reducing driver turnover</span></div>
+          <div class="ob-opt" data-step="3" data-val="Onboarding" onclick="obSelect(3,'Onboarding',this)"><div class="ob-radio"></div><span class="ob-opt-txt">New driver onboarding kits</span></div>
+          <div class="ob-opt" data-step="3" data-val="Safety" onclick="obSelect(3,'Safety',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Safety recognition programs</span></div>
+          <div class="ob-opt" data-step="3" data-val="Seasonal" onclick="obSelect(3,'Seasonal',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Holiday & seasonal gifts</span></div>
+        </div>
+      </div>
+      <!-- Step 4 -->
+      <div class="ob-step" id="ob-step-4">
+        <div class="ob-q">How do you prefer to pay?</div>
+        <div class="ob-opts">
+          <div class="ob-opt" data-step="4" data-val="Credit Card" onclick="obSelect(4,'Credit Card',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Credit / debit card</span></div>
+          <div class="ob-opt" data-step="4" data-val="Net-30" onclick="obSelect(4,'Net-30',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Net-30 payment terms</span></div>
+          <div class="ob-opt" data-step="4" data-val="Purchase Order" onclick="obSelect(4,'Purchase Order',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Purchase order (PO)</span></div>
+          <div class="ob-opt" data-step="4" data-val="Unsure" onclick="obSelect(4,'Unsure',this)"><div class="ob-radio"></div><span class="ob-opt-txt">Not sure yet</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="ob-foot">
+      <span class="ob-step-num" id="ob-step-num">Step 1 of 4</span>
+      <div style="display:flex;gap:10px">
+        <button class="btn-p btn-p-ghost" id="ob-back-btn" onclick="obBack()" style="display:none">Back</button>
+        <button class="btn-p btn-p-primary" onclick="obNext()">Continue →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PROGRAM BUILDER MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="prog-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">Build a Recognition Program</span>
+      <button class="modal-close" onclick="closeModal('prog-modal')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <form onsubmit="submitProgram(event)">
+      <div class="modal-body">
+        <div class="fg">
+          <label class="fl">Program Name</label>
+          <input name="prog-name" class="fi" placeholder="e.g. Driver Appreciation Week 2026" required>
+        </div>
+        <div class="fgrid2">
+          <div class="fg">
+            <label class="fl">Program Type</label>
+            <select name="prog-type" class="fs">
+              <option value="appreciation">Appreciation</option>
+              <option value="onboarding">Onboarding</option>
+              <option value="safety">Safety</option>
+              <option value="holiday">Holiday</option>
+              <option value="milestone">Milestone</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="fl">Trigger</label>
+            <select name="prog-trigger" class="fs">
+              <option value="annual">Annual date</option>
+              <option value="rolling">Rolling (new hires)</option>
+              <option value="milestone">On milestone</option>
+            </select>
+          </div>
+        </div>
+        <div class="fgrid2">
+          <div class="fg">
+            <label class="fl">Budget per Driver ($)</label>
+            <input name="prog-budget" type="number" class="fi" placeholder="50" min="1" required>
+          </div>
+          <div class="fg">
+            <label class="fl">Driver Count</label>
+            <input name="prog-drivers" type="number" class="fi" placeholder="50" min="0">
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">Target Date (optional)</label>
+          <input name="prog-date" type="date" class="fi">
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-p btn-p-ghost" onclick="closeModal('prog-modal')">Cancel</button>
+        <button type="submit" class="btn-p btn-p-primary">Create Program</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     ADD DRIVER MODAL
+════════════════════════════════════════════ -->
+<div class="modal-overlay" id="add-driver-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title">Add Driver</span>
+      <button class="modal-close" onclick="closeModal('add-driver-modal')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <form onsubmit="submitDriver(event)">
+      <div class="modal-body">
+        <div class="fgrid2">
+          <div class="fg">
+            <label class="fl">Full Name</label>
+            <input name="d-name" class="fi" placeholder="Jane Smith" required>
+          </div>
+          <div class="fg">
+            <label class="fl">Email (optional)</label>
+            <input name="d-email" type="email" class="fi" placeholder="jane@example.com">
+          </div>
+        </div>
+        <div class="fgrid2">
+          <div class="fg">
+            <label class="fl">Department</label>
+            <input name="d-dept" class="fi" placeholder="Long-haul, Local, etc.">
+          </div>
+          <div class="fg">
+            <label class="fl">Hire Date</label>
+            <input name="d-hire" type="date" class="fi">
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-p btn-p-ghost" onclick="closeModal('add-driver-modal')">Cancel</button>
+        <button type="submit" class="btn-p btn-p-primary">Add Driver</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PORTAL WRAP
+════════════════════════════════════════════ -->
+<div id="portal-wrap" hidden>
+
+  <!-- Sidebar -->
+  <aside id="portal-sidebar">
+    <div class="sb-logo">
+      <div class="sb-logo-mark">DAS</div>
+      <div>
+        <div class="sb-logo-text">Driver Appreciation</div>
+        <div class="sb-logo-sub">Fleet Portal</div>
+      </div>
+    </div>
+    <div class="sb-user">
+      <div id="sb-avatar">F</div>
+      <div style="min-width:0">
+        <div id="sb-company">Loading…</div>
+        <div id="sb-tier">Starter</div>
+      </div>
+    </div>
+    <nav class="sb-nav">
+      <div class="sb-nav-label">Main</div>
+      <button class="sb-item active" data-section="dashboard" onclick="navigate('dashboard')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+        Dashboard
+      </button>
+      <button class="sb-item" data-section="orders" onclick="navigate('orders')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+        Orders
+      </button>
+      <button class="sb-item" data-section="programs" onclick="navigate('programs')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
+        Programs
+      </button>
+      <button class="sb-item" data-section="roster" onclick="navigate('roster')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+        Driver Roster
+      </button>
+      <div class="sb-nav-label">Finance</div>
+      <button class="sb-item" data-section="billing" onclick="navigate('billing')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
+        Billing
+      </button>
+      <button class="sb-item" data-section="quotes" onclick="navigate('quotes')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        Quote Request
+      </button>
+      <div class="sb-nav-label">Resources</div>
+      <button class="sb-item" data-section="ideas" onclick="navigate('ideas')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+        Ideas &amp; Guides
+      </button>
+      <button class="sb-item" data-section="support" onclick="navigate('support')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+        Support
+      </button>
+      <button class="sb-item" data-section="settings" onclick="navigate('settings')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        Settings
+      </button>
+    </nav>
+    <div class="sb-footer">
+      <button class="sb-signout" onclick="signOut()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75"/></svg>
+        Sign Out
+      </button>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div id="sb-overlay" onclick="closeSidebar()"></div>
+
+  <!-- Body -->
+  <div class="portal-body">
+    <!-- Mobile topbar -->
+    <div class="portal-topbar">
+      <button id="sb-toggle" onclick="openSidebar()">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+      <span class="topbar-title">Fleet Portal</span>
+      <a href="cart.html" style="display:flex;align-items:center;gap:4px;font-size:0.8rem;font-weight:600;color:#0F172A;text-decoration:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:18px;height:18px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+        Cart
+      </a>
+    </div>
+
+    <!-- MAIN -->
+    <main class="portal-main">
+
+      <!-- ── DASHBOARD ── -->
+      <section class="p-sec active" id="sec-dashboard">
+        <div class="p-head">
+          <div>
+            <div class="p-title" id="dash-company">Welcome back</div>
+            <div class="p-sub">Here's what's happening with your fleet program.</div>
+          </div>
+          <div class="p-actions">
+            <a href="shop.html" class="btn-p btn-p-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+              New Order
+            </a>
+          </div>
+        </div>
+
+        <!-- Tier banner -->
+        <div class="tier-banner">
+          <div class="tier-left">
+            <div class="tier-icon">🏆</div>
+            <div>
+              <div class="tier-name-txt" id="tier-name">Starter</div>
+              <div class="tier-desc-txt" id="tier-desc">Start ordering to unlock discounts</div>
+            </div>
+          </div>
+          <div class="tier-right">
+            <div class="tier-bar-label" id="tier-bar-label">$5,000 to Fleet Partner</div>
+            <div class="tier-bar"><div class="tier-bar-fill" id="tier-bar-fill" style="width:0%"></div></div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stat-grid">
+          <div class="stat-card"><div class="stat-label">YTD Spend</div><div class="stat-value" id="d-ytd">$0.00</div><div class="stat-hint">Current year</div></div>
+          <div class="stat-card"><div class="stat-label">Active Programs</div><div class="stat-value" id="d-progs">0</div><div class="stat-hint">Running now</div></div>
+          <div class="stat-card"><div class="stat-label">Drivers on Roster</div><div class="stat-value" id="d-drivers">0</div><div class="stat-hint">In your fleet</div></div>
+          <div class="stat-card"><div class="stat-label">Units Ordered</div><div class="stat-value" id="d-units">0</div><div class="stat-hint">All time</div></div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="quick-grid">
+          <a href="shop.html" class="qa">
+            <div class="qa-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg></div>
+            <div class="qa-label">Place Order</div>
+            <div class="qa-sub">Shop recognition kits</div>
+          </a>
+          <button class="qa" onclick="navigate('programs');setTimeout(()=>openModal('prog-modal'),100)">
+            <div class="qa-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg></div>
+            <div class="qa-label">Build Program</div>
+            <div class="qa-sub">Automate recognition</div>
+          </button>
+          <button class="qa" onclick="navigate('roster');setTimeout(()=>openModal('add-driver-modal'),100)">
+            <div class="qa-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z"/></svg></div>
+            <div class="qa-label">Add Drivers</div>
+            <div class="qa-sub">Manage roster</div>
+          </button>
+          <button class="qa" onclick="navigate('quotes')">
+            <div class="qa-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg></div>
+            <div class="qa-label">Get a Quote</div>
+            <div class="qa-sub">Custom pricing</div>
+          </button>
+        </div>
+
+        <!-- Events + Recent orders -->
+        <div class="col-2">
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">Upcoming Recognition Events</span></div>
+            <div class="p-card-body" id="d-events"></div>
+          </div>
+          <div class="p-card">
+            <div class="p-card-head">
+              <span class="p-card-title">Recent Orders</span>
+              <button class="btn-p btn-p-ghost btn-p-sm" onclick="navigate('orders')">View all</button>
+            </div>
+            <div id="d-orders"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── ORDERS ── -->
+      <section class="p-sec" id="sec-orders">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Orders</div>
+            <div class="p-sub">Your complete order history and saved templates.</div>
+          </div>
+          <div class="p-actions">
+            <a href="shop.html" class="btn-p btn-p-primary">+ New Order</a>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Order History</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Order #</th><th>Date</th><th>Items</th><th>Units</th><th>Total</th><th>Status</th></tr></thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Saved Order Templates</span></div>
+          <div class="p-card-body" id="templates-list"></div>
+        </div>
+      </section>
+
+      <!-- ── PROGRAMS ── -->
+      <section class="p-sec" id="sec-programs">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Recognition Programs</div>
+            <div class="p-sub">Automated recognition that runs on your schedule.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-primary" onclick="openModal('prog-modal')">+ Build Program</button>
+          </div>
+        </div>
+        <div class="prog-grid" id="prog-grid"></div>
+      </section>
+
+      <!-- ── ROSTER ── -->
+      <section class="p-sec" id="sec-roster">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Driver Roster</div>
+            <div class="p-sub">Track drivers and get notified about upcoming anniversaries.</div>
+          </div>
+          <div class="p-actions">
+            <label class="btn-p btn-p-ghost" style="cursor:pointer">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+              Import CSV
+              <input type="file" accept=".csv" style="display:none" onchange="handleCSV(this)">
+            </label>
+            <button class="btn-p btn-p-primary" onclick="openModal('add-driver-modal')">+ Add Driver</button>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+          <div class="stat-card" style="flex:1;min-width:140px;padding:12px 16px">
+            <div class="stat-label">Total Drivers</div>
+            <div class="stat-value" id="roster-count">0</div>
+          </div>
+          <div class="stat-card" style="flex:1;min-width:140px;padding:12px 16px;border-color:#FEF3C7;background:#FFFBEB">
+            <div class="stat-label" style="color:#92400E">Upcoming Milestones</div>
+            <div class="stat-value" style="color:#92400E" id="milestone-count">0</div>
+            <div class="stat-hint" style="color:#92400E">Within 60 days</div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">All Drivers</span></div>
+            <div class="p-table-wrap">
+              <table class="p-table">
+                <thead><tr><th>Name</th><th>Dept</th><th>Hire Date</th><th>Tenure</th><th></th></tr></thead>
+                <tbody id="roster-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+          <div class="p-card">
+            <div class="p-card-head">
+              <span class="p-card-title">🎂 Upcoming Anniversaries</span>
+            </div>
+            <div class="p-card-body" id="milestone-list"></div>
+          </div>
+        </div>
+        <div class="p-card" style="margin-top:16px">
+          <div class="p-card-body" style="font-size:0.78rem;color:#6B7280;line-height:1.6">
+            <strong style="color:#0F172A">CSV format:</strong> Your file should have column headers including <code>name</code>, <code>email</code> (optional), <code>dept</code> (optional), and <code>hireDate</code>. One driver per row.
+          </div>
+        </div>
+      </section>
+
+      <!-- ── BILLING ── -->
+      <section class="p-sec" id="sec-billing">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Billing &amp; Invoices</div>
+            <div class="p-sub">Invoices, spend summary, and payment settings.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-ghost" onclick="navigate('quotes')">Request Net-30</button>
+          </div>
+        </div>
+        <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="stat-card"><div class="stat-label">YTD Spend</div><div class="stat-value" id="b-ytd">$0.00</div><div class="stat-hint">Current year</div></div>
+          <div class="stat-card"><div class="stat-label">Total Orders</div><div class="stat-value" id="b-orders">0</div></div>
+          <div class="stat-card"><div class="stat-label">Avg. Order Value</div><div class="stat-value" id="b-avg">$0.00</div></div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Invoices</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Invoice #</th><th>Date</th><th>Amount</th><th>Status</th><th></th></tr></thead>
+              <tbody id="inv-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── QUOTES ── -->
+      <section class="p-sec" id="sec-quotes">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Request a Quote</div>
+            <div class="p-sub">Custom pricing for large orders, programs, or branded kits.</div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">New Quote Request</span></div>
+            <form class="p-card-body" onsubmit="submitQuote(event)">
+              <div class="fgrid2">
+                <div class="fg">
+                  <label class="fl">Fleet Size</label>
+                  <select name="q-fleet" class="fs">
+                    <option value="<25">Under 25</option>
+                    <option value="25-100">25 – 100</option>
+                    <option value="100-500" selected>100 – 500</option>
+                    <option value="500+">500+</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Product Type</label>
+                  <select name="q-product" class="fs">
+                    <option>Appreciation Kits</option>
+                    <option>Onboarding Kits</option>
+                    <option>Safety Awards</option>
+                    <option>Holiday Gifts</option>
+                    <option>Custom / Branded</option>
+                    <option>Multiple Types</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fgrid2">
+                <div class="fg">
+                  <label class="fl">Estimated Quantity</label>
+                  <input name="q-qty" type="number" class="fi" placeholder="e.g. 200" min="1">
+                </div>
+                <div class="fg">
+                  <label class="fl">Budget per Driver ($)</label>
+                  <input name="q-budget" type="number" class="fi" placeholder="e.g. 75" min="1">
+                </div>
+              </div>
+              <div class="fg">
+                <label class="fl">Needed By</label>
+                <input name="q-timing" type="date" class="fi">
+              </div>
+              <div class="fg">
+                <label class="fl">Additional Notes</label>
+                <textarea name="q-notes" class="ft" placeholder="Custom branding requirements, delivery instructions, special requests…"></textarea>
+              </div>
+              <button type="submit" class="btn-p btn-p-primary" style="width:100%">Submit Quote Request</button>
+            </form>
+          </div>
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">Quote History</span></div>
+            <div class="p-table-wrap">
+              <table class="p-table">
+                <thead><tr><th>Quote #</th><th>Date</th><th>Type</th><th>Status</th></tr></thead>
+                <tbody id="quotes-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── IDEAS & GUIDES ── -->
+      <section class="p-sec" id="sec-ideas">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Ideas &amp; Guides</div>
+            <div class="p-sub">Saved products, ROI calculator, and program benchmarks.</div>
+          </div>
+          <div class="p-actions">
+            <a href="shop.html" class="btn-p btn-p-ghost">Browse Products</a>
+          </div>
+        </div>
+
+        <!-- Saved ideas -->
+        <div style="margin-bottom:6px;font-size:0.8rem;font-weight:600;color:#374151">Saved Products</div>
+        <div class="prog-grid" id="ideas-grid" style="margin-bottom:24px"></div>
+
+        <!-- ROI Calculator -->
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">ROI Calculator</span></div>
+          <div class="p-card-body">
+            <div class="fgrid2" style="margin-bottom:14px">
+              <div class="fg" style="margin-bottom:0">
+                <label class="fl">Fleet Size (drivers)</label>
+                <input id="roi-fleet" type="number" class="fi" placeholder="e.g. 150" min="1">
+              </div>
+              <div class="fg" style="margin-bottom:0">
+                <label class="fl">Annual Program Spend ($)</label>
+                <input id="roi-spend" type="number" class="fi" placeholder="e.g. 12000" min="0">
+              </div>
+            </div>
+            <button class="btn-p btn-p-primary" onclick="calcROI()">Calculate ROI</button>
+            <div class="roi-result" id="roi-result-box">
+              <div><div class="roi-label">Drivers at Risk</div><div class="roi-value" id="roi-at-risk">—</div></div>
+              <div><div class="roi-label">Estimated Retained</div><div class="roi-value" id="roi-retained">—</div></div>
+              <div><div class="roi-label">Turnover Cost Saved</div><div class="roi-value" id="roi-savings">—</div></div>
+              <div><div class="roi-label">Program ROI</div><div class="roi-value" id="roi-result-pct" style="font-size:1.5rem">—</div></div>
+            </div>
+            <div style="font-size:0.72rem;color:#6B7280;margin-top:10px">Based on industry average: $12,799 driver replacement cost, 20% retention lift from structured recognition programs.</div>
+          </div>
+        </div>
+
+        <!-- Benchmarks -->
+        <div class="p-card" style="margin-top:16px">
+          <div class="p-card-head"><span class="p-card-title">Industry Benchmarks</span></div>
+          <div class="p-card-body">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px">
+              <div style="border-left:3px solid #1A2E6E;padding:10px 14px">
+                <div style="font-size:1.25rem;font-weight:700;color:#1A2E6E">30%</div>
+                <div style="font-size:0.8rem;font-weight:600;color:#0F172A">Turnover Reduction</div>
+                <div style="font-size:0.72rem;color:#6B7280;margin-top:2px">Fleets with structured recognition programs</div>
+              </div>
+              <div style="border-left:3px solid #059669;padding:10px 14px">
+                <div style="font-size:1.25rem;font-weight:700;color:#059669">10:1</div>
+                <div style="font-size:0.8rem;font-weight:600;color:#0F172A">Average ROI</div>
+                <div style="font-size:0.72rem;color:#6B7280;margin-top:2px">Return on recognition investment</div>
+              </div>
+              <div style="border-left:3px solid #D97706;padding:10px 14px">
+                <div style="font-size:1.25rem;font-weight:700;color:#D97706">23%</div>
+                <div style="font-size:0.8rem;font-weight:600;color:#0F172A">Fewer Accidents</div>
+                <div style="font-size:0.72rem;color:#6B7280;margin-top:2px">Recognized drivers vs. unrecognized</div>
+              </div>
+              <div style="border-left:3px solid #7C3AED;padding:10px 14px">
+                <div style="font-size:1.25rem;font-weight:700;color:#7C3AED">$12,799</div>
+                <div style="font-size:0.8rem;font-weight:600;color:#0F172A">Avg Replacement Cost</div>
+                <div style="font-size:0.72rem;color:#6B7280;margin-top:2px">Per driver lost (industry avg)</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SUPPORT ── -->
+      <section class="p-sec" id="sec-support">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Support</div>
+            <div class="p-sub">Submit a ticket or contact your account team directly.</div>
+          </div>
+        </div>
+        <div class="col-2">
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">New Support Ticket</span></div>
+            <form class="p-card-body" onsubmit="submitTicket(event)">
+              <div class="fg">
+                <label class="fl">Subject</label>
+                <input name="t-subject" class="fi" placeholder="e.g. Wrong item shipped on order ORD-abc123" required>
+              </div>
+              <div class="fgrid2">
+                <div class="fg">
+                  <label class="fl">Order # (if applicable)</label>
+                  <input name="t-order" class="fi" placeholder="ORD-…">
+                </div>
+                <div class="fg">
+                  <label class="fl">Priority</label>
+                  <select name="t-priority" class="fs">
+                    <option value="normal">Normal</option>
+                    <option value="high">High</option>
+                    <option value="urgent">Urgent</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fg">
+                <label class="fl">Message</label>
+                <textarea name="t-message" class="ft" placeholder="Describe your issue in detail…" required></textarea>
+              </div>
+              <button type="submit" class="btn-p btn-p-primary" style="width:100%">Submit Ticket</button>
+            </form>
+          </div>
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">Ticket History</span></div>
+            <div class="p-table-wrap">
+              <table class="p-table">
+                <thead><tr><th>Ticket</th><th>Date</th><th>Subject</th><th>Priority</th><th>Status</th></tr></thead>
+                <tbody id="tickets-tbody"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Support resources -->
+        <div style="margin-top:20px;font-size:0.8rem;font-weight:600;color:#374151;margin-bottom:8px">Direct Contact</div>
+        <div class="support-resources">
+          <div class="support-res">
+            <div class="support-res-icon">📞</div>
+            <div class="support-res-label">Phone</div>
+            <div class="support-res-val">Account holders: priority queue</div>
+          </div>
+          <div class="support-res">
+            <div class="support-res-icon">✉️</div>
+            <div class="support-res-label">Email</div>
+            <div class="support-res-val">support@driverappreciation.com</div>
+          </div>
+          <div class="support-res">
+            <div class="support-res-icon">⏱️</div>
+            <div class="support-res-label">Response Time</div>
+            <div class="support-res-val">Account holders: &lt; 4 hours</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SETTINGS ── -->
+      <section class="p-sec" id="sec-settings">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Settings</div>
+            <div class="p-sub">Company profile, team members, and referral program.</div>
+          </div>
+        </div>
+        <div class="col-2">
+          <!-- Company profile -->
+          <div class="p-card">
+            <div class="p-card-head"><span class="p-card-title">Company Profile</span></div>
+            <form class="p-card-body" onsubmit="saveSettings(event)">
+              <div class="fg">
+                <label class="fl">Company Name</label>
+                <input id="set-company" name="set-company" class="fi" placeholder="Acme Logistics Inc.">
+              </div>
+              <div class="fgrid2">
+                <div class="fg">
+                  <label class="fl">Fleet Size</label>
+                  <select id="set-fleet" name="set-fleet" class="fs">
+                    <option value="<25">Under 25</option>
+                    <option value="25-100">25 – 100</option>
+                    <option value="100-500">100 – 500</option>
+                    <option value="500+">500+</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label class="fl">Your Role</label>
+                  <select id="set-role" name="set-role" class="fs">
+                    <option>Fleet Admin</option>
+                    <option>Procurement</option>
+                    <option>HR</option>
+                    <option>Finance</option>
+                  </select>
+                </div>
+              </div>
+              <button type="submit" class="btn-p btn-p-primary">Save Changes</button>
+            </form>
+          </div>
+
+          <!-- Team + Referral -->
+          <div>
+            <div class="p-card">
+              <div class="p-card-head"><span class="p-card-title">Team Members</span></div>
+              <div class="p-table-wrap">
+                <table class="p-table">
+                  <thead><tr><th>Email</th><th>Role</th><th>Status</th></tr></thead>
+                  <tbody id="team-tbody"></tbody>
+                </table>
+              </div>
+              <form class="p-card-body" style="border-top:1px solid #DEE3E9" onsubmit="inviteTeam(event)">
+                <div class="fgrid2" style="margin-bottom:10px">
+                  <input name="inv-email" type="email" class="fi" placeholder="colleague@company.com" required>
+                  <select name="inv-role" class="fs">
+                    <option>Buyer</option>
+                    <option>Finance Viewer</option>
+                    <option>Fleet Admin</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn-p btn-p-ghost" style="width:100%">Send Invite</button>
+              </form>
+            </div>
+
+            <div class="p-card" style="margin-top:16px">
+              <div class="p-card-head"><span class="p-card-title">Referral Program</span></div>
+              <div class="p-card-body">
+                <div style="font-size:0.8rem;color:#6B7280;margin-bottom:12px">Share your code with other fleet operators. When they place their first order, you both earn a $50 account credit.</div>
+                <div class="ref-code-box">
+                  <div class="ref-code" id="referral-code">—</div>
+                  <button class="btn-p btn-p-ghost btn-p-sm" onclick="copyRef()" style="margin-left:auto">Copy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main><!-- /portal-main -->
+  </div><!-- /portal-body -->
+</div><!-- /portal-wrap -->
+
+<!-- ═══════════════════════════════════════════
+     SCRIPTS — Firebase preserved exactly as-was
+════════════════════════════════════════════ -->
+<script src="/api/supabase-config"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/portal.js"></script>
+<script>
+/* ═══════════════════════════════════════════
+   FLEET PORTAL — main controller
+   Depends on: auth.js (Firebase), cart.js (showToast), portal.js (PortalAccount etc.)
+════════════════════════════════════════════ */
+
+let currentUser = null;
+let obStep = 1;
+const obAnswers = {};
+
+/* ── Boot ── */
+onAuthReady(user => {
+  if (!user) {
+    window.location.href = 'login.html?returnUrl=' + encodeURIComponent(window.location.pathname);
+    return;
+  }
+  currentUser = user;
+  storeUserSession(user);
+
+  if (!PortalAccount.isOnboarded()) {
+    document.getElementById('ob-overlay').classList.add('open');
+  } else {
+    initPortal();
+  }
+});
+
+/* ── Onboarding ── */
+function obSelect(step, value, el) {
+  obAnswers['step' + step] = value;
+  el.closest('.ob-opts').querySelectorAll('.ob-opt').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+
+function obNext() {
+  if (!obAnswers['step' + obStep]) { showToast('Please make a selection', 'error'); return; }
+  if (obStep === 4) {
+    PortalAccount.complete({
+      role:        obAnswers.step1,
+      fleetSize:   obAnswers.step2,
+      priority:    obAnswers.step3,
+      payment:     obAnswers.step4,
+      companyName: currentUser.displayName || '',
+      uid:         currentUser.uid,
+    });
+    seedDemoData();
+    document.getElementById('ob-overlay').classList.remove('open');
+    initPortal();
+    return;
+  }
+  obStep++;
+  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ob-step-' + obStep).classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const d = document.getElementById('ob-dot-' + i);
+    d.classList.remove('cur','done');
+    if (i < obStep) d.classList.add('done');
+    if (i === obStep) d.classList.add('cur');
+  }
+  document.getElementById('ob-step-num').textContent = 'Step ' + obStep + ' of 4';
+  document.getElementById('ob-back-btn').style.display = obStep > 1 ? '' : 'none';
+}
+
+function obBack() {
+  if (obStep <= 1) return;
+  obStep--;
+  document.querySelectorAll('.ob-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('ob-step-' + obStep).classList.add('active');
+  for (let i = 1; i <= 4; i++) {
+    const d = document.getElementById('ob-dot-' + i);
+    d.classList.remove('cur','done');
+    if (i < obStep) d.classList.add('done');
+    if (i === obStep) d.classList.add('cur');
+  }
+  document.getElementById('ob-step-num').textContent = 'Step ' + obStep + ' of 4';
+  document.getElementById('ob-back-btn').style.display = obStep > 1 ? '' : 'none';
+}
+
+/* ── Init portal ── */
+function initPortal() {
+  const acct  = PortalAccount.get();
+  const ytd   = PortalOrders.ytdSpend();
+  const tier  = PortalAccount.loyaltyTier(ytd);
+  const company = acct.companyName || currentUser.displayName || 'Fleet Manager';
+  const initials = (currentUser.displayName || currentUser.email || 'F')
+    .split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+
+  document.getElementById('sb-company').textContent = company;
+  const av = document.getElementById('sb-avatar');
+  if (currentUser.photoURL) {
+    av.innerHTML = '<img src="' + currentUser.photoURL + '" alt="' + initials + '">';
+  } else {
+    av.textContent = initials;
+  }
+  document.getElementById('sb-tier').textContent = tier.name;
+  document.getElementById('portal-wrap').removeAttribute('hidden');
+  navigate('dashboard');
+}
+
+/* ── Navigation ── */
+function navigate(section) {
+  document.querySelectorAll('.p-sec').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
+  const sec = document.getElementById('sec-' + section);
+  if (sec) sec.classList.add('active');
+  const nav = document.querySelector('.sb-item[data-section="' + section + '"]');
+  if (nav) nav.classList.add('active');
+  closeSidebar();
+  const renders = { dashboard, orders, programs, roster, billing, quotes, ideas, support, settings };
+  if (renders[section]) renders[section]();
+}
+
+/* ── Sidebar mobile ── */
+function openSidebar()  { document.getElementById('portal-sidebar').classList.add('open'); document.getElementById('sb-overlay').classList.add('open'); }
+function closeSidebar() { document.getElementById('portal-sidebar').classList.remove('open'); document.getElementById('sb-overlay').classList.remove('open'); }
+
+/* ── Modals ── */
+function openModal(id)  { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+/* ════════════════════════════════════
+   SECTION RENDERERS
+════════════════════════════════════ */
+
+function dashboard() {
+  const acct = PortalAccount.get();
+  const ytd  = PortalOrders.ytdSpend();
+  const tier = PortalAccount.loyaltyTier(ytd);
+  const progs = PortalPrograms.get();
+  const roster = PortalRoster.get();
+  const company = acct.companyName || currentUser.displayName || 'Fleet Manager';
+
+  document.getElementById('dash-company').textContent = 'Welcome back, ' + company;
+  document.getElementById('tier-name').textContent = tier.name;
+  document.getElementById('tier-desc').textContent = tier.discount > 0 ? tier.discount + '% discount on all orders' : 'Start ordering to unlock discounts';
+  const pct = tier.nextAt ? Math.min(100, Math.round(ytd / tier.nextAt * 100)) : 100;
+  document.getElementById('tier-bar-fill').style.width = pct + '%';
+  document.getElementById('tier-bar-label').textContent = tier.nextAt
+    ? fmtMoney(tier.nextAt - ytd) + ' to ' + tier.next
+    : 'Top tier achieved 🏆';
+
+  document.getElementById('d-ytd').textContent     = fmtMoney(ytd);
+  document.getElementById('d-progs').textContent   = progs.filter(p => p.status === 'active').length;
+  document.getElementById('d-drivers').textContent = roster.length;
+  document.getElementById('d-units').textContent   = PortalOrders.totalUnits().toLocaleString();
+
+  const events = getUpcomingEvents(3);
+  document.getElementById('d-events').innerHTML = events.map(e => `
+    <div class="ev-item">
+      <div class="ev-emoji">${e.emoji}</div>
+      <div style="min-width:0;flex:1">
+        <div class="ev-name">${e.name}</div>
+        <div class="ev-date">Order by ${fmtDate(e.orderBy.toISOString())}</div>
+      </div>
+      <div class="ev-days${e.late ? ' late' : ''}">${e.daysAway}d</div>
+    </div>`).join('');
+
+  const ords = PortalOrders.get().slice(0, 3);
+  document.getElementById('d-orders').innerHTML = ords.length === 0
+    ? `<div class="p-empty" style="padding:20px"><p class="p-empty-title" style="font-size:0.875rem">No orders yet</p><a href="shop.html" class="btn-p btn-p-primary btn-p-sm" style="margin-top:6px">Shop Now</a></div>`
+    : `<div class="p-table-wrap"><table class="p-table"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody>${ords.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${fmtMoney(o.total)}</td><td><span class="bdg bdg-green">Confirmed</span></td></tr>`).join('')}</tbody></table></div>`;
+}
+
+function orders() {
+  const list = PortalOrders.get();
+  const tbody = document.getElementById('orders-tbody');
+  if (tbody) {
+    tbody.innerHTML = list.length === 0
+      ? `<tr><td colspan="6"><div class="p-empty"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg></div><p class="p-empty-title">No Orders Yet</p><p class="p-empty-msg">Place your first order to see it here.</p><a href="shop.html" class="btn-p btn-p-primary">Shop Products</a></div></td></tr>`
+      : list.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${o.items||'—'}</td><td>${(o.units||0).toLocaleString()}</td><td>${fmtMoney(o.total)}</td><td><span class="bdg bdg-green">Confirmed</span></td></tr>`).join('');
+  }
+  const tel = document.getElementById('templates-list');
+  if (!tel) return;
+  const tmpl = PortalTemplates.get();
+  tel.innerHTML = tmpl.length === 0
+    ? `<p style="font-size:0.8rem;color:#6B7280">No saved templates yet. After ordering, you can save a cart as a template for fast reorders.</p>`
+    : tmpl.map(t=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #DEE3E9"><div><div style="font-weight:600;font-size:0.875rem">${t.name}</div></div><div style="display:flex;gap:6px"><a href="shop.html" class="btn-p btn-p-ghost btn-p-sm">Reorder</a><button class="btn-p btn-p-danger btn-p-sm" onclick="PortalTemplates.remove('${t.id}');orders()">Remove</button></div></div>`).join('');
+}
+
+function programs() {
+  const progs = PortalPrograms.get();
+  const grid  = document.getElementById('prog-grid');
+  if (!grid) return;
+  const tc = { appreciation:'background:#EFF6FF;color:#1E40AF', onboarding:'background:#ECFDF5;color:#065F46', safety:'background:#FFF7ED;color:#9A3412', holiday:'background:#FDF4FF;color:#7E22CE', milestone:'background:#FFF1F2;color:#9F1239' };
+  grid.innerHTML = progs.length === 0
+    ? `<div class="p-empty" style="grid-column:1/-1;background:#fff;border-radius:14px;border:1px solid #DEE3E9"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg></div><p class="p-empty-title">No Programs Yet</p><p class="p-empty-msg">Build your first recognition program to automate driver appreciation at scale.</p><button class="btn-p btn-p-primary" onclick="openModal('prog-modal')">Build First Program</button></div>`
+    : progs.map(p=>`<div class="prog-card"><div class="prog-card-top"><span class="prog-type" style="${tc[p.type]||tc.appreciation}">${p.type}</span><span class="bdg ${p.status==='active'?'bdg-green':'bdg-gray'}">${p.status}</span></div><div class="prog-name">${p.name}</div><div class="prog-meta"><span>👥 ${p.driverCount||0} drivers</span><span>💰 $${p.budget}/driver</span>${p.lastRun?`<span>Last: ${fmtDate(p.lastRun)}</span>`:'<span>Not yet run</span>'}</div><div class="prog-footer"><button class="btn-p btn-p-ghost btn-p-sm" onclick="PortalPrograms.update('${p.id}',{status:'${p.status==='active'?'paused':'active'}'});programs()">${p.status==='active'?'Pause':'Activate'}</button><button class="btn-p btn-p-danger btn-p-sm" onclick="if(confirm('Remove this program?')){PortalPrograms.remove('${p.id}');programs();}">Remove</button></div></div>`).join('');
+}
+
+function roster() {
+  const drivers = PortalRoster.get();
+  const milestones = PortalRoster.milestones();
+  const rc = document.getElementById('roster-count'); if(rc) rc.textContent = drivers.length;
+  const mc = document.getElementById('milestone-count'); if(mc) mc.textContent = milestones.length;
+  const tbody = document.getElementById('roster-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = drivers.length === 0
+    ? `<tr><td colspan="5"><div class="p-empty"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg></div><p class="p-empty-title">No Drivers Added</p><p class="p-empty-msg">Import a CSV or add drivers one at a time.</p><button class="btn-p btn-p-primary" onclick="openModal('add-driver-modal')">Add First Driver</button></div></td></tr>`
+    : drivers.map(d=>{const yrs=d.hireDate?Math.floor((new Date()-new Date(d.hireDate))/(365.25*86400000)):null;return`<tr><td><div class="fw6">${d.name}</div>${d.email?`<div style="font-size:0.72rem;color:#6B7280">${d.email}</div>`:''}</td><td>${d.dept||'—'}</td><td>${fmtDate(d.hireDate)}</td><td>${yrs!==null?yrs+'yr':'—'}</td><td><button class="btn-p btn-p-danger btn-p-sm" onclick="if(confirm('Remove ${d.name.replace(/'/g,"\\'")}?')){PortalRoster.remove('${d.id}');roster();}">Remove</button></td></tr>`;}).join('');
+  const ml = document.getElementById('milestone-list');
+  if (!ml) return;
+  ml.innerHTML = milestones.length === 0
+    ? `<p style="font-size:0.8rem;color:#6B7280;padding:12px 0">No upcoming anniversaries in the next 60 days.</p>`
+    : milestones.map(d=>`<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #DEE3E9"><div><div style="font-weight:600;font-size:0.875rem">${d.name}</div><div style="font-size:0.72rem;color:#6B7280">${d.nextYear}-year anniversary in ${d.daysToNext} days</div></div><button class="btn-p btn-p-primary btn-p-sm" onclick="navigate('quotes')">Gift</button></div>`).join('');
+}
+
+function billing() {
+  const ytd  = PortalOrders.ytdSpend();
+  const ords = PortalOrders.get();
+  const el = document.getElementById('b-ytd'); if(el) el.textContent = fmtMoney(ytd);
+  const oe = document.getElementById('b-orders'); if(oe) oe.textContent = ords.length;
+  const ae = document.getElementById('b-avg'); if(ae) ae.textContent = ords.length > 0 ? fmtMoney(ytd/ords.length) : '$0.00';
+  const tbody = document.getElementById('inv-tbody');
+  if (!tbody) return;
+  const invoices = PortalInvoices.get();
+  tbody.innerHTML = invoices.length === 0
+    ? `<tr><td colspan="5"><div class="p-empty"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg></div><p class="p-empty-title">No Invoices Yet</p><p class="p-empty-msg">Invoices will appear here after your first order is processed.</p></div></td></tr>`
+    : invoices.map(i=>`<tr><td class="fw6">${i.id}</td><td>${fmtDate(i.createdAt)}</td><td>${fmtMoney(i.amount)}</td><td><span class="bdg ${i.status==='paid'?'bdg-green':i.status==='overdue'?'bdg-red':'bdg-yellow'}">${i.status}</span></td><td><a href="${i.pdf||'#'}" class="btn-p btn-p-ghost btn-p-sm">Download</a></td></tr>`).join('');
+}
+
+function quotes() {
+  const list = PortalQuotes.get();
+  const tbody = document.getElementById('quotes-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = list.length === 0
+    ? `<tr><td colspan="4"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">No quotes submitted yet.</p></td></tr>`
+    : list.map(q=>`<tr><td class="fw6">${q.id}</td><td>${fmtDate(q.createdAt)}</td><td>${q.productType||'General'}</td><td><span class="bdg bdg-blue">${q.status}</span></td></tr>`).join('');
+}
+
+function ideas() {
+  const list = PortalIdeas.get();
+  const grid = document.getElementById('ideas-grid');
+  if (!grid) return;
+  grid.innerHTML = list.length === 0
+    ? `<div class="p-empty" style="grid-column:1/-1;background:#fff;border-radius:14px;border:1px solid #DEE3E9"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div><p class="p-empty-title">No Saved Products</p><p class="p-empty-msg">Browse products and tap the heart icon to save ideas for your program.</p><a href="shop.html" class="btn-p btn-p-primary">Browse Products</a></div>`
+    : list.map(idea=>`<div class="prog-card">${idea.image?`<img src="${idea.image}" alt="" style="width:100%;height:110px;object-fit:cover;border-radius:10px;margin-bottom:10px">`:''}<div class="prog-name">${idea.name||idea.productId||idea.id}</div>${idea.price?`<div style="font-size:0.78rem;color:#6B7280;margin-bottom:8px">$${idea.price}/unit</div>`:''}<div class="prog-footer"><a href="product.html?id=${idea.productId||idea.id}" class="btn-p btn-p-ghost btn-p-sm">View</a><button class="btn-p btn-p-danger btn-p-sm" onclick="PortalIdeas.toggle({id:'${idea.productId||idea.id}'});ideas()">Remove</button></div></div>`).join('');
+}
+
+function support() {
+  const list = PortalTickets.get();
+  const tbody = document.getElementById('tickets-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = list.length === 0
+    ? `<tr><td colspan="5"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">No support tickets yet.</p></td></tr>`
+    : list.map(t=>`<tr><td class="fw6">${t.id}</td><td>${fmtDate(t.createdAt)}</td><td>${t.subject}</td><td><span class="bdg ${t.priority==='urgent'?'bdg-red':t.priority==='high'?'bdg-yellow':'bdg-gray'}">${t.priority}</span></td><td><span class="bdg ${t.status==='open'?'bdg-blue':'bdg-green'}">${t.status}</span></td></tr>`).join('');
+}
+
+function settings() {
+  const acct = PortalAccount.get();
+  const team = PortalTeam.get();
+  if (acct.companyName) { const e=document.getElementById('set-company'); if(e) e.value=acct.companyName; }
+  if (acct.fleetSize)   { const e=document.getElementById('set-fleet');   if(e) e.value=acct.fleetSize; }
+  if (acct.role)        { const e=document.getElementById('set-role');    if(e) e.value=acct.role; }
+  const re = document.getElementById('referral-code');
+  if (re) re.textContent = PortalAccount.referralCode(acct.uid || currentUser.uid);
+  const tbody = document.getElementById('team-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = team.length === 0
+    ? `<tr><td colspan="3"><p style="padding:12px;color:#6B7280;font-size:0.8rem;text-align:center">No team members added.</p></td></tr>`
+    : team.map(m=>`<tr><td>${m.email}</td><td>${m.role}</td><td><span class="bdg bdg-yellow">${m.status}</span></td></tr>`).join('');
+}
+
+/* ── Form handlers ── */
+function submitProgram(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalPrograms.add({ name:fd.get('prog-name'), type:fd.get('prog-type'), trigger:fd.get('prog-trigger'), triggerDate:fd.get('prog-date')||null, budget:parseInt(fd.get('prog-budget'))||50, driverCount:parseInt(fd.get('prog-drivers'))||0, status:'active' });
+  closeModal('prog-modal'); e.target.reset(); programs(); showToast('Program created!','success');
+}
+
+function submitQuote(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalQuotes.add({ fleetSize:fd.get('q-fleet'), productType:fd.get('q-product'), quantity:fd.get('q-qty'), budget:fd.get('q-budget'), timing:fd.get('q-timing'), notes:fd.get('q-notes') });
+  e.target.reset(); quotes(); showToast("Quote submitted — we'll follow up within 24 hours.",'success');
+}
+
+function submitTicket(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalTickets.add({ subject:fd.get('t-subject'), orderId:fd.get('t-order')||null, priority:fd.get('t-priority'), message:fd.get('t-message') });
+  e.target.reset(); support(); showToast('Support ticket submitted!','success');
+}
+
+function saveSettings(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalAccount.set({ companyName:fd.get('set-company'), fleetSize:fd.get('set-fleet'), role:fd.get('set-role') });
+  showToast('Settings saved','success');
+}
+
+function inviteTeam(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalTeam.invite({ email:fd.get('inv-email'), role:fd.get('inv-role') });
+  e.target.reset(); settings(); showToast('Invite sent!','success');
+}
+
+function submitDriver(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  PortalRoster.add({ name:fd.get('d-name'), email:fd.get('d-email'), dept:fd.get('d-dept'), hireDate:fd.get('d-hire') });
+  e.target.reset(); closeModal('add-driver-modal'); roster(); showToast('Driver added','success');
+}
+
+/* ── CSV import ── */
+function handleCSV(input) {
+  const file = input.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const lines = e.target.result.split('\n').filter(l => l.trim());
+    const headers = lines[0].toLowerCase().split(',').map(h => h.trim().replace(/"/g,''));
+    const rows = lines.slice(1).map(line => {
+      const vals = line.split(',').map(v => v.trim().replace(/^"|"$/g,''));
+      const obj = {};
+      headers.forEach((h,i) => { obj[h] = vals[i]||''; });
+      return { name:obj.name||obj.fullname||obj['full name']||'', email:obj.email||'', dept:obj.dept||obj.department||'', hireDate:obj.hiredate||obj['hire date']||obj['hire_date']||'' };
+    }).filter(r => r.name);
+    const count = PortalRoster.importCSV(rows);
+    roster();
+    showToast(count + ' driver' + (count!==1?'s':'') + ' imported','success');
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+
+/* ── ROI calculator ── */
+function calcROI() {
+  const fleet = parseInt(document.getElementById('roi-fleet').value) || 0;
+  const spend = parseFloat(document.getElementById('roi-spend').value) || 0;
+  if (!fleet) { showToast('Enter your fleet size','error'); return; }
+  const result = PortalROI.calculate(fleet, spend);
+  document.getElementById('roi-at-risk').textContent     = result.atRisk;
+  document.getElementById('roi-retained').textContent    = result.retained;
+  document.getElementById('roi-savings').textContent     = fmtMoney(result.savings);
+  document.getElementById('roi-result-pct').textContent  = result.roi + '%';
+  document.getElementById('roi-result-box').classList.add('show');
+}
+
+/* ── Copy referral code ── */
+function copyRef() {
+  const code = document.getElementById('referral-code').textContent;
+  navigator.clipboard.writeText(code).then(() => showToast('Referral code copied!','success'));
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,393 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saved Kits — Driver Appreciation Solutions</title>
+  <meta name="description" content="Your saved recognition kits. Add to cart and order for your fleet when you're ready.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+
+  <style>
+    body { background: #fff; }
+
+    .fav-page-wrap { padding: 48px 0 96px; }
+
+    .fav-hero {
+      margin-bottom: 48px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid #E5E5E5;
+      display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .fav-hero-eyebrow {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #888; margin-bottom: 10px;
+    }
+    .fav-hero-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 700;
+      letter-spacing: -0.03em; color: #0D1B45; line-height: 1.1;
+    }
+    .fav-count-tag {
+      font-size: 0.875rem; font-weight: 600; color: var(--text-muted);
+      margin-left: 12px; font-weight: 400;
+    }
+    .fav-hero-link {
+      font-size: 0.9375rem; font-weight: 600; color: var(--gold);
+      text-decoration: none; border-bottom: 1px solid var(--gold);
+      white-space: nowrap;
+    }
+    .fav-hero-link:hover { opacity: 0.8; }
+
+    /* GRID */
+    .fav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .fav-card {
+      background: #fff;
+      border: 1px solid #E8E8E8;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.22s ease, transform 0.22s ease;
+    }
+    .fav-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.09);
+      transform: translateY(-3px);
+    }
+
+    .fav-card-img {
+      aspect-ratio: 4/3; background: #F5F5F5; overflow: hidden;
+      position: relative;
+    }
+    .fav-card-img img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.3s ease;
+    }
+    .fav-card:hover .fav-card-img img { transform: scale(1.04); }
+
+    .fav-card-remove {
+      position: absolute; top: 12px; right: 12px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #999; transition: all 0.18s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .fav-card-remove:hover { color: #d00; background: #fff; }
+    .fav-card-remove svg { width: 16px; height: 16px; }
+
+    .fav-card-tier-badge {
+      position: absolute; bottom: 12px; left: 12px;
+      background: rgba(13,27,69,0.85); color: #fff;
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 100px;
+    }
+
+    .fav-card-body { padding: 20px; }
+    .fav-card-cat {
+      font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: #888; margin-bottom: 6px;
+    }
+    .fav-card-name {
+      font-size: 1.0625rem; font-weight: 700; color: #0D1B45;
+      letter-spacing: -0.02em; margin-bottom: 6px; line-height: 1.3;
+    }
+    .fav-card-price {
+      font-size: 0.9375rem; font-weight: 600; color: #555; margin-bottom: 20px;
+    }
+    .fav-card-price strong { color: #0D1B45; }
+
+    .fav-card-actions { display: flex; gap: 8px; }
+    .fav-btn-cart {
+      flex: 1; height: 44px; background: #0D1B45; color: #fff;
+      border: none; border-radius: 100px; font-size: 0.875rem;
+      font-weight: 700; cursor: pointer; display: flex;
+      align-items: center; justify-content: center; gap: 6px;
+      text-decoration: none; transition: background 0.18s ease;
+    }
+    .fav-btn-cart:hover { background: #162353; }
+    .fav-btn-view {
+      height: 44px; width: 44px; background: transparent;
+      border: 1.5px solid #E5E5E5; border-radius: 100px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      color: #555; text-decoration: none; transition: all 0.18s ease;
+    }
+    .fav-btn-view:hover { border-color: #999; color: #0D1B45; }
+    .fav-btn-view svg { width: 16px; height: 16px; }
+
+    /* EMPTY STATE */
+    .fav-empty {
+      text-align: center; padding: 96px 24px;
+    }
+    .fav-empty-icon {
+      width: 72px; height: 72px; margin: 0 auto 24px;
+      background: #F5F5F5; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: #ccc;
+    }
+    .fav-empty-icon svg { width: 36px; height: 36px; }
+    .fav-empty-title {
+      font-size: 1.375rem; font-weight: 700; color: #0D1B45;
+      letter-spacing: -0.02em; margin-bottom: 12px;
+    }
+    .fav-empty-desc {
+      font-size: 1rem; color: #767676; line-height: 1.6; margin-bottom: 32px; max-width: 380px; margin-left: auto; margin-right: auto;
+    }
+
+    /* FAVED NAV BADGE */
+    .fav-count {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 18px; height: 18px; padding: 0 4px;
+      background: #0D1B45; color: #fff; border-radius: 100px;
+      font-size: 0.6875rem; font-weight: 700; margin-left: 2px;
+      opacity: 0; transition: opacity 0.2s ease;
+    }
+    .fav-count.visible { opacity: 1; }
+
+    @media (max-width: 540px) {
+      .fav-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .fav-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
+  <a href="shop.html">Order recognition kits →</a>
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html"   class="nav-link">Home</a>
+        <a href="shop.html"    class="nav-link">Shop</a>
+        <a href="about.html"   class="nav-link">About</a>
+        <a href="ideas.html"   class="nav-link">Ideas</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="favorites.html" class="nav-cart-btn" style="color:#0D1B45" aria-label="Saved Kits">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:20px;height:20px"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
+          Saved
+          <span class="fav-count" id="fav-count">0</span>
+        </a>
+        <a href="cart.html" class="nav-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </a>
+        <a href="login.html" class="nav-login-btn btn btn-primary btn-sm">Sign In</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button class="mobile-close-btn">✕</button>
+  </div>
+  <a href="index.html"   class="mobile-nav-link">Home</a>
+  <a href="shop.html"    class="mobile-nav-link">Shop</a>
+  <a href="about.html"   class="mobile-nav-link">About</a>
+  <a href="ideas.html"   class="mobile-nav-link">Ideas</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- MAIN -->
+<main class="fav-page-wrap">
+  <div class="container">
+
+    <div class="fav-hero">
+      <div>
+        <div class="fav-hero-eyebrow">Your Saved Kits</div>
+        <h1 class="fav-hero-title">
+          Saved Kits
+          <span class="fav-count-tag" id="fav-count-label"></span>
+        </h1>
+      </div>
+      <a href="shop.html" class="fav-hero-link">Browse all products →</a>
+    </div>
+
+    <div id="fav-content"></div>
+
+  </div>
+</main>
+
+<!-- SHOP CTA -->
+<section style="background:#F8F8F8;border-top:1px solid #E5E5E5;padding:64px 0">
+  <div class="container" style="text-align:center">
+    <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#888;margin-bottom:12px">Full Catalog</div>
+    <h2 style="font-size:clamp(1.5rem,3vw,2rem);font-weight:700;letter-spacing:-0.025em;color:#0D1B45;margin-bottom:12px">All five recognition kits</h2>
+    <p style="font-size:1rem;color:#767676;max-width:440px;margin:0 auto 28px;line-height:1.65">From Day 1 onboarding to 10-year milestones — every recognition moment in one catalog.</p>
+    <a href="shop.html" class="btn btn-primary btn-lg">Shop All Kits</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="nav-logo">
+          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        </a>
+        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, and milestone awards built for the trucking industry.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
+          <li><a href="shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
+          <li><a href="shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html"   class="footer-link">About Us</a></li>
+          <li><a href="ideas.html"   class="footer-link">Ideas Blog</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="customer-service.html" class="footer-link">Customer Service</a></li>
+          <li><a href="return-policy.html"    class="footer-link">Return Policy</a></li>
+          <li><a href="refund-policy.html"    class="footer-link">Refund &amp; Disputes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="terms.html"             class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="return-policy.html"     class="footer-legal-link">Return Policy</a>
+        <a href="refund-policy.html"     class="footer-legal-link">Refund Policy</a>
+        <a href="legal.html"             class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script src="js/cart.js"></script>
+<script>
+const FAV_KEY = 'das_favorites_v1';
+
+function getFavs() {
+  try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch { return []; }
+}
+function saveFavs(list) {
+  localStorage.setItem(FAV_KEY, JSON.stringify(list));
+  updateNavBadge(list.length);
+}
+function removeFav(productId) {
+  saveFavs(getFavs().filter(f => f.productId !== productId));
+  render();
+}
+function addFavToCart(fav) {
+  Cart.add({
+    id:       `${fav.productId}-${fav.tier}`,
+    name:     `${fav.name} (${fav.tierLabel})`,
+    price:    fav.price,
+    category: fav.category,
+    image:    fav.image,
+    minQty:   10,
+  }, 10);
+}
+function updateNavBadge(count) {
+  const badge = document.getElementById('fav-count');
+  if (badge) { badge.textContent = count; badge.classList.toggle('visible', count > 0); }
+}
+
+function render() {
+  const favs = getFavs();
+  const container = document.getElementById('fav-content');
+  const label = document.getElementById('fav-count-label');
+  if (label) label.textContent = favs.length ? `(${favs.length})` : '';
+  updateNavBadge(favs.length);
+
+  if (!favs.length) {
+    container.innerHTML = `
+      <div class="fav-empty">
+        <div class="fav-empty-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
+        </div>
+        <h2 class="fav-empty-title">No saved kits yet</h2>
+        <p class="fav-empty-desc">Browse the catalog and hit "Save for Later" on any product to build your list before you're ready to order.</p>
+        <a href="shop.html" class="btn btn-primary btn-lg">Shop All Kits</a>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = `<div class="fav-grid">${favs.map(f => `
+    <div class="fav-card" data-pid="${f.productId}">
+      <div class="fav-card-img">
+        <img src="${f.image}" alt="${f.name}" loading="lazy" onerror="this.style.display='none'">
+        <button class="fav-card-remove" data-pid="${f.productId}" aria-label="Remove from saved kits">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <span class="fav-card-tier-badge">${f.tierLabel}</span>
+      </div>
+      <div class="fav-card-body">
+        <div class="fav-card-cat">${f.category}</div>
+        <div class="fav-card-name">${f.name}</div>
+        <div class="fav-card-price"><strong>$${f.price.toFixed(2)}</strong> per unit &middot; min. 10</div>
+        <div class="fav-card-actions">
+          <button class="fav-btn-cart" data-pid="${f.productId}">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+            Add to Cart
+          </button>
+          <a href="product.html?id=${f.productId}" class="fav-btn-view" aria-label="View product">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>`).join('')}</div>`;
+
+  // Event delegation
+  document.querySelectorAll('.fav-card-remove').forEach(btn => {
+    btn.addEventListener('click', () => removeFav(btn.dataset.pid));
+  });
+  document.querySelectorAll('.fav-btn-cart').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const fav = getFavs().find(f => f.productId === btn.dataset.pid);
+      if (!fav) return;
+      addFavToCart(fav);
+      const orig = btn.innerHTML;
+      btn.innerHTML = '✓ Added';
+      btn.style.background = 'var(--success, #22c55e)';
+      setTimeout(() => { btn.innerHTML = orig; btn.style.background = ''; }, 1800);
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', render);
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

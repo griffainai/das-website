@@ -1,0 +1,7 @@
+node_modules
+netlify
+netlify.toml
+dev-server.js
+FIREBASE_SETUP.md
+.claude
+*.log

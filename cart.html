@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — Driver Appreciation Solutions</title>
+  <meta name="description" content="Review your order and proceed to secure checkout.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="announcement-bar">
+  All orders include free standard shipping &nbsp;·&nbsp; 3–5 business day fulfillment
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html"  class="nav-link">Home</a>
+        <a href="shop.html"   class="nav-link">Shop</a>
+        <a href="about.html"  class="nav-link">About</a>
+        <a href="ideas.html"  class="nav-link">Ideas</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-cart-btn" style="color:var(--gold);border-color:var(--gold-border-strong)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </a>
+        <a href="login.html" class="nav-login-btn btn btn-primary btn-sm">Sign In</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button class="mobile-close-btn">✕</button>
+  </div>
+  <a href="index.html"  class="mobile-nav-link">Home</a>
+  <a href="shop.html"   class="mobile-nav-link">Shop</a>
+  <a href="about.html"  class="mobile-nav-link">About</a>
+  <a href="ideas.html"  class="mobile-nav-link">Ideas</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero" style="padding:56px 0 48px">
+  <div class="page-hero-content container">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      <span>Cart</span>
+    </div>
+    <h1 class="section-title" style="font-size:clamp(1.75rem,3.5vw,2.5rem);margin-bottom:0">Your Order</h1>
+  </div>
+</div>
+
+<!-- CART CONTENT -->
+<section class="section" style="background:var(--black)">
+  <div class="container">
+    <div class="cart-layout">
+
+      <!-- CART ITEMS -->
+      <div>
+        <div class="cart-table" id="cart-items-wrap">
+          <!-- Rendered by JS -->
+        </div>
+        <div style="margin-top:16px">
+          <a href="shop.html" class="btn btn-secondary btn-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+            Continue Shopping
+          </a>
+        </div>
+      </div>
+
+      <!-- ORDER SUMMARY -->
+      <div class="order-summary">
+        <div class="order-summary-title">Order Summary</div>
+
+        <div class="order-line">
+          <span>Subtotal</span>
+          <strong id="summary-subtotal">$0.00</strong>
+        </div>
+        <div class="order-line">
+          <span>Shipping</span>
+          <strong style="color:var(--success)">Free</strong>
+        </div>
+        <div class="order-line">
+          <span>Taxes</span>
+          <strong>Calculated at checkout</strong>
+        </div>
+
+        <div class="order-total">
+          <span>Estimated Total</span>
+          <span id="summary-total">$0.00</span>
+        </div>
+
+        <button class="btn btn-primary btn-full btn-lg" id="checkout-btn" onclick="goToCheckout()">
+          Proceed to Checkout
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </button>
+
+        <div class="checkout-trust" style="margin-top:14px">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;color:var(--success)"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
+          <span style="font-size:0.75rem;color:var(--text-muted)">Secured by Stripe · 256-bit encryption</span>
+        </div>
+
+        <div class="checkout-note">
+          By placing your order you agree to our <a href="#">Terms &amp; Conditions</a>. Minimum order of 10 units per product.
+        </div>
+
+        <!-- TRUST SIGNALS -->
+        <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--gold-border)">
+          <div style="font-size:0.6875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px">Accepted Payments</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">VISA</div>
+            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">MASTERCARD</div>
+            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">AMEX</div>
+            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">ACH</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="terms.html" class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="cancelation-policy.html" class="footer-legal-link">Cancellation Policy</a>
+        <a href="return-policy.html" class="footer-legal-link">Return Policy</a>
+        <a href="refund-policy.html" class="footer-legal-link">Refund Policy</a>
+        <a href="legal.html" class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="js/cart.js"></script>
+<script>
+function renderCart() {
+  const items = Cart.get();
+  const wrap  = document.getElementById('cart-items-wrap');
+
+  if (!items.length) {
+    wrap.innerHTML = `
+      <div class="cart-empty">
+        <div class="cart-empty-icon">🛒</div>
+        <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:8px">Your cart is empty</h3>
+        <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:24px">Add products from the shop to get started.</p>
+        <a href="shop.html" class="btn btn-primary">Browse Products</a>
+      </div>`;
+    document.getElementById('summary-subtotal').textContent = '$0.00';
+    document.getElementById('summary-total').textContent    = '$0.00';
+    document.getElementById('checkout-btn').disabled = true;
+    document.getElementById('checkout-btn').style.opacity = '0.5';
+    return;
+  }
+
+  document.getElementById('checkout-btn').disabled = false;
+  document.getElementById('checkout-btn').style.opacity = '';
+
+  const header = `
+    <div class="cart-table-head">
+      <span style="grid-column:1/3">Product</span>
+      <span style="text-align:center">Qty</span>
+      <span style="text-align:right">Subtotal</span>
+      <span></span>
+    </div>`;
+
+  const rows = items.map(item => `
+    <div class="cart-item">
+      <img class="cart-item-img"
+           src="${item.image || ''}"
+           alt="${item.name}"
+           onerror="this.style.background='var(--black-5)';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/>'">
+      <div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-cat">${item.category}</div>
+        <div style="font-size:0.875rem;color:var(--text-muted);margin-top:4px">$${item.price.toFixed(2)} / unit</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:6px;justify-content:center">
+        <button class="qty-btn" onclick="changeQty('${item.id}', -10)" style="width:26px;height:26px;font-size:0.9rem">−</button>
+        <input type="number"
+               class="qty-input"
+               style="width:48px"
+               value="${item.qty}"
+               min="${item.minQty || 10}"
+               onchange="setQty('${item.id}', this.value)">
+        <button class="qty-btn" onclick="changeQty('${item.id}', 10)" style="width:26px;height:26px;font-size:0.9rem">+</button>
+      </div>
+      <div class="cart-item-subtotal" style="text-align:right">$${(item.price * item.qty).toFixed(2)}</div>
+      <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Remove ${item.name}">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>`).join('');
+
+  wrap.innerHTML = header + rows;
+
+  const total = Cart.total();
+  document.getElementById('summary-subtotal').textContent = `$${total.toFixed(2)}`;
+  document.getElementById('summary-total').textContent    = `$${total.toFixed(2)}`;
+}
+
+function removeItem(id) { Cart.remove(id); renderCart(); }
+function changeQty(id, delta) {
+  const items = Cart.get();
+  const item = items.find(i => i.id === id);
+  if (item) Cart.setQty(id, item.qty + delta);
+  renderCart();
+}
+function setQty(id, val) { Cart.setQty(id, parseInt(val)); renderCart(); }
+
+window.addEventListener('das:cartchange', renderCart);
+document.addEventListener('DOMContentLoaded', renderCart);
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

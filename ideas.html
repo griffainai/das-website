@@ -1,0 +1,911 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Recognition Blog — Ideas &amp; Insights for Fleet Operators</title>
+  <meta name="description" content="Practical guides, safety research, retention data, and recognition strategies for fleet operators building driver programs that reduce accidents and keep drivers longer.">
+  <link rel="canonical" href="https://website-griffainai.vercel.app/ideas.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="Driver Recognition Ideas — Blog &amp; Insights for Fleet Operators">
+  <meta property="og:description" content="Practical guides, safety research, retention data, and recognition strategies for fleet operators building driver programs that reduce accidents and keep drivers longer.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta property="og:url" content="https://website-griffainai.vercel.app/ideas.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Driver Recognition Ideas — Blog &amp; Insights for Fleet Operators">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <meta name="theme-color" content="#1A2E6E">
+  <style>
+    /* ── Blog-specific styles ── */
+    .blog-hero { background: #0D1B45; padding: 80px 0 72px; }
+    .blog-hero-eyebrow { display: inline-block; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
+    .blog-hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 20px; }
+    .blog-hero-title em { color: rgba(255,255,255,0.55); font-style: normal; }
+    .blog-hero-desc { font-size: 1.125rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 560px; margin-bottom: 40px; }
+    .blog-stats { display: flex; gap: 32px; flex-wrap: wrap; }
+    .blog-stat { display: flex; flex-direction: column; gap: 4px; }
+    .blog-stat-num { font-size: 1.75rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1; }
+    .blog-stat-label { font-size: 0.8125rem; color: rgba(255,255,255,0.5); }
+
+    /* ── Category filter ── */
+    .category-bar { background: var(--black); border-bottom: 1px solid var(--gold-border); padding: 0; position: sticky; top: 72px; z-index: 90; }
+    .category-bar-inner { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; padding: 14px 0; }
+    .category-bar-inner::-webkit-scrollbar { display: none; }
+    .cat-btn { flex-shrink: 0; padding: 7px 18px; border-radius: 100px; border: 1px solid transparent; font-size: 0.875rem; font-weight: 600; color: var(--text-muted); background: transparent; cursor: pointer; transition: all 0.18s ease; white-space: nowrap; }
+    .cat-btn:hover { color: var(--text-primary); background: var(--black-2); border-color: var(--gold-border); }
+    .cat-btn.active { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+    /* ── Featured post ── */
+    .featured-post { display: grid; grid-template-columns: 1fr 1fr; border-radius: var(--radius-xl); overflow: hidden; border: 1px solid var(--gold-border); background: var(--black-2); margin-bottom: 48px; transition: box-shadow 0.24s ease; }
+    .featured-post:hover { box-shadow: var(--shadow-md); }
+    .featured-img-wrap { min-height: 360px; background: var(--black-4); overflow: hidden; position: relative; }
+    .featured-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: 0.88; transition: opacity 0.3s ease, transform 0.4s ease; }
+    .featured-post:hover .featured-img-wrap img { opacity: 1; transform: scale(1.03); }
+    .featured-badge { position: absolute; top: 20px; left: 20px; background: var(--gold); color: #fff; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; }
+    .featured-content { padding: 48px 44px; display: flex; flex-direction: column; justify-content: center; }
+    .featured-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .featured-category { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+    .featured-date { font-size: 0.8125rem; color: var(--text-muted); }
+    .featured-readtime { font-size: 0.8125rem; color: var(--text-muted); }
+    .featured-title { font-size: clamp(1.375rem, 2.5vw, 1.875rem); font-weight: 800; letter-spacing: -0.025em; line-height: 1.2; color: var(--text-primary); margin-bottom: 14px; }
+    .featured-excerpt { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.75; margin-bottom: 28px; flex: 1; }
+    .featured-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.9375rem; font-weight: 600; color: #fff; background: var(--gold); padding: 11px 22px; border-radius: 100px; text-decoration: none; transition: all 0.18s ease; align-self: flex-start; }
+    .featured-link:hover { background: var(--gold-hover); transform: scale(1.04); }
+    .featured-link svg { width: 16px; height: 16px; }
+
+    /* ── Article card grid ── */
+    .article-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .article-card { background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all 0.24s ease; text-decoration: none; color: inherit; }
+    .article-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); border-color: rgba(26,46,110,0.28); }
+    .card-img-wrap { aspect-ratio: 16/9; background: var(--black-4); overflow: hidden; flex-shrink: 0; }
+    .card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .article-card:hover .card-img-wrap img { transform: scale(1.06); }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .card-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+    .card-category { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gold); }
+    .card-date { font-size: 0.6875rem; color: var(--text-muted); margin-left: auto; }
+    .card-title { font-size: 1.0625rem; font-weight: 700; line-height: 1.35; color: var(--text-primary); margin-bottom: 10px; }
+    .card-excerpt { font-size: 0.875rem; color: var(--text-secondary); line-height: 1.65; flex: 1; margin-bottom: 18px; }
+    .card-readmore { display: inline-flex; align-items: center; gap: 6px; font-size: 0.875rem; font-weight: 700; color: var(--gold); align-self: flex-start; }
+    .card-readmore svg { width: 14px; height: 14px; transition: transform 0.2s ease; }
+    .article-card:hover .card-readmore svg { transform: translateX(3px); }
+
+    /* ── Insight strip ── */
+    .insight-strip { background: #0D1B45; padding: 56px 0; }
+    .insight-strip-inner { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: var(--radius-xl); overflow: hidden; }
+    .insight-item { background: #0D1B45; padding: 36px 32px; }
+    .insight-num { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 8px; }
+    .insight-num span { color: rgba(255,255,255,0.35); font-size: 1.5rem; }
+    .insight-label { font-size: 0.9375rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+
+    /* ── Newsletter ── */
+    .newsletter-section { background: var(--black-2); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); padding: 56px 0; }
+    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .newsletter-form { display: flex; gap: 8px; }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: 1px solid var(--gold-border); border-radius: 100px; font-size: 0.9375rem; background: var(--black); color: var(--text-primary); outline: none; transition: border-color 0.18s ease; }
+    .newsletter-input:focus { border-color: var(--gold); }
+    .newsletter-input::placeholder { color: var(--text-muted); }
+
+    /* ── Hidden cards (filter) ── */
+    .article-card[data-hidden="true"] { display: none; }
+    .featured-post[data-hidden="true"] { display: none; }
+
+    /* ══════════════════════════════════════════════════
+       BLOG LAYOUT — two-column with Linear-style sidebar
+    ══════════════════════════════════════════════════ */
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 296px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* ── Linear-style sidebar ── */
+    .blog-sidebar {
+      position: sticky;
+      top: 88px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* Sidebar card shell */
+    .sidebar-card {
+      background: var(--black-2);
+      border: 1px solid var(--gold-border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* Sidebar card header */
+    .sidebar-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 16px 12px;
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .sidebar-card-header-icon {
+      width: 20px; height: 20px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sidebar-card-header-icon svg { width: 11px; height: 11px; }
+    .sch-navy   { background: rgba(26,46,110,0.18); color: #8BA4FF; }
+    .sch-green  { background: rgba(34,197,94,0.12); color: #4ADE80; }
+    .sch-amber  { background: rgba(251,188,4,0.10); color: #FCD34D; }
+    .sidebar-card-header-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ── DAW Countdown mini-widget ── */
+    .sidebar-daw {
+      padding: 14px 16px 16px;
+    }
+    .sidebar-daw-date {
+      font-size: 0.6875rem;
+      font-weight: 600;
+      color: #4ADE80;
+      letter-spacing: 0.06em;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .sidebar-daw-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #4ADE80;
+      box-shadow: 0 0 6px rgba(74,222,128,0.7);
+    }
+    .sidebar-daw-title {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .sidebar-daw-timer {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 14px;
+    }
+    .sidebar-daw-unit {
+      flex: 1;
+      background: var(--black-4);
+      border: 1px solid var(--gold-border);
+      border-radius: 8px;
+      padding: 8px 4px 6px;
+      text-align: center;
+    }
+    .sidebar-daw-num {
+      display: block;
+      font-size: 1.1875rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 3px;
+      font-variant-numeric: tabular-nums;
+    }
+    .sidebar-daw-label {
+      font-size: 0.5625rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .sidebar-daw-cta {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+      padding: 9px 16px;
+      border-radius: 100px;
+      background: var(--gold);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .sidebar-daw-cta:hover { background: var(--gold-hover); transform: scale(1.03); }
+    .sidebar-daw-cta svg { width: 12px; height: 12px; }
+
+    /* ── Recognition Calendar ── */
+    .sidebar-cal-list {
+      padding: 8px 0;
+    }
+    .sidebar-cal-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 10px 16px;
+      cursor: default;
+      transition: background 0.15s ease;
+    }
+    .sidebar-cal-item:hover { background: var(--black-4); }
+    .sidebar-cal-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+    .scd-active  { background: #4ADE80; box-shadow: 0 0 6px rgba(74,222,128,0.6); }
+    .scd-soon    { background: #60A5FA; box-shadow: 0 0 6px rgba(96,165,250,0.5); }
+    .scd-planned { background: rgba(255,255,255,0.18); }
+    .sidebar-cal-info { flex: 1; min-width: 0; }
+    .sidebar-cal-name {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      margin-bottom: 2px;
+    }
+    .sidebar-cal-when {
+      font-size: 0.6875rem;
+      color: var(--text-muted);
+    }
+    .sidebar-cal-badge {
+      padding: 2px 8px;
+      border-radius: 100px;
+      font-size: 0.5625rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .scbadge-live { background: rgba(74,222,128,0.12); color: #4ADE80; border: 1px solid rgba(74,222,128,0.2); }
+    .scbadge-soon { background: rgba(96,165,250,0.10); color: #60A5FA; border: 1px solid rgba(96,165,250,0.18); }
+    .scbadge-q4   { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--gold-border); }
+
+    /* ── Quick Guides ── */
+    .sidebar-guides-list { padding: 6px 0 8px; }
+    .sidebar-guide-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      transition: all 0.15s ease;
+      border-bottom: 1px solid var(--gold-border);
+    }
+    .sidebar-guide-item:last-child { border-bottom: none; }
+    .sidebar-guide-item:hover { background: var(--black-4); color: var(--text-primary); }
+    .sidebar-guide-item:hover .sgi-arrow { transform: translateX(2px); }
+    .sgi-arrow { color: var(--text-muted); flex-shrink: 0; transition: transform 0.15s ease; }
+    .sgi-arrow svg { width: 12px; height: 12px; }
+
+    /* ── Responsive ── */
+    .article-grid { grid-template-columns: repeat(2, 1fr); }
+
+    @media (max-width: 1100px) {
+      .blog-layout { grid-template-columns: 1fr 260px; gap: 24px; }
+    }
+    @media (max-width: 880px) {
+      .blog-layout { grid-template-columns: 1fr; }
+      .blog-sidebar { position: static; display: grid; grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 960px) { .featured-post { grid-template-columns: 1fr; } .featured-img-wrap { min-height: 260px; } .insight-strip-inner { grid-template-columns: 1fr 1fr; } .newsletter-inner { grid-template-columns: 1fr; } }
+    @media (max-width: 640px) { .article-grid { grid-template-columns: 1fr; } .featured-content { padding: 28px 24px; } .blog-stats { gap: 20px; } .insight-item { padding: 24px 20px; } .blog-sidebar { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
+  <a href="shop.html">Order recognition kits →</a>
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html"  class="nav-link">Home</a>
+        <a href="shop.html"   class="nav-link">Shop</a>
+        <a href="about.html"  class="nav-link">About</a>
+        <a href="ideas.html"  class="nav-link active">Ideas</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </a>
+        <a href="login.html" class="nav-login-btn btn btn-primary btn-sm">Sign In</a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button class="mobile-close-btn">✕</button>
+  </div>
+  <a href="index.html"  class="mobile-nav-link">Home</a>
+  <a href="shop.html"   class="mobile-nav-link">Shop</a>
+  <a href="about.html"  class="mobile-nav-link">About</a>
+  <a href="ideas.html"  class="mobile-nav-link active">Ideas</a>
+  <a href="contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- BLOG HERO -->
+<div class="blog-hero">
+  <div class="container">
+    <div style="max-width:720px">
+      <div class="blog-hero-eyebrow">Driver Recognition Blog</div>
+      <h1 class="blog-hero-title">I Need<br><em>Ideas.</em></h1>
+      <p class="blog-hero-desc">Research, playbooks, and hard-won insights for fleet operators building driver recognition programs that cut accidents, reduce turnover, and change what drivers say about their company.</p>
+      <div class="blog-stats">
+        <div class="blog-stat">
+          <span class="blog-stat-num">23%</span>
+          <span class="blog-stat-label">avg. accident reduction</span>
+        </div>
+        <div class="blog-stat">
+          <span class="blog-stat-num">30%</span>
+          <span class="blog-stat-label">avg. turnover reduction</span>
+        </div>
+        <div class="blog-stat">
+          <span class="blog-stat-num">10:1</span>
+          <span class="blog-stat-label">recognition ROI ratio</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORY FILTER -->
+<div class="category-bar">
+  <div class="container">
+    <div class="category-bar-inner">
+      <button class="cat-btn active" data-cat="all">All Articles</button>
+      <button class="cat-btn" data-cat="safety">Safety &amp; ROI</button>
+      <button class="cat-btn" data-cat="retention">Retention</button>
+      <button class="cat-btn" data-cat="planning">Planning</button>
+      <button class="cat-btn" data-cat="onboarding">Onboarding</button>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED POST -->
+<section style="background:var(--black);padding:56px 0 0">
+  <div class="container">
+    <a href="blog/fleet-operators-guide-appreciation-week.html"
+       class="featured-post"
+       data-cats="planning"
+       style="display:grid;text-decoration:none;color:inherit">
+      <div class="featured-img-wrap">
+        <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900&q=75&fit=crop"
+             alt="Semi truck fleet on open highway at sunset"
+             loading="eager"
+             onerror="this.style.display='none'">
+        <span class="featured-badge">Featured</span>
+      </div>
+      <div class="featured-content">
+        <div class="featured-meta">
+          <span class="featured-category">Planning</span>
+          <span class="featured-date">May 2026</span>
+          <span class="featured-readtime">· 8 min read</span>
+        </div>
+        <h2 class="featured-title">The Fleet Operator's Guide to Driver Appreciation Week 2026</h2>
+        <p class="featured-excerpt">Everything you need to plan, budget, and execute a recognition program that actually moves the needle on driver morale, safety scores, and long-term retention. A step-by-step playbook from our team — with a 30-day launch checklist.</p>
+        <span class="featured-link">
+          Read Article
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ARTICLE GRID + SIDEBAR -->
+<section style="background:var(--black);padding:28px 0 64px">
+  <div class="container">
+    <div class="blog-layout">
+
+      <!-- ══ Main column ══ -->
+      <div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+          <h2 style="font-size:1.125rem;font-weight:700;color:var(--text-primary)">All Articles</h2>
+          <span id="article-count" style="font-size:0.875rem;color:var(--text-muted)">5 articles</span>
+        </div>
+
+    <div class="article-grid" id="article-grid">
+
+      <!-- Card 1: Safety & ROI -->
+      <a href="blog/recognition-reduces-accidents.html" class="article-card" data-cats="safety">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=70&fit=crop"
+               alt="Fleet safety dashboard data"
+               loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category">Safety &amp; ROI</span>
+            <span class="card-date">Jan 2026 · 7 min</span>
+          </div>
+          <h3 class="card-title">How Recognized Drivers Have Fewer Accidents — And What That Means for Your Bottom Line</h3>
+          <p class="card-excerpt">The link between driver recognition and road safety is documented, quantifiable, and one of the most powerful financial arguments for investing in your people. A 23% accident reduction is not a soft HR outcome — it is an operational and insurance outcome.</p>
+          <span class="card-readmore">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 2: Retention - ROI -->
+      <a href="blog/roi-of-recognition.html" class="article-card" data-cats="retention">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70&fit=crop"
+               alt="Fleet manager reviewing ROI data"
+               loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category">Retention</span>
+            <span class="card-date">Mar 2026 · 6 min</span>
+          </div>
+          <h3 class="card-title">The Real ROI of Driver Recognition Programs: A Data-Backed Analysis</h3>
+          <p class="card-excerpt">Replacing a single driver costs $8,000–$20,000. A full recognition program costs $110 per driver per year. The ROI math is not close — and most fleet operators have never run it with all the line items visible.</p>
+          <span class="card-readmore">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 3: Retention - Turnover -->
+      <a href="blog/cost-of-driver-turnover.html" class="article-card" data-cats="retention">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=70&fit=crop"
+               alt="Financial cost analysis and business planning"
+               loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category">Retention</span>
+            <span class="card-date">Dec 2025 · 6 min</span>
+          </div>
+          <h3 class="card-title">The True Cost of Losing a Driver (And How Recognition Changes the Math)</h3>
+          <p class="card-excerpt">Most fleet operators know driver turnover is expensive. Most underestimate it by 40–60%. Here is the complete cost breakdown — every line item from departure through productive seat — and the retention investment that prevents it.</p>
+          <span class="card-readmore">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 4: Onboarding -->
+      <a href="blog/first-30-days-onboarding.html" class="article-card" data-cats="onboarding">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=70&fit=crop"
+               alt="New driver onboarding and orientation process"
+               loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category">Onboarding</span>
+            <span class="card-date">Apr 2026 · 5 min</span>
+          </div>
+          <h3 class="card-title">5 Things New Drivers Notice About Your Company in the First 30 Days</h3>
+          <p class="card-excerpt">The first month sets the retention trajectory for a driver's entire tenure. What high-retention fleets do in those 30 days is not complicated — but it is deliberate. Here's exactly what your new drivers are watching for.</p>
+          <span class="card-readmore">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 5: Planning - Calendar -->
+      <a href="blog/year-round-recognition-calendar.html" class="article-card" data-cats="planning">
+        <div class="card-img-wrap">
+          <img src="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=70&fit=crop"
+               alt="Driver appreciation kit and recognition program materials"
+               loading="lazy"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category">Planning</span>
+            <span class="card-date">Feb 2026 · 5 min</span>
+          </div>
+          <h3 class="card-title">How to Build a Year-Round Driver Recognition Calendar (With Budget Templates)</h3>
+          <p class="card-excerpt">Driver Appreciation Week is one week. Retention is a 52-week job. This guide maps every recognition touchpoint across all four quarters — with per-driver budget targets and procurement timelines for any fleet size.</p>
+          <span class="card-readmore">
+            Read Article
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- Card 6: Empty state placeholder for future article -->
+      <div class="article-card" data-cats="safety retention planning onboarding" style="cursor:default;opacity:0.55">
+        <div class="card-img-wrap" style="background:var(--black-4);display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:40px;height:40px;color:var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        </div>
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="card-category" style="color:var(--text-muted)">Coming Soon</span>
+          </div>
+          <h3 class="card-title" style="color:var(--text-muted)">The Fleet Manager's Playbook for Safety Culture in 2026</h3>
+          <p class="card-excerpt">A comprehensive guide to building a safety culture that doesn't rely on enforcement alone — and how recognition programs function as the missing infrastructure piece. Publishing June 2026.</p>
+          <span class="card-readmore" style="color:var(--text-muted)">Coming June 2026</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty state (shown when no category matches) -->
+    <div id="empty-state" style="display:none;text-align:center;padding:80px 24px">
+      <div style="font-size:3rem;margin-bottom:16px">📭</div>
+      <h3 style="font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:8px">No articles in this category yet</h3>
+      <p style="color:var(--text-muted);font-size:0.9375rem">We're adding new content regularly. Check back soon or browse all articles.</p>
+      <button class="cat-btn active" style="margin-top:20px" onclick="setCategory('all')">View All Articles</button>
+    </div>
+
+      </div><!-- /main column -->
+
+      <!-- ══ Linear-style Sidebar ══ -->
+      <aside class="blog-sidebar">
+
+        <!-- Widget 1: DAW Countdown -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <div class="sidebar-card-header-icon sch-green">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <span class="sidebar-card-header-title">DAW 2026</span>
+          </div>
+          <div class="sidebar-daw">
+            <div class="sidebar-daw-date">
+              <span class="sidebar-daw-dot"></span>
+              Sep 7 – 13, 2026
+            </div>
+            <div class="sidebar-daw-title">Driver Appreciation Week</div>
+            <div class="sidebar-daw-timer">
+              <div class="sidebar-daw-unit">
+                <span class="sidebar-daw-num" id="sdaw-days">--</span>
+                <span class="sidebar-daw-label">Days</span>
+              </div>
+              <div class="sidebar-daw-unit">
+                <span class="sidebar-daw-num" id="sdaw-hours">--</span>
+                <span class="sidebar-daw-label">Hrs</span>
+              </div>
+              <div class="sidebar-daw-unit">
+                <span class="sidebar-daw-num" id="sdaw-min">--</span>
+                <span class="sidebar-daw-label">Min</span>
+              </div>
+              <div class="sidebar-daw-unit">
+                <span class="sidebar-daw-num" id="sdaw-sec">--</span>
+                <span class="sidebar-daw-label">Sec</span>
+              </div>
+            </div>
+            <a href="shop.html" class="sidebar-daw-cta">
+              Order Before Aug 28
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Widget 2: Recognition Calendar (Linear style) -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <div class="sidebar-card-header-icon sch-navy">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
+            </div>
+            <span class="sidebar-card-header-title">Recognition Calendar</span>
+          </div>
+          <div class="sidebar-cal-list">
+            <div class="sidebar-cal-item">
+              <div class="sidebar-cal-dot scd-active"></div>
+              <div class="sidebar-cal-info">
+                <div class="sidebar-cal-name">Driver Appreciation Week</div>
+                <div class="sidebar-cal-when">Sep 7–13, 2026 · Order by Aug 28</div>
+              </div>
+              <span class="sidebar-cal-badge scbadge-live">Live</span>
+            </div>
+            <div class="sidebar-cal-item">
+              <div class="sidebar-cal-dot scd-soon"></div>
+              <div class="sidebar-cal-info">
+                <div class="sidebar-cal-name">Q3 Safety Review</div>
+                <div class="sidebar-cal-when">Jul–Sep 2026</div>
+              </div>
+              <span class="sidebar-cal-badge scbadge-soon">Q3</span>
+            </div>
+            <div class="sidebar-cal-item">
+              <div class="sidebar-cal-dot scd-planned"></div>
+              <div class="sidebar-cal-info">
+                <div class="sidebar-cal-name">Year-End Holiday Kits</div>
+                <div class="sidebar-cal-when">Nov–Dec 2026</div>
+              </div>
+              <span class="sidebar-cal-badge scbadge-q4">Q4</span>
+            </div>
+            <div class="sidebar-cal-item">
+              <div class="sidebar-cal-dot scd-planned"></div>
+              <div class="sidebar-cal-info">
+                <div class="sidebar-cal-name">Q1 Onboarding Push</div>
+                <div class="sidebar-cal-when">Jan 2027</div>
+              </div>
+              <span class="sidebar-cal-badge scbadge-q4">Q1</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Widget 3: Quick Guides -->
+        <div class="sidebar-card">
+          <div class="sidebar-card-header">
+            <div class="sidebar-card-header-icon sch-amber">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
+            </div>
+            <span class="sidebar-card-header-title">Quick Guides</span>
+          </div>
+          <div class="sidebar-guides-list">
+            <a href="blog/fleet-operators-guide-appreciation-week.html" class="sidebar-guide-item">
+              <span style="flex:1">How to Plan DAW 2026</span>
+              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </a>
+            <a href="blog/roi-of-recognition.html" class="sidebar-guide-item">
+              <span style="flex:1">Recognition ROI Analysis</span>
+              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </a>
+            <a href="blog/cost-of-driver-turnover.html" class="sidebar-guide-item">
+              <span style="flex:1">True Cost of Turnover</span>
+              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </a>
+            <a href="blog/year-round-recognition-calendar.html" class="sidebar-guide-item">
+              <span style="flex:1">Year-Round Calendar Template</span>
+              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </a>
+            <a href="contact.html" class="sidebar-guide-item">
+              <span style="flex:1">Get a Custom Quote</span>
+              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+            </a>
+          </div>
+        </div>
+
+      </aside><!-- /sidebar -->
+
+    </div><!-- /blog-layout -->
+  </div>
+</section>
+
+<!-- INSIGHT STRIP -->
+<section class="insight-strip">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px">
+      <span class="section-eyebrow" style="color:rgba(255,255,255,0.5)">The Numbers Behind the Practice</span>
+      <h2 style="font-size:clamp(1.5rem,3vw,2.25rem);font-weight:800;color:#fff;letter-spacing:-0.03em;margin-top:8px">Why recognition is a financial imperative.</h2>
+    </div>
+    <div class="insight-strip-inner">
+      <div class="insight-item">
+        <div class="insight-num">$11K<span>+</span></div>
+        <div class="insight-label">average cost to replace a single commercial driver — recruiting, training, and productivity gap</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">94<span>%</span></div>
+        <div class="insight-label">annual driver turnover rate at large truckload carriers — one of the highest in any industry</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">23<span>%</span></div>
+        <div class="insight-label">lower preventable accident rate in fleets with formal recognition programs vs. those without</div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-num">10<span>:1</span></div>
+        <div class="insight-label">conservative ROI ratio for structured recognition programs, based on turnover and safety savings</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section">
+  <div class="container">
+    <div class="newsletter-inner">
+      <div>
+        <span class="section-eyebrow">Fleet Recognition Insights</span>
+        <h2 style="font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:800;letter-spacing:-0.025em;color:var(--text-primary);margin-top:10px;margin-bottom:12px">Get new articles in your inbox.</h2>
+        <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7;max-width:420px;margin:0">We publish practical guides on driver retention, safety ROI, and recognition program design — delivered directly to fleet operators who need it.</p>
+      </div>
+      <div>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="your@fleet.com" autocomplete="email">
+          <button class="btn btn-primary" style="flex-shrink:0;white-space:nowrap">Subscribe</button>
+        </div>
+        <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:12px">No spam. Unsubscribe anytime. One to two emails per month.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section-sm" style="background:var(--black)">
+  <div class="container">
+    <div class="cta-banner">
+      <div class="cta-banner-eyebrow">Ready to Act on It</div>
+      <h2 class="cta-banner-title">Turn the ideas into action.</h2>
+      <p class="cta-banner-desc">Browse the product line built to support every recognition strategy in our guides — curated kits, onboarding packs, and milestone awards built for commercial fleets.</p>
+      <div class="cta-banner-actions">
+        <a href="shop.html" class="btn btn-primary btn-lg">Shop Recognition Kits</a>
+        <a href="contact.html" class="btn btn-secondary btn-lg">Get a Custom Quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="index.html" class="nav-logo">
+          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        </a>
+        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, and milestone awards built for the trucking industry.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
+          <li><a href="shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
+          <li><a href="shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html"   class="footer-link">About Us</a></li>
+          <li><a href="ideas.html"   class="footer-link">Ideas Blog</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="customer-service.html" class="footer-link">Customer Service</a></li>
+          <li><a href="return-policy.html" class="footer-link">Return Policy</a></li>
+          <li><a href="refund-policy.html" class="footer-link">Refund &amp; Disputes</a></li>
+          <li><a href="cancelation-policy.html" class="footer-link">Cancellation Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="terms.html" class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="cancelation-policy.html" class="footer-legal-link">Cancellation Policy</a>
+        <a href="return-policy.html" class="footer-legal-link">Return Policy</a>
+        <a href="refund-policy.html" class="footer-legal-link">Refund Policy</a>
+        <a href="legal.html" class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script src="js/cart.js"></script>
+<script>
+/* ── Category filter ── */
+function setCategory(cat) {
+  document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cat === cat);
+  });
+
+  const featuredPost = document.querySelector('.featured-post');
+  const cards        = document.querySelectorAll('#article-grid .article-card');
+  let   visible      = 0;
+
+  // Featured post
+  if (featuredPost) {
+    const cats = featuredPost.dataset.cats || '';
+    const show = cat === 'all' || cats.includes(cat);
+    featuredPost.style.display = show ? 'grid' : 'none';
+    if (show && cat !== 'all') visible++;
+  }
+
+  // Article cards
+  cards.forEach(card => {
+    const cats = card.dataset.cats || '';
+    const show = cat === 'all' || cats.includes(cat);
+    card.style.display = show ? 'flex' : 'none';
+    if (show) visible++;
+  });
+
+  // Count display (subtract the "coming soon" card from all-articles count)
+  const countEl = document.getElementById('article-count');
+  if (countEl) {
+    const display = cat === 'all' ? 5 : visible;
+    countEl.textContent = display + ' article' + (display !== 1 ? 's' : '');
+  }
+
+  // Empty state
+  const emptyState = document.getElementById('empty-state');
+  if (emptyState) {
+    emptyState.style.display = visible === 0 ? 'block' : 'none';
+  }
+}
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+  btn.addEventListener('click', () => setCategory(btn.dataset.cat));
+});
+
+// Newsletter form — basic UX (no backend yet)
+const newsletterForm = document.querySelector('.newsletter-form');
+if (newsletterForm) {
+  newsletterForm.querySelector('button').addEventListener('click', () => {
+    const input = newsletterForm.querySelector('.newsletter-input');
+    if (input.value && input.value.includes('@')) {
+      showToast('You\'re subscribed! Check your inbox for the first issue.', 'success');
+      input.value = '';
+    } else {
+      showToast('Please enter a valid email address.', 'error');
+    }
+  });
+}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  // Sidebar DAW countdown
+  (function() {
+    const TARGET = new Date('2026-09-07T00:00:00').getTime();
+    function pad(n) { return String(n).padStart(2, '0'); }
+    function tickSidebar() {
+      const diff = TARGET - Date.now();
+      if (diff <= 0) {
+        ['sdaw-days','sdaw-hours','sdaw-min','sdaw-sec'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = '00';
+        });
+        return;
+      }
+      const d = document.getElementById('sdaw-days');
+      const h = document.getElementById('sdaw-hours');
+      const m = document.getElementById('sdaw-min');
+      const s = document.getElementById('sdaw-sec');
+      if (d) d.textContent = pad(Math.floor(diff / 86400000));
+      if (h) h.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+      if (m) m.textContent = pad(Math.floor((diff % 3600000) / 60000));
+      if (s) s.textContent = pad(Math.floor((diff % 60000) / 1000));
+    }
+    tickSidebar();
+    setInterval(tickSidebar, 1000);
+  })();
+</script>
+</body>
+</html>

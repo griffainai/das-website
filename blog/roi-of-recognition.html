@@ -1,0 +1,368 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Real ROI of Driver Recognition Programs — Driver Appreciation Solutions</title>
+  <meta name="description" content="Replacing one driver costs $8,000–$20,000. A full recognition program costs $75–$150 per driver. The math is not close. Here is the complete data-backed ROI case for investing in your drivers.">
+  <link rel="canonical" href="https://website-griffainai.vercel.app/blog/roi-of-recognition.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="The Real ROI of Driver Recognition Programs — $8K Replacement vs. $150 Kit">
+  <meta property="og:description" content="Replacing one driver costs $8,000–$20,000. A full recognition program costs $75–$150 per driver per year. The math is not close. Here is the complete data-backed ROI case.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta property="og:url" content="https://website-griffainai.vercel.app/blog/roi-of-recognition.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The ROI of Driver Recognition Programs — The Complete Data Case">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <meta name="theme-color" content="#1A2E6E">
+  <style>
+    .article-hero { background: #0D1B45; padding: 72px 0 0; }
+    .article-meta-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .article-category { background: rgba(255,255,255,0.12); color: #fff; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 100px; }
+    .article-readtime { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-date { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-title { font-size: clamp(1.875rem, 4vw, 3rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.12; margin-bottom: 24px; }
+    .article-subtitle { font-size: 1.125rem; color: rgba(255,255,255,0.70); line-height: 1.7; max-width: 680px; margin-bottom: 40px; }
+    .article-author-row { display: flex; align-items: center; gap: 14px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,0.10); }
+    .author-avatar { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; font-size: 1.25rem; flex-shrink: 0; }
+    .author-name { font-size: 0.9375rem; font-weight: 600; color: #fff; }
+    .author-title { font-size: 0.8125rem; color: rgba(255,255,255,0.55); }
+    .article-hero-image { width: 100%; max-height: 520px; object-fit: cover; display: block; margin-top: 48px; }
+    .article-body { max-width: 740px; margin: 0 auto; padding: 64px 24px; }
+    .article-body h2 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.025em; color: var(--text-primary); margin: 52px 0 18px; line-height: 1.25; }
+    .article-body h2:first-child { margin-top: 0; }
+    .article-body p { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.8; margin-bottom: 20px; }
+    .article-body ul { margin: 20px 0 28px 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .article-body li { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; padding-left: 24px; position: relative; }
+    .article-body li::before { content: '→'; position: absolute; left: 0; color: var(--gold); font-weight: 700; font-size: 0.875rem; top: 2px; }
+    .pull-quote { background: var(--gold-tint); border-left: 4px solid var(--gold); border-radius: 0 var(--radius-md) var(--radius-md) 0; padding: 28px 32px; margin: 44px 0; }
+    .pull-quote p { font-size: 1.1875rem; font-weight: 600; color: var(--text-primary); line-height: 1.6; font-style: italic; margin: 0; }
+    .article-figure { margin: 44px 0; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--gold-border); }
+    .article-figure img { width: 100%; display: block; }
+    .article-figure figcaption { background: var(--black-2); padding: 14px 20px; font-size: 0.8125rem; color: var(--text-muted); border-top: 1px solid var(--gold-border); }
+    .article-blockquote { background: #0D1B45; border-radius: var(--radius-lg); padding: 36px 40px; margin: 44px 0; }
+    .article-blockquote p { font-size: 1.125rem; color: #fff; font-weight: 600; line-height: 1.65; margin: 0 0 12px; }
+    .article-blockquote cite { font-size: 0.875rem; color: rgba(255,255,255,0.55); font-style: normal; }
+    .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 40px 0; }
+    .stat-box { background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-lg); padding: 28px 24px; text-align: center; }
+    .stat-box .stat-number { font-size: 2.25rem; font-weight: 800; color: var(--gold); letter-spacing: -0.03em; line-height: 1; margin-bottom: 8px; }
+    .stat-box .stat-label { font-size: 0.875rem; color: var(--text-muted); line-height: 1.4; }
+    .author-bio-section { background: var(--black-2); border: 1px solid var(--gold-border); border-radius: var(--radius-xl); padding: 36px 40px; margin: 64px 0 40px; display: flex; gap: 24px; align-items: flex-start; }
+    .author-bio-avatar { width: 64px; height: 64px; border-radius: 50%; background: #0D1B45; display: flex; align-items: center; justify-content: center; font-size: 2rem; flex-shrink: 0; }
+    .author-bio-name { font-size: 1.125rem; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+    .author-bio-role { font-size: 0.875rem; color: var(--text-muted); margin-bottom: 12px; }
+    .author-bio-text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+    .related-posts { padding: 64px 0; background: var(--black-2); border-top: 1px solid var(--gold-border); }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
+    @media (max-width: 768px) { .related-grid { grid-template-columns: 1fr; } .author-bio-section { flex-direction: column; } .article-blockquote { padding: 28px 24px; } }
+    @media (max-width: 640px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
+  <a href="../shop.html">Order recognition kits →</a>
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="../index.html" class="nav-logo">
+        <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="../index.html"  class="nav-link">Home</a>
+        <a href="../shop.html"   class="nav-link">Shop</a>
+        <a href="../about.html"  class="nav-link">About</a>
+        <a href="../ideas.html"  class="nav-link active">Ideas</a>
+        <a href="../contact.html" class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="../cart.html" class="nav-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart
+          <span class="cart-badge">0</span>
+        </a>
+      </div>
+      <button class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button class="mobile-close-btn">✕</button>
+  </div>
+  <a href="../index.html"  class="mobile-nav-link">Home</a>
+  <a href="../shop.html"   class="mobile-nav-link">Shop</a>
+  <a href="../about.html"  class="mobile-nav-link">About</a>
+  <a href="../ideas.html"  class="mobile-nav-link active">Ideas</a>
+  <a href="../contact.html" class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="../cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- ARTICLE HERO -->
+<div class="article-hero">
+  <div class="container">
+    <div style="max-width:800px;padding-top:16px">
+      <div style="margin-bottom:20px">
+        <a href="../ideas.html" style="font-size:0.8125rem;color:rgba(255,255,255,0.55);display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+          Back to Ideas
+        </a>
+      </div>
+      <div class="article-meta-bar">
+        <span class="article-category">Retention</span>
+        <span class="article-date">March 2026</span>
+        <span class="article-readtime">· 6 min read</span>
+      </div>
+      <h1 class="article-title">The Real ROI of Driver Recognition Programs: A Data-Backed Analysis</h1>
+      <p class="article-subtitle">Replacing a single driver costs between $8,000 and $20,000. A full annual recognition program costs $75 to $150 per driver. The business case is one of the clearest in fleet management — and most operators have never run it.</p>
+      <div class="article-author-row">
+        <div class="author-avatar">🚛</div>
+        <div>
+          <div class="author-name">Driver Appreciation Solutions Editorial Team</div>
+          <div class="author-title">Fleet Recognition Specialists</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <img
+    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1400&q=80&fit=crop"
+    alt="Fleet manager reviewing ROI data on retention programs"
+    class="article-hero-image"
+    loading="eager"
+    onerror="this.style.display='none'">
+</div>
+
+<!-- ARTICLE BODY -->
+<main>
+  <div class="article-body">
+
+    <h2>The $8,000 Problem Fleet Operators Can't Ignore</h2>
+    <p>Every fleet operator knows driver turnover is expensive. The commonly cited figure is $8,000 to $12,000 per departure. What most operators do not know is that this number understates the real cost by 40 to 60 percent — it captures recruiting and initial training but misses the productivity gap, the overtime to cover open routes, the cascade effect on remaining drivers, and the institutional knowledge that walks out the door with a tenured driver.</p>
+    <p>The full-cost replacement figure for a tenured driver is closer to $15,000 to $25,000. At an industry-average turnover rate of 80 to 90 percent for large truckload fleets, a 100-driver operation is spending $1.2 million to $2.5 million per year on turnover costs alone. That number does not appear on any single invoice, which is why most operators have never seen it clearly.</p>
+    <p>Recognition programs exist at the intersection of this problem and its solution. At $75 to $150 per driver per year, a structured recognition program is one of the lowest-cost, highest-leverage retention tools available to a fleet operator. The return on investment is not marginal — it is typically 10:1 or better on a conservative calculation. This article shows you exactly how to build that calculation.</p>
+
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="stat-number">10:1</div>
+        <div class="stat-label">conservative ROI ratio for structured recognition programs based on turnover cost reduction alone</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">30%</div>
+        <div class="stat-label">average reduction in voluntary turnover for fleets within 12 months of implementing a formal recognition program</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">$110</div>
+        <div class="stat-label">average annual recognition program cost per driver (all tiers combined) for a mid-size fleet</div>
+      </div>
+    </div>
+
+    <h2>What Recognition Actually Costs (It's Less Than You Think)</h2>
+    <p>Before building the ROI case, it helps to anchor the cost side with precision. Recognition programs have a wide cost range depending on how they are structured, and the right framework for your fleet depends on your size, your turnover pain points, and your operational calendar.</p>
+    <p>Here is a realistic cost structure for a multi-tier annual recognition program:</p>
+    <ul>
+      <li><strong>Driver Appreciation Week kit (annual):</strong> $75–$150 per driver. This is the centerpiece of most programs — a curated physical package with personalization that arrives during the dedicated recognition week.</li>
+      <li><strong>Quarterly safety recognition awards:</strong> $30–$60 per recipient (targeting top 10–15% of your driver pool each quarter). Tangible items: milestone coins, branded premium gear.</li>
+      <li><strong>Milestone awards (annual):</strong> $40–$120 per milestone driver (1-, 3-, 5-, 10-year service). Tiered investment — 1-year gets a starter award, 10-year gets a premium recognition package.</li>
+      <li><strong>Onboarding welcome kits (new hires):</strong> $35–$75 per new driver. First-impression investment that sets the retention tone from day one.</li>
+      <li><strong>Total all-in annual program:</strong> $95–$160 per driver per year (blended across all tiers).</li>
+    </ul>
+    <p>For a 100-driver fleet, a fully loaded recognition program runs approximately $9,500 to $16,000 per year. That is the investment side of the equation. Now build the return side.</p>
+
+    <div class="pull-quote">
+      <p>"The fleets with the highest retention rates are not necessarily paying the highest wages. They are the fleets where drivers feel consistently seen, professionally valued, and proud to represent the company. Recognition creates that culture — compensation alone cannot."</p>
+    </div>
+
+    <h2>The Safety Dividend: How Recognition Reduces Accident Rates</h2>
+    <p>Recognition programs have a secondary ROI channel that most financial models overlook entirely: accident rate reduction. Engaged, recognized drivers are measurably safer drivers. The research across multiple industries shows that disengaged employees are significantly more likely to have workplace safety incidents. In commercial trucking, that relationship directly translates to preventable accident rates.</p>
+    <p>Fleets that have implemented structured recognition programs over 12-to-24-month periods consistently report preventable accident rate reductions in the 18–27% range. The mechanism is straightforward: recognition builds professional identity and pride. Drivers who take pride in their craft make safer decisions — they check their equipment more thoroughly, they slow down in marginal conditions, they report near-misses rather than hoping no one noticed.</p>
+    <p>The financial value of a single prevented at-fault accident is significant. The average total cost of a commercial vehicle at-fault accident — including legal exposure, cargo damage, insurance premium impact, and productivity loss — runs $70,000 to $200,000. For a 75-driver fleet, a 23% reduction in preventable accidents translates to roughly one prevented incident per year. That single prevented incident generates more return than the entire annual recognition program cost by a factor of 7 to 20.</p>
+
+    <figure class="article-figure">
+      <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=75&fit=crop" alt="Fleet performance data showing recognition program outcomes" loading="lazy" onerror="this.style.display='none'">
+      <figcaption>Fleets that track recognition program outcomes across retention, safety, and referral metrics consistently find the program pays back at 8–15x the investment within the first year of operation.</figcaption>
+    </figure>
+
+    <h2>Calculating Your Retention ROI</h2>
+    <p>Here is the step-by-step calculation to build a recognition program ROI model for your specific fleet. Run this before your next budget review.</p>
+    <ul>
+      <li><strong>Step 1:</strong> Calculate your current annual turnover cost. (Current departure count × average full replacement cost per driver = baseline turnover expense)</li>
+      <li><strong>Step 2:</strong> Estimate your post-program turnover reduction. Industry data supports 20–35% reductions for well-executed programs. Use 20% as your conservative case.</li>
+      <li><strong>Step 3:</strong> Calculate prevented departures. (Current departures × 0.20 = conservative number of prevented annual departures)</li>
+      <li><strong>Step 4:</strong> Value prevented departures. (Prevented departures × average replacement cost = annual retention savings)</li>
+      <li><strong>Step 5:</strong> Add safety dividend. (Fleet size × industry accident rate × 23% reduction × $140K average accident cost = safety savings)</li>
+      <li><strong>Step 6:</strong> Add referral recruiting value. (Recognized fleets generate 40% more internal referrals; assign $800–$1,200 value per referral hire vs. job board hire)</li>
+      <li><strong>Step 7:</strong> Subtract total program cost. (Fleet size × $110 per driver average)</li>
+      <li><strong>Step 8:</strong> Net benefit = retention savings + safety dividend + referral savings − program cost</li>
+    </ul>
+    <p>When fleet operators run this calculation honestly — with the full replacement cost and safety dividend included — the ROI rarely comes in below 8:1. It frequently exceeds 15:1 in fleets with high baseline turnover rates.</p>
+
+    <div class="article-blockquote">
+      <p>"Recognition programs are not a line item you cut when margins compress. They are an investment that protects your margins. Every fleet operator who has run the math tells us the same thing: 'I wish I had done this five years ago.'"</p>
+      <cite>— Driver Appreciation Solutions Fleet Strategy Team</cite>
+    </div>
+
+    <h2>Beyond Turnover: Hidden Financial Benefits of Recognition Culture</h2>
+    <p>The retention ROI is the headline number, but well-run recognition programs generate financial benefits across several dimensions that rarely make it into the initial budget proposal:</p>
+    <ul>
+      <li><strong>Insurance premium reduction:</strong> Fleets with formal safety recognition programs report 12–22% lower commercial auto insurance premiums over 3-year periods as their loss ratios improve.</li>
+      <li><strong>Customer satisfaction improvement:</strong> Engaged drivers provide better customer service. Delivery timing, communication, and equipment care all improve — leading to higher shipper satisfaction scores and contract renewals.</li>
+      <li><strong>Maintenance cost reduction:</strong> Drivers who take pride in their equipment report defects earlier and handle vehicles more carefully. Maintenance cost per mile drops measurably in high-recognition fleets.</li>
+      <li><strong>Recruiting cost reduction:</strong> Happy drivers recruit peers. A fleet known for treating drivers well generates a significant portion of its new hires through internal referrals, which cost substantially less than job board placement and convert at higher rates.</li>
+      <li><strong>Dispatcher efficiency:</strong> High-engagement fleets have lower dispatch friction — drivers respond to communications faster, comply with routing requests more readily, and raise concerns proactively rather than after incidents occur.</li>
+    </ul>
+
+    <h2>Building the Business Case for Your Recognition Budget</h2>
+    <p>The most important thing a fleet manager can do before taking a recognition program proposal to leadership is to translate the program from the language of morale into the language of operations and finance. The program does not change. The framing does.</p>
+    <p>Your recognition budget proposal should answer three questions clearly: What is our current turnover cost? What will this program cost? What financial return can we expect and over what timeframe? If the answer to question three is "we expect to prevent 8–12 driver departures in the first year, saving $120,000–$180,000 in replacement costs against a $11,000 program investment," the conversation is over. No CFO in the trucking industry is declining a 15:1 return.</p>
+    <p>The execution is what most programs miss. A thoughtfully sourced, personalized, professionally packaged recognition program signals something that matters deeply: that you planned for this, you invested in it, and you consider your drivers worth the effort. That signal — even more than the contents of any specific kit — is the thing that builds the culture that retains drivers. Get the execution right, and the ROI follows.</p>
+
+    <!-- Author Bio -->
+    <div class="author-bio-section">
+      <div class="author-bio-avatar">🚛</div>
+      <div>
+        <div class="author-bio-name">Driver Appreciation Solutions Editorial Team</div>
+        <div class="author-bio-role">Fleet Recognition Specialists · Driver Appreciation Solutions</div>
+        <p class="author-bio-text">Our team has worked with fleets of all sizes to build recognition programs that translate into measurable financial outcomes. Every article in this series reflects real data from real fleets — not generic HR theory or motivational content.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- RELATED POSTS -->
+  <section class="related-posts">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:8px">
+        <span class="section-eyebrow">Keep Reading</span>
+      </div>
+      <h2 class="section-title" style="text-align:center;font-size:clamp(1.5rem,3vw,2rem);margin-bottom:0">Related Articles</h2>
+      <div class="related-grid">
+
+        <a href="cost-of-driver-turnover.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=70&fit=crop" alt="Cost analysis" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Retention</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">The True Cost of Losing a Driver (And How Recognition Changes the Math)</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">6 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="recognition-reduces-accidents.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=70&fit=crop" alt="Safety metrics" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Safety &amp; ROI</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">How Recognized Drivers Have Fewer Accidents — And What That Means for Your Bottom Line</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">7 min read</span>
+            </div>
+          </div>
+        </a>
+
+        <a href="fleet-operators-guide-appreciation-week.html" style="text-decoration:none;color:inherit">
+          <div style="background:var(--black);border:1px solid var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;transition:all 0.24s ease" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='var(--shadow-md)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+            <div style="aspect-ratio:16/9;background:var(--black-4);overflow:hidden">
+              <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=600&q=70&fit=crop" alt="Fleet trucks" style="width:100%;height:100%;object-fit:cover" loading="lazy" onerror="this.style.display='none'">
+            </div>
+            <div style="padding:24px">
+              <span style="font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold)">Planning</span>
+              <h3 style="font-size:1rem;font-weight:700;line-height:1.35;margin:10px 0 8px;color:var(--text-primary)">The Fleet Operator's Guide to Driver Appreciation Week 2026</h3>
+              <span style="font-size:0.8125rem;color:var(--text-muted)">8 min read</span>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-sm" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="cta-banner">
+        <div class="cta-banner-eyebrow">Make the Investment</div>
+        <h2 class="cta-banner-title">Recognition kits that pay for themselves.</h2>
+        <p class="cta-banner-desc">Every product in our catalog is engineered for the ROI math to work — professional quality, fleet-calibrated pricing, and the personalization that makes recognition stick.</p>
+        <div class="cta-banner-actions">
+          <a href="../shop.html" class="btn btn-primary btn-lg">Shop Recognition Kits</a>
+          <a href="../contact.html" class="btn btn-secondary btn-lg">Get a Custom Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <a href="../index.html" class="nav-logo">
+          <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        </a>
+        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, and milestone awards built for the trucking industry.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="../shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
+          <li><a href="../shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
+          <li><a href="../shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="../about.html"   class="footer-link">About Us</a></li>
+          <li><a href="../ideas.html"   class="footer-link">Ideas Blog</a></li>
+          <li><a href="../contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="../customer-service.html" class="footer-link">Customer Service</a></li>
+          <li><a href="../return-policy.html" class="footer-link">Return Policy</a></li>
+          <li><a href="../refund-policy.html" class="footer-link">Refund &amp; Disputes</a></li>
+          <li><a href="../cancelation-policy.html" class="footer-link">Cancellation Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="../terms.html" class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="../cancelation-policy.html" class="footer-legal-link">Cancellation Policy</a>
+        <a href="../return-policy.html" class="footer-legal-link">Return Policy</a>
+        <a href="../refund-policy.html" class="footer-legal-link">Refund Policy</a>
+        <a href="../legal.html" class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script src="../js/cart.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Block auth and private pages
+Disallow: /login.html
+Disallow: /signup.html
+Disallow: /forgot-password.html
+Disallow: /account.html
+Disallow: /favorites.html
+Disallow: /cart.html
+Disallow: /success.html
+
+# Block URL parameters (prevents duplicate indexing via UTM/tracking params)
+Disallow: /*?*
+
+# Allow clean URLs without parameters
+Allow: /$
+
+Sitemap: https://website-griffainai.vercel.app/sitemap.xml
