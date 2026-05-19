@@ -17,10 +17,42 @@
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80&fit=crop" fetchpriority="high">
   <link rel="stylesheet" href="../css/styles.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-griffainai.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://website-griffainai.vercel.app/ideas.html" },
+          { "@type": "ListItem", "position": 3, "name": "The Fleet Operator's Guide to Driver Appreciation Week 2026", "item": "https://website-griffainai.vercel.app/blog/fleet-operators-guide-appreciation-week.html" }
+        ]
+      },
+      {
+        "@type": "Article",
+        "@id": "https://website-griffainai.vercel.app/blog/fleet-operators-guide-appreciation-week.html#article",
+        "headline": "The Fleet Operator's Guide to Driver Appreciation Week 2026",
+        "description": "A step-by-step playbook for planning, budgeting, and executing Driver Appreciation Week 2026 — with tactics that reduce turnover and improve driver morale long after the week is over.",
+        "image": "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop",
+        "datePublished": "2026-05-19",
+        "dateModified": "2026-05-19",
+        "author": { "@type": "Organization", "name": "Driver Appreciation Solutions", "url": "https://website-griffainai.vercel.app/" },
+        "publisher": { "@type": "Organization", "name": "Driver Appreciation Solutions", "logo": { "@type": "ImageObject", "url": "https://website-griffainai.vercel.app/images/logo.png" } },
+        "url": "https://website-griffainai.vercel.app/blog/fleet-operators-guide-appreciation-week.html",
+        "mainEntityOfPage": "https://website-griffainai.vercel.app/blog/fleet-operators-guide-appreciation-week.html",
+        "keywords": ["driver appreciation week 2026", "fleet operator guide", "DAW 2026", "driver recognition", "truck driver appreciation"]
+      }
+    ]
+  }
+  </script>
   <style>
     .article-hero { background: #0D1B45; padding: 72px 0 0; }
     .article-meta-bar { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
@@ -91,7 +123,7 @@
           <span class="cart-badge">0</span>
         </a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Open menu">
+      <button type="button" class="nav-mobile-toggle" aria-label="Open menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
     </div>
@@ -102,7 +134,7 @@
 <div class="mobile-drawer">
   <div class="mobile-drawer-header">
     <img src="../images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
-    <button class="mobile-close-btn">✕</button>
+    <button type="button" class="mobile-close-btn">✕</button>
   </div>
   <a href="../index.html"  class="mobile-nav-link">Home</a>
   <a href="../shop.html"   class="mobile-nav-link">Shop</a>
@@ -370,7 +402,7 @@
   </div>
 </footer>
 
-<button class="scroll-top" aria-label="Scroll to top">
+<button type="button" class="scroll-top" aria-label="Scroll to top">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
 </button>
 

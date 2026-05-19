@@ -17,10 +17,45 @@
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://website-griffainai.vercel.app/" },
+          { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://website-griffainai.vercel.app/shop.html" },
+          { "@type": "ListItem", "position": 3, "name": "Product", "item": "https://website-griffainai.vercel.app/product.html" }
+        ]
+      },
+      {
+        "@type": "Product",
+        "@id": "https://website-griffainai.vercel.app/product.html#product",
+        "name": "Driver Appreciation Kit",
+        "description": "Curated driver appreciation kits, onboarding packs, and milestone awards built for trucking fleets. Fleet-scale orders from 10 units. Ships in 3–5 days.",
+        "image": "https://images.unsplash.com/photo-1549465231-2f652e31be48?w=1200&q=80&fit=crop",
+        "brand": { "@type": "Brand", "name": "Driver Appreciation Solutions" },
+        "url": "https://website-griffainai.vercel.app/product.html",
+        "offers": {
+          "@type": "AggregateOffer",
+          "priceCurrency": "USD",
+          "lowPrice": "44.99",
+          "highPrice": "79.99",
+          "offerCount": "5",
+          "availability": "https://schema.org/InStock",
+          "seller": { "@type": "Organization", "name": "Driver Appreciation Solutions" }
+        }
+      }
+    ]
+  }
+  </script>
 
   <!-- Stripe.js — for Apple Pay / Google Pay Payment Request Button -->
   <script src="https://js.stripe.com/v3/"></script>
@@ -485,7 +520,7 @@
         </a>
         <a href="login.html" class="nav-login-btn btn btn-primary btn-sm">Sign In</a>
       </div>
-      <button class="nav-mobile-toggle" aria-label="Open menu">
+      <button type="button" class="nav-mobile-toggle" aria-label="Open menu">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
       </button>
     </div>
@@ -496,7 +531,7 @@
 <div class="mobile-drawer">
   <div class="mobile-drawer-header">
     <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
-    <button class="mobile-close-btn">✕</button>
+    <button type="button" class="mobile-close-btn">✕</button>
   </div>
   <a href="index.html"  class="mobile-nav-link">Home</a>
   <a href="shop.html"   class="mobile-nav-link active">Shop</a>
@@ -529,10 +564,10 @@
       <div class="main-image-area" id="main-image-area" style="position:relative">
         <img id="main-product-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
         <div class="img-nav-btns">
-          <button class="img-nav-btn" id="img-prev" aria-label="Previous image">
+          <button type="button" class="img-nav-btn" id="img-prev" aria-label="Previous image">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
           </button>
-          <button class="img-nav-btn" id="img-next" aria-label="Next image">
+          <button type="button" class="img-nav-btn" id="img-next" aria-label="Next image">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
           </button>
         </div>
@@ -550,15 +585,15 @@
         <div style="margin-bottom:24px">
           <div class="section-label">Select Kit Tier</div>
           <div class="tier-selector">
-            <button class="tier-btn active" data-tier="standard" data-mult="1.0">
+            <button type="button" class="tier-btn active" data-tier="standard" data-mult="1.0">
               Standard
               <span class="tier-price" id="tier-price-standard"></span>
             </button>
-            <button class="tier-btn" data-tier="premium" data-mult="1.45">
+            <button type="button" class="tier-btn" data-tier="premium" data-mult="1.45">
               Premium
               <span class="tier-price" id="tier-price-premium"></span>
             </button>
-            <button class="tier-btn" data-tier="enterprise" data-mult="1.95">
+            <button type="button" class="tier-btn" data-tier="enterprise" data-mult="1.95">
               Enterprise
               <span class="tier-price" id="tier-price-enterprise"></span>
             </button>
@@ -576,9 +611,9 @@
           </div>
           <div class="qty-row">
             <div class="qty-stepper">
-              <button class="qty-step-btn" id="qty-down" aria-label="Decrease">−</button>
+              <button type="button" class="qty-step-btn" id="qty-down" aria-label="Decrease">−</button>
               <input class="qty-step-input" id="qty-input" type="number" value="10" min="10" step="10" aria-label="Quantity">
-              <button class="qty-step-btn" id="qty-up" aria-label="Increase">+</button>
+              <button type="button" class="qty-step-btn" id="qty-up" aria-label="Increase">+</button>
             </div>
             <div class="qty-subtotal">
               Subtotal: <strong id="qty-subtotal-val">—</strong>
@@ -605,12 +640,12 @@
         </div>
 
         <!-- Primary CTAs -->
-        <button class="btn-add-cart" id="btn-add-to-cart">
+        <button type="button" class="btn-add-cart" id="btn-add-to-cart">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
           Add to Cart
         </button>
 
-        <button class="btn-favorite" id="btn-favorite">
+        <button type="button" class="btn-favorite" id="btn-favorite">
           Save for Later
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
         </button>
@@ -638,7 +673,7 @@
 
         <!-- Accordions -->
         <div class="accordion-item">
-          <button class="accordion-trigger" id="acc-included" aria-expanded="false">
+          <button type="button" class="accordion-trigger" id="acc-included" aria-expanded="false">
             What's Included
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
           </button>
@@ -648,7 +683,7 @@
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger" id="acc-details" aria-expanded="false">
+          <button type="button" class="accordion-trigger" id="acc-details" aria-expanded="false">
             Product Details
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
           </button>
@@ -656,7 +691,7 @@
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger" id="acc-shipping" aria-expanded="false">
+          <button type="button" class="accordion-trigger" id="acc-shipping" aria-expanded="false">
             Shipping &amp; Returns
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
           </button>
@@ -668,7 +703,7 @@
         </div>
 
         <div class="accordion-item">
-          <button class="accordion-trigger" id="acc-reviews" aria-expanded="false">
+          <button type="button" class="accordion-trigger" id="acc-reviews" aria-expanded="false">
             <span id="acc-reviews-label">Reviews (47) ★★★★½</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
           </button>
@@ -815,7 +850,7 @@
   </div>
 </footer>
 
-<button class="scroll-top" aria-label="Scroll to top">
+<button type="button" class="scroll-top" aria-label="Scroll to top">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
 </button>
 
