@@ -294,14 +294,14 @@
 
 <script src="js/cart.js"></script>
 <script>
-const FAV_KEY = 'das_favorites_v1';
+// FAV_KEY is already declared in cart.js — do not redeclare here
 
 function getFavs() {
   try { return JSON.parse(localStorage.getItem(FAV_KEY)) || []; } catch { return []; }
 }
 function saveFavs(list) {
   localStorage.setItem(FAV_KEY, JSON.stringify(list));
-  updateNavBadge(list.length);
+  Favorites._updateNav();
 }
 function removeFav(productId) {
   saveFavs(getFavs().filter(f => f.productId !== productId));
