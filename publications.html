@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Newsletter Builder — Fleet Portal | Driver Appreciation Solutions</title>
+  <meta name="description" content="Build branded quarterly driver newsletters in minutes. Spotlight your best drivers, share safety awards, and publish company news — all from the DAS Fleet Portal. Included with every portal account.">
+  <link rel="canonical" href="https://driverappreciationsolutions.com/publications.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="Driver Newsletter Builder — DAS Fleet Portal">
+  <meta property="og:description" content="Build branded quarterly driver newsletters in minutes. Spotlight your best drivers, share safety awards, and publish company news.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80&fit=crop">
+  <meta property="og:url" content="https://driverappreciationsolutions.com/publications.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Driver Newsletter Builder — DAS Fleet Portal">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&q=80&fit=crop">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <meta name="theme-color" content="#1A2E6E">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home",        "item": "https://driverappreciationsolutions.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Newsletter Builder", "item": "https://driverappreciationsolutions.com/publications.html" }
+        ]
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "DAS Driver Newsletter Builder",
+        "applicationCategory": "BusinessApplication",
+        "description": "Build branded quarterly driver newsletters featuring driver spotlights, safety awards, and company news. Generate a shareable PDF in minutes.",
+        "provider": { "@type": "Organization", "name": "Driver Appreciation Solutions", "url": "https://driverappreciationsolutions.com/" },
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Included with DAS Fleet Portal account" }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* ── Publications page-specific styles ── */
+    .pub-modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 36px;
+    }
+    .pub-module-card {
+      background: var(--black-3, #111827);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 14px;
+      padding: 20px;
+      transition: border-color .2s, transform .2s;
+    }
+    .pub-module-card:hover { border-color: rgba(200,168,75,.35); transform: translateY(-2px); }
+    .pub-module-icon {
+      width: 40px; height: 40px;
+      background: rgba(26,46,110,.5);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 12px;
+    }
+    .pub-module-icon svg { width: 20px; height: 20px; color: #C8A84B; }
+    .pub-module-title { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .pub-module-desc  { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.5; }
+
+    .pub-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+    }
+    @media (max-width: 768px) {
+      .pub-steps-grid { grid-template-columns: 1fr; gap: 20px; }
+      .pub-modules-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .pub-step {
+      background: var(--black-3, #111827);
+      border: 1px solid rgba(255,255,255,.07);
+      border-radius: 18px;
+      padding: 28px 24px;
+      position: relative;
+    }
+    .pub-step-num {
+      width: 36px; height: 36px;
+      background: #1A2E6E;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; font-weight: 800; color: #fff;
+      margin-bottom: 16px;
+    }
+    .pub-step-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
+    .pub-step-desc  { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.65; }
+
+    .pub-portal-cta {
+      background: linear-gradient(135deg, #0C1840 0%, #1A2E6E 100%);
+      border-radius: 24px;
+      padding: 56px 48px;
+      text-align: center;
+      border: 1px solid rgba(200,168,75,.2);
+    }
+    @media (max-width: 640px) { .pub-portal-cta { padding: 36px 24px; } }
+
+    .pub-feature-split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    @media (max-width: 768px) { .pub-feature-split { grid-template-columns: 1fr; gap: 36px; } }
+
+    .pub-ui-mockup {
+      background: #0C1840;
+      border: 1px solid rgba(200,168,75,.2);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+    }
+    .pub-ui-bar {
+      background: #1A2E6E;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .pub-ui-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .pub-ui-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8); margin-left: 4px; }
+    .pub-ui-body { padding: 20px; }
+    .pub-ui-row  {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.06);
+      border-radius: 10px;
+      padding: 10px 14px;
+      margin-bottom: 8px;
+    }
+    .pub-ui-row-icon {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: #1A2E6E;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .pub-ui-row-icon svg { width: 14px; height: 14px; color: #C8A84B; }
+    .pub-ui-row-label { font-size: 12px; color: rgba(255,255,255,.7); flex: 1; }
+    .pub-ui-row-badge {
+      font-size: 10px; font-weight: 600;
+      padding: 2px 8px; border-radius: 20px;
+    }
+    .badge-on   { background: rgba(74,222,128,.15); color: #4ade80; }
+    .badge-off  { background: rgba(255,255,255,.07); color: rgba(255,255,255,.35); }
+    .pub-ui-generate {
+      width: 100%; margin-top: 14px;
+      background: #C8A84B; color: #0C1840;
+      border: none; border-radius: 10px;
+      padding: 11px; font-size: 13px; font-weight: 800;
+      cursor: default;
+    }
+  </style>
+</head>
+<body>
+
+<div class="announcement-bar">
+  Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
+  <a href="shop.html">Shop recognition kits →</a>
+</div>
+
+<nav class="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="index.html"        class="nav-link">Home</a>
+        <a href="shop.html"         class="nav-link">Shop</a>
+        <a href="about.html"        class="nav-link">About</a>
+        <a href="ideas.html"        class="nav-link">Ideas</a>
+        <a href="publications.html" class="nav-link active">Newsletter</a>
+        <a href="contact.html"      class="nav-link">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-cart-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          Cart <span class="cart-badge">0</span>
+        </a>
+        <a href="login.html" class="nav-login-btn btn btn-primary btn-sm">Sign In</a>
+      </div>
+      <button type="button" class="nav-mobile-toggle" aria-label="Open menu">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <button type="button" class="mobile-close-btn">✕</button>
+  </div>
+  <a href="index.html"        class="mobile-nav-link">Home</a>
+  <a href="shop.html"         class="mobile-nav-link">Shop</a>
+  <a href="about.html"        class="mobile-nav-link">About</a>
+  <a href="ideas.html"        class="mobile-nav-link">Ideas</a>
+  <a href="publications.html" class="mobile-nav-link active">Newsletter</a>
+  <a href="contact.html"      class="mobile-nav-link">Contact</a>
+  <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
+</div>
+
+<!-- ── PAGE HERO ─────────────────────────────────────────────── -->
+<div class="page-hero">
+  <div class="page-hero-content container">
+    <div class="page-hero-breadcrumb">
+      <a href="index.html">Home</a>
+      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      <span>Driver Newsletter Builder</span>
+    </div>
+    <span class="section-eyebrow">Fleet Portal Feature</span>
+    <h1 class="section-title" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:16px">
+      Your Fleet's Own<br>Driver Newsletter.
+    </h1>
+    <p style="font-size:1.125rem;color:var(--text-secondary);max-width:620px;margin:0 auto;line-height:1.65">
+      Spotlight your best drivers, share safety milestones, and publish company news — built and branded to your fleet in minutes. Included with every DAS portal account.
+    </p>
+    <div class="sol-hero-stats">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">8</span><span class="sol-hero-stat-label">Content Modules</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">PDF</span><span class="sol-hero-stat-label">Instant Generation</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">1-Link</span><span class="sol-hero-stat-label">Share Anywhere</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">Free</span><span class="sol-hero-stat-label">Included with Portal</span></div>
+    </div>
+    <div class="sol-hero-actions">
+      <a href="login.html" class="btn btn-primary btn-lg">Access Your Portal</a>
+      <a href="signup.html" class="btn btn-secondary btn-lg">Create Account — Free</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── WHAT IT IS ─────────────────────────────────────────────── -->
+<section class="section" style="background:var(--black)">
+  <div class="container">
+    <div class="pub-feature-split">
+
+      <!-- Left: copy -->
+      <div>
+        <span class="section-eyebrow">Built for Fleet Managers</span>
+        <h2 class="section-title" style="font-size:clamp(1.6rem,3vw,2.4rem)">Recognition that goes beyond the box.</h2>
+        <p style="font-size:1.0625rem;color:var(--text-secondary);line-height:1.7;margin-bottom:20px">
+          Physical kits make an impact on delivery day. A driver newsletter keeps that recognition alive all quarter — inside the cab, on break room bulletin boards, and shared with family.
+        </p>
+        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.7;margin-bottom:28px">
+          The DAS Newsletter Builder lets any fleet manager create a professional, fully branded quarterly publication without a design team. Pick your content modules, add your drivers, and generate a shareable PDF in minutes. Every portal account gets full access — no extra charge.
+        </p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px">
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)">
+            <svg style="flex-shrink:0;margin-top:2px;color:#C8A84B" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span><strong style="color:#fff">Driver Spotlight sections</strong> — name, photo, tenure, and a personal recognition message</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)">
+            <svg style="flex-shrink:0;margin-top:2px;color:#C8A84B" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span><strong style="color:#fff">Safety award callouts</strong> — highlight clean safety records and DOT milestones</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)">
+            <svg style="flex-shrink:0;margin-top:2px;color:#C8A84B" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span><strong style="color:#fff">Your brand, your colors</strong> — logo, fleet name, and color scheme applied throughout</span>
+          </li>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)">
+            <svg style="flex-shrink:0;margin-top:2px;color:#C8A84B" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            <span><strong style="color:#fff">One shareable link</strong> — email it, print it, or post it on your internal portal</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Right: UI mockup -->
+      <div>
+        <div class="pub-ui-mockup">
+          <div class="pub-ui-bar">
+            <div class="pub-ui-dot" style="background:#ff5f57"></div>
+            <div class="pub-ui-dot" style="background:#ffbd2e"></div>
+            <div class="pub-ui-dot" style="background:#28c840"></div>
+            <span class="pub-ui-title">Q3 2026 — Fleet Newsletter Builder</span>
+          </div>
+          <div class="pub-ui-body">
+            <div class="pub-ui-row">
+              <div class="pub-ui-row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg></div>
+              <span class="pub-ui-row-label">Driver Spotlight</span>
+              <span class="pub-ui-row-badge badge-on">ON</span>
+            </div>
+            <div class="pub-ui-row">
+              <div class="pub-ui-row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+              <span class="pub-ui-row-label">Safety Awards</span>
+              <span class="pub-ui-row-badge badge-on">ON</span>
+            </div>
+            <div class="pub-ui-row">
+              <div class="pub-ui-row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"/></svg></div>
+              <span class="pub-ui-row-label">Years of Service</span>
+              <span class="pub-ui-row-badge badge-on">ON</span>
+            </div>
+            <div class="pub-ui-row">
+              <div class="pub-ui-row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg></div>
+              <span class="pub-ui-row-label">Company News</span>
+              <span class="pub-ui-row-badge badge-off">OFF</span>
+            </div>
+            <div class="pub-ui-row">
+              <div class="pub-ui-row-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg></div>
+              <span class="pub-ui-row-label">New Hires</span>
+              <span class="pub-ui-row-badge badge-on">ON</span>
+            </div>
+            <button class="pub-ui-generate">Generate PDF →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 8 CONTENT MODULES ─────────────────────────────────────── -->
+<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="section-eyebrow">Content Modules</span>
+      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Pick exactly what<br>your fleet needs.</h2>
+      <p style="color:var(--text-secondary);font-size:1rem;margin-top:12px;max-width:520px;margin-left:auto;margin-right:auto">
+        Turn on the modules that matter to your fleet. Each newsletter is built from the sections you choose — nothing extra, nothing missing.
+      </p>
+    </div>
+
+    <div class="pub-modules-grid">
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg></div>
+        <div class="pub-module-title">Driver Spotlight</div>
+        <div class="pub-module-desc">Feature individual drivers with photo, bio, tenure, and a personalized recognition message from leadership.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+        <div class="pub-module-title">Safety Awards</div>
+        <div class="pub-module-desc">Recognize clean safety records, near-miss reporting, and DOT milestone achievements.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497"/></svg></div>
+        <div class="pub-module-title">Years of Service</div>
+        <div class="pub-module-desc">Celebrate 1-, 3-, 5-, and 10-year service anniversaries publicly across the fleet.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5"/></svg></div>
+        <div class="pub-module-title">New Hires</div>
+        <div class="pub-module-desc">Welcome new drivers by name and make them feel part of the fleet from day one.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></div>
+        <div class="pub-module-title">Birthdays</div>
+        <div class="pub-module-desc">Acknowledge driver birthdays quarterly so no one gets overlooked.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5"/></svg></div>
+        <div class="pub-module-title">Company News</div>
+        <div class="pub-module-desc">Share fleet updates, new routes, equipment news, or company milestones.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"/></svg></div>
+        <div class="pub-module-title">Letter from Management</div>
+        <div class="pub-module-desc">A direct message from fleet leadership — personal, visible, and in print every quarter.</div>
+      </div>
+
+      <div class="pub-module-card">
+        <div class="pub-module-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125"/></svg></div>
+        <div class="pub-module-title">Driver Tips</div>
+        <div class="pub-module-desc">Share safety tips, fuel-efficiency guidance, or wellness resources your drivers can actually use.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
+<section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+  <div class="container">
+    <div class="section-header centered">
+      <span class="section-eyebrow">How It Works</span>
+      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">From blank page to published<br>newsletter in three steps.</h2>
+    </div>
+
+    <div class="pub-steps-grid">
+
+      <div class="pub-step">
+        <div class="pub-step-num">1</div>
+        <div class="pub-step-title">Set up your fleet profile</div>
+        <div class="pub-step-desc">Add your logo, fleet colors, and driver roster to the portal once. Every newsletter you build after that inherits your brand automatically — no re-entering information.</div>
+      </div>
+
+      <div class="pub-step">
+        <div class="pub-step-num">2</div>
+        <div class="pub-step-title">Choose modules &amp; drivers</div>
+        <div class="pub-step-desc">Select which content modules to include — Driver Spotlight, Safety Awards, Years of Service, and more. Tag which drivers appear in each section. The wizard walks you through each step.</div>
+      </div>
+
+      <div class="pub-step">
+        <div class="pub-step-num">3</div>
+        <div class="pub-step-title">Generate &amp; share</div>
+        <div class="pub-step-desc">Hit generate. The portal builds a professional PDF using your brand and content in minutes. Share it via a single link — email it, print it, or post it on your bulletin board.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── PORTAL CTA ─────────────────────────────────────────────── -->
+<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+  <div class="container">
+    <div class="pub-portal-cta">
+      <span class="section-eyebrow" style="color:var(--gold)">Included with Every Account</span>
+      <h2 class="section-title" style="color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);margin-top:12px">Ready to build your<br>first driver newsletter?</h2>
+      <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:480px;margin:16px auto 32px;line-height:1.65">
+        The newsletter builder is free with every DAS portal account. Sign up, upload your driver roster, and your first issue can be live before the end of the week.
+      </p>
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+        <a href="signup.html" class="btn btn-primary btn-lg">Create Free Account</a>
+        <a href="login.html"  class="btn btn-secondary btn-lg">Sign Into Portal</a>
+      </div>
+      <p style="color:rgba(255,255,255,.3);font-size:12px;margin-top:20px">No credit card required to start. Upgrade to unlock recognition kit ordering and automated programs.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="footer-brand">
+          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        </a>
+        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, milestone awards, and the Driver Newsletter Builder — built for trucking.</p>
+        <div class="footer-social">
+          <a href="#" class="footer-social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          </a>
+          <a href="#" class="footer-social-link" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Portal Features</div>
+        <ul class="footer-links">
+          <li><a href="publications.html" class="footer-link">Driver Newsletter Builder</a></li>
+          <li><a href="login.html"        class="footer-link">Fleet Portal Login</a></li>
+          <li><a href="signup.html"       class="footer-link">Create Account</a></li>
+          <li><a href="contact.html"      class="footer-link">Request a Demo</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Products</div>
+        <ul class="footer-links">
+          <li><a href="shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
+          <li><a href="shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
+          <li><a href="shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
+          <li><a href="shop.html"                       class="footer-link">Full Catalog</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="about.html"   class="footer-link">About Us</a></li>
+          <li><a href="ideas.html"   class="footer-link">Driver Ideas Blog</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+          <li><a href="customer-service.html" class="footer-link">Customer Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="terms.html"             class="footer-legal-link">Terms &amp; Conditions</a>
+        <a href="return-policy.html"     class="footer-legal-link">Return Policy</a>
+        <a href="refund-policy.html"     class="footer-legal-link">Refund Policy</a>
+        <a href="legal.html"             class="footer-legal-link">Legal / Export</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<button type="button" class="scroll-top" aria-label="Scroll to top">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
+</button>
+
+<script src="js/cart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/chat.js" defer></script>
+<script>
+  // Mobile drawer
+  const toggle = document.querySelector('.nav-mobile-toggle')
+  const drawer = document.querySelector('.mobile-drawer')
+  const overlay = document.querySelector('.mobile-overlay')
+  const closeBtn = document.querySelector('.mobile-close-btn')
+  if (toggle && drawer) {
+    toggle.addEventListener('click',  () => { drawer.classList.add('open'); overlay.classList.add('open') })
+    closeBtn.addEventListener('click', () => { drawer.classList.remove('open'); overlay.classList.remove('open') })
+    overlay.addEventListener('click',  () => { drawer.classList.remove('open'); overlay.classList.remove('open') })
+  }
+  // Scroll-to-top
+  const scrollTop = document.querySelector('.scroll-top')
+  if (scrollTop) {
+    window.addEventListener('scroll', () => scrollTop.classList.toggle('visible', window.scrollY > 400))
+    scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+  }
+</script>
+</body>
+</html>
