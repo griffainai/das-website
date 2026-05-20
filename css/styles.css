@@ -90,15 +90,24 @@ ul { list-style: none; }
 .section-lg { padding: 128px 0; }
 
 /* =========================================
+   STICKY HEADER WRAPPER
+   Wraps announcement bar + nav so they move
+   as a single unit while scrolling.
+   ========================================= */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 101;
+}
+
+/* =========================================
    ENTERPRISE ANNOUNCEMENT BAR
    ========================================= */
 .announcement-bar-enterprise {
   background: #0D1B45;
   border-bottom: 1px solid rgba(255,255,255,0.10);
   padding: 0 var(--container-padding);
-  position: sticky;
-  top: 0;
-  z-index: 101;
+  position: relative;
 }
 .ann-bar-inner {
   max-width: var(--container-max);
@@ -200,8 +209,14 @@ ul { list-style: none; }
    ========================================= */
 .nav {
   position: sticky;
-  top: 42px;
+  top: 0;
   z-index: 100;
+}
+/* When nav is inside .sticky-header, the wrapper handles sticking */
+.sticky-header .nav {
+  position: relative;
+  top: auto;
+  z-index: auto;
   background: rgba(241, 244, 247, 0.85);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
