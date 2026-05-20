@@ -21,6 +21,7 @@
     if (diff <= 0) {
       // DAW is here or passed
       ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => set(id, 0));
+      ['ann-cd-days','ann-cd-hours','ann-cd-mins'].forEach(id => set(id, 0));
       const subLabel = document.querySelector('.countdown-ent-sub-label');
       if (subLabel) subLabel.textContent = 'Happening Now';
       const deadline = document.querySelector('.countdown-ent-deadline');
@@ -38,17 +39,17 @@
     set('cd-minutes', minutes);
     set('cd-seconds', seconds);
 
-    // Nav pill
-    const nd = document.getElementById('nav-cd-days');
-    const nh = document.getElementById('nav-cd-hours');
-    const nm = document.getElementById('nav-cd-mins');
-    if (nd) nd.textContent = days;
-    if (nh) nh.textContent = pad(hours);
-    if (nm) nm.textContent = pad(minutes);
+    // Announcement bar trim countdown
+    const ad = document.getElementById('ann-cd-days');
+    const ah = document.getElementById('ann-cd-hours');
+    const am = document.getElementById('ann-cd-mins');
+    if (ad) ad.textContent = days;
+    if (ah) ah.textContent = pad(hours);
+    if (am) am.textContent = pad(minutes);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    if (!document.getElementById('cd-days') && !document.getElementById('nav-cd-days')) return;
+    if (!document.getElementById('cd-days') && !document.getElementById('ann-cd-days')) return;
     tick();
     setInterval(tick, 1000);
   });
