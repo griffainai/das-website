@@ -32,6 +32,14 @@
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80&fit=crop" fetchpriority="high">
 
   <link rel="stylesheet" href="css/styles.css">
+  <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
+       The .sticky-header wrapper keeps the announcement bar + nav locked together
+       as a single sticky unit while scrolling. -->
+  <style>
+    .sticky-header { position: sticky; top: 0; z-index: 101; }
+    .sticky-header .announcement-bar-enterprise { position: relative; }
+    .sticky-header .nav { position: relative; top: auto; z-index: auto; }
+  </style>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
