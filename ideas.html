@@ -89,12 +89,17 @@
     .article-card:hover .card-readmore svg { transform: translateX(3px); }
 
     /* ── Insight strip ── */
-    .insight-strip { background: #0D1B45; padding: 56px 0; }
-    .insight-strip-inner { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1px; background: rgba(255,255,255,0.08); border-radius: var(--radius-xl); overflow: hidden; }
-    .insight-item { background: #0D1B45; padding: 36px 32px; }
-    .insight-num { font-size: 2.5rem; font-weight: 900; letter-spacing: -0.04em; color: #fff; line-height: 1; margin-bottom: 8px; }
-    .insight-num span { color: rgba(255,255,255,0.35); font-size: 1.5rem; }
-    .insight-label { font-size: 0.9375rem; color: rgba(255,255,255,0.6); line-height: 1.55; }
+    .insight-strip { background: #0B1637; padding: 80px 0; position: relative; overflow: hidden; }
+    .insight-strip::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 45% at 50% 0%, rgba(255,255,255,0.04) 0%, transparent 65%); pointer-events: none; }
+    .insight-strip-inner { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; overflow: hidden; position: relative; z-index: 1; }
+    .insight-item { background: rgba(255,255,255,0.025); padding: 44px 36px 40px; position: relative; border-right: 1px solid rgba(255,255,255,0.08); transition: background 0.25s ease; }
+    .insight-item:last-child { border-right: none; }
+    .insight-item::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.20) 50%, transparent 100%); }
+    .insight-item:hover { background: rgba(255,255,255,0.05); }
+    .insight-tag { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: rgba(255,255,255,0.30); margin-bottom: 18px; }
+    .insight-num { font-size: 3.25rem; font-weight: 900; letter-spacing: -0.045em; color: #fff; line-height: 1; margin-bottom: 16px; text-shadow: 0 0 40px rgba(255,255,255,0.10); }
+    .insight-num span { color: rgba(255,255,255,0.32); font-size: 2rem; font-weight: 800; vertical-align: baseline; }
+    .insight-label { font-size: 0.875rem; color: rgba(255,255,255,0.52); line-height: 1.65; font-weight: 400; }
 
     /* ── Newsletter ── */
     .newsletter-section { background: var(--black-2); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); padding: 56px 0; }
@@ -724,18 +729,22 @@
     </div>
     <div class="insight-strip-inner">
       <div class="insight-item">
+        <div class="insight-tag">Cost of Turnover</div>
         <div class="insight-num">$11K<span>+</span></div>
         <div class="insight-label">average cost to replace a single commercial driver — recruiting, training, and productivity gap</div>
       </div>
       <div class="insight-item">
+        <div class="insight-tag">OTR Turnover Rate</div>
         <div class="insight-num">94<span>%</span></div>
         <div class="insight-label">annual driver turnover rate at large truckload carriers — one of the highest in any industry</div>
       </div>
       <div class="insight-item">
+        <div class="insight-tag">Safety Impact</div>
         <div class="insight-num">23<span>%</span></div>
         <div class="insight-label">lower preventable accident rate in fleets with formal recognition programs vs. those without</div>
       </div>
       <div class="insight-item">
+        <div class="insight-tag">Recognition ROI</div>
         <div class="insight-num">10<span>:1</span></div>
         <div class="insight-label">conservative ROI ratio for structured recognition programs, based on turnover and safety savings</div>
       </div>
@@ -877,19 +886,45 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
   btn.addEventListener('click', () => setCategory(btn.dataset.cat));
 });
 
-// Newsletter form — basic UX (no backend yet)
-const newsletterForm = document.querySelector('.newsletter-form');
-if (newsletterForm) {
-  newsletterForm.querySelector('button').addEventListener('click', () => {
-    const input = newsletterForm.querySelector('.newsletter-input');
-    if (input.value && input.value.includes('@')) {
-      showToast('You\'re subscribed! Check your inbox for the first issue.', 'success');
-      input.value = '';
-    } else {
+// Newsletter subscription — real API call to /api/newsletter-subscribe
+(function () {
+  const form  = document.querySelector('.newsletter-form');
+  if (!form) return;
+  const btn   = form.querySelector('button');
+  const input = form.querySelector('.newsletter-input');
+
+  async function handleSubscribe() {
+    const email = (input.value || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       showToast('Please enter a valid email address.', 'error');
+      return;
     }
-  });
-}
+    btn.disabled    = true;
+    btn.textContent = 'Subscribing…';
+    try {
+      const res  = await fetch('/api/newsletter-subscribe', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ email }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        showToast('Subscribed! Check your inbox for a welcome email.', 'success');
+        input.value = '';
+      } else {
+        showToast(data.error || 'Something went wrong — please try again.', 'error');
+      }
+    } catch (e) {
+      showToast('Network error — please try again.', 'error');
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = 'Subscribe';
+    }
+  }
+
+  btn.addEventListener('click', handleSubscribe);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') handleSubscribe(); });
+})();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js"></script>
