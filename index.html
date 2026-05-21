@@ -39,6 +39,13 @@
     .sticky-header { position: sticky; top: 0; z-index: 101; }
     .sticky-header .announcement-bar-enterprise { position: relative; }
     .sticky-header .nav { position: relative; top: auto; z-index: auto; }
+    .ann-bar-countdown {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 0.8125rem; color: #fff; font-variant-numeric: tabular-nums;
+      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px; padding: 3px 10px; white-space: nowrap; letter-spacing: 0.01em;
+    }
+    .ann-bar-countdown strong { font-weight: 800; }
   </style>
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
@@ -1355,7 +1362,7 @@
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5"/></svg>
 </button>
 
-<script src="js/countdown.js"></script>
+<script src="js/countdown.js?v=2"></script>
 <script src="js/cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js"></script>
