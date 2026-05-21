@@ -202,14 +202,14 @@ function renderCart() {
         <div style="font-size:0.875rem;color:var(--text-muted);margin-top:4px">$${item.price.toFixed(2)} / unit</div>
       </div>
       <div style="display:flex;align-items:center;gap:6px;justify-content:center">
-        <button class="qty-btn" onclick="changeQty('${item.id}', -10)" style="width:26px;height:26px;font-size:0.9rem">−</button>
+        <button class="qty-btn" onclick="changeQty('${item.id}', -1)" style="width:26px;height:26px;font-size:0.9rem">−</button>
         <input type="number"
                class="qty-input"
                style="width:48px"
                value="${item.qty}"
                min="${item.minQty || 10}"
                onchange="setQty('${item.id}', this.value)">
-        <button class="qty-btn" onclick="changeQty('${item.id}', 10)" style="width:26px;height:26px;font-size:0.9rem">+</button>
+        <button class="qty-btn" onclick="changeQty('${item.id}', 1)" style="width:26px;height:26px;font-size:0.9rem">+</button>
       </div>
       <div class="cart-item-subtotal" style="text-align:right">$${(item.price * item.qty).toFixed(2)}</div>
       <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Remove ${item.name}">

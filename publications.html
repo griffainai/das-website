@@ -46,122 +46,145 @@
   </script>
 
   <style>
-    /* ── Publications page-specific styles ── */
-    .pub-modules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-      margin-top: 36px;
-    }
-    .pub-module-card {
-      background: #0C1840;
-      border: 1px solid rgba(200,168,75,.15);
-      border-radius: 14px;
-      padding: 20px;
-      transition: border-color .2s, transform .2s;
-    }
-    .pub-module-card:hover { border-color: rgba(200,168,75,.35); transform: translateY(-2px); }
-    .pub-module-icon {
-      width: 40px; height: 40px;
-      background: rgba(26,46,110,.5);
-      border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: 12px;
-    }
-    .pub-module-icon svg { width: 20px; height: 20px; color: #1A2E6E; }
-    .pub-module-title { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .pub-module-desc  { font-size: 12px; color: rgba(255,255,255,.5); line-height: 1.5; }
+    /* ── Publications page — enterprise light theme ── */
 
-    .pub-steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      margin-top: 48px;
-    }
-    @media (max-width: 768px) {
-      .pub-steps-grid { grid-template-columns: 1fr; gap: 20px; }
-      .pub-modules-grid { grid-template-columns: 1fr 1fr; }
-    }
-    .pub-step {
-      background: #0C1840;
-      border: 1px solid rgba(200,168,75,.15);
-      border-radius: 18px;
-      padding: 28px 24px;
-      position: relative;
-    }
-    .pub-step-num {
-      width: 36px; height: 36px;
-      background: #1A2E6E;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 15px; font-weight: 800; color: #fff;
-      margin-bottom: 16px;
-    }
-    .pub-step-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 10px; }
-    .pub-step-desc  { font-size: 14px; color: rgba(255,255,255,.55); line-height: 1.65; }
-
-    .pub-portal-cta {
-      background: linear-gradient(135deg, #0C1840 0%, #1A2E6E 100%);
-      border-radius: 24px;
-      padding: 56px 48px;
-      text-align: center;
-      border: 1px solid rgba(200,168,75,.2);
-    }
-    @media (max-width: 640px) { .pub-portal-cta { padding: 36px 24px; } }
-
+    /* Feature split */
     .pub-feature-split {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 64px;
       align-items: center;
     }
-    @media (max-width: 768px) { .pub-feature-split { grid-template-columns: 1fr; gap: 36px; } }
 
+    /* UI Mockup — light portal preview */
     .pub-ui-mockup {
-      background: #0C1840;
-      border: 1px solid rgba(200,168,75,.2);
-      border-radius: 18px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 24px 64px rgba(0,0,0,.5);
+      box-shadow: 0 20px 60px rgba(15,23,42,.09), 0 4px 12px rgba(15,23,42,.05);
     }
     .pub-ui-bar {
-      background: #1A2E6E;
-      padding: 12px 16px;
+      background: #F8FAFC;
+      padding: 11px 16px;
       display: flex;
       align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      gap: 8px;
+      border-bottom: 1px solid #E2E8F0;
     }
     .pub-ui-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .pub-ui-title { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8); margin-left: 4px; }
+    .pub-ui-title { font-size: 0.75rem; font-weight: 600; color: #64748B; margin-left: 6px; letter-spacing: -0.01em; }
     .pub-ui-body { padding: 20px; }
-    .pub-ui-row  {
+    .pub-ui-row {
       display: flex; align-items: center; gap: 10px;
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.06);
-      border-radius: 10px;
-      padding: 10px 14px;
-      margin-bottom: 8px;
+      background: #FAFAFA;
+      border: 1px solid #F1F5F9;
+      border-radius: 9px;
+      padding: 10px 13px;
+      margin-bottom: 7px;
+      transition: border-color .15s;
     }
+    .pub-ui-row:hover { border-color: #CBD5E1; }
     .pub-ui-row-icon {
       width: 28px; height: 28px; border-radius: 7px;
-      background: #1A2E6E;
+      background: rgba(26,46,110,.08);
       display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
-    .pub-ui-row-icon svg { width: 14px; height: 14px; color: #1A2E6E; }
-    .pub-ui-row-label { font-size: 12px; color: rgba(255,255,255,.7); flex: 1; }
+    .pub-ui-row-icon svg { width: 14px; height: 14px; color: #1A2E6E; stroke: #1A2E6E; }
+    .pub-ui-row-label { font-size: 0.75rem; color: #334155; flex: 1; font-weight: 500; }
     .pub-ui-row-badge {
-      font-size: 10px; font-weight: 600;
+      font-size: 0.625rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
       padding: 2px 8px; border-radius: 20px;
     }
-    .badge-on   { background: rgba(74,222,128,.15); color: #4ade80; }
-    .badge-off  { background: rgba(255,255,255,.07); color: rgba(255,255,255,.35); }
+    .badge-on  { background: #DCFCE7; color: #15803D; }
+    .badge-off { background: #F1F5F9; color: #94A3B8; }
     .pub-ui-generate {
       width: 100%; margin-top: 14px;
-      background: #1A2E6E; color: #ffffff;
-      border: none; border-radius: 10px;
-      padding: 11px; font-size: 13px; font-weight: 800;
-      cursor: default;
+      background: #1A2E6E; color: #fff;
+      border: none; border-radius: 9px;
+      padding: 11px; font-size: 0.8125rem; font-weight: 700;
+      letter-spacing: -0.01em; cursor: default;
+    }
+
+    /* Content Modules grid */
+    .pub-modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .pub-module-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px 20px;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+    }
+    .pub-module-card:hover {
+      border-color: rgba(26,46,110,.35);
+      box-shadow: 0 4px 20px rgba(26,46,110,.07);
+      transform: translateY(-2px);
+    }
+    .pub-module-icon {
+      width: 40px; height: 40px;
+      background: rgba(26,46,110,.07);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .pub-module-icon svg { width: 20px; height: 20px; color: #1A2E6E; }
+    .pub-module-title { font-size: 0.875rem; font-weight: 700; color: #0F172A; margin-bottom: 6px; }
+    .pub-module-desc  { font-size: 0.8125rem; color: #64748B; line-height: 1.55; }
+
+    /* How It Works steps */
+    .pub-steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      margin-top: 48px;
+      border: 1px solid #E2E8F0;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pub-step {
+      background: #FFFFFF;
+      padding: 40px 36px;
+      position: relative;
+      border-right: 1px solid #E2E8F0;
+      transition: background .2s ease;
+    }
+    .pub-step:last-child { border-right: none; }
+    .pub-step:hover { background: #F8FAFC; }
+    .pub-step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 32px; height: 32px;
+      background: #1A2E6E; color: #fff;
+      border-radius: 50%;
+      font-size: 0.8125rem; font-weight: 800;
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      margin-bottom: 20px; flex-shrink: 0;
+    }
+    .pub-step-title { font-size: 1.125rem; font-weight: 700; color: #0F172A; margin-bottom: 10px; letter-spacing: -0.01em; }
+    .pub-step-desc  { font-size: 0.9375rem; color: #64748B; line-height: 1.65; }
+
+    /* CTA block */
+    .pub-portal-cta {
+      background: #1A2E6E;
+      border-radius: 20px;
+      padding: 64px 48px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .pub-feature-split   { grid-template-columns: 1fr; gap: 36px; }
+      .pub-steps-grid      { grid-template-columns: 1fr; }
+      .pub-step            { border-right: none; border-bottom: 1px solid #E2E8F0; padding: 32px 24px; }
+      .pub-step:last-child { border-bottom: none; }
+      .pub-modules-grid    { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .pub-modules-grid { grid-template-columns: 1fr; }
+      .pub-portal-cta   { padding: 40px 24px; }
     }
   </style>
 </head>
@@ -244,7 +267,7 @@
 </div>
 
 <!-- ── WHAT IT IS ─────────────────────────────────────────────── -->
-<section class="section" style="background:var(--black)">
+<section class="section" style="background:#FFFFFF;border-top:1px solid #E2E8F0">
   <div class="container">
     <div class="pub-feature-split">
 
@@ -323,7 +346,7 @@
 </section>
 
 <!-- ── 8 CONTENT MODULES ─────────────────────────────────────── -->
-<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+<section class="section-sm" style="background:#F8FAFC;border-top:1px solid #E2E8F0">
   <div class="container">
     <div class="section-header centered">
       <span class="section-eyebrow">Content Modules</span>
@@ -388,7 +411,7 @@
 </section>
 
 <!-- ── HOW IT WORKS ───────────────────────────────────────────── -->
-<section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+<section class="section" style="background:#FFFFFF;border-top:1px solid #E2E8F0">
   <div class="container">
     <div class="section-header centered">
       <span class="section-eyebrow">How It Works</span>
@@ -420,19 +443,19 @@
 </section>
 
 <!-- ── PORTAL CTA ─────────────────────────────────────────────── -->
-<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+<section class="section-sm" style="background:#F8FAFC;border-top:1px solid #E2E8F0">
   <div class="container">
     <div class="pub-portal-cta">
-      <span class="section-eyebrow" style="color:#1A2E6E">Included with Every Account</span>
-      <h2 class="section-title" style="color:#fff;font-size:clamp(1.6rem,3vw,2.4rem);margin-top:12px">Ready to build your<br>first driver newsletter?</h2>
-      <p style="color:rgba(255,255,255,.6);font-size:1rem;max-width:480px;margin:16px auto 32px;line-height:1.65">
+      <span style="display:inline-block;font-size:0.6875rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:rgba(255,255,255,0.55);margin-bottom:14px">Included with Every Account</span>
+      <h2 style="font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.025em;margin-bottom:14px">Ready to build your<br>first driver newsletter?</h2>
+      <p style="color:rgba(255,255,255,.65);font-size:1rem;max-width:480px;margin:0 auto 32px;line-height:1.65">
         The newsletter builder is free with every DAS portal account. Sign up, upload your driver roster, and your first issue can be live before the end of the week.
       </p>
-      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
-        <a href="signup.html" class="btn btn-lg" style="background:#1A2E6E;color:#ffffff;border-color:#1A2E6E;font-weight:700">Create Free Account</a>
-        <a href="login.html"  class="btn btn-lg" style="background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff">Sign Into Portal</a>
+      <div style="display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap">
+        <a href="signup.html" class="btn btn-lg" style="background:#FFFFFF;color:#1A2E6E;border-color:#FFFFFF;font-weight:700">Create Free Account</a>
+        <a href="login.html"  class="btn btn-lg" style="background:transparent;border:2px solid rgba(255,255,255,.35);color:#fff">Sign Into Portal</a>
       </div>
-      <p style="color:rgba(255,255,255,.3);font-size:12px;margin-top:20px">No credit card required to start. Upgrade to unlock recognition kit ordering and automated programs.</p>
+      <p style="color:rgba(255,255,255,.3);font-size:0.75rem;margin-top:20px">No credit card required. Upgrade anytime to unlock recognition kit ordering.</p>
     </div>
   </div>
 </section>

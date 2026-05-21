@@ -40,12 +40,23 @@
     .sticky-header .announcement-bar-enterprise { position: relative; }
     .sticky-header .nav { position: relative; top: auto; z-index: auto; }
     .ann-bar-countdown {
-      display: inline-flex; align-items: center; gap: 3px;
-      font-size: 0.8125rem; color: #fff; font-variant-numeric: tabular-nums;
-      background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 100px; padding: 3px 10px; white-space: nowrap; letter-spacing: 0.01em;
+      display: inline-flex; align-items: center; gap: 7px;
+      font-variant-numeric: tabular-nums; white-space: nowrap;
     }
-    .ann-bar-countdown strong { font-weight: 800; }
+    .ann-cd-unit {
+      display: inline-flex; align-items: baseline; gap: 2px;
+    }
+    .ann-cd-num {
+      font-size: 0.9375rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1;
+    }
+    .ann-cd-label {
+      font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.42); line-height: 1;
+    }
+    .ann-cd-sep {
+      width: 1px; height: 11px; background: rgba(255,255,255,0.22);
+      display: inline-block; align-self: center; flex-shrink: 0;
+    }
     /* Stats removed — no longer need the bottom gap on hero actions */
     .hero-actions { margin-bottom: 0; }
   </style>
@@ -173,9 +184,11 @@
     </div>
     <div class="ann-bar-right">
       <span class="ann-bar-countdown">
-        <strong id="ann-cd-days">--</strong>d&nbsp;
-        <strong id="ann-cd-hours">--</strong>h&nbsp;
-        <strong id="ann-cd-mins">--</strong>m
+        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-days">--</strong><span class="ann-cd-label">d</span></span>
+        <span class="ann-cd-sep"></span>
+        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-hours">--</strong><span class="ann-cd-label">h</span></span>
+        <span class="ann-cd-sep"></span>
+        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-mins">--</strong><span class="ann-cd-label">m</span></span>
       </span>
       <span class="ann-bar-msg">Guarantee on-time delivery — order before Aug 7</span>
       <a href="shop.html" class="ann-bar-cta">
@@ -556,27 +569,9 @@
       <h2 class="section-title" data-reveal data-reveal-delay="1">From first call to<br>first delivery — three steps.</h2>
       <p class="section-desc" data-reveal data-reveal-delay="2">Enterprise fleet buyers shouldn't have to figure it out. Tell us what you need and we handle the rest — from program design to white-glove delivery at any scale.</p>
     </div>
-    <!-- Animated progress track -->
-    <div class="hiw-track" aria-hidden="true">
-      <div class="hiw-track-node" id="hiwNode1">
-        <span class="hiw-node-num">1</span>
-        <span class="hiw-node-ring"></span>
-      </div>
-      <div class="hiw-track-bar"><div class="hiw-track-fill" id="hiwBar1"></div></div>
-      <div class="hiw-track-node" id="hiwNode2">
-        <span class="hiw-node-num">2</span>
-        <span class="hiw-node-ring"></span>
-      </div>
-      <div class="hiw-track-bar"><div class="hiw-track-fill" id="hiwBar2"></div></div>
-      <div class="hiw-track-node" id="hiwNode3">
-        <span class="hiw-node-num">3</span>
-        <span class="hiw-node-ring"></span>
-      </div>
-    </div>
-
-    <!-- Step cards -->
-    <div class="hiw-cards">
-      <div class="hiw-step">
+    <div class="hiw-grid">
+      <div class="hiw-step" data-reveal data-reveal-delay="1">
+        <div class="hiw-step-badge">1</div>
         <div class="hiw-step-title">Tell us your fleet</div>
         <p class="hiw-step-desc">Share your driver count, recognition goals, and any upcoming dates — Driver Appreciation Week, milestones, onboarding schedules. Five minutes of context is all we need.</p>
         <span class="hiw-step-tag">
@@ -584,7 +579,8 @@
           Quote in 24 hours
         </span>
       </div>
-      <div class="hiw-step">
+      <div class="hiw-step" data-reveal data-reveal-delay="2">
+        <div class="hiw-step-badge">2</div>
         <div class="hiw-step-title">We build your program</div>
         <p class="hiw-step-desc">We prescribe the right products, tier, quantity, and personalization for your fleet's specific situation. You approve. We handle branding, packaging, and fulfillment logistics.</p>
         <span class="hiw-step-tag">
@@ -592,7 +588,8 @@
           Custom program design
         </span>
       </div>
-      <div class="hiw-step">
+      <div class="hiw-step" data-reveal data-reveal-delay="3">
+        <div class="hiw-step-badge">3</div>
         <div class="hiw-step-title">Delivered on your timeline</div>
         <p class="hiw-step-desc">Kits arrive at your terminal — individually packaged, branded, and ready to distribute. For enterprise fleets, we coordinate multi-location delivery so nothing falls through the cracks.</p>
         <span class="hiw-step-tag">
@@ -1544,51 +1541,6 @@
   });
 </script>
 
-<!-- ── HOW IT WORKS animated timeline ── -->
-<script>
-(function () {
-  const section = document.querySelector('.hiw-section');
-  if (!section) return;
-  const nodes = [
-    document.getElementById('hiwNode1'),
-    document.getElementById('hiwNode2'),
-    document.getElementById('hiwNode3'),
-  ];
-  const bars = [
-    document.getElementById('hiwBar1'),
-    document.getElementById('hiwBar2'),
-  ];
-  const cards = document.querySelectorAll('.hiw-step');
-  let fired = false;
-
-  function runSequence() {
-    if (fired) return;
-    fired = true;
-    // Node 1 + card 1 immediately
-    if (nodes[0]) nodes[0].classList.add('hiw-node-active');
-    if (cards[0]) cards[0].classList.add('hiw-step-visible');
-    // Bar 1 fills at 200ms
-    setTimeout(function () { if (bars[0]) bars[0].classList.add('filled'); }, 200);
-    // Node 2 + card 2 at 850ms
-    setTimeout(function () {
-      if (nodes[1]) nodes[1].classList.add('hiw-node-active');
-      if (cards[1]) cards[1].classList.add('hiw-step-visible');
-    }, 850);
-    // Bar 2 fills at 1050ms
-    setTimeout(function () { if (bars[1]) bars[1].classList.add('filled'); }, 1050);
-    // Node 3 + card 3 at 1700ms
-    setTimeout(function () {
-      if (nodes[2]) nodes[2].classList.add('hiw-node-active');
-      if (cards[2]) cards[2].classList.add('hiw-step-visible');
-    }, 1700);
-  }
-
-  var obs = new IntersectionObserver(function (entries) {
-    if (entries[0].isIntersecting) runSequence();
-  }, { threshold: 0.2 });
-  obs.observe(section);
-})();
-</script>
 
 <!-- ── Scroll Reveal ── -->
 <script>

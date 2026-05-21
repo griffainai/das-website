@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const input   = control?.querySelector('.qty-input');
     if (!input) return;
     const min  = parseInt(input.min) || 10;
-    const step = parseInt(input.dataset.step) || 10;
+    const step = parseInt(input.dataset.step) || 1;
     const cur  = parseInt(input.value) || min;
     const delta = btn.dataset.dir === 'up' ? step : -step;
     input.value = Math.max(min, cur + delta);
@@ -230,13 +230,16 @@ async function goToCheckout() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ items }),
     });
-    const data = await res.json();
+    let data;
+    try { data = await res.json(); } catch { data = {}; }
     if (data.url) {
+      Cart.clear();
       window.location.href = data.url;
     } else {
-      throw new Error(data.error || 'Checkout failed');
+      throw new Error(data.error || `Server error ${res.status}`);
     }
   } catch (err) {
+    console.error('[checkout]', err.message);
     showToast(err.message || 'Checkout error — please try again', 'error');
     if (btn) { btn.disabled = false; btn.textContent = 'Proceed to Checkout'; }
   }

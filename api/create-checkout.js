@@ -4,23 +4,24 @@
    POST /api/create-checkout
    ============================================= */
 
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-
 module.exports = async (req, res) => {
   const allowedOrigin = process.env.SITE_URL || '*';
-
-  res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
+  res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
-  // Handle CORS preflight
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+  if (req.method === 'OPTIONS') return res.status(204).end();
+  if (req.method !== 'POST')    return res.status(405).json({ error: 'Method not allowed' });
+
+  // Guard: key must be present
+  if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.startsWith('sk_test_REPLACE')) {
+    console.error('[create-checkout] STRIPE_SECRET_KEY is not configured');
+    return res.status(500).json({ error: 'Payment system not configured — contact support.' });
   }
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  // Initialise Stripe inside the handler so the env var is read at request time
+  const Stripe = require('stripe');
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 
   const { items } = req.body || {};
 
@@ -30,12 +31,16 @@ module.exports = async (req, res) => {
 
   // Validate each item
   for (const item of items) {
-    if (!item.name || typeof item.price !== 'number' || item.price <= 0 || !Number.isInteger(item.qty) || item.qty < 1) {
-      return res.status(400).json({ error: `Invalid item: ${item.name || 'unknown'}` });
+    if (!item.name || typeof item.price !== 'number' || item.price <= 0) {
+      return res.status(400).json({ error: `Invalid item data for: ${item.name || 'unknown'}` });
     }
     const minQty = item.minQty || 10;
-    if (item.qty < minQty) {
-      return res.status(400).json({ error: `Minimum order for ${item.name} is ${minQty} units` });
+    if ((item.qty || 0) < minQty) {
+      return res.status(400).json({ error: `Minimum order for "${item.name}" is ${minQty} units` });
+    }
+    // Stripe minimum charge is $0.50 USD
+    if (item.price < 0.50) {
+      return res.status(400).json({ error: `Unit price for "${item.name}" must be at least $0.50` });
     }
   }
 
@@ -45,7 +50,7 @@ module.exports = async (req, res) => {
         currency: 'usd',
         product_data: {
           name: item.name,
-          description: `Category: ${item.category || 'Driver Appreciation'} · Min. order: ${item.minQty || 10} units`,
+          description: `Fleet recognition · min. ${item.minQty || 10} units`,
           images: item.image ? [item.image] : [],
           metadata: {
             product_id: item.id       || '',
@@ -57,30 +62,24 @@ module.exports = async (req, res) => {
       quantity: item.qty,
     }));
 
-    const siteUrl = process.env.SITE_URL || 'https://driverappreciationsolutions.com';
+    const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
 
     const session = await stripe.checkout.sessions.create({
-      // automatic_payment_methods lets Stripe surface Apple Pay, Google Pay,
-      // Link, and cards based on what the buyer's browser/device supports —
-      // no explicit list needed, and no domain verification required for wallets.
       automatic_payment_methods: { enabled: true },
       line_items,
-      mode: 'payment',
-      success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url:  `${siteUrl}/cart.html`,
+      mode:                       'payment',
+      success_url:                `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url:                 `${siteUrl}/cart.html`,
       billing_address_collection: 'required',
-      shipping_address_collection: {
-        allowed_countries: ['US', 'CA'],
-      },
-      automatic_tax: { enabled: false },
-      allow_promotion_codes: true,
+      shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      allow_promotion_codes:       true,
       custom_text: {
         submit: {
-          message: 'All orders ship within 3–5 business days. Minimum 10 units per product.',
+          message: 'Orders ship within 3–5 business days. Minimum 10 units per product.',
         },
       },
       metadata: {
-        order_source: 'driver-appreciation-solutions-web',
+        order_source: 'das-website-cart',
         item_count:   String(items.length),
       },
     });
@@ -88,7 +87,9 @@ module.exports = async (req, res) => {
     return res.status(200).json({ url: session.url });
 
   } catch (err) {
-    console.error('[Stripe Error]', err.message);
-    return res.status(500).json({ error: 'Checkout session creation failed. Please try again.' });
+    console.error('[Stripe create-checkout error]', err.message, err.type);
+    return res.status(500).json({
+      error: err.message || 'Failed to create checkout session. Please try again.',
+    });
   }
 };

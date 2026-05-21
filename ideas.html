@@ -102,12 +102,39 @@
     .insight-label { font-size: 0.875rem; color: rgba(255,255,255,0.52); line-height: 1.65; font-weight: 400; }
 
     /* ── Newsletter ── */
-    .newsletter-section { background: var(--black-2); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); padding: 56px 0; }
-    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+    .newsletter-section { background: #0B1637; padding: 80px 0; position: relative; overflow: hidden; }
+    .newsletter-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 70% 50%, rgba(255,255,255,0.03) 0%, transparent 65%); pointer-events: none; }
+    .newsletter-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; position: relative; z-index: 1; }
+    .newsletter-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.10em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-bottom: 16px; }
+    .newsletter-eyebrow::before { content: ''; width: 20px; height: 1.5px; background: rgba(255,255,255,0.35); flex-shrink: 0; }
+    .newsletter-title { font-size: clamp(1.375rem, 2.5vw, 1.875rem); font-weight: 800; letter-spacing: -0.025em; color: #fff; line-height: 1.2; margin: 0 0 20px; }
+    .newsletter-bullets { list-style: none; padding: 0; margin: 0 0 20px; display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9375rem; color: rgba(255,255,255,0.68); line-height: 1.5; }
+    .newsletter-bullets li::before { content: ''; width: 16px; height: 16px; min-width: 16px; margin-top: 2px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='none' stroke='rgba(255,255,255,0.55)' stroke-width='1.5'/%3E%3Cpath d='M5 8l2 2 4-4' stroke='rgba(255,255,255,0.55)' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; }
+    .newsletter-proof { font-size: 0.875rem; color: rgba(255,255,255,0.40); margin-bottom: 20px; line-height: 1.5; }
+    .newsletter-proof strong { color: rgba(255,255,255,0.72); font-weight: 600; }
     .newsletter-form { display: flex; gap: 8px; }
-    .newsletter-input { flex: 1; padding: 13px 18px; border: 1px solid var(--gold-border); border-radius: 100px; font-size: 0.9375rem; background: var(--black); color: var(--text-primary); outline: none; transition: border-color 0.18s ease; }
-    .newsletter-input:focus { border-color: var(--gold); }
-    .newsletter-input::placeholder { color: var(--text-muted); }
+    .newsletter-input { flex: 1; padding: 13px 18px; border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; font-size: 0.9375rem; background: rgba(255,255,255,0.07); color: #fff; outline: none; transition: border-color 0.18s ease; }
+    .newsletter-input:focus { border-color: rgba(255,255,255,0.50); }
+    .newsletter-input::placeholder { color: rgba(255,255,255,0.30); }
+    .newsletter-microcopy { font-size: 0.8125rem; color: rgba(255,255,255,0.28); margin-top: 12px; }
+    /* Preview card */
+    .newsletter-preview { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+    .nl-preview-header { background: rgba(255,255,255,0.06); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 14px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .nl-preview-tag { font-size: 0.625rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.55); display: flex; align-items: center; gap: 7px; }
+    .nl-preview-date { font-size: 0.6875rem; color: rgba(255,255,255,0.28); }
+    .nl-preview-body { padding: 24px 20px 20px; }
+    .nl-preview-issue-label { font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.28); margin-bottom: 10px; }
+    .nl-preview-headline { font-size: 1rem; font-weight: 700; color: #fff; line-height: 1.45; letter-spacing: -0.01em; margin-bottom: 20px; }
+    .nl-preview-articles { display: flex; flex-direction: column; }
+    .nl-preview-article { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; border-top: 1px solid rgba(255,255,255,0.07); }
+    .nl-preview-art-title { font-size: 0.8125rem; color: rgba(255,255,255,0.65); line-height: 1.4; display: flex; align-items: flex-start; gap: 8px; }
+    .nl-preview-art-title::before { content: ''; width: 5px; height: 5px; min-width: 5px; border-radius: 50%; background: rgba(255,255,255,0.45); margin-top: 5px; }
+    .nl-preview-art-time { font-size: 0.6875rem; color: rgba(255,255,255,0.22); white-space: nowrap; }
+    .nl-preview-footer { background: rgba(0,0,0,0.22); border-top: 1px solid rgba(255,255,255,0.07); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+    .nl-preview-meta { font-size: 0.75rem; color: rgba(255,255,255,0.28); }
+    .nl-preview-cta { font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.75); text-decoration: none; transition: opacity 0.15s; cursor: pointer; }
+    .nl-preview-cta:hover { opacity: 0.70; }
 
     /* ── Hidden cards (filter) ── */
     .article-card[data-hidden="true"] { display: none; }
@@ -312,6 +339,7 @@
     .sgi-arrow { color: var(--text-muted); flex-shrink: 0; transition: transform 0.15s ease; }
     .sgi-arrow svg { width: 12px; height: 12px; }
 
+
     /* ── Responsive ── */
     .article-grid { grid-template-columns: repeat(2, 1fr); }
 
@@ -376,27 +404,13 @@
   <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
 
-<!-- BLOG HERO -->
-<div class="blog-hero">
+<!-- PAGE LABEL (minimal — featured article is the visual anchor) -->
+<div style="background:#FFFFFF;border-bottom:1px solid #F1F5F9;padding:28px 0 20px">
   <div class="container">
-    <div style="max-width:720px">
-      <div class="blog-hero-eyebrow">Driver Recognition Blog</div>
-      <h1 class="blog-hero-title">I Need<br><em>Ideas.</em></h1>
-      <p class="blog-hero-desc">Research, playbooks, and hard-won insights for fleet operators building driver recognition programs that cut accidents, reduce turnover, and change what drivers say about their company.</p>
-      <div class="blog-stats">
-        <div class="blog-stat">
-          <span class="blog-stat-num">23%</span>
-          <span class="blog-stat-label">avg. accident reduction</span>
-        </div>
-        <div class="blog-stat">
-          <span class="blog-stat-num">30%</span>
-          <span class="blog-stat-label">avg. turnover reduction</span>
-        </div>
-        <div class="blog-stat">
-          <span class="blog-stat-num">10:1</span>
-          <span class="blog-stat-label">recognition ROI ratio</span>
-        </div>
-      </div>
+    <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+      <span style="font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1A2E6E;">Ideas &amp; Insights</span>
+      <span style="width:1px;height:12px;background:#D1D5DB;display:inline-block;align-self:center;"></span>
+      <h1 style="font-size:1rem;font-weight:500;color:#6B7280;margin:0;letter-spacing:-0.01em;">Research, playbooks, and guides for fleet operators</h1>
     </div>
   </div>
 </div>
@@ -415,7 +429,7 @@
 </div>
 
 <!-- FEATURED POST -->
-<section style="background:var(--black);padding:56px 0 0">
+<section style="background:#FFFFFF;padding:40px 0 0">
   <div class="container">
     <a href="blog/fleet-operators-guide-appreciation-week.html"
        class="featured-post"
@@ -446,15 +460,15 @@
 </section>
 
 <!-- ARTICLE GRID + SIDEBAR -->
-<section style="background:var(--black);padding:28px 0 64px">
+<section style="background:#FFFFFF;padding:28px 0 64px">
   <div class="container">
     <div class="blog-layout">
 
       <!-- ══ Main column ══ -->
       <div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
-          <h2 style="font-size:1.125rem;font-weight:700;color:var(--text-primary)">All Articles</h2>
-          <span id="article-count" style="font-size:0.875rem;color:var(--text-muted)">5 articles</span>
+          <h2 style="font-size:1.125rem;font-weight:700;color:#111827">All Articles</h2>
+          <span id="article-count" style="font-size:0.875rem;color:#9CA3AF">5 articles</span>
         </div>
 
     <div class="article-grid" id="article-grid">
@@ -571,8 +585,8 @@
 
       <!-- Card 6: Empty state placeholder for future article -->
       <div class="article-card" data-cats="safety retention planning onboarding" style="cursor:default;opacity:0.55">
-        <div class="card-img-wrap" style="background:var(--black-4);display:flex;align-items:center;justify-content:center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:40px;height:40px;color:var(--text-muted)"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
+        <div class="card-img-wrap" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:40px;height:40px;color:#9CA3AF"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
         </div>
         <div class="card-body">
           <div class="card-meta">
@@ -589,8 +603,8 @@
     <!-- Empty state (shown when no category matches) -->
     <div id="empty-state" style="display:none;text-align:center;padding:80px 24px">
       <div style="font-size:3rem;margin-bottom:16px">📭</div>
-      <h3 style="font-size:1.25rem;font-weight:700;color:var(--text-primary);margin-bottom:8px">No articles in this category yet</h3>
-      <p style="color:var(--text-muted);font-size:0.9375rem">We're adding new content regularly. Check back soon or browse all articles.</p>
+      <h3 style="font-size:1.25rem;font-weight:700;color:#111827;margin-bottom:8px">No articles in this category yet</h3>
+      <p style="color:#6B7280;font-size:0.9375rem">We're adding new content regularly. Check back soon or browse all articles.</p>
       <button type="button" class="cat-btn active" style="margin-top:20px" onclick="setCategory('all')">View All Articles</button>
     </div>
 
@@ -756,24 +770,63 @@
 <section class="newsletter-section">
   <div class="container">
     <div class="newsletter-inner">
+
+      <!-- LEFT: CTA -->
       <div>
-        <span class="section-eyebrow">Fleet Recognition Insights</span>
-        <h2 style="font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:800;letter-spacing:-0.025em;color:var(--text-primary);margin-top:10px;margin-bottom:12px">Get new articles in your inbox.</h2>
-        <p style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.7;max-width:420px;margin:0">We publish practical guides on driver retention, safety ROI, and recognition program design — delivered directly to fleet operators who need it.</p>
-      </div>
-      <div>
+        <div class="newsletter-eyebrow">Fleet Recognition Insights &nbsp;·&nbsp; Free Monthly</div>
+        <h2 class="newsletter-title">The newsletter for fleet operators who keep drivers longer.</h2>
+        <ul class="newsletter-bullets">
+          <li>Retention benchmarks and real turnover cost data</li>
+          <li>Safety ROI frameworks you can present to ownership</li>
+          <li>Driver Appreciation Week planning, one month ahead</li>
+        </ul>
+        <p class="newsletter-proof"><strong>1,200+ fleet operators</strong> and safety managers subscribe.</p>
         <div class="newsletter-form">
           <input type="email" class="newsletter-input" placeholder="your@fleet.com" autocomplete="email">
-          <button class="btn btn-primary" style="flex-shrink:0;white-space:nowrap">Subscribe</button>
+          <button class="btn btn-primary" style="flex-shrink:0;white-space:nowrap">Get the Next Issue</button>
         </div>
-        <p style="font-size:0.8125rem;color:var(--text-muted);margin-top:12px">No spam. Unsubscribe anytime. One to two emails per month.</p>
+        <p class="newsletter-microcopy">Free. One issue per month. No vendor pitches.</p>
       </div>
+
+      <!-- RIGHT: Sample issue preview card -->
+      <div class="newsletter-preview">
+        <div class="nl-preview-header">
+          <div class="nl-preview-tag">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Sample Issue
+          </div>
+          <div class="nl-preview-date">May 2026</div>
+        </div>
+        <div class="nl-preview-body">
+          <div class="nl-preview-issue-label">This Month's Lead Story</div>
+          <div class="nl-preview-headline">Driver Retention in 2026: What the 94% OTR Turnover Rate Tells Every Fleet Manager</div>
+          <div class="nl-preview-articles">
+            <div class="nl-preview-article">
+              <div class="nl-preview-art-title">How Recognized Drivers Have Fewer Preventable Accidents</div>
+              <div class="nl-preview-art-time">7 min</div>
+            </div>
+            <div class="nl-preview-article">
+              <div class="nl-preview-art-title">The Real ROI of a Structured Recognition Program</div>
+              <div class="nl-preview-art-time">6 min</div>
+            </div>
+            <div class="nl-preview-article">
+              <div class="nl-preview-art-title">Build a Year-Round Recognition Calendar in One Afternoon</div>
+              <div class="nl-preview-art-time">5 min</div>
+            </div>
+          </div>
+        </div>
+        <div class="nl-preview-footer">
+          <span class="nl-preview-meta">3 articles · 18 min read</span>
+          <a class="nl-preview-cta" onclick="document.querySelector('.newsletter-input').focus();return false;">Subscribe to read →</a>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="section-sm" style="background:var(--black)">
+<section class="section-sm" style="background:#F9FAFB">
   <div class="container">
     <div class="cta-banner">
       <div class="cta-banner-eyebrow">Ready to Act on It</div>

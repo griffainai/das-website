@@ -613,7 +613,7 @@
           <div class="qty-row">
             <div class="qty-stepper">
               <button type="button" class="qty-step-btn" id="qty-down" aria-label="Decrease">−</button>
-              <input class="qty-step-input" id="qty-input" type="number" value="10" min="10" step="10" aria-label="Quantity">
+              <input class="qty-step-input" id="qty-input" type="number" value="10" min="10" step="1" aria-label="Quantity">
               <button type="button" class="qty-step-btn" id="qty-up" aria-label="Increase">+</button>
             </div>
             <div class="qty-subtotal">
@@ -1027,7 +1027,7 @@ const PRODUCTS = {
     id: 'das-004',
     name: 'Holiday Gift Set',
     category: 'Milestone Gifts',
-    price: 54.99,
+    price: 1.00,
     minQty: 10,
     styleId: 'HGS-004-GLD',
     description: 'The year-end recognition moment that drivers talk about longest. The Holiday Gift Set is curated to land during the season when drivers are most reflective about their work relationships — and to send a signal that lasts well into the new year. Particularly effective for OTR drivers whose families see the package at home.',
@@ -1335,12 +1335,12 @@ function initQtyControls() {
 
   document.getElementById('qty-down').addEventListener('click', () => {
     const v = parseInt(input.value) || min;
-    if (v > min) input.value = Math.max(min, v - 10);
+    if (v > min) input.value = Math.max(min, v - 1);
     updateSubtotal();
   });
   document.getElementById('qty-up').addEventListener('click', () => {
     const v = parseInt(input.value) || min;
-    input.value = v + 10;
+    input.value = v + 1;
     updateSubtotal();
   });
   input.addEventListener('input', () => {
