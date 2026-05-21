@@ -66,9 +66,10 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  /* overflow-x on html is required — body-only is ignored by Firefox
-     and bypassed by position:fixed elements on all browsers */
-  overflow-x: hidden;
+  /* overflow-x: clip (NOT hidden) — 'clip' correctly clamps overflow from
+     position:sticky children. 'hidden' creates a scroll container which
+     allows sticky/fixed elements to escape it on iOS Safari and Chrome. */
+  overflow-x: clip;
   width: 100%;
 }
 body {
@@ -77,8 +78,9 @@ body {
   color: var(--text-primary);
   font-size: 1rem;
   line-height: 1.6;
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
+  max-width: 100vw;
   /* Prevent rubber-band horizontal bounce on iOS */
   overscroll-behavior-x: none;
 }
@@ -128,6 +130,11 @@ ul { list-style: none; }
   position: sticky;
   top: 0;
   z-index: 101;
+  /* Clip any overflow from child elements — critical for mobile.
+     overflow-x: clip does NOT create a scroll container (unlike hidden)
+     so sticky positioning still works correctly. */
+  overflow-x: clip;
+  max-width: 100vw;
 }
 
 /* =========================================
@@ -138,6 +145,8 @@ ul { list-style: none; }
   border-bottom: 1px solid rgba(255,255,255,0.10);
   padding: 0 var(--container-padding);
   position: relative;
+  overflow-x: clip;
+  max-width: 100vw;
 }
 .ann-bar-inner {
   max-width: var(--container-max);
@@ -216,14 +225,25 @@ ul { list-style: none; }
 .ann-bar-cta:hover { background: rgba(255,255,255,0.20); }
 .ann-bar-cta svg { width: 12px; height: 12px; }
 @media (max-width: 640px) {
-  .ann-bar-msg { display: none; }
-  .ann-bar-inner { justify-content: space-between; padding: 6px 0; }
+  .ann-bar-msg     { display: none; }
+  /* Collapse the countdown to just the CTA on tablet/small screens —
+     the d/h/m/s pill + prefix is too wide to share a row with the left side */
+  .ann-bar-countdown { display: none; }
+  .ann-bar-inner   { justify-content: space-between; padding: 6px 0; flex-wrap: nowrap; }
 }
 @media (max-width: 480px) {
-  /* On very narrow phones hide the date — "Driver Appreciation Week" + countdown
-     + CTA is enough and prevents the left side from overflowing */
-  .ann-bar-dates { display: none; }
+  /* Phone: hide everything on left except the event label */
+  .ann-bar-dates   { display: none; }
   .ann-bar-divider { display: none; }
+  .ann-bar-icon    { display: none; }
+  /* Prevent left side from pushing right side off screen */
+  .ann-bar-left    { min-width: 0; overflow: hidden; }
+  .ann-bar-event-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 160px;
+  }
 }
 
 /* =========================================
