@@ -61,7 +61,7 @@
 /* =========================================
    RESET
    ========================================= */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; min-width: 0; }
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
@@ -1915,7 +1915,7 @@ ul { list-style: none; }
   gap: 80px;
   align-items: center;
 }
-@media (max-width: 1024px) {
+@media (max-width: 1100px) {
   .how-help-grid { grid-template-columns: 1fr; gap: 56px; }
 }
 /* Content side */
@@ -3671,3 +3671,87 @@ ul { list-style: none; }
 [data-reveal-delay="4"] { transition-delay: 0.32s; }
 [data-reveal-delay="5"] { transition-delay: 0.40s; }
 [data-reveal-delay="6"] { transition-delay: 0.48s; }
+
+/* =========================================
+   NUCLEAR MOBILE SAFETY NET
+   Comprehensive overrides that catch any
+   component not covered by its own breakpoint.
+   Applied LAST so specificity wins cleanly.
+   Do not remove — neverrollover.com reference.
+   ========================================= */
+
+/* ── 640px — primary mobile breakpoint ── */
+@media (max-width: 640px) {
+
+  /* Section padding — standardise vertical rhythm on phones */
+  .section                { padding: 64px 0 !important; }
+  .section-sm             { padding: 48px 0 !important; }
+  .section-lg             { padding: 72px 0 !important; }
+  .hiw-section            { padding: 64px 0 !important; }
+  .testimonials-section   { padding: 64px 0 !important; }
+  .how-help-section       { padding: 64px 0 !important; }
+  .enterprise-cta         { padding: 64px 0 !important; }
+  .countdown-section      { padding: 24px 0 48px !important; }
+
+  /* Collapse ALL named grid components that didn't have their own breakpoint */
+  [class*="-grid"]:not(.product-grid):not(.stats-bar-inner):not(.sol-trophy-grid) {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Typography — clamp so headings never overflow narrow viewports */
+  h1 { font-size: clamp(1.75rem, 8vw, 2.75rem) !important; word-break: break-word; }
+  h2 { font-size: clamp(1.4rem, 6vw, 2.25rem) !important; word-break: break-word; }
+  h3 { font-size: clamp(1.1rem, 5vw, 1.5rem) !important; }
+
+  /* Images — guarantee no image blows out the viewport */
+  img { max-width: 100% !important; height: auto; }
+
+  /* Tables — scroll horizontally instead of breaking layout */
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* Container safe padding */
+  .container { padding-left: 20px !important; padding-right: 20px !important; }
+
+  /* Inline-style width overrides — catch any hardcoded widths in HTML */
+  [style*="width:"]:not(img):not(video):not(iframe):not(canvas) {
+    max-width: 100% !important;
+  }
+  [style*="min-width:"] { min-width: 0 !important; }
+
+  /* Specific audit fixes */
+  .google-summary-card    { min-width: 0 !important; width: 100%; }
+  .toast                  { white-space: normal !important; max-width: calc(100vw - 48px) !important; }
+  .btn-ghost-sm           { white-space: normal !important; flex-shrink: 1 !important; }
+
+  /* Decorative orbs — shrink so parent overflow:hidden contains them more tightly */
+  .enterprise-cta-orb-1   { width: 280px !important; height: 280px !important; right: -40px !important; }
+  .enterprise-cta-orb-2   { width: 200px !important; height: 200px !important; }
+  .how-help-dot-grid       { width: 200px !important; height: 200px !important; }
+  .how-help-orb            { width: 240px !important; height: 240px !important; }
+}
+
+/* ── 480px — small phone ── */
+@media (max-width: 480px) {
+  .section                { padding: 48px 0 !important; }
+  .section-sm             { padding: 36px 0 !important; }
+  .section-lg             { padding: 56px 0 !important; }
+  .hiw-section            { padding: 48px 0 !important; }
+  .testimonials-section   { padding: 48px 0 !important; }
+  .how-help-section       { padding: 48px 0 !important; }
+  .enterprise-cta         { padding: 48px 0 40px !important; }
+
+  /* Gap reductions for stacked layouts */
+  [style*="gap: 60px"],
+  [style*="gap:60px"]     { gap: 20px !important; }
+  [style*="gap: 48px"],
+  [style*="gap:48px"]     { gap: 16px !important; }
+}
+
+/* ── 380px — very small phones (iPhone SE 1st gen, Galaxy A) ── */
+@media (max-width: 380px) {
+  .countdown-drop-unit {
+    min-width: 58px !important;
+    padding: 10px 12px !important;
+  }
+  .countdown-num { font-size: 1.5rem !important; }
+}
