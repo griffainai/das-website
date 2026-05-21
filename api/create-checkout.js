@@ -65,7 +65,6 @@ module.exports = async (req, res) => {
     const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
 
     const session = await stripe.checkout.sessions.create({
-      automatic_payment_methods: { enabled: true },
       line_items,
       mode:                       'payment',
       success_url:                `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
