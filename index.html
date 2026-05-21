@@ -57,6 +57,10 @@
       width: 1px; height: 11px; background: rgba(255,255,255,0.22);
       display: inline-block; align-self: center; flex-shrink: 0;
     }
+    .ann-cd-prefix {
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.55); text-transform: uppercase; margin-right: 2px;
+    }
     /* Stats removed — no longer need the bottom gap on hero actions */
     .hero-actions { margin-bottom: 0; }
   </style>
@@ -184,11 +188,14 @@
     </div>
     <div class="ann-bar-right">
       <span class="ann-bar-countdown">
+        <span class="ann-cd-prefix">DAW begins in</span>
         <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-days">--</strong><span class="ann-cd-label">d</span></span>
         <span class="ann-cd-sep"></span>
         <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-hours">--</strong><span class="ann-cd-label">h</span></span>
         <span class="ann-cd-sep"></span>
         <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-mins">--</strong><span class="ann-cd-label">m</span></span>
+        <span class="ann-cd-sep"></span>
+        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-secs">--</strong><span class="ann-cd-label">s</span></span>
       </span>
       <span class="ann-bar-msg">Guarantee on-time delivery — order before Aug 7</span>
       <a href="shop.html" class="ann-bar-cta">

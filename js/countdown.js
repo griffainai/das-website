@@ -21,7 +21,7 @@
     if (diff <= 0) {
       // DAW is here or passed
       ['cd-days','cd-hours','cd-minutes','cd-seconds'].forEach(id => set(id, 0));
-      ['ann-cd-days','ann-cd-hours','ann-cd-mins'].forEach(id => set(id, 0));
+      ['ann-cd-days','ann-cd-hours','ann-cd-mins','ann-cd-secs'].forEach(id => set(id, 0));
       const subLabel = document.querySelector('.countdown-ent-sub-label');
       if (subLabel) subLabel.textContent = 'Happening Now';
       const deadline = document.querySelector('.countdown-ent-deadline');
@@ -39,13 +39,15 @@
     set('cd-minutes', minutes);
     set('cd-seconds', seconds);
 
-    // Announcement bar trim countdown
+    // Announcement bar countdown (d · h · m · s)
     const ad = document.getElementById('ann-cd-days');
     const ah = document.getElementById('ann-cd-hours');
     const am = document.getElementById('ann-cd-mins');
-    if (ad) ad.textContent = days;
-    if (ah) ah.textContent = pad(hours);
-    if (am) am.textContent = pad(minutes);
+    const as_ = document.getElementById('ann-cd-secs');
+    if (ad)  ad.textContent  = days;
+    if (ah)  ah.textContent  = pad(hours);
+    if (am)  am.textContent  = pad(minutes);
+    if (as_) as_.textContent = pad(seconds);
   }
 
   document.addEventListener('DOMContentLoaded', () => {
