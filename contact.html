@@ -17,7 +17,7 @@
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/styles.css?v=2">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
@@ -25,371 +25,143 @@
   <style>
 
     /* ══════════════════════════════════════════════════════
-       CONTACT PAGE — OPENAI-STYLE DARK LAYOUT
+       CONTACT PAGE — ENTERPRISE WHITE / NAVY
+       Inspired by Salesforce, Workday, ServiceNow patterns:
+       white base, navy accents, clean typography, authority
+       through white space — not visual drama.
     ══════════════════════════════════════════════════════ */
 
-    /* Dark page body */
-    body { background: #050D1C; }
+    body { background: #FFFFFF; }
 
-    /* ── White nav override ───────────────────────────────
-       Standard nav is sticky + frosted glass; on a dark page
-       we strip the transparency and render it fully opaque
-       white so it's always legible.                        */
+    /* Nav — always crisp white on light page */
     .nav {
-      background: rgba(255,255,255,0.97) !important;
-      backdrop-filter: blur(20px) !important;
-      -webkit-backdrop-filter: blur(20px) !important;
-      border-bottom: 1px solid rgba(0,0,0,0.08) !important;
-    }
-
-    /* ── Contact page shell ───────────────────────────── */
-    .contact-page {
-      background: #050D1C;
-      position: relative;
-      overflow: hidden;
-      padding-bottom: 0;
-    }
-
-    /* Two ambient orbs — subtle depth */
-    .contact-orb {
-      position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .contact-orb-1 {
-      width: 800px; height: 800px;
-      top: -240px; left: -200px;
-      background: radial-gradient(circle, rgba(26,46,110,0.45) 0%, transparent 60%);
-    }
-    .contact-orb-2 {
-      width: 560px; height: 560px;
-      bottom: 80px; right: -120px;
-      background: radial-gradient(circle, rgba(26,46,110,0.25) 0%, transparent 60%);
-    }
-
-    /* ── Two-column grid ───────────────────────────────── */
-    .contact-body {
-      position: relative;
-      z-index: 1;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 80px 40px 100px;
-      display: grid;
-      grid-template-columns: 1fr 500px;
-      gap: 72px;
-      align-items: start;
+      background: rgba(255,255,255,0.98) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      border-bottom: 1px solid #E5E7EB !important;
     }
 
     /* ══════════════════════════════════════════════════════
-       LEFT COLUMN
+       HERO — white, navy text, minimal
     ══════════════════════════════════════════════════════ */
-
-    .cl-top { margin-bottom: 40px; }
-
-    /* Subtitle line — OpenAI Caption: 13px / 500 / 0.01em */
-    .cl-tag {
+    .contact-hero {
+      background: #FFFFFF;
+      padding: 72px 0 64px;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .ch-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 16px;
-      letter-spacing: 0.01em;
-    }
-    .cl-tag-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4ADE80;
-      box-shadow: 0 0 8px rgba(74,222,128,0.8);
-    }
-
-    /* Main heading — OpenAI Display: 400–600 max, -0.02em, generous leading */
-    .cl-heading {
-      font-size: clamp(2.25rem, 4.5vw, 3.25rem);
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.02em;
-      line-height: 1.12;
-      margin-bottom: 18px;
-    }
-
-    /* Body copy — OpenAI Body Large: 18px / 400 / 1.65 */
-    .cl-body {
-      font-size: 1.125rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.50);
-      line-height: 1.65;
-      letter-spacing: 0;
-      max-width: 440px;
-      margin-bottom: 28px;
-    }
-
-    /* "Learn more" ghost pill */
-    .cl-learn-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 10px 22px;
-      border-radius: 100px;
-      border: 1.5px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.80);
-      font-family: inherit;
-      font-size: 0.9375rem;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    .cl-learn-btn:hover {
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.35);
-      color: #fff;
-    }
-    .cl-learn-btn svg { width: 13px; height: 13px; flex-shrink: 0; }
-
-    /* ── Features ─────────────────────────────────────── */
-    .cl-features { margin-top: 44px; margin-bottom: 44px; }
-
-    /* OpenAI Label spec: 12px / 500 / 0.04em */
-    .cl-features-label {
       font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
+      font-weight: 700;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.38);
-      margin-bottom: 18px;
-    }
-
-    .cl-feature-list {
-      list-style: none;
-      padding: 0; margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    /* OpenAI Body spec: 16px / 400 / 1.65 */
-    .cl-feature-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      font-size: 1rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.70);
-      letter-spacing: 0;
-      line-height: 1.65;
-    }
-
-    .cl-feature-icon-wrap {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .cl-feature-icon-wrap svg { width: 16px; height: 16px; }
-    .cfi-teal   { background: rgba(45,212,191,0.12); color: #2DD4BF; }
-    .cfi-blue   { background: rgba(99,170,255,0.12); color: #63AAFF; }
-    .cfi-yellow { background: rgba(26,46,110,0.08);  color: #1A2E6E; }
-    .cfi-purple { background: rgba(167,139,250,0.12); color: #A78BFA; }
-
-    /* ── Trusted by ───────────────────────────────────── */
-    .cl-trust { margin-bottom: 44px; }
-
-    /* OpenAI Label spec */
-    .cl-trust-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
+      color: #1A2E6E;
       margin-bottom: 16px;
     }
-
-    .cl-trust-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 24px;
+    .ch-eyebrow::before {
+      content: '';
+      width: 18px;
+      height: 2px;
+      background: #1A2E6E;
+      border-radius: 2px;
     }
-
-    .cl-trust-item {
-      font-size: 0.8125rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.28);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      transition: color 0.2s ease;
+    .ch-title {
+      font-size: clamp(2rem, 4vw, 2.875rem);
+      font-weight: 800;
+      color: #111827;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 16px;
     }
-    .cl-trust-item:hover { color: rgba(255,255,255,0.55); }
-
-    /* ── Direct contact info ──────────────────────────── */
-    .cl-contact-strip {
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding-top: 32px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 0;
-    }
-
-    .cl-contact-item {
-      padding: 0 24px 0 0;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      margin-right: 24px;
-    }
-    .cl-contact-item:last-child {
-      border-right: none;
-      padding-right: 0;
-      margin-right: 0;
-    }
-
-    .cl-contact-item-icon {
-      width: 34px; height: 34px;
-      border-radius: 9px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 11px;
-    }
-    .cl-contact-item-icon svg { width: 15px; height: 15px; }
-
-    /* OpenAI Label spec */
-    .cl-contact-item-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.28);
-      margin-bottom: 5px;
-    }
-
-    .cl-contact-item-value {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: rgba(255,255,255,0.7);
-      line-height: 1.5;
-    }
-    .cl-contact-item-value a {
-      color: rgba(255,255,255,0.7);
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
-    .cl-contact-item-value a:hover { color: #fff; }
-    .cl-contact-item-sub {
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.28);
-      margin-top: 2px;
+    .ch-title span { color: #1A2E6E; }
+    .ch-subtitle {
+      font-size: 1.0625rem;
+      color: #6B7280;
+      line-height: 1.7;
+      max-width: 540px;
     }
 
     /* ══════════════════════════════════════════════════════
-       RIGHT COLUMN — FORM CARD
+       MAIN SECTION — form left, info panel right
     ══════════════════════════════════════════════════════ */
-
-    .cr-card {
-      background: #0B1526;
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 16px;
-      padding: 32px 32px 28px;
-      position: sticky;
-      top: 84px;
+    .contact-main {
+      background: #FFFFFF;
+      padding: 64px 0 80px;
+    }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 64px;
+      align-items: start;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
     }
 
-    /* ── Form card header ─────────────────────────── */
-    .cr-card-header {
-      margin-bottom: 24px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-    }
-    .cr-card-header-title {
-      font-size: 1.0625rem;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.015em;
+    /* ── Form column ────────────────────────────────── */
+    .form-section-head { margin-bottom: 32px; }
+    .form-section-title {
+      font-size: 1.375rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.02em;
       margin-bottom: 6px;
     }
-    .cr-card-header-meta {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.8125rem;
-      color: rgba(255,255,255,0.38);
-      font-weight: 400;
-    }
-    .cr-card-header-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #4ADE80;
-      box-shadow: 0 0 6px rgba(74,222,128,0.65);
-      flex-shrink: 0;
+    .form-section-sub {
+      font-size: 0.9375rem;
+      color: #6B7280;
     }
 
-    /* Two-column field grid */
-    .cr-row {
+    .cf-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 16px;
+      margin-bottom: 18px;
     }
-    .cr-row-full { margin-bottom: 12px; }
-
-    /* Field group */
-    .cr-group { display: flex; flex-direction: column; gap: 7px; }
-
-    /* Label — OpenAI spec exactly: 12px / 500 / 0.04em */
-    .cr-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.48);
-      display: flex;
-      align-items: center;
-      gap: 3px;
+    .cf-row-full { margin-bottom: 18px; }
+    .cf-group { display: flex; flex-direction: column; gap: 7px; }
+    .cf-label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: #374151;
     }
-    .cr-req { color: rgba(255,255,255,0.20); font-size: 0.6875rem; }
+    .cf-req { color: #1A2E6E; margin-left: 1px; }
 
-    /* Shared input / select / textarea — OpenAI spec: 12px radius */
-    .cr-input,
-    .cr-select,
-    .cr-textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.11);
-      border-radius: 12px;
-      padding: 12px 14px;
+    .cf-input,
+    .cf-select,
+    .cf-textarea {
+      border: 1.5px solid #D1D5DB;
+      border-radius: 8px;
+      padding: 11px 14px;
       font-family: inherit;
       font-size: 0.9375rem;
-      color: #fff;
+      color: #111827;
+      background: #FFFFFF;
       outline: none;
       width: 100%;
-      transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
       -webkit-appearance: none;
       appearance: none;
     }
-    .cr-input::placeholder,
-    .cr-textarea::placeholder { color: rgba(255,255,255,0.18); }
-    .cr-input:focus,
-    .cr-select:focus,
-    .cr-textarea:focus {
-      border-color: rgba(123,175,247,0.55);
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 0 0 3px rgba(123,175,247,0.09);
+    .cf-input::placeholder,
+    .cf-textarea::placeholder { color: #9CA3AF; }
+    .cf-input:focus,
+    .cf-select:focus,
+    .cf-textarea:focus {
+      border-color: #1A2E6E;
+      box-shadow: 0 0 0 3px rgba(26,46,110,0.10);
     }
-    .cr-input.invalid,
-    .cr-select.invalid,
-    .cr-textarea.invalid {
-      border-color: rgba(248,113,113,0.55);
-      box-shadow: 0 0 0 3px rgba(248,113,113,0.08);
+    .cf-input.invalid,
+    .cf-select.invalid,
+    .cf-textarea.invalid {
+      border-color: #EF4444;
+      box-shadow: 0 0 0 3px rgba(239,68,68,0.08);
     }
 
-    /* Select wrapper (custom arrow) */
-    .cr-select-wrap { position: relative; }
-    .cr-select-wrap::after {
+    .cf-select-wrap { position: relative; }
+    .cf-select-wrap::after {
       content: '';
       position: absolute;
       right: 13px; top: 50%;
@@ -397,102 +169,242 @@
       width: 0; height: 0;
       border-left: 4.5px solid transparent;
       border-right: 4.5px solid transparent;
-      border-top: 5px solid rgba(255,255,255,0.4);
+      border-top: 5px solid #6B7280;
       pointer-events: none;
     }
-    .cr-select { padding-right: 34px; cursor: pointer; }
-    .cr-select option { background: #0D1B45; color: #fff; }
+    .cf-select { padding-right: 34px; cursor: pointer; background: #FFFFFF; color: #111827; }
+    .cf-select option { color: #111827; background: #fff; }
 
-    /* Textarea */
-    .cr-textarea {
-      resize: vertical;
-      min-height: 110px;
-      line-height: 1.6;
-    }
+    .cf-textarea { resize: vertical; min-height: 108px; line-height: 1.65; }
 
-    /* Submit — OpenAI rectangular CTA: 12px radius */
-    .cr-submit {
+    .cf-submit {
       width: 100%;
-      padding: 13px 24px;
-      border-radius: 12px;
+      padding: 14px 28px;
+      background: #1A2E6E;
+      color: #FFFFFF;
       border: none;
-      background: #fff;
-      color: #0B1526;
+      border-radius: 8px;
       font-family: inherit;
-      font-size: 0.9375rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 700;
       letter-spacing: -0.01em;
       cursor: pointer;
-      margin-top: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
-      transition: background 0.18s ease, box-shadow 0.18s ease;
+      gap: 8px;
+      margin-top: 8px;
+      transition: background 0.18s ease, transform 0.12s ease, box-shadow 0.18s ease;
     }
-    .cr-submit:hover {
-      background: #F0F4FF;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+    .cf-submit:hover {
+      background: #112050;
+      box-shadow: 0 4px 20px rgba(26,46,110,0.30);
     }
-    .cr-submit:active { opacity: 0.92; }
-    .cr-submit:disabled { opacity: 0.45; cursor: not-allowed; box-shadow: none; }
-    .cr-submit svg { width: 14px; height: 14px; }
+    .cf-submit:active { transform: scale(0.99); }
+    .cf-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; box-shadow: none; }
+    .cf-submit svg { width: 15px; height: 15px; }
 
-    /* Footer note */
     .cr-note {
       margin-top: 14px;
-      font-size: 0.75rem;
-      color: rgba(255,255,255,0.28);
+      font-size: 0.8125rem;
+      color: #9CA3AF;
       text-align: center;
       line-height: 1.5;
     }
-    .cr-note a {
-      color: rgba(255,255,255,0.45);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-      transition: color 0.15s ease;
-    }
-    .cr-note a:hover { color: rgba(255,255,255,0.75); }
+    .cr-note a { color: #6B7280; text-decoration: underline; text-underline-offset: 2px; }
+    .cr-note a:hover { color: #1A2E6E; }
 
-    /* Success state */
+    /* ── Error ─ */
+    #cr-send-error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #DC2626;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      margin-bottom: 16px;
+    }
+
+    /* ── Success state ─ */
     .cr-success {
       display: none;
       text-align: center;
-      padding: 40px 0 28px;
+      padding: 48px 24px;
     }
     .cr-success-ring {
       width: 60px; height: 60px;
       border-radius: 50%;
-      border: 1.5px solid rgba(74,222,128,0.35);
-      background: rgba(74,222,128,0.08);
+      background: #DCFCE7;
       display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 18px;
+      margin: 0 auto 20px;
     }
-    .cr-success-ring svg { width: 26px; height: 26px; color: #4ADE80; }
-    .cr-success-title {
-      font-size: 1.125rem; font-weight: 700; color: #fff; margin-bottom: 8px;
+    .cr-success-ring svg { width: 26px; height: 26px; color: #16A34A; }
+    .cr-success-title { font-size: 1.25rem; font-weight: 700; color: #111827; margin-bottom: 8px; }
+    .cr-success-msg { font-size: 0.9375rem; color: #6B7280; line-height: 1.65; }
+    .cr-success-msg a { color: #1A2E6E; font-weight: 600; text-decoration: none; }
+    .cr-success-msg a:hover { text-decoration: underline; }
+
+    /* ── Form card header (visible before success) ─ */
+    .cr-card-header { margin-bottom: 0; }
+    .cr-card-header-title { display: none; }
+    .cr-card-header-meta { display: none; }
+
+    /* ══════════════════════════════════════════════════════
+       INFO PANEL (right column)
+    ══════════════════════════════════════════════════════ */
+    .info-panel {
+      background: #F9FAFB;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 14px;
+      padding: 32px 28px;
+      position: sticky;
+      top: 88px;
     }
-    .cr-success-msg {
-      font-size: 0.9rem; color: rgba(255,255,255,0.45); line-height: 1.65;
+    .ip-title {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      color: #111827;
+      letter-spacing: -0.015em;
+      margin-bottom: 24px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid #E5E7EB;
     }
-    .cr-success-msg a { color: rgba(255,255,255,0.6); text-decoration: underline; }
+    .ip-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px 0;
+      border-bottom: 1px solid #F3F4F6;
+    }
+    .ip-contact-item:last-of-type { border-bottom: none; padding-bottom: 0; }
+    .ip-icon {
+      width: 38px; height: 38px; min-width: 38px;
+      background: #1A2E6E;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #FFFFFF;
+    }
+    .ip-icon svg { width: 17px; height: 17px; }
+    .ip-label {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      margin-bottom: 4px;
+    }
+    .ip-value {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: #111827;
+      line-height: 1.4;
+    }
+    .ip-value a {
+      color: #1A2E6E;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .ip-value a:hover { text-decoration: underline; }
+    .ip-sub {
+      font-size: 0.8125rem;
+      color: #9CA3AF;
+      margin-top: 3px;
+      font-weight: 400;
+    }
+
+    /* "What happens next" steps */
+    .ip-next { margin-top: 26px; }
+    .ip-next-title {
+      font-size: 0.6875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #9CA3AF;
+      margin-bottom: 16px;
+    }
+    .ip-next-steps { display: flex; flex-direction: column; gap: 14px; }
+    .ip-next-step { display: flex; align-items: flex-start; gap: 12px; }
+    .ip-step-num {
+      width: 22px; height: 22px; min-width: 22px;
+      background: #1A2E6E;
+      color: #FFFFFF;
+      border-radius: 50%;
+      font-size: 0.6875rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .ip-step-text {
+      font-size: 0.875rem;
+      color: #4B5563;
+      line-height: 1.55;
+    }
+    .ip-step-text strong { color: #111827; font-weight: 600; }
+
+    /* ══════════════════════════════════════════════════════
+       TRUST BAR — full width, light gray
+    ══════════════════════════════════════════════════════ */
+    .trust-bar {
+      background: #F9FAFB;
+      border-top: 1px solid #E5E7EB;
+      padding: 48px 0;
+    }
+    .trust-bar-inner {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+    .trust-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+      border-right: 1px solid #E5E7EB;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-num {
+      font-size: 1.875rem;
+      font-weight: 900;
+      color: #1A2E6E;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .trust-label {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: #6B7280;
+      line-height: 1.4;
+    }
 
     /* ══════════════════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════════════════ */
-    @media (max-width: 1080px) {
-      .contact-body { grid-template-columns: 1fr 440px; gap: 52px; padding: 64px 32px 80px; }
+    @media (max-width: 1100px) {
+      .contact-grid { grid-template-columns: 1fr 340px; gap: 48px; padding: 0 32px; }
     }
     @media (max-width: 860px) {
-      .contact-body { grid-template-columns: 1fr; gap: 44px; padding: 52px 24px 72px; }
-      .cr-card { position: static; }
-      .cl-contact-strip { grid-template-columns: 1fr; gap: 20px; }
-      .cl-contact-item { border-right: none; padding-right: 0; margin-right: 0; border-bottom: 1px solid rgba(255,255,255,0.07); padding-bottom: 20px; }
-      .cl-contact-item:last-child { border-bottom: none; padding-bottom: 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; padding: 0 24px; }
+      .info-panel { position: static; }
+      .trust-bar-inner { grid-template-columns: repeat(2, 1fr); gap: 24px 0; }
+      .trust-item:nth-child(2) { border-right: none; }
+      .trust-item:nth-child(3) { border-right: 1px solid #E5E7EB; padding-top: 24px; }
+      .trust-item:nth-child(4) { padding-top: 24px; }
     }
-    @media (max-width: 520px) {
-      .cr-card { padding: 28px 22px 24px; }
-      .cr-row  { grid-template-columns: 1fr; gap: 12px; }
+    @media (max-width: 640px) {
+      .contact-hero { padding: 52px 0 44px; }
+      .contact-main { padding: 48px 0 60px; }
+      .contact-grid { padding: 0 20px; }
+      .cf-row { grid-template-columns: 1fr; gap: 18px; }
+      .trust-bar-inner { grid-template-columns: repeat(2, 1fr); padding: 0 24px; }
+      .ch-title { font-size: 1.875rem; }
     }
   </style>
 </head>
@@ -564,129 +476,29 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════
-     CONTACT PAGE
+     CONTACT HERO
 ══════════════════════════════════════════════════════ -->
-<div class="contact-page">
+<div class="contact-hero">
+  <div class="container">
+    <div class="ch-eyebrow">Fleet Recognition Programs</div>
+    <h1 class="ch-title">Let's Build Your<br><span>Fleet Program.</span></h1>
+    <p class="ch-subtitle">Tell us about your drivers and recognition goals. A fleet specialist will respond within one business day with a custom program recommendation tailored to your operation.</p>
+  </div>
+</div>
 
-  <!-- Ambient orbs -->
-  <div class="contact-orb contact-orb-1" aria-hidden="true"></div>
-  <div class="contact-orb contact-orb-2" aria-hidden="true"></div>
-
-  <div class="contact-body">
+<!-- ══════════════════════════════════════════════════════
+     MAIN — FORM + INFO PANEL
+══════════════════════════════════════════════════════ -->
+<div class="contact-main">
+  <div class="contact-grid">
 
     <!-- ══════════════════════════════════════════════
-         LEFT COLUMN
+         LEFT — CONTACT FORM
     ══════════════════════════════════════════════ -->
     <div>
-
-      <div class="cl-top">
-        <!-- Accent tag line — colored, above headline -->
-        <div class="cl-tag">
-          <span class="cl-tag-dot"></span>
-          Get started with Driver Appreciation Solutions
-        </div>
-
-        <!-- Main headline — OpenAI scale -->
-        <h1 class="cl-heading">Contact our<br>fleet team.</h1>
-
-        <p class="cl-body">The trucking industry's recognition standard — built for work. Empower your drivers with curated programs, premium fulfillment, and measurable retention results you can trust.</p>
-
-        <a href="shop.html" class="cl-learn-btn">
-          Browse programs
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-        </a>
-      </div>
-
-      <!-- Features -->
-      <div class="cl-features">
-        <div class="cl-features-label">Features</div>
-        <ul class="cl-feature-list">
-          <li class="cl-feature-item">
-            <div class="cl-feature-icon-wrap cfi-teal">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"/></svg>
-            </div>
-            No long-term contracts — order when you need it
-          </li>
-          <li class="cl-feature-item">
-            <div class="cl-feature-icon-wrap cfi-blue">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"/></svg>
-            </div>
-            White-glove fulfillment at any fleet scale
-          </li>
-          <li class="cl-feature-item">
-            <div class="cl-feature-icon-wrap cfi-yellow">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
-            </div>
-            Dedicated account manager for 100+ driver fleets
-          </li>
-          <li class="cl-feature-item">
-            <div class="cl-feature-icon-wrap cfi-purple">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z"/></svg>
-            </div>
-            Custom fleet branding &amp; driver personalization
-          </li>
-        </ul>
-      </div>
-
-      <!-- Trusted by -->
-      <div class="cl-trust">
-        <div class="cl-trust-label">Trusted by fleet operators at</div>
-        <div class="cl-trust-row">
-          <span class="cl-trust-item">Pacific Freight</span>
-          <span class="cl-trust-item">Midwest Transport</span>
-          <span class="cl-trust-item">Eagle Ridge Carriers</span>
-          <span class="cl-trust-item">Southwest Logistics</span>
-        </div>
-      </div>
-
-      <!-- Direct contact info — enterprise strip -->
-      <div class="cl-contact-strip">
-
-        <div class="cl-contact-item">
-          <div class="cl-contact-item-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-          </div>
-          <div class="cl-contact-item-label">Email us</div>
-          <div class="cl-contact-item-value">
-            <a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a>
-          </div>
-        </div>
-
-        <div class="cl-contact-item">
-          <div class="cl-contact-item-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
-          </div>
-          <div class="cl-contact-item-label">Call us</div>
-          <div class="cl-contact-item-value">
-            <a href="tel:3026810995">302.681.0995</a>
-          </div>
-        </div>
-
-        <div class="cl-contact-item">
-          <div class="cl-contact-item-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          </div>
-          <div class="cl-contact-item-label">Hours</div>
-          <div class="cl-contact-item-value">Mon–Fri, 9 AM–5 PM CT</div>
-          <div class="cl-contact-item-sub">Responds within 1 business day</div>
-        </div>
-
-      </div>
-
-    </div><!-- /left column -->
-
-    <!-- ══════════════════════════════════════════════
-         RIGHT COLUMN — FORM CARD
-    ══════════════════════════════════════════════ -->
-    <div class="cr-card">
-
-      <!-- Form card header — hidden on success -->
-      <div class="cr-card-header" id="cr-card-header">
-        <div class="cr-card-header-title">Send us a message</div>
-        <div class="cr-card-header-meta">
-          <span class="cr-card-header-dot"></span>
-          Typically responds within 1 business day
-        </div>
+      <div class="form-section-head">
+        <h2 class="form-section-title">Request a Consultation</h2>
+        <p class="form-section-sub">All fields marked <span style="color:#1A2E6E;font-weight:700">*</span> are required.</p>
       </div>
 
       <!-- Success state -->
@@ -694,20 +506,27 @@
         <div class="cr-success-ring">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
         </div>
-        <div class="cr-success-title">Message received.</div>
-        <p class="cr-success-msg">We'll reach out within 1 business day.<br>For urgent orders, call <a href="tel:3026810995">302.681.0995</a>.</p>
+        <div class="cr-success-title">Request received.</div>
+        <p class="cr-success-msg">We'll reach out within 1 business day with a custom recommendation.<br>For urgent orders, call <a href="tel:3026810995">302.681.0995</a>.</p>
       </div>
+
+      <!-- Hidden header shim (JS hides it on success) -->
+      <div id="cr-card-header" class="cr-card-header"></div>
 
       <!-- Contact form -->
       <form id="contact-form" novalidate>
 
-        <!-- Row 1: Fleet size + Company name -->
-        <div class="cr-row">
-          <div class="cr-group">
-            <label class="cr-label" for="fleet-size">Fleet size <span class="cr-req">*</span></label>
-            <div class="cr-select-wrap">
-              <select class="cr-select" id="fleet-size" name="fleet_size" required>
-                <option value="" disabled selected>Please select</option>
+        <!-- Row 1: Company + Fleet size -->
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="company">Company Name <span class="cf-req">*</span></label>
+            <input class="cf-input" type="text" id="company" name="company" placeholder="Acme Freight LLC" required>
+          </div>
+          <div class="cf-group">
+            <label class="cf-label" for="fleet-size">Fleet Size <span class="cf-req">*</span></label>
+            <div class="cf-select-wrap">
+              <select class="cf-select cr-select" id="fleet-size" name="fleet_size" required>
+                <option value="" disabled selected>Select range</option>
                 <option value="10-25">10–25 drivers</option>
                 <option value="26-50">26–50 drivers</option>
                 <option value="51-100">51–100 drivers</option>
@@ -716,43 +535,39 @@
               </select>
             </div>
           </div>
-          <div class="cr-group">
-            <label class="cr-label" for="company">Company name <span class="cr-req">*</span></label>
-            <input class="cr-input" type="text" id="company" name="company" required>
-          </div>
         </div>
 
         <!-- Row 2: First + Last name -->
-        <div class="cr-row">
-          <div class="cr-group">
-            <label class="cr-label" for="first-name">First name <span class="cr-req">*</span></label>
-            <input class="cr-input" type="text" id="first-name" name="first_name" required>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="first-name">First Name <span class="cf-req">*</span></label>
+            <input class="cf-input" type="text" id="first-name" name="first_name" placeholder="Jane" required>
           </div>
-          <div class="cr-group">
-            <label class="cr-label" for="last-name">Last name <span class="cr-req">*</span></label>
-            <input class="cr-input" type="text" id="last-name" name="last_name" required>
+          <div class="cf-group">
+            <label class="cf-label" for="last-name">Last Name <span class="cf-req">*</span></label>
+            <input class="cf-input" type="text" id="last-name" name="last_name" placeholder="Smith" required>
           </div>
         </div>
 
         <!-- Row 3: Email + Phone -->
-        <div class="cr-row">
-          <div class="cr-group">
-            <label class="cr-label" for="email">Work email <span class="cr-req">*</span></label>
-            <input class="cr-input" type="email" id="email" name="email" required>
+        <div class="cf-row">
+          <div class="cf-group">
+            <label class="cf-label" for="email">Work Email <span class="cf-req">*</span></label>
+            <input class="cf-input" type="email" id="email" name="email" placeholder="jane@acmefreight.com" required>
           </div>
-          <div class="cr-group">
-            <label class="cr-label" for="phone">Phone number <span class="cr-req">*</span></label>
-            <input class="cr-input" type="tel" id="phone" name="phone">
+          <div class="cf-group">
+            <label class="cf-label" for="phone">Phone Number</label>
+            <input class="cf-input" type="tel" id="phone" name="phone" placeholder="(555) 000-0000">
           </div>
         </div>
 
-        <!-- Full row: Interest -->
-        <div class="cr-row-full">
-          <div class="cr-group">
-            <label class="cr-label" for="inquiry-type">Which of our programs are you interested in? <span class="cr-req">*</span></label>
-            <div class="cr-select-wrap">
-              <select class="cr-select" id="inquiry-type" name="inquiry_type" required>
-                <option value="" disabled selected>Select one from the dropdown options below</option>
+        <!-- Full row: Program Interest -->
+        <div class="cf-row-full">
+          <div class="cf-group">
+            <label class="cf-label" for="inquiry-type">Which program are you interested in? <span class="cf-req">*</span></label>
+            <div class="cf-select-wrap">
+              <select class="cf-select cr-select" id="inquiry-type" name="inquiry_type" required>
+                <option value="" disabled selected>Select a program</option>
                 <option value="appreciation">Driver Appreciation Kits</option>
                 <option value="safety">Safety Recognition Program</option>
                 <option value="onboarding">New Driver Onboarding</option>
@@ -767,30 +582,118 @@
         </div>
 
         <!-- Full row: Message -->
-        <div class="cr-row-full">
-          <div class="cr-group">
-            <label class="cr-label" for="message">Can you share more about your business needs and challenges?</label>
-            <textarea class="cr-textarea" id="message" name="message" placeholder="Tell us about your fleet size, recognition goals, timelines, or any specific challenges you're solving…"></textarea>
+        <div class="cf-row-full">
+          <div class="cf-group">
+            <label class="cf-label" for="message">Tell us about your fleet and goals</label>
+            <textarea class="cf-input cf-textarea" id="message" name="message" placeholder="Share your driver count, recognition goals, key dates (like Driver Appreciation Week), or any challenges you're trying to solve. The more context, the better we can help."></textarea>
           </div>
         </div>
 
         <!-- Error message -->
-        <div id="cr-send-error" style="display:none;background:rgba(220,38,38,0.15);border:1px solid rgba(220,38,38,0.4);color:#fca5a5;padding:12px 16px;border-radius:8px;font-size:0.875rem;margin-bottom:16px"></div>
+        <div id="cr-send-error" style="display:none;" class="cf-row-full"></div>
 
         <!-- Submit -->
-        <button type="submit" class="cr-submit" id="cr-submit-btn">
-          Submit
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5"/></svg>
+        <button type="submit" class="cf-submit" id="cr-submit-btn">
+          Request a Consultation
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
 
       </form>
 
-      <p class="cr-note">For other inquiries, visit our <a href="customer-service.html">customer service center</a>.</p>
+      <p class="cr-note">For order status or returns, visit our <a href="customer-service.html">customer service center</a>.</p>
 
-    </div><!-- /cr-card -->
+    </div><!-- /form column -->
 
-  </div><!-- /contact-body -->
-</div><!-- /contact-page -->
+    <!-- ══════════════════════════════════════════════
+         RIGHT — INFO PANEL
+    ══════════════════════════════════════════════ -->
+    <div class="info-panel">
+
+      <div class="ip-title">Talk to a Specialist</div>
+
+      <!-- Phone -->
+      <div class="ip-contact-item">
+        <div class="ip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+        </div>
+        <div>
+          <div class="ip-label">Call us directly</div>
+          <div class="ip-value"><a href="tel:3026810995">302.681.0995</a></div>
+          <div class="ip-sub">Mon–Fri, 9 AM–5 PM CT</div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="ip-contact-item">
+        <div class="ip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+        </div>
+        <div>
+          <div class="ip-label">Email us</div>
+          <div class="ip-value"><a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a></div>
+          <div class="ip-sub">Responds within 1 business day</div>
+        </div>
+      </div>
+
+      <!-- Response time -->
+      <div class="ip-contact-item">
+        <div class="ip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        </div>
+        <div>
+          <div class="ip-label">Response time</div>
+          <div class="ip-value">Within 1 business day</div>
+          <div class="ip-sub">Enterprise quotes: same day</div>
+        </div>
+      </div>
+
+      <!-- What happens next -->
+      <div class="ip-next">
+        <div class="ip-next-title">What happens next</div>
+        <div class="ip-next-steps">
+          <div class="ip-next-step">
+            <div class="ip-step-num">1</div>
+            <div class="ip-step-text"><strong>We review your request</strong> and match you with the right program for your fleet size and goals.</div>
+          </div>
+          <div class="ip-next-step">
+            <div class="ip-step-num">2</div>
+            <div class="ip-step-text"><strong>A fleet specialist contacts you</strong> — by email or phone, whichever you prefer.</div>
+          </div>
+          <div class="ip-next-step">
+            <div class="ip-step-num">3</div>
+            <div class="ip-step-text"><strong>You receive a custom quote</strong> with product recommendations, fleet branding options, and pricing.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /info-panel -->
+
+  </div><!-- /contact-grid -->
+</div><!-- /contact-main -->
+
+<!-- ══════════════════════════════════════════════════════
+     TRUST BAR
+══════════════════════════════════════════════════════ -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <span class="trust-num">500+</span>
+      <span class="trust-label">Fleet Accounts Served</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">&lt; 1 Day</span>
+      <span class="trust-label">Average Response Time</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">10:1</span>
+      <span class="trust-label">Recognition ROI Ratio</span>
+    </div>
+    <div class="trust-item">
+      <span class="trust-num">100%</span>
+      <span class="trust-label">Fleet-Branded Programs</span>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
