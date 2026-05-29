@@ -245,8 +245,10 @@ async function goToCheckout() {
     let data;
     try { data = await res.json(); } catch { data = {}; }
     if (data.url) {
-      // Clear AFTER we have a confirmed Stripe URL — not before
-      Cart.clear();
+      // Do NOT clear the cart here — the buyer hasn't paid yet. If they
+      // abandon Stripe Checkout (cancel_url → /cart.html) their cart must
+      // still be intact. The cart is cleared only on success.html, after
+      // payment is confirmed.
       window.location.assign(data.url);
     } else {
       throw new Error(data.error || `Server error ${res.status}`);
