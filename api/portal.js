@@ -294,6 +294,83 @@ async function handleSubmitQuote(req, res, payload) {
 }
 
 /* =============================================================
+   ACTION: confirm-order   (success-page finalizer — webhook-independent)
+   The success page calls this with the Stripe session id right after the
+   buyer returns from Checkout. We verify the session is actually PAID,
+   confirm the order belongs to the caller's company, flip it to
+   'confirmed', and capture the shipping address. Idempotent: a second call
+   (or the webhook arriving first) just returns the current order. This
+   removes the hard dependency on the Stripe webhook for order visibility.
+   ============================================================= */
+async function handleConfirmOrder(req, res, payload) {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Unauthenticated' });
+
+  const sessionId = String((payload && payload.session_id) || '').trim();
+  if (!sessionId) return res.status(400).json({ error: 'Missing session_id' });
+
+  const supabase = getServiceClient();
+  const { data: profile } = await supabase.from('users').select('company_id').eq('id', user.id).maybeSingle();
+  const callerCompany = (profile && profile.company_id) || null;
+
+  // Locate the order by Stripe session id (set up-front by create-checkout /
+  // recognition-order).
+  const { data: order, error: lookErr } = await supabase
+    .from('das_orders')
+    .select('id, company_id, order_number, items, subtotal, shipping_cost, total, status, notes, created_at')
+    .eq('stripe_session_id', sessionId)
+    .maybeSingle();
+  if (lookErr) { console.error('[confirm-order] lookup', lookErr.message); return res.status(500).json({ error: 'Lookup failed' }); }
+  if (!order)  return res.status(404).json({ error: 'Order not found for this session' });
+
+  // Ownership: the order must belong to the caller's company.
+  if (order.company_id && callerCompany && order.company_id !== callerCompany) {
+    return res.status(403).json({ error: 'This order belongs to a different account' });
+  }
+
+  // Already advanced (webhook beat us, or a repeat call) → return as-is.
+  if (order.status && order.status !== 'payment_pending') {
+    return res.status(200).json({ ok: true, order, alreadyConfirmed: true });
+  }
+
+  // Verify the Stripe session is genuinely paid before confirming.
+  if (!process.env.STRIPE_SECRET_KEY) return res.status(500).json({ error: 'Payment system not configured' });
+  const Stripe = require('stripe');
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
+
+  let session;
+  try {
+    session = await stripe.checkout.sessions.retrieve(sessionId);
+  } catch (err) {
+    console.error('[confirm-order] stripe retrieve', err && err.message);
+    return res.status(502).json({ error: 'Could not verify payment' });
+  }
+  if (!session || session.payment_status !== 'paid') {
+    return res.status(409).json({ error: 'Payment not completed yet', payment_status: session && session.payment_status });
+  }
+
+  const addr = session.shipping_details && session.shipping_details.address;
+  const shippingAddress = addr
+    ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code].filter(Boolean).join(', ')
+    : null;
+  const newNotes = [order.notes || '', shippingAddress ? `Ship to: ${shippingAddress}` : null]
+    .filter(Boolean).join(' | ') || null;
+
+  const { data: updated, error: updErr } = await supabase
+    .from('das_orders')
+    .update({ status: 'confirmed', notes: newNotes, updated_at: new Date().toISOString() })
+    .eq('id', order.id)
+    .eq('status', 'payment_pending')   // guard against double-confirm race
+    .select('id, order_number, items, subtotal, shipping_cost, total, status, created_at')
+    .maybeSingle();
+  if (updErr) { console.error('[confirm-order] update', updErr.message); return res.status(500).json({ error: 'Could not confirm order' }); }
+
+  // If the guard matched nothing, the webhook confirmed it in the meantime — re-read.
+  const finalOrder = updated || order;
+  return res.status(200).json({ ok: true, order: finalOrder });
+}
+
+/* =============================================================
    ACTION: billing-checkout   (subscription Checkout session)
    ============================================================= */
 const PRICE_IDS = {
@@ -460,15 +537,23 @@ async function handleStripeWebhook(req, res, rawBody) {
             unit_price: ((li.amount_total || 0) / (li.quantity || 1)) / 100,
           }));
 
-          const total   = (session.amount_total || 0) / 100;
+          // amount_total includes shipping (+ tax); amount_subtotal is goods only.
+          const total        = (session.amount_total    || 0) / 100;
+          const goodsSubtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
+          const shippingCost = (session.total_details && session.total_details.amount_shipping != null)
+            ? session.total_details.amount_shipping / 100
+            : Math.max(0, Number((total - goodsSubtotal).toFixed(2)));
+          const addr = session.shipping_details && session.shipping_details.address;
+          const shipTo = addr ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code].filter(Boolean).join(', ') : null;
           const payload = {
             order_number:      `DAS-${Date.now().toString(36).toUpperCase()}`,
             stripe_session_id: session.id,
             items,
-            subtotal:          total,
-            total,
+            subtotal:          Number(goodsSubtotal.toFixed(2)),
+            shipping_cost:     Number(shippingCost.toFixed(2)),
+            total:             Number(total.toFixed(2)),
             status:            'confirmed',
-            notes:             customerName ? `Customer: ${customerName} <${email}>` : email,
+            notes:             [customerName ? `Customer: ${customerName} <${email}>` : email, shipTo ? `Ship to: ${shipTo}` : null].filter(Boolean).join(' | '),
           };
           if (companyId) payload.company_id = companyId;
 
@@ -915,6 +1000,7 @@ module.exports = async (req, res) => {
     case 'billing-portal':       return handleBillingPortal(req, res);
     case 'recognition-catalog':  return handleRecognitionCatalog(req, res);
     case 'recognition-order':    return handleRecognitionOrder(req, res, payload);
+    case 'confirm-order':        return handleConfirmOrder(req, res, payload);
     default:
       return res.status(404).json({ error: `Unknown portal action: ${action || '(none)'}` });
   }

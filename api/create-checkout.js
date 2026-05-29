@@ -4,10 +4,12 @@
    POST /api/create-checkout
    ============================================= */
 
+const { getServiceClient, getUserFromToken } = require('./_supabase');
+
 module.exports = async (req, res) => {
   const allowedOrigin = process.env.SITE_URL || '*';
   res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
@@ -152,6 +154,24 @@ module.exports = async (req, res) => {
 
     const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
 
+    // ── Resolve the authenticated buyer (if any) so the order is linked to
+    //    their company and shows up in their portal. Guests fall through to
+    //    the webhook's email-match path (backstop), so the public storefront
+    //    keeps working without a login. ──────────────────────────────────────
+    let buyerUserId = null;
+    let buyerCompanyId = null;
+    try {
+      const user = await getUserFromToken(req.headers.authorization || req.headers.Authorization);
+      if (user) {
+        buyerUserId = user.id;
+        const svc = getServiceClient();
+        const { data: profile } = await svc.from('users').select('company_id').eq('id', user.id).maybeSingle();
+        buyerCompanyId = (profile && profile.company_id) || null;
+      }
+    } catch (e) {
+      console.warn('[create-checkout] buyer resolve skipped:', e && e.message);
+    }
+
     // ── Quantity-tiered shipping (single company address) ──
     // Kits cost ~$15 each to ship; the old flat $12.95 undercharged every multi-unit
     // order. Compute a flat rate from total quantity using the shared rule engine.
@@ -214,9 +234,74 @@ module.exports = async (req, res) => {
     // Apply bundle discount coupon if eligible (15% off entire order)
     if (discountsArg) sessionConfig.discounts = discountsArg;
 
+    // ── Authenticated buyer → create the order row UP-FRONT (status
+    //    payment_pending) so it appears in their portal immediately and the
+    //    success page / webhook only needs to flip it to confirmed. Mirrors
+    //    the proven recognition-order flow. Money figures match what Stripe
+    //    will charge so the portal total is correct. ───────────────────────
+    let createdOrderId = null;
+    if (buyerCompanyId) {
+      const goodsCents     = priced.reduce((s, it) => s + Math.round(it.unitPrice * 100) * it.qty, 0);
+      const guaranteeCents = (premiumGuarantee && Math.round(goodsCents * 0.10) >= 50) ? Math.round(goodsCents * 0.10) : 0;
+      const preDiscount    = goodsCents + guaranteeCents;
+      const discountCents  = bundleApplies ? Math.round(preDiscount * 0.15) : 0;
+      const subtotalCents  = preDiscount - discountCents;   // goods after discount, pre-shipping
+      const totalCents     = subtotalCents + shippingCents;
+
+      const orderItems = priced.map(it => ({ name: it.name, qty: it.qty, unit_price: it.unitPrice, sku: it.id || null }));
+      if (guaranteeCents > 0) orderItems.push({ name: 'Premium Guarantee (1-yr quality lock + overnight replacement)', qty: 1, unit_price: Math.round(guaranteeCents) / 100, sku: 'GUARANTEE' });
+
+      const datePart    = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+      const randPart    = Math.floor(1000 + Math.random() * 9000);
+      const orderNumber = `DAS-${datePart}-${randPart}`;
+      const noteParts   = [
+        bundleApplies    ? `Bundle discount 15% (−$${(discountCents / 100).toFixed(2)})` : null,
+        premiumGuarantee ? 'Premium guarantee added' : null,
+        shipResult.requiresQuote ? 'Freight confirmed by DAS after order' : null,
+      ].filter(Boolean);
+
+      try {
+        const svc = getServiceClient();
+        const { data: order, error: insErr } = await svc.from('das_orders').insert({
+          company_id:           buyerCompanyId,
+          order_number:         orderNumber,
+          items:                orderItems,
+          subtotal:             Math.round(subtotalCents) / 100,
+          shipping_cost:        Math.round(shippingCents) / 100,
+          total:                Math.round(totalCents) / 100,
+          status:               'payment_pending',
+          fulfillment_type:     'single_address',
+          delivery_count:       1,
+          submitted_by_user_id: buyerUserId,
+          notes:                noteParts.join(' | ') || null,
+        }).select('id').single();
+        if (insErr) {
+          console.error('[create-checkout] up-front order insert failed:', insErr.message);
+        } else if (order) {
+          createdOrderId = order.id;
+          sessionConfig.metadata.orderId    = order.id;
+          sessionConfig.metadata.company_id = buyerCompanyId;
+          sessionConfig.success_url         = `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}&order_id=${order.id}`;
+        }
+      } catch (e) {
+        console.error('[create-checkout] order creation skipped:', e && e.message);
+      }
+    }
+
     const session = await stripe.checkout.sessions.create(sessionConfig);
 
-    return res.status(200).json({ url: session.url });
+    // Link the Stripe session back to the order so confirm-order / webhook can find it.
+    if (createdOrderId) {
+      try {
+        await getServiceClient().from('das_orders')
+          .update({ stripe_session_id: session.id })
+          .eq('id', createdOrderId);
+      } catch (e) {
+        console.error('[create-checkout] session link failed:', e && e.message);
+      }
+    }
+
+    return res.status(200).json({ url: session.url, orderId: createdOrderId });
 
   } catch (err) {
     console.error('[Stripe create-checkout error]', err.message, err.type);
