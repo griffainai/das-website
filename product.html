@@ -887,6 +887,7 @@
 </button>
 
 <script src="js/cart.js"></script>
+<script src="/lib/catalog.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
    PRODUCT DATA — all 5 products
@@ -1169,7 +1170,15 @@ const PRODUCTS = {
 /* ═══════════════════════════════════════════════════════════════
    TIER DESCRIPTIONS & STATE
 ═══════════════════════════════════════════════════════════════ */
-const TIER_MULTS = { standard: 1.0, premium: 1.45, enterprise: 1.95 };
+// Tier multipliers + base prices come from the shared catalog (lib/catalog.js) when loaded,
+// so the storefront and the checkout price-authority can never drift. Hardcoded values are fallbacks.
+const TIER_MULTS = (window.DASCatalog && window.DASCatalog.MULTIPLIERS) || { standard: 1.0, premium: 1.45, enterprise: 1.95 };
+try {
+  if (window.DASCatalog) Object.keys(PRODUCTS).forEach(function (pid) {
+    var c = window.DASCatalog.lookup(pid);
+    if (c && typeof c.basePrice === 'number') PRODUCTS[pid].price = c.basePrice;
+  });
+} catch (e) { /* keep hardcoded fallback prices */ }
 let currentProduct = null;
 let currentTier    = 'standard';
 let currentImgIdx  = 0;
