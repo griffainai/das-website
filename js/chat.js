@@ -8,9 +8,15 @@
   'use strict'
 
   // ── Config ────────────────────────────────────────────────────
-  // Point this at wherever the das-portal is deployed.
-  const API_URL        = 'https://das-portal-ten.vercel.app/api/chat'
-  const SUBMIT_URL     = 'https://das-portal-ten.vercel.app/api/chat/submit-quote'
+  // Primary: same-origin serverless functions (api/chat.js, api/submit-quote.js).
+  // Fallback: das-portal — kept alive during the migration window so live chat
+  // never breaks if the .com endpoints aren't fully configured yet. Remove the
+  // fallbacks once ANTHROPIC_API_KEY etc. are confirmed on the .com and
+  // das-portal is retired.
+  const API_URL          = '/api/chat'
+  const API_FALLBACK     = 'https://das-portal-ten.vercel.app/api/chat'
+  const SUBMIT_URL       = '/api/submit-quote'
+  const SUBMIT_FALLBACK  = 'https://das-portal-ten.vercel.app/api/chat/submit-quote'
   const SESSION_KEY    = 'das_scout_messages'
   const PULSE_DELAY_MS = 10000   // show unread dot after 10s
 
@@ -446,14 +452,24 @@
     abortCtrl = new AbortController()
 
     try {
-      const res = await fetch(API_URL, {
+      const reqInit = {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ messages }),
         signal:  abortCtrl.signal,
-      })
+      }
 
-      if (!res.ok || !res.body) throw new Error(res.status)
+      // Try the .com endpoint first; fall back to das-portal if it's not
+      // configured/available yet (non-ok status or network error).
+      let res
+      try {
+        res = await fetch(API_URL, reqInit)
+        if (!res.ok || !res.body) throw new Error(res.status)
+      } catch (primaryErr) {
+        if (primaryErr.name === 'AbortError') throw primaryErr
+        res = await fetch(API_FALLBACK, reqInit)
+        if (!res.ok || !res.body) throw new Error(res.status)
+      }
 
       removeTyping()
 
@@ -496,13 +512,29 @@
   }
 
   async function submitQuote(quote) {
+    const headers = { 'Content-Type': 'application/json' }
+
+    // If a portal session exists, attach the access token so the quote is
+    // attributed to the logged-in account (server PATH A). Best-effort.
     try {
-      await fetch(SUBMIT_URL, {
-        method:  'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(quote),
-      })
+      if (typeof window.getSupabase === 'function') {
+        const sb = window.getSupabase()
+        const { data } = await sb.auth.getSession()
+        const token = data && data.session && data.session.access_token
+        if (token) headers.Authorization = 'Bearer ' + token
+      }
     } catch {}
+
+    const reqInit = { method: 'POST', headers, body: JSON.stringify(quote) }
+
+    // Try the .com endpoint first; fall back to das-portal during migration so
+    // a lead is never lost if the .com endpoint isn't configured yet.
+    try {
+      const res = await fetch(SUBMIT_URL, reqInit)
+      if (!res.ok) throw new Error(res.status)
+    } catch {
+      try { await fetch(SUBMIT_FALLBACK, reqInit) } catch {}
+    }
   }
 
   // ── UI helpers ────────────────────────────────────────────────
