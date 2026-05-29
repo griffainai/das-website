@@ -92,7 +92,12 @@ const Cart = {
   },
 };
 
+/* Expose Cart + Favorites + showToast on window so other scripts (fbt.js, upsell-modal.js, etc.) can access them. */
+window.Cart      = Cart;
+window.Favorites = Favorites;
+
 /* ---- Toast ---- */
+window.showToast = showToast;
 function showToast(message, type = 'success') {
   let container = document.querySelector('.toast-container');
   if (!container) {
@@ -225,16 +230,24 @@ async function goToCheckout() {
   if (btn) { btn.disabled = true; btn.textContent = 'Redirecting…'; }
 
   try {
+    const meta = (typeof window !== 'undefined' && window.__dasCheckoutMeta) || {};
     const res = await fetch('/api/create-checkout', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ items }),
+      body: JSON.stringify({
+        items,
+        // Upsell-stack metadata computed by cart.html — server re-validates.
+        bundleDiscount:   meta.bundleDiscount   || 0,
+        premiumGuarantee: !!meta.premiumGuarantee,
+        guaranteeFee:     meta.guaranteeFee     || 0,
+      }),
     });
     let data;
     try { data = await res.json(); } catch { data = {}; }
     if (data.url) {
+      // Clear AFTER we have a confirmed Stripe URL — not before
       Cart.clear();
-      window.location.href = data.url;
+      window.location.assign(data.url);
     } else {
       throw new Error(data.error || `Server error ${res.status}`);
     }

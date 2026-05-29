@@ -26,12 +26,11 @@
   <!-- Preconnect -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
 
   <!-- Preload hero image for LCP -->
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80&fit=crop" fetchpriority="high">
+  <link rel="preload" as="image" href="images/das-hero.jpg" fetchpriority="high">
 
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
        as a single sticky unit while scrolling. -->
@@ -165,6 +164,9 @@
     ]
   }
   </script>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
 
@@ -229,10 +231,10 @@
       <div class="nav-actions">
         <a href="cart.html" class="nav-cart-btn">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
-          Cart
+          <span class="nav-cart-label">Cart</span>
           <span class="cart-badge">0</span>
         </a>
-        <button type="button" class="nav-login-btn btn btn-primary btn-sm" id="nav-signin-btn" onclick="openSignInModal()">Sign In</button>
+        <a href="#" class="nav-login-btn btn btn-primary btn-sm" id="nav-signin-btn" onclick="openSignInModal(); return false;">Sign In</a>
       </div>
 
       <button type="button" class="nav-mobile-toggle" aria-label="Open menu">
@@ -247,18 +249,56 @@
 
 <!-- Mobile Drawer -->
 <div class="mobile-overlay"></div>
-<div class="mobile-drawer">
+<div class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+  <!-- Drawer header -->
   <div class="mobile-drawer-header">
-    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
-    <button type="button" class="mobile-close-btn" aria-label="Close menu">✕</button>
+    <a href="index.html" class="mobile-drawer-logo">
+      <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    </a>
+    <button type="button" class="mobile-close-btn" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
   </div>
-  <a href="index.html" class="mobile-nav-link active">Home</a>
-  <a href="shop.html"  class="mobile-nav-link">Shop</a>
-  <a href="about.html" class="mobile-nav-link">About</a>
-  <a href="ideas.html" class="mobile-nav-link">Ideas</a>
-  <a href="contact.html" class="mobile-nav-link">Contact</a>
+
+  <!-- Nav section label -->
+  <p class="mobile-drawer-section-label">Navigation</p>
+
+  <!-- Nav links -->
+  <a href="index.html" class="mobile-nav-link active">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+    Home
+  </a>
+  <a href="shop.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+    Shop
+  </a>
+  <a href="about.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+    About
+  </a>
+  <a href="ideas.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+    Ideas
+  </a>
+  <a href="publications.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5M6 7.5h3v3H6v-3z"/></svg>
+    Newsletter
+  </a>
+  <a href="contact.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+    Contact
+  </a>
+
+  <!-- Drawer footer CTAs -->
   <div class="mobile-drawer-footer">
-    <a href="cart.html" class="btn btn-primary btn-full">View Cart</a>
+    <a href="#" id="drawer-auth-btn" class="btn btn-primary btn-full" onclick="openSignInModal(); return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+      Sign In
+    </a>
+    <a href="cart.html" class="btn btn-full mobile-drawer-cart-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+      View Cart
+    </a>
   </div>
 </div>
 
@@ -290,8 +330,8 @@
         </div>
       </div>
       <div class="hero-visual" data-reveal data-reveal-delay="2">
-        <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80&fit=crop"
-             alt="Professional fleet operations director — Driver Appreciation Solutions"
+        <img src="images/das-hero.jpg"
+             alt="Driver Appreciation Week ceremony — Driver Appreciation Solutions"
              width="900" height="600"
              loading="eager"
              fetchpriority="high"
@@ -521,7 +561,7 @@
      ============================================================ -->
 <section class="section" style="background:linear-gradient(160deg,#081230 0%,#1A2E6E 100%);border-top:1px solid rgba(200,168,75,.18)">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center">
+    <div class="newsletter-split">
 
       <!-- Left: copy -->
       <div>
@@ -535,7 +575,7 @@
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">One shareable link</strong> — email it, print it, or post it in your portal</span></li>
           <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">Free with every portal account</strong> — no extra charge, no design team needed</span></li>
         </ul>
-        <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div class="newsletter-cta-row">
           <a href="publications.html" class="btn btn-primary btn-lg" style="background:#ffffff;color:#1A2E6E;border-color:#ffffff">See How It Works</a>
           <a href="signup.html" class="btn btn-lg" style="background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff">Create Free Account</a>
         </div>
@@ -578,7 +618,7 @@
     </div>
     <div class="hiw-grid">
       <div class="hiw-step" data-reveal data-reveal-delay="1">
-        <div class="hiw-step-badge">1</div>
+        <div class="hiw-step-header"><div class="hiw-step-badge">1</div></div>
         <div class="hiw-step-title">Tell us your fleet</div>
         <p class="hiw-step-desc">Share your driver count, recognition goals, and any upcoming dates — Driver Appreciation Week, milestones, onboarding schedules. Five minutes of context is all we need.</p>
         <span class="hiw-step-tag">
@@ -587,7 +627,7 @@
         </span>
       </div>
       <div class="hiw-step" data-reveal data-reveal-delay="2">
-        <div class="hiw-step-badge">2</div>
+        <div class="hiw-step-header"><div class="hiw-step-badge">2</div></div>
         <div class="hiw-step-title">We build your program</div>
         <p class="hiw-step-desc">We prescribe the right products, tier, quantity, and personalization for your fleet's specific situation. You approve. We handle branding, packaging, and fulfillment logistics.</p>
         <span class="hiw-step-tag">
@@ -596,7 +636,7 @@
         </span>
       </div>
       <div class="hiw-step" data-reveal data-reveal-delay="3">
-        <div class="hiw-step-badge">3</div>
+        <div class="hiw-step-header"><div class="hiw-step-badge">3</div></div>
         <div class="hiw-step-title">Delivered on your timeline</div>
         <p class="hiw-step-desc">Kits arrive at your terminal — individually packaged, branded, and ready to distribute. For enterprise fleets, we coordinate multi-location delivery so nothing falls through the cracks.</p>
         <span class="hiw-step-tag">
@@ -676,7 +716,7 @@
      ============================================================ -->
 <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
   <div class="container">
-    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:40px">
+    <div class="products-section-header">
       <div>
         <span class="section-eyebrow">Featured Products</span>
         <h2 class="section-title" style="margin-bottom:0">Order 10 or 10,000 —<br>quality doesn't scale down.</h2>
@@ -792,7 +832,7 @@
 
       <div class="countdown-ent-badge">
         <span class="countdown-ent-badge-dot"></span>
-        September 7 – 13, 2026
+        September 13 – 19, 2026
       </div>
 
       <h2 class="countdown-ent-title">Driver Appreciation Week</h2>
@@ -1089,28 +1129,6 @@
 
     </div><!-- /enterprise-cta-inner -->
 
-    <!-- Bottom proof strip -->
-    <div class="enterprise-cta-proof-strip">
-      <div class="enterprise-proof-item">
-        <div class="enterprise-proof-value">500<span>+</span></div>
-        <div class="enterprise-proof-label">Fleet Accounts</div>
-      </div>
-      <div class="enterprise-proof-divider"></div>
-      <div class="enterprise-proof-item">
-        <div class="enterprise-proof-value">50K<span>+</span></div>
-        <div class="enterprise-proof-label">Drivers Recognized</div>
-      </div>
-      <div class="enterprise-proof-divider"></div>
-      <div class="enterprise-proof-item">
-        <div class="enterprise-proof-value">98<span>%</span></div>
-        <div class="enterprise-proof-label">Reorder Rate</div>
-      </div>
-      <div class="enterprise-proof-divider"></div>
-      <div class="enterprise-proof-item">
-        <div class="enterprise-proof-value">$140K<span>+</span></div>
-        <div class="enterprise-proof-label">Per Accident Avoided</div>
-      </div>
-    </div>
 
   </div>
 </section>
@@ -1184,53 +1202,33 @@
         <h2 class="how-help-title">How We Help<br>Fleets Win.</h2>
         <p class="how-help-intro">Recognition isn't a nice-to-have — it's an operating lever. Fleets that invest in structured driver appreciation programs run safer, retain more drivers, and spend less on replacement. We make running that program effortless.</p>
 
-        <div class="how-help-features">
+        <div class="how-help-kpi-grid">
 
-          <div class="how-help-feature">
-            <div class="how-help-feature-icon how-help-icon-safety">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/></svg>
-            </div>
-            <div class="how-help-feature-body">
-              <h3 class="how-help-feature-title">Safety Through Recognition</h3>
-              <p class="how-help-feature-desc">Recognized drivers are engaged drivers — and engaged drivers have 23% fewer preventable accidents. When your fleet feels valued, it shows on the road. Recognition isn't morale management; it's a safety program.</p>
-              <span class="how-help-feature-stat">23% fewer accidents · 31% fewer DOT violations</span>
-            </div>
+          <div class="how-help-kpi-card how-help-kpi-card--green">
+            <div class="how-help-kpi-num">23%</div>
+            <div class="how-help-kpi-name">Fewer Preventable Accidents</div>
+            <p class="how-help-kpi-detail">Recognized drivers are engaged drivers. Engagement reduces accident rates by 23% — recognition is a safety program, not a morale exercise.</p>
           </div>
 
-          <div class="how-help-feature">
-            <div class="how-help-feature-icon how-help-icon-retention">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
-            </div>
-            <div class="how-help-feature-body">
-              <h3 class="how-help-feature-title">Stop the Turnover Bleeding</h3>
-              <p class="how-help-feature-desc">Every driver departure costs $8,450–$20,050 in recruiting, training, and lost productivity. Our programs are proven to reduce first-90-day turnover by up to 30% — a single fleet of 50 drivers can save over $134,000 annually.</p>
-              <span class="how-help-feature-stat">30% turnover reduction · $134K+ annual savings per 50-driver fleet</span>
-            </div>
+          <div class="how-help-kpi-card how-help-kpi-card--blue">
+            <div class="how-help-kpi-num">30%</div>
+            <div class="how-help-kpi-name">Reduction in Early Turnover</div>
+            <p class="how-help-kpi-detail">Every departure costs $8,450–$20,050 in recruiting and lost productivity. Structured programs cut first-90-day attrition by 30%.</p>
           </div>
 
-          <div class="how-help-feature">
-            <div class="how-help-feature-icon how-help-icon-scale">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"/></svg>
-            </div>
-            <div class="how-help-feature-body">
-              <h3 class="how-help-feature-title">Programs That Scale with Your Fleet</h3>
-              <p class="how-help-feature-desc">10 trucks or 500 — our programs scale identically. Every kit arrives curated, branded, and ready to deliver. No internal design work, no sourcing, no vendor management. You order. We execute. Your drivers feel it.</p>
-              <span class="how-help-feature-stat">500+ fleet accounts · Fleet-scale fulfillment at any volume</span>
-            </div>
+          <div class="how-help-kpi-card how-help-kpi-card--amber">
+            <div class="how-help-kpi-num">$134K</div>
+            <div class="how-help-kpi-name">Annual Savings Per 50-Driver Fleet</div>
+            <p class="how-help-kpi-detail">Calculated from reduced turnover costs alone. Add insurance premium improvements and accident-related savings and the number climbs further.</p>
           </div>
 
-          <div class="how-help-feature">
-            <div class="how-help-feature-icon how-help-icon-roi">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
-            </div>
-            <div class="how-help-feature-body">
-              <h3 class="how-help-feature-title">10-to-1 Return on Investment</h3>
-              <p class="how-help-feature-desc">For every $1 invested in a structured driver recognition program, fleets recover $10 through reduced turnover, lower insurance premiums, fewer accident-related costs, and improved driver productivity. The math is straightforward.</p>
-              <span class="how-help-feature-stat">10:1 ROI documented · $140K average per accident avoided</span>
-            </div>
+          <div class="how-help-kpi-card how-help-kpi-card--navy">
+            <div class="how-help-kpi-num">10:1</div>
+            <div class="how-help-kpi-name">Average Program ROI</div>
+            <p class="how-help-kpi-detail">For every $1 invested in a structured driver recognition program, fleets recover $10 through lower turnover, lower premiums, and improved performance.</p>
           </div>
 
-        </div><!-- /features -->
+        </div><!-- /kpi-grid -->
 
         <div class="how-help-actions">
           <a href="ideas.html" class="btn btn-ghost">
@@ -1260,8 +1258,8 @@
 
         <!-- Main image -->
         <div class="how-help-img-main">
-          <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=80&fit=crop"
-               alt="Fleet manager with driver" loading="lazy"
+          <img src="images/Das Website Replacement Photo 1.0.png"
+               alt="American fleet truck — Driver Appreciation Solutions" loading="lazy"
                onerror="this.style.background='var(--black-5)'">
         </div>
         <!-- Secondary image -->
@@ -1367,7 +1365,7 @@
 <script src="js/countdown.js?v=2"></script>
 <script src="js/cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 <!-- Scout AI chat widget — self-contained, no dependencies -->
 <script src="js/chat.js" defer></script>
 <script>
@@ -1522,18 +1520,6 @@
     document.body.style.overflow = '';
   }
 
-  // ── Update nav button when signed in ──────────────────────
-  onAuthReady(user => {
-    const btn = document.getElementById('nav-signin-btn');
-    if (!btn) return;
-    if (user) {
-      const initials = (user.displayName || user.email || 'U')
-        .split(' ').map(w => w[0]).join('').slice(0,2).toUpperCase();
-      btn.innerHTML = `<span style="width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,0.25);color:#fff;font-size:0.75rem;font-weight:700;display:flex;align-items:center;justify-content:center">${initials}</span><span>My Account</span>`;
-      btn.onclick = () => window.location.href = 'account.html';
-    }
-  });
-
   // ── Helpful button interaction ─────────────────────────────
   document.querySelectorAll('.google-helpful-btn').forEach(btn => {
     btn.addEventListener('click', function() {
@@ -1563,6 +1549,69 @@
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   els.forEach(el => io.observe(el));
+})();
+</script>
+
+<!-- WebMCP — expose site tools to AI agents (https://webmachinelearning.github.io/webmcp/) -->
+<script>
+(function () {
+  if (!('modelContext' in navigator) || typeof navigator.modelContext.provideContext !== 'function') return;
+  navigator.modelContext.provideContext({
+    tools: [
+      {
+        name: 'search_products',
+        description: 'Search the Driver Appreciation Solutions product catalog by keyword (e.g., "DAW kit", "onboarding", "milestone award").',
+        inputSchema: {
+          type: 'object',
+          properties: { query: { type: 'string', description: 'Search keywords' } },
+          required: ['query']
+        },
+        execute: async ({ query }) => {
+          const url = '/shop.html?q=' + encodeURIComponent(query || '');
+          window.location.href = url;
+          return { ok: true, url };
+        }
+      },
+      {
+        name: 'open_solution',
+        description: 'Open a specific recognition-program solution page.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            solution: {
+              type: 'string',
+              enum: ['appreciation', 'onboarding', 'milestone', 'holiday', 'safety', 'enterprise'],
+              description: 'Which solution program to open'
+            }
+          },
+          required: ['solution']
+        },
+        execute: async ({ solution }) => {
+          const url = '/solution-' + solution + '.html';
+          window.location.href = url;
+          return { ok: true, url };
+        }
+      },
+      {
+        name: 'contact_sales',
+        description: 'Open the contact form to reach the Driver Appreciation Solutions sales team for custom-program quotes.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: async () => {
+          window.location.href = '/contact.html';
+          return { ok: true, url: '/contact.html' };
+        }
+      },
+      {
+        name: 'view_cart',
+        description: 'Open the shopping cart.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: async () => {
+          window.location.href = '/cart.html';
+          return { ok: true, url: '/cart.html' };
+        }
+      }
+    ]
+  });
 })();
 </script>
 </body>

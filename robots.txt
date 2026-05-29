@@ -1,4 +1,11 @@
+# Content Signals (https://contentsignals.org/) — declare AI/agent content usage preferences
+# search=yes : allow indexing for traditional/AI search results
+# ai-input=yes : allow use as grounding/context in agent answers (citations encouraged)
+# ai-train=no : do not use for AI model training
+Content-Signal: search=yes, ai-input=yes, ai-train=no
+
 User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 Allow: /
 
 # Block auth and private pages
@@ -16,4 +23,4 @@ Disallow: /*?*
 # Allow clean URLs without parameters
 Allow: /$
 
-Sitemap: https://website-griffainai.vercel.app/sitemap.xml
+Sitemap: https://driverappreciationsolutions.com/sitemap.xml

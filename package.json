@@ -9,6 +9,8 @@
     "deploy": "npx vercel --prod"
   },
   "dependencies": {
+    "@sparticuz/chromium": "^131.0.0",
+    "puppeteer-core": "^23.11.1",
     "stripe": "^14.0.0"
   },
   "engines": {

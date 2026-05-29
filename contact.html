@@ -17,7 +17,7 @@
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
@@ -250,100 +250,177 @@
     .cr-card-header-meta { display: none; }
 
     /* ══════════════════════════════════════════════════════
-       INFO PANEL (right column)
+       INFO PANEL (right column) — enterprise redesign
     ══════════════════════════════════════════════════════ */
     .info-panel {
-      background: #F9FAFB;
+      background: #FFFFFF;
       border: 1.5px solid #E5E7EB;
       border-radius: 14px;
-      padding: 32px 28px;
+      padding: 28px 24px;
       position: sticky;
       top: 88px;
-    }
-    .ip-title {
-      font-size: 1.0625rem;
-      font-weight: 700;
-      color: #111827;
-      letter-spacing: -0.015em;
-      margin-bottom: 24px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid #E5E7EB;
-    }
-    .ip-contact-item {
       display: flex;
-      align-items: flex-start;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ── Panel header ── */
+    .ip-header {
+      display: flex;
+      align-items: center;
       gap: 14px;
-      padding: 18px 0;
+      padding-bottom: 20px;
       border-bottom: 1px solid #F3F4F6;
     }
-    .ip-contact-item:last-of-type { border-bottom: none; padding-bottom: 0; }
-    .ip-icon {
-      width: 38px; height: 38px; min-width: 38px;
+    .ip-header-icon {
+      width: 44px; height: 44px; min-width: 44px;
+      background: #EEF2FF;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #1A2E6E;
+    }
+    .ip-header-icon svg { width: 21px; height: 21px; }
+    .ip-header-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #111827;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+    .ip-header-avail {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8125rem;
+      color: #6B7280;
+      font-weight: 500;
+    }
+    .ip-avail-dot {
+      width: 7px; height: 7px;
+      background: #22C55E;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── Contact channel cards ── */
+    .ip-channels {
+      display: flex;
+      flex-direction: column;
+      border: 1.5px solid #E5E7EB;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .ip-channel {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 15px 16px;
+      border-bottom: 1px solid #F3F4F6;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      color: inherit;
+    }
+    .ip-channel:last-child { border-bottom: none; }
+    a.ip-channel:hover { background: #F9FAFB; }
+    .ip-channel-icon {
+      width: 36px; height: 36px; min-width: 36px;
       background: #1A2E6E;
-      border-radius: 9px;
+      border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: #FFFFFF;
     }
-    .ip-icon svg { width: 17px; height: 17px; }
-    .ip-label {
+    .ip-channel-icon svg { width: 16px; height: 16px; }
+    .ip-channel-body { flex: 1; min-width: 0; }
+    .ip-channel-label {
       font-size: 0.6875rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: #9CA3AF;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
-    .ip-value {
+    .ip-channel-value {
       font-size: 0.9375rem;
-      font-weight: 600;
-      color: #111827;
-      line-height: 1.4;
-    }
-    .ip-value a {
-      color: #1A2E6E;
-      text-decoration: none;
       font-weight: 700;
+      color: #1A2E6E;
+      line-height: 1.3;
     }
-    .ip-value a:hover { text-decoration: underline; }
-    .ip-sub {
+    .ip-channel-plain .ip-channel-value { color: #111827; }
+    .ip-channel-sub {
       font-size: 0.8125rem;
       color: #9CA3AF;
-      margin-top: 3px;
-      font-weight: 400;
+      margin-top: 2px;
     }
+    .ip-channel-arrow { color: #D1D5DB; flex-shrink: 0; }
+    .ip-channel-arrow svg { width: 14px; height: 14px; display: block; }
 
-    /* "What happens next" steps */
-    .ip-next { margin-top: 26px; }
+    /* ── What Happens Next — timeline ── */
+    .ip-next {
+      background: #F8FAFF;
+      border: 1.5px solid #E0E7FF;
+      border-radius: 10px;
+      padding: 20px;
+    }
     .ip-next-title {
       font-size: 0.6875rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #9CA3AF;
-      margin-bottom: 16px;
+      letter-spacing: 0.10em;
+      color: #1A2E6E;
+      margin-bottom: 18px;
     }
-    .ip-next-steps { display: flex; flex-direction: column; gap: 14px; }
-    .ip-next-step { display: flex; align-items: flex-start; gap: 12px; }
+    .ip-next-steps { display: flex; flex-direction: column; }
+    .ip-next-step { display: flex; gap: 14px; align-items: flex-start; }
+    .ip-step-track {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      width: 28px;
+    }
     .ip-step-num {
-      width: 22px; height: 22px; min-width: 22px;
+      width: 28px; height: 28px; min-width: 28px;
       background: #1A2E6E;
       color: #FFFFFF;
       border-radius: 50%;
-      font-size: 0.6875rem;
+      font-size: 0.75rem;
       font-weight: 800;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 1px;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
     }
-    .ip-step-text {
+    .ip-step-line {
+      flex: 1;
+      width: 1px;
+      background: #C7D2FE;
+      min-height: 16px;
+      margin: 4px 0;
+    }
+    .ip-step-body {
+      flex: 1;
+      padding-bottom: 16px;
+      padding-top: 3px;
+    }
+    .ip-next-step:last-child .ip-step-body { padding-bottom: 0; }
+    .ip-step-head {
       font-size: 0.875rem;
-      color: #4B5563;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 3px;
+      line-height: 1.3;
+    }
+    .ip-step-desc {
+      font-size: 0.8125rem;
+      color: #6B7280;
       line-height: 1.55;
     }
-    .ip-step-text strong { color: #111827; font-weight: 600; }
 
     /* ══════════════════════════════════════════════════════
        TRUST BAR — full width, light gray
@@ -407,6 +484,8 @@
       .ch-title { font-size: 1.875rem; }
     }
   </style>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
 </head>
 <body>
 
@@ -609,62 +688,105 @@
     ══════════════════════════════════════════════ -->
     <div class="info-panel">
 
-      <div class="ip-title">Talk to a Specialist</div>
-
-      <!-- Phone -->
-      <div class="ip-contact-item">
-        <div class="ip-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+      <!-- Header -->
+      <div class="ip-header">
+        <div class="ip-header-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
         </div>
         <div>
-          <div class="ip-label">Call us directly</div>
-          <div class="ip-value"><a href="tel:3026810995">302.681.0995</a></div>
-          <div class="ip-sub">Mon–Fri, 9 AM–5 PM CT</div>
+          <div class="ip-header-title">Talk to a Specialist</div>
+          <div class="ip-header-avail">
+            <span class="ip-avail-dot"></span>Fleet team available Mon–Fri
+          </div>
         </div>
       </div>
 
-      <!-- Email -->
-      <div class="ip-contact-item">
-        <div class="ip-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
-        </div>
-        <div>
-          <div class="ip-label">Email us</div>
-          <div class="ip-value"><a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a></div>
-          <div class="ip-sub">Responds within 1 business day</div>
-        </div>
-      </div>
+      <!-- Contact channels -->
+      <div class="ip-channels">
 
-      <!-- Response time -->
-      <div class="ip-contact-item">
-        <div class="ip-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </div>
-        <div>
-          <div class="ip-label">Response time</div>
-          <div class="ip-value">Within 1 business day</div>
-          <div class="ip-sub">Enterprise quotes: same day</div>
-        </div>
-      </div>
+        <!-- Phone -->
+        <a href="tel:3026810995" class="ip-channel">
+          <div class="ip-channel-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </div>
+          <div class="ip-channel-body">
+            <div class="ip-channel-label">Phone</div>
+            <div class="ip-channel-value">302.681.0995</div>
+            <div class="ip-channel-sub">Mon–Fri, 9 AM–5 PM CT</div>
+          </div>
+          <div class="ip-channel-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </div>
+        </a>
 
-      <!-- What happens next -->
+        <!-- Email -->
+        <a href="mailto:info@driverappreciationsolutions.com" class="ip-channel">
+          <div class="ip-channel-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+          </div>
+          <div class="ip-channel-body">
+            <div class="ip-channel-label">Email</div>
+            <div class="ip-channel-value" style="font-size:0.8125rem">info@driverappreciationsolutions.com</div>
+            <div class="ip-channel-sub">Responds within 1 business day</div>
+          </div>
+          <div class="ip-channel-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+          </div>
+        </a>
+
+        <!-- Response SLA (non-clickable) -->
+        <div class="ip-channel ip-channel-plain">
+          <div class="ip-channel-icon" style="background:#F3F4F6">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="color:#6B7280"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <div class="ip-channel-body">
+            <div class="ip-channel-label">Response time</div>
+            <div class="ip-channel-value">Within 1 business day</div>
+            <div class="ip-channel-sub">Enterprise quotes: same day</div>
+          </div>
+        </div>
+
+      </div><!-- /ip-channels -->
+
+      <!-- What happens next — timeline -->
       <div class="ip-next">
         <div class="ip-next-title">What happens next</div>
         <div class="ip-next-steps">
+
           <div class="ip-next-step">
-            <div class="ip-step-num">1</div>
-            <div class="ip-step-text"><strong>We review your request</strong> and match you with the right program for your fleet size and goals.</div>
+            <div class="ip-step-track">
+              <div class="ip-step-num">1</div>
+              <div class="ip-step-line"></div>
+            </div>
+            <div class="ip-step-body">
+              <div class="ip-step-head">We review your request</div>
+              <div class="ip-step-desc">Matched to the right program for your fleet size and recognition goals.</div>
+            </div>
           </div>
+
           <div class="ip-next-step">
-            <div class="ip-step-num">2</div>
-            <div class="ip-step-text"><strong>A fleet specialist contacts you</strong> — by email or phone, whichever you prefer.</div>
+            <div class="ip-step-track">
+              <div class="ip-step-num">2</div>
+              <div class="ip-step-line"></div>
+            </div>
+            <div class="ip-step-body">
+              <div class="ip-step-head">A specialist reaches out</div>
+              <div class="ip-step-desc">By email or phone — whichever you prefer.</div>
+            </div>
           </div>
+
           <div class="ip-next-step">
-            <div class="ip-step-num">3</div>
-            <div class="ip-step-text"><strong>You receive a custom quote</strong> with product recommendations, fleet branding options, and pricing.</div>
+            <div class="ip-step-track">
+              <div class="ip-step-num">3</div>
+            </div>
+            <div class="ip-step-body">
+              <div class="ip-step-head">You receive a custom quote</div>
+              <div class="ip-step-desc">Product recommendations, fleet branding options, and volume pricing.</div>
+            </div>
           </div>
+
         </div>
-      </div>
+      </div><!-- /ip-next -->
 
     </div><!-- /info-panel -->
 
@@ -750,7 +872,7 @@
 
 <script src="js/cart.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 
 <script>
   document.getElementById('contact-form').addEventListener('submit', function(e) {

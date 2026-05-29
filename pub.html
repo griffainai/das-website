@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Driver Newsletter — Driver Appreciation Solutions</title>
+  <meta name="description" content="A driver-recognition newsletter published with Driver Appreciation Solutions.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/images/logo.png" type="image/png">
+  <meta name="theme-color" content="#1A2E6E">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="Driver Newsletter">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: #0C1840;
+      color: #0F172A;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ── Top bar ── */
+    .v-bar {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 10px 18px;
+      background: #1A2E6E;
+      color: #fff;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      z-index: 2;
+    }
+    .v-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: #fff; min-width: 0; }
+    .v-mark {
+      width: 34px; height: 34px; border-radius: 8px; flex-shrink: 0;
+      background: #C8A24A; color: #0C1840;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.72rem; letter-spacing: 0.02em;
+    }
+    .v-brand-txt { min-width: 0; }
+    .v-brand-name { font-size: 0.84rem; font-weight: 700; line-height: 1.15; white-space: nowrap; }
+    .v-brand-sub { font-size: 0.66rem; color: rgba(255,255,255,0.62); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .v-actions { display: flex; align-items: center; gap: 9px; flex-shrink: 0; }
+    .v-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 15px; border-radius: 8px;
+      font-size: 0.8rem; font-weight: 600; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.28); background: transparent; color: #fff;
+      text-decoration: none; transition: all 150ms ease; white-space: nowrap;
+    }
+    .v-btn:hover { background: rgba(255,255,255,0.12); }
+    .v-btn svg { width: 15px; height: 15px; }
+    .v-btn-gold { background: #C8A24A; border-color: #C8A24A; color: #0C1840; }
+    .v-btn-gold:hover { background: #d4b25f; }
+
+    /* ── Stage ── */
+    .v-stage { flex: 1; min-height: 0; position: relative; background: #0C1840; }
+    #v-frame { width: 100%; height: 100%; border: none; background: #fff; display: none; }
+
+    /* ── States ── */
+    .v-state {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 14px; padding: 40px 24px; text-align: center; color: #fff;
+    }
+    .v-state-icon {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.16);
+      display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.7);
+    }
+    .v-state-icon svg { width: 26px; height: 26px; }
+    .v-state-title { font-size: 1.15rem; font-weight: 700; }
+    .v-state-msg { font-size: 0.9rem; color: rgba(255,255,255,0.66); max-width: 380px; line-height: 1.55; }
+    .v-state-link {
+      margin-top: 6px; display: inline-flex; align-items: center; gap: 6px;
+      padding: 9px 18px; border-radius: 8px; background: #C8A24A; color: #0C1840;
+      font-size: 0.85rem; font-weight: 700; text-decoration: none;
+    }
+    .v-spinner {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.18); border-top-color: #C8A24A;
+      animation: v-spin 800ms linear infinite;
+    }
+    @keyframes v-spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 560px) {
+      .v-brand-sub { display: none; }
+      .v-btn { padding: 8px 11px; }
+      #v-print-label { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="v-bar">
+    <a class="v-brand" href="https://driverappreciationsolutions.com/" target="_blank" rel="noopener">
+      <span class="v-mark">DAS</span>
+      <span class="v-brand-txt">
+        <span class="v-brand-name" id="v-title">Driver Newsletter</span>
+        <span class="v-brand-sub" id="v-sub">Driver Appreciation Solutions</span>
+      </span>
+    </a>
+    <div class="v-actions" id="v-actions" style="display:none">
+      <button class="v-btn" id="v-print" onclick="vPrint()" title="Print or save as PDF">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0110.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0l.229 2.523a1.125 1.125 0 01-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0021 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 00-1.913-.247M6.34 18H5.25A2.25 2.25 0 013 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 011.913-.247m10.5 0a48.536 48.536 0 00-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5zm-3 0h.008v.008H15V10.5z"/></svg>
+        <span id="v-print-label">Print / Save PDF</span>
+      </button>
+      <a class="v-btn v-btn-gold" id="v-download" target="_blank" rel="noopener" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+        Download PDF
+      </a>
+    </div>
+  </header>
+
+  <main class="v-stage">
+    <iframe id="v-frame" title="Driver newsletter" sandbox="allow-same-origin allow-modals"></iframe>
+
+    <div class="v-state" id="v-loading">
+      <div class="v-spinner"></div>
+      <div class="v-state-msg">Loading newsletter…</div>
+    </div>
+
+    <div class="v-state" id="v-error" style="display:none">
+      <div class="v-state-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/></svg>
+      </div>
+      <div class="v-state-title" id="v-error-title">Newsletter not found</div>
+      <div class="v-state-msg" id="v-error-msg">This newsletter may be unpublished or the link is incorrect.</div>
+      <a class="v-state-link" href="https://driverappreciationsolutions.com/publications.html" target="_blank" rel="noopener">About DAS Newsletters</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="js/pub-render.js"></script>
+  <script>
+  (function () {
+    var SUPABASE_URL = 'https://afqrwezmwfgwakgfdcty.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFmcXJ3ZXptd2Znd2FrZ2ZkY3R5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzkxOTQxODMsImV4cCI6MjA5NDc3MDE4M30.PAwlexLGMrC9Pat8N2ga_jCKnyUPItJFFNRBpItt4IM';
+
+    function $(id) { return document.getElementById(id); }
+    function showError(title, msg) {
+      $('v-loading').style.display = 'none';
+      $('v-frame').style.display = 'none';
+      if (title) $('v-error-title').textContent = title;
+      if (msg) $('v-error-msg').textContent = msg;
+      $('v-error').style.display = 'flex';
+    }
+
+    function getId() {
+      var p = new URLSearchParams(window.location.search);
+      return (p.get('id') || '').trim();
+    }
+
+    window.vPrint = function () {
+      var f = $('v-frame');
+      try { f.contentWindow.focus(); f.contentWindow.print(); }
+      catch (e) { window.print(); }
+    };
+
+    async function boot() {
+      var id = getId();
+      if (!id) { showError('No newsletter selected', 'This link is missing a newsletter id.'); return; }
+
+      if (!window.supabase || !window.supabase.createClient) {
+        showError('Could not load', 'The viewer failed to initialize. Please refresh.'); return;
+      }
+      if (!window.PubRender || !window.PubRender.buildNewsletterHTML) {
+        showError('Could not load', 'The renderer failed to initialize. Please refresh.'); return;
+      }
+
+      var sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      var row, error;
+      try {
+        var res = await sb.from('das_publications').select('*').eq('id', id).maybeSingle();
+        row = res.data; error = res.error;
+      } catch (e) { error = e; }
+
+      if (error) { showError('Could not load', 'Something went wrong loading this newsletter.'); return; }
+      if (!row)  { showError('Newsletter not found', 'This newsletter may be unpublished or the link is incorrect.'); return; }
+      if (row.status !== 'published') {
+        showError('Not published yet', 'This newsletter has not been published. Check back soon.'); return;
+      }
+
+      // header text
+      var label = window.PubRender.issueLabel ? window.PubRender.issueLabel(row) : '';
+      var titleText = row.title || 'Driver Newsletter';
+      $('v-title').textContent = titleText;
+      var company = (row.settings && row.settings.company_name) || '';
+      $('v-sub').textContent = [company, label].filter(Boolean).join(' · ') || 'Driver Appreciation Solutions';
+      document.title = titleText + ' — Driver Appreciation Solutions';
+
+      // render newsletter into the sandboxed frame
+      var html;
+      try { html = window.PubRender.buildNewsletterHTML(row); }
+      catch (e) { showError('Could not render', 'This newsletter could not be displayed.'); return; }
+
+      var frame = $('v-frame');
+      frame.srcdoc = html;
+      frame.onload = function () {
+        $('v-loading').style.display = 'none';
+        frame.style.display = 'block';
+        var actions = $('v-actions');
+        actions.style.display = 'flex';
+        if (row.pdf_url) {
+          var dl = $('v-download');
+          dl.href = row.pdf_url;
+          dl.style.display = 'inline-flex';
+        }
+      };
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+    else boot();
+  })();
+  </script>
+</body>
+</html>

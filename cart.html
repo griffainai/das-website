@@ -8,8 +8,11 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="icon" href="/images/logo.png" type="image/png">
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
 
@@ -94,13 +97,38 @@
       <div class="order-summary">
         <div class="order-summary-title">Order Summary</div>
 
+        <!-- ── Bundle-threshold nudge — populated by JS (hidden when threshold met or cart empty) ── -->
+        <div id="bundle-nudge" style="display:none;background:#FFFBEB;border:1px solid #FEF3C7;border-radius:10px;padding:10px 12px;margin-bottom:14px">
+          <p id="bundle-nudge-text" style="margin:0;font-size:0.75rem;font-weight:600;color:#92400E;line-height:1.4"></p>
+          <div style="margin-top:8px;height:6px;background:#FEF3C7;border-radius:3px;overflow:hidden">
+            <div id="bundle-nudge-bar" style="height:100%;background:#F59E0B;border-radius:3px;transition:width 0.3s ease;width:0%"></div>
+          </div>
+        </div>
+
+        <!-- ── Premium guarantee upsell — optional checkbox ── -->
+        <label id="premium-guarantee-row" style="display:none;align-items:flex-start;gap:10px;padding:10px 12px;border:1px dashed #E5E7EB;border-radius:10px;margin-bottom:14px;cursor:pointer">
+          <input type="checkbox" id="premium-guarantee-cb" style="margin-top:2px;width:16px;height:16px;accent-color:#1A2E6E;cursor:pointer">
+          <div style="flex:1;min-width:0">
+            <p style="margin:0;font-size:0.75rem;font-weight:700;color:#1A2E6E;letter-spacing:1px;text-transform:uppercase">Optional · Premium Guarantee</p>
+            <p style="margin:2px 0 0;font-size:0.8125rem;color:#374151;line-height:1.4">Add overnight replacement on damaged items + 1-year quality lock. <strong style="color:#1A2E6E">+10%</strong> of order subtotal.</p>
+          </div>
+        </label>
+
         <div class="order-line">
           <span>Subtotal</span>
           <strong id="summary-subtotal">$0.00</strong>
         </div>
+        <div class="order-line" id="bundle-discount-row" style="display:none">
+          <span style="color:#059669;font-weight:600">Bundle discount</span>
+          <strong style="color:#059669" id="summary-bundle-discount">−$0.00</strong>
+        </div>
+        <div class="order-line" id="guarantee-fee-row" style="display:none">
+          <span>Premium guarantee</span>
+          <strong id="summary-guarantee-fee">+$0.00</strong>
+        </div>
         <div class="order-line">
           <span>Shipping</span>
-          <strong style="color:var(--success)">Free</strong>
+          <strong>Calculated at checkout</strong>
         </div>
         <div class="order-line">
           <span>Taxes</span>
@@ -219,10 +247,78 @@ function renderCart() {
 
   wrap.innerHTML = header + rows;
 
-  const total = Cart.total();
-  document.getElementById('summary-subtotal').textContent = `$${total.toFixed(2)}`;
-  document.getElementById('summary-total').textContent    = `$${total.toFixed(2)}`;
+  const subtotal = Cart.total();
+  document.getElementById('summary-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+
+  // ── Bundle threshold mechanics (mirrors the portal's cart context) ──
+  const BUNDLE_THRESHOLD    = 575;
+  const BUNDLE_DISCOUNT_PCT = 0.15;
+  const GUARANTEE_PCT       = 0.10;
+
+  const qualified = subtotal >= BUNDLE_THRESHOLD;
+  const bundleDiscount = qualified ? Math.round(subtotal * BUNDLE_DISCOUNT_PCT * 100) / 100 : 0;
+  const amountToThreshold = qualified ? 0 : Math.round((BUNDLE_THRESHOLD - subtotal) * 100) / 100;
+
+  const nudge     = document.getElementById('bundle-nudge');
+  const nudgeText = document.getElementById('bundle-nudge-text');
+  const nudgeBar  = document.getElementById('bundle-nudge-bar');
+  if (qualified) {
+    nudge.style.display     = 'block';
+    nudge.style.background  = '#ECFDF5';
+    nudge.style.borderColor = '#A7F3D0';
+    nudgeText.style.color   = '#065F46';
+    nudgeText.textContent   = '✓ You unlocked 15% off this order — applied below.';
+    nudgeBar.style.background = '#10B981';
+    nudgeBar.style.width = '100%';
+  } else {
+    nudge.style.display     = 'block';
+    nudge.style.background  = '#FFFBEB';
+    nudge.style.borderColor = '#FEF3C7';
+    nudgeText.style.color   = '#92400E';
+    nudgeText.innerHTML     = `Add <strong>$${amountToThreshold.toFixed(2)}</strong> more to unlock <strong>15% off</strong> your order.`;
+    nudgeBar.style.background = '#F59E0B';
+    nudgeBar.style.width = Math.min(100, (subtotal / BUNDLE_THRESHOLD) * 100).toFixed(1) + '%';
+  }
+
+  const discountRow = document.getElementById('bundle-discount-row');
+  if (bundleDiscount > 0) {
+    discountRow.style.display = '';
+    document.getElementById('summary-bundle-discount').textContent = `−$${bundleDiscount.toFixed(2)}`;
+  } else {
+    discountRow.style.display = 'none';
+  }
+
+  // ── Premium guarantee row visibility + math ──
+  const guaranteeRow = document.getElementById('premium-guarantee-row');
+  const guaranteeCb  = document.getElementById('premium-guarantee-cb');
+  guaranteeRow.style.display = 'flex';
+
+  const postBundle    = subtotal - bundleDiscount;
+  const guaranteeOn   = !!(guaranteeCb && guaranteeCb.checked);
+  const guaranteeFee  = guaranteeOn ? Math.round(postBundle * GUARANTEE_PCT * 100) / 100 : 0;
+  const guaranteeRow2 = document.getElementById('guarantee-fee-row');
+  if (guaranteeOn) {
+    guaranteeRow2.style.display = '';
+    document.getElementById('summary-guarantee-fee').textContent = `+$${guaranteeFee.toFixed(2)}`;
+  } else {
+    guaranteeRow2.style.display = 'none';
+  }
+
+  const grandTotal = Math.round((postBundle + guaranteeFee) * 100) / 100;
+  document.getElementById('summary-total').textContent = `$${grandTotal.toFixed(2)}`;
+
+  // Expose for goToCheckout()
+  window.__dasCheckoutMeta = {
+    bundleDiscount:   bundleDiscount,
+    premiumGuarantee: guaranteeOn,
+    guaranteeFee:     guaranteeFee,
+  };
 }
+
+// Recompute when premium-guarantee checkbox toggles
+document.addEventListener('change', function (e) {
+  if (e.target && e.target.id === 'premium-guarantee-cb') renderCart();
+});
 
 function removeItem(id) { Cart.remove(id); renderCart(); }
 function changeQty(id, delta) {
@@ -237,6 +333,6 @@ window.addEventListener('das:cartchange', renderCart);
 document.addEventListener('DOMContentLoaded', renderCart);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 </body>
 </html>

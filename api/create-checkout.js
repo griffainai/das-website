@@ -23,7 +23,12 @@ module.exports = async (req, res) => {
   const Stripe = require('stripe');
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 
-  const { items } = req.body || {};
+  const body = req.body || {};
+  const { items } = body;
+  // Optional upsell metadata from the client (cart.html computes these)
+  const bundleDiscount    = Math.max(0, Number(body.bundleDiscount   || 0));
+  const guaranteeFee      = Math.max(0, Number(body.guaranteeFee     || 0));
+  const premiumGuarantee  = Boolean(body.premiumGuarantee);
 
   if (!Array.isArray(items) || items.length === 0) {
     return res.status(400).json({ error: 'Cart is empty' });
@@ -62,15 +67,76 @@ module.exports = async (req, res) => {
       quantity: item.qty,
     }));
 
+    // ── Premium guarantee — added as a Stripe line item so the buyer sees it
+    //    on the receipt and Stripe records it as a sold add-on. Server recomputes
+    //    fee from subtotal × 10% rather than trusting the client number, so
+    //    clients can't underpay by tampering with the request body.
+    if (premiumGuarantee) {
+      const subtotalCents = items.reduce((s, it) => s + Math.round(it.price * 100) * it.qty, 0);
+      const serverGuaranteeCents = Math.round(subtotalCents * 0.10);
+      if (serverGuaranteeCents >= 50) {
+        line_items.push({
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name: 'Premium Guarantee — 1-yr quality lock + overnight replacement',
+              description: '10% of order subtotal · optional add-on',
+            },
+            unit_amount: serverGuaranteeCents,
+          },
+          quantity: 1,
+        });
+      }
+    }
+
+    // ── Bundle discount — applied via Stripe Coupon (created on the fly).
+    //    Re-computed server-side: only valid when subtotal >= $575.
+    //    15% off the entire order.
+    const bundleEligibleSubtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
+    const bundleApplies = bundleEligibleSubtotal >= 575;
+    let discountsArg = undefined;
+    if (bundleApplies) {
+      const coupon = await stripe.coupons.create({
+        percent_off: 15,
+        duration:    'once',
+        name:        'Bundle Discount — 15% off (Aug 7 promotion)',
+      });
+      discountsArg = [{ coupon: coupon.id }];
+    }
+
     const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
 
-    const session = await stripe.checkout.sessions.create({
+    const sessionConfig = {
       line_items,
       mode:                       'payment',
       success_url:                `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:                 `${siteUrl}/cart.html`,
-      billing_address_collection: 'required',
+      billing_address_collection:  'required',
       shipping_address_collection: { allowed_countries: ['US', 'CA'] },
+      shipping_options: [
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 1295, currency: 'usd' },
+            display_name: 'Standard Shipping',
+            delivery_estimate: {
+              minimum: { unit: 'business_day', value: 3 },
+              maximum: { unit: 'business_day', value: 5 },
+            },
+          },
+        },
+        {
+          shipping_rate_data: {
+            type: 'fixed_amount',
+            fixed_amount: { amount: 2495, currency: 'usd' },
+            display_name: 'Expedited Shipping',
+            delivery_estimate: {
+              minimum: { unit: 'business_day', value: 1 },
+              maximum: { unit: 'business_day', value: 2 },
+            },
+          },
+        },
+      ],
       allow_promotion_codes:       true,
       custom_text: {
         submit: {
@@ -78,10 +144,17 @@ module.exports = async (req, res) => {
         },
       },
       metadata: {
-        order_source: 'das-website-cart',
-        item_count:   String(items.length),
+        order_source:      'das-website-cart',
+        item_count:        String(items.length),
+        bundle_applied:    bundleApplies ? '1' : '0',
+        premium_guarantee: premiumGuarantee ? '1' : '0',
       },
-    });
+    };
+
+    // Apply bundle discount coupon if eligible (15% off entire order)
+    if (discountsArg) sessionConfig.discounts = discountsArg;
+
+    const session = await stripe.checkout.sessions.create(sessionConfig);
 
     return res.status(200).json({ url: session.url });
 

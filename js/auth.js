@@ -78,6 +78,17 @@ function onAuthReady(callback) {
   });
 }
 
+// Audit P2-AUTH-008 — open-redirect defense for returnUrl param.
+// Only same-origin absolute paths are accepted; anything else (full URLs,
+// protocol-relative `//evil.com`, etc.) falls back to the safe default.
+function safeReturnPath(raw) {
+  if (typeof raw !== 'string' || raw.length === 0) return '/account';
+  if (raw.startsWith('//')) return '/account';        // protocol-relative
+  if (!raw.startsWith('/'))  return '/account';        // not an absolute path
+  if (raw.includes('://'))   return '/account';        // sneaky encoded URL
+  return raw;
+}
+
 // ─────────────────────────────────────────────
 // SIGN IN WITH GOOGLE (OAuth redirect)
 // ─────────────────────────────────────────────
@@ -85,7 +96,7 @@ async function signInWithGoogle() {
   const sb = getSupabase();
   if (!sb) { showAuthError('Auth not configured. Contact support.'); return; }
 
-  const returnUrl = new URLSearchParams(window.location.search).get('returnUrl') || '/account.html';
+  const returnUrl  = safeReturnPath(new URLSearchParams(window.location.search).get('returnUrl'));
   const redirectTo = window.location.origin + returnUrl;
 
   const { error } = await sb.auth.signInWithOAuth({
@@ -134,6 +145,8 @@ async function createAccount(email, password, displayName, companyName) {
         display_name: displayName,
         company_name: companyName,
       },
+      // Where Supabase sends the user after they click the confirmation link.
+      emailRedirectTo: window.location.origin + '/account',
     },
   });
 
@@ -143,10 +156,84 @@ async function createAccount(email, password, displayName, companyName) {
     return;
   }
 
-  // Supabase sends a confirmation email automatically when email confirmations are enabled
-  const user = data.user;
+  // Supabase contract:
+  //   - If the project requires email confirmation → data.session is null,
+  //     data.user exists but is unconfirmed. We MUST NOT redirect them to a
+  //     gated page. Show "check your email" instead.
+  //   - If email confirmation is OFF → data.session exists, log them straight in.
+  const user    = data.user;
+  const session = data.session;
+
+  if (user && !session) {
+    // Pending email verification — render an inline confirmation card.
+    showEmailVerificationPending(email);
+    return;
+  }
+
   if (user) storeUserSession(_normalizeUser(user), { companyName });
   redirectToAccount();
+}
+
+// ─────────────────────────────────────────────
+// EMAIL VERIFICATION — pending state UI
+// Replaces the signup form with a "check your inbox" card. Resend button
+// uses Supabase's resend() to send a fresh confirmation email.
+// ─────────────────────────────────────────────
+function showEmailVerificationPending(email) {
+  const form = document.getElementById('signup-form');
+  const card = document.querySelector('.auth-card');
+  if (!form || !card) {
+    // Fallback — at least alert the user instead of silently leaving them on the form
+    showAuthError('Check your email to confirm your account before signing in.');
+    return;
+  }
+
+  form.style.display = 'none';
+
+  const pending = document.createElement('div');
+  pending.id = 'das-verify-pending';
+  pending.style.cssText = 'padding:24px 0;text-align:center';
+  pending.innerHTML = ''
+    + '<div style="width:56px;height:56px;border-radius:50%;background:rgba(26,46,110,0.08);'
+    +   'display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:28px">✉️</div>'
+    + '<h2 style="font-size:1.25rem;font-weight:700;color:#111;margin:0 0 8px">Check your inbox</h2>'
+    + '<p style="font-size:0.9375rem;color:#374151;line-height:1.6;margin:0 0 20px">'
+    +   'We sent a confirmation link to <strong>' + escapeHtmlText(email) + '</strong>. '
+    +   'Click the link in that email to activate your account, then come back and sign in.'
+    + '</p>'
+    + '<p style="font-size:0.8125rem;color:#6B7280;margin:0 0 16px">Tip: check Spam / Promotions if you don\'t see it in 60 seconds.</p>'
+    + '<button id="das-verify-resend" type="button" class="btn btn-secondary btn-sm" style="margin-right:8px">Resend confirmation</button>'
+    + '<a href="/login" class="btn btn-primary btn-sm">Back to sign in</a>'
+    + '<p id="das-verify-resend-status" style="font-size:0.75rem;color:#059669;margin:14px 0 0;min-height:18px"></p>';
+  card.appendChild(pending);
+
+  document.getElementById('das-verify-resend').addEventListener('click', async function () {
+    const btn = this;
+    const status = document.getElementById('das-verify-resend-status');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    status.textContent = '';
+    try {
+      const sb = getSupabase();
+      if (!sb) throw new Error('Auth not configured');
+      const { error } = await sb.auth.resend({ type: 'signup', email: email });
+      if (error) throw error;
+      status.style.color = '#059669';
+      status.textContent = 'Sent — check your inbox again.';
+    } catch (err) {
+      status.style.color = '#B91C1C';
+      status.textContent = (err && err.message) || 'Could not resend — please try again.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Resend confirmation';
+    }
+  });
+}
+
+function escapeHtmlText(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, function (ch) {
+    return ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[ch];
+  });
 }
 
 // ─────────────────────────────────────────────
@@ -179,7 +266,7 @@ async function signOut() {
     if (error) console.error('[DAS Auth] Sign out error:', error);
   }
   clearUserSession();
-  window.location.href = 'login.html';
+  window.location.href = '/login';
 }
 
 // ─────────────────────────────────────────────
@@ -208,11 +295,11 @@ function clearUserSession() {
 }
 
 function redirectToAccount() {
-  const returnUrl = new URLSearchParams(window.location.search).get('returnUrl');
-  window.location.href = returnUrl || 'account.html';
+  const returnUrl = safeReturnPath(new URLSearchParams(window.location.search).get('returnUrl'));
+  window.location.href = returnUrl;
 }
 
-function requireAuth(redirectTo = 'login.html') {
+function requireAuth(redirectTo = '/login') {
   onAuthReady(user => {
     if (!user) {
       const current = encodeURIComponent(window.location.pathname + window.location.search);
@@ -224,7 +311,7 @@ function requireAuth(redirectTo = 'login.html') {
   });
 }
 
-function redirectIfAuthed(to = 'account.html') {
+function redirectIfAuthed(to = '/account') {
   onAuthReady(user => {
     if (user) window.location.href = to;
   });
@@ -234,19 +321,63 @@ function redirectIfAuthed(to = 'account.html') {
 // NAV — update login/account button across site
 // ─────────────────────────────────────────────
 function renderAuthNav(user) {
-  const navActions = document.querySelector('.nav-actions');
-  if (!navActions) return;
-
-  const loginBtn = navActions.querySelector('.nav-login-btn');
-  if (!loginBtn) return;
-
   if (user) {
     const initials = (user.displayName || user.email || 'U')
-      .split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    loginBtn.innerHTML = `
-      <span style="width:32px;height:32px;border-radius:50%;background:var(--gold);color:#fff;font-size:0.8125rem;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0">${initials}</span>
-      <span>My Account</span>`;
-    loginBtn.href = 'account.html';
+      .split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const avatarHTML =
+      `<span style="width:32px;height:32px;border-radius:50%;background:var(--gold);` +
+      `color:#fff;font-size:0.8125rem;font-weight:700;display:flex;align-items:center;` +
+      `justify-content:center;flex-shrink:0">${initials}</span>`;
+
+    // ── Desktop nav button ──────────────────────
+    const desktopBtn = document.querySelector('.nav-actions .nav-login-btn');
+    if (desktopBtn) {
+      desktopBtn.innerHTML = `${avatarHTML}<span>My Account</span>`;
+      desktopBtn.href = '/account';
+      desktopBtn.removeAttribute('onclick');
+      desktopBtn.onclick = e => { e.preventDefault(); window.location.href = '/account'; };
+    }
+
+    // ── Mobile drawer button ────────────────────
+    const drawerBtn = document.getElementById('drawer-auth-btn');
+    if (drawerBtn) {
+      drawerBtn.innerHTML = `${avatarHTML}<span>My Account</span>`;
+      drawerBtn.href = '/account';
+      drawerBtn.removeAttribute('onclick');
+      drawerBtn.onclick = e => {
+        e.preventDefault();
+        // Close drawer using same selectors as cart.js closeNav()
+        document.querySelector('.mobile-drawer')?.classList.remove('open');
+        document.querySelector('.mobile-overlay')?.classList.remove('open');
+        document.body.style.overflow = '';
+        window.location.href = '/account';
+      };
+    }
+
+  } else {
+    // ── Signed out — restore Sign In state ─────
+    const personIcon =
+      `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" ` +
+      `stroke-width="2" stroke="currentColor" style="width:15px;height:15px;flex-shrink:0">` +
+      `<path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 ` +
+      `0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 ` +
+      `21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>`;
+
+    const desktopBtn = document.querySelector('.nav-actions .nav-login-btn');
+    if (desktopBtn) {
+      desktopBtn.innerHTML = 'Sign In';
+      desktopBtn.href = '/login';
+      desktopBtn.onclick = null;
+      desktopBtn.removeAttribute('onclick');
+    }
+
+    const drawerBtn = document.getElementById('drawer-auth-btn');
+    if (drawerBtn) {
+      drawerBtn.innerHTML = `${personIcon}Sign In`;
+      drawerBtn.href = '/login';
+      drawerBtn.onclick = null;
+      drawerBtn.removeAttribute('onclick');
+    }
   }
 }
 
@@ -307,9 +438,33 @@ function togglePasswordVisibility(inputId, btn) {
 // ─────────────────────────────────────────────
 // INIT ON PAGE LOAD
 // ─────────────────────────────────────────────
-document.addEventListener('DOMContentLoaded', () => {
-  // Update nav auth button on every page
-  onAuthReady(user => {
-    if (user) renderAuthNav(user);
-  });
+document.addEventListener('DOMContentLoaded', async () => {
+  // ── PRIMARY: fetch auth status from the portal API ─────────────────────────
+  // The portal uses @supabase/ssr createBrowserClient which stores sessions in
+  // COOKIES (not localStorage) so they can be read server-side by SSR components.
+  // The standard CDN Supabase client below reads localStorage only — the two
+  // storage mechanisms are completely separate. We fix this by calling
+  // /api/auth/status, which runs on the same origin, reads the cookie-based
+  // session server-side, and returns a JSON payload the nav can use.
+  try {
+    const res = await fetch('/api/auth/status', { credentials: 'include' });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.authenticated) {
+        renderAuthNav({
+          uid:         '',
+          email:       data.email,
+          displayName: data.displayName,
+          photoURL:    data.avatarUrl,
+          emailVerified: true,
+        });
+        return; // nav is rendered — no need to check localStorage below
+      }
+    }
+    // Not authenticated (or request failed) — show signed-out state
+    renderAuthNav(null);
+  } catch (err) {
+    console.warn('[DAS Auth] status check error:', err.message);
+    renderAuthNav(null);
+  }
 });

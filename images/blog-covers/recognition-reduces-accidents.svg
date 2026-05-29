@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">23% Fewer Accidents — Driver Recognition &amp; Road Safety</title>
+  <desc id="desc">Editorial cover for the DAS article on the correlation between driver recognition and accident reduction.</desc>
+
+  <!-- Base canvas: deep DAS navy. Single flat surface — no gradient (anti-AI-slop). -->
+  <rect width="1200" height="675" fill="#1A2E6E"/>
+
+  <!-- Quiet lane-marker grid evoking a highway, low opacity so type leads. -->
+  <g opacity="0.10" stroke="#FFFFFF" stroke-width="2">
+    <line x1="0"    y1="540" x2="1200" y2="540"/>
+    <line x1="0"    y1="600" x2="1200" y2="600"/>
+  </g>
+  <g opacity="0.22" fill="#FFFFFF">
+    <rect x="80"   y="569" width="60" height="3"/>
+    <rect x="220"  y="569" width="60" height="3"/>
+    <rect x="360"  y="569" width="60" height="3"/>
+    <rect x="500"  y="569" width="60" height="3"/>
+    <rect x="640"  y="569" width="60" height="3"/>
+    <rect x="780"  y="569" width="60" height="3"/>
+    <rect x="920"  y="569" width="60" height="3"/>
+    <rect x="1060" y="569" width="60" height="3"/>
+  </g>
+
+  <!-- Hairline divider above eyebrow label. -->
+  <line x1="80" y1="125" x2="180" y2="125" stroke="#8B9BAC" stroke-width="2"/>
+
+  <!-- Eyebrow / category label. -->
+  <text x="80" y="160"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="20" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    SAFETY &amp; ROI
+  </text>
+
+  <!-- Lead stat — the article's hook. -->
+  <text x="80" y="380"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="260" font-weight="800" letter-spacing="-12" fill="#FFFFFF">
+    23<tspan font-size="160" dx="-4" dy="-30">%</tspan>
+  </text>
+
+  <!-- Sub-headline. -->
+  <text x="80" y="450"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="40" font-weight="700" letter-spacing="-0.5" fill="#FFFFFF">
+    fewer accidents
+  </text>
+
+  <!-- Supporting line. -->
+  <text x="80" y="495"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="22" font-weight="500" letter-spacing="0" fill="#B7C2D4">
+    when drivers feel recognized at work
+  </text>
+
+  <!-- DAS wordmark, lower-right corner. -->
+  <text x="1120" y="640"
+        text-anchor="end"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="3" fill="#8B9BAC">
+    DAS / IDEAS
+  </text>
+</svg>

@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
@@ -353,6 +353,8 @@
     @media (max-width: 960px) { .featured-post { grid-template-columns: 1fr; } .featured-img-wrap { min-height: 260px; } .insight-strip-inner { grid-template-columns: 1fr 1fr; } .newsletter-inner { grid-template-columns: 1fr; } }
     @media (max-width: 640px) { .article-grid { grid-template-columns: 1fr; } .featured-content { padding: 28px 24px; } .blog-stats { gap: 20px; } .insight-item { padding: 24px 20px; } .blog-sidebar { grid-template-columns: 1fr; } }
   </style>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
 </head>
 <body>
 
@@ -476,8 +478,8 @@
       <!-- Card 1: Safety & ROI -->
       <a href="blog/recognition-reduces-accidents.html" class="article-card" data-cats="safety">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600&q=70&fit=crop"
-               alt="Fleet safety dashboard data"
+          <img src="images/blog-covers/recognition-reduces-accidents.svg"
+               alt="23% fewer accidents when drivers feel recognized — DAS editorial cover"
                loading="lazy"
                onerror="this.style.display='none'">
         </div>
@@ -498,8 +500,8 @@
       <!-- Card 2: Retention - ROI -->
       <a href="blog/roi-of-recognition.html" class="article-card" data-cats="retention">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=70&fit=crop"
-               alt="Fleet manager reviewing ROI data"
+          <img src="images/blog-covers/roi-of-recognition.svg"
+               alt="$110 per driver per year versus $20K to replace one — DAS editorial cover"
                loading="lazy"
                onerror="this.style.display='none'">
         </div>
@@ -520,8 +522,8 @@
       <!-- Card 3: Retention - Turnover -->
       <a href="blog/cost-of-driver-turnover.html" class="article-card" data-cats="retention">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=70&fit=crop"
-               alt="Financial cost analysis and business planning"
+          <img src="images/blog-covers/cost-of-driver-turnover.svg"
+               alt="Driver turnover costs run 40–60% higher than most fleets estimate — DAS editorial cover"
                loading="lazy"
                onerror="this.style.display='none'">
         </div>
@@ -542,8 +544,8 @@
       <!-- Card 4: Onboarding -->
       <a href="blog/first-30-days-onboarding.html" class="article-card" data-cats="onboarding">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=70&fit=crop"
-               alt="New driver onboarding and orientation process"
+          <img src="images/blog-covers/first-30-days-onboarding.svg"
+               alt="First 30 days when driver retention is decided — DAS editorial cover"
                loading="lazy"
                onerror="this.style.display='none'">
         </div>
@@ -564,8 +566,8 @@
       <!-- Card 5: Planning - Calendar -->
       <a href="blog/year-round-recognition-calendar.html" class="article-card" data-cats="planning">
         <div class="card-img-wrap">
-          <img src="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=70&fit=crop"
-               alt="Driver appreciation kit and recognition program materials"
+          <img src="images/blog-covers/year-round-recognition-calendar.svg"
+               alt="52 weeks of driver recognition rhythm — DAS editorial cover"
                loading="lazy"
                onerror="this.style.display='none'">
         </div>
@@ -624,7 +626,7 @@
           <div class="sidebar-daw">
             <div class="sidebar-daw-date">
               <span class="sidebar-daw-dot"></span>
-              Sep 7 – 13, 2026
+              Sep 13 – 19, 2026
             </div>
             <div class="sidebar-daw-title">Driver Appreciation Week</div>
             <div class="sidebar-daw-timer">
@@ -665,7 +667,7 @@
               <div class="sidebar-cal-dot scd-active"></div>
               <div class="sidebar-cal-info">
                 <div class="sidebar-cal-name">Driver Appreciation Week</div>
-                <div class="sidebar-cal-when">Sep 7–13, 2026 · Order by Aug 7</div>
+                <div class="sidebar-cal-when">Sep 13–19, 2026 · Order by Aug 7</div>
               </div>
               <span class="sidebar-cal-badge scbadge-live">Live</span>
             </div>
@@ -980,11 +982,11 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 })();
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 <script>
   // Sidebar DAW countdown
   (function() {
-    const TARGET = new Date('2026-09-07T00:00:00').getTime();
+    const TARGET = new Date('2026-09-13T00:00:00').getTime();
     function pad(n) { return String(n).padStart(2, '0'); }
     function tickSidebar() {
       const diff = TARGET - Date.now();

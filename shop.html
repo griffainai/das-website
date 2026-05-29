@@ -19,7 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
@@ -82,7 +82,7 @@
               "description": "Curated seasonal package for drivers — premium contents selected to show appreciation during the holiday season with a personal touch.",
               "image": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop",
               "url": "https://driverappreciationsolutions.com/product.html?id=das-004",
-              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "1.00", "availability": "https://schema.org/InStock" }
+              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "54.99", "availability": "https://schema.org/InStock" }
             }
           },
           {
@@ -101,6 +101,9 @@
     ]
   }
   </script>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
 
@@ -342,7 +345,7 @@
 
         <div class="product-card"
              data-product-id="das-004" data-product-name="Holiday Gift Set"
-             data-product-price="1.00" data-product-category="Milestone Gifts"
+             data-product-price="54.99" data-product-category="Milestone Gifts"
              data-product-image="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop"
              data-product-min-qty="10" data-filter-cat="milestone">
           <a href="product.html?id=das-004" style="text-decoration:none;color:inherit;display:block">
@@ -366,7 +369,7 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$1.00</span>
+                <span class="product-price-amount">$54.99</span>
                 <span class="product-price-unit">per unit · min. 10</span>
               </div>
               <div class="product-card-actions">
@@ -512,6 +515,6 @@ if (catParam) {
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 </body>
 </html>

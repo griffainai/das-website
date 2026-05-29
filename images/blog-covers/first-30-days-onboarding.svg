@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">First 30 Days — When Driver Retention Is Decided</title>
+  <desc id="desc">Editorial cover laying out a 30-cell calendar grid with key onboarding moments highlighted in DAS navy.</desc>
+
+  <!-- Off-white surface, navy ink. -->
+  <rect width="1200" height="675" fill="#F7F8FA"/>
+
+  <!-- Eyebrow. -->
+  <line x1="80" y1="100" x2="180" y2="100" stroke="#1A2E6E" stroke-width="2"/>
+  <text x="80" y="135"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="18" font-weight="700" letter-spacing="3" fill="#1A2E6E">
+    ONBOARDING
+  </text>
+
+  <!-- Hook. -->
+  <text x="80" y="240"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="84" font-weight="800" letter-spacing="-3" fill="#1A2E6E">
+    First 30 days.
+  </text>
+  <text x="80" y="295"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="34" font-weight="600" letter-spacing="-0.5" fill="#1A2E6E" opacity="0.72">
+    5 things new drivers notice before you ever notice them.
+  </text>
+
+  <!-- ── 30-cell grid: 10 columns x 3 rows = days 1–30. Days 1, 7, 14, 30 highlighted. ─ -->
+  <g transform="translate(80, 380)">
+    <!-- Row 1: Days 1–10 -->
+    <g>
+      <!-- Day numbers row -->
+      <g font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#8B9BAC">
+        <text x="22" y="-12" text-anchor="middle">1</text>
+        <text x="74" y="-12" text-anchor="middle">2</text>
+        <text x="126" y="-12" text-anchor="middle">3</text>
+        <text x="178" y="-12" text-anchor="middle">4</text>
+        <text x="230" y="-12" text-anchor="middle">5</text>
+        <text x="282" y="-12" text-anchor="middle">6</text>
+        <text x="334" y="-12" text-anchor="middle">7</text>
+        <text x="386" y="-12" text-anchor="middle">8</text>
+        <text x="438" y="-12" text-anchor="middle">9</text>
+        <text x="490" y="-12" text-anchor="middle">10</text>
+      </g>
+      <!-- Day 1: highlight -->
+      <rect x="0"   y="0" width="44" height="44" fill="#1A2E6E"/>
+      <rect x="52"  y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="104" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="156" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="208" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="260" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <!-- Day 7: highlight -->
+      <rect x="312" y="0" width="44" height="44" fill="#1A2E6E"/>
+      <rect x="364" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="416" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="468" y="0" width="44" height="44" fill="#E8F3FF"/>
+    </g>
+    <!-- Row 2: Days 11–20 -->
+    <g transform="translate(0, 68)">
+      <g font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#8B9BAC">
+        <text x="22" y="-12" text-anchor="middle">11</text>
+        <text x="74" y="-12" text-anchor="middle">12</text>
+        <text x="126" y="-12" text-anchor="middle">13</text>
+        <text x="178" y="-12" text-anchor="middle">14</text>
+        <text x="230" y="-12" text-anchor="middle">15</text>
+        <text x="282" y="-12" text-anchor="middle">16</text>
+        <text x="334" y="-12" text-anchor="middle">17</text>
+        <text x="386" y="-12" text-anchor="middle">18</text>
+        <text x="438" y="-12" text-anchor="middle">19</text>
+        <text x="490" y="-12" text-anchor="middle">20</text>
+      </g>
+      <rect x="0"   y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="52"  y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="104" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <!-- Day 14: highlight -->
+      <rect x="156" y="0" width="44" height="44" fill="#1A2E6E"/>
+      <rect x="208" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="260" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="312" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="364" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="416" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="468" y="0" width="44" height="44" fill="#E8F3FF"/>
+    </g>
+    <!-- Row 3: Days 21–30 -->
+    <g transform="translate(0, 136)">
+      <g font-family="'Inter',system-ui,sans-serif" font-size="11" font-weight="600" letter-spacing="1" fill="#8B9BAC">
+        <text x="22" y="-12" text-anchor="middle">21</text>
+        <text x="74" y="-12" text-anchor="middle">22</text>
+        <text x="126" y="-12" text-anchor="middle">23</text>
+        <text x="178" y="-12" text-anchor="middle">24</text>
+        <text x="230" y="-12" text-anchor="middle">25</text>
+        <text x="282" y="-12" text-anchor="middle">26</text>
+        <text x="334" y="-12" text-anchor="middle">27</text>
+        <text x="386" y="-12" text-anchor="middle">28</text>
+        <text x="438" y="-12" text-anchor="middle">29</text>
+        <text x="490" y="-12" text-anchor="middle">30</text>
+      </g>
+      <rect x="0"   y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="52"  y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="104" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="156" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="208" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="260" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="312" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="364" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <rect x="416" y="0" width="44" height="44" fill="#E8F3FF"/>
+      <!-- Day 30: highlight -->
+      <rect x="468" y="0" width="44" height="44" fill="#1A2E6E"/>
+    </g>
+  </g>
+
+  <!-- DAS wordmark. -->
+  <text x="1120" y="640" text-anchor="end"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="3" fill="#8B9BAC">
+    DAS / IDEAS
+  </text>
+</svg>
