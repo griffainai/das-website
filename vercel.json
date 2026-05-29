@@ -8,12 +8,6 @@
     { "source": "/api/billing-portal",   "destination": "/api/portal?action=billing-portal" },
     { "source": "/api/stripe-webhook",   "destination": "/api/portal?action=stripe-webhook" }
   ],
-  "functions": {
-    "api/publications-generate.js": {
-      "memory": 1769,
-      "maxDuration": 60
-    }
-  },
   "headers": [
     {
       "source": "/(.*)",

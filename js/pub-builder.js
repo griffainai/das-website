@@ -5,8 +5,8 @@
    Browser-side. Talks to Supabase DIRECTLY as the logged-in user
    (getSupabase() → authenticated CDN client). RLS + the owner-scoped
    storage policies (migration 024) are the security boundary, so no
-   service-role key ever touches the client. The ONE server call is the
-   optional PDF render (/api/publications-generate).
+   service-role key ever touches the client. PDF export is fully
+   client-side (window.PubPDF, js/pub-pdf.js) — no server call.
 
    Globals it relies on (all defined before this runs):
      getSupabase, currentUser           (js/auth.js)
@@ -14,6 +14,7 @@
      PortalAccount                      (js/portal.js)
      openModal, closeModal, escapeHtmlText, navigate  (account.html inline)
      PubRender                          (js/pub-render.js)
+     PubPDF                             (js/pub-pdf.js)
    ============================================================= */
 
 /* ---- data layer: runs AS THE USER (RLS enforced) ---- */
@@ -64,19 +65,6 @@ const PubStore = {
       .upload(path, file, { contentType: file.type || 'image/jpeg', upsert: false });
     if (error) throw new Error(error.message || 'Upload failed.');
     return sb.storage.from('publication-assets').getPublicUrl(path).data.publicUrl;
-  },
-  async generate(id) {
-    const sb = this.sb();
-    const { data: { session } } = await sb.auth.getSession();
-    if (!session) throw new Error('Session expired — please sign in again.');
-    const res = await fetch('/api/publications-generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session.access_token },
-      body: JSON.stringify({ id: id }),
-    });
-    const j = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(j.error || ('PDF failed (HTTP ' + res.status + ')'));
-    return j;
   },
 };
 
@@ -375,19 +363,20 @@ function pubOpenPublic() {
 
 async function pubGenerate() {
   if (!pubCurrent || !pubCurrent.id) return;
+  if (!window.PubPDF || !window.PubPDF.download) {
+    pubToast('PDF tools are still loading — try again in a moment.', 'error');
+    return;
+  }
   const btn = document.getElementById('pb-gen-btn');
-  if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Generating…'; }
+  if (btn) { btn.disabled = true; btn.dataset.label = btn.textContent; btn.textContent = 'Preparing…'; }
   try {
-    await pubSaveNow();
-    const j = await PubStore.generate(pubCurrent.id);
-    if (j && j.pdf_url) pubCurrent.pdf_url = j.pdf_url;
-    pubCurrent.status = 'published';
-    pubSyncHeader();
-    pubToast('PDF ready — download is in the toolbar.', 'success');
+    await pubSaveNow();                       // persist the latest edits into pubCurrent + DB
+    await window.PubPDF.download(pubCurrent);  // build the .pdf in-browser and save it to Downloads
+    pubToast('Downloaded — check your Downloads folder.', 'success');
   } catch (e) {
-    pubToast(e.message || 'PDF generation failed', 'error');
+    pubToast(e.message || 'Could not create the PDF.', 'error');
   } finally {
-    if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Generate PDF'; }
+    if (btn) { btn.disabled = false; btn.textContent = btn.dataset.label || 'Download PDF'; }
   }
 }
 
