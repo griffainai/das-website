@@ -147,7 +147,7 @@ module.exports = async (req, res) => {
       const coupon = await stripe.coupons.create({
         percent_off: 15,
         duration:    'once',
-        name:        'Bundle Discount — 15% off (Aug 7 promotion)',
+        name:        'Bundle Discount 15% off',   // Stripe coupon name max = 40 chars
       });
       discountsArg = [{ coupon: coupon.id }];
     }
