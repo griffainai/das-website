@@ -214,7 +214,6 @@ module.exports = async (req, res) => {
           },
         },
       ],
-      allow_promotion_codes:       true,
       custom_text: {
         submit: {
           message: 'Orders ship within 3–5 business days. Minimum 10 units per product.',
@@ -231,8 +230,12 @@ module.exports = async (req, res) => {
       },
     };
 
-    // Apply bundle discount coupon if eligible (15% off entire order)
+    // Apply bundle discount coupon if eligible (15% off entire order).
+    // NOTE: Stripe forbids combining `discounts` with `allow_promotion_codes`
+    // in the same session — set only one. Auto bundle discount wins; otherwise
+    // let the buyer enter a promo code.
     if (discountsArg) sessionConfig.discounts = discountsArg;
+    else              sessionConfig.allow_promotion_codes = true;
 
     // ── Authenticated buyer → create the order row UP-FRONT (status
     //    payment_pending) so it appears in their portal immediately and the
