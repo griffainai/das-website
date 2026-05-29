@@ -367,32 +367,53 @@ const PortalInvoices = {
 };
 
 /* ════════════════════════════════════════════
+   Portal API helper — POST an action to /api/portal with the user's
+   Supabase access token. Server-side handlers insert with the service
+   role and fire admin email notifications (so notifications can't be
+   skipped by the client). Returns parsed JSON or throws.
+════════════════════════════════════════════ */
+async function _portalApi(action, body) {
+  const sb = PortalData.sb();
+  let token = null;
+  if (sb) { try { const { data } = await sb.auth.getSession(); token = data && data.session && data.session.access_token; } catch {} }
+  const resp = await fetch('/api/portal?action=' + encodeURIComponent(action), {
+    method:  'POST',
+    headers: { 'Content-Type': 'application/json', ...(token ? { Authorization: 'Bearer ' + token } : {}) },
+    body:    JSON.stringify(body || {}),
+  });
+  let data = null;
+  try { data = await resp.json(); } catch {}
+  if (!resp.ok) throw new Error((data && data.error) || ('HTTP ' + resp.status));
+  return data;
+}
+
+/* ════════════════════════════════════════════
    Quotes (quotes)
 ════════════════════════════════════════════ */
 const PortalQuotes = {
   get() { return PortalData.cache.quotes; },
   async add(q) {
-    const sb = PortalData.sb();
     const optimistic = { id: 'tmp-' + uid(), createdAt: new Date().toISOString(), productType: q.productType || 'General', status: 'submitted' };
     PortalData.cache.quotes.unshift(optimistic);
     _rerender('quotes');
-    if (!sb || !PortalData.companyId) { _toast('Not linked to a company yet — quote saved locally only.', 'error'); return optimistic; }
     const notes = [q.notes, q.fleetSize ? ('Fleet size: ' + q.fleetSize) : '']
       .map(s => (s || '').toString().trim()).filter(Boolean).join(' — ') || null;
-    const { data, error } = await sb.from('quotes').insert({
-      company_id:        PortalData.companyId,
-      user_id:           PortalData.userId,
-      type:              q.productType || 'General',
-      driver_count:      parseInt(q.quantity, 10) || null,
-      budget_per_driver: parseInt(q.budget, 10) || null,
-      timeline:          q.timing || null,
-      notes:             notes,
-      status:            'submitted',
-    }).select().single();
-    if (error) { _toast('Could not submit quote.', 'error'); await PortalData.refresh('quotes', mapQuote, 'quotes', 'quotes'); return null; }
-    optimistic.id = data.id;
-    _rerender('quotes');
-    return optimistic;
+    try {
+      const res = await _portalApi('submit-quote', {
+        type:              q.productType || 'General',
+        driver_count:      parseInt(q.quantity, 10) || null,
+        budget_per_driver: parseInt(q.budget, 10) || null,
+        timeline:          q.timing || null,
+        notes:             notes,
+      });
+      if (res && res.quote && res.quote.id) optimistic.id = res.quote.id;
+      _rerender('quotes');
+      return optimistic;
+    } catch (err) {
+      _toast('Could not submit quote.', 'error');
+      await PortalData.refresh('quotes', mapQuote, 'quotes', 'quotes');
+      return null;
+    }
   },
 };
 
@@ -402,26 +423,26 @@ const PortalQuotes = {
 const PortalTickets = {
   get() { return PortalData.cache.tickets; },
   async add(t) {
-    const sb = PortalData.sb();
     const optimistic = { id: 'tmp-' + uid(), createdAt: new Date().toISOString(), subject: t.subject, priority: t.priority || 'normal', status: 'open' };
     PortalData.cache.tickets.unshift(optimistic);
     _rerender('support');
-    if (!sb || !PortalData.companyId) { _toast('Not linked to a company yet — ticket saved locally only.', 'error'); return optimistic; }
     const message = [t.message, t.orderId ? ('Related order: ' + t.orderId) : '']
       .map(s => (s || '').toString().trim()).filter(Boolean).join('\n\n');
-    const { data, error } = await sb.from('support_tickets').insert({
-      company_id: PortalData.companyId,
-      user_id:    PortalData.userId,
-      subject:    t.subject,
-      message:    message,
-      category:   'general',
-      priority:   t.priority || 'normal',
-      status:     'open',
-    }).select().single();
-    if (error) { _toast('Could not submit ticket.', 'error'); await PortalData.refresh('support_tickets', mapTicket, 'tickets', 'support'); return null; }
-    optimistic.id = data.id;
-    _rerender('support');
-    return optimistic;
+    try {
+      const res = await _portalApi('submit-ticket', {
+        subject:  t.subject,
+        message:  message,
+        category: 'general',
+        priority: t.priority || 'normal',
+      });
+      if (res && res.ticket && res.ticket.id) optimistic.id = res.ticket.id;
+      _rerender('support');
+      return optimistic;
+    } catch (err) {
+      _toast('Could not submit ticket.', 'error');
+      await PortalData.refresh('support_tickets', mapTicket, 'tickets', 'support');
+      return null;
+    }
   },
 };
 

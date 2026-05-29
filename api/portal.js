@@ -105,6 +105,110 @@ async function sendLeadNotification(lead) {
   }
 }
 
+/* -------------------------------------------------------------------
+   Generic admin notification (Resend). Recipient resolution order:
+     DAS_NOTIFY_EMAIL  →  ADMIN_EMAILS (all)  →  griffainai@gmail.com
+   Fire-and-forget; never blocks or throws into the request path.
+   ------------------------------------------------------------------- */
+function adminNotifyRecipients() {
+  const direct = (process.env.DAS_NOTIFY_EMAIL || '').split(',').map(s => s.trim()).filter(Boolean);
+  if (direct.length) return direct;
+  const admins = (process.env.ADMIN_EMAILS || '').split(',').map(s => s.trim()).filter(Boolean);
+  if (admins.length) return admins;
+  return ['griffainai@gmail.com'];
+}
+
+async function sendAdminEmail({ subject, html, from }) {
+  const key = process.env.RESEND_API_KEY;
+  if (!key) { console.warn('[notify] RESEND_API_KEY missing — skipping:', subject); return; }
+  try {
+    const resp = await fetch('https://api.resend.com/emails', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
+      body: JSON.stringify({
+        from:    from || 'DAS Portal <notifications@driverappreciationsolutions.com>',
+        to:      adminNotifyRecipients(),
+        subject,
+        html,
+      }),
+    });
+    if (!resp.ok) {
+      const errBody = await resp.text().catch(() => '');
+      console.error(`[notify] FAILED (HTTP ${resp.status}): ${errBody}`);
+    }
+  } catch (err) {
+    console.error('[notify] threw:', err && err.message);
+  }
+}
+
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, ch => (
+    { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch] || ch
+  ));
+}
+
+/* =============================================================
+   ACTION: submit-ticket   (authed → support_tickets + admin email)
+   Inserts server-side (service role) so the notification always fires
+   with trusted data, then emails the DAS team. Returns the created row.
+   ============================================================= */
+async function handleSubmitTicket(req, res, payload) {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Unauthenticated' });
+
+  const subject  = String(payload.subject  || '').trim();
+  const message  = String(payload.message  || '').trim();
+  const priority = ['low', 'normal', 'high', 'urgent'].includes(payload.priority) ? payload.priority : 'normal';
+  if (!subject) return res.status(400).json({ error: 'Subject is required' });
+
+  const supabase = getServiceClient();
+  const { data: profile } = await supabase.from('users').select('company_id').eq('id', user.id).maybeSingle();
+  const companyId = (profile && profile.company_id) || null;
+
+  let companyName = '';
+  if (companyId) {
+    const { data: co } = await supabase.from('companies').select('name').eq('id', companyId).maybeSingle();
+    companyName = (co && co.name) || '';
+  }
+
+  const { data, error } = await supabase.from('support_tickets').insert({
+    company_id: companyId,
+    user_id:    user.id,
+    subject,
+    message,
+    category:   payload.category || 'general',
+    priority,
+    status:     'open',
+  }).select().single();
+
+  if (error) {
+    console.error('[submit-ticket]', error.message);
+    return res.status(500).json({ error: 'Could not submit ticket' });
+  }
+
+  const prClr = { urgent: '#B91C1C', high: '#C2410C', normal: '#1A2E6E', low: '#6B7280' }[priority] || '#1A2E6E';
+  void sendAdminEmail({
+    subject: `🎫 Support ticket — ${subject} [${priority.toUpperCase()}]`,
+    html: `
+      <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+        <div style="background:${prClr};padding:18px 22px;border-radius:12px 12px 0 0">
+          <h2 style="color:#fff;margin:0;font-size:17px">New Support Ticket</h2>
+          <p style="color:rgba(255,255,255,.7);margin:4px 0 0;font-size:12px">Priority: ${esc(priority)}</p>
+        </div>
+        <div style="background:#fff;padding:22px;border:1px solid #E5E7EB;border-top:0;border-radius:0 0 12px 12px">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px">
+            <tr><td style="padding:6px 0;color:#6B7280;width:120px">Company</td><td style="padding:6px 0;font-weight:600;color:#111">${esc(companyName || '—')}</td></tr>
+            <tr><td style="padding:6px 0;color:#6B7280">From</td><td style="padding:6px 0">${esc(user.email || '—')}</td></tr>
+            <tr><td style="padding:6px 0;color:#6B7280">Subject</td><td style="padding:6px 0;font-weight:600;color:#111">${esc(subject)}</td></tr>
+          </table>
+          ${message ? `<div style="background:#F9FAFB;border-radius:8px;padding:12px 16px;font-size:13px;color:#374151;white-space:pre-wrap">${esc(message)}</div>` : ''}
+        </div>
+      </div>`,
+  });
+
+  return res.status(200).json({ ok: true, ticket: data });
+}
+
 async function handleSubmitQuote(req, res, payload) {
   // ── PATH A: Authenticated portal user ──────────────────────────────
   try {
@@ -121,7 +225,7 @@ async function handleSubmitQuote(req, res, payload) {
         payload.contact_email ? `Email: ${payload.contact_email}`  : null,
       ].filter(Boolean).join(' | ') || null;
 
-      await supabase.from('quotes').insert({
+      const { data: quoteRow } = await supabase.from('quotes').insert({
         company_id:        (profile && profile.company_id) || null,
         user_id:           user.id,
         type:              payload.type,
@@ -130,9 +234,36 @@ async function handleSubmitQuote(req, res, payload) {
         timeline:          payload.timeline,
         notes:             notesStr,
         status:            'submitted',
+      }).select().single();
+
+      let coName = '';
+      if (profile && profile.company_id) {
+        const { data: co } = await supabase.from('companies').select('name').eq('id', profile.company_id).maybeSingle();
+        coName = (co && co.name) || '';
+      }
+      void sendAdminEmail({
+        subject: `📋 Quote request — ${esc(coName || user.email || 'Portal user')}`,
+        html: `
+          <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
+            <div style="background:#1A2E6E;padding:18px 22px;border-radius:12px 12px 0 0">
+              <h2 style="color:#fff;margin:0;font-size:17px">New Quote Request</h2>
+              <p style="color:rgba(255,255,255,.7);margin:4px 0 0;font-size:12px">From the customer portal</p>
+            </div>
+            <div style="background:#fff;padding:22px;border:1px solid #E5E7EB;border-top:0;border-radius:0 0 12px 12px">
+              <table style="width:100%;border-collapse:collapse;font-size:14px;margin-bottom:14px">
+                <tr><td style="padding:6px 0;color:#6B7280;width:140px">Company</td><td style="padding:6px 0;font-weight:600;color:#111">${esc(coName || '—')}</td></tr>
+                <tr><td style="padding:6px 0;color:#6B7280">From</td><td style="padding:6px 0">${esc(user.email || '—')}</td></tr>
+                <tr><td style="padding:6px 0;color:#6B7280">Type</td><td style="padding:6px 0">${esc(payload.type || '—')}</td></tr>
+                <tr><td style="padding:6px 0;color:#6B7280">Driver count</td><td style="padding:6px 0">${esc(payload.driver_count || '—')}</td></tr>
+                <tr><td style="padding:6px 0;color:#6B7280">Budget / driver</td><td style="padding:6px 0">${esc(payload.budget_per_driver || '—')}</td></tr>
+                <tr><td style="padding:6px 0;color:#6B7280">Timeline</td><td style="padding:6px 0">${esc(payload.timeline || '—')}</td></tr>
+              </table>
+              ${notesStr ? `<div style="background:#F9FAFB;border-radius:8px;padding:12px 16px;font-size:13px;color:#374151;white-space:pre-wrap">${esc(notesStr)}</div>` : ''}
+            </div>
+          </div>`,
       });
 
-      return res.status(200).json({ ok: true, path: 'portal' });
+      return res.status(200).json({ ok: true, path: 'portal', quote: quoteRow });
     }
   } catch (err) {
     console.error('[submit-quote portal path]', err && err.message);
@@ -754,6 +885,7 @@ module.exports = async (req, res) => {
 
   switch (action) {
     case 'submit-quote':         return handleSubmitQuote(req, res, payload);
+    case 'submit-ticket':        return handleSubmitTicket(req, res, payload);
     case 'billing-checkout':     return handleBillingCheckout(req, res, payload);
     case 'billing-portal':       return handleBillingPortal(req, res);
     case 'recognition-catalog':  return handleRecognitionCatalog(req, res);

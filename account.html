@@ -724,6 +724,18 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
         Review Queue
       </button>
+      <button class="sb-item sb-admin-item" data-section="adminTickets" onclick="navigate('adminTickets')" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+        Support Queue
+      </button>
+      <button class="sb-item sb-admin-item" data-section="adminQuotes" onclick="navigate('adminQuotes')" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+        Quote Queue
+      </button>
+      <button class="sb-item sb-admin-item" data-section="adminProducts" onclick="navigate('adminProducts')" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+        Products
+      </button>
     </nav>
     <div class="sb-footer">
       <button class="sb-signout" onclick="signOut()">
@@ -1393,6 +1405,74 @@
         </div>
       </section>
 
+      <!-- ADMIN · Support Queue -->
+      <section class="p-sec" id="sec-adminTickets">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Support Queue</div>
+            <div class="p-sub">Customer support tickets across all companies.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-ghost" onclick="adminTickets()">Refresh</button>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Tickets</span><span class="bdg bdg-gray" id="admin-tickets-count">0</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Created</th><th>Company</th><th>Subject</th><th>Priority</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admin-tickets-tbody"><tr><td colspan="6"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADMIN · Quote Queue -->
+      <section class="p-sec" id="sec-adminQuotes">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Quote Queue</div>
+            <div class="p-sub">Quote requests submitted from the portal.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-ghost" onclick="adminQuotes()">Refresh</button>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Requests</span><span class="bdg bdg-gray" id="admin-quotes-count">0</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Created</th><th>Company</th><th>Type</th><th>Drivers</th><th>Budget</th><th>Timeline</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="admin-quotes-tbody"><tr><td colspan="8"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ADMIN · Products (store catalog) -->
+      <section class="p-sec" id="sec-adminProducts">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Products</div>
+            <div class="p-sub">Manage the store catalog — add, edit, upload images, or deactivate.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-ghost" onclick="adminProducts()">Refresh</button>
+            <button class="btn-p btn-p-primary" onclick="adminProductNew()">+ New Product</button>
+          </div>
+        </div>
+        <div id="admin-product-form-wrap" style="display:none"></div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Catalog</span><span class="bdg bdg-gray" id="admin-products-count">0</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Image</th><th>SKU</th><th>Name</th><th>Price</th><th>Category</th><th>Active</th><th>Actions</th></tr></thead>
+              <tbody id="admin-products-tbody"><tr><td colspan="7"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
     </main><!-- /portal-main -->
   </div><!-- /portal-body -->
 </div><!-- /portal-wrap -->
@@ -1403,7 +1483,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
 <script src="js/cart.js"></script>
-<script src="js/portal.js?v=2"></script>
+<script src="js/portal.js?v=3"></script>
 <script src="lib/carriers.js"></script>
 <script src="lib/shipping.js"></script>
 <script src="lib/recognition.js"></script>
@@ -1542,7 +1622,7 @@ function navigate(section) {
   const nav = document.querySelector('.sb-item[data-section="' + section + '"]');
   if (nav) nav.classList.add('active');
   closeSidebar();
-  const renders = { dashboard, orders, programs, recognition, roster, publications, billing, quotes, ideas, support, settings, admin };
+  const renders = { dashboard, orders, programs, recognition, roster, publications, billing, quotes, ideas, support, settings, admin, adminTickets, adminQuotes, adminProducts };
   if (renders[section]) renders[section]();
 }
 
@@ -1557,6 +1637,29 @@ function closeModal(id) { document.getElementById(id).classList.remove('open'); 
 /* ════════════════════════════════════
    SECTION RENDERERS
 ════════════════════════════════════ */
+
+/* Customer-facing order status → { label, badge class }. */
+const ORDER_STATUS_MAP = {
+  payment_pending:         { label: 'Awaiting Payment', cls: 'bdg-yellow' },
+  pending:                 { label: 'Pending',          cls: 'bdg-gray'   },
+  in_review:               { label: 'In Review',        cls: 'bdg-yellow' },
+  shipping_quote_required: { label: 'Quote Pending',    cls: 'bdg-blue'   },
+  confirmed:               { label: 'Confirmed',        cls: 'bdg-green'  },
+  in_production:           { label: 'In Production',     cls: 'bdg-blue'   },
+  shipped:                 { label: 'Shipped',          cls: 'bdg-blue'   },
+  delivered:               { label: 'Delivered',        cls: 'bdg-green'  },
+  completed:               { label: 'Completed',        cls: 'bdg-green'  },
+  cancelled:               { label: 'Cancelled',        cls: 'bdg-red'    },
+  issue:                   { label: 'Issue',            cls: 'bdg-red'    },
+  net_terms_pending:       { label: 'Net Terms Review', cls: 'bdg-yellow' },
+  net_terms_more_info:     { label: 'Info Needed',      cls: 'bdg-blue'   },
+  net_terms_approved:      { label: 'Approved',         cls: 'bdg-green'  },
+  net_terms_rejected:      { label: 'Declined',         cls: 'bdg-red'    },
+};
+function orderStatusBadge(status) {
+  const s = ORDER_STATUS_MAP[status] || { label: status || 'Pending', cls: 'bdg-gray' };
+  return `<span class="bdg ${s.cls}">${escapeHtmlText(s.label)}</span>`;
+}
 
 function dashboard() {
   const acct = PortalAccount.get();
@@ -1594,7 +1697,7 @@ function dashboard() {
   const ords = PortalOrders.get().slice(0, 3);
   document.getElementById('d-orders').innerHTML = ords.length === 0
     ? `<div class="p-empty" style="padding:20px"><p class="p-empty-title" style="font-size:0.875rem">No orders yet</p><a href="shop.html" class="btn-p btn-p-primary btn-p-sm" style="margin-top:6px">Shop Now</a></div>`
-    : `<div class="p-table-wrap"><table class="p-table"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody>${ords.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${fmtMoney(o.total)}</td><td><span class="bdg bdg-green">Confirmed</span></td></tr>`).join('')}</tbody></table></div>`;
+    : `<div class="p-table-wrap"><table class="p-table"><thead><tr><th>Order</th><th>Date</th><th>Total</th><th>Status</th></tr></thead><tbody>${ords.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${fmtMoney(o.total)}</td><td>${orderStatusBadge(o.status)}</td></tr>`).join('')}</tbody></table></div>`;
 }
 
 function orders() {
@@ -1603,7 +1706,7 @@ function orders() {
   if (tbody) {
     tbody.innerHTML = list.length === 0
       ? `<tr><td colspan="6"><div class="p-empty"><div class="p-empty-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg></div><p class="p-empty-title">No Orders Yet</p><p class="p-empty-msg">Place your first order to see it here.</p><a href="shop.html" class="btn-p btn-p-primary">Shop Products</a></div></td></tr>`
-      : list.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${o.items||'—'}</td><td>${(o.units||0).toLocaleString()}</td><td>${fmtMoney(o.total)}</td><td><span class="bdg bdg-green">Confirmed</span></td></tr>`).join('');
+      : list.map(o=>`<tr><td class="fw6">${o.id}</td><td>${fmtDate(o.createdAt)}</td><td>${o.items||'—'}</td><td>${(o.units||0).toLocaleString()}</td><td>${fmtMoney(o.total)}</td><td>${orderStatusBadge(o.status)}</td></tr>`).join('');
   }
   const tel = document.getElementById('templates-list');
   if (!tel) return;
@@ -1715,6 +1818,7 @@ function maybeShowAdmin(user) {
   const item = document.getElementById('sb-admin-item');
   if (grp)  grp.style.display = '';
   if (item) item.style.display = '';
+  document.querySelectorAll('.sb-admin-item').forEach(el => { el.style.display = ''; });
 }
 
 // Get the current Supabase access token (JWT) for the Authorization header.
@@ -1831,6 +1935,187 @@ function adminSetShipping(orderId) {
   const val = el ? parseFloat(el.value) : NaN;
   if (isNaN(val) || val < 0) { showToast('Enter a valid shipping cost.', 'error'); return; }
   adminPatch(orderId, 'confirmed', Number(val.toFixed(2)));
+}
+
+/* ════════════════════════════════════
+   ADMIN — shared fetch helper for the admin-orders endpoint.
+   resource = orders | tickets | quotes | products
+════════════════════════════════════ */
+async function adminFetch(resource, opts = {}) {
+  const token = await adminToken();
+  if (!token) throw new Error('Not signed in — refresh and try again.');
+  const qs = resource && resource !== 'orders' ? ('?resource=' + encodeURIComponent(resource)) : '';
+  const res = await fetch('/api/admin-orders' + qs, {
+    method:  opts.method || 'GET',
+    headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+    body:    opts.body ? JSON.stringify(opts.body) : undefined,
+  });
+  if (res.status === 403) throw new Error('Your account is not authorized for the admin area.');
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.error || ('Request failed (HTTP ' + res.status + ')'));
+  return data;
+}
+
+/* ── ADMIN · Support Queue ── */
+const TICKET_BADGE = { open: 'bdg-blue', in_progress: 'bdg-yellow', waiting: 'bdg-yellow', resolved: 'bdg-green', closed: 'bdg-gray' };
+function adminTickets() {
+  const tbody = document.getElementById('admin-tickets-tbody');
+  if (tbody) tbody.innerHTML = `<tr><td colspan="6"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr>`;
+  adminFetch('tickets')
+    .then(d => adminRenderTickets(d.tickets || []))
+    .catch(e => { if (tbody) tbody.innerHTML = `<tr><td colspan="6"><p style="padding:20px;text-align:center;color:#B91C1C;font-size:0.8rem">${escapeHtmlText(e.message)}</p></td></tr>`; });
+}
+function adminRenderTickets(rows) {
+  const tbody = document.getElementById('admin-tickets-tbody');
+  const c = document.getElementById('admin-tickets-count'); if (c) c.textContent = rows.length;
+  if (!tbody) return;
+  if (rows.length === 0) { tbody.innerHTML = `<tr><td colspan="6"><div class="p-empty" style="padding:28px"><p class="p-empty-title">No tickets</p><p class="p-empty-msg">No support tickets have been submitted.</p></div></td></tr>`; return; }
+  tbody.innerHTML = rows.map(t => {
+    const badge = TICKET_BADGE[t.status] || 'bdg-gray';
+    const id = String(t.id);
+    const opts = ['open','in_progress','waiting','resolved','closed'].map(s => `<option value="${s}"${s===t.status?' selected':''}>${s.replace(/_/g,' ')}</option>`).join('');
+    return `<tr>
+      <td>${fmtDate(t.created_at)}</td>
+      <td>${escapeHtmlText(t.company_name || '—')}</td>
+      <td class="fw6">${escapeHtmlText(t.subject || '—')}<div style="font-size:0.72rem;color:#6B7280;white-space:pre-wrap;max-width:320px">${escapeHtmlText(t.message || '')}</div></td>
+      <td><span class="bdg ${t.priority==='urgent'?'bdg-red':t.priority==='high'?'bdg-yellow':'bdg-gray'}">${escapeHtmlText(t.priority || 'normal')}</span></td>
+      <td><span class="bdg ${badge}">${escapeHtmlText(String(t.status||'open').replace(/_/g,' '))}</span></td>
+      <td><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><select id="tk-${id}" style="padding:4px 6px;border:1px solid #DEE3E9;border-radius:6px;font-size:0.78rem">${opts}</select><button class="btn-p btn-p-primary btn-p-sm" onclick="adminUpdateTicket('${id}')">Save</button></div></td>
+    </tr>`;
+  }).join('');
+}
+async function adminUpdateTicket(ticketId) {
+  const sel = document.getElementById('tk-' + ticketId);
+  const status = sel ? sel.value : null;
+  try { await adminFetch('tickets', { method: 'PATCH', body: { ticketId, status } }); showToast('Ticket updated.', 'success'); adminTickets(); }
+  catch (e) { showToast(e.message, 'error'); }
+}
+
+/* ── ADMIN · Quote Queue ── */
+const QUOTE_BADGE = { submitted: 'bdg-blue', in_review: 'bdg-yellow', quoted: 'bdg-yellow', accepted: 'bdg-green', declined: 'bdg-red', closed: 'bdg-gray' };
+function adminQuotes() {
+  const tbody = document.getElementById('admin-quotes-tbody');
+  if (tbody) tbody.innerHTML = `<tr><td colspan="8"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr>`;
+  adminFetch('quotes')
+    .then(d => adminRenderQuotes(d.quotes || []))
+    .catch(e => { if (tbody) tbody.innerHTML = `<tr><td colspan="8"><p style="padding:20px;text-align:center;color:#B91C1C;font-size:0.8rem">${escapeHtmlText(e.message)}</p></td></tr>`; });
+}
+function adminRenderQuotes(rows) {
+  const tbody = document.getElementById('admin-quotes-tbody');
+  const c = document.getElementById('admin-quotes-count'); if (c) c.textContent = rows.length;
+  if (!tbody) return;
+  if (rows.length === 0) { tbody.innerHTML = `<tr><td colspan="8"><div class="p-empty" style="padding:28px"><p class="p-empty-title">No requests</p><p class="p-empty-msg">No quote requests have been submitted.</p></div></td></tr>`; return; }
+  tbody.innerHTML = rows.map(q => {
+    const badge = QUOTE_BADGE[q.status] || 'bdg-gray';
+    const id = String(q.id);
+    const opts = ['submitted','in_review','quoted','accepted','declined','closed'].map(s => `<option value="${s}"${s===q.status?' selected':''}>${s.replace(/_/g,' ')}</option>`).join('');
+    return `<tr>
+      <td>${fmtDate(q.created_at)}</td>
+      <td>${escapeHtmlText(q.company_name || '—')}</td>
+      <td>${escapeHtmlText(q.type || '—')}${q.notes?`<div style="font-size:0.72rem;color:#6B7280;white-space:pre-wrap;max-width:280px">${escapeHtmlText(q.notes)}</div>`:''}</td>
+      <td>${escapeHtmlText(q.driver_count != null ? String(q.driver_count) : '—')}</td>
+      <td>${q.budget_per_driver != null ? fmtMoney(q.budget_per_driver) : '—'}</td>
+      <td>${escapeHtmlText(q.timeline || '—')}</td>
+      <td><span class="bdg ${badge}">${escapeHtmlText(String(q.status||'submitted').replace(/_/g,' '))}</span></td>
+      <td><div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap"><select id="qt-${id}" style="padding:4px 6px;border:1px solid #DEE3E9;border-radius:6px;font-size:0.78rem">${opts}</select><button class="btn-p btn-p-primary btn-p-sm" onclick="adminUpdateQuote('${id}')">Save</button></div></td>
+    </tr>`;
+  }).join('');
+}
+async function adminUpdateQuote(quoteId) {
+  const sel = document.getElementById('qt-' + quoteId);
+  const status = sel ? sel.value : null;
+  try { await adminFetch('quotes', { method: 'PATCH', body: { quoteId, status } }); showToast('Quote updated.', 'success'); adminQuotes(); }
+  catch (e) { showToast(e.message, 'error'); }
+}
+
+/* ── ADMIN · Products (store catalog) ── */
+let _adminProductsCache = [];
+function adminProducts() {
+  const tbody = document.getElementById('admin-products-tbody');
+  if (tbody) tbody.innerHTML = `<tr><td colspan="7"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr>`;
+  adminFetch('products')
+    .then(d => { _adminProductsCache = d.products || []; adminRenderProducts(_adminProductsCache); })
+    .catch(e => { if (tbody) tbody.innerHTML = `<tr><td colspan="7"><p style="padding:20px;text-align:center;color:#B91C1C;font-size:0.8rem">${escapeHtmlText(e.message)}</p></td></tr>`; });
+}
+function adminRenderProducts(rows) {
+  const tbody = document.getElementById('admin-products-tbody');
+  const c = document.getElementById('admin-products-count'); if (c) c.textContent = rows.length;
+  if (!tbody) return;
+  if (rows.length === 0) { tbody.innerHTML = `<tr><td colspan="7"><div class="p-empty" style="padding:28px"><p class="p-empty-title">No products</p><p class="p-empty-msg">Add your first product to the catalog.</p></div></td></tr>`; return; }
+  tbody.innerHTML = rows.map(p => {
+    const id = String(p.id);
+    const img = p.image_url ? `<img src="${escapeHtmlText(p.image_url)}" alt="" style="width:42px;height:42px;object-fit:cover;border-radius:6px">` : '<span style="color:#9CA3AF;font-size:0.72rem">—</span>';
+    return `<tr>
+      <td>${img}</td>
+      <td class="fw6">${escapeHtmlText(p.sku || '—')}</td>
+      <td>${escapeHtmlText(p.name || '—')}</td>
+      <td>${p.price != null ? fmtMoney(p.price) : '—'}</td>
+      <td>${escapeHtmlText(p.category || '—')}</td>
+      <td><span class="bdg ${p.active===false?'bdg-gray':'bdg-green'}">${p.active===false?'Inactive':'Active'}</span></td>
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap"><button class="btn-p btn-p-ghost btn-p-sm" onclick="adminProductEdit('${id}')">Edit</button>${p.active===false?'':`<button class="btn-p btn-p-danger btn-p-sm" onclick="adminProductDeactivate('${id}')">Deactivate</button>`}</div></td>
+    </tr>`;
+  }).join('');
+}
+function adminProductNew()  { adminProductForm(null); }
+function adminProductEdit(id) { adminProductForm(_adminProductsCache.find(p => String(p.id) === String(id)) || null); }
+function adminProductForm(p) {
+  const wrap = document.getElementById('admin-product-form-wrap');
+  if (!wrap) return;
+  const v = f => p && p[f] != null ? String(p[f]) : '';
+  wrap.style.display = '';
+  wrap.innerHTML = `
+    <div class="p-card" style="margin-bottom:16px">
+      <div class="p-card-head"><span class="p-card-title">${p ? 'Edit Product' : 'New Product'}</span></div>
+      <div style="padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <label style="font-size:0.78rem;color:#374151">Name<input id="pf-name" value="${escapeHtmlText(v('name'))}" style="width:100%;padding:8px;border:1px solid #DEE3E9;border-radius:6px;margin-top:4px"></label>
+        <label style="font-size:0.78rem;color:#374151">SKU<input id="pf-sku" value="${escapeHtmlText(v('sku'))}" style="width:100%;padding:8px;border:1px solid #DEE3E9;border-radius:6px;margin-top:4px"></label>
+        <label style="font-size:0.78rem;color:#374151">Price<input id="pf-price" type="number" step="0.01" min="0" value="${escapeHtmlText(v('price'))}" style="width:100%;padding:8px;border:1px solid #DEE3E9;border-radius:6px;margin-top:4px"></label>
+        <label style="font-size:0.78rem;color:#374151">Category<input id="pf-category" value="${escapeHtmlText(v('category'))}" style="width:100%;padding:8px;border:1px solid #DEE3E9;border-radius:6px;margin-top:4px"></label>
+        <label style="font-size:0.78rem;color:#374151;grid-column:1/3">Description<textarea id="pf-description" rows="2" style="width:100%;padding:8px;border:1px solid #DEE3E9;border-radius:6px;margin-top:4px">${escapeHtmlText(v('description'))}</textarea></label>
+        <label style="font-size:0.78rem;color:#374151">Image${p && p.image_url ? ' (replace)' : ''}<input id="pf-image" type="file" accept="image/*" style="width:100%;margin-top:4px"></label>
+        <label style="font-size:0.78rem;color:#374151;display:flex;align-items:center;gap:8px;margin-top:22px"><input id="pf-active" type="checkbox" ${p && p.active===false?'':'checked'}> Active</label>
+      </div>
+      <div style="padding:0 16px 16px;display:flex;gap:8px">
+        <button class="btn-p btn-p-primary btn-p-sm" onclick="adminProductSave(${p ? `'${String(p.id)}'` : 'null'})">Save</button>
+        <button class="btn-p btn-p-ghost btn-p-sm" onclick="document.getElementById('admin-product-form-wrap').style.display='none'">Cancel</button>
+      </div>
+    </div>`;
+}
+function _fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(r.result);
+    r.onerror = reject;
+    r.readAsDataURL(file);
+  });
+}
+async function adminProductSave(productId) {
+  const body = {
+    name:        (document.getElementById('pf-name').value || '').trim(),
+    sku:         (document.getElementById('pf-sku').value || '').trim(),
+    price:       parseFloat(document.getElementById('pf-price').value) || 0,
+    category:    (document.getElementById('pf-category').value || '').trim(),
+    description: (document.getElementById('pf-description').value || '').trim(),
+    active:      document.getElementById('pf-active').checked,
+  };
+  if (!body.name) { showToast('Product name is required.', 'error'); return; }
+  const fileEl = document.getElementById('pf-image');
+  if (fileEl && fileEl.files && fileEl.files[0]) {
+    try { body.image_base64 = await _fileToBase64(fileEl.files[0]); body.image_filename = fileEl.files[0].name; }
+    catch { showToast('Could not read image file.', 'error'); return; }
+  }
+  if (productId) body.productId = productId;
+  try {
+    await adminFetch('products', { method: productId ? 'PATCH' : 'POST', body });
+    showToast('Product saved.', 'success');
+    const wrap = document.getElementById('admin-product-form-wrap'); if (wrap) wrap.style.display = 'none';
+    adminProducts();
+  } catch (e) { showToast(e.message, 'error'); }
+}
+async function adminProductDeactivate(productId) {
+  if (!confirm('Deactivate this product? It will be hidden from the store but kept in history.')) return;
+  try { await adminFetch('products', { method: 'PATCH', body: { productId, active: false } }); showToast('Product deactivated.', 'success'); adminProducts(); }
+  catch (e) { showToast(e.message, 'error'); }
 }
 
 /* ── Form handlers ── */
