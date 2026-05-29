@@ -324,10 +324,12 @@ function renderAuthNav(user) {
   if (user) {
     const initials = (user.displayName || user.email || 'U')
       .split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
-    const avatarHTML =
-      `<span style="width:32px;height:32px;border-radius:50%;background:var(--gold);` +
-      `color:#fff;font-size:0.8125rem;font-weight:700;display:flex;align-items:center;` +
-      `justify-content:center;flex-shrink:0">${initials}</span>`;
+    const avatarHTML = user.photoURL
+      ? `<img src="${user.photoURL}" alt="${initials}" referrerpolicy="no-referrer" ` +
+        `style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">`
+      : `<span style="width:32px;height:32px;border-radius:50%;background:var(--gold);` +
+        `color:#fff;font-size:0.8125rem;font-weight:700;display:flex;align-items:center;` +
+        `justify-content:center;flex-shrink:0">${initials}</span>`;
 
     // ── Desktop nav button ──────────────────────
     const desktopBtn = document.querySelector('.nav-actions .nav-login-btn');
@@ -439,32 +441,25 @@ function togglePasswordVisibility(inputId, btn) {
 // INIT ON PAGE LOAD
 // ─────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
-  // ── PRIMARY: fetch auth status from the portal API ─────────────────────────
-  // The portal uses @supabase/ssr createBrowserClient which stores sessions in
-  // COOKIES (not localStorage) so they can be read server-side by SSR components.
-  // The standard CDN Supabase client below reads localStorage only — the two
-  // storage mechanisms are completely separate. We fix this by calling
-  // /api/auth/status, which runs on the same origin, reads the cookie-based
-  // session server-side, and returns a JSON payload the nav can use.
+  // Drive the nav off the REAL Supabase session. Sign-in (login.html) and the
+  // /account page both use the CDN Supabase client below, which persists the
+  // session in localStorage — so reading it here is the single source of truth.
+  // (The old /api/auth/status endpoint never existed, which is why the nav was
+  //  stuck on "Sign In" even while signed in.)
+  const sb = getSupabase();
+  if (!sb) { renderAuthNav(null); return; }
+
+  // Immediate paint from the current session.
   try {
-    const res = await fetch('/api/auth/status', { credentials: 'include' });
-    if (res.ok) {
-      const data = await res.json();
-      if (data.authenticated) {
-        renderAuthNav({
-          uid:         '',
-          email:       data.email,
-          displayName: data.displayName,
-          photoURL:    data.avatarUrl,
-          emailVerified: true,
-        });
-        return; // nav is rendered — no need to check localStorage below
-      }
-    }
-    // Not authenticated (or request failed) — show signed-out state
-    renderAuthNav(null);
+    const { data: { session } } = await sb.auth.getSession();
+    renderAuthNav(_normalizeUser(session?.user ?? null));
   } catch (err) {
-    console.warn('[DAS Auth] status check error:', err.message);
+    console.warn('[DAS Auth] session check error:', err.message);
     renderAuthNav(null);
   }
+
+  // Keep the nav in sync with later sign-in / sign-out / token-refresh events.
+  sb.auth.onAuthStateChange((_event, session) => {
+    renderAuthNav(_normalizeUser(session?.user ?? null));
+  });
 });
