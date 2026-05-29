@@ -693,6 +693,31 @@ async function handleRecognitionOrder(req, res, body) {
   if (!track || !milestone || !recognitionTier || !sku) {
     return res.status(400).json({ error: 'Missing required fields (track, milestone, tier, product).' });
   }
+
+  // ── Enum validation ──────────────────────────────────────────────────────────
+  const VALID_RECOGNITION_TIERS = ['tier_1', 'tier_2', 'tier_3', 'tier_4'];
+  const VALID_KIT_TIERS         = ['standard', 'premium', 'enterprise'];
+  if (!VALID_RECOGNITION_TIERS.includes(recognitionTier)) {
+    return res.status(400).json({ error: 'Invalid recognition tier.' });
+  }
+  if (kitTierOverride && !VALID_KIT_TIERS.includes(kitTierOverride)) {
+    return res.status(400).json({ error: 'Invalid kit tier override.' });
+  }
+
+  // ── Kit-downgrade guard ──────────────────────────────────────────────────────
+  // The admin can override the kit tier, but must not go *below* the default for
+  // the milestone (e.g. submitting a tier_3 milestone at standard-kit pricing
+  // would undercharge while the order records an elite recognition — a margin leak).
+  if (kitTierOverride) {
+    const recommendedKitTier = Pricing.kitTierForRecognitionTier(recognitionTier);
+    const tierRank = { standard: 0, premium: 1, enterprise: 2 };
+    if (tierRank[kitTierOverride] < tierRank[recommendedKitTier]) {
+      return res.status(400).json({
+        error: `Kit tier "${kitTierOverride}" is below the recommended level for this recognition milestone. Please select "${recommendedKitTier}" or higher.`,
+      });
+    }
+  }
+
   if (!eligibility) return res.status(400).json({ error: 'Eligibility must be confirmed before submitting.' });
 
   const rawRecipients = Array.isArray(body.recipients) ? body.recipients : [];
