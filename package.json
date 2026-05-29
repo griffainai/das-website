@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.32.0",
+    "@sparticuz/chromium": "^131.0.0",
     "@supabase/supabase-js": "^2.45.0",
+    "puppeteer-core": "^23.11.1",
     "stripe": "^14.0.0"
   },
   "engines": {

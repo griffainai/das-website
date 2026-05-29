@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">52 Weeks — A Year-Round Driver Recognition Calendar</title>
+  <desc id="desc">Editorial cover showing a four-quarter recognition rhythm. The quarterly bars and 52-tick row imply a planned year without inventing fake metrics.</desc>
+
+  <!-- Deep navy canvas. -->
+  <rect width="1200" height="675" fill="#1A2E6E"/>
+
+  <!-- Eyebrow row. -->
+  <line x1="80" y1="100" x2="180" y2="100" stroke="#8B9BAC" stroke-width="2"/>
+  <text x="80" y="135"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="18" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    PLANNING
+  </text>
+
+  <!-- Lead stat. -->
+  <text x="80" y="305"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="220" font-weight="800" letter-spacing="-10" fill="#FFFFFF">
+    52
+  </text>
+  <text x="80" y="365"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="40" font-weight="700" letter-spacing="-0.5" fill="#FFFFFF">
+    weeks of recognition rhythm
+  </text>
+  <text x="80" y="400"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="20" font-weight="500" letter-spacing="0" fill="#B7C2D4">
+    Driver Appreciation Week is one week. Retention is the other 51.
+  </text>
+
+  <!-- 52-week tick row — every 13th tick taller to mark quarters. -->
+  <g transform="translate(80, 480)">
+    <line x1="0" y1="0" x2="1040" y2="0" stroke="#FFFFFF" opacity="0.20" stroke-width="1"/>
+  </g>
+  <g transform="translate(80, 470)" stroke="#FFFFFF" stroke-width="1.5">
+    <!-- 52 ticks across 1040px → 20px spacing. -->
+    <!-- We render them as repeated lines; quarter boundaries (1, 14, 27, 40) get a taller, brighter tick. -->
+  </g>
+  <!-- Generate ticks via inline rects (52 of them, 20px apart). -->
+  <g fill="#FFFFFF">
+    <!-- Quarter-marker ticks: taller + brighter. -->
+    <rect x="80"  y="465" width="2" height="32" opacity="1"/>
+    <rect x="340" y="465" width="2" height="32" opacity="1"/>
+    <rect x="600" y="465" width="2" height="32" opacity="1"/>
+    <rect x="860" y="465" width="2" height="32" opacity="1"/>
+    <!-- Filler ticks: shorter, lower opacity. -->
+    <rect x="100" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="120" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="140" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="160" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="180" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="200" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="220" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="240" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="260" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="280" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="300" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="320" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="360" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="380" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="400" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="420" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="440" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="460" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="480" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="500" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="520" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="540" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="560" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="580" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="620" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="640" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="660" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="680" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="700" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="720" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="740" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="760" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="780" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="800" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="820" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="840" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="880" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="900" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="920" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="940" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="960" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="980" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1000" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1020" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1040" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1060" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1080" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1100" y="473" width="2" height="16" opacity="0.30"/>
+    <rect x="1120" y="465" width="2" height="32" opacity="1"/>
+  </g>
+
+  <!-- Quarter labels. -->
+  <g font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    <text x="81"   y="540">Q1</text>
+    <text x="341"  y="540">Q2</text>
+    <text x="601"  y="540">Q3</text>
+    <text x="861"  y="540">Q4</text>
+  </g>
+
+  <!-- Mid-anchor: Driver Appreciation Week call-out (Q3, ~week 36 in early September). -->
+  <line x1="780" y1="455" x2="780" y2="495" stroke="#FFFFFF" stroke-width="2"/>
+  <text x="780" y="445" text-anchor="middle"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="12" font-weight="700" letter-spacing="2" fill="#FFFFFF">
+    DAW · SEP 7–13
+  </text>
+
+  <!-- DAS wordmark. -->
+  <text x="1120" y="640" text-anchor="end"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="3" fill="#8B9BAC">
+    DAS / IDEAS
+  </text>
+</svg>

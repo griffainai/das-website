@@ -6,7 +6,7 @@
 
 (function () {
   // DAW 2026: September 13–19, 2026
-  const DAW_TARGET = new Date('2026-09-07T00:00:00').getTime();
+  const DAW_TARGET = new Date('2026-09-13T00:00:00').getTime();
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -25,7 +25,7 @@
       const subLabel = document.querySelector('.countdown-ent-sub-label');
       if (subLabel) subLabel.textContent = 'Happening Now';
       const deadline = document.querySelector('.countdown-ent-deadline');
-      if (deadline) deadline.textContent = '🎉 Driver Appreciation Week Sep 7–13, 2026 — order now!';
+      if (deadline) deadline.textContent = '🎉 Driver Appreciation Week Sep 13–19, 2026 — order now!';
       return;
     }
 

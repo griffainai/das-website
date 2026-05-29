@@ -1,0 +1,37 @@
+{
+  "linkset": [
+    {
+      "anchor": "https://driverappreciationsolutions.com/api/contact",
+      "service-doc": [
+        { "href": "https://driverappreciationsolutions.com/contact.html", "type": "text/html", "title": "Contact form documentation" }
+      ],
+      "describes": [
+        { "href": "https://driverappreciationsolutions.com/", "type": "text/html" }
+      ]
+    },
+    {
+      "anchor": "https://driverappreciationsolutions.com/api/newsletter-subscribe",
+      "service-doc": [
+        { "href": "https://driverappreciationsolutions.com/", "type": "text/html", "title": "Newsletter subscribe endpoint" }
+      ]
+    },
+    {
+      "anchor": "https://driverappreciationsolutions.com/api/create-checkout",
+      "service-doc": [
+        { "href": "https://driverappreciationsolutions.com/cart.html", "type": "text/html", "title": "Stripe checkout creation endpoint" }
+      ]
+    },
+    {
+      "anchor": "https://driverappreciationsolutions.com/api/create-payment-intent",
+      "service-doc": [
+        { "href": "https://driverappreciationsolutions.com/cart.html", "type": "text/html", "title": "Stripe payment intent endpoint" }
+      ]
+    },
+    {
+      "anchor": "https://driverappreciationsolutions.com/shop.html",
+      "service-doc": [
+        { "href": "https://driverappreciationsolutions.com/shop.html", "type": "text/html", "title": "Product catalog (HTML)" }
+      ]
+    }
+  ]
+}

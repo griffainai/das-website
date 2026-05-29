@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">Most Fleets Underestimate Driver Turnover Cost by 40–60%</title>
+  <desc id="desc">Editorial cover using an iceberg metaphor — the visible cost of a departing driver versus the full hidden cost.</desc>
+
+  <!-- Top half: pale "what you see" surface. Bottom half: deep navy "what it actually costs". -->
+  <rect width="1200" height="280" fill="#F1F4F7"/>
+  <rect y="280" width="1200" height="395" fill="#1A2E6E"/>
+
+  <!-- Waterline — thin two-tone bar. -->
+  <rect y="278" width="1200" height="1" fill="#8B9BAC"/>
+  <rect y="282" width="1200" height="1" fill="#FFFFFF" opacity="0.18"/>
+
+  <!-- ── ABOVE WATERLINE: "What you see" ─────────────────────────────────── -->
+  <line x1="80" y1="80" x2="180" y2="80" stroke="#1A2E6E" stroke-width="2"/>
+  <text x="80" y="115"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="16" font-weight="700" letter-spacing="3" fill="#1A2E6E">
+    WHAT YOU SEE
+  </text>
+  <text x="80" y="195"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="60" font-weight="800" letter-spacing="-2" fill="#1A2E6E">
+    Recruiting · Training · Onboarding
+  </text>
+  <text x="80" y="240"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="20" font-weight="500" fill="#1A2E6E" opacity="0.7">
+    the line items every fleet operator already tracks
+  </text>
+
+  <!-- ── BELOW WATERLINE: the real number ─────────────────────────────────── -->
+  <line x1="80" y1="335" x2="180" y2="335" stroke="#8B9BAC" stroke-width="2"/>
+  <text x="80" y="370"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="16" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    WHAT IT ACTUALLY COSTS
+  </text>
+
+  <text x="80" y="555"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="180" font-weight="800" letter-spacing="-6" fill="#FFFFFF">
+    40–60<tspan font-size="120" dy="-25">%</tspan>
+  </text>
+
+  <text x="80" y="610"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="22" font-weight="600" fill="#FFFFFF">
+    higher than most fleet operators estimate
+  </text>
+
+  <!-- Right-side hidden-cost stack — six small unlabeled bars to imply more, without inventing metrics. -->
+  <g transform="translate(880, 380)" opacity="0.85">
+    <rect x="0"   y="0"   width="220" height="10" fill="#FFFFFF" opacity="0.18"/>
+    <rect x="0"   y="22"  width="180" height="10" fill="#FFFFFF" opacity="0.24"/>
+    <rect x="0"   y="44"  width="240" height="10" fill="#FFFFFF" opacity="0.32"/>
+    <rect x="0"   y="66"  width="160" height="10" fill="#FFFFFF" opacity="0.40"/>
+    <rect x="0"   y="88"  width="200" height="10" fill="#FFFFFF" opacity="0.55"/>
+    <rect x="0"   y="110" width="260" height="10" fill="#FFFFFF" opacity="0.85"/>
+  </g>
+
+  <!-- DAS wordmark. -->
+  <text x="1120" y="640" text-anchor="end"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="3" fill="#8B9BAC">
+    DAS / IDEAS
+  </text>
+</svg>

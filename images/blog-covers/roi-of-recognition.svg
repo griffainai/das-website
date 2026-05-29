@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc" preserveAspectRatio="xMidYMid slice">
+  <title id="title">$110 vs $20,000 — The ROI of Driver Recognition</title>
+  <desc id="desc">Editorial cover juxtaposing the annual program cost against the cost of replacing one driver.</desc>
+
+  <!-- Split-canvas composition: left = recognition program cost (light), right = turnover cost (navy). -->
+  <rect width="600"  height="675" fill="#F7F8FA"/>
+  <rect x="600" width="600" height="675" fill="#1A2E6E"/>
+
+  <!-- Subtle vertical separator hairline. -->
+  <line x1="600" y1="0" x2="600" y2="675" stroke="#E8F3FF" stroke-width="2"/>
+
+  <!-- ── LEFT panel: the recognition program ─────────────────────────────── -->
+  <line x1="80" y1="125" x2="180" y2="125" stroke="#8B9BAC" stroke-width="2"/>
+  <text x="80" y="160"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="18" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    RECOGNITION PROGRAM
+  </text>
+
+  <text x="80" y="380"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="160" font-weight="800" letter-spacing="-6" fill="#1A2E6E">
+    $110
+  </text>
+
+  <text x="80" y="430"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="22" font-weight="600" letter-spacing="0" fill="#1A2E6E">
+    per driver, per year
+  </text>
+
+  <!-- ── RIGHT panel: replacing one driver ──────────────────────────────── -->
+  <line x1="680" y1="125" x2="780" y2="125" stroke="#8B9BAC" stroke-width="2"/>
+  <text x="680" y="160"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="18" font-weight="700" letter-spacing="3" fill="#8B9BAC">
+    REPLACING ONE DRIVER
+  </text>
+
+  <text x="680" y="380"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="160" font-weight="800" letter-spacing="-6" fill="#FFFFFF">
+    $20K
+  </text>
+
+  <text x="680" y="430"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="22" font-weight="600" letter-spacing="0" fill="#FFFFFF">
+    fully loaded, all-in cost
+  </text>
+
+  <!-- ── Bottom band: the comparison rendered as a horizontal bar ratio ──── -->
+  <!-- Frame outline -->
+  <rect x="80" y="540" width="1040" height="14" fill="none" stroke="#8B9BAC" stroke-width="1"/>
+  <!-- The "$110" sliver (0.55% of $20,000) — kept perceptible at 8px so it reads. -->
+  <rect x="80" y="540" width="8" height="14" fill="#1A2E6E"/>
+  <!-- Tick labels. -->
+  <text x="80" y="585"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="1" fill="#1A2E6E">
+    $0
+  </text>
+  <text x="1120" y="585" text-anchor="end"
+        font-family="'Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="1" fill="#1A2E6E">
+    $20,000
+  </text>
+
+  <!-- Eyebrow over the bar. -->
+  <text x="600" y="525" text-anchor="middle"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="13" font-weight="700" letter-spacing="3" fill="#1A2E6E">
+    THE MATH IS NOT CLOSE
+  </text>
+
+  <!-- DAS wordmark, lower-right. -->
+  <text x="1120" y="640" text-anchor="end"
+        font-family="'Plus Jakarta Sans','Inter',system-ui,sans-serif"
+        font-size="14" font-weight="600" letter-spacing="3" fill="#8B9BAC">
+    DAS / IDEAS
+  </text>
+</svg>

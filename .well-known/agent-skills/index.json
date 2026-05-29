@@ -1,0 +1,12 @@
+{
+  "$schema": "https://agentskills.io/schemas/index/v0.2.0.json",
+  "skills": [
+    {
+      "name": "browse-catalog",
+      "type": "skill",
+      "description": "Browse the Driver Appreciation Solutions product catalog — DAW kits, onboarding packs, milestone awards, and enterprise recognition programs for trucking fleets.",
+      "url": "https://driverappreciationsolutions.com/.well-known/agent-skills/browse-catalog/SKILL.md",
+      "sha256": "775a65676f043cccc6797f08fd1b18e7746d6f5af4750027774d12eae08101f1"
+    }
+  ]
+}

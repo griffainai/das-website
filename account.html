@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <style>
     body { overflow-x: hidden; }
@@ -205,6 +205,74 @@
     .btn-p-sm { padding: 6px 12px; font-size: 0.75rem; }
     .btn-p-danger { background: #FEE2E2; color: #991B1B; border: 1px solid #FECACA; }
     .btn-p-danger:hover { background: #FECACA; }
+
+    /* ── Publications: list cards ── */
+    .pb-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); gap: 14px; }
+    .pb-card { background: #fff; border: 1px solid #DEE3E9; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 7px; }
+    .pb-card-top { display: flex; align-items: center; justify-content: space-between; }
+    .pb-card-fmt { font-size: 0.7rem; font-weight: 600; color: #6B7280; }
+    .pb-card-title { font-size: 1rem; font-weight: 700; color: #0F172A; line-height: 1.25; }
+    .pb-card-meta { font-size: 0.78rem; color: #6B7280; }
+    .pb-card-actions { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+
+    /* ── Publications: builder overlay ── */
+    .pb-overlay { display: none; position: fixed; inset: 0; background: #F1F4F7; z-index: 150; }
+    .pb-overlay.open { display: flex; }
+    .pb-shell { display: flex; flex-direction: column; width: 100%; height: 100%; }
+    .pb-bar { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 16px; background: #fff; border-bottom: 1px solid #DEE3E9; flex-wrap: wrap; }
+    .pb-bar-left, .pb-bar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .pb-close { width: 34px; height: 34px; border-radius: 8px; border: 1px solid #DEE3E9; background: #fff; cursor: pointer; color: #0F172A; display: inline-flex; align-items: center; justify-content: center; }
+    .pb-close svg { width: 17px; height: 17px; }
+    .pb-close:hover { background: #F1F4F7; }
+    .pb-save { font-size: 0.75rem; color: #6B7280; }
+    .pb-tabs { display: none; }
+    .pb-tab { padding: 6px 13px; border: 1px solid #DEE3E9; background: #fff; font-size: 0.75rem; font-weight: 600; cursor: pointer; color: #374151; }
+    .pb-tab:first-child { border-radius: 8px 0 0 8px; }
+    .pb-tab:last-child { border-radius: 0 8px 8px 0; border-left: none; }
+    .pb-tab.is-active { background: #1A2E6E; color: #fff; border-color: #1A2E6E; }
+
+    .pb-body { flex: 1; display: grid; grid-template-columns: 430px 1fr; min-height: 0; }
+    .pb-form { overflow-y: auto; background: #fff; border-right: 1px solid #DEE3E9; }
+    .pb-form-inner { padding: 20px; max-width: 480px; }
+    .pb-preview { display: flex; justify-content: center; align-items: stretch; padding: 24px; overflow: auto; }
+    .pb-preview iframe { width: 100%; max-width: 850px; height: 100%; min-height: 600px; border: 1px solid #DEE3E9; border-radius: 6px; background: #fff; box-shadow: 0 8px 28px rgba(0,0,0,0.10); }
+
+    .pb-sec-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #6B7280; margin: 6px 0 10px; padding-top: 16px; border-top: 1px solid #EEF1F4; }
+    .pb-mods { display: flex; flex-direction: column; gap: 9px; margin-bottom: 16px; }
+    .pb-mod { display: flex; align-items: center; gap: 8px; font-size: 0.83rem; color: #374151; cursor: pointer; user-select: none; }
+    .pb-mod input { width: 15px; height: 15px; accent-color: #1A2E6E; flex-shrink: 0; }
+
+    .pb-budget { font-size: 0.76rem; line-height: 1.45; padding: 9px 12px; border-radius: 8px; margin-bottom: 8px; background: #F1F4F7; color: #6B7280; }
+    .pb-budget:empty { display: none; }
+    .pb-budget--ok { background: #DCFCE7; color: #166534; }
+    .pb-budget--over_budget { background: #FEE2E2; color: #991B1B; }
+    .pb-budget--blank_pages { background: #EDF0FB; color: #1A2E6E; }
+
+    .pb-drv-empty { font-size: 0.8rem; color: #6B7280; padding: 14px; text-align: center; border: 1px dashed #DEE3E9; border-radius: 10px; }
+    .pb-drv { display: flex; align-items: center; gap: 10px; padding: 8px; border: 1px solid #DEE3E9; border-radius: 10px; margin-bottom: 8px; }
+    .pb-drv-thumb { width: 38px; height: 38px; border-radius: 50%; background-size: cover; background-position: center; flex-shrink: 0; background-color: #EDF0FB; }
+    .pb-drv-thumb--mono { display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: #1A2E6E; }
+    .pb-drv-main { flex: 1; min-width: 0; }
+    .pb-drv-name { font-size: 0.85rem; font-weight: 600; color: #0F172A; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pb-drv-sub { font-size: 0.74rem; color: #6B7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pb-drv-actions { display: flex; gap: 4px; flex-shrink: 0; }
+
+    /* ── Publications: driver modal photo ── */
+    .pd-photo-row { display: flex; gap: 14px; align-items: center; margin-bottom: 16px; }
+    .pd-photo-prev { width: 72px; height: 72px; border-radius: 50%; background: #F1F4F7; border: 1px solid #DEE3E9; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; color: #9CA3AF; text-align: center; background-size: cover; background-position: center; flex-shrink: 0; }
+    .pd-photo-prev.has { color: transparent; }
+    .pd-photo-ctl { display: flex; flex-direction: column; gap: 6px; }
+    .pd-photo-status { font-size: 0.72rem; color: #6B7280; }
+    .pd-checks { display: flex; gap: 22px; margin-top: 4px; }
+
+    @media (max-width: 900px) {
+      .pb-tabs { display: inline-flex; }
+      .pb-body { grid-template-columns: 1fr; }
+      .pb-form { border-right: none; }
+      .pb-preview { display: none; }
+      .pb-body.show-preview .pb-form { display: none; }
+      .pb-body.show-preview .pb-preview { display: flex; }
+    }
 
     /* ── Support resources ── */
     .support-resources { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 16px; }
@@ -408,6 +476,174 @@
 </div>
 
 <!-- ═══════════════════════════════════════════
+     PUBLICATIONS BUILDER  (full-screen overlay)
+════════════════════════════════════════════ -->
+<div class="pb-overlay" id="pub-builder">
+  <div class="pb-shell">
+    <header class="pb-bar">
+      <div class="pb-bar-left">
+        <button class="pb-close" onclick="pubCloseBuilder()" title="Back to publications">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>
+        </button>
+        <span class="bdg bdg-gray" id="pb-status">Draft</span>
+        <span class="pb-save" id="pb-save-status">Saved</span>
+      </div>
+      <div class="pb-bar-right">
+        <span class="pb-tabs">
+          <button type="button" class="pb-tab is-active" onclick="pubPane('form')">Editor</button>
+          <button type="button" class="pb-tab" onclick="pubPane('preview')">Preview</button>
+        </span>
+        <a class="btn-p btn-p-ghost btn-p-sm" id="pb-download" target="_blank" rel="noopener" style="display:none">Download PDF</a>
+        <button class="btn-p btn-p-ghost btn-p-sm" id="pb-openpub-btn" onclick="pubOpenPublic()" style="display:none">View public</button>
+        <button class="btn-p btn-p-ghost btn-p-sm" id="pb-share-btn" onclick="pubCopyShare()" style="display:none">Copy link</button>
+        <button class="btn-p btn-p-ghost btn-p-sm" id="pb-gen-btn" onclick="pubGenerate()">Generate PDF</button>
+        <button class="btn-p btn-p-primary btn-p-sm" id="pb-publish-btn" onclick="pubPublishToggle()">Publish</button>
+      </div>
+    </header>
+    <div class="pb-body" id="pb-body">
+      <div class="pb-form">
+        <div class="pb-form-inner">
+          <div class="fg">
+            <label class="fl">Issue title</label>
+            <input id="pb-title" class="fi" placeholder="Q2 Driver Spotlight" oninput="pubField('title', this.value)">
+          </div>
+          <div class="fgrid2">
+            <div class="fg">
+              <label class="fl">Format</label>
+              <select id="pb-format" class="fs" onchange="pubField('format', this.value)">
+                <option value="magazine">Magazine — 8.5 × 11 in</option>
+                <option value="mailer">Mailer — 5.75 × 8.75 in</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="fl">Page count</label>
+              <input id="pb-pagecount" class="fi" type="number" min="8" step="2" oninput="pubField('page_count', this.value)">
+            </div>
+          </div>
+          <div class="fgrid2">
+            <div class="fg">
+              <label class="fl">Quarter</label>
+              <select id="pb-quarter" class="fs" onchange="pubField('quarter', this.value)">
+                <option value="Q1">Q1</option>
+                <option value="Q2">Q2</option>
+                <option value="Q3">Q3</option>
+                <option value="Q4">Q4</option>
+              </select>
+            </div>
+            <div class="fg">
+              <label class="fl">Year</label>
+              <input id="pb-year" class="fi" type="number" min="2020" max="2099" oninput="pubField('year', this.value)">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="fl">Company name</label>
+            <input id="pb-company" class="fi" placeholder="Acme Trucking Co." oninput="pubSetting('company_name', this.value)">
+          </div>
+
+          <div class="pb-budget" id="pb-budget"></div>
+
+          <div class="pb-sec-label">Sections</div>
+          <div class="pb-mods">
+            <label class="pb-mod"><input type="checkbox" id="pb-mod-toc" onchange="pubModule('toc', this.checked)"> Table of Contents</label>
+            <label class="pb-mod"><input type="checkbox" id="pb-mod-letter" onchange="pubModule('letter', this.checked)"> Letter from Management</label>
+            <label class="pb-mod"><input type="checkbox" id="pb-mod-milestones" onchange="pubModule('milestones', this.checked)"> Milestones &amp; Anniversaries</label>
+            <label class="pb-mod"><input type="checkbox" id="pb-mod-safety" onchange="pubModule('safety', this.checked)"> Safety Honor Roll</label>
+            <label class="pb-mod"><input type="checkbox" id="pb-mod-archive" onchange="pubModule('archive', this.checked)"> Back-Cover Note</label>
+          </div>
+
+          <div class="fg">
+            <label class="fl">Letter from management</label>
+            <textarea id="pb-letter" class="ft" placeholder="A note from leadership to your drivers…" oninput="pubSetting('letter', this.value)"></textarea>
+          </div>
+          <div class="fg">
+            <label class="fl">Back-cover note</label>
+            <textarea id="pb-backnote" class="ft" placeholder="Closing note for the back cover…" oninput="pubSetting('back_note', this.value)"></textarea>
+          </div>
+
+          <div class="pb-sec-label">Driver spotlights</div>
+          <div id="pb-drivers"></div>
+          <button type="button" class="btn-p btn-p-ghost" style="width:100%;justify-content:center;margin-top:10px" onclick="pubDriverModalOpen()">+ Add driver</button>
+        </div>
+      </div>
+      <div class="pb-preview">
+        <iframe id="pub-preview" title="Newsletter preview" sandbox="allow-same-origin"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Driver spotlight sub-modal -->
+<div class="modal-overlay" id="pub-driver-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <span class="modal-title" id="pd-modal-title">Add Driver</span>
+      <button class="modal-close" onclick="closeModal('pub-driver-modal')"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg></button>
+    </div>
+    <form onsubmit="pubDriverSave(event)">
+      <div class="modal-body">
+        <div class="pd-photo-row">
+          <div class="pd-photo-prev" id="pd-photo-prev">No photo</div>
+          <div class="pd-photo-ctl">
+            <label class="btn-p btn-p-ghost btn-p-sm" style="cursor:pointer;display:inline-flex">
+              Upload photo
+              <input type="file" id="pd-photo" accept="image/jpeg,image/png,image/webp,image/gif" hidden onchange="pubUploadPhoto(this)">
+            </label>
+            <div class="pd-photo-status" id="pd-photo-status"></div>
+            <input type="hidden" id="pd-photo-url">
+          </div>
+        </div>
+        <div class="fg">
+          <label class="fl">Driver name</label>
+          <input id="pd-name" class="fi" placeholder="Jane Smith" required>
+        </div>
+        <div class="fgrid2">
+          <div class="fg">
+            <label class="fl">Driver type</label>
+            <select id="pd-type" class="fs">
+              <option value="">—</option>
+              <option value="otr">OTR (Over-the-Road)</option>
+              <option value="regional">Regional</option>
+              <option value="local">Local / P&amp;D</option>
+              <option value="dedicated">Dedicated</option>
+              <option value="owner_operator">Owner-Operator</option>
+              <option value="team">Team Driver</option>
+              <option value="flatbed">Flatbed</option>
+              <option value="tanker">Tanker</option>
+              <option value="reefer">Reefer</option>
+              <option value="hazmat">Hazmat</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="fl">Milestone</label>
+            <input id="pd-milestone" class="fi" placeholder="10 Years of Service">
+          </div>
+        </div>
+        <div class="fgrid2">
+          <div class="fg"><label class="fl">Years of service</label><input id="pd-years" class="fi" type="number" min="0"></div>
+          <div class="fg"><label class="fl">Safe miles</label><input id="pd-miles" class="fi" type="number" min="0"></div>
+        </div>
+        <div class="fgrid2">
+          <div class="fg"><label class="fl">Accident-free years</label><input id="pd-accfree" class="fi" type="number" min="0"></div>
+          <div class="fg"><label class="fl">Home terminal</label><input id="pd-terminal" class="fi" placeholder="Dallas, TX"></div>
+        </div>
+        <div class="fg"><label class="fl">Favorite route</label><input id="pd-route" class="fi" placeholder="I-10 corridor"></div>
+        <div class="fg"><label class="fl">Quote</label><textarea id="pd-quote" class="ft" placeholder="In their own words…"></textarea></div>
+        <div class="fg"><label class="fl">Special achievements</label><textarea id="pd-achv" class="ft" placeholder="Awards, records, volunteer work…"></textarea></div>
+        <div class="fg"><label class="fl">Family note</label><textarea id="pd-family" class="ft" placeholder="A personal touch — family, hobbies…"></textarea></div>
+        <div class="pd-checks">
+          <label class="pb-mod"><input type="checkbox" id="pd-vet"> Veteran</label>
+          <label class="pb-mod"><input type="checkbox" id="pd-mentor"> Mentor</label>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-p btn-p-ghost" onclick="closeModal('pub-driver-modal')">Cancel</button>
+        <button type="submit" class="btn-p btn-p-primary">Save Driver</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
      PORTAL WRAP
 ════════════════════════════════════════════ -->
 <div id="portal-wrap" hidden>
@@ -446,6 +682,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
         Driver Roster
       </button>
+      <button class="sb-item" data-section="publications" onclick="navigate('publications')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5m3-9h3.375c.621 0 1.125.504 1.125 1.125V18a2.25 2.25 0 01-2.25 2.25M16.5 7.5V18a2.25 2.25 0 002.25 2.25M16.5 7.5V4.875c0-.621-.504-1.125-1.125-1.125H4.125C3.504 3.75 3 4.254 3 4.875V18a2.25 2.25 0 002.25 2.25h13.5"/></svg>
+        Publications
+      </button>
       <div class="sb-nav-label">Finance</div>
       <button class="sb-item" data-section="billing" onclick="navigate('billing')">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z"/></svg>
@@ -467,6 +707,11 @@
       <button class="sb-item" data-section="settings" onclick="navigate('settings')">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
         Settings
+      </button>
+      <div class="sb-nav-label" id="sb-admin-group" style="display:none">Admin</div>
+      <button class="sb-item" id="sb-admin-item" data-section="admin" onclick="navigate('admin')" style="display:none">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z"/></svg>
+        Review Queue
       </button>
     </nav>
     <div class="sb-footer">
@@ -664,6 +909,20 @@
             <strong style="color:#0F172A">CSV format:</strong> Your file should have column headers including <code>name</code>, <code>email</code> (optional), <code>dept</code> (optional), and <code>hireDate</code>. One driver per row.
           </div>
         </div>
+      </section>
+
+      <!-- ── PUBLICATIONS ── -->
+      <section class="p-sec" id="sec-publications">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Publications</div>
+            <div class="p-sub">Build a driver-recognition newsletter, publish a shareable link, and download a print-ready PDF.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-primary" onclick="pubNew()">+ New Issue</button>
+          </div>
+        </div>
+        <div id="pub-list"></div>
       </section>
 
       <!-- ── BILLING ── -->
@@ -978,6 +1237,28 @@
         </div>
       </section>
 
+      <!-- ── ADMIN: REVIEW QUEUE ── -->
+      <section class="p-sec" id="sec-admin">
+        <div class="p-head">
+          <div>
+            <div class="p-title">Review Queue</div>
+            <div class="p-sub">Orders awaiting DAS review — approve, set shipping, or flag issues.</div>
+          </div>
+          <div class="p-actions">
+            <button class="btn-p btn-p-ghost" onclick="admin()">Refresh</button>
+          </div>
+        </div>
+        <div class="p-card">
+          <div class="p-card-head"><span class="p-card-title">Orders Needing Action</span><span class="bdg bdg-gray" id="admin-count">0</span></div>
+          <div class="p-table-wrap">
+            <table class="p-table">
+              <thead><tr><th>Order #</th><th>Company</th><th>Status</th><th>Items</th><th>Subtotal</th><th>Shipping</th><th>Total</th><th>Actions</th></tr></thead>
+              <tbody id="admin-tbody"><tr><td colspan="8"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
     </main><!-- /portal-main -->
   </div><!-- /portal-body -->
 </div><!-- /portal-wrap -->
@@ -986,9 +1267,11 @@
      SCRIPTS — Firebase preserved exactly as-was
 ════════════════════════════════════════════ -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 <script src="js/cart.js"></script>
 <script src="js/portal.js"></script>
+<script src="js/pub-render.js"></script>
+<script src="js/pub-builder.js"></script>
 <script>
 /* ═══════════════════════════════════════════
    FLEET PORTAL — main controller
@@ -1007,6 +1290,7 @@ onAuthReady(user => {
   }
   currentUser = user;
   storeUserSession(user);
+  maybeShowAdmin(user);
 
   if (!PortalAccount.isOnboarded()) {
     document.getElementById('ob-overlay').classList.add('open');
@@ -1096,7 +1380,7 @@ function navigate(section) {
   const nav = document.querySelector('.sb-item[data-section="' + section + '"]');
   if (nav) nav.classList.add('active');
   closeSidebar();
-  const renders = { dashboard, orders, programs, roster, billing, quotes, ideas, support, settings };
+  const renders = { dashboard, orders, programs, roster, publications, billing, quotes, ideas, support, settings, admin };
   if (renders[section]) renders[section]();
 }
 
@@ -1248,6 +1532,143 @@ function settings() {
   tbody.innerHTML = team.length === 0
     ? `<tr><td colspan="3"><p style="padding:12px;color:#6B7280;font-size:0.8rem;text-align:center">No team members added.</p></td></tr>`
     : team.map(m=>`<tr><td>${m.email}</td><td>${m.role}</td><td><span class="bdg bdg-yellow">${m.status}</span></td></tr>`).join('');
+}
+
+/* ════════════════════════════════════
+   ADMIN — REVIEW QUEUE
+   Client-side allowlist gates the NAV only; the /api/admin-orders
+   endpoint independently verifies the Supabase token + ADMIN_EMAILS,
+   so showing the nav to a non-admin is harmless (API returns 403).
+════════════════════════════════════ */
+const ADMIN_EMAILS_CLIENT = [
+  'griffainai@gmail.com',
+  'shaqisvictory@gmail.com',
+  'ssshafeek@driverappreciationsolutions.com',
+];
+
+function maybeShowAdmin(user) {
+  const email = (user && user.email || '').toLowerCase();
+  if (!ADMIN_EMAILS_CLIENT.includes(email)) return;
+  const grp = document.getElementById('sb-admin-group');
+  const item = document.getElementById('sb-admin-item');
+  if (grp)  grp.style.display = '';
+  if (item) item.style.display = '';
+}
+
+// Get the current Supabase access token (JWT) for the Authorization header.
+async function adminToken() {
+  try {
+    const sb = getSupabase();
+    if (!sb) return null;
+    const { data } = await sb.auth.getSession();
+    return (data && data.session && data.session.access_token) || null;
+  } catch { return null; }
+}
+
+const ADMIN_STATUS_BADGE = {
+  in_review:               'bdg-yellow',
+  shipping_quote_required: 'bdg-blue',
+  issue:                   'bdg-red',
+  net_terms_pending:       'bdg-yellow',
+  net_terms_more_info:     'bdg-blue',
+};
+
+function admin() {
+  const tbody = document.getElementById('admin-tbody');
+  if (!tbody) return;
+  tbody.innerHTML = `<tr><td colspan="8"><p style="padding:20px;text-align:center;color:#6B7280;font-size:0.8rem">Loading…</p></td></tr>`;
+
+  adminToken().then(token => {
+    if (!token) { adminError('Not signed in — refresh and try again.'); return; }
+    return fetch('/api/admin-orders', { headers: { Authorization: 'Bearer ' + token } })
+      .then(async res => {
+        if (res.status === 403) { adminError('Your account is not authorized for the review queue.'); return null; }
+        if (!res.ok) { adminError('Could not load orders (HTTP ' + res.status + ').'); return null; }
+        return res.json();
+      })
+      .then(payload => { if (payload) adminRender(payload.orders || []); });
+  }).catch(() => adminError('Network error loading the review queue.'));
+}
+
+function adminError(msg) {
+  const tbody = document.getElementById('admin-tbody');
+  if (tbody) tbody.innerHTML = `<tr><td colspan="8"><p style="padding:20px;text-align:center;color:#B91C1C;font-size:0.8rem">${escapeHtmlText(msg)}</p></td></tr>`;
+  const c = document.getElementById('admin-count'); if (c) c.textContent = '0';
+}
+
+function adminRender(orders) {
+  const tbody = document.getElementById('admin-tbody');
+  const c = document.getElementById('admin-count'); if (c) c.textContent = orders.length;
+  if (!tbody) return;
+  if (orders.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="8"><div class="p-empty" style="padding:28px"><p class="p-empty-title">Queue is clear</p><p class="p-empty-msg">No orders are waiting for review right now.</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML = orders.map(o => {
+    const badge = ADMIN_STATUS_BADGE[o.status] || 'bdg-gray';
+    const items = Array.isArray(o.items) ? o.items.length + ' line' + (o.items.length === 1 ? '' : 's') : '—';
+    const needsQuote = o.status === 'shipping_quote_required' || o.shipping_quote_required;
+    const isNetTerms = o.status === 'net_terms_pending' || o.status === 'net_terms_more_info';
+    const id = String(o.id);
+    const shipCell = needsQuote
+      ? `<input type="number" step="0.01" min="0" id="ship-${id}" placeholder="0.00" style="width:84px;padding:4px 6px;border:1px solid #DEE3E9;border-radius:6px;font-size:0.8rem">`
+      : (o.shipping_cost != null ? fmtMoney(o.shipping_cost) : 'TBD');
+    let actions = '';
+    if (needsQuote) {
+      actions += `<button class="btn-p btn-p-primary btn-p-sm" onclick="adminSetShipping('${id}')">Save Shipping</button>`;
+    }
+    if (isNetTerms) {
+      actions += `<button class="btn-p btn-p-primary btn-p-sm" onclick="adminPatch('${id}','net_terms_approved')">Approve</button>`;
+      actions += `<button class="btn-p btn-p-danger btn-p-sm" onclick="adminPatch('${id}','net_terms_rejected')">Reject</button>`;
+    } else {
+      actions += `<button class="btn-p btn-p-primary btn-p-sm" onclick="adminPatch('${id}','confirmed')">Confirm</button>`;
+      actions += `<button class="btn-p btn-p-danger btn-p-sm" onclick="adminPatch('${id}','cancelled')">Cancel</button>`;
+    }
+    return `<tr>
+      <td class="fw6">${escapeHtmlText(o.order_number || id)}</td>
+      <td>${escapeHtmlText(o.company_name || '—')}</td>
+      <td><span class="bdg ${badge}">${escapeHtmlText(String(o.status).replace(/_/g,' '))}</span></td>
+      <td>${items}</td>
+      <td>${o.subtotal != null ? fmtMoney(o.subtotal) : '—'}</td>
+      <td>${shipCell}</td>
+      <td>${o.total != null ? fmtMoney(o.total) : 'TBD'}</td>
+      <td><div style="display:flex;gap:6px;flex-wrap:wrap">${actions}</div></td>
+    </tr>`;
+  }).join('');
+}
+
+// PATCH status (and optionally shipping_cost) on an order, then refresh.
+async function adminPatch(orderId, status, shipping_cost) {
+  const token = await adminToken();
+  if (!token) { showToast('Session expired — refresh and sign in.', 'error'); return; }
+  const verb = status === 'cancelled' ? 'Cancel' : status === 'net_terms_rejected' ? 'Reject' : 'Approve';
+  if ((status === 'cancelled' || status === 'net_terms_rejected') && !confirm(verb + ' this order?')) return;
+  const body = { orderId, status };
+  if (shipping_cost !== undefined) body.shipping_cost = shipping_cost;
+  try {
+    const res = await fetch('/api/admin-orders', {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      showToast(err.error || ('Update failed (HTTP ' + res.status + ')'), 'error');
+      return;
+    }
+    showToast('Order updated.', 'success');
+    admin();
+  } catch {
+    showToast('Network error updating order.', 'error');
+  }
+}
+
+// Read the inline shipping input for an order and PATCH it as a quote.
+function adminSetShipping(orderId) {
+  const el = document.getElementById('ship-' + orderId);
+  const val = el ? parseFloat(el.value) : NaN;
+  if (isNaN(val) || val < 0) { showToast('Enter a valid shipping cost.', 'error'); return; }
+  adminPatch(orderId, 'confirmed', Number(val.toFixed(2)));
 }
 
 /* ── Form handlers ── */

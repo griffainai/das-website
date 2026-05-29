@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="css/styles.css?v=3">
+  <link rel="stylesheet" href="css/styles.css?v=10">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" href="/images/logo.png" type="image/png">
   <meta name="theme-color" content="#1A2E6E">
@@ -485,7 +485,31 @@
       .enterprise-fleet-cta { padding: 64px 0; }
       .enterprise-stats-grid { max-width: 100%; }
     }
+    /* ── Frequently Bought Together (FBT) bundle widget ────────────── */
+    .fbt-card        { background:#FFF; border:1px solid rgba(26,46,110,0.15); border-radius:16px; padding:20px; }
+    .fbt-eyebrow     { font-size:0.6875rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#6B7280; margin:0 0 14px; }
+    .fbt-row         { display:flex; align-items:center; gap:14px; flex-wrap:wrap; margin-bottom:14px; }
+    .fbt-tile        { display:flex; flex-direction:column; align-items:center; gap:8px; padding:8px; border-radius:12px; width:120px; text-align:center; cursor:pointer; background:transparent; }
+    .fbt-tile img    { width:64px; height:64px; object-fit:cover; border-radius:10px; }
+    .fbt-tile-on     { border:2px solid #1A2E6E; background:rgba(26,46,110,0.05); }
+    .fbt-tile-off    { border:2px dashed #E5E7EB; background:#FAFAFA; opacity:0.65; }
+    .fbt-name        { font-size:0.75rem; font-weight:600; color:#374151; line-height:1.25; margin:0; max-width:96px; }
+    .fbt-price       { font-size:0.75rem; font-weight:700; color:#1A2E6E; margin:0; }
+    .fbt-plus        { font-size:1.25rem; font-weight:700; color:#D1D5DB; }
+    .fbt-cta-row     { display:flex; align-items:center; justify-content:space-between; gap:12px; padding-top:12px; border-top:1px solid #F3F4F6; flex-wrap:wrap; }
+    .fbt-price-col   { display:flex; flex-direction:column; gap:2px; }
+    .fbt-price-line  { display:flex; align-items:baseline; gap:8px; }
+    .fbt-price-total { font-size:1.125rem; font-weight:900; color:#111827; }
+    .fbt-price-strike{ font-size:0.875rem; color:#9CA3AF; text-decoration:line-through; }
+    .fbt-price-save  { font-size:0.75rem; font-weight:700; color:#059669; }
+    .fbt-count       { font-size:0.75rem; color:#9CA3AF; margin:0; }
+    .fbt-add-btn     { white-space:nowrap; }
   </style>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/upsell-modal.js?v=1" defer></script>
+  <!-- FBT bundle widget — populated by DASFBTInit() after the product loads -->
+  <script src="/js/fbt.js?v=1" defer></script>
 </head>
 <body>
 
@@ -749,6 +773,13 @@
   </div>
 </main>
 
+<!-- FREQUENTLY BOUGHT TOGETHER (bundle widget) -->
+<section class="fbt-section" style="padding:48px 0 8px;background:#FFFFFF">
+  <div class="container">
+    <div id="fbt-section"></div>
+  </div>
+</section>
+
 <!-- RELATED PRODUCTS -->
 <section class="related-section">
   <div class="container">
@@ -867,7 +898,7 @@ const PRODUCTS = {
     category: 'Appreciation Kits',
     price: 49.99,
     minQty: 1, // TEMP: lowered to 1 for Stripe payment testing — restore to 10 before launch
-    styleId: 'DAK-001-BLK',
+    styleId: 'DAK-001-BLK', sku: 'DAS-DAK-001',
     description: 'The signature Driver Appreciation Kit — built for fleet operators who understand that recognition is the highest-leverage retention tool available. Curated with the driver\'s professional identity in mind: quality items, personalized acknowledgment, and premium packaging that communicates your company planned ahead for this moment.',
     images: [
       'https://images.unsplash.com/photo-1549465231-2f652e31be48?w=900&q=80&fit=crop',
@@ -922,7 +953,7 @@ const PRODUCTS = {
     category: 'Appreciation Kits',
     price: 44.99,
     minQty: 10,
-    styleId: 'SRK-002-BLK',
+    styleId: 'SRK-002-BLK', sku: 'DAS-SRK-001',
     description: 'Built for fleets that treat safety as a cultural value, not just a compliance requirement. The Safety Recognition Kit rewards clean safety records, near-miss reporting, and exemplary pre-trip behavior with tangible acknowledgment that reinforces the behavior and builds professional identity around safe driving.',
     images: [
       'https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80&fit=crop',
@@ -974,7 +1005,7 @@ const PRODUCTS = {
     category: 'Onboarding Solutions',
     price: 59.99,
     minQty: 10,
-    styleId: 'OBP-003-NVY',
+    styleId: 'OBP-003-NVY', sku: 'DAS-OBP-001',
     description: 'First impressions determine retention trajectories. The Premium Onboarding Pack ensures every new driver\'s first day communicates a clear message: we were expecting you, we planned for you, and you matter here. Curated to build professional identity and company loyalty from the moment a driver walks through the door.',
     images: [
       'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=900&q=80&fit=crop',
@@ -1027,9 +1058,10 @@ const PRODUCTS = {
     id: 'das-004',
     name: 'Holiday Gift Set',
     category: 'Milestone Gifts',
-    price: 1.00,
+    // PRICING NOTE: $54.99 is a placeholder set 2026-05-28 because original $1.00 was a typo. Awaiting Shakir's confirmed price.
+    price: 54.99,
     minQty: 10,
-    styleId: 'HGS-004-GLD',
+    styleId: 'HGS-004-GLD', sku: 'DAS-HGS-001',
     description: 'The year-end recognition moment that drivers talk about longest. The Holiday Gift Set is curated to land during the season when drivers are most reflective about their work relationships — and to send a signal that lasts well into the new year. Particularly effective for OTR drivers whose families see the package at home.',
     images: [
       'https://images.unsplash.com/photo-1512909006721-3d6018887383?w=900&q=80&fit=crop',
@@ -1082,7 +1114,7 @@ const PRODUCTS = {
     category: 'Milestone Gifts',
     price: 79.99,
     minQty: 10,
-    styleId: 'SMA-005-PRE',
+    styleId: 'SMA-005-PRE', sku: 'DAS-SMA-001',
     description: 'Honor years of professional dedication with an award worthy of the milestone. The Service Milestone Award Box is our most elevated recognition product — designed for 1-, 3-, 5-, and 10-year service anniversaries with tiered acknowledgment that reflects the weight of the achievement. This is the recognition drivers display in their cabs for years.',
     images: [
       'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80&fit=crop',
@@ -1170,6 +1202,19 @@ document.addEventListener('DOMContentLoaded', () => {
   initAccordions();
   initExpressCheckout();
   Favorites._updateNav();
+
+  // FBT bundle widget — populates the #fbt-section below the PDP grid.
+  // No-op if SKU not present or no rules match.
+  if (window.DASFBTInit && currentProduct.sku) {
+    window.DASFBTInit({
+      id:        currentProduct.id,
+      sku:       currentProduct.sku,
+      name:      currentProduct.name,
+      price:     currentProduct.price,
+      image_url: (currentProduct.images && currentProduct.images[0]) || null,
+      category:  currentProduct.category,
+    });
+  }
 });
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1547,6 +1592,6 @@ function renderRelated() {
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script src="js/auth.js"></script>
+<script src="js/auth.js?v=2"></script>
 </body>
 </html>
