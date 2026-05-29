@@ -1937,7 +1937,7 @@ async function recognition() {
   if (!rxState.productsLoaded) {
     try {
       const token = await adminToken();
-      const r = await fetch('/api/recognition-catalog', { headers: token ? { Authorization: 'Bearer ' + token } : {} });
+      const r = await fetch('/api/recognition-catalog', { method: 'POST', headers: token ? { Authorization: 'Bearer ' + token } : {} });
       if (r.ok) { const d = await r.json(); rxState.products = Array.isArray(d.products) ? d.products : []; }
     } catch (_) {}
     rxState.productsLoaded = true;
