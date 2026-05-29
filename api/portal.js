@@ -21,6 +21,10 @@
 
 const { getServiceClient, getUserFromToken } = require('./_supabase');
 
+// Shared pure-logic libs (UMD → CommonJS). No Supabase/Stripe coupling.
+const Shipping    = require('../lib/shipping');
+const Pricing     = require('../lib/recognition-pricing');
+
 const ALLOWED_ORIGINS = [
   'https://driverappreciationsolutions.com',
   'https://www.driverappreciationsolutions.com',
@@ -450,6 +454,278 @@ async function handleStripeWebhook(req, res, rawBody) {
 }
 
 /* =============================================================
+   RECOGNITION: company resolution helper (service client)
+   Mirrors the old lib/admin-auth resolveCompany using supabase-js.
+   ============================================================= */
+async function createPortalCompany(supabase, user) {
+  const domain = String(user.email || '').split('@')[1] || '';
+  const name   = domain ? `${domain} (via website)` : `${user.email || 'Customer'} account`;
+  const { data, error } = await supabase
+    .from('companies')
+    .insert({ name, billing_email: user.email || null, owner_id: user.id })
+    .select('id').single();
+  if (error) { console.error('[recognition] createCompany', error.message); return null; }
+  return data && data.id;
+}
+
+async function resolvePortalCompany(supabase, user) {
+  if (!user || !user.id) return null;
+  const { data: rows } = await supabase
+    .from('users').select('id, company_id').eq('id', user.id).limit(1);
+
+  if (Array.isArray(rows) && rows.length) {
+    if (rows[0].company_id) return rows[0].company_id;
+    const cid = await createPortalCompany(supabase, user);
+    if (cid) await supabase.from('users').update({ company_id: cid }).eq('id', user.id);
+    return cid;
+  }
+  // No users row (pure website signup) → provision company + link.
+  const cid = await createPortalCompany(supabase, user);
+  if (cid) {
+    await supabase.from('users')
+      .upsert({ id: user.id, email: user.email, company_id: cid, role: 'owner' }, { onConflict: 'id' });
+  }
+  return cid;
+}
+
+/* =============================================================
+   ACTION: recognition-catalog   (active products for the wizard)
+   Service-role read so it works regardless of das_products RLS.
+   ============================================================= */
+async function handleRecognitionCatalog(req, res) {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Unauthenticated' });
+
+  const supabase = getServiceClient();
+  let { data, error } = await supabase.from('das_products').select('*').eq('active', true).order('name');
+  if (error) { // tolerate a schema without an `active` flag
+    ({ data, error } = await supabase.from('das_products').select('*').order('name'));
+  }
+  if (error) { console.error('[recognition-catalog]', error.message); return res.status(500).json({ error: 'Catalog load failed' }); }
+
+  const products = (Array.isArray(data) ? data : []).map(p => ({
+    id:    p.id,
+    name:  p.name,
+    sku:   p.sku,
+    price: Number(p.price) || 0,
+    category: p.category || '',
+    requires_manual_shipping_quote: p.requires_manual_shipping_quote === true,
+    ships_individually:             p.ships_individually === true,
+    package_weight_oz:              p.package_weight_oz,
+  }));
+  return res.status(200).json({ products });
+}
+
+/* =============================================================
+   ACTION: recognition-order   (price + create order + Stripe / quote)
+   Pay-now: order inserted payment_pending, Stripe metadata.orderId +
+   stripe_session_id set so the stripe-webhook records/advances it (no
+   duplicate insert). Quote-required orders are stored for manual review.
+   ============================================================= */
+const REQUIRED_RECIPIENT_FIELDS = ['first_name', 'last_name', 'address_1', 'city', 'state', 'zip'];
+
+function cleanRecipient(r) {
+  return {
+    first_name: String(r.first_name || '').trim(),
+    last_name:  String(r.last_name  || '').trim(),
+    address_1:  String(r.address_1  || '').trim(),
+    address_2:  r.address_2 ? String(r.address_2).trim() : null,
+    city:       String(r.city  || '').trim(),
+    state:      String(r.state || '').trim(),
+    zip:        String(r.zip   || '').trim(),
+    phone:      r.phone ? String(r.phone).trim() : null,
+    email:      r.email ? String(r.email).trim() : null,
+    shirt_size: r.shirt_size ? String(r.shirt_size).trim() : null,
+    message:    r.message ? String(r.message).trim() : null,
+    ref_no:     r.ref_no ? String(r.ref_no).trim() : null,
+  };
+}
+
+async function handleRecognitionOrder(req, res, body) {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Unauthenticated' });
+
+  const supabase = getServiceClient();
+  const companyId = await resolvePortalCompany(supabase, user);
+  if (!companyId) return res.status(400).json({ error: 'Could not resolve your company. Please contact support.' });
+
+  const track           = String(body.track || '').trim();
+  const milestone       = String(body.milestone || '').trim();
+  const sku             = String(body.sku || '').trim();
+  const recognitionTier = String(body.tier || '').trim();              // tier_1..tier_4
+  const kitTierOverride = body.kitTier ? String(body.kitTier).trim() : null;
+  const tierOverridden  = Boolean(body.tierOverridden) || !!kitTierOverride;
+  const fulfillmentType = body.fulfillmentType === 'multi_address' ? 'multi_address' : 'single_address';
+  const companyNote     = body.companyNote ? String(body.companyNote).trim() : null;
+  const eligibility     = Boolean(body.eligibilityConfirmed);
+
+  if (!track || !milestone || !recognitionTier || !sku) {
+    return res.status(400).json({ error: 'Missing required fields (track, milestone, tier, product).' });
+  }
+  if (!eligibility) return res.status(400).json({ error: 'Eligibility must be confirmed before submitting.' });
+
+  const rawRecipients = Array.isArray(body.recipients) ? body.recipients : [];
+  if (rawRecipients.length === 0)    return res.status(400).json({ error: 'At least one recipient is required.' });
+  if (rawRecipients.length > 5000)   return res.status(400).json({ error: 'Too many recipients in a single order.' });
+
+  const recipients = rawRecipients.map(cleanRecipient);
+  for (let i = 0; i < recipients.length; i++) {
+    const missing = REQUIRED_RECIPIENT_FIELDS.filter(f => !recipients[i][f]);
+    if (missing.length) return res.status(400).json({ error: `Recipient ${i + 1} is missing: ${missing.join(', ')}` });
+  }
+
+  // Authoritative product lookup (service role).
+  const { data: prod, error: prodErr } = await supabase
+    .from('das_products').select('*').eq('sku', sku).limit(1).maybeSingle();
+  if (prodErr) { console.error('[recognition-order] product lookup', prodErr.message); return res.status(500).json({ error: 'Product lookup failed.' }); }
+  if (!prod)   return res.status(400).json({ error: `Unknown product SKU: ${sku}` });
+
+  // Pricing: recognition tier → kit tier → unit price.
+  const kitTier   = kitTierOverride || Pricing.kitTierForRecognitionTier(recognitionTier);
+  const basePrice = Number(prod.price) || 0;
+  const unitPrice = Pricing.priceForKitTier(kitTier, basePrice);
+  if (unitPrice < 0.50) return res.status(400).json({ error: 'Computed unit price is below the minimum chargeable amount.' });
+
+  const qty           = recipients.length;
+  const deliveryCount = fulfillmentType === 'multi_address' ? qty : 1;
+
+  const shippingResult = Shipping.calculateShipping({
+    fulfillmentType,
+    deliveryCount,
+    items: [{
+      qty,
+      product: {
+        requires_manual_shipping_quote: prod.requires_manual_shipping_quote === true,
+        ships_individually:             prod.ships_individually === true,
+        package_weight_oz:              prod.package_weight_oz,
+        package_length_in:              prod.package_length_in,
+        package_width_in:               prod.package_width_in,
+        package_height_in:              prod.package_height_in,
+      },
+    }],
+  });
+
+  const requiresQuote = shippingResult.requiresQuote;
+  const subtotal      = Number((unitPrice * qty).toFixed(2));
+  const shippingCost  = requiresQuote ? null : shippingResult.cost;
+  const total         = requiresQuote ? null : Number((subtotal + shippingCost).toFixed(2));
+
+  const datePart    = new Date().toISOString().slice(0, 10).replace(/-/g, '');
+  const randPart    = Math.floor(1000 + Math.random() * 9000);
+  const orderNumber = `DAS-RX-${datePart}-${randPart}`;
+  const tierLabel   = recognitionTier.replace('tier_', 'Tier ');
+  const itemLabel   = `${prod.name} — ${milestone} (${tierLabel}, ${kitTier})`;
+
+  const notesParts = [
+    `Track: ${track}`,
+    `Milestone: ${milestone}`,
+    `Tier: ${recognitionTier}${tierOverridden ? ' (override → ' + kitTier + ')' : ''}`,
+    `Fulfillment: ${fulfillmentType}`,
+    companyNote ? `Company note: ${companyNote}` : null,
+    requiresQuote ? `Quote reason: ${shippingResult.reason}` : null,
+  ].filter(Boolean);
+
+  const orderRow = {
+    company_id:               companyId,
+    order_number:             orderNumber,
+    items:                    [{ name: itemLabel, qty, unit_price: unitPrice, sku }],
+    subtotal,
+    shipping_cost:            shippingCost,
+    total,
+    status:                   requiresQuote ? 'shipping_quote_required' : 'payment_pending',
+    notes:                    notesParts.join(' | '),
+    fulfillment_type:         fulfillmentType,
+    delivery_count:           deliveryCount,
+    shipping_quote_required:  requiresQuote,
+    shipping_quote_reason:    requiresQuote ? shippingResult.reason : null,
+    recipients,
+    recognition_track:        track,
+    recognition_milestone:    milestone,
+    recognition_tier:         recognitionTier,
+    submitted_by_user_id:     user.id,
+    eligibility_confirmed_at: new Date().toISOString(),
+  };
+
+  const { data: order, error: insErr } = await supabase
+    .from('das_orders').insert(orderRow).select('*').single();
+  if (insErr || !order) { console.error('[recognition-order] insert failed', insErr && insErr.message); return res.status(500).json({ error: 'Order creation failed.' }); }
+
+  // Quote-required → submit for review, no charge.
+  if (requiresQuote) {
+    return res.status(200).json({
+      mode:          'quote_required',
+      orderId:       order.id,
+      orderNumber:   order.order_number,
+      status:        order.status,
+      adminMessage:  shippingResult.adminMessage,
+      estimatedCost: shippingResult.estimatedCost,
+    });
+  }
+
+  // Calculable → pay now via Stripe Checkout.
+  if (!process.env.STRIPE_SECRET_KEY || process.env.STRIPE_SECRET_KEY.startsWith('sk_test_REPLACE')) {
+    console.error('[recognition-order] STRIPE_SECRET_KEY not configured');
+    return res.status(500).json({ error: 'Payment system not configured — contact support.' });
+  }
+
+  try {
+    const Stripe  = require('stripe');
+    const stripe  = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
+    const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
+
+    const line_items = [{
+      price_data: {
+        currency: 'usd',
+        product_data: {
+          name:        itemLabel,
+          description: `${fulfillmentType === 'multi_address' ? qty + ' recipients' : milestone} · recognition program`,
+        },
+        unit_amount: Math.round(unitPrice * 100),
+      },
+      quantity: qty,
+    }];
+
+    if (shippingCost > 0) {
+      line_items.push({
+        price_data: {
+          currency: 'usd',
+          product_data: { name: 'Shipping & handling', description: shippingResult.breakdown },
+          unit_amount: Math.round(shippingCost * 100),
+        },
+        quantity: 1,
+      });
+    }
+
+    const session = await stripe.checkout.sessions.create({
+      line_items,
+      mode:                       'payment',
+      success_url:                `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}&order_id=${order.id}`,
+      cancel_url:                 `${siteUrl}/account.html#recognition`,
+      billing_address_collection: 'required',
+      custom_text: { submit: { message: 'Recognition orders enter DAS review immediately after payment.' } },
+      // orderId (camelCase) is what the stripe-webhook checkout.session.completed
+      // handler keys on — it flips this order to confirmed and never double-inserts.
+      metadata: {
+        order_source: 'das-recognition-order',
+        orderId:      order.id,
+        order_number: order.order_number,
+        company_id:   companyId,
+        recipients:   String(qty),
+      },
+    });
+
+    await supabase.from('das_orders')
+      .update({ stripe_session_id: session.id, notes: notesParts.concat([`Stripe session: ${session.id}`]).join(' | ') })
+      .eq('id', order.id);
+
+    return res.status(200).json({ mode: 'checkout', orderId: order.id, orderNumber: order.order_number, url: session.url });
+  } catch (err) {
+    console.error('[recognition-order] Stripe error', err && err.message);
+    return res.status(500).json({ error: (err && err.message) || 'Failed to start checkout. Please try again.' });
+  }
+}
+
+/* =============================================================
    ROUTER
    ============================================================= */
 module.exports = async (req, res) => {
@@ -477,9 +753,11 @@ module.exports = async (req, res) => {
   }
 
   switch (action) {
-    case 'submit-quote':     return handleSubmitQuote(req, res, payload);
-    case 'billing-checkout': return handleBillingCheckout(req, res, payload);
-    case 'billing-portal':   return handleBillingPortal(req, res);
+    case 'submit-quote':         return handleSubmitQuote(req, res, payload);
+    case 'billing-checkout':     return handleBillingCheckout(req, res, payload);
+    case 'billing-portal':       return handleBillingPortal(req, res);
+    case 'recognition-catalog':  return handleRecognitionCatalog(req, res);
+    case 'recognition-order':    return handleRecognitionOrder(req, res, payload);
     default:
       return res.status(404).json({ error: `Unknown portal action: ${action || '(none)'}` });
   }

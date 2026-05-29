@@ -685,6 +685,10 @@
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z"/></svg>
         Programs
       </button>
+      <button class="sb-item" data-section="recognition" onclick="navigate('recognition')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0"/></svg>
+        New Recognition
+      </button>
       <button class="sb-item" data-section="roster" onclick="navigate('roster')">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
         Driver Roster
@@ -871,6 +875,123 @@
           </div>
         </div>
         <div class="prog-grid" id="prog-grid"></div>
+      </section>
+
+      <!-- ── NEW RECOGNITION ── -->
+      <section class="p-sec" id="sec-recognition">
+        <div class="p-head">
+          <div>
+            <div class="p-title">New Recognition Order</div>
+            <div class="p-sub">Recognize a driver milestone — we recommend the right tier, you confirm and pay.</div>
+          </div>
+        </div>
+        <div class="col-2" style="align-items:start">
+          <!-- LEFT: builder -->
+          <div class="p-card">
+            <div class="p-card-body">
+              <div class="fg">
+                <label class="fl">Recognition Track</label>
+                <select id="rx-track" class="fs" onchange="rxTrackChanged()"></select>
+                <div id="rx-track-desc" style="font-size:0.74rem;color:#6B7280;margin-top:4px"></div>
+              </div>
+              <div class="fg">
+                <label class="fl">Milestone</label>
+                <select id="rx-milestone" class="fs" onchange="rxRecalc()"></select>
+              </div>
+              <div class="fg">
+                <label class="fl">Recommended Reward Tier</label>
+                <select id="rx-tier" class="fs" onchange="rxTierChanged()">
+                  <option value="tier_1">Tier 1 — Essential</option>
+                  <option value="tier_2">Tier 2 — Professional</option>
+                  <option value="tier_3">Tier 3 — Elite</option>
+                  <option value="tier_4">Tier 4 — Legacy</option>
+                </select>
+                <div id="rx-tier-desc" style="font-size:0.74rem;color:#6B7280;margin-top:4px"></div>
+                <div id="rx-tier-override" style="display:none;font-size:0.72rem;color:#9A3412;margin-top:4px">⚠ You changed the recommended tier — DAS will see this as an admin override.</div>
+              </div>
+              <div class="fg">
+                <label class="fl">Kit / Product</label>
+                <select id="rx-product" class="fs" onchange="rxRecalc()"></select>
+                <div id="rx-product-flag" style="display:none;font-size:0.72rem;color:#9A3412;margin-top:4px">⚠ This item requires DAS shipping review — the order submits for a quote instead of charging now.</div>
+              </div>
+
+              <div class="fg">
+                <label class="fl">Delivery Mode</label>
+                <div style="display:flex;gap:8px;flex-wrap:wrap">
+                  <button type="button" class="btn-p btn-p-ghost rx-mode-btn" data-mode="single" onclick="rxSetMode('single')">Single driver</button>
+                  <button type="button" class="btn-p btn-p-ghost rx-mode-btn" data-mode="bulk" onclick="rxSetMode('bulk')">CSV bulk (one delivery each)</button>
+                </div>
+              </div>
+
+              <!-- SINGLE recipient -->
+              <div id="rx-single">
+                <div class="fgrid2">
+                  <div class="fg"><label class="fl">First Name</label><input id="rx-fn" class="fi" oninput="rxRecalc()"></div>
+                  <div class="fg"><label class="fl">Last Name</label><input id="rx-ln" class="fi" oninput="rxRecalc()"></div>
+                </div>
+                <div class="fg"><label class="fl">Address Line 1</label><input id="rx-a1" class="fi"></div>
+                <div class="fg"><label class="fl">Address Line 2 (optional)</label><input id="rx-a2" class="fi"></div>
+                <div class="fgrid2">
+                  <div class="fg"><label class="fl">City</label><input id="rx-city" class="fi"></div>
+                  <div class="fg"><label class="fl">State</label><input id="rx-state" class="fi" maxlength="2" placeholder="TX"></div>
+                </div>
+                <div class="fgrid2">
+                  <div class="fg"><label class="fl">ZIP</label><input id="rx-zip" class="fi"></div>
+                  <div class="fg"><label class="fl">Shirt Size (optional)</label>
+                    <select id="rx-shirt" class="fs"><option value="">—</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option><option>3XL</option></select>
+                  </div>
+                </div>
+                <div class="fgrid2">
+                  <div class="fg"><label class="fl">Phone (optional)</label><input id="rx-phone" class="fi"></div>
+                  <div class="fg"><label class="fl">Email (optional)</label><input id="rx-email" type="email" class="fi"></div>
+                </div>
+                <div class="fg"><label class="fl">Personal Message (optional)</label><textarea id="rx-msg" class="fi" rows="2" placeholder="Congratulations on your milestone…"></textarea></div>
+              </div>
+
+              <!-- BULK CSV -->
+              <div id="rx-bulk" style="display:none">
+                <div style="background:#F3F5F9;border:1px solid #DEE3E9;border-radius:10px;padding:14px;margin-bottom:12px">
+                  <div style="font-size:0.78rem;color:#374151;line-height:1.6;margin-bottom:10px">
+                    Upload one row per recipient. Required columns: <code>first_name, last_name, address_1, city, state, zip</code>.
+                    Optional: <code>address_2, phone, email, shirt_size, message</code>. Each recipient is a separate $20 delivery.
+                  </div>
+                  <div style="display:flex;gap:8px;flex-wrap:wrap">
+                    <button type="button" class="btn-p btn-p-ghost btn-p-sm" onclick="rxDownloadTemplate()">Download CSV template</button>
+                    <label class="btn-p btn-p-primary btn-p-sm" style="cursor:pointer">
+                      Upload CSV
+                      <input type="file" accept=".csv" style="display:none" onchange="rxHandleCSV(this)">
+                    </label>
+                  </div>
+                </div>
+                <div id="rx-csv-result" style="font-size:0.78rem"></div>
+              </div>
+
+              <div class="fg" style="margin-top:4px">
+                <label class="fl">Company Note to DAS (optional)</label>
+                <textarea id="rx-note" class="fi" rows="2" placeholder="Anything DAS should know about this order."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: summary -->
+          <div class="p-card" style="position:sticky;top:16px">
+            <div class="p-card-head"><span class="p-card-title">Order Summary</span></div>
+            <div class="p-card-body">
+              <div id="rx-summary" style="font-size:0.82rem;color:#374151;line-height:1.9"></div>
+              <div style="border-top:1px solid #DEE3E9;margin:14px 0"></div>
+              <div id="rx-totals" style="font-size:0.85rem"></div>
+              <div id="rx-quote-note" style="display:none;background:#FFF7ED;border:1px solid #FED7AA;border-radius:10px;padding:12px;margin-top:12px;font-size:0.76rem;color:#9A3412;line-height:1.5"></div>
+
+              <label style="display:flex;gap:10px;align-items:flex-start;margin-top:16px;font-size:0.76rem;color:#374151;line-height:1.5;cursor:pointer">
+                <input type="checkbox" id="rx-eligibility" style="margin-top:2px;flex-shrink:0" onchange="rxRecalc()">
+                <span>I confirm that my organization has verified the recipient's eligibility for this recognition. DAS is responsible for fulfillment only and does not verify mileage, safety status, employment records, or incident history.</span>
+              </label>
+
+              <button class="btn-p btn-p-primary btn-p-lg" id="rx-submit" style="width:100%;margin-top:16px" disabled onclick="rxSubmit()">Continue to Payment</button>
+              <div id="rx-error" style="display:none;color:#B91C1C;font-size:0.76rem;margin-top:8px"></div>
+            </div>
+          </div>
+        </div>
       </section>
 
       <!-- ── ROSTER ── -->
@@ -1283,6 +1404,11 @@
 <script src="js/auth.js?v=2"></script>
 <script src="js/cart.js"></script>
 <script src="js/portal.js?v=2"></script>
+<script src="lib/carriers.js"></script>
+<script src="lib/shipping.js"></script>
+<script src="lib/recognition.js"></script>
+<script src="lib/recognition-pricing.js"></script>
+<script src="lib/csv.js"></script>
 <script src="js/pub-render.js"></script>
 <script src="js/pub-builder.js?v=2"></script>
 <script src="js/pub-pdf.js?v=1"></script>
@@ -1416,7 +1542,7 @@ function navigate(section) {
   const nav = document.querySelector('.sb-item[data-section="' + section + '"]');
   if (nav) nav.classList.add('active');
   closeSidebar();
-  const renders = { dashboard, orders, programs, roster, publications, billing, quotes, ideas, support, settings, admin };
+  const renders = { dashboard, orders, programs, recognition, roster, publications, billing, quotes, ideas, support, settings, admin };
   if (renders[section]) renders[section]();
 }
 
@@ -1789,6 +1915,311 @@ function copyRef() {
   const code = document.getElementById('referral-code').textContent;
   navigator.clipboard.writeText(code).then(() => showToast('Referral code copied!','success'));
 }
+
+/* ════════════════════════════════════
+   RECOGNITION WIZARD
+   Uses the shared UMD engines (DASRecognition / DASRecognitionPricing /
+   DASShipping / DASCsv) so the client preview matches the server exactly.
+════════════════════════════════════ */
+const rxState = { products: [], productsLoaded: false, mode: 'single', bulkRecipients: [] };
+
+const CSV_COLUMNS = ['first_name','last_name','address_1','address_2','city','state','zip','phone','email','shirt_size','message'];
+const CSV_REQUIRED = ['first_name','last_name','address_1','city','state','zip'];
+
+async function recognition() {
+  // Populate the track dropdown once.
+  const trackSel = document.getElementById('rx-track');
+  if (trackSel && !trackSel.options.length) {
+    trackSel.innerHTML = DASRecognition.ALL_TRACKS.map(t =>
+      `<option value="${t}">${escapeHtmlText(DASRecognition.TRACK_LABELS[t].name)}</option>`).join('');
+  }
+  // Load products once.
+  if (!rxState.productsLoaded) {
+    try {
+      const token = await adminToken();
+      const r = await fetch('/api/recognition-catalog', { headers: token ? { Authorization: 'Bearer ' + token } : {} });
+      if (r.ok) { const d = await r.json(); rxState.products = Array.isArray(d.products) ? d.products : []; }
+    } catch (_) {}
+    rxState.productsLoaded = true;
+    const prodSel = document.getElementById('rx-product');
+    if (prodSel) {
+      prodSel.innerHTML = rxState.products.length
+        ? rxState.products.map(p => `<option value="${escapeHtmlText(p.sku)}">${escapeHtmlText(p.name)} — base ${Number(p.price).toFixed(2)}</option>`).join('')
+        : '<option value="">No products available</option>';
+    }
+  }
+  rxSetMode(rxState.mode);
+  rxTrackChanged();
+}
+
+function rxTrackChanged() {
+  const track = document.getElementById('rx-track').value;
+  const desc = DASRecognition.TRACK_LABELS[track];
+  document.getElementById('rx-track-desc').textContent = desc ? desc.description : '';
+  const milestones = DASRecognition.MILESTONES_BY_TRACK[track] || [];
+  const mSel = document.getElementById('rx-milestone');
+  mSel.innerHTML = milestones.map(m => `<option value="${m.id}">${escapeHtmlText(m.label)}</option>`).join('');
+  rxApplyRecommendedTier();
+  rxRecalc();
+}
+
+function rxApplyRecommendedTier() {
+  const track = document.getElementById('rx-track').value;
+  const milestoneId = document.getElementById('rx-milestone').value;
+  const rec = DASRecognition.recommendTier(track, milestoneId);
+  const tierSel = document.getElementById('rx-tier');
+  tierSel.value = rec;
+  tierSel.dataset.recommended = rec;
+  document.getElementById('rx-tier-override').style.display = 'none';
+}
+
+// When milestone changes we also reset the recommended tier.
+document.addEventListener('change', function (e) {
+  if (e.target && e.target.id === 'rx-milestone') rxApplyRecommendedTier();
+});
+
+function rxTierChanged() {
+  const tierSel = document.getElementById('rx-tier');
+  const overridden = tierSel.value !== tierSel.dataset.recommended;
+  document.getElementById('rx-tier-override').style.display = overridden ? '' : 'none';
+  rxRecalc();
+}
+
+function rxSetMode(mode) {
+  rxState.mode = mode;
+  document.getElementById('rx-single').style.display = mode === 'single' ? '' : 'none';
+  document.getElementById('rx-bulk').style.display   = mode === 'bulk'   ? '' : 'none';
+  document.querySelectorAll('.rx-mode-btn').forEach(b => {
+    const on = b.dataset.mode === mode;
+    b.classList.toggle('btn-p-primary', on);
+    b.classList.toggle('btn-p-ghost', !on);
+  });
+  rxRecalc();
+}
+
+function rxSelectedProduct() {
+  const sku = document.getElementById('rx-product').value;
+  return rxState.products.find(p => p.sku === sku) || null;
+}
+
+function rxSingleRecipientValid() {
+  return ['rx-fn','rx-ln','rx-a1','rx-city','rx-state','rx-zip']
+    .every(id => (document.getElementById(id).value || '').trim().length > 0);
+}
+
+function rxGatherRecipients() {
+  if (rxState.mode === 'single') {
+    return [{
+      first_name: document.getElementById('rx-fn').value.trim(),
+      last_name:  document.getElementById('rx-ln').value.trim(),
+      address_1:  document.getElementById('rx-a1').value.trim(),
+      address_2:  document.getElementById('rx-a2').value.trim() || null,
+      city:       document.getElementById('rx-city').value.trim(),
+      state:      document.getElementById('rx-state').value.trim(),
+      zip:        document.getElementById('rx-zip').value.trim(),
+      phone:      document.getElementById('rx-phone').value.trim() || null,
+      email:      document.getElementById('rx-email').value.trim() || null,
+      shirt_size: document.getElementById('rx-shirt').value || null,
+      message:    document.getElementById('rx-msg').value.trim() || null,
+    }];
+  }
+  return rxState.bulkRecipients.slice();
+}
+
+function rxRecalc() {
+  const product = rxSelectedProduct();
+  const tier = document.getElementById('rx-tier').value;
+  const tierLabel = DASRecognition.TIER_LABELS[tier];
+  document.getElementById('rx-tier-desc').textContent = tierLabel ? tierLabel.description : '';
+
+  const flagged = !!(product && product.requires_manual_shipping_quote);
+  document.getElementById('rx-product-flag').style.display = flagged ? '' : 'none';
+
+  const summaryEl = document.getElementById('rx-summary');
+  const totalsEl  = document.getElementById('rx-totals');
+  const quoteEl   = document.getElementById('rx-quote-note');
+  const submitBtn = document.getElementById('rx-submit');
+
+  if (!product) {
+    summaryEl.innerHTML = '<span style="color:#6B7280">Select a product to see pricing.</span>';
+    totalsEl.innerHTML = ''; quoteEl.style.display = 'none';
+    submitBtn.disabled = true; return;
+  }
+
+  const kitTier   = DASRecognitionPricing.kitTierForRecognitionTier(tier);
+  const unitPrice = DASRecognitionPricing.priceForKitTier(kitTier, Number(product.price));
+  const qty       = rxState.mode === 'single' ? 1 : rxState.bulkRecipients.length;
+  const subtotal  = Number((unitPrice * qty).toFixed(2));
+
+  const track       = document.getElementById('rx-track').value;
+  const milestoneId = document.getElementById('rx-milestone').value;
+  const milestone   = DASRecognition.getMilestone(track, milestoneId);
+
+  const fulfillmentType = rxState.mode === 'single' ? 'single_address' : 'multi_address';
+  const ship = DASShipping.calculateShipping({
+    fulfillmentType,
+    deliveryCount: fulfillmentType === 'multi_address' ? Math.max(1, qty) : 1,
+    items: [{ qty: Math.max(1, qty), product: {
+      requires_manual_shipping_quote: flagged,
+      package_weight_oz: product.package_weight_oz,
+      package_length_in: product.package_length_in,
+      package_width_in:  product.package_width_in,
+      package_height_in: product.package_height_in,
+    } }],
+  });
+
+  summaryEl.innerHTML =
+    `<div><strong>Track:</strong> ${escapeHtmlText(DASRecognition.TRACK_LABELS[track].name)}</div>` +
+    `<div><strong>Milestone:</strong> ${escapeHtmlText(milestone ? milestone.label : '—')}</div>` +
+    `<div><strong>Tier:</strong> ${escapeHtmlText(tierLabel ? tierLabel.name : tier)} <span style="color:#6B7280">(${kitTier} kit)</span></div>` +
+    `<div><strong>Kit:</strong> ${escapeHtmlText(product.name)}</div>` +
+    `<div><strong>Recipients:</strong> ${qty}</div>`;
+
+  const requiresQuote = ship.requiresQuote;
+  if (requiresQuote) {
+    totalsEl.innerHTML =
+      `<div style="display:flex;justify-content:space-between"><span>Kit subtotal</span><strong>${fmtMoney(subtotal)}</strong></div>` +
+      `<div style="display:flex;justify-content:space-between;color:#9A3412"><span>Shipping</span><strong>Quote required</strong></div>`;
+    quoteEl.style.display = '';
+    quoteEl.textContent = ship.adminMessage || 'This order requires DAS shipping review before payment.';
+    submitBtn.textContent = 'Submit for Shipping Quote';
+  } else {
+    const total = Number((subtotal + ship.cost).toFixed(2));
+    totalsEl.innerHTML =
+      `<div style="display:flex;justify-content:space-between"><span>Kit subtotal (${qty} × ${fmtMoney(unitPrice)})</span><strong>${fmtMoney(subtotal)}</strong></div>` +
+      `<div style="display:flex;justify-content:space-between"><span>Shipping</span><strong>${fmtMoney(ship.cost)}</strong></div>` +
+      `<div style="display:flex;justify-content:space-between;font-size:1rem;font-weight:800;border-top:1px solid #DEE3E9;padding-top:8px;margin-top:8px"><span>Total</span><span>${fmtMoney(total)}</span></div>` +
+      `<div style="font-size:0.7rem;color:#6B7280;margin-top:4px">${escapeHtmlText(ship.breakdown)}</div>`;
+    quoteEl.style.display = 'none';
+    submitBtn.textContent = 'Continue to Payment';
+  }
+
+  const eligible = document.getElementById('rx-eligibility').checked;
+  const recipientsOk = rxState.mode === 'single' ? rxSingleRecipientValid() : rxState.bulkRecipients.length > 0;
+  submitBtn.disabled = !(eligible && recipientsOk && milestone);
+}
+
+function rxDownloadTemplate() {
+  const example = ['Jane','Smith','123 Fleet Rd','Suite 200','Dallas','TX','75201','555-555-0100','jane@example.com','L','Congratulations on your milestone!'];
+  const csv = DASCsv.toCSV([CSV_COLUMNS, example]);
+  const blob = new Blob([csv], { type: 'text/csv' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'das-recognition-recipients-template.csv';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(a.href);
+}
+
+function rxHandleCSV(input) {
+  const file = input.files && input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function () {
+    const resultEl = document.getElementById('rx-csv-result');
+    let rows;
+    try { rows = DASCsv.parseCSV(String(reader.result)); }
+    catch (_) { resultEl.innerHTML = '<span style="color:#B91C1C">Could not parse that CSV.</span>'; return; }
+    if (rows.length < 2) { resultEl.innerHTML = '<span style="color:#B91C1C">CSV needs a header row plus at least one recipient.</span>'; return; }
+
+    const header = rows[0].map(h => h.trim().toLowerCase());
+    const idx = {};
+    CSV_COLUMNS.forEach(c => { idx[c] = header.indexOf(c); });
+    const missingCols = CSV_REQUIRED.filter(c => idx[c] === -1);
+    if (missingCols.length) {
+      resultEl.innerHTML = `<span style="color:#B91C1C">Missing required column(s): ${missingCols.join(', ')}</span>`;
+      rxState.bulkRecipients = []; rxRecalc(); return;
+    }
+
+    const recipients = []; const errors = [];
+    for (let r = 1; r < rows.length; r++) {
+      const row = rows[r];
+      const get = c => (idx[c] !== -1 && row[idx[c]] != null ? String(row[idx[c]]).trim() : '');
+      const rec = {
+        first_name: get('first_name'), last_name: get('last_name'),
+        address_1: get('address_1'), address_2: get('address_2') || null,
+        city: get('city'), state: get('state'), zip: get('zip'),
+        phone: get('phone') || null, email: get('email') || null,
+        shirt_size: get('shirt_size') || null, message: get('message') || null,
+      };
+      const miss = CSV_REQUIRED.filter(c => !rec[c]);
+      if (miss.length) { errors.push(`Row ${r + 1}: missing ${miss.join(', ')}`); continue; }
+      recipients.push(rec);
+    }
+    rxState.bulkRecipients = recipients;
+
+    const preview = recipients.slice(0, 8).map(rc =>
+      `<tr><td>${escapeHtmlText(rc.first_name + ' ' + rc.last_name)}</td><td>${escapeHtmlText(rc.city + ', ' + rc.state)}</td><td>${escapeHtmlText(rc.shirt_size || '—')}</td></tr>`).join('');
+    resultEl.innerHTML =
+      `<div style="margin-bottom:8px"><strong>${recipients.length}</strong> valid recipient${recipients.length === 1 ? '' : 's'} loaded` +
+      (errors.length ? ` · <span style="color:#B91C1C">${errors.length} skipped</span>` : '') + `</div>` +
+      (recipients.length ? `<table class="p-table"><thead><tr><th>Name</th><th>Destination</th><th>Shirt</th></tr></thead><tbody>${preview}</tbody></table>` +
+        (recipients.length > 8 ? `<div style="color:#6B7280;margin-top:6px">…and ${recipients.length - 8} more</div>` : '') : '') +
+      (errors.length ? `<div style="color:#B91C1C;margin-top:8px;font-size:0.72rem">${errors.slice(0,5).map(escapeHtmlText).join('<br>')}</div>` : '');
+    rxRecalc();
+  };
+  reader.readAsText(file);
+}
+
+async function rxSubmit() {
+  const product = rxSelectedProduct();
+  if (!product) return;
+  const track = document.getElementById('rx-track').value;
+  const milestoneId = document.getElementById('rx-milestone').value;
+  const milestone = DASRecognition.getMilestone(track, milestoneId);
+  const tierSel = document.getElementById('rx-tier');
+  const tier = tierSel.value;
+  const recipients = rxGatherRecipients();
+
+  const errEl = document.getElementById('rx-error');
+  errEl.style.display = 'none';
+  const submitBtn = document.getElementById('rx-submit');
+
+  if (!recipients.length) { errEl.textContent = 'Add at least one recipient.'; errEl.style.display = ''; return; }
+
+  const payload = {
+    track,
+    milestone: milestone ? milestone.label : milestoneId,
+    milestoneId,
+    tier,
+    tierOverridden: tier !== tierSel.dataset.recommended,
+    sku: product.sku,
+    fulfillmentType: rxState.mode === 'single' ? 'single_address' : 'multi_address',
+    recipients,
+    companyNote: document.getElementById('rx-note').value.trim() || null,
+    eligibilityConfirmed: document.getElementById('rx-eligibility').checked,
+  };
+
+  submitBtn.disabled = true;
+  const original = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting…';
+  try {
+    const token = await adminToken();
+    if (!token) { errEl.textContent = 'Session expired — please sign in again.'; errEl.style.display = ''; submitBtn.disabled = false; submitBtn.textContent = original; return; }
+    const res = await fetch('/api/recognition-order', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) { errEl.textContent = data.error || ('Submission failed (HTTP ' + res.status + ')'); errEl.style.display = ''; submitBtn.disabled = false; submitBtn.textContent = original; return; }
+
+    if (data.mode === 'checkout' && data.url) {
+      window.location.href = data.url; // off to Stripe
+      return;
+    }
+    if (data.mode === 'quote_required') {
+      showToast('Order ' + (data.orderNumber || '') + ' submitted for DAS shipping review.', 'success');
+      navigate('orders');
+      return;
+    }
+    showToast('Order submitted.', 'success');
+    navigate('orders');
+  } catch (_) {
+    errEl.textContent = 'Network error — please try again.'; errEl.style.display = '';
+    submitBtn.disabled = false; submitBtn.textContent = original;
+  }
+}
+
 </script>
 
 </body>

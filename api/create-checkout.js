@@ -23,6 +23,9 @@ module.exports = async (req, res) => {
   const Stripe = require('stripe');
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
 
+  // Quantity-tiered shipping engine (replaces the old hardcoded $12.95/$24.95).
+  const Shipping = require('../lib/shipping');
+
   const body = req.body || {};
   const { items } = body;
   // Optional upsell metadata from the client (cart.html computes these)
@@ -106,6 +109,28 @@ module.exports = async (req, res) => {
 
     const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');
 
+    // ── Quantity-tiered shipping (single company address) ──
+    // Kits cost ~$15 each to ship; the old flat $12.95 undercharged every multi-unit
+    // order. Compute a flat rate from total quantity using the shared rule engine.
+    const totalQty = items.reduce((s, it) => s + (Number(it.qty) || 0), 0);
+    const shipResult = Shipping.calculateShipping({
+      fulfillmentType: 'single_address',
+      deliveryCount:   1,
+      items:           items.map(it => ({ qty: Number(it.qty) || 0, product: null })),
+    });
+    // For calculable tiers use the engine cost; for 500+ (quote-required) charge the
+    // top self-serve tier as a conservative floor and flag for DAS follow-up.
+    let shippingCents;
+    let shippingLabel;
+    if (shipResult.requiresQuote) {
+      shippingCents = Math.round((Shipping.estimateSingleAddressFlat(499) || 950) * 100);
+      shippingLabel = `Flat-rate shipping (${totalQty} units — final freight confirmed by DAS)`;
+    } else {
+      shippingCents = Math.round(shipResult.cost * 100);
+      shippingLabel = `Flat-rate shipping (${totalQty} units)`;
+    }
+    if (!(shippingCents > 0)) shippingCents = 2500; // safety floor
+
     const sessionConfig = {
       line_items,
       mode:                       'payment',
@@ -117,22 +142,11 @@ module.exports = async (req, res) => {
         {
           shipping_rate_data: {
             type: 'fixed_amount',
-            fixed_amount: { amount: 1295, currency: 'usd' },
-            display_name: 'Standard Shipping',
+            fixed_amount: { amount: shippingCents, currency: 'usd' },
+            display_name: shippingLabel,
             delivery_estimate: {
               minimum: { unit: 'business_day', value: 3 },
-              maximum: { unit: 'business_day', value: 5 },
-            },
-          },
-        },
-        {
-          shipping_rate_data: {
-            type: 'fixed_amount',
-            fixed_amount: { amount: 2495, currency: 'usd' },
-            display_name: 'Expedited Shipping',
-            delivery_estimate: {
-              minimum: { unit: 'business_day', value: 1 },
-              maximum: { unit: 'business_day', value: 2 },
+              maximum: { unit: 'business_day', value: 7 },
             },
           },
         },
@@ -146,6 +160,9 @@ module.exports = async (req, res) => {
       metadata: {
         order_source:      'das-website-cart',
         item_count:        String(items.length),
+        total_qty:         String(totalQty),
+        shipping_charged:  String(shippingCents),
+        shipping_quote:    shipResult.requiresQuote ? '1' : '0',
         bundle_applied:    bundleApplies ? '1' : '0',
         premium_guarantee: premiumGuarantee ? '1' : '0',
       },
