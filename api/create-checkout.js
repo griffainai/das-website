@@ -25,6 +25,8 @@ module.exports = async (req, res) => {
 
   // Quantity-tiered shipping engine (replaces the old hardcoded $12.95/$24.95).
   const Shipping = require('../lib/shipping');
+  // Server-side price authority for the static storefront catalog (anti price-tampering).
+  const Catalog  = require('../lib/catalog');
 
   const body = req.body || {};
   const { items } = body;
@@ -37,35 +39,76 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: 'Cart is empty' });
   }
 
-  // Validate each item
+  // ── Validate + PRICE each item server-side ───────────────────────────────────
+  // Known storefront products are priced from lib/catalog: the browser-sent price is
+  // verified against the real tier prices and replaced with the trusted value, never
+  // taken on faith. Unknown items (e.g. Frequently-Bought-Together bundle items sourced
+  // from Supabase) are sanity-checked and passed through.
+  const MAX_ITEMS = 100;       // a real cart never has this many distinct lines
+  const MAX_QTY    = 100000;   // per-line sanity ceiling
+  if (items.length > MAX_ITEMS) {
+    return res.status(400).json({ error: 'Too many items in cart.' });
+  }
+
+  const priced = [];
   for (const item of items) {
-    if (!item.name || typeof item.price !== 'number' || item.price <= 0) {
-      return res.status(400).json({ error: `Invalid item data for: ${item.name || 'unknown'}` });
+    const name = String(item && item.name ? item.name : '').trim().slice(0, 200);
+    if (!name) return res.status(400).json({ error: 'Invalid item data (missing name).' });
+
+    const qty = Number(item.qty);
+    if (!Number.isInteger(qty) || qty <= 0 || qty > MAX_QTY) {
+      return res.status(400).json({ error: `Invalid quantity for "${name}".` });
     }
-    const minQty = item.minQty || 10;
-    if ((item.qty || 0) < minQty) {
-      return res.status(400).json({ error: `Minimum order for "${item.name}" is ${minQty} units` });
+
+    // Resolve the authoritative unit price.
+    let unitPrice, minQty;
+    const verdict = Catalog.resolve(item);
+    if (verdict.status === 'verified') {
+      unitPrice = verdict.unitPrice;                 // server-trusted tier price
+      minQty    = verdict.minQty || 10;
+    } else if (verdict.status === 'rejected') {
+      // Known product, but the price matches no real tier → tampering. Reject.
+      console.error('[create-checkout] price mismatch', { id: item.id, sent: item.price, allowed: verdict.allowed });
+      return res.status(400).json({ error: 'Item pricing is out of date — please refresh the page and try again.' });
+    } else {
+      // Unknown product (FBT / Supabase-sourced): sanity-check the client price.
+      const cp = Number(item.price);
+      if (!isFinite(cp) || cp < 0.50) {
+        return res.status(400).json({ error: `Unit price for "${name}" must be at least $0.50.` });
+      }
+      unitPrice = Math.round(cp * 100) / 100;
+      minQty    = Number(item.minQty) > 0 ? Number(item.minQty) : 10;
     }
-    // Stripe minimum charge is $0.50 USD
-    if (item.price < 0.50) {
-      return res.status(400).json({ error: `Unit price for "${item.name}" must be at least $0.50` });
+
+    if (qty < minQty) {
+      return res.status(400).json({ error: `Minimum order for "${name}" is ${minQty} units.` });
     }
+
+    priced.push({
+      id:       item.id || '',
+      name,
+      qty,
+      unitPrice,
+      minQty,
+      image:    item.image    || null,
+      category: item.category || '',
+    });
   }
 
   try {
-    const line_items = items.map(item => ({
+    const line_items = priced.map(item => ({
       price_data: {
         currency: 'usd',
         product_data: {
           name: item.name,
-          description: `Fleet recognition · min. ${item.minQty || 10} units`,
+          description: `Fleet recognition · min. ${item.minQty} units`,
           images: item.image ? [item.image] : [],
           metadata: {
-            product_id: item.id       || '',
-            category:   item.category || '',
+            product_id: item.id,
+            category:   item.category,
           },
         },
-        unit_amount: Math.round(item.price * 100),
+        unit_amount: Math.round(item.unitPrice * 100),
       },
       quantity: item.qty,
     }));
@@ -75,7 +118,7 @@ module.exports = async (req, res) => {
     //    fee from subtotal × 10% rather than trusting the client number, so
     //    clients can't underpay by tampering with the request body.
     if (premiumGuarantee) {
-      const subtotalCents = items.reduce((s, it) => s + Math.round(it.price * 100) * it.qty, 0);
+      const subtotalCents = priced.reduce((s, it) => s + Math.round(it.unitPrice * 100) * it.qty, 0);
       const serverGuaranteeCents = Math.round(subtotalCents * 0.10);
       if (serverGuaranteeCents >= 50) {
         line_items.push({
@@ -95,7 +138,7 @@ module.exports = async (req, res) => {
     // ── Bundle discount — applied via Stripe Coupon (created on the fly).
     //    Re-computed server-side: only valid when subtotal >= $575.
     //    15% off the entire order.
-    const bundleEligibleSubtotal = items.reduce((s, it) => s + it.price * it.qty, 0);
+    const bundleEligibleSubtotal = priced.reduce((s, it) => s + it.unitPrice * it.qty, 0);
     const bundleApplies = bundleEligibleSubtotal >= 575;
     let discountsArg = undefined;
     if (bundleApplies) {
@@ -112,11 +155,11 @@ module.exports = async (req, res) => {
     // ── Quantity-tiered shipping (single company address) ──
     // Kits cost ~$15 each to ship; the old flat $12.95 undercharged every multi-unit
     // order. Compute a flat rate from total quantity using the shared rule engine.
-    const totalQty = items.reduce((s, it) => s + (Number(it.qty) || 0), 0);
+    const totalQty = priced.reduce((s, it) => s + it.qty, 0);
     const shipResult = Shipping.calculateShipping({
       fulfillmentType: 'single_address',
       deliveryCount:   1,
-      items:           items.map(it => ({ qty: Number(it.qty) || 0, product: null })),
+      items:           priced.map(it => ({ qty: it.qty, product: null })),
     });
     // For calculable tiers use the engine cost; for 500+ (quote-required) charge the
     // top self-serve tier as a conservative floor and flag for DAS follow-up.
@@ -178,7 +221,7 @@ module.exports = async (req, res) => {
   } catch (err) {
     console.error('[Stripe create-checkout error]', err.message, err.type);
     return res.status(500).json({
-      error: err.message || 'Failed to create checkout session. Please try again.',
+      error: 'Failed to create checkout session. Please try again.',
     });
   }
 };
