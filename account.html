@@ -1281,6 +1281,7 @@
 let currentUser = null;
 let obStep = 1;
 const obAnswers = {};
+let _activeSection = 'dashboard';
 
 /* ── Boot ── */
 onAuthReady(user => {
@@ -1349,12 +1350,31 @@ function obBack() {
   document.getElementById('ob-back-btn').style.display = obStep > 1 ? '' : 'none';
 }
 
-/* ── Init portal ── */
+/* ── Init portal ──
+   Reveal the dashboard SHELL immediately (with placeholders/zeros), THEN load
+   the real Supabase data and repaint. The UI is never gated behind the network,
+   and a hard timeout guarantees we never sit on a blank screen if a query is
+   slow or stalls. */
 async function initPortal() {
-  // Pull real business data (orders, programs, roster, quotes, tickets, templates)
-  // from Supabase into the in-memory cache before the first render.
-  await PortalData.hydrate();
+  paintHeader();
+  document.getElementById('portal-wrap').removeAttribute('hidden');
+  navigate('dashboard');
 
+  // Load real data, but cap the wait so a slow/stalled query can never blank the
+  // page. hydrate() swallows its own errors, so this race never rejects.
+  await Promise.race([
+    PortalData.hydrate(),
+    new Promise(r => setTimeout(r, 9000)),
+  ]);
+
+  // Repaint header + re-render whatever section is active, now with real data.
+  paintHeader();
+  navigate(_activeSection || 'dashboard');
+}
+
+/* Paint sidebar identity + tier from the current cache. Safe before or after
+   hydrate (empty cache → zeros), and idempotent so we can call it twice. */
+function paintHeader() {
   const acct  = PortalAccount.get();
   const ytd   = PortalOrders.ytdSpend();
   const tier  = PortalAccount.loyaltyTier(ytd);
@@ -1370,12 +1390,11 @@ async function initPortal() {
     av.textContent = initials;
   }
   document.getElementById('sb-tier').textContent = tier.name;
-  document.getElementById('portal-wrap').removeAttribute('hidden');
-  navigate('dashboard');
 }
 
 /* ── Navigation ── */
 function navigate(section) {
+  _activeSection = section;
   document.querySelectorAll('.p-sec').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.sb-item').forEach(i => i.classList.remove('active'));
   const sec = document.getElementById('sec-' + section);

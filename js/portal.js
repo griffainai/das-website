@@ -69,7 +69,8 @@ const PortalData = {
       if (!this.companyId) { this.ready = true; return true; }
 
       const cid = this.companyId;
-      const [orders, programs, drivers, quotes, tickets, templates] = await Promise.all([
+      // allSettled (not all): one failing or slow table must not wipe the rest.
+      const [orders, programs, drivers, quotes, tickets, templates] = await Promise.allSettled([
         sb.from('das_orders').select('*').eq('company_id', cid).order('created_at', { ascending: false }),
         sb.from('recognition_programs').select('*').eq('company_id', cid).order('created_at', { ascending: false }),
         sb.from('drivers').select('*').eq('company_id', cid).eq('active', true).order('last_name'),
@@ -77,13 +78,14 @@ const PortalData = {
         sb.from('support_tickets').select('*').eq('company_id', cid).order('created_at', { ascending: false }),
         sb.from('cart_templates').select('*').eq('company_id', cid).order('created_at', { ascending: false }),
       ]);
+      const rows = r => (r && r.status === 'fulfilled' && r.value && r.value.data) ? r.value.data : [];
 
-      this.cache.orders    = (orders.data    || []).map(mapOrder);
-      this.cache.programs  = (programs.data  || []).map(mapProgram);
-      this.cache.roster    = (drivers.data   || []).map(mapDriver);
-      this.cache.quotes    = (quotes.data    || []).map(mapQuote);
-      this.cache.tickets   = (tickets.data   || []).map(mapTicket);
-      this.cache.templates = (templates.data || []).map(mapTemplate);
+      this.cache.orders    = rows(orders).map(mapOrder);
+      this.cache.programs  = rows(programs).map(mapProgram);
+      this.cache.roster    = rows(drivers).map(mapDriver);
+      this.cache.quotes    = rows(quotes).map(mapQuote);
+      this.cache.tickets   = rows(tickets).map(mapTicket);
+      this.cache.templates = rows(templates).map(mapTemplate);
 
       this.ready = true;
       return true;
