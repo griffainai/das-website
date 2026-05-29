@@ -1317,7 +1317,6 @@ function obNext() {
       companyName: currentUser.displayName || '',
       uid:         currentUser.uid,
     });
-    seedDemoData();
     document.getElementById('ob-overlay').classList.remove('open');
     initPortal();
     return;
@@ -1351,7 +1350,11 @@ function obBack() {
 }
 
 /* ── Init portal ── */
-function initPortal() {
+async function initPortal() {
+  // Pull real business data (orders, programs, roster, quotes, tickets, templates)
+  // from Supabase into the in-memory cache before the first render.
+  await PortalData.hydrate();
+
   const acct  = PortalAccount.get();
   const ytd   = PortalOrders.ytdSpend();
   const tier  = PortalAccount.loyaltyTier(ytd);
@@ -1718,7 +1721,7 @@ function submitDriver(e) {
 function handleCSV(input) {
   const file = input.files[0]; if (!file) return;
   const reader = new FileReader();
-  reader.onload = e => {
+  reader.onload = async e => {
     const lines = e.target.result.split('\n').filter(l => l.trim());
     const headers = lines[0].toLowerCase().split(',').map(h => h.trim().replace(/"/g,''));
     const rows = lines.slice(1).map(line => {
@@ -1727,7 +1730,7 @@ function handleCSV(input) {
       headers.forEach((h,i) => { obj[h] = vals[i]||''; });
       return { name:obj.name||obj.fullname||obj['full name']||'', email:obj.email||'', dept:obj.dept||obj.department||'', hireDate:obj.hiredate||obj['hire date']||obj['hire_date']||'' };
     }).filter(r => r.name);
-    const count = PortalRoster.importCSV(rows);
+    const count = await PortalRoster.importCSV(rows);
     roster();
     showToast(count + ' driver' + (count!==1?'s':'') + ' imported','success');
     input.value = '';
