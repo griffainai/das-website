@@ -263,23 +263,50 @@ module.exports = async (req, res) => {
         shipResult.requiresQuote ? 'Freight confirmed by DAS after order' : null,
       ].filter(Boolean);
 
+      const orderFields = {
+        company_id:           buyerCompanyId,
+        items:                orderItems,
+        subtotal:             Math.round(subtotalCents) / 100,
+        shipping_cost:        Math.round(shippingCents) / 100,
+        total:                Math.round(totalCents) / 100,
+        status:               'payment_pending',
+        fulfillment_type:     'single_address',
+        delivery_count:       1,
+        submitted_by_user_id: buyerUserId,
+        notes:                noteParts.join(' | ') || null,
+      };
+
       try {
         const svc = getServiceClient();
-        const { data: order, error: insErr } = await svc.from('das_orders').insert({
-          company_id:           buyerCompanyId,
-          order_number:         orderNumber,
-          items:                orderItems,
-          subtotal:             Math.round(subtotalCents) / 100,
-          shipping_cost:        Math.round(shippingCents) / 100,
-          total:                Math.round(totalCents) / 100,
-          status:               'payment_pending',
-          fulfillment_type:     'single_address',
-          delivery_count:       1,
-          submitted_by_user_id: buyerUserId,
-          notes:                noteParts.join(' | ') || null,
-        }).select('id').single();
-        if (insErr) {
-          console.error('[create-checkout] up-front order insert failed:', insErr.message);
+
+        // Reuse the buyer's existing unpaid store-cart draft (if any) instead
+        // of creating a new row on every checkout click. This keeps at most
+        // ONE payment_pending order per buyer — abandoned checkouts update the
+        // same draft rather than piling up. Recognition orders (recognition_track
+        // set) are never touched here.
+        const { data: draft } = await svc.from('das_orders')
+          .select('id')
+          .eq('company_id', buyerCompanyId)
+          .eq('status', 'payment_pending')
+          .is('recognition_track', null)
+          .order('created_at', { ascending: false })
+          .limit(1)
+          .maybeSingle();
+
+        let order, opErr;
+        if (draft && draft.id) {
+          ({ data: order, error: opErr } = await svc.from('das_orders')
+            .update({ ...orderFields, updated_at: new Date().toISOString() })
+            .eq('id', draft.id)
+            .select('id').single());
+        } else {
+          ({ data: order, error: opErr } = await svc.from('das_orders')
+            .insert({ ...orderFields, order_number: orderNumber })
+            .select('id').single());
+        }
+
+        if (opErr) {
+          console.error('[create-checkout] up-front order upsert failed:', opErr.message);
         } else if (order) {
           createdOrderId = order.id;
           sessionConfig.metadata.orderId    = order.id;
