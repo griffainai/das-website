@@ -525,15 +525,24 @@
       }
     } catch {}
 
-    const reqInit = { method: 'POST', headers, body: JSON.stringify(quote) }
+    const payload = JSON.stringify(quote)
 
-    // Try the .com endpoint first; fall back to das-portal during migration so
-    // a lead is never lost if the .com endpoint isn't configured yet.
+    // Try the .com endpoint first (may carry the portal auth token → PATH A).
     try {
-      const res = await fetch(SUBMIT_URL, reqInit)
+      const res = await fetch(SUBMIT_URL, { method: 'POST', headers, body: payload })
       if (!res.ok) throw new Error(res.status)
     } catch {
-      try { await fetch(SUBMIT_FALLBACK, reqInit) } catch {}
+      // Fall back to das-portal during migration so a lead is never lost.
+      // das-portal authenticates via its own SSR cookie, not a bearer token,
+      // and its CORS only allows Content-Type — so the Authorization header is
+      // both useless and would fail the cross-origin preflight. Drop it here.
+      try {
+        await fetch(SUBMIT_FALLBACK, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body:    payload,
+        })
+      } catch {}
     }
   }
 
