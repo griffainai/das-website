@@ -19,9 +19,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=12">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#1A2E6E">
 
   <script type="application/ld+json">
@@ -56,17 +57,6 @@
             "@type": "ListItem", "position": 2,
             "item": {
               "@type": "Product",
-              "name": "Safety Recognition Kit",
-              "description": "Recognize your safest drivers with a kit built around safety culture. Achievement certificate, recognition pin, and milestone acknowledgment package.",
-              "image": "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=600&q=75&fit=crop",
-              "url": "https://driverappreciationsolutions.com/product.html?id=das-002",
-              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "44.99", "availability": "https://schema.org/InStock" }
-            }
-          },
-          {
-            "@type": "ListItem", "position": 3,
-            "item": {
-              "@type": "Product",
               "name": "Premium Onboarding Pack",
               "description": "Welcome new drivers the right way from day one. Sets cultural tone and makes the first impression that drives long-term retention.",
               "image": "https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=600&q=75&fit=crop",
@@ -82,7 +72,7 @@
               "description": "Curated seasonal package for drivers — premium contents selected to show appreciation during the holiday season with a personal touch.",
               "image": "https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop",
               "url": "https://driverappreciationsolutions.com/product.html?id=das-004",
-              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "54.99", "availability": "https://schema.org/InStock" }
+              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "1.00", "availability": "https://schema.org/InStock" }
             }
           },
           {
@@ -94,6 +84,17 @@
               "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=75&fit=crop",
               "url": "https://driverappreciationsolutions.com/product.html?id=das-005",
               "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "79.99", "availability": "https://schema.org/InStock" }
+            }
+          },
+          {
+            "@type": "ListItem", "position": 6,
+            "item": {
+              "@type": "Product",
+              "name": "Professional Driver Essentials Kit",
+              "description": "A premium driver recognition, safety, and onboarding kit — tire pressure gauge, tire tread depth gauge, branded keychain, custom insert, and branded presentation packaging. Optional fleet branding.",
+              "image": "https://driverappreciationsolutions.com/images/pde-kit-01.jpg",
+              "url": "https://driverappreciationsolutions.com/product.html?id=das-006",
+              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "79.95", "availability": "https://schema.org/InStock" }
             }
           }
         ]
@@ -122,7 +123,7 @@
         <a href="index.html" class="nav-link">Home</a>
         <a href="shop.html"  class="nav-link active">Shop</a>
         <a href="about.html" class="nav-link">About</a>
-        <a href="ideas.html" class="nav-link">Ideas</a>
+        <a href="ideas.html" class="nav-link">Insights &amp; Ideas</a>
         <a href="publications.html" class="nav-link">Newsletter</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
@@ -155,7 +156,7 @@
   <a href="index.html" class="mobile-nav-link">Home</a>
   <a href="shop.html"  class="mobile-nav-link active">Shop</a>
   <a href="about.html" class="mobile-nav-link">About</a>
-  <a href="ideas.html" class="mobile-nav-link">Ideas</a>
+  <a href="ideas.html" class="mobile-nav-link">Insights &amp; Ideas</a>
   <a href="contact.html" class="mobile-nav-link">Contact</a>
   <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
@@ -183,8 +184,11 @@
       <span class="shop-filter-bar-label">Filter:</span>
       <button type="button" class="filter-btn active" data-filter="all">All Products</button>
       <button type="button" class="filter-btn" data-filter="appreciation">Appreciation Kits</button>
+      <button type="button" class="filter-btn" data-filter="safety">Safety Recognition</button>
       <button type="button" class="filter-btn" data-filter="onboarding">Onboarding Solutions</button>
-      <button type="button" class="filter-btn" data-filter="milestone">Milestone Gifts</button>
+      <button type="button" class="filter-btn" data-filter="milestone">Service Milestone Awards</button>
+      <button type="button" class="filter-btn" data-filter="holiday">Holiday &amp; Seasonal</button>
+      <button type="button" class="filter-btn" data-filter="milepacks">Mile Packs</button>
     </div>
 
     <!-- APPRECIATION KITS -->
@@ -238,23 +242,96 @@
         </div>
 
         <div class="product-card"
-             data-product-id="das-002" data-product-name="Safety Recognition Kit"
-             data-product-price="44.99" data-product-category="Appreciation Kits"
-             data-product-image="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=600&q=75&fit=crop"
-             data-product-min-qty="10" data-filter-cat="appreciation">
-          <a href="product.html?id=das-002" style="text-decoration:none;color:inherit;display:block">
+             data-product-id="das-006" data-product-name="Professional Driver Essentials Kit™"
+             data-product-price="79.95" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pde-kit-01.jpg"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=das-006" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=600&q=75&fit=crop" alt="Safety Recognition Kit" loading="lazy" onerror="this.style.display='none'">
-              <span class="product-card-category-pill">Appreciation Kits</span>
+              <img class="product-card-img" src="/images/pde-kit-01.jpg" alt="Professional Driver Essentials Kit" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Driver Essentials</span>
             </div>
           </a>
           <div class="product-card-body">
-            <h3 class="product-card-title"><a href="product.html?id=das-002" style="text-decoration:none;color:inherit">Safety Recognition Kit</a></h3>
-            <p class="product-card-desc">Recognize your safest drivers with a kit built around safety culture. Achievement certificate, recognition pin, and milestone acknowledgment package.</p>
+            <h3 class="product-card-title"><a href="product.html?id=das-006" style="text-decoration:none;color:inherit">Professional Driver Essentials Kit™</a></h3>
+            <p class="product-card-desc">A premium recognition, safety, and onboarding kit — tire pressure gauge, tire tread depth gauge, branded keychain, custom insert, and branded presentation packaging. Optional fleet branding.</p>
             <div class="product-card-tiers">
-              <span class="product-tier-pill">Standard</span>
-              <span class="product-tier-pill">Premium</span>
-              <span class="product-tier-pill product-tier-pill-ent">Enterprise</span>
+              <span class="product-tier-pill">Corporate volume pricing</span>
+            </div>
+            <div class="qty-label">Quantity</div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$79.95</span>
+                <span class="product-price-unit">per kit · volume pricing</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-006" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-product-id="das-007" data-product-name="Welcome Driver Appreciation Kit"
+             data-product-price="97.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/welcome-driver-kit-v2.png"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=das-007" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/welcome-driver-kit-v2.png" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Welcome Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-007" style="text-decoration:none;color:inherit">Welcome Driver Appreciation Kit</a></h3>
+            <p class="product-card-desc">Make new drivers feel valued from day one — a premium branded onboarding kit (mug, tee, bag, hat &amp; welcome pamphlet) customized with your logo, colors &amp; messaging via a DAS rep.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-branded</span>
+            </div>
+            <div class="qty-label">Quantity</div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <p class="perhire-note">First order: 10-unit minimum · Reorders: as few as 1 per hire</p>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$97.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-007" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Welcome Kits</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-product-id="das-008" data-product-name="Driver Road Warrior Backpack™"
+             data-product-price="85.99" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/rwb-hero.png"
+             data-product-min-qty="10" data-filter-cat="appreciation">
+          <a href="product.html?id=das-008" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/rwb-hero.png" alt="Driver Road Warrior Backpack — premium custom-logo backpack" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Gift</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-008" style="text-decoration:none;color:inherit">Driver Road Warrior Backpack™</a></h3>
+            <p class="product-card-desc">Built for the road, appreciated for years. A premium custom-logo backpack drivers use every day — the high-value Driver Appreciation Week, onboarding &amp; retention gift that keeps making an impression.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
             </div>
             <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
             <div class="qty-control">
@@ -264,12 +341,299 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$44.99</span>
-                <span class="product-price-unit">per unit · min. 10</span>
+                <span class="product-price-amount">$85.99</span>
+                <span class="product-price-unit">per backpack · min. 10 · customized after purchase</span>
               </div>
               <div class="product-card-actions">
                 <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
-                <a href="product.html?id=das-002" class="btn-ghost-sm">Details</a>
+                <a href="product.html?id=das-008" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Backpacks</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-product-id="das-009" data-product-name="Professional Travel Kit"
+             data-product-price="77.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/travel-kit-hero-v2.jpg"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=das-009" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/travel-kit-hero-v2.jpg" alt="Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Driver Wellness</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-009" style="text-decoration:none;color:inherit">Professional Travel Kit</a></h3>
+            <p class="product-card-desc">A daily-use wellness gift for the road — a custom-logo travel bag plus self-care essentials (soap, loofah, Q-Tips, Dude Wipes) that keep drivers refreshed and organized mile after mile.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity</div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$77.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-009" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Travel Kits</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-appreciation.html ===== -->
+<div class="shop-service-detail" id="service-detail-appreciation" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How the Driver Appreciation program works</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, tiers, and process — scroll on if you want the full picture before ordering.</p>
+    <div class="sol-hero-stats" style="margin-top:28px">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">30%</span><span class="sol-hero-stat-label">Turnover Reduction</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">10:1</span><span class="sol-hero-stat-label">Documented ROI</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">3–5d</span><span class="sol-hero-stat-label">Ships In</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">$49.99</span><span class="sol-hero-stat-label">Starting Price / Unit</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Retention Problem</span>
+          <h2 class="section-title">The industry runs at 89% annual turnover. Recognition is the proven intervention.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Every fleet manager knows the number. 89% annual turnover among large OTR carriers (ATA). $8,000–$15,000 to replace each driver (ATRI). Most carriers try to solve it with pay increases. Pay helps — but it's rarely the determining factor in whether a driver stays or leaves.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:28px">Research consistently shows the leading driver of voluntary departure isn't compensation — it's feeling invisible. Feeling like a number in a dispatch system rather than a professional the company depends on. Driver Appreciation Week, held each September, is the industry's recognized moment to close that gap. Most carriers miss it or execute it poorly: a group pizza order, a generic email, a gift card that arrives three weeks late.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">Driver Appreciation Solutions was built specifically to change that — with recognition that arrives on time, carries the fleet's brand, has the driver's name on it, and reflects the quality of the work they put in.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">True Cost of Losing One Driver</span>
+            <span class="sol-art-src">ATRI Cost Study</span>
+          </div>
+          <div class="sol-receipt">
+            <div class="sol-receipt-title">Replacement Cost Breakdown</div>
+            <div class="sol-receipt-line"><span>Recruiting &amp; job advertising</span><span>$2,500</span></div>
+            <div class="sol-receipt-line"><span>Orientation &amp; onboarding training</span><span>$3,500</span></div>
+            <div class="sol-receipt-line"><span>Lost productivity (first 90 days)</span><span>$4,800</span></div>
+            <div class="sol-receipt-line"><span>Coverage gaps &amp; overtime costs</span><span>$4,200</span></div>
+            <div class="sol-receipt-separator"></div>
+            <div class="sol-receipt-total">
+              <span>Total per driver</span>
+              <span>$15,000+</span>
+            </div>
+            <div class="sol-receipt-vs">vs. appreciation kit cost per driver: ~$75</div>
+          </div>
+          <div class="sol-art-footer-grid" style="margin-top:14px">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-gold">89%</span>
+              <span class="sol-art-flbl">annual OTR turnover, large carriers</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-blue">10:1</span>
+              <span class="sol-art-flbl">documented recognition ROI</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED BY TIER -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">Program Tiers</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Choose the tier that fits<br>your fleet and budget.</h2>
+        <p style="font-size:1rem;color:var(--text-secondary);margin-top:12px">All tiers include custom fleet branding and driver name personalization.</p>
+      </div>
+      <div class="sol-tier-grid">
+
+        <div class="sol-tier-card sol-tier-standard">
+          <span class="sol-tier-badge">Standard</span>
+          <div class="sol-tier-price">$49.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium insulated tumbler (fleet-branded)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Personalized recognition card (driver name printed)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>DAW commemorative pin</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Branded gift box with tissue</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom company message insert</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=appreciation" class="btn btn-secondary btn-full" style="border-radius:10px">Shop Standard</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-featured sol-tier-premium">
+          <span class="sol-tier-badge">Premium</span>
+          <div class="sol-tier-price">$74.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Standard</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Branded driver gear bag</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Commemorative milestone coin (die-cast)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Certificate of achievement (hard-bound)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium rigid gift box</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=appreciation" class="btn btn-primary btn-full" style="border-radius:10px">Shop Premium</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-enterprise">
+          <span class="sol-tier-badge">Enterprise</span>
+          <div class="sol-tier-price">Custom</div>
+          <div class="sol-tier-price-unit">volume pricing · 100+ drivers</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Premium</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Embroidered fleet apparel</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Leadership video QR code insert</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom SKU development available</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Net-30 payment terms</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="contact.html" class="btn btn-secondary btn-full" style="border-radius:10px">Request Enterprise Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">From order to driver hands —<br>on your program timeline.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-header"><div class="sol-step-num">01</div></div>
+          <div class="sol-step-title">Select your tier &amp; quantity</div>
+          <div class="sol-step-desc">Choose Standard, Premium, or Enterprise. Set your driver count. Enterprise orders get a dedicated quote call to scope custom needs.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-header"><div class="sol-step-num">02</div></div>
+          <div class="sol-step-title">Submit fleet artwork &amp; driver roster</div>
+          <div class="sol-step-desc">Upload your fleet logo (PNG or SVG at 300dpi+) and provide the driver name list. We handle typesetting — no design work on your end.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-header"><div class="sol-step-num">03</div></div>
+          <div class="sol-step-title">Artwork approval</div>
+          <div class="sol-step-desc">We send you a digital proof within one business day. One revision round included. Approve and production begins immediately.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-header"><div class="sol-step-num">04</div></div>
+          <div class="sol-step-title">Ships per your program timeline</div>
+          <div class="sol-step-desc">Packed individually per driver, labeled and ready for distribution at your terminal or direct home delivery on Enterprise tier.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:32px">
+        <span class="section-eyebrow">Who Orders This Program</span>
+        <h2 class="section-title" style="font-size:clamp(1.25rem,2.5vw,1.875rem)">Built for the people accountable<br>for driver retention outcomes.</h2>
+      </div>
+      <div class="sol-persona-grid">
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Safety / Director of Safety</div>
+          <div class="sol-persona-desc">Responsible for CSA scores, DOT compliance, and the safety culture that determines whether drivers file reports or hide near-misses. Recognition programs are a cultural input, not just a morale gesture.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Operations / Fleet Operations Manager</div>
+          <div class="sol-persona-desc">Managing driver count, turnover rate, and the cost-per-mile impact of empty seats. Driver Appreciation programs are an operational investment with a documented ROI, not a line item to cut.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">HR Director / Driver Recruitment Lead</div>
+          <div class="sol-persona-desc">Responsible for the driver lifecycle from hire to tenure. First impressions and annual recognition touchpoints are retention levers that extend the useful employment period for each driver recruited.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">Owner-Operator / Small Fleet Owner (10–50 drivers)</div>
+          <div class="sol-persona-desc">Every driver that leaves costs real money and disrupts real loads. Standard-tier programs with 10-unit minimums make fleet-grade recognition accessible without requiring an enterprise budget.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+    </div>
+
+    <!-- SAFETY RECOGNITION -->
+    <div class="mb-xl" id="cat-safety" data-category-section="safety">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+        <div>
+          <span class="section-eyebrow">Safety Recognition</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Safety Recognition Programs</h2>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 28px">Recognize drivers who have achieved verified safe driving milestones through discipline, professionalism, and a commitment to roadway safety. Safety Recognition is its own flagship program — distinct from career-mileage <a href="#cat-milestone" style="color:var(--gold);font-weight:700">Service Milestone Awards</a>.</p>
+      <div class="product-grid">
+
+        <!-- Safe Miles Recognition Kit — relocated here (2026-06-12) so NO Safe Miles product
+             sits under Service Milestone Awards. Milestone selector flows to checkout/fulfillment. -->
+        <div class="product-card mrk-card"
+             data-product-id="safe-miles-kit" data-product-name="Safe Miles Recognition Kit"
+             data-product-price="179.00" data-product-category="Safety Recognition"
+             data-product-image="/images/milestone-kit-medal.jpg"
+             data-product-type="safe-miles"
+             data-product-min-qty="1" data-filter-cat="safety">
+          <a href="product.html?id=safe-miles-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/milestone-kit-medal.jpg" alt="Safe Miles Recognition Kit — Safe Miles medal, lapel pins, recognition apparel, keychain, and road bag tag" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Safe Miles Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=safe-miles-kit" style="text-decoration:none;color:inherit">Safe Miles Recognition Kit</a></h3>
+            <p class="product-card-desc">Dedicated to accident-free, incident-free career milestones — Safe Miles medal, 2 Safe Miles lapel pins, recognition t-shirt, keychain, and driver road bag tag.</p>
+            <div class="mrk-select-label">Safe Miles Level</div>
+            <select class="mrk-select" data-milestone aria-label="Safe Miles level">
+              <option value="250k">250,000 Safe Miles</option>
+              <option value="500k">500,000 Safe Miles</option>
+              <option value="1m" selected>1 Million Safe Miles</option>
+              <option value="2m">2 Million Safe Miles</option>
+              <option value="3m">3 Million Safe Miles</option>
+              <option value="4m">4 Million Safe Miles</option>
+              <option value="5m">5 Million Safe Miles</option>
+              <option value="6m">6 Million Safe Miles</option>
+            </select>
+            <p class="mrk-disclaimer">Images shown are representative. Final award components will be customized to the selected milestone level.</p>
+            <div class="qty-label">Quantity</div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$179.00</span>
+                <span class="product-price-unit">per kit</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=safe-miles-kit" class="btn-ghost-sm">Details</a>
                 <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
               </div>
             </div>
@@ -277,6 +641,330 @@
         </div>
 
       </div>
+
+      <!-- ════════ SAFE SERVICE MILES MEDALS — the safe-track medals also surface here under
+           Safety Recognition. Rendered from js/milestones.js (same data as the Milestone section). ════════ -->
+      <div class="msm-block" style="margin-top:46px">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+          <div>
+            <span class="section-eyebrow">Safe Service Miles</span>
+            <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Safe Service Miles Medals</h2>
+          </div>
+          <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+        </div>
+        <div class="product-grid" id="safety-medals-grid"></div>
+      </div>
+
+      <!-- ════════ SAFE SERVICE MILES ACCESSORIES — everyday wearable/carry recognition items.
+           Lives directly under the Safe Service Miles Medals, inside the Safety Recognition
+           program. Safe-miles green styling via data-product-type="safe-miles". ════════ -->
+      <div class="msm-block" id="cat-safe-accessories" style="margin-top:46px">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+          <div>
+            <span class="section-eyebrow">Safe Service Miles Accessories</span>
+            <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Safe Service Miles Accessories</h2>
+          </div>
+          <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+        </div>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 22px">Extend the recognition beyond the award ceremony. Safe Service Miles Accessories provide drivers with meaningful, everyday reminders of their commitment to professional and accident-free driving.</p>
+        <div class="product-grid">
+
+          <div class="product-card" data-product-type="safe-miles"
+               data-product-id="ssm-lapel-pin" data-product-name="Safe Service Miles Lapel Pin"
+               data-product-price="12.99" data-product-category="Safety Recognition"
+               data-product-image="/images/milestone-kit-lapel-detail.jpg"
+               data-product-min-qty="10" data-filter-cat="safety">
+            <a href="product.html?id=ssm-lapel-pin" style="text-decoration:none;color:inherit;display:block">
+              <div class="product-card-img-wrap">
+                <img class="product-card-img" src="/images/milestone-kit-lapel-detail.jpg" alt="Safe Service Miles recognition lapel pin" loading="lazy" onerror="this.style.display='none'">
+                <span class="product-card-category-pill">Safe Recognition</span>
+              </div>
+            </a>
+            <div class="product-card-body">
+              <div class="msm-badges"><span class="msm-badge msm-badge-safe">Safe Service Miles</span></div>
+              <h3 class="product-card-title"><a href="product.html?id=ssm-lapel-pin" style="text-decoration:none;color:inherit">Safe Service Miles Lapel Pin</a></h3>
+              <p class="product-card-desc">A professional recognition pin worn on uniforms, jackets, hats, and safety apparel — a daily, visible symbol of safety excellence.</p>
+              <div class="qty-label">Quantity</div>
+              <div class="qty-control">
+                <button type="button" class="qty-btn" data-dir="down">−</button>
+                <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+                <button type="button" class="qty-btn" data-dir="up">+</button>
+              </div>
+              <div class="product-card-footer">
+                <div class="product-card-price-row">
+                  <span class="product-price-amount">$12.99</span>
+                  <span class="product-price-unit">per pin · min. 10</span>
+                </div>
+                <div class="product-card-actions">
+                  <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                  <a href="product.html?id=ssm-lapel-pin" class="btn-ghost-sm">Details</a>
+                  <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-card" data-product-type="safe-miles"
+               data-product-id="ssm-luggage-tag" data-product-name="Safe Service Miles Luggage Tag"
+               data-product-price="19.99" data-product-category="Safety Recognition"
+               data-product-image="/images/milestone-kit-luggage.jpg"
+               data-product-min-qty="10" data-filter-cat="safety">
+            <a href="product.html?id=ssm-luggage-tag" style="text-decoration:none;color:inherit;display:block">
+              <div class="product-card-img-wrap">
+                <img class="product-card-img" src="/images/milestone-kit-luggage.jpg" alt="Safe Service Miles driver luggage tag" loading="lazy" onerror="this.style.display='none'">
+                <span class="product-card-category-pill">Safe Recognition</span>
+              </div>
+            </a>
+            <div class="product-card-body">
+              <div class="msm-badges"><span class="msm-badge msm-badge-safe">Safe Service Miles</span></div>
+              <h3 class="product-card-title"><a href="product.html?id=ssm-luggage-tag" style="text-decoration:none;color:inherit">Safe Service Miles Luggage Tag</a></h3>
+              <p class="product-card-desc">A premium driver ID tag for road bags and travel gear — durable, professional, and a daily reminder of verified safe-driving achievement.</p>
+              <div class="qty-label">Quantity</div>
+              <div class="qty-control">
+                <button type="button" class="qty-btn" data-dir="down">−</button>
+                <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+                <button type="button" class="qty-btn" data-dir="up">+</button>
+              </div>
+              <div class="product-card-footer">
+                <div class="product-card-price-row">
+                  <span class="product-price-amount">$19.99</span>
+                  <span class="product-price-unit">per tag · min. 10</span>
+                </div>
+                <div class="product-card-actions">
+                  <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                  <a href="product.html?id=ssm-luggage-tag" class="btn-ghost-sm">Details</a>
+                  <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <p style="font-size:0.78rem;color:var(--text-muted);font-style:italic;margin:14px 0 0">Images shown are representative. Final accessories carry your Safe Service Miles recognition branding.</p>
+      </div>
+
+      <!-- ════════ EXECUTIVE DRIVER RECOGNITION COLLECTION — premium safety upgrade. Lives UNDER
+           Safety Recognition (an extension of the Safe Service Miles program), never under Service
+           Milestone Awards. Rendered from js/milestones.js (exec track) into #safety-exec-grid. ════════ -->
+      <div class="msm-block" id="cat-executive" style="margin-top:46px">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+          <div>
+            <span class="section-eyebrow">Executive Driver Recognition Collection</span>
+            <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Executive Driver Recognition Collection</h2>
+          </div>
+          <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+        </div>
+        <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 24px">Premium recognition enhancements designed to accompany Safe Service Miles awards and celebrate exceptional safety achievement. Each option pairs the Safe Service Miles medal, presentation, and recognition materials with a premium executive gift — it raises the Safe Miles award, it does not replace it.</p>
+        <div class="product-grid" id="safety-exec-grid"></div>
+      </div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-safety.html ===== -->
+<div class="shop-service-detail" id="service-detail-safety" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How the Safety Recognition program works</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, tiers, and process — scroll on if you want the full picture before ordering.</p>
+  </div>
+
+  <!-- STATS STRIP (folded in from hero) -->
+  <div class="container" style="padding-top:32px">
+    <div class="sol-hero-stats">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">23%</span><span class="sol-hero-stat-label">Fewer Accidents</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">31%</span><span class="sol-hero-stat-label">Fewer DOT Violations</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">4</span><span class="sol-hero-stat-label">Award Tiers</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">$39.99</span><span class="sol-hero-stat-label">Starting Price / Unit</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Safety Culture Problem</span>
+          <h2 class="section-title">Compliance doesn't create safety culture. Recognition does.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">The DOT runs on CSA scores. Every carrier knows their BASICs. But knowing the metrics doesn't automatically change driver behavior at 2 AM on I-80. What changes behavior is the environment drivers operate in — and whether their safety choices are acknowledged or ignored.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Most fleets invest in compliance training, dashcam systems, and post-incident investigation. Very few invest in recognizing the positive: the driver who's gone 500,000 miles without a preventable incident, the operator who documented a near-miss, the professional who arrives without incident every single week.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">When safe choices are acknowledged with tangible, professional recognition — a milestone pin, a die-cast coin, an engraved plaque — drivers understand that the carrier sees what they're doing. That visibility reinforces the behavior. That reinforcement compounds across the fleet.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">Recognized vs. Unrecognized</span>
+            <span class="sol-art-src">ATRI · FMCSA Research</span>
+          </div>
+          <div class="sol-scorecard">
+            <div class="sol-scorecard-col sol-sc-good">
+              <div class="sol-sc-head">With Recognition</div>
+              <div class="sol-sc-stat">
+                <span class="val">−23%</span>
+                <span class="lbl">accident rate</span>
+              </div>
+              <div class="sol-sc-stat">
+                <span class="val">−31%</span>
+                <span class="lbl">DOT violations</span>
+              </div>
+              <div class="sol-sc-stat">
+                <span class="val">4 tiers</span>
+                <span class="lbl">milestone program</span>
+              </div>
+            </div>
+            <div class="sol-scorecard-col sol-sc-bad">
+              <div class="sol-sc-head">Industry Average</div>
+              <div class="sol-sc-stat">
+                <span class="val muted">baseline</span>
+                <span class="lbl">accident rate</span>
+              </div>
+              <div class="sol-sc-stat">
+                <span class="val muted">baseline</span>
+                <span class="lbl">DOT violations</span>
+              </div>
+              <div class="sol-sc-stat">
+                <span class="val danger">$140K+</span>
+                <span class="lbl">per incident</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-art-footer-grid">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval">100K–1M</span>
+              <span class="sol-art-flbl">safe miles per milestone tier</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-green">$39.99</span>
+              <span class="sol-art-flbl">starting per unit</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED BY TIER -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">Program Tiers</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Four milestone thresholds.<br>Three award tiers.</h2>
+        <p style="font-size:1rem;color:var(--text-secondary);margin-top:12px">Milestones: 100K miles · 250K miles · 500K miles · 1M miles. All tiers include safe-mileage verification documentation.</p>
+      </div>
+      <div class="sol-tier-grid">
+
+        <div class="sol-tier-card sol-tier-standard">
+          <span class="sol-tier-badge">Standard</span>
+          <div class="sol-tier-price">$39.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Safety achievement certificate (name-printed)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Safety milestone pin (milestone-specific)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Manager recognition card</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Branded safety performance sticker set</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Branded gift sleeve</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=safety" class="btn btn-secondary btn-full" style="border-radius:10px">Shop Standard</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-featured sol-tier-premium">
+          <span class="sol-tier-badge">Premium</span>
+          <div class="sol-tier-price">$64.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Standard</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Die-cast milestone coin (mileage-specific)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Hard-bound safety achievement certificate</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Exact safe miles printed on certificate</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium rigid presentation box</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=safety" class="btn btn-primary btn-full" style="border-radius:10px">Shop Premium</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-enterprise">
+          <span class="sol-tier-badge">Enterprise</span>
+          <div class="sol-tier-price">Custom</div>
+          <div class="sol-tier-price-unit">volume pricing · 100+ drivers</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Premium</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom engraved plaque (exact safe miles)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Fleet-wide announcement package</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Leadership recognition ceremony toolkit</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager + Net-30 terms</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="contact.html" class="btn btn-secondary btn-full" style="border-radius:10px">Request Enterprise Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Set up a program once.<br>Run it year-round.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">01</div>
+          <div class="sol-step-title">Define your milestone thresholds</div>
+          <div class="sol-step-desc">Select which safe-mileage milestones to recognize — 100K, 250K, 500K, and/or 1M. Enterprise programs can include custom thresholds aligned to your CSA calendar.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">02</div>
+          <div class="sol-step-title">Submit milestone data &amp; fleet logo</div>
+          <div class="sol-step-desc">Provide the driver name, exact safe miles, and milestone tier. We handle all artwork and typesetting — no production work on your end.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">03</div>
+          <div class="sol-step-title">Approve digital proof</div>
+          <div class="sol-step-desc">We send a digital proof within one business day. One revision round included. Approve and we go to production immediately.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">04</div>
+          <div class="sol-step-title">Deliver at the right moment</div>
+          <div class="sol-step-desc">Ships on your timeline. Present at a safety meeting, during pre-trip inspection, or at a terminal event. The timing amplifies the impact.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:32px">
+        <span class="section-eyebrow">Who Orders This Program</span>
+        <h2 class="section-title" style="font-size:clamp(1.25rem,2.5vw,1.875rem)">For the leaders accountable<br>for CSA scores and safety outcomes.</h2>
+      </div>
+      <div class="sol-persona-grid">
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Safety / Director of Safety</div>
+          <div class="sol-persona-desc">Accountable for BASIC scores, DOT compliance, and the cultural environment that determines whether drivers report incidents or avoid them. Recognition is a cultural investment with measurable return.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">Safety Manager / Fleet Safety Coordinator</div>
+          <div class="sol-persona-desc">Managing day-to-day safety programs, incident investigation, and driver coaching. Safety recognition programs complement the corrective side of safety management with positive reinforcement.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">Insurance &amp; Risk Manager</div>
+          <div class="sol-persona-desc">Responsible for the fleet's loss ratio and premium trajectory. Documented safety recognition programs signal risk-management culture to underwriters and can support premium negotiation.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Operations / General Manager</div>
+          <div class="sol-persona-desc">At $140K+ per preventable accident, safety recognition programs pay for themselves with a single incident prevented. The ROI case doesn't require a spreadsheet.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
     </div>
 
     <!-- ONBOARDING SOLUTIONS -->
@@ -329,57 +1017,263 @@
           </div>
         </div>
 
-      </div>
-    </div>
-
-    <!-- MILESTONE GIFTS -->
-    <div class="mb-xl" data-category-section="milestone">
-      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
-        <div>
-          <span class="section-eyebrow">Milestone Gifts</span>
-          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Service Milestone Gifts</h2>
-        </div>
-        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
-      </div>
-      <div class="product-grid">
-
+        <!-- Welcome Driver Appreciation Kit — also featured here (falls in Appreciation AND Onboarding). -->
         <div class="product-card"
-             data-product-id="das-004" data-product-name="Holiday Gift Set"
-             data-product-price="54.99" data-product-category="Milestone Gifts"
-             data-product-image="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop"
-             data-product-min-qty="10" data-filter-cat="milestone">
-          <a href="product.html?id=das-004" style="text-decoration:none;color:inherit;display:block">
+             data-product-id="das-007" data-product-name="Welcome Driver Appreciation Kit"
+             data-product-price="97.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/welcome-driver-kit-v2.png"
+             data-product-min-qty="1" data-filter-cat="onboarding">
+          <a href="product.html?id=das-007" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop" alt="Holiday Gift Set" loading="lazy" onerror="this.style.display='none'">
-              <span class="product-card-category-pill">Milestone Gifts</span>
+              <img class="product-card-img" src="/images/welcome-driver-kit-v2.png" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Welcome Kit</span>
             </div>
           </a>
           <div class="product-card-body">
-            <h3 class="product-card-title"><a href="product.html?id=das-004" style="text-decoration:none;color:inherit">Holiday Gift Set</a></h3>
-            <p class="product-card-desc">Curated seasonal package for drivers — premium contents selected to show appreciation during the holiday season with a personal touch.</p>
+            <h3 class="product-card-title"><a href="product.html?id=das-007" style="text-decoration:none;color:inherit">Welcome Driver Appreciation Kit</a></h3>
+            <p class="product-card-desc">The premium Day-1 welcome kit for new drivers — mug, tee, bag, hat &amp; welcome pamphlet, custom-branded with your logo, colors &amp; messaging via a DAS rep.</p>
             <div class="product-card-tiers">
-              <span class="product-tier-pill">Standard</span>
-              <span class="product-tier-pill">Premium</span>
+              <span class="product-tier-pill">Custom-branded</span>
             </div>
-            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-label">Quantity</div>
             <div class="qty-control">
               <button type="button" class="qty-btn" data-dir="down">−</button>
-              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
               <button type="button" class="qty-btn" data-dir="up">+</button>
             </div>
+            <p class="perhire-note">First order: 10-unit minimum · Reorders: as few as 1 per hire</p>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$54.99</span>
-                <span class="product-price-unit">per unit · min. 10</span>
+                <span class="product-price-amount">$97.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
               </div>
               <div class="product-card-actions">
                 <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
-                <a href="product.html?id=das-004" class="btn-ghost-sm">Details</a>
-                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
+                <a href="product.html?id=das-007" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Welcome Kits</button>
               </div>
             </div>
           </div>
         </div>
+
+      </div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-onboarding.html ===== -->
+<div class="shop-service-detail" id="service-detail-onboarding" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How the New Driver Onboarding program works</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, tiers, and process — scroll on if you want the full picture before ordering.</p>
+  </div>
+
+  <!-- STATS STRIP (folded from hero) -->
+  <div class="container" style="padding-top:32px">
+    <div class="sol-hero-stats">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">30%</span><span class="sol-hero-stat-label">Less 90-Day Turnover</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">Day 1</span><span class="sol-hero-stat-label">Delivery Ready</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">100%</span><span class="sol-hero-stat-label">Personalized</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">$59.99</span><span class="sol-hero-stat-label">Starting Price / Unit</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Onboarding Problem</span>
+          <h2 class="section-title">The first 90 days determine whether a driver stays. Most fleets waste them.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Industry data consistently shows that driver turnover is highest in the first 90 days of employment. The reasons are almost always the same: the driver arrived and found the experience didn't match what they were recruited for. The culture felt indifferent. Nobody seemed to have planned for their arrival.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">A premium onboarding pack doesn't solve all of that — but it signals something important immediately: we planned for you. We invested in your first day before you arrived. The kit on your seat, the personalized welcome card with your name on it, the branded gear — these are intentional signals about what kind of company this is.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">That signal lands differently than any amount of recruiter talk. The $8,000–$15,000 cost of replacing a driver who leaves in the first 90 days makes a $60 onboarding investment one of the most defensible line items in the fleet operations budget.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">90-Day Departure Risk</span>
+            <span class="sol-art-src">Industry Research Consensus</span>
+          </div>
+          <div class="sol-thermal">
+            <div class="sol-thz sol-thz-hot">
+              <div class="sol-thz-bar"></div>
+              <div class="sol-thz-body">
+                <span class="sol-thz-range">Days 1–30</span>
+                <span class="sol-thz-risk">High Risk</span>
+                <span class="sol-thz-pct">47%</span>
+                <span class="sol-thz-desc">of first-90-day departures happen here</span>
+              </div>
+            </div>
+            <div class="sol-thz sol-thz-warm">
+              <div class="sol-thz-bar"></div>
+              <div class="sol-thz-body">
+                <span class="sol-thz-range">Days 31–60</span>
+                <span class="sol-thz-risk">Moderate</span>
+                <span class="sol-thz-pct">31%</span>
+                <span class="sol-thz-desc">risk declines with early engagement</span>
+              </div>
+            </div>
+            <div class="sol-thz sol-thz-cool">
+              <div class="sol-thz-bar"></div>
+              <div class="sol-thz-body">
+                <span class="sol-thz-range">Days 61–90</span>
+                <span class="sol-thz-risk">Stabilizing</span>
+                <span class="sol-thz-pct">22%</span>
+                <span class="sol-thz-desc">driver committed by this stage</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-art-footer-grid">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-green">−30%</span>
+              <span class="sol-art-flbl">departure reduction with Day 1 kit</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval">~$60</span>
+              <span class="sol-art-flbl">kit cost vs. $8–15K replacement</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED BY TIER -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">Program Tiers</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Every tier sends the same message:<br>we planned for you.</h2>
+        <p style="font-size:1rem;color:var(--text-secondary);margin-top:12px">All tiers include the driver's name on the welcome card and the fleet logo on all branded items.</p>
+      </div>
+      <div class="sol-tier-grid">
+
+        <div class="sol-tier-card sol-tier-standard">
+          <span class="sol-tier-badge">Standard</span>
+          <div class="sol-tier-price">$59.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Personalized welcome card (name-printed)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Fleet-branded insulated bottle</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Company values card and culture overview</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>New driver checklist and resource guide</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Day 1 safety essentials kit</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=onboarding" class="btn btn-secondary btn-full" style="border-radius:10px">Shop Standard</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-featured sol-tier-premium">
+          <span class="sol-tier-badge">Premium</span>
+          <div class="sol-tier-price">$84.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Standard</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Embroidered branded apparel (fleet logo)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Professional driver journal</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium rigid gift box</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Leadership welcome letter (name-printed)</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=onboarding" class="btn btn-primary btn-full" style="border-radius:10px">Shop Premium</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-enterprise">
+          <span class="sol-tier-badge">Enterprise</span>
+          <div class="sol-tier-price">Custom</div>
+          <div class="sol-tier-price-unit">volume pricing · 100+ drivers</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Premium</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Home delivery before first day</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom SKU development available</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Standing inventory for rolling new hires</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager + Net-30 terms</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="contact.html" class="btn btn-secondary btn-full" style="border-radius:10px">Request Enterprise Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Order in advance. Deliver on Day 1.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">01</div>
+          <div class="sol-step-title">Order your tier and quantity</div>
+          <div class="sol-step-desc">Standard and Premium orders go live with 10 units. Enterprise accounts can set up standing inventory to cover rolling new-hire starts without reordering each time.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">02</div>
+          <div class="sol-step-title">Submit fleet logo and driver roster</div>
+          <div class="sol-step-desc">Upload your fleet logo (PNG or SVG at 300dpi+) and provide the new driver name list. We handle all personalization — welcome card, bottle, apparel, and insert.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">03</div>
+          <div class="sol-step-title">Approve and go to production</div>
+          <div class="sol-step-desc">Digital proof sent within one business day. One revision round included. Approve and we produce and pack immediately — ships on your timeline.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">04</div>
+          <div class="sol-step-title">Place on seat before the driver arrives</div>
+          <div class="sol-step-desc">Deliver to your terminal or use Enterprise home delivery. The pack is on the driver's seat or at their door before they walk in. That's the moment that matters.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+    </div>
+
+    <!-- MILESTONE GIFTS -->
+    <div class="mb-xl" id="cat-milestone" data-category-section="milestone">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <div>
+          <span class="section-eyebrow">Service Milestone Awards</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Service Milestone Awards</h2>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+
+      <!-- ════════ FLAGSHIP — the Professional Driver Milestone Recognition Kit is the complete,
+           bundled recognition package and is elevated above the individual medals/accessories. ════════ -->
+      <a href="product.html?id=milestone-kit" class="mrk-flagship" aria-label="Professional Driver Milestone Recognition Kit — the complete recognition package">
+        <div class="mrk-flagship-media">
+          <img src="/images/mrk-lapel-lifestyle.webp" alt="Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride" loading="eager">
+          <span class="mrk-flagship-tag">Flagship Recognition Kit</span>
+        </div>
+        <div class="mrk-flagship-body">
+          <span class="mrk-flagship-badge">Complete Recognition Package</span>
+          <h3 class="mrk-flagship-title">Professional Driver Milestone Recognition Kit</h3>
+          <p class="mrk-flagship-sub">One recognition program. Multiple recognition moments. Everything needed to celebrate a professional driver's achievement — in a single premium package.</p>
+          <div class="mrk-flagship-items" aria-label="Included in the kit">
+            <span>Milestone Medal</span>
+            <span>Lapel Pins</span>
+            <span>Recognition T-Shirt</span>
+            <span>Keychain</span>
+            <span>Driver Road Bag Tag</span>
+          </div>
+          <div class="mrk-flagship-foot">
+            <div class="mrk-flagship-price">$179<span>/ kit · choose any milestone 250K–6M</span></div>
+            <span class="mrk-flagship-cta">Build the Recognition Kit
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </span>
+          </div>
+        </div>
+      </a>
+
+      <div class="product-grid">
 
         <div class="product-card"
              data-product-id="das-005" data-product-name="Service Milestone Award Box"
@@ -420,6 +1314,698 @@
           </div>
         </div>
 
+      </div>
+
+      <!-- ════════ SERVICE MILESTONE AWARDS (medals + early-career awards) — expansion of this section.
+           Preserves the Service Milestone Award Box above. Cards render from js/milestones.js. ════════ -->
+      <div class="msm-block" style="margin-top:46px">
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
+          <div>
+            <span class="section-eyebrow">Service Milestone Awards</span>
+            <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Career Mileage Medals</h2>
+          </div>
+          <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+        </div>
+        <p class="msm-choose-help">Recognize career dedication, service longevity, and significant mileage achievements throughout a professional driver's career. Verified safe-driving milestones are their own program — see <a href="#cat-safety" style="color:var(--gold);font-weight:700">Safety Recognition</a>.</p>
+        <div class="product-grid" id="milestone-grid"></div>
+      </div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-milestone.html ===== -->
+<div class="shop-service-detail" id="service-detail-milestone" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How the Service Milestone Awards program works</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, tiers, and process — scroll on if you want the full picture before ordering.</p>
+
+    <!-- Hero stat strip (folded from .sol-hero-stats) -->
+    <div class="sol-hero-stats" style="margin-top:32px">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">98%</span><span class="sol-hero-stat-label">Reorder Rate</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">4</span><span class="sol-hero-stat-label">Milestone Tiers</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">$79.99</span><span class="sol-hero-stat-label">Starting Price / Unit</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">3–5d</span><span class="sol-hero-stat-label">Ships In</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Tenure Decision</span>
+          <h2 class="section-title">Every anniversary is a decision point. Recognition determines the outcome.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">At 1 year, a driver is evaluating whether this is a company worth committing to. At 3 years, they've developed institutional knowledge that's expensive to replace. At 5 and 10 years, they're the cultural backbone of the fleet — the drivers newer hires watch to understand how the company really operates.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Most carriers acknowledge these milestones informally at best — a handshake, maybe a mention at a safety meeting. That informality communicates something: the company didn't think this was worth planning for. Drivers notice. They compare notes.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">A premium anniversary award box arrives with the driver's name engraved on it, the exact years of service on the certificate, and recognition from leadership that reads like it was written for this person — because it was. That's the difference between a gesture and a retention investment. Our 98% reorder rate is not an accident.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">The Four Tenure Tiers</span>
+            <span class="sol-art-src">DAS Program Structure</span>
+          </div>
+          <div class="sol-trophy-grid">
+            <div class="sol-trophy sol-tr-bronze">
+              <div class="sol-tr-badge">1</div>
+              <div class="sol-tr-year">1 Year</div>
+              <div class="sol-tr-desc">Certificate + milestone pin</div>
+            </div>
+            <div class="sol-trophy sol-tr-silver">
+              <div class="sol-tr-badge">3</div>
+              <div class="sol-tr-year">3 Years</div>
+              <div class="sol-tr-desc">Die-cast coin + hardbound cert</div>
+            </div>
+            <div class="sol-trophy sol-tr-gold">
+              <div class="sol-tr-badge">5</div>
+              <div class="sol-tr-year">5 Years</div>
+              <div class="sol-tr-desc">Engraved plaque + premium box</div>
+            </div>
+            <div class="sol-trophy sol-tr-platinum">
+              <div class="sol-tr-badge">10</div>
+              <div class="sol-tr-year">10 Years</div>
+              <div class="sol-tr-desc">Legacy award + ceremony kit</div>
+            </div>
+          </div>
+          <div class="sol-art-footer-grid">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-blue">98%</span>
+              <span class="sol-art-flbl">fleet reorder rate — highest in catalog</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval">100%</span>
+              <span class="sol-art-flbl">name + exact years on every item</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MILESTONE TIERS -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:32px">
+        <span class="section-eyebrow">Anniversary Milestones</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Four milestones. Each one<br>heavier than the last.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:48px">
+        <div style="background:var(--black-2);padding:24px 20px;text-align:center">
+          <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">1 Year</div>
+          <div style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold);margin-bottom:6px">1st Year</div>
+          <div style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.5">First anniversary kit — signals that reaching one year is worth celebrating</div>
+        </div>
+        <div style="background:var(--black-3);padding:24px 20px;text-align:center">
+          <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">3 Years</div>
+          <div style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold);margin-bottom:6px">3rd Year</div>
+          <div style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.5">Three-year award — the first real tenure benchmark in the OTR industry</div>
+        </div>
+        <div style="background:var(--black-3);padding:24px 20px;text-align:center">
+          <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">5 Years</div>
+          <div style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold);margin-bottom:6px">5th Year</div>
+          <div style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.5">Five-year award — at this milestone, a driver's institutional knowledge is irreplaceable</div>
+        </div>
+        <div style="background:var(--black-2);padding:24px 20px;text-align:center">
+          <div style="font-size:0.6875rem;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">10 Years</div>
+          <div style="font-size:1.5rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold);margin-bottom:6px">10th Year</div>
+          <div style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.5">Decade award — the career driver. Our most premium presentation, no exceptions.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED BY TIER -->
+  <section class="section-sm" style="background:var(--black-3);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">Program Tiers</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Three award tiers for every<br>fleet size and budget.</h2>
+        <p style="font-size:1rem;color:var(--text-secondary);margin-top:12px">All tiers include engraved driver name and years of service. All ship on your timeline.</p>
+      </div>
+      <div class="sol-tier-grid">
+
+        <div class="sol-tier-card sol-tier-standard">
+          <span class="sol-tier-badge">Standard</span>
+          <div class="sol-tier-price">$79.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Engraved anniversary plaque (name + years)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Certificate of service recognition</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Personalized leadership letter</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Year-specific recognition pin</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Rigid gift presentation box</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=milestone" class="btn btn-secondary btn-full" style="border-radius:10px">Shop Standard</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-featured sol-tier-premium">
+          <span class="sol-tier-badge">Premium</span>
+          <div class="sol-tier-price">$109.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Standard</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Die-cast commemorative coin (year-specific)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium insulated tumbler (fleet-branded)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium hard-cloth presentation box</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Handwritten congratulations card option</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=milestone" class="btn btn-primary btn-full" style="border-radius:10px">Shop Premium</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-enterprise">
+          <span class="sol-tier-badge">Enterprise</span>
+          <div class="sol-tier-price">Custom</div>
+          <div class="sol-tier-price-unit">volume pricing · 100+ drivers</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Premium</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium branded watch or jewelry (5-year+)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Public recognition ceremony toolkit</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Annual milestone calendar management</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager + Net-30 terms</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="contact.html" class="btn btn-secondary btn-full" style="border-radius:10px">Request Enterprise Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Submit a driver. Receive a<br>presentation-ready award box.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">01</div>
+          <div class="sol-step-title">Submit driver name and anniversary tier</div>
+          <div class="sol-step-desc">Specify the driver, years of service, and whether it's a 1-, 3-, 5-, or 10-year anniversary. Enterprise accounts can submit batched CSV files for fleet-wide anniversary management.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">02</div>
+          <div class="sol-step-title">Provide fleet artwork</div>
+          <div class="sol-step-desc">Upload your fleet logo (PNG or SVG at 300dpi+). We apply it to all branded items and the recognition certificate. Returning accounts skip this step.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">03</div>
+          <div class="sol-step-title">Approve digital proof</div>
+          <div class="sol-step-desc">Digital proof sent within one business day — engraving text, certificate layout, personalization. One revision round included. Approve and production begins.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">04</div>
+          <div class="sol-step-title">Present on the anniversary date</div>
+          <div class="sol-step-desc">Ships on your timeline. Present at a terminal event, dispatch call, or manager meeting. The presentation moment is the one drivers remember and talk about.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+    </div>
+
+    <!-- HOLIDAY & SEASONAL -->
+    <div class="mb-xl" data-category-section="holiday">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <div>
+          <span class="section-eyebrow">Holiday &amp; Seasonal</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Holiday &amp; Seasonal Programs</h2>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+      <div class="product-grid">
+
+        <div class="product-card"
+             data-product-id="das-004" data-product-name="Holiday Gift Set"
+             data-product-price="1.00" data-product-category="Holiday &amp; Seasonal"
+             data-product-image="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop"
+             data-product-min-qty="10" data-filter-cat="holiday">
+          <a href="product.html?id=das-004" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="https://images.unsplash.com/photo-1512909006721-3d6018887383?w=600&q=75&fit=crop" alt="Holiday Gift Set" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Holiday &amp; Seasonal</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-004" style="text-decoration:none;color:inherit">Holiday Gift Set</a></h3>
+            <p class="product-card-desc">Curated seasonal package for drivers — premium contents selected to show appreciation during the holiday season with a personal touch.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Standard</span>
+              <span class="product-tier-pill">Premium</span>
+            </div>
+            <!-- TEMP (testing): purchasable at $1. REVERT this card to the seasonal state — re-add the
+                 <span class="soon-pill">Available Sept 21</span> badge, drop the qty + Add-to-Cart, and
+                 restore the "Notify Me →" CTA + "Available September 21 · seasonal" price line. -->
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$1.00</span>
+                <span class="product-price-unit">per unit · min. 10</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-004" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-holiday.html ===== -->
+<div class="shop-service-detail" id="service-detail-holiday" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How the Holiday &amp; Seasonal program works</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, tiers, and process — scroll on if you want the full picture before ordering.</p>
+  </div>
+
+  <!-- STATS STRIP (folded from hero) -->
+  <div class="container" style="padding-top:32px">
+    <div class="sol-hero-stats">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">Q4</span><span class="sol-hero-stat-label">Highest Impact Period</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">4.7★</span><span class="sol-hero-stat-label">Average Rating</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">$54.99</span><span class="sol-hero-stat-label">Starting Price / Unit</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">3–5d</span><span class="sol-hero-stat-label">Ships In</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Year-End Opportunity</span>
+          <h2 class="section-title">The holidays are the one moment where your driver's family is the audience.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">OTR drivers spend weeks away from home during Q4 — the season where everyone else is with their families. They're on I-40 at 3 AM on Thanksgiving weekend while the rest of the country is home. They know it. Their families know it.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">When a premium holiday recognition package arrives — branded, personalized, and clearly came from leadership — it travels home with the driver. Their spouse sees it. Their kids see it. The acknowledgment extends beyond the individual. The family, which often questions whether the sacrifices are worth it, sees evidence that the company values what their driver does.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">That family-level impact is the retention lever most fleet managers never think to activate. It's also the reason our holiday programs consistently outperform other recognition products on reorder rate and driver-reported satisfaction.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">Who Actually Sees the Kit</span>
+            <span class="sol-art-src">DAS Program Insight</span>
+          </div>
+          <div class="sol-signal-chain">
+            <div class="sol-signal-node sol-signal-fleet">
+              <div class="sol-signal-node-icon">🏢</div>
+              <div class="sol-signal-node-label">Fleet Mgr</div>
+            </div>
+            <div class="sol-signal-arrow">→</div>
+            <div class="sol-signal-node sol-signal-kit">
+              <div class="sol-signal-node-icon">📦</div>
+              <div class="sol-signal-node-label">Holiday Kit</div>
+            </div>
+            <div class="sol-signal-arrow">→</div>
+            <div class="sol-signal-node sol-signal-driver">
+              <div class="sol-signal-node-icon">🚛</div>
+              <div class="sol-signal-node-label">Driver</div>
+            </div>
+            <div class="sol-signal-arrow">→</div>
+            <div class="sol-signal-node sol-signal-family">
+              <div class="sol-signal-node-icon">🏠</div>
+              <div class="sol-signal-node-label">Family</div>
+            </div>
+          </div>
+          <div class="sol-signal-insight">
+            <div class="sol-signal-insight-label">Why the family matters</div>
+            <div class="sol-signal-insight-text">OTR drivers spend Q4 away while everyone else is home. When a premium kit goes home, their family sees evidence the company values what their driver does. That family-level signal is the retention lever most carriers never activate.</div>
+          </div>
+          <div class="sol-art-footer-grid">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-gold">4.7★</span>
+              <span class="sol-art-flbl">highest driver satisfaction rating</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-green">Nov 1</span>
+              <span class="sol-art-flbl">order deadline · holiday delivery</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED BY TIER -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">Program Tiers</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Three tiers. Every one<br>worth bringing home.</h2>
+        <p style="font-size:1rem;color:var(--text-secondary);margin-top:12px">All tiers include driver name personalization and fleet branding. Holiday programs ship seasonally — order early.</p>
+      </div>
+      <div class="sol-tier-grid">
+
+        <div class="sol-tier-card sol-tier-standard">
+          <span class="sol-tier-badge">Standard</span>
+          <div class="sol-tier-price">$54.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Seasonal curated gift set</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Personalized holiday card from leadership</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium branded thermal mug</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Year-end appreciation note (tenure-specific)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Branded premium gift wrap</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=holiday" class="btn btn-secondary btn-full" style="border-radius:10px">Shop Standard</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-featured sol-tier-premium">
+          <span class="sol-tier-badge">Premium</span>
+          <div class="sol-tier-price">$79.99</div>
+          <div class="sol-tier-price-unit">per unit · min. 10 units</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Standard</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Year-in-review acknowledgment letter</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Holiday bonus card sleeve</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium branded fleece or apparel item</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Premium rigid gift box with tissue</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="shop.html?category=holiday" class="btn btn-primary btn-full" style="border-radius:10px">Shop Premium</a>
+          </div>
+        </div>
+
+        <div class="sol-tier-card sol-tier-enterprise">
+          <span class="sol-tier-badge">Enterprise</span>
+          <div class="sol-tier-price">Custom</div>
+          <div class="sol-tier-price-unit">volume pricing · 100+ drivers</div>
+          <div class="sol-tier-divider"></div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Everything in Premium</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Direct home delivery option</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom seasonal message from CEO/President</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Tenure-tiered gift escalation (1yr, 3yr, 5yr+)</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager + Net-30 terms</li>
+          </ul>
+          <div class="sol-tier-footer">
+            <a href="contact.html" class="btn btn-secondary btn-full" style="border-radius:10px">Request Enterprise Quote</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Order by November 1.<br>Deliver before the holidays.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">01</div>
+          <div class="sol-step-title">Order by November 1</div>
+          <div class="sol-step-desc">Standard Q4 window closes November 1 to guarantee pre-holiday delivery. Express processing is available through November 15 for additional cost. Don't wait.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">02</div>
+          <div class="sol-step-title">Submit driver roster and fleet logo</div>
+          <div class="sol-step-desc">Provide driver names and tenure data for tenure-specific messaging. Enterprise accounts with home delivery supply driver addresses — we handle the rest.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">03</div>
+          <div class="sol-step-title">Approve and produce</div>
+          <div class="sol-step-desc">Digital proof within one business day. Approve and we produce and pack immediately — each kit labeled per driver for clean terminal distribution or home delivery.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">04</div>
+          <div class="sol-step-title">Distribute or ship direct to home</div>
+          <div class="sol-step-desc">Standard and Premium deliver to your terminal. Enterprise offers direct home delivery — arriving before the driver does, so the family receives it. That's the moment that matters.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+    </div>
+
+    <!-- MILE PACKS -->
+    <div class="mb-xl" data-category-section="milepacks">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
+        <div>
+          <span class="section-eyebrow">Mile Packs</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">MILE PACKS</h2>
+          <p style="font-size:0.9375rem;color:var(--text-secondary);margin-top:6px;max-width:560px">Curated recognition kits for every moment on the road — fuel, hydration, comfort, safety, and milestone tributes. Three tiers: Essential, Premium, and Signature.</p>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+      <div class="product-grid" id="mile-packs-grid"></div>
+
+      <!-- ===== PROGRAM DETAILS — relocated from solution-enterprise.html ===== -->
+<div class="shop-service-detail" id="service-detail-milepacks" style="border-top:1px solid var(--gold-border);margin-top:48px">
+  <div class="container" style="text-align:center;padding-top:40px">
+    <span class="section-eyebrow">Program Details</span>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How Mile Packs &amp; enterprise fleet programs work</h2>
+    <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, volume tiers, and process — scroll on if you want the full picture before ordering.</p>
+  </div>
+
+  <!-- STATS STRIP (folded from hero) -->
+  <div class="container" style="padding-top:24px">
+    <div class="sol-hero-stats">
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">10</span><span class="sol-hero-stat-label">Unit Minimum</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">Net-30</span><span class="sol-hero-stat-label">Available Terms</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">24hr</span><span class="sol-hero-stat-label">Quote Turnaround</span></div>
+      <div class="sol-hero-stat"><span class="sol-hero-stat-value">Free</span><span class="sol-hero-stat-label">Shipping Included</span></div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <section class="section" style="background:var(--black)">
+    <div class="container">
+      <div class="about-split" style="gap:56px">
+        <div>
+          <span class="section-eyebrow">The Scale Problem</span>
+          <h2 class="section-title">At 500 drivers, a manual recognition program isn't a program. It's a liability.</h2>
+          <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Standard recognition approaches break down at scale. Someone has to track every anniversary, coordinate every order, manage every vendor relationship, and ensure every driver gets the right kit on the right date. At 100 drivers that's manageable. At 500+ it becomes the thing that always falls through the cracks.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65;margin-bottom:20px">Enterprise carriers need a different model: one where the recognition calendar is managed externally, the products are custom-built for their brand, the fulfillment happens without administrative overhead, and the billing is structured for enterprise purchasing processes — not B2C credit cards.</p>
+          <p style="font-size:1rem;color:var(--text-secondary);line-height:1.65">That's exactly what the Enterprise Fleet Program delivers. One dedicated account manager. One annual planning call. Quarterly program reviews. And recognition that happens on schedule, at scale, without your team having to think about it after the initial setup.</p>
+        </div>
+        <div class="sol-artifact">
+          <div class="sol-art-hdr">
+            <span class="sol-art-eye">The Scale Equation</span>
+            <span class="sol-art-src">ATRI · ATA Fleet Data</span>
+          </div>
+          <div class="sol-calc">
+            <div class="sol-calc-inputs">
+              <div class="sol-calc-input">
+                <span class="sol-calc-input-val">1,000</span>
+                <span class="sol-calc-input-lbl">Drivers</span>
+              </div>
+              <div class="sol-calc-input">
+                <span class="sol-calc-input-val">89%</span>
+                <span class="sol-calc-input-lbl">Turnover</span>
+              </div>
+              <div class="sol-calc-input">
+                <span class="sol-calc-input-val">$15K</span>
+                <span class="sol-calc-input-lbl">Avg Cost</span>
+              </div>
+            </div>
+            <div class="sol-calc-op">↓ annual turnover exposure</div>
+            <div class="sol-calc-output">
+              <span class="sol-calc-output-label">Replacement cost / year</span>
+              <span class="sol-calc-output-val">$13.35M</span>
+            </div>
+            <div class="sol-calc-op">vs. full-fleet recognition program</div>
+            <div class="sol-calc-vs">
+              <span class="sol-calc-vs-label">Annual recognition investment</span>
+              <span class="sol-calc-vs-val">~$75K</span>
+            </div>
+          </div>
+          <div class="sol-art-footer-grid">
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval sol-art-fval-blue">15%</span>
+              <span class="sol-art-flbl">volume discount · 100–499 drivers</span>
+            </div>
+            <div class="sol-art-fstat">
+              <span class="sol-art-fval">Net-30</span>
+              <span class="sol-art-flbl">standard enterprise payment terms</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S INCLUDED -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:40px">
+        <span class="section-eyebrow">What's Included</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Everything you need to run<br>a recognition program at fleet scale.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+        <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
+          <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Account Management</div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Dedicated account manager assigned at onboarding</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Annual program planning consultation</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Quarterly program reviews</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Recognition ROI reporting</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>24-hour quote turnaround</li>
+          </ul>
+        </div>
+        <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
+          <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Products &amp; Fulfillment</div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Custom SKU development available</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Fleet-branded custom kits</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>White-glove fulfillment to any terminal</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Home delivery option for OTR drivers</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Free sample order before commitment</li>
+          </ul>
+        </div>
+        <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
+          <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Billing &amp; Terms</div>
+          <ul class="sol-tier-list">
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Net-30 payment terms</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Volume pricing by fleet size tier</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Annual contract available</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Purchase order accepted</li>
+            <li><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>Vendor onboarding support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VOLUME TIERS -->
+  <section class="section-sm" style="background:var(--black-3);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:36px">
+        <span class="section-eyebrow">Volume Pricing</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Pricing that scales with your fleet.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gold-border);border-radius:var(--radius-lg);overflow:hidden;max-width:800px;margin:0 auto">
+        <div style="background:var(--black);padding:28px 24px">
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-muted);margin-bottom:10px">Standard</div>
+          <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:4px">List Price</div>
+          <div style="font-size:0.8125rem;color:var(--text-muted);margin-bottom:12px">10–99 drivers</div>
+          <div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5">Published per-unit pricing with no minimum commitment. Accessible for regional and small fleets.</div>
+        </div>
+        <div style="background:#EFF6FF;padding:28px 24px;border-left:2px solid #BFDBFE;border-right:2px solid #BFDBFE">
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#1D4ED8;margin-bottom:10px">Volume</div>
+          <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:4px">Save 15%</div>
+          <div style="font-size:0.8125rem;color:var(--text-muted);margin-bottom:12px">100–499 drivers</div>
+          <div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5">Automatic 15% volume discount applied to all products. No negotiation required — applies at checkout.</div>
+        </div>
+        <div style="background:#F5F3FF;padding:28px 24px">
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:#7C3AED;margin-bottom:10px">Enterprise</div>
+          <div style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;color:var(--text-primary);margin-bottom:4px">Custom Rate</div>
+          <div style="font-size:0.8125rem;color:var(--text-muted);margin-bottom:12px">500+ drivers</div>
+          <div style="font-size:0.875rem;color:var(--text-secondary);line-height:1.5">Negotiated pricing based on annual driver count, product mix, and contract length. Scoped in a 30-minute call.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--black);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header centered" style="margin-bottom:48px">
+        <span class="section-eyebrow">How It Works</span>
+        <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">From first call to running program<br>in under two weeks.</h2>
+      </div>
+      <div class="sol-steps">
+        <div class="sol-step">
+          <div class="sol-step-num">01</div>
+          <div class="sol-step-title">Initial scoping call (30 min)</div>
+          <div class="sol-step-desc">We review your driver count, recognition calendar, current program gaps, and budget parameters. You get a custom quote within 24 hours of the call.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">02</div>
+          <div class="sol-step-title">Program architecture &amp; artwork</div>
+          <div class="sol-step-desc">We map your recognition calendar — DAW, milestones, onboarding, holidays — and collect your fleet artwork. One revision round on all proofs.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">03</div>
+          <div class="sol-step-title">Sample order before commitment</div>
+          <div class="sol-step-desc">Before you commit to a full program, we ship a sample order at no cost. You approve the physical product. If it doesn't meet your standard, we fix it before the full run.</div>
+        </div>
+        <div class="sol-step">
+          <div class="sol-step-num">04</div>
+          <div class="sol-step-title">Ongoing execution — zero overhead</div>
+          <div class="sol-step-desc">Your account manager handles the rest: scheduling, driver roster updates, order processing, fulfillment, and reporting. You review results. We execute the program.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO IT'S FOR -->
+  <section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
+    <div class="container">
+      <div class="section-header" style="margin-bottom:32px">
+        <span class="section-eyebrow">Who This Program Is For</span>
+        <h2 class="section-title" style="font-size:clamp(1.25rem,2.5vw,1.875rem)">The decision-makers who own<br>driver retention outcomes at scale.</h2>
+      </div>
+      <div class="sol-persona-grid">
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Safety / Chief Safety Officer</div>
+          <div class="sol-persona-desc">Running safety culture programs across multiple terminals and thousands of drivers. Recognition is a documented input to safety behavior — and enterprise programs provide the scale to make it systematic.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">VP Operations / COO</div>
+          <div class="sol-persona-desc">Accountable for turnover costs and the operational impact of empty seats. Enterprise recognition programs are an operations investment with a documented cost-benefit case, not a HR budget item.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">Director of Human Resources</div>
+          <div class="sol-persona-desc">Managing the driver lifecycle from recruiting to tenure across multiple locations and driver profiles. Enterprise programs provide consistent recognition infrastructure across the entire driver population.</div>
+        </div>
+        <div class="sol-persona-card">
+          <div class="sol-persona-role">Procurement / Vendor Management</div>
+          <div class="sol-persona-desc">Evaluating vendor relationships on reliability, compliance, and total cost of ownership. Enterprise tier includes Net-30 terms, purchase orders, vendor onboarding support, and contract documentation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+    </div>
+
+    <!-- ════════ OVERALL DRIVER APPRECIATION SOLUTIONS SUMMARY — shown ONLY on the
+         "All Products" view (applyShopFilter), AFTER the full product gallery. On a
+         filtered category view this is hidden and that category's own program-detail
+         block shows instead. One blurb for the whole solution, not per-program. ════════ -->
+    <div id="shop-overall-detail" style="border-top:1px solid var(--gold-border);margin-top:48px;padding-top:48px;text-align:center">
+      <span class="section-eyebrow">Driver Appreciation Solutions</span>
+      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem);margin-top:8px">Recognition that keeps professional drivers</h2>
+      <p style="color:var(--text-secondary);max-width:680px;margin:12px auto 0;line-height:1.7">
+        The industry runs at 89% annual driver turnover — and recognition is the proven intervention.
+        Driver Appreciation Solutions builds the programs that turn recognition into retention across the
+        entire driver lifecycle: appreciation kits, safety recognition, new-driver onboarding, career &amp;
+        safe-mileage milestones, holiday gifting, and enterprise mile packs for 100+ driver fleets.
+        Every program ships presentation-ready, on your timeline.
+      </p>
+      <div class="sol-hero-stats" style="margin-top:28px;justify-content:center">
+        <div class="sol-hero-stat"><span class="sol-hero-stat-value">30%</span><span class="sol-hero-stat-label">Turnover Reduction</span></div>
+        <div class="sol-hero-stat"><span class="sol-hero-stat-value">10:1</span><span class="sol-hero-stat-label">Documented ROI</span></div>
+        <div class="sol-hero-stat"><span class="sol-hero-stat-value">98%</span><span class="sol-hero-stat-label">Reorder Rate</span></div>
+      </div>
+      <p style="color:var(--text-muted);font-size:0.875rem;margin:24px auto 0">
+        Choose a category above to see how that specific program works — tiers, process, and ROI.
+      </p>
+      <div style="margin-top:20px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a href="contact.html" class="btn btn-primary">Request a Quote</a>
+        <a href="about.html" class="btn btn-secondary">How DAS Works</a>
       </div>
     </div>
 
@@ -492,30 +2078,413 @@
 <!-- Single source of truth for storefront prices: lib/catalog.js → store-pricing.js syncs the cards. -->
 <script src="/lib/catalog.js"></script>
 <script src="/js/store-pricing.js?v=1"></script>
+<!-- MILE PACKS: square card frames so the square product photos fill with NO crop.
+     Real photos use cover (perfect fill); placeholder cards (.mp-ph) use contain so the
+     full 3:2 placeholder shows (navy letterbox to match the card). -->
+<style>
+  [data-filter-cat="milepacks"] .product-card-img-wrap { aspect-ratio: 1 / 1; }
+  [data-filter-cat="milepacks"].mp-ph .product-card-img-wrap { background: #14224F; }
+  [data-filter-cat="milepacks"].mp-ph .product-card-img { object-fit: contain; }
+  /* Professional Driver Essentials Kit — real 3:2 product photos. Match the card
+     frame to the photo ratio so it fills with NO crop (its own row, so no height mismatch). */
+  /* Appreciation grid — uniform SQUARE frames (same format as MILE PACKS) so all three cards
+     (das-001, das-006, das-007) are the SAME size: equal photo size → equal card height → no
+     white-space gaps. das-007's photo is square so it fills perfectly with no crop; das-001 and
+     das-006 fill via the default object-fit:cover. */
+  [data-category-section="appreciation"] .product-card-img-wrap,
+  [data-category-section="onboarding"] .product-card-img-wrap { aspect-ratio: 1 / 1; }
+  /* Professional Travel Kit (das-009): its hero is a landscape graphic — show it in FULL
+     (contain) inside the square frame instead of cropping the bag off the sides. */
+  [data-product-id="das-009"] .product-card-img-wrap { background: #0E1A33; }
+  [data-product-id="das-009"] .product-card-img { object-fit: contain; }
+  /* Professional Driver Essentials Kit (das-006): its photos are 3:2 landscape lifestyle shots.
+     The square appreciation frame was cropping the sides (and the cover-crop zoom read as
+     pixelation). Show the FULL photo (contain) on a dark letterbox that matches the scene. */
+  [data-product-id="das-006"] .product-card-img-wrap { background: #0E1A33; }
+  [data-product-id="das-006"] .product-card-img { object-fit: contain; }
+
+  /* ── Service Milestone Awards (medals) — explicit hex (DAS CSS vars are inverted) ── */
+  .msm-intro { font-size: 0.95rem; color: #475569; line-height: 1.7; max-width: 760px; margin: 0 0 22px; }
+
+  /* ── Recognition-type selection cards (replaces the old Career/Safe pill toggle) ── */
+  .msm-choose-help { font-size: 0.9375rem; font-weight: 600; color: #0F172A; margin: 0 0 14px; }
+  .msm-trackcards { display: flex; align-items: stretch; gap: 16px; max-width: 780px; margin: 0 0 16px; }
+  .msm-trackcards .msm-trackcard { flex: 1 1 0; min-width: 0; }
+  .msm-or { align-self: center; flex: 0 0 auto; font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; letter-spacing: .1em; color: #94A3B8; }
+  .msm-trackcard {
+    display: flex; align-items: flex-start; gap: 14px; text-align: left;
+    padding: 20px 20px 20px 18px; border-radius: 14px; cursor: pointer;
+    background: #fff; border: 1.5px solid #E2E8F0; box-shadow: 0 1px 2px rgba(15,23,42,.04);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease, background .18s ease;
+    position: relative;
+  }
+  .msm-trackcard:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(15,23,42,.10); }
+  .msm-trackcard:focus-visible { outline: 3px solid rgba(26,46,110,.45); outline-offset: 2px; }
+  .msm-trackcard-icon {
+    flex: 0 0 auto; width: 46px; height: 46px; border-radius: 11px;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: background .18s ease, color .18s ease;
+  }
+  .msm-trackcard-icon svg { width: 26px; height: 26px; }
+  .msm-trackcard-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  .msm-trackcard-title { font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.01em; color: #0F172A; line-height: 1.2; }
+  .msm-trackcard-desc { font-size: 0.875rem; color: #475569; line-height: 1.5; }
+  .msm-trackcard-check {
+    flex: 0 0 auto; width: 22px; height: 22px; border-radius: 50%;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-left: auto; color: #fff; opacity: 0; transform: scale(.7);
+    transition: opacity .18s ease, transform .18s ease, background .18s ease;
+  }
+  .msm-trackcard-check svg { width: 13px; height: 13px; }
+
+  /* Career accent = navy; Safe accent = green. Both equally premium. */
+  .msm-trackcard--career .msm-trackcard-icon { background: rgba(26,46,110,.10); color: #1A2E6E; }
+  .msm-trackcard--safe   .msm-trackcard-icon { background: rgba(46,158,107,.12); color: #2E9E6B; }
+
+  .msm-trackcard.active { box-shadow: 0 8px 22px rgba(15,23,42,.12); }
+  .msm-trackcard--career.active { border-color: #1A2E6E; background: #F7F9FF; }
+  .msm-trackcard--career.active .msm-trackcard-icon { background: #1A2E6E; color: #fff; }
+  .msm-trackcard--career.active .msm-trackcard-check { opacity: 1; transform: scale(1); background: #1A2E6E; }
+  .msm-trackcard--safe.active { border-color: #2E9E6B; background: #F3FBF7; }
+  .msm-trackcard--safe.active .msm-trackcard-icon { background: #2E9E6B; color: #fff; }
+  .msm-trackcard--safe.active .msm-trackcard-check { opacity: 1; transform: scale(1); background: #2E9E6B; }
+
+  .msm-choose-legend { font-size: 0.8125rem; color: #64748B; margin: 0 0 4px; }
+  .msm-choose-legend strong { color: #334155; font-weight: 700; }
+  .msm-choose-confirm { font-size: 0.8125rem; font-weight: 700; color: #1A2E6E; margin: 0 0 24px; }
+  /* Per-hire kit (das-007): first-order 10-min vs repeat-customer 1-per-hire note. */
+  .perhire-note { font-size: 0.75rem; font-weight: 600; color: #475569; margin: 8px 0 0; line-height: 1.45; }
+  .msm-trackcard--safe.active ~ .msm-choose-confirm,
+  .msm-choose-confirm.is-safe { color: #2E9E6B; }
+  .msm-choose-confirm.is-exec { color: #9A7B2E; }
+
+  /* ── Executive Driver Recognition Collection — premium upgrade banner ── */
+  .msm-exec-banner {
+    display: flex; align-items: center; gap: 18px; width: 100%; max-width: 780px;
+    text-align: left; padding: 20px 22px; border-radius: 14px; cursor: pointer;
+    margin: 0 0 24px; position: relative; overflow: hidden;
+    background: linear-gradient(135deg, #16264F 0%, #0C1733 100%);
+    border: 1.5px solid rgba(200,168,75,.45);
+    box-shadow: 0 2px 10px rgba(12,23,51,.18);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .msm-exec-banner::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(120% 140% at 100% 0%, rgba(200,168,75,.16) 0%, transparent 55%);
+  }
+  .msm-exec-banner:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(12,23,51,.30); border-color: rgba(200,168,75,.75); }
+  .msm-exec-banner:focus-visible { outline: 3px solid rgba(200,168,75,.6); outline-offset: 2px; }
+  .msm-exec-banner.active { border-color: #C8A84B; box-shadow: 0 12px 30px rgba(12,23,51,.34), 0 0 0 1px rgba(200,168,75,.5) inset; }
+  .msm-exec-banner-icon {
+    flex: 0 0 auto; width: 50px; height: 50px; border-radius: 12px; position: relative; z-index: 1;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: rgba(200,168,75,.16); color: #D9BE72; border: 1px solid rgba(200,168,75,.4);
+  }
+  .msm-exec-banner-icon svg { width: 27px; height: 27px; }
+  .msm-exec-banner-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; position: relative; z-index: 1; }
+  .msm-exec-banner-eyebrow { font-size: 0.6875rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #C8A84B; }
+  .msm-exec-banner-title { font-size: 1.125rem; font-weight: 800; letter-spacing: -0.01em; color: #fff; line-height: 1.2; }
+  .msm-exec-banner-desc { font-size: 0.8125rem; color: #B9C4E0; line-height: 1.5; max-width: 540px; }
+  .msm-exec-banner-cta { flex: 0 0 auto; margin-left: auto; align-self: center; position: relative; z-index: 1;
+    font-size: 0.8125rem; font-weight: 800; letter-spacing: .02em; color: #D9BE72; white-space: nowrap; }
+
+  /* Executive product cards + badges */
+  .msm-badge-exec { background: #16264F; color: #D9BE72; }
+  .msm-badge-exec-soft { background: rgba(200,168,75,.16); color: #9A7B2E; }
+  .product-card--exec { border-color: rgba(200,168,75,.5); }
+  .product-card--exec .product-card-category-pill { background: #16264F; color: #D9BE72; }
+  /* Dark-background product shots (Camino tote, Pack Leader) blend into a near-black card image. */
+  .product-card--dark .product-card-img-wrap { background: #0A0A0A !important; }
+  /* Flagship Pack Leader — elevated gold framing + larger image presence */
+  .msm-badge-flagship { background: linear-gradient(135deg,#C8A84B,#9A7B2E); color: #16264F; }
+  .product-card--flagship { border-color: #C8A84B; box-shadow: 0 6px 22px rgba(200,168,75,.22); }
+  /* Coming-soon exec gift (Food Jar) price slot */
+  .product-price-soon { font-size: 0.9375rem; font-weight: 800; letter-spacing: -0.01em; color: #9A7B2E; }
+
+  /* ── Milestone Recognition Kit cards — milestone <select> + representative-image disclaimer ── */
+  .mrk-select-label { font-size: 0.8125rem; font-weight: 800; color: #0F172A; margin: 6px 0 6px; }
+  .mrk-select {
+    width: 100%; padding: 10px 12px; border-radius: 9px; border: 1.5px solid #D5DBE6;
+    background: #fff; font-size: 0.9375rem; font-weight: 700; color: #0F172A;
+    appearance: none; -webkit-appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231A2E6E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 12px center; padding-right: 34px;
+  }
+  .mrk-select:focus-visible { outline: 3px solid rgba(26,46,110,.35); border-color: #1A2E6E; }
+  .mrk-disclaimer { margin: 8px 0 12px; font-size: 0.72rem; line-height: 1.4; color: #64748B; font-style: italic; }
+  .mrk-card--featured { border-color: #C8A84B; box-shadow: 0 6px 22px rgba(200,168,75,.20); }
+
+  /* ── FLAGSHIP — Professional Driver Milestone Recognition Kit (elevated hero feature) ── */
+  .mrk-flagship { display: grid; grid-template-columns: minmax(0,320px) 1fr; align-items: stretch;
+    text-decoration: none; color: inherit; background: linear-gradient(135deg,#16264F,#0C1733);
+    border: 1.5px solid rgba(200,168,75,.5); border-radius: 16px; overflow: hidden; margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(12,23,51,.18); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .mrk-flagship:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(12,23,51,.30); border-color: #C8A84B; }
+  .mrk-flagship-media { position: relative; background: #0A0A0A; min-height: 250px; }
+  .mrk-flagship-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mrk-flagship-tag { position: absolute; top: 14px; left: 14px; background: linear-gradient(135deg,#C8A84B,#9A7B2E);
+    color: #16264F; font-size: .6875rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: 6px; }
+  .mrk-flagship-body { padding: 28px 30px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+  .mrk-flagship-badge { font-size: .6875rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #D9BE72; }
+  .mrk-flagship-title { font-size: clamp(1.35rem,2.4vw,1.875rem); font-weight: 800; letter-spacing: -.02em; color: #fff; line-height: 1.15; margin: 0; }
+  .mrk-flagship-sub { font-size: .95rem; color: #B9C4E0; line-height: 1.55; max-width: 560px; margin: 0; }
+  .mrk-flagship-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .mrk-flagship-items span { display: inline-flex; align-items: center; gap: 7px; font-size: .8125rem; font-weight: 700; color: #E8EDFA;
+    background: rgba(200,168,75,.12); border: 1px solid rgba(200,168,75,.35); border-radius: 999px; padding: 5px 13px; }
+  .mrk-flagship-items span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #D9BE72; flex: 0 0 auto; }
+  .mrk-flagship-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
+  .mrk-flagship-price { font-size: 1.5rem; font-weight: 800; color: #fff; }
+  .mrk-flagship-price span { font-size: .8125rem; font-weight: 600; color: #8FA0CC; margin-left: 8px; }
+  .mrk-flagship-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .9375rem; color: #16264F;
+    background: linear-gradient(135deg,#E8C766,#C8A84B); padding: 11px 20px; border-radius: 10px; }
+  .mrk-flagship-cta svg { width: 15px; height: 15px; }
+  @media (max-width: 760px) { .mrk-flagship { grid-template-columns: 1fr; } .mrk-flagship-media { min-height: 210px; } }
+  /* Milestone Recognition Kit cards use marketing/lifestyle photos (medal, lapel, luggage) —
+     show them in FULL (contain) on a dark letterbox instead of the default 16:9 cover crop. */
+  .mrk-card .product-card-img-wrap { aspect-ratio: 4 / 3; background: #0E1A33; }
+  .mrk-card .product-card-img { object-fit: contain; }
+
+  /* "Executive Collection available" cross-link on Safe medal cards */
+  .msm-exec-xref {
+    display: flex; align-items: center; gap: 7px; margin: 12px -20px -20px; padding: 11px 20px;
+    font-size: 0.75rem; font-weight: 700; color: #9A7B2E; text-decoration: none;
+    background: linear-gradient(90deg, rgba(200,168,75,.10), rgba(200,168,75,.04));
+    border-top: 1px solid rgba(200,168,75,.28);
+    border-radius: 0 0 14px 14px; transition: background .16s ease, color .16s ease;
+  }
+  .msm-exec-xref:hover { background: rgba(200,168,75,.18); color: #7A5E1E; }
+  .msm-exec-xref-mark { color: #C8A84B; font-size: 0.875rem; }
+  .msm-exec-xref-arrow { margin-left: auto; font-weight: 800; }
+
+  @media (max-width: 640px) {
+    .msm-trackcards { flex-direction: column; gap: 10px; }
+    .msm-trackcard { padding: 18px; }
+    .msm-or { padding: 2px 0; }
+    .msm-exec-banner { flex-wrap: wrap; gap: 14px; padding: 18px; }
+    .msm-exec-banner-cta { margin-left: 0; }
+  }
+  /* Service Milestone medal cards — show the FULL medal photo (no crop), kept crisp. */
+  .product-card[data-track] .product-card-img-wrap { aspect-ratio: 4 / 3; background: #F1F5F9; }
+  .product-card[data-track] .product-card-img { object-fit: contain; }
+
+  /* ── SAFE SERVICE MILES — green interior image border (visual program distinction) ──
+     Inset box-shadow = a 6px INTERIOR border that follows the existing frame radius and
+     never shifts layout. Applies to any Safe Miles product (medals via data-track, plus
+     the Safe Miles Kit via data-product-type). Standard milestone cards are untouched. */
+  .product-card[data-product-type="safe-miles"] .product-card-img-wrap,
+  .product-card[data-track="safe"] .product-card-img-wrap {
+    box-shadow: inset 0 0 0 6px #059669;
+    transition: box-shadow .18s ease;
+  }
+  .product-card[data-product-type="safe-miles"]:hover .product-card-img-wrap,
+  .product-card[data-track="safe"]:hover .product-card-img-wrap {
+    box-shadow: inset 0 0 0 6px #059669, 0 0 0 4px rgba(5,150,105,0.18), 0 6px 20px rgba(5,150,105,0.18);
+  }
+  @media (max-width: 640px) {
+    .product-card[data-product-type="safe-miles"] .product-card-img-wrap,
+    .product-card[data-track="safe"] .product-card-img-wrap { box-shadow: inset 0 0 0 4px #059669; }
+    .product-card[data-product-type="safe-miles"]:hover .product-card-img-wrap,
+    .product-card[data-track="safe"]:hover .product-card-img-wrap {
+      box-shadow: inset 0 0 0 4px #059669, 0 0 0 3px rgba(5,150,105,0.18);
+    }
+  }
+  .msm-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 10px; }
+  .msm-badge { display: inline-block; font-size: 0.6875rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; }
+  .msm-badge-medal { background: rgba(200,168,75,.16); color: #9A7B2E; }
+  .msm-badge-soon  { background: #EEF1F5; color: #64748B; }
+  .msm-badge-safe  { background: rgba(46,158,107,.12); color: #2E9E6B; }
+  /* MILE PACKS — "Free shipping" pill on cards */
+  .ship-pill { display: inline-block; font-size: 0.6875rem; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; background: rgba(46,158,107,.12); color: #2E9E6B; }
+  /* "Available [date]" / coming-soon badge — top-right of a product card image */
+  .soon-pill { position: absolute; top: 12px; right: 12px; background: #C8A84B; color: #1A2E6E; font-size: 0.6875rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
+</style>
+<!-- MILE PACKS: render the 23 cards synchronously (before cart.js wires add-to-cart on DOMContentLoaded) -->
+<script src="js/mile-packs.js"></script>
+<script>
+(function () {
+  var grid = document.getElementById('mile-packs-grid');
+  if (!grid || !window.DAS_MILEPACKS) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  var heart = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>';
+  grid.innerHTML = window.DAS_MILEPACKS.filter(function (k) { return !k.archived; }).map(function (k) {
+    var hasPhoto = !!(k.photos && k.photos.length);
+    var img = hasPhoto ? k.photos[0] : ('/images/mp-' + k.num + '.jpg');
+    var price = (typeof k.price === 'number' ? k.price : 0).toFixed(2);
+    return '' +
+    '<div class="product-card' + (hasPhoto ? '' : ' mp-ph') + '" ' +
+      'data-product-id="' + k.id + '" data-product-name="' + esc(k.name) + '" ' +
+      'data-product-price="' + price + '" data-product-category="' + esc('MILE PACKS · ' + k.tier) + '" ' +
+      'data-product-image="' + img + '" data-product-min-qty="' + k.minQty + '" data-filter-cat="milepacks">' +
+      '<a href="product.html?id=' + k.id + '" style="text-decoration:none;color:inherit;display:block">' +
+        '<div class="product-card-img-wrap">' +
+          '<img class="product-card-img" src="' + img + '" alt="' + esc(k.name) + '" loading="lazy" onerror="this.style.display=\'none\'">' +
+          '<span class="product-card-category-pill">' + esc(k.tier) + '</span>' +
+        '</div>' +
+      '</a>' +
+      '<div class="product-card-body">' +
+        '<h3 class="product-card-title"><a href="product.html?id=' + k.id + '" style="text-decoration:none;color:inherit">' + esc(k.name) + '</a></h3>' +
+        '<p class="product-card-desc">' + esc(k.blurb) + '</p>' +
+        '<div class="product-card-tiers"><span class="product-tier-pill">' + esc(k.tier) + '</span><span class="ship-pill">Free shipping</span></div>' +
+        '<div class="qty-label">Quantity <span style="color:var(--gold)">(min. ' + k.minQty + ')</span></div>' +
+        '<div class="qty-control">' +
+          '<button type="button" class="qty-btn" data-dir="down">−</button>' +
+          '<input class="qty-input" type="number" value="' + k.minQty + '" min="' + k.minQty + '" data-step="1" aria-label="Quantity">' +
+          '<button type="button" class="qty-btn" data-dir="up">+</button>' +
+        '</div>' +
+        '<div class="product-card-footer">' +
+          '<div class="product-card-price-row">' +
+            '<span class="product-price-amount">$' + price + '</span>' +
+            '<span class="product-price-unit">per unit · min. ' + k.minQty + '</span>' +
+          '</div>' +
+          '<div class="product-card-actions">' +
+            '<button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later">' + heart + '</button>' +
+            '<a href="product.html?id=' + k.id + '" class="btn-ghost-sm">Details</a>' +
+            '<button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }).join('');
+})();
+</script>
+<!-- SERVICE MILESTONE AWARDS: render medal/award cards synchronously + wire the Career/Safe toggle -->
+<script src="js/milestones.js"></script>
+<script>
+(function () {
+  var grid = document.getElementById('milestone-grid');
+  var intro = document.getElementById('msm-intro');
+  if (intro && window.DAS_MILESTONE_INTRO) intro.textContent = window.DAS_MILESTONE_INTRO;
+  if (!grid || !window.DAS_MILESTONES) return;
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+  var heart = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>';
+  function buildCard(k, forceShow) {
+    var img = (k.photos && k.photos[0]) || k.image;
+    var price = (typeof k.price === 'number' ? k.price : 0).toFixed(2);
+    var safe = k.track === 'safe';
+    var exec = k.track === 'exec';
+    // The exec package(s) for a safe milestone — resolved by baseId so it works whether the
+    // milestone has one exec product or a choice of several (500k → Food Jar / Lunch Bag).
+    var execTargets = safe ? window.DAS_MILESTONES.filter(function (o) {
+      return o.track === 'exec' && o.executive && o.executive.baseId === k.id;
+    }) : [];
+    var execTarget = execTargets[0] ? execTargets[0].id : null;
+    var execXrefLabel = execTargets.length > 1
+      ? 'Executive Collection available — choose a premium executive gift'
+      : 'Executive Collection available — adds a premium executive gift';
+    var soon = !!k.comingSoon;       // Food Jar exec option — present but pricing pending
+    var darkImg = !!k.darkImg;       // dark-bg product shots (tote, pack leader) → dark img wrap
+    var flagship = !!k.flagship;     // Pack Leader — flagship visual treatment
+    var statusBadge = exec
+      ? (soon ? '<span class="msm-badge msm-badge-soon">Pricing Coming Soon</span>'
+              : (flagship ? '<span class="msm-badge msm-badge-flagship">Flagship Collection</span>'
+                          : '<span class="msm-badge msm-badge-exec">Premium Gift Included</span>'))
+      : (k.type === 'medal')
+        ? '<span class="msm-badge msm-badge-medal">Medal Available</span>'
+        : '<span class="msm-badge msm-badge-soon">Coming Soon — Physical Award</span>';
+    var safeBadge = exec
+      ? '<span class="msm-badge msm-badge-exec-soft">' + esc(k.executive ? k.executive.short : 'Executive') + '</span>'
+      : safe ? '<span class="msm-badge msm-badge-safe">Safe Miles</span>' : '';
+    var pill = exec ? 'Executive Collection' : safe ? 'Safe Service Miles' : 'Service Miles';
+    var cat = exec ? 'Executive Driver Recognition Collection'
+            : safe ? 'Safe Service Milestone Awards' : 'Service Milestone Awards';
+    var unitText = exec ? 'per package' : 'per item · placeholder price';
+    // Future-proof productType attribute (drives the Safe Miles green interior border).
+    var productType = exec ? 'executive' : (safe ? 'safe-miles' : 'milestone');
+    return '<div class="product-card' + (exec ? ' product-card--exec' : '') + (darkImg ? ' product-card--dark' : '') + (flagship ? ' product-card--flagship' : '') + '" data-track="' + k.track + '" data-product-type="' + productType + '" ' +
+      'data-product-id="' + k.id + '" data-product-name="' + esc(k.name) + '" ' +
+      'data-product-price="' + price + '" data-product-category="' + esc(cat) + '" ' +
+      'data-product-image="' + img + '" data-product-min-qty="' + k.minQty + '" data-filter-cat="milestone">' +
+      '<a href="product.html?id=' + k.id + '" style="text-decoration:none;color:inherit;display:block">' +
+        '<div class="product-card-img-wrap">' +
+          '<img class="product-card-img" src="' + img + '" alt="' + esc(k.imageAlt || k.name) + '" loading="lazy" onerror="this.style.display=\'none\'">' +
+          '<span class="product-card-category-pill">' + esc(pill) + '</span>' +
+        '</div>' +
+      '</a>' +
+      '<div class="product-card-body">' +
+        '<div class="msm-badges">' + statusBadge + safeBadge + '</div>' +
+        '<h3 class="product-card-title"><a href="product.html?id=' + k.id + '" style="text-decoration:none;color:inherit">' + esc(k.name) + '</a></h3>' +
+        '<p class="product-card-desc">' + esc(k.description) + '</p>' +
+        (soon ? '' :
+          '<div class="qty-label">Quantity</div>' +
+          '<div class="qty-control">' +
+            '<button type="button" class="qty-btn" data-dir="down">−</button>' +
+            '<input class="qty-input" type="number" value="' + k.minQty + '" min="' + k.minQty + '" data-step="1" aria-label="Quantity">' +
+            '<button type="button" class="qty-btn" data-dir="up">+</button>' +
+          '</div>') +
+        '<div class="product-card-footer">' +
+          '<div class="product-card-price-row">' +
+            (soon
+              ? '<span class="product-price-soon">Pricing Coming Soon</span>'
+              : '<span class="product-price-amount">$' + price + '</span>' +
+                '<span class="product-price-unit">' + unitText + '</span>') +
+          '</div>' +
+          '<div class="product-card-actions">' +
+            '<button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later">' + heart + '</button>' +
+            '<a href="product.html?id=' + k.id + '" class="btn-ghost-sm">Details</a>' +
+            (soon
+              ? '<a href="product.html?id=' + k.id + '" class="btn btn-primary btn-sm">View · Notify Me</a>'
+              : '<button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>') +
+          '</div>' +
+        '</div>' +
+        ((safe && execTarget) ? '<a class="msm-exec-xref" href="product.html?id=' + execTarget + '">' +
+          '<span class="msm-exec-xref-mark" aria-hidden="true">✦</span> ' + execXrefLabel +
+          '<span class="msm-exec-xref-arrow" aria-hidden="true">→</span></a>' : '') +
+      '</div>' +
+    '</div>';
+  }
+  // ── THREE DISTINCT RECOGNITION PATHS (separated 2026-06-12) ──────────────────
+  //   Service Milestone Awards = CAREER mileage medals ONLY (this #milestone-grid).
+  //   Safety Recognition = Safe Service Miles medals (#safety-medals-grid) + the
+  //   Executive Driver Recognition Collection (#safety-exec-grid), both rendered under
+  //   the Safety Recognition section. Career and Safety never mix.
+  grid.innerHTML = window.DAS_MILESTONES
+    .filter(function (k) { return k.track === 'career'; })
+    .map(function (k) { return buildCard(k, false); }).join('');
+
+  // Safety Recognition — Safe Service Miles medals.
+  var safetyGrid = document.getElementById('safety-medals-grid');
+  if (safetyGrid) {
+    safetyGrid.innerHTML = window.DAS_MILESTONES
+      .filter(function (k) { return k.track === 'safe'; })
+      .map(function (k) { return buildCard(k, true); }).join('');
+  }
+  // Safety Recognition — Executive Driver Recognition Collection (premium safety upgrade).
+  var execGrid = document.getElementById('safety-exec-grid');
+  if (execGrid) {
+    execGrid.innerHTML = window.DAS_MILESTONES
+      .filter(function (k) { return k.track === 'exec'; })
+      .map(function (k) { return buildCard(k, true); }).join('');
+  }
+})();
+</script>
 <script src="js/cart.js"></script>
 <script>
-// Filter logic
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.dataset.filter;
-    document.querySelectorAll('[data-category-section]').forEach(section => {
-      if (filter === 'all' || section.dataset.categorySection === filter) {
-        section.style.display = '';
-      } else {
-        section.style.display = 'none';
-      }
-    });
+// Filter logic — show/hide whole category sections only. The Milestone section keeps its own
+// Career/Safe track toggle (selectTrack); the filter never merges the two medal tracks.
+function applyShopFilter(filter) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+  document.querySelectorAll('[data-category-section]').forEach(section => {
+    section.style.display = (filter === 'all' || section.dataset.categorySection === filter) ? '' : 'none';
   });
+  // Per-program detail blocks (the "How the X program works" copy + diagrams) only
+  // belong on a single-category (filtered) view — and only the matching one. On the
+  // "All Products" view they're ALL hidden so the product gallery flows uninterrupted,
+  // and the one overall Driver Appreciation Solutions summary shows at the bottom instead.
+  document.querySelectorAll('.shop-service-detail').forEach(el => {
+    const cat = el.id.replace('service-detail-', '');
+    el.style.display = (filter !== 'all' && cat === filter) ? '' : 'none';
+  });
+  const overall = document.getElementById('shop-overall-detail');
+  if (overall) overall.style.display = (filter === 'all') ? '' : 'none';
+}
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => applyShopFilter(btn.dataset.filter));
 });
-// Apply URL param filter on load
+// On load: honor ?category= if it maps to a real filter, otherwise default to "All Products".
 const urlParams = new URLSearchParams(window.location.search);
 const catParam = urlParams.get('category');
-if (catParam) {
-  const btn = document.querySelector(`.filter-btn[data-filter="${catParam}"]`);
-  if (btn) btn.click();
-}
+const validCat = catParam && document.querySelector(`.filter-btn[data-filter="${catParam}"]`);
+applyShopFilter(validCat ? catParam : 'all');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>

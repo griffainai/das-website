@@ -5,22 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Product — Driver Appreciation Solutions</title>
   <meta name="description" id="page-desc" content="Fleet recognition kits built for the trucking industry.">
-  <link rel="canonical" href="https://driverappreciationsolutions.com/product.html">
+  <link rel="canonical" id="page-canonical" href="https://driverappreciationsolutions.com/product.html">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="Driver Appreciation Solutions">
   <meta property="og:title" content="Fleet Recognition Kits — Driver Appreciation Solutions">
   <meta property="og:description" content="Fleet recognition kits built for the trucking industry. Driver appreciation, onboarding, milestone, and safety recognition programs. Fleet-scale programs.">
   <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
-  <meta property="og:url" content="https://driverappreciationsolutions.com/product.html">
+  <meta property="og:url" id="page-ogurl" content="https://driverappreciationsolutions.com/product.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fleet Recognition Kits — Driver Appreciation Solutions">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="stylesheet" href="css/styles.css?v=12">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#1A2E6E">
 
   <script type="application/ld+json">
@@ -47,8 +48,8 @@
           "@type": "AggregateOffer",
           "priceCurrency": "USD",
           "lowPrice": "44.99",
-          "highPrice": "79.99",
-          "offerCount": "5",
+          "highPrice": "97.00",
+          "offerCount": "8",
           "availability": "https://schema.org/InStock",
           "seller": { "@type": "Organization", "name": "Driver Appreciation Solutions" }
         }
@@ -128,6 +129,84 @@
       transition: opacity 0.2s ease;
     }
     .main-image-area.transitioning img { opacity: 0; }
+    /* Full-photo (uncropped) display for landscape product shots */
+    .main-image-area.fit-contain { aspect-ratio: 3/2; }
+    .main-image-area.fit-contain img { object-fit: contain; }
+    .thumb-rail.fit-contain .thumb-item img { object-fit: contain; }
+    /* Dark-background product shots (Camino tote, Pack Leader) blend into a near-black wrap. */
+    .main-image-area.img-dark { background: #0A0A0A; }
+    .thumb-rail.img-dark .thumb-item { background: #0A0A0A; }
+    /* Safe Service Miles — green interior border on the PDP gallery (matches the shop cards). */
+    .main-image-area.safe-frame { box-shadow: inset 0 0 0 6px #059669; transition: box-shadow .18s ease; }
+    .main-image-area.safe-frame:hover { box-shadow: inset 0 0 0 6px #059669, 0 0 0 4px rgba(5,150,105,0.18); }
+    .thumb-rail.safe-frame .thumb-item.active { box-shadow: inset 0 0 0 3px #059669; }
+    @media (max-width: 640px) { .main-image-area.safe-frame { box-shadow: inset 0 0 0 4px #059669; } }
+    /* Coming-soon exec gift (Food Jar) — pricing-pending label in the price slot */
+    .price-soon { font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.01em; color: #1A2E6E; }
+    /* Milestone-select kits — milestone dropdown + representative-image disclaimer */
+    .milestone-select-block { margin: 0 0 20px; }
+    .milestone-select {
+      width: 100%; margin-top: 8px; padding: 12px 14px; border-radius: 10px;
+      border: 1.5px solid #D5DBE6; background: #fff; font-size: 1rem; font-weight: 700; color: #0F172A;
+      appearance: none; -webkit-appearance: none; cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%231A2E6E' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
+    }
+    .milestone-select:focus-visible { outline: 3px solid rgba(26,46,110,.35); outline-offset: 1px; border-color: #1A2E6E; }
+    .milestone-disclaimer { margin: 9px 2px 0; font-size: 0.78rem; line-height: 1.45; color: #64748B; font-style: italic; }
+
+    /* ── das-006 commercial: "included" callout + Net-30 terms + application modal (explicit hex) ── */
+    .das-value-block { background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px 18px; margin: 0 0 20px; }
+    .dvb-title { font-size: 0.8125rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; color: #1A2E6E; margin-bottom: 10px; }
+    .dvb-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+    .dvb-list li { display: flex; align-items: flex-start; gap: 9px; font-size: 0.875rem; color: #334155; line-height: 1.45; }
+    .dvb-list li svg { flex-shrink: 0; width: 18px; height: 18px; color: #2E9E6B; margin-top: 1px; }
+    .dvb-list li strong { color: #0F172A; }
+    /* Customization-coordinated product block (Welcome Kit) */
+    .cust-process { font-size: 0.875rem; color: #334155; line-height: 1.6; margin: 0 0 14px; }
+    .cust-process a, .cust-contact a { color: #1A2E6E; font-weight: 700; }
+    .cust-ideal-label { font-size: 0.6875rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #9A7B2E; margin-bottom: 8px; }
+    .cust-chips { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+    .cust-chips span { font-size: 11px; font-weight: 600; color: #334155; background: #fff; border: 1px solid #E2E8F0; border-radius: 7px; padding: 5px 10px; }
+    .cust-contact { font-size: 0.8125rem; color: #475569; margin: 0; }
+    .terms-or { display: flex; align-items: center; gap: 12px; margin: 14px 0; color: #94A3B8; font-size: 0.8125rem; }
+    .terms-or::before, .terms-or::after { content: ''; flex: 1; height: 1px; background: #E2E8F0; }
+    .btn-terms { width: 100%; padding: 13px; border-radius: 10px; border: 1.5px solid #1A2E6E; background: #fff; color: #1A2E6E; font-size: 0.9375rem; font-weight: 700; cursor: pointer; transition: background .15s ease; }
+    .btn-terms:hover { background: #F0F4FF; }
+    .terms-cta-note { font-size: 0.75rem; color: #64748B; line-height: 1.5; margin: 8px 2px 0; }
+    .terms-modal { position: fixed; inset: 0; z-index: 1000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .terms-modal-backdrop { position: absolute; inset: 0; background: rgba(15,23,42,.55); }
+    .terms-modal-card { position: relative; background: #fff; border-radius: 16px; max-width: 480px; width: 100%; max-height: 90vh; overflow: auto; padding: 30px 28px; box-shadow: 0 24px 64px rgba(0,0,0,.3); }
+    .terms-modal-close { position: absolute; top: 12px; right: 16px; background: none; border: none; font-size: 28px; line-height: 1; color: #94A3B8; cursor: pointer; }
+    .terms-modal-title { font-size: 1.375rem; font-weight: 800; color: #0F172A; margin: 0 0 8px; }
+    .terms-modal-sub { font-size: 0.875rem; color: #475569; line-height: 1.6; margin: 0 0 20px; }
+    .terms-field { margin-bottom: 14px; }
+    .terms-field label { display: block; font-size: 0.8125rem; font-weight: 700; color: #334155; margin-bottom: 5px; }
+    .terms-field label span { color: #DC2626; }
+    .terms-field input, .terms-field textarea { width: 100%; box-sizing: border-box; padding: 10px 12px; border: 1px solid #CBD5E1; border-radius: 8px; font-size: 0.9375rem; font-family: inherit; }
+    .terms-field input:focus, .terms-field textarea:focus { outline: none; border-color: #1A2E6E; }
+    .terms-radios { display: flex; flex-direction: column; gap: 7px; }
+    .terms-radios label { font-weight: 500; font-size: 0.875rem; color: #334155; display: flex; align-items: center; gap: 8px; }
+    .terms-error { background: #FEF2F2; color: #B91C1C; font-size: 0.8125rem; padding: 10px 12px; border-radius: 8px; margin-bottom: 12px; }
+    .btn-terms-submit { width: 100%; padding: 13px; border: none; border-radius: 10px; background: #1A2E6E; color: #fff; font-size: 0.9375rem; font-weight: 700; cursor: pointer; }
+    .btn-terms-submit:hover { background: #16265C; }
+    .btn-terms-submit:disabled { opacity: .6; cursor: default; }
+    .terms-fineprint { font-size: 0.6875rem; color: #94A3B8; line-height: 1.5; margin: 12px 0 0; text-align: center; }
+    .terms-success { text-align: center; padding: 20px 0; }
+    .terms-success-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(46,158,107,.12); color: #2E9E6B; font-size: 30px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+    .terms-success h2 { font-size: 1.25rem; font-weight: 800; color: #0F172A; margin: 0 0 10px; }
+    .terms-success p { font-size: 0.9375rem; color: #475569; line-height: 1.6; margin: 0 0 20px; }
+
+    /* ── Availability states: coming-soon / sold-out ── */
+    .availability-block { margin: 4px 0 20px; }
+    .avail-banner { border-radius: 12px; padding: 18px 20px; border: 1px solid; }
+    .avail-banner.avail-coming_soon { background: rgba(200,168,75,.10); border-color: rgba(200,168,75,.35); }
+    .avail-banner.avail-sold_out { background: #F1F5F9; border-color: #E2E8F0; }
+    .avail-eyebrow { font-size: 0.6875rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+    .avail-banner.avail-coming_soon .avail-eyebrow { color: #9A7B2E; }
+    .avail-banner.avail-sold_out .avail-eyebrow { color: #64748B; }
+    .avail-title { font-size: 1.125rem; font-weight: 800; color: #0F172A; margin-bottom: 6px; }
+    .avail-sub { font-size: 0.9375rem; color: #475569; line-height: 1.55; margin-bottom: 14px; }
     .img-nav-btns {
       position: absolute; bottom: 20px; right: 20px;
       display: flex; gap: 8px;
@@ -217,6 +296,19 @@
       font-size: 0.9375rem; color: var(--text-muted);
     }
     .qty-subtotal strong { color: var(--text-primary); }
+    /* ── Corporate volume pricing (quantity-break products) ── */
+    .volume-table { width: 100%; border-collapse: collapse; border: 1px solid #E5E7EB; border-radius: 10px; overflow: hidden; }
+    .volume-table td { padding: 11px 14px; font-size: 0.9375rem; border-bottom: 1px solid #F1F2F4; }
+    .volume-table tr:last-child td { border-bottom: none; }
+    .volume-table .vt-qty { color: var(--text-primary); font-weight: 600; }
+    .volume-table .vt-price { text-align: right; font-weight: 800; color: var(--text-primary); white-space: nowrap; }
+    .volume-table tr.vt-active { background: #1A2E6E; }
+    .volume-table tr.vt-active td { color: #ffffff; }
+    .volume-branding-note { margin-top: 10px; font-size: 0.8125rem; color: var(--text-muted); }
+    .qty-unitprice { display: block; font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 3px; }
+    .qty-unitprice strong { color: var(--text-primary); font-weight: 800; }
+    .ideal-for { font-size: 0.8125rem; color: var(--text-muted); margin: -2px 0 18px; line-height: 1.55; }
+    .ideal-for strong { color: var(--text-primary); font-weight: 600; }
 
     /* ── EXPRESS CHECKOUT ── */
     .express-checkout-section { margin-bottom: 16px; }
@@ -345,17 +437,83 @@
     .related-section { background: #F8F8F8; padding: 64px 0; border-top: 1px solid #E5E5E5; }
     .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 32px; }
     .related-card {
-      background: #fff; border-radius: 12px; overflow: hidden;
-      cursor: pointer; transition: all 0.22s ease;
-      text-decoration: none; color: inherit;
+      background: #fff; border: 1px solid #ECEFF3; border-radius: 12px; overflow: hidden;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      display: flex; flex-direction: column;
     }
     .related-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.10); }
+    .related-card-link { text-decoration: none; color: inherit; display: block; }
     .related-card-img { aspect-ratio: 1; background: #F5F5F5; overflow: hidden; }
     .related-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .related-card-body { padding: 16px; }
+    /* Safe Service Miles green interior border on related-product cards (program distinction). */
+    .related-card[data-product-type="safe-miles"] .related-card-img { box-shadow: inset 0 0 0 4px #059669; }
+    .related-card[data-product-type="safe-miles"]:hover .related-card-img { box-shadow: inset 0 0 0 4px #059669, 0 0 0 3px rgba(5,150,105,0.18); }
+    .related-card-body { padding: 16px 16px 8px; }
     .related-card-cat { font-size: 0.6875rem; color: var(--text-muted); margin-bottom: 4px; }
     .related-card-name { font-size: 0.9375rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
     .related-card-price { font-size: 0.9375rem; font-weight: 600; color: var(--text-primary); }
+    .related-card-actions { margin-top: auto; padding: 0 16px 16px; display: flex; gap: 10px; align-items: center; }
+    .related-add-btn {
+      flex: 1; appearance: none; border: 0; cursor: pointer;
+      background: #1A2E6E; color: #fff; font-weight: 700; font-size: 0.8125rem;
+      padding: 10px 12px; border-radius: 8px; transition: background .18s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .related-add-btn:hover { background: #16245a; }
+    .related-add-btn.qadded { background: #16a34a; }
+    .related-details-link { font-size: 0.8125rem; font-weight: 600; color: var(--text-muted); text-decoration: none; white-space: nowrap; }
+    .related-details-link:hover { color: var(--text-primary); }
+
+    /* Featured mile-pack pairing card inside the story add-on (Pair it with a DAS Mile Pack) */
+    .story-mp-card { display: flex; gap: 16px; align-items: center; background: #fff; border: 1px solid #E2E8F0; border-radius: 12px; padding: 14px; margin-top: 16px; }
+    .story-mp-imglink { flex: 0 0 auto; width: 104px; height: 104px; border-radius: 10px; overflow: hidden; background: #F1F5F9; display: block; }
+    .story-mp-imglink img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .story-mp-info { flex: 1; min-width: 0; }
+    .story-mp-tier { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: #2E9E6B; margin-bottom: 2px; }
+    .story-mp-name { display: block; font-size: 1.0625rem; font-weight: 800; color: var(--text-primary); text-decoration: none; margin-bottom: 2px; line-height: 1.2; }
+    .story-mp-name:hover { color: #1A2E6E; }
+    .story-mp-price { font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 10px; }
+    .story-mp-add { appearance: none; border: 0; cursor: pointer; background: #1A2E6E; color: #fff; font-weight: 700; font-size: 0.8125rem; padding: 9px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 6px; transition: background .18s ease; }
+    .story-mp-add:hover { background: #16245a; }
+    .story-mp-add.qadded { background: #16a34a; }
+    @media (max-width: 480px) { .story-mp-card { flex-direction: column; align-items: stretch; } .story-mp-imglink { width: 100%; height: 170px; } }
+
+    /* PRODUCT STORY — narrative section beneath the product image (left/center column) */
+    .product-story { margin: 44px auto 0; max-width: 880px; }
+    .product-story-divider { height: 1px; background: #E5E7EB; margin: 0 0 28px; }
+    .product-story h2 { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 0 0 16px; line-height: 1.18; }
+    .product-story h3 { font-size: 1.125rem; font-weight: 800; letter-spacing: -0.01em; color: #1A2E6E; margin: 0 0 10px; }
+    .product-story p { font-size: 1rem; line-height: 1.75; color: var(--text-secondary); margin: 0 0 16px; }
+    .product-story-addon { background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 14px; padding: 24px 26px; margin: 28px 0 0; }
+    .product-story-addon p:last-child { margin-bottom: 0; }
+    .story-addon-link { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; color: #1A2E6E; text-decoration: none; margin-top: 12px; }
+    .story-addon-link:hover { text-decoration: underline; }
+    .product-story-closing { font-size: 1.0625rem; font-weight: 700; color: var(--text-primary); line-height: 1.6; margin: 24px 0 0; padding-top: 20px; border-top: 1px solid #E5E7EB; }
+    .product-story .story-section-h { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.015em; color: var(--text-primary); margin: 30px 0 14px; }
+    .product-story .story-bullets { margin: 4px 0 14px; padding-left: 0; list-style: none; display: grid; gap: 8px; }
+    .product-story .story-bullets li { position: relative; padding-left: 24px; color: #1F2937; line-height: 1.5; }
+    .product-story .story-bullets li::before { content: ""; position: absolute; left: 6px; top: 9px; width: 6px; height: 6px; border-radius: 50%; background: #2E9E6B; }
+    .story-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 0 0 8px; }
+    .story-feature { display: flex; gap: 10px; align-items: flex-start; background: #F8FAFC; border: 1px solid #EEF1F6; border-radius: 10px; padding: 12px 14px; }
+    .story-feature svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 1px; }
+    .story-feature span { font-size: 0.9375rem; color: #1F2937; font-weight: 600; line-height: 1.4; }
+    @media (max-width: 560px) { .story-features { grid-template-columns: 1fr; } }
+
+    /* INTERACTIVE KIT COMPONENT EXPLORER */
+    .component-explorer { margin: 40px auto 0; max-width: 880px; background: #F8FAFC; border: 1px solid #E2E8F0; border-radius: 16px; padding: 28px 30px; }
+    .component-explorer .ce-eyebrow { font-size: 0.6875rem; text-transform: uppercase; letter-spacing: .1em; font-weight: 800; color: #2E9E6B; margin-bottom: 6px; }
+    .component-explorer .ce-name { font-size: clamp(1.375rem, 2.4vw, 1.75rem); font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary); margin: 0 0 14px; line-height: 1.2; }
+    .component-explorer p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin: 0 0 14px; }
+    .component-explorer .ce-sub { font-size: 0.8125rem; text-transform: uppercase; letter-spacing: .06em; font-weight: 800; color: #1A2E6E; margin: 20px 0 8px; }
+    .component-explorer .ce-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 6px; }
+    .component-explorer .ce-list li { font-size: 0.9375rem; color: #1F2937; line-height: 1.5; }
+    /* Component thumbnails get a subtle ring so they read as explorable items */
+    .thumb-item.thumb-component { position: relative; }
+    .thumb-item.thumb-component::after { content: ''; position: absolute; inset: 0; border-radius: 8px; box-shadow: inset 0 0 0 1.5px rgba(26,46,110,.18); pointer-events: none; }
+    .thumb-item.thumb-component.active::after { box-shadow: inset 0 0 0 2px var(--text-primary); }
+    @media (max-width: 560px) { .component-explorer { padding: 22px 20px; } }
+    /* The story now lives full-width BELOW the grid (not a grid child), so the grid is
+       the original clean 3-column layout and the sticky photo never overlaps the story. */
 
     /* RESPONSIVE */
     @media (max-width: 1100px) {
@@ -366,13 +524,14 @@
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto;
       }
+      .product-story { margin-top: 28px; }
       .thumb-rail {
         flex-direction: row; position: static;
         overflow-x: auto; gap: 8px; padding-bottom: 4px;
         order: 2;
       }
       .thumb-item { flex-shrink: 0; }
-      .main-image-area { position: static; aspect-ratio: 4/3; order: 1; }
+      .main-image-area { position: relative; aspect-ratio: 4/3; order: 1; top: 0; }
       .product-info-panel { order: 3; }
       .related-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -528,7 +687,7 @@
         <a href="index.html"  class="nav-link">Home</a>
         <a href="shop.html"   class="nav-link active">Shop</a>
         <a href="about.html"  class="nav-link">About</a>
-        <a href="ideas.html"  class="nav-link">Ideas</a>
+        <a href="ideas.html"  class="nav-link">Insights &amp; Ideas</a>
         <a href="publications.html" class="nav-link">Newsletter</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
@@ -561,7 +720,7 @@
   <a href="index.html"  class="mobile-nav-link">Home</a>
   <a href="shop.html"   class="mobile-nav-link active">Shop</a>
   <a href="about.html"  class="mobile-nav-link">About</a>
-  <a href="ideas.html"  class="mobile-nav-link">Ideas</a>
+  <a href="ideas.html"  class="mobile-nav-link">Insights &amp; Ideas</a>
   <a href="contact.html" class="mobile-nav-link">Contact</a>
   <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
@@ -576,6 +735,8 @@
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
       <a href="shop.html">Shop</a>
       <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
+      <a href="shop.html" id="breadcrumb-cat" style="display:none">Category</a>
+      <svg id="breadcrumb-cat-sep" style="display:none" xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg>
       <span id="breadcrumb-name">Product</span>
     </nav>
 
@@ -586,8 +747,8 @@
       <div class="thumb-rail" id="thumb-rail"></div>
 
       <!-- Main Image -->
-      <div class="main-image-area" id="main-image-area" style="position:relative">
-        <img id="main-product-img" src="" alt="" style="width:100%;height:100%;object-fit:cover;display:block">
+      <div class="main-image-area" id="main-image-area">
+        <img id="main-product-img" src="" alt="">
         <div class="img-nav-btns">
           <button type="button" class="img-nav-btn" id="img-prev" aria-label="Previous image">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
@@ -605,9 +766,10 @@
         <div class="product-info-category" id="pi-category"></div>
         <h1 class="product-info-name" id="pi-name"></h1>
         <div class="product-info-price" id="pi-price"></div>
+        <div class="ideal-for" id="pi-idealfor" style="display:none"></div>
 
-        <!-- Kit Tier Selector -->
-        <div style="margin-bottom:24px">
+        <!-- Kit Tier Selector (tier-priced products) -->
+        <div style="margin-bottom:24px" id="tier-block">
           <div class="section-label">Select Kit Tier</div>
           <div class="tier-selector">
             <button type="button" class="tier-btn active" data-tier="standard" data-mult="1.0">
@@ -628,11 +790,30 @@
           </div>
         </div>
 
+        <!-- Corporate Volume Pricing (volume-priced products only) -->
+        <div id="volume-block" style="display:none;margin-bottom:24px">
+          <div class="section-label">Corporate Volume Pricing</div>
+          <table class="volume-table"><tbody id="volume-rows"></tbody></table>
+          <p class="volume-branding-note">Custom branding available for qualifying corporate orders.</p>
+        </div>
+
+        <!-- Availability state (coming-soon / sold-out) — shown via JS; hides the purchase controls -->
+        <div id="availability-block" class="availability-block" style="display:none"></div>
+
+        <!-- Milestone selector (milestone-select kits only) — populated via JS -->
+        <div id="milestone-select-block" class="milestone-select-block" style="display:none">
+          <div class="section-label">Milestone Level
+            <span class="section-label-muted">— select the achievement being recognized</span>
+          </div>
+          <select id="pdp-milestone-select" class="milestone-select" aria-label="Milestone level"></select>
+          <p class="milestone-disclaimer">Images shown are representative. Final award components will be customized to the selected milestone level.</p>
+        </div>
+
         <!-- Quantity -->
         <div class="qty-section">
           <div class="section-label">
             Quantity
-            <span class="section-label-muted">(min. 10 units)</span>
+            <span class="section-label-muted" id="qty-min-label">(min. 10 units)</span>
           </div>
           <div class="qty-row">
             <div class="qty-stepper">
@@ -641,6 +822,7 @@
               <button type="button" class="qty-step-btn" id="qty-up" aria-label="Increase">+</button>
             </div>
             <div class="qty-subtotal">
+              <span class="qty-unitprice" id="qty-unitprice" style="display:none"></span>
               Subtotal: <strong id="qty-subtotal-val">—</strong>
             </div>
           </div>
@@ -664,6 +846,15 @@
           </div>
         </div>
 
+        <!-- das-006: what's included in the price (shown via JS when product.includesShipping) -->
+        <div id="das-value-block" class="das-value-block" style="display:none">
+          <div class="dvb-title">Included in this price</div>
+          <ul class="dvb-list" id="dvb-list"></ul>
+        </div>
+
+        <!-- Customization-coordinated products (e.g. Welcome Kit) — process + use cases + contact (shown via JS) -->
+        <div id="customization-block" class="das-value-block" style="display:none"></div>
+
         <!-- Primary CTAs -->
         <button type="button" class="btn-add-cart" id="btn-add-to-cart">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
@@ -674,6 +865,22 @@
           Save for Later
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" style="width:20px;height:20px"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>
         </button>
+
+        <!-- Corporate purchasing pathway — secondary, never competes with Add to Cart. -->
+        <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--gold-border);text-align:center">
+          <p style="font-size:0.8125rem;color:var(--text-secondary);margin:0 0 9px">Need invoice billing, purchase order support, or company terms?</p>
+          <a id="buy-for-company-link" href="company-purchasing.html" style="display:inline-flex;align-items:center;gap:7px;font-size:0.875rem;font-weight:700;color:#1A2E6E;text-decoration:none;border:1px solid var(--gold-border);border-radius:8px;padding:9px 16px">
+            Buy for My Company
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:14px;height:14px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+        </div>
+
+        <!-- das-006: Net-30 terms application (shown via JS when product.termsAvailable) -->
+        <div id="das-terms-cta" style="display:none">
+          <div class="terms-or"><span>or</span></div>
+          <button type="button" class="btn-terms" id="btn-apply-terms">Apply for 30-day terms (subject to approval)</button>
+          <p class="terms-cta-note">Prefer to be invoiced instead of paying by card? Apply for Net-30 billing — reviewed and approved by a DAS representative. No payment is collected now.</p>
+        </div>
 
         <!-- Shipping / Trust -->
         <div class="shipping-block">
@@ -729,39 +936,11 @@
 
         <div class="accordion-item">
           <button type="button" class="accordion-trigger" id="acc-reviews" aria-expanded="false">
-            <span id="acc-reviews-label">Reviews (47) ★★★★½</span>
+            <span id="acc-reviews-label">Reviews</span>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
           </button>
-          <div class="accordion-content" id="acc-reviews-content">
-            <div class="review-stars">
-              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star half">★</span>
-              <span style="font-size:0.9375rem;color:var(--text-muted);margin-left:6px">4.6 out of 5 (47 reviews)</span>
-            </div>
-            <div class="review-card">
-              <div class="review-header">
-                <span class="reviewer-name">Marcus T. — Fleet Manager, 120 drivers</span>
-                <span class="review-date">March 2026</span>
-              </div>
-              <div style="color:#1A2E6E;font-size:0.875rem;margin-bottom:6px">★★★★★</div>
-              <div class="review-body">Ordered 120 kits for Driver Appreciation Week. The quality blew me away — every driver said something about theirs. We've had three separate mentions in exit interviews where staying was attributed partly to how they were treated during appreciation events. Worth every dollar.</div>
-            </div>
-            <div class="review-card">
-              <div class="review-header">
-                <span class="reviewer-name">Sarah K. — Director of Operations</span>
-                <span class="review-date">January 2026</span>
-              </div>
-              <div style="color:#1A2E6E;font-size:0.875rem;margin-bottom:6px">★★★★★</div>
-              <div class="review-body">We've done recognition programs before but always felt like we were cobbling things together. This is the first time everything arrived coordinated, on-brand, and professional. Our safety manager told me driver near-miss reporting went up after appreciation week — drivers are more engaged, and it shows in the data.</div>
-            </div>
-            <div class="review-card">
-              <div class="review-header">
-                <span class="reviewer-name">David R. — Owner Operator, 35 trucks</span>
-                <span class="review-date">November 2025</span>
-              </div>
-              <div style="color:#1A2E6E;font-size:0.875rem;margin-bottom:6px">★★★★☆</div>
-              <div class="review-body">Solid product. Shipping was a day later than expected but the team at DAS proactively reached out to let me know. Every driver got theirs before the end of the week. Would order 4 stars only because of the slight delay — product itself is 5 stars.</div>
-            </div>
-          </div>
+          <!-- Populated by renderReviews() from product data — no fabricated reviews. -->
+          <div class="accordion-content" id="acc-reviews-content"></div>
         </div>
 
       </div>
@@ -770,8 +949,82 @@
     </div>
     <!-- end product grid -->
 
+    <!-- INTERACTIVE KIT COMPONENT EXPLORER — full-width below the grid (avoids the sticky-image
+         overlap); shown only after a component thumbnail is selected, hidden for the kit hero. -->
+    <section class="component-explorer" id="component-explorer" style="display:none" aria-label="Kit component detail"></section>
+
+    <!-- PRODUCT STORY — narrative sales content, FULL-WIDTH BELOW the grid so the sticky
+         product photo can never overlap it. The photo stays sticky while you read the buy
+         panel, scrolls away as you reach the story, and reappears when you scroll back up.
+         Data-driven from the product's `story` field (e.g. das-007 Welcome Kit). -->
+    <section class="product-story" id="product-story" style="display:none" aria-label="Product story"></section>
+
   </div>
 </main>
+
+<!-- ════════ 30-DAY TERMS (NET-30) APPLICATION MODAL — submits to /api/contact → info@driverappreciationsolutions.com.
+     FUTURE: a dedicated /api/terms-apply endpoint could write to a Supabase "terms_applications" table
+     + trigger an approval workflow; for now it reuses the contact endpoint (no new serverless function). ════════ -->
+<div id="terms-modal" class="terms-modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="terms-modal-title">
+  <div class="terms-modal-backdrop" id="terms-modal-backdrop"></div>
+  <div class="terms-modal-card">
+    <button type="button" class="terms-modal-close" id="terms-modal-close" aria-label="Close">&times;</button>
+    <div id="terms-form-wrap">
+      <h2 id="terms-modal-title" class="terms-modal-title">Apply for 30-Day Terms</h2>
+      <p class="terms-modal-sub">Net-30 billing, <strong>subject to approval</strong>. A DAS representative reviews each application and follows up by email. <strong>No payment is collected now</strong> — you'll be invoiced once approved.</p>
+      <form id="terms-form" novalidate>
+        <div class="terms-field"><label>Company name <span>*</span></label><input name="company" required></div>
+        <div class="terms-field"><label>Contact name <span>*</span></label><input name="contact" required></div>
+        <div class="terms-field"><label>Work email <span>*</span></label><input type="email" name="email" required></div>
+        <div class="terms-field"><label>Phone</label><input name="phone" inputmode="tel"></div>
+        <div class="terms-field"><label>Estimated quantity</label><input name="qty" inputmode="numeric"></div>
+        <div class="terms-field"><label>Delivery preference</label>
+          <div class="terms-radios">
+            <label><input type="radio" name="delivery" value="One hub facility (single address)" checked> One hub facility</label>
+            <label><input type="radio" name="delivery" value="Multiple driver addresses (split shipment)"> Multiple driver addresses</label>
+          </div>
+        </div>
+        <div class="terms-field"><label>Notes</label><textarea name="notes" rows="3" placeholder="Anything else we should know?"></textarea></div>
+        <div class="terms-error" id="terms-error" style="display:none"></div>
+        <button type="submit" class="btn-terms-submit" id="terms-submit">Submit application</button>
+        <p class="terms-fineprint">By submitting, you request Net-30 terms for review. Terms are not guaranteed and are granted only after DAS approval.</p>
+      </form>
+    </div>
+    <div id="terms-success" class="terms-success" style="display:none">
+      <div class="terms-success-icon">&#10003;</div>
+      <h2>Application received</h2>
+      <p>Thank you for the opportunity to earn your business. Your 30-day terms application has been received and a DAS representative will review it and follow up by email. No payment was collected.</p>
+      <button type="button" class="btn-terms-submit" id="terms-success-close">Done</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════════ "NOTIFY ME" MODAL — for coming-soon / sold-out items. Captures email → /api/contact
+     → info@driverappreciationsolutions.com (reply-to = customer), or links to create an account.
+     FUTURE: a /api/notify endpoint could store these in a Supabase "stock_notifications" table
+     (product_id, email) and auto-email when inventory/availability flips. ════════ -->
+<div id="notify-modal" class="terms-modal" style="display:none" role="dialog" aria-modal="true" aria-labelledby="notify-title">
+  <div class="terms-modal-backdrop" id="notify-backdrop"></div>
+  <div class="terms-modal-card">
+    <button type="button" class="terms-modal-close" id="notify-close" aria-label="Close">&times;</button>
+    <div id="notify-form-wrap">
+      <h2 class="terms-modal-title" id="notify-title">Notify me when it's available</h2>
+      <p class="terms-modal-sub" id="notify-sub">We'll email you the moment this item is available to order. No spam.</p>
+      <form id="notify-form" novalidate>
+        <div class="terms-field"><label>Email <span>*</span></label><input type="email" name="email" required placeholder="you@company.com"></div>
+        <div class="terms-error" id="notify-error" style="display:none"></div>
+        <button type="submit" class="btn-terms-submit" id="notify-submit">Notify me</button>
+        <p class="terms-fineprint">Prefer an account? <a href="signup.html">Create one</a> to manage orders and get notified automatically.</p>
+      </form>
+    </div>
+    <div id="notify-success" class="terms-success" style="display:none">
+      <div class="terms-success-icon">&#10003;</div>
+      <h2>You're on the list</h2>
+      <p>Thanks — we'll email you the moment this item is available. Want to do more? <a href="signup.html">Create an account</a>.</p>
+      <button type="button" class="btn-terms-submit" id="notify-success-close">Done</button>
+    </div>
+  </div>
+</div>
 
 <!-- FREQUENTLY BOUGHT TOGETHER (bundle widget) -->
 <section class="fbt-section" style="padding:48px 0 8px;background:#FFFFFF">
@@ -785,7 +1038,7 @@
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
       <span class="section-eyebrow">You May Also Need</span>
-      <a href="shop.html" style="font-size:0.875rem;font-weight:600;color:var(--gold);text-decoration:none">View All →</a>
+      <a href="shop.html" id="related-view-all" style="font-size:0.875rem;font-weight:600;color:var(--gold);text-decoration:none">View All →</a>
     </div>
     <h2 style="font-size:clamp(1.375rem,2.5vw,1.875rem);font-weight:600;letter-spacing:-0.015em;color:var(--text-primary);margin-bottom:0">Complete the Kit.</h2>
     <div class="related-grid" id="related-grid"></div>
@@ -888,9 +1141,11 @@
 
 <script src="js/cart.js"></script>
 <script src="/lib/catalog.js"></script>
+<script src="js/mile-packs.js"></script>
+<script src="js/milestones.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════════
-   PRODUCT DATA — all 5 products
+   PRODUCT DATA — core products + MILE PACKS (merged in below)
 ═══════════════════════════════════════════════════════════════ */
 const PRODUCTS = {
   'das-001': {
@@ -943,61 +1198,9 @@ const PRODUCTS = {
         ],
       },
     },
-    reviews: 47,
-    rating: 4.6,
-    relatedIds: ['das-002', 'das-003', 'das-005'],
-  },
-
-  'das-002': {
-    id: 'das-002',
-    name: 'Safety Recognition Kit',
-    category: 'Appreciation Kits',
-    price: 44.99,
-    minQty: 10,
-    styleId: 'SRK-002-BLK', sku: 'DAS-SRK-001',
-    description: 'Built for fleets that treat safety as a cultural value, not just a compliance requirement. The Safety Recognition Kit rewards clean safety records, near-miss reporting, and exemplary pre-trip behavior with tangible acknowledgment that reinforces the behavior and builds professional identity around safe driving.',
-    images: [
-      'https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900&q=80&fit=crop',
-    ],
-    tiers: {
-      standard: {
-        description: 'Core safety recognition items — designed to acknowledge clean safety records and reinforce safe professional behavior.',
-        included: [
-          'Safety achievement certificate (name + specific milestone)',
-          'Safety recognition lapel pin — tiered by miles (100K/250K/500K/1M)',
-          'Personalized card from direct manager',
-          'Branded safety performance sticker set',
-          'Acknowledgment packaging with safety theme',
-        ],
-      },
-      premium: {
-        description: 'Elevated safety recognition for high performers. Everything in Standard, plus items that visibly mark the driver as safety elite.',
-        included: [
-          'All Standard items',
-          'Premium safety milestone coin (heavy die-cast)',
-          'Hard-bound certificate of excellence',
-          'Fleet-branded high-visibility gear item',
-          'Safety record window display placard (cab display)',
-        ],
-      },
-      enterprise: {
-        description: 'Top-tier safety recognition for the elite drivers — the ones who have earned 1M+ safe miles or multiple years of zero incidents.',
-        included: [
-          'All Premium items',
-          'Custom plaque with driver name and exact safe miles logged',
-          'Video testimonial package from company leadership',
-          'Fleet-wide announcement package (feature in company newsletter/comms)',
-          'Premium branded apparel — safety culture edition',
-          'Insurance recognition letter for driver\'s personal records',
-        ],
-      },
-    },
-    reviews: 31,
-    rating: 4.8,
-    relatedIds: ['das-001', 'das-004', 'das-005'],
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-003', 'das-005'],
   },
 
   'das-003': {
@@ -1050,18 +1253,20 @@ const PRODUCTS = {
         ],
       },
     },
-    reviews: 22,
-    rating: 4.9,
-    relatedIds: ['das-001', 'das-002', 'das-005'],
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-001', 'das-005'],
   },
 
   'das-004': {
     id: 'das-004',
     name: 'Holiday Gift Set',
     category: 'Milestone Gifts',
-    // PRICING NOTE: $54.99 is a placeholder set 2026-05-28 because original $1.00 was a typo. Awaiting Shakir's confirmed price.
-    price: 54.99,
+    price: 1.00,   // TEMP: $1 live-payment test — revert to 54.99
     minQty: 10,
+    // TEMP (testing): seasonal block lifted so das-004 is purchasable for the $1 test.
+    // REVERT — re-add this line (+ `unavailable: true` for das-004 in lib/catalog.js):
+    //   availability: 'coming_soon', availableDate: 'September 21',
     styleId: 'HGS-004-GLD', sku: 'DAS-HGS-001',
     description: 'The year-end recognition moment that drivers talk about longest. The Holiday Gift Set is curated to land during the season when drivers are most reflective about their work relationships — and to send a signal that lasts well into the new year. Particularly effective for OTR drivers whose families see the package at home.',
     images: [
@@ -1104,9 +1309,9 @@ const PRODUCTS = {
         ],
       },
     },
-    reviews: 38,
-    rating: 4.7,
-    relatedIds: ['das-001', 'das-005', 'das-002'],
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-001', 'das-005'],
   },
 
   'das-005': {
@@ -1161,9 +1366,346 @@ const PRODUCTS = {
         ],
       },
     },
-    reviews: 54,
-    rating: 4.9,
-    relatedIds: ['das-001', 'das-002', 'das-004'],
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-001', 'das-004'],
+  },
+  'das-006': {
+    id: 'das-006',
+    name: 'Professional Driver Essentials Kit™',
+    category: 'Driver Appreciation Kits',
+    price: 79.95,                 // retail per-kit baseline; volumeTiers drive actual pricing
+    minQty: 1,
+    pricingModel: 'volume',
+    volumeTiers: [
+      { min: 1,   max: 24,   price: 79.95 },
+      { min: 25,  max: 99,   price: 74.95 },
+      { min: 100, max: 249,  price: 69.95 },
+      { min: 250, max: null, price: 64.95 },
+    ],
+    idealFor: ['Driver Appreciation Week', 'Safety Week', 'New Hire Welcome Kits', 'Driver Recognition Programs'],
+    styleId: 'PDE-006-PRO', sku: 'DAS-PDE-001',
+    description: 'A premium driver recognition, safety, onboarding, and appreciation kit — built around the tools a professional driver actually uses. Each kit pairs a tire pressure gauge and tire tread depth gauge with a branded keychain, a custom insert, and premium branded presentation packaging. Add optional fleet/company branding and every kit becomes a daily reminder that your operation invests in the people behind the wheel.',
+    included: [
+      'Tire pressure gauge',
+      'Tire tread depth gauge',
+      'Branded keychain',
+      'Custom insert (driver name or company message)',
+      'Branded presentation packaging',
+      'Optional fleet / company branding',
+    ],
+    images: [
+      '/images/pde-kit-01.jpg',
+      '/images/pde-kit-02.jpg',
+      '/images/pde-kit-03.jpg',
+    ],
+    fitContain: true,   // landscape product photos — show full image, never crop
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-003', 'das-001'],
+    // ── das-006 commercial terms (drive the PDP "included" callout + Net-30 + delivery UI) ──
+    includesShipping: true,        // shipping is included in the price (checkout charges $0 shipping — see lib/catalog.js shippingIncluded)
+    includesCustomization: true,   // fleet/company branding included at this price
+    flexibleDelivery: true,        // ship to one hub OR multiple individual driver addresses
+    termsAvailable: true,          // offer "Apply for 30-day terms (subject to approval)" → emails info@
+  },
+
+  'das-007': {
+    id: 'das-007',
+    name: 'Welcome Driver Appreciation Kit',
+    category: 'Driver Appreciation Kits',
+    price: 97.00,
+    // minQty stays 1 client-side so the stepper never blocks a legitimate
+    // per-hire reorder. The 10-unit FIRST-ORDER minimum is enforced server-side
+    // (api/create-checkout.js + lib/catalog.js perHire). perHire drives the UX note.
+    minQty: 1,
+    perHire: true,
+    pricingModel: 'single',
+    singleBadge: 'Welcome Kit · Custom-branded',
+    unitNoun: 'kit',
+    ctaLabel: 'Order Welcome Kits',
+    styleId: 'WDA-007', sku: 'DAS-WDA-001',
+    description: 'Welcome new drivers with a premium branded appreciation kit designed to make them feel valued from day one. Each kit can be customized with your company logo, colors, and messaging through direct coordination with a DAS representative.',
+    included: [
+      'Custom coffee travel mug',
+      'Custom t-shirt',
+      'Custom bag',
+      'Custom welcome pamphlet',
+      'Custom hat',
+    ],
+    // Kit hero + lifestyle gallery (custom-branded tee on a driver + Driver Appreciation Week event).
+    images: ['/images/welcome-driver-kit-v2.png', '/images/wk-driver-lifestyle.jpg', '/images/wk-group-lifestyle.jpg'],
+    // Customization is coordinated AFTER purchase (no embedded builder) — drives the PDP customization block.
+    customization: {
+      process: 'After your order is received, a DAS representative will contact you by email or phone to collect your company logo, brand colors, preferred messaging, and customization details. You may also email your artwork and customization requests directly to info@driverappreciationsolutions.com.',
+      idealFor: ['New driver onboarding', 'Orientation classes', 'Terminal welcome programs', 'Recruiting & retention programs'],
+      email: 'info@driverappreciationsolutions.com',
+    },
+    // Narrative sales content rendered beneath the product image (renderStory). Data-driven so it stays editable.
+    story: {
+      heading: 'Because First Impressions Matter.',
+      paragraphs: [
+        'You have already invested in bringing a new driver through the door — transportation to orientation, hotel accommodations, onboarding materials, safety training, recruiting time, and operational resources.',
+        'The Welcome Driver Appreciation Kit helps turn that investment into an immediate sense of belonging.',
+        'Imagine your new driver arriving during orientation and receiving a custom-branded kit featuring your company logo, colors, and welcome message. From week one, they feel seen, valued, and part of the team.',
+        'Each kit includes a custom coffee travel mug, t-shirt, bag, welcome pamphlet, and hat — all coordinated to reflect your company culture.',
+      ],
+      addon: {
+        heading: 'Pair it with a DAS Mile Pack.',
+        paragraphs: [
+          'Complete the welcome experience with a DAS Mile Pack filled with snacks your new driver can enjoy in their hotel room, during breaks, or after a long day of onboarding and safety training.',
+          'Small gestures create lasting impressions. Help every new driver feel like they belong before they ever take their first load.',
+        ],
+        featuredId: 'mp-05',   // The Long Haul Snack Pack — rendered as a preview card with add-to-order
+        linkHref: 'shop.html?category=milepacks',
+        linkText: 'Browse all DAS Mile Packs',
+      },
+      closing: 'Welcome them well. Recognize them early. Build loyalty from day one.',
+    },
+    // ── Interactive Kit Component Explorer ── reusable model: add/remove components here.
+    // Each: { order, active, name, image, paragraphs[], benefits[]?, specs[]? }. Thumbnails +
+    // the detail panel are generated automatically (renderComponentPanel / gallery wiring).
+    components: [
+      {
+        order: 1, active: true,
+        name: 'Premium Driver Travel Mug™',
+        image: '/images/wk-comp-mug.jpg',
+        paragraphs: [
+          'Long days, early mornings, and miles of highway ahead demand a beverage companion that works as hard as your drivers do. The Premium Driver Travel Mug™ is designed specifically for life on the road — keeping coffee hot during pre-trip inspections, a cold drink cold through long summer routes, and your drivers refreshed throughout the workday.',
+          'Constructed from durable stainless steel and customized with your company logo, it’s more than drinkware — it’s a daily reminder that your organization values the professionals behind the wheel.',
+          'Designed to fit most commercial truck and passenger-vehicle cup holders, it’s ideal for orientation gifts, Driver Appreciation Week, milestone recognition, safety awards, and recruiting. A hot coffee before sunrise, an energy drink at a fuel stop, or ice-cold water through a long shift — it’s a gift drivers use day after day, year after year.',
+        ],
+        benefits: [
+          'Customized with your company logo',
+          'Premium stainless steel construction',
+          'Keeps hot beverages hot up to 6 hours',
+          'Keeps cold beverages cold up to 8 hours',
+          'Fits most vehicle & commercial truck cup holders',
+          'Spill-resistant lid design',
+          'Built for daily use on and off the road',
+        ],
+        specs: [
+          '25 oz (739 ml) — 7.9"H · 3.3" top · 2.7" base · press-in spill-resistant lid',
+          '40 oz (1183 ml) — 10.4"H · 3.9" top · 2.9" base · screw-on lid + reusable straw',
+          'Stainless steel · BPA-free & lead-free · hand wash recommended',
+        ],
+      },
+      {
+        order: 2, active: true,
+        name: 'Custom Company-Branded Driver T-Shirt™',
+        image: '/images/wk-comp-shirt.png',
+        paragraphs: [
+          'A great company culture starts with pride, and few items create that sense of belonging better than a professionally branded company shirt. Whether presented during orientation, Driver Appreciation Week, a milestone celebration, a safety recognition event, or a company gathering, this premium custom t-shirt helps drivers feel connected to the organization they represent.',
+          'Each shirt is customized with your company’s logo, colors, and preferred branding for a professional appearance both on and off the job. Drivers can wear it at orientation, company events, training, community outreach, or on their personal time — extending the visibility of your brand while reinforcing employee pride.',
+          'More than apparel, it’s a lasting reminder that your organization recognizes and appreciates the individuals who keep your operation moving. Sizes are collected after purchase by a DAS representative so you can provide the exact quantity and size breakdown your drivers need.',
+        ],
+        benefits: [
+          'New driver orientation',
+          'Driver Appreciation Week',
+          'Safety recognition programs',
+          'Milestone awards',
+          'Recruiting events & company celebrations',
+          'Retention initiatives',
+        ],
+        specs: [
+          'Customized: logo placement, brand colors, shirt color, front & back artwork, custom messaging',
+          'Sizes (collected after purchase): S · M · L · XL · 2XL · 3XL · 4XL · 5XL (availability may vary)',
+        ],
+      },
+      {
+        order: 3, active: true,
+        name: 'Custom Company-Branded Hat™',
+        image: '/images/wk-comp-hat.jpg',
+        paragraphs: [
+          'A clean, professional cap your drivers will reach for every day — on the road, at the terminal, and off the clock. Customized with your company logo, it turns everyday wear into lasting brand visibility and a simple, genuine signal that your drivers are valued.',
+          'Structured for a premium look and built for daily use, it pairs naturally with the rest of the welcome kit at orientation, Driver Appreciation Week, safety milestones, and recruiting events.',
+        ],
+        benefits: [
+          'Customized with your company logo',
+          'Premium, professional appearance',
+          'Comfortable for all-day, on- and off-duty wear',
+          'Great for orientation, appreciation week & recruiting',
+        ],
+      },
+    ],
+    reviews: 0, rating: 0,
+    relatedIds: ['das-003', 'das-001'],
+  },
+
+  'das-008': {
+    id: 'das-008',
+    name: 'Driver Road Warrior Backpack™',
+    category: 'Driver Appreciation Kits',
+    price: 85.99,
+    minQty: 10,
+    moqNote: 'Custom backpack orders begin at 10 units.',
+    pricingModel: 'single',
+    singleBadge: 'Premium Gift · Custom-logo',
+    unitNoun: 'backpack',
+    ctaLabel: 'Order Backpacks',
+    styleId: 'RWB-008', sku: 'DAS-RWB-001',
+    metaTitle: 'Driver Road Warrior Backpack™ | Driver Appreciation Solutions',
+    metaDescription: 'A premium custom-logo backpack designed for professional truck drivers. The perfect Driver Appreciation Week, onboarding, retention, and recognition gift.',
+    description: 'Built for the Road. Appreciated for Years. The Driver Road Warrior Backpack™ is a premium driver appreciation gift designed specifically for professional drivers. Unlike consumable gifts that are quickly forgotten, this is a practical, everyday-use item that becomes part of a driver’s lifestyle both on and off duty — a premium Driver Appreciation Week, safety incentive, milestone, onboarding, or retention gift.',
+    included: [
+      'Premium Driver Road Warrior Backpack™',
+      'Custom company-logo branding (coordinated after purchase)',
+      'Spacious multi-compartment interior — tablet, documents & personal items',
+      'Durable construction built for daily, long-haul use',
+      'Branded, presentation-ready packaging',
+    ],
+    // Real product photography — clean studio hero + lifestyle (in-cab, event) shots.
+    images: ['/images/rwb-hero.png', '/images/rwb-cab.png', '/images/rwb-angle.png', '/images/rwb-event.png'],
+    fitContain: true,   // mixed portrait/landscape shots → show each in full (no crop) on the PDP hero
+    // Customization (company logo) coordinated AFTER purchase — drives the PDP customization block.
+    customization: {
+      process: 'After your order is received, a DAS representative will contact you by email or phone to collect your company logo and customization details. You may also email your artwork and customization requests directly to info@driverappreciationsolutions.com.',
+      idealFor: ['Driver Appreciation Week', 'Safety incentive gift', 'Milestone recognition', 'New-hire & onboarding', 'Retention gift'],
+      email: 'info@driverappreciationsolutions.com',
+    },
+    // Hero marketing story rendered beneath the product images (renderStory). Data-driven.
+    story: {
+      heading: 'A Gift They’ll Use Long After Driver Appreciation Week',
+      paragraphs: [
+        'Every year, companies invest thousands of dollars recognizing the professional drivers who keep their operation moving. The Driver Road Warrior Backpack™ is designed to be more than a one-day gift.',
+        'Built for the realities of life on the road, this premium backpack provides drivers with a durable and professional way to carry everyday essentials, paperwork, electronics, personal belongings, travel items, and overnight necessities.',
+        'Whether it’s used during orientation, on regional routes, over-the-road trips, hotel stays, family travel, or daily commuting, this backpack quickly becomes a trusted companion.',
+        'Unlike gifts that are consumed, stored away, or forgotten, the Driver Road Warrior Backpack™ delivers value every day it is used.',
+        'A driver may enjoy this backpack for years after receiving it, creating thousands of positive interactions with your company’s appreciation investment.',
+        'When a driver uses this backpack at truck stops, terminals, hotels, airports, training events, and family outings, your company’s recognition continues to make an impression long after Driver Appreciation Week has ended.',
+      ],
+      featuresTitle: 'Why fleets choose it',
+      features: [
+        'Customized with Your Company Logo',
+        'Premium Professional Appearance',
+        'Spacious Multi-Compartment Design',
+        'Ideal for Tablets, Documents & Personal Items',
+        'Durable Construction Built for Daily Use',
+        'Comfortable for Long-Haul Travel',
+        'Excellent Driver Appreciation Week Gift',
+        'Outstanding New Hire & Orientation Gift',
+        'Long-Term Recognition Value',
+      ],
+      customSection: {
+        title: 'Customized for Your Fleet',
+        paragraphs: [
+          'Each Driver Road Warrior Backpack™ can be customized with your company logo to create a meaningful and professional recognition gift that reinforces pride, culture, and appreciation throughout your organization.',
+          'Customization details will be coordinated directly with a DAS representative after purchase.',
+        ],
+      },
+      addon: {
+        heading: 'Complete the Experience',
+        paragraphs: [
+          'Pair the Driver Road Warrior Backpack™ with a DAS Mile Pack to create a complete appreciation experience. Drivers can enjoy premium snacks and essentials during orientation, training, hotel stays, and while on the road.',
+        ],
+        featuredId: 'mp-05',
+        linkHref: 'shop.html?category=milepacks',
+        linkText: 'Browse all DAS Mile Packs',
+      },
+    },
+    reviews: 0, rating: 0,
+    relatedIds: ['mp-05', 'mp-02', 'mp-04'],
+  },
+
+  'das-009': {
+    id: 'das-009',
+    name: 'Professional Travel Kit',
+    category: 'Driver Appreciation Kits',
+    price: 77.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Driver Wellness · Custom-logo',
+    unitNoun: 'kit',
+    ctaLabel: 'Order Travel Kits',
+    styleId: 'PTK-009', sku: 'DAS-PTK-001',
+    metaTitle: 'Professional Travel Kit | Driver Appreciation Solutions',
+    metaDescription: 'A custom-logo Professional Travel Kit for drivers — a durable travel bag plus self-care essentials. The perfect driver wellness, onboarding, and appreciation gift.',
+    description: 'A practical, daily-use appreciation gift designed to support drivers on the road. Complete with a customized travel bag and essential self-care items, this kit helps drivers stay refreshed, organized, and ready for the miles ahead.',
+    included: [
+      'Professional Travel Kit Bag — customized with your company logo',
+      'Sasquatch Soap (fragrance may vary based on availability)',
+      'Q-Tips',
+      'Loofah',
+      'Dude Wipes',
+    ],
+    images: ['/images/travel-kit-hero-v2.jpg', '/images/travel-kit-truckcab.jpg', '/images/professional-travel-kit-hero.png'],
+    imageAlt: 'Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers',
+    imageAlts: [
+      'Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers',
+      'Professional Travel Kit displayed inside a truck cab at a truck stop, showcasing organizational capacity and storage possibilities for professional drivers.',
+      'Professional Travel Kit open on a truck dashboard at a truck stop, fully stocked with travel essentials',
+    ],
+    fitContain: true,   // landscape hero graphic → show in full; component photos use the explorer below
+    customization: {
+      process: 'After your order is received, a DAS representative will contact you to collect your company logo, brand colors, preferred messaging, and customization requirements. You may also email your artwork and customization requests directly to info@driverappreciationsolutions.com.',
+      idealFor: ['Driver Appreciation Week', 'New driver orientation', 'Recruiting events', 'Safety recognition', 'Driver retention', 'Milestone recognition', 'Holiday appreciation'],
+      email: 'info@driverappreciationsolutions.com',
+    },
+    story: {
+      heading: 'Self-Care That Travels Every Mile',
+      paragraphs: [
+        'For over-the-road drivers, the truck is their workplace — but the shower stop is often the one place during the day where they can reset, recharge, and take care of themselves.',
+        'The Professional Travel Kit is designed to keep personal essentials organized, protected, and readily accessible. Whether used at truck-stop shower facilities, hotels, orientation travel, or during life on the road, this practical kit helps drivers stay prepared wherever their route takes them.',
+        'Customized with your company logo and branding, this kit is more than a gift — it’s a statement that your organization recognizes the sacrifices drivers make every day and values their comfort and well-being beyond the driver’s seat.',
+        'Unlike many appreciation gifts that are used once and forgotten, the travel bag and included essentials provide lasting value that drivers will use again and again. (Soap fragrance may vary based on availability.)',
+      ],
+      addon: {
+        heading: 'Complete the Driver Experience',
+        paragraphs: [
+          'Pair this kit with a DAS Mile Pack™ to provide drivers with convenient snacks and refreshments for the road ahead — perfect for shower stops, rest areas, and breaks between loads.',
+        ],
+        featuredId: 'mp-05',
+        linkHref: 'shop.html?category=milepacks',
+        linkText: 'Browse all DAS Mile Packs',
+      },
+    },
+    // ── Interactive Kit Component Explorer — the kit contents. Q-Tips pending a photo. ──
+    components: [
+      {
+        order: 1, active: true,
+        name: 'Sasquatch Soap',
+        image: '/images/travel-soap.jpg',
+        paragraphs: [
+          'A rugged, premium bar soap built for life on the road. After a long haul, a pre-trip in the rain, or a dusty dock, a real shower starts with real soap — not the thin sliver at the truck-stop counter.',
+          'Fragrance may vary based on availability — every batch is a clean, masculine scent drivers actually want to use.',
+        ],
+        benefits: [
+          'Premium, long-lasting bar',
+          'Clean, masculine scent (fragrance may vary based on availability)',
+          'Travel-ready size for shower bags',
+        ],
+      },
+      {
+        order: 2, active: true,
+        name: 'Dude Wipes',
+        image: '/images/travel-dudewipes.jpg',
+        paragraphs: [
+          'Individually wrapped, flushable cleansing wipes for the moments between showers — a quick freshen-up at the rest area, before a delivery, or after loading in the heat.',
+          'Oversized, extra-durable, and alcohol-free, they keep drivers feeling clean and presentable wherever the route takes them.',
+        ],
+        benefits: [
+          'Individually wrapped & flushable',
+          'Oversized, extra-durable',
+          'Alcohol-free — gentle on skin',
+          'Perfect between truck-stop showers',
+        ],
+      },
+      {
+        order: 3, active: true,
+        name: 'Exfoliating Loofah',
+        image: '/images/travel-loofah.jpg',
+        paragraphs: [
+          'A durable, dual-sided exfoliating washcloth for a deeper, more refreshing clean at truck-stop showers. Folds flat, dries fast, and outlasts disposable options.',
+        ],
+        benefits: [
+          'Dual-sided exfoliating texture',
+          'Folds flat, dries fast',
+          'Reusable & long-lasting',
+        ],
+      },
+    ],
+    reviews: 0, rating: 0,
+    relatedIds: ['mp-05', 'das-008', 'das-007'],
   },
 };
 
@@ -1179,6 +1721,304 @@ try {
     if (c && typeof c.basePrice === 'number') PRODUCTS[pid].price = c.basePrice;
   });
 } catch (e) { /* keep hardcoded fallback prices */ }
+
+/* ── Volume (quantity-break) pricing helpers ── */
+function isVolume(p) { return !!(p && p.pricingModel === 'volume' && Array.isArray(p.volumeTiers)); }
+function volumeUnitPrice(p, qty) {
+  const tiers = p.volumeTiers; qty = Number(qty) || 0;
+  for (const t of tiers) { if (qty >= t.min && (t.max == null || qty <= t.max)) return t.price; }
+  return tiers[0].price;
+}
+function volumeTierLabel(t) { return t.max == null ? `${t.min}+ units` : `${t.min}–${t.max} units`; }
+function renderVolumeRows(p) {
+  const body = document.getElementById('volume-rows');
+  if (!body) return;
+  body.innerHTML = p.volumeTiers.map(t =>
+    `<tr data-min="${t.min}" data-max="${t.max == null ? '' : t.max}">` +
+    `<td class="vt-qty">${volumeTierLabel(t)}</td>` +
+    `<td class="vt-price">$${t.price.toFixed(2)} / kit</td></tr>`
+  ).join('');
+}
+function highlightVolumeRow(qty) {
+  document.querySelectorAll('#volume-rows tr').forEach(tr => {
+    const min = Number(tr.dataset.min);
+    const max = tr.dataset.max === '' ? null : Number(tr.dataset.max);
+    tr.classList.toggle('vt-active', qty >= min && (max == null || qty <= max));
+  });
+}
+
+/* ── Single-price (one flat price + tier label) helper — MILE PACKS ── */
+function isSingle(p) { return !!(p && p.pricingModel === 'single'); }
+/* Resolve the unit price for the current product/qty across all 3 pricing models. */
+function currentUnit(p, qty) {
+  if (isVolume(p)) return volumeUnitPrice(p, qty);
+  if (isSingle(p)) return p.price;
+  return p.price * TIER_MULTS[currentTier];
+}
+
+/* ── Merge the MILE PACKS into PRODUCTS as single-price products (archived ones skipped → no PDP) ── */
+if (window.DAS_MILEPACKS) {
+  const mp = window.DAS_MILEPACKS.filter(k => !k.archived);
+  mp.forEach((k, i) => {
+    // The Driver Road Warrior Backpack™ (das-008) is the PARENT cross-sell for Mile Packs —
+    // it leads every Mile Pack's "Complete the Kit" list, then sibling packs fill the rest.
+    const siblings = mp.length > 1
+      ? [mp[(i + 1) % mp.length].id, mp[(i + 2) % mp.length].id, mp[(i + 3) % mp.length].id].filter(id => id !== k.id)
+      : [];
+    const rel = ['das-008'].concat(siblings).slice(0, 3);
+    PRODUCTS[k.id] = {
+      id: k.id,
+      name: k.name,
+      category: 'MILE PACKS · ' + k.tier,
+      price: k.price,
+      minQty: k.minQty,
+      pricingModel: 'single',
+      tierLabel: k.tier,
+      singleBadge: k.tier + ' MILE PACK',
+      unitNoun: 'kit',
+      styleId: 'MP-' + k.num, sku: 'DAS-MP-' + k.num,
+      description: k.description,
+      included: k.included,
+      images: (k.photos && k.photos.length) ? k.photos : ['/images/mp-' + k.num + '.jpg'],
+      // Real photos are square → default 1:1 cover (fills, no crop). Placeholders are
+      // 3:2 → fitContain (full image, letterboxed). So only placeholders get fitContain.
+      fitContain: !(k.photos && k.photos.length),
+      reviews: 0, rating: 0,
+      relatedIds: rel,
+    };
+  });
+}
+
+/* ── MILESTONE RECOGNITION KITS — flat $179, buyer selects a milestone LEVEL (250k…6M).
+   Two real products present an apparent 16+ -variant catalog; the level rides the cart line
+   into Stripe metadata + fulfillment (see api/create-checkout.js `milestoneSelect`). Imagery
+   is representative marketing (disclaimer shown by the selector). */
+(function () {
+  const MS_MILES = [
+    { key:'250k', n:'250,000' }, { key:'500k', n:'500,000' }, { key:'1m', n:'1 Million' },
+    { key:'2m', n:'2 Million' }, { key:'3m', n:'3 Million' }, { key:'4m', n:'4 Million' },
+    { key:'5m', n:'5 Million' }, { key:'6m', n:'6 Million' },
+  ];
+  const kitImages = ['/images/milestone-kit-medal.jpg', '/images/milestone-kit-lapel-hat.jpg',
+    '/images/milestone-kit-luggage.jpg', '/images/milestone-kit-lapel-detail.jpg',
+    '/images/milestone-kit-lapel-lapel.jpg', '/images/milestone-kit-luggage-master.jpg'];
+  PRODUCTS['milestone-kit'] = {
+    id: 'milestone-kit',
+    name: 'Professional Driver Milestone Recognition Kit',
+    category: 'Service Milestone Award Box',
+    price: 179.00, minQty: 1, pricingModel: 'single',
+    singleBadge: 'Complete Recognition Kit', unitNoun: 'kit',
+    ctaLabel: 'Add Recognition Kit',
+    milestoneSelect: true, defaultMilestone: '1m',
+    milestoneOptions: MS_MILES.map(m => ({ key:m.key, label:m.n + ' Miles' })),
+    styleId: 'PDMRK', sku: 'DAS-PDMRK-001',
+    metaTitle: 'Professional Driver Milestone Recognition Kit | Driver Appreciation Solutions',
+    metaDescription: 'A complete career-mileage recognition kit — milestone medal, lapel pins, recognition t-shirt, keychain, and road bag tag. Select any milestone from 250,000 to 6 Million miles.',
+    description: 'Recognize professional drivers for extraordinary career mileage achievements with a complete recognition package designed to be displayed, worn, and celebrated. Select the milestone level being honored — every kit is customized to the achievement.',
+    included: ['1 Milestone Medal', '2 Lapel Pins', '1 Recognition T-Shirt', '1 Keychain', '1 Driver Road Bag Tag'],
+    // New premium photography (2026-06-12): hero = kit contents (tag + medal), then the
+    // Driver Road Bag Tag lifestyle shot, then existing close-ups. Career milestone — NO Safe styling.
+    images: ['/images/mrk-lapel-lifestyle.webp', '/images/mrk-hero.webp', '/images/mrk-lifestyle.webp', '/images/milestone-kit-medal.jpg'],
+    imageAlt: 'Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride',
+    imageAlts: [
+      'Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride',
+      'Professional Driver Milestone Recognition Kit — premium career-milestone luggage tag (front and back) and engraved medal',
+      'Driver Road Bag Tag attached to a professional driver’s backpack — daily recognition of a career milestone',
+      'Milestone recognition medal close-up',
+    ],
+    productType: 'milestone', imageWrapDark: true,
+    fitContain: true, reviews: 0, rating: 0,
+    relatedIds: ['safe-miles-kit', 'das-005', 'msm-c-1m'],
+  };
+  PRODUCTS['safe-miles-kit'] = {
+    id: 'safe-miles-kit',
+    name: 'Safe Miles Recognition Kit',
+    category: 'Service Milestone Award Box',
+    price: 179.00, minQty: 1, pricingModel: 'single',
+    singleBadge: 'Safe Miles · Complete Recognition Kit', unitNoun: 'kit',
+    ctaLabel: 'Add Recognition Kit',
+    milestoneSelect: true, defaultMilestone: '1m',
+    milestoneOptions: MS_MILES.map(m => ({ key:m.key, label:m.n + ' Safe Miles' })),
+    styleId: 'SMRK', sku: 'DAS-SMRK-001',
+    metaTitle: 'Safe Miles Recognition Kit | Driver Appreciation Solutions',
+    metaDescription: 'A complete safe-driving recognition kit — Safe Miles medal, Safe Miles lapel pins, recognition t-shirt, keychain, and road bag tag. Select any safe-miles milestone from 250,000 to 6 Million.',
+    description: 'More than a gift — a safety recognition program. The Safe Miles Recognition Kit turns a safety milestone into a recognition experience drivers can see, use, wear, and remember. Select the safe-miles level being honored — every kit is customized to the achievement.',
+    included: ['1 Safe Miles Medal', '2 Safe Miles Lapel Pins', '1 Recognition T-Shirt', '1 Keychain', '1 Driver Road Bag Tag'],
+    images: kitImages,
+    imageAlt: 'Safe Miles Recognition Kit — Safe Miles medal, lapel pins, recognition apparel, keychain, and road bag tag',
+    productType: 'safe-miles', safeMiles: true,
+    fitContain: true, reviews: 0, rating: 0,
+    relatedIds: ['milestone-kit', 'das-005', 'msm-s-1m'],
+    story: {
+      heading: 'More Than a Gift. A Safety Recognition Program.',
+      paragraphs: [
+        'Every fleet wants a stronger safety culture. The challenge is finding meaningful ways to recognize the drivers who make that culture possible.',
+        'The Safe Miles Recognition Kit was designed to transform a safety milestone into a memorable recognition experience.',
+        'Rather than simply tracking safe miles internally, forward-thinking fleets use Safe Miles Recognition Kits to celebrate achievement at the moment it matters most. Whether recognizing 500,000 Safe Miles, 1 Million Safe Miles, or beyond, each kit serves as a tangible reminder that safe driving is noticed, valued, and appreciated.',
+        'When a professional driver reaches a major safety milestone, the accomplishment deserves more than a mention in a meeting or a certificate that ends up in a drawer. It deserves recognition that the driver can see, use, wear, and remember.',
+      ],
+      sections: [
+        {
+          heading: 'Create a Recognition Event Drivers Remember',
+          paragraphs: ['Many fleets choose to present Safe Miles Recognition Kits during:'],
+          bullets: ['Safety meetings', 'Driver appreciation events', 'Annual awards banquets', 'Terminal celebrations', 'Leadership recognition ceremonies', 'Driver milestone presentations'],
+          paragraphsAfter: [
+            'The result is a visible demonstration that safety matters within your organization. Drivers see their peers being recognized. Managers reinforce company values. Families celebrate the accomplishment.',
+            'The culture becomes stronger with every milestone achieved.',
+          ],
+        },
+        {
+          heading: 'Built to Reinforce Safety Culture',
+          paragraphs: [
+            'The Safe Miles Recognition Kit combines practical driver-focused items with meaningful recognition pieces to create a complete milestone presentation. Each component has been selected to ensure the recipient receives something that is both useful and memorable.',
+            'The program is designed to support ongoing recognition at multiple milestones throughout a driver’s career, creating a clear pathway of achievement and reinforcing the behaviors that contribute to long-term safety success.',
+            'When implemented consistently, these recognition moments become part of the company’s safety culture rather than isolated awards.',
+          ],
+        },
+        {
+          heading: 'Flexible Delivery Options',
+          paragraphs: ['Every fleet operates differently. That’s why Safe Miles Recognition Kits can be delivered in the manner that best supports your recognition program. Choose to have kits shipped directly to:'],
+          bullets: ['The driver’s home address', 'A terminal or domicile location', 'A safety manager', 'A fleet manager', 'A company headquarters', 'A driver appreciation event'],
+          paragraphsAfter: [
+            'Some organizations prefer to present the award personally during a recognition ceremony. Others choose to surprise drivers by having the kit delivered directly to their home so family members can participate in the celebration.',
+            'Both approaches create meaningful recognition experiences that drivers remember.',
+          ],
+        },
+        {
+          heading: 'Designed for Growing Fleets',
+          paragraphs: ['Whether recognizing a handful of drivers each year or implementing a company-wide safety recognition strategy, the Safe Miles Recognition Kit provides a scalable solution that grows alongside your program. Ideal for:'],
+          bullets: ['Truckload Carriers', 'Dedicated Fleets', 'Private Fleets', 'LTL Operations', 'Ready-Mix Fleets', 'Construction Fleets', 'Municipal Fleets', 'Utility Fleets', 'Oil & Gas Transportation Operations'],
+        },
+        {
+          heading: 'Recognition That Supports Retention',
+          paragraphs: ['Professional drivers notice when safety achievements are recognized. The Safe Miles Recognition Kit helps organizations:'],
+          bullets: ['Celebrate verified safety milestones', 'Reinforce desired driving behaviors', 'Increase driver engagement', 'Strengthen safety culture', 'Improve recognition consistency', 'Demonstrate appreciation for professional drivers'],
+          paragraphsAfter: [
+            'Most importantly, it helps create moments that remind drivers their commitment to safety matters.',
+            'Because every safe mile represents a decision. Every milestone represents discipline. And every achievement deserves recognition.',
+          ],
+        },
+      ],
+      closing: 'Safe Miles Recognition Kits — helping fleets recognize the drivers who set the standard for safety, professionalism, and excellence.',
+    },
+  };
+
+  // ── SAFE SERVICE MILES ACCESSORIES — everyday wearable/carry recognition items that
+  //    complement the Safe Service Miles medals. Flat price, fleet bulk min 10. Safe-miles
+  //    styling (green border). Imagery is representative (from the recognition-kit shoot).
+  PRODUCTS['ssm-lapel-pin'] = {
+    id: 'ssm-lapel-pin',
+    name: 'Safe Service Miles Lapel Pin',
+    category: 'Safety Recognition',
+    price: 12.99, minQty: 10, pricingModel: 'single',
+    singleBadge: 'Safe Recognition · Accessory', unitNoun: 'pin',
+    ctaLabel: 'Add Lapel Pins',
+    styleId: 'SSM-PIN', sku: 'DAS-SSM-PIN-001',
+    metaTitle: 'Safe Service Miles Lapel Pin | Driver Appreciation Solutions',
+    metaDescription: 'A professional Safe Service Miles recognition lapel pin — worn daily on uniforms, jackets, hats, and safety apparel as a visible symbol of accident-free driving excellence.',
+    description: 'A professional recognition pin designed to be worn on uniforms, jackets, hats, and safety apparel — a daily, visible symbol of safety excellence that complements the Safe Service Miles medals.',
+    included: ['Safe Service Miles recognition lapel pin', 'Secure clutch backing', 'Professional finish — built for daily wear'],
+    images: ['/images/milestone-kit-lapel-detail.jpg', '/images/milestone-kit-lapel-hat.jpg'],
+    imageAlt: 'Safe Service Miles recognition lapel pin',
+    imageAlts: [
+      'Safe Service Miles recognition lapel pin — detailed view',
+      'Safe Service Miles lapel pin worn on a professional driver’s cap',
+    ],
+    productType: 'safe-miles', safeMiles: true, representativeNote: true,
+    fitContain: true, reviews: 0, rating: 0,
+    relatedIds: ['ssm-luggage-tag', 'msm-s-1m', 'msm-s-2m'],
+  };
+  PRODUCTS['ssm-luggage-tag'] = {
+    id: 'ssm-luggage-tag',
+    name: 'Safe Service Miles Luggage Tag',
+    category: 'Safety Recognition',
+    price: 19.99, minQty: 10, pricingModel: 'single',
+    singleBadge: 'Safe Recognition · Accessory', unitNoun: 'tag',
+    ctaLabel: 'Add Luggage Tags',
+    styleId: 'SSM-TAG', sku: 'DAS-SSM-TAG-001',
+    metaTitle: 'Safe Service Miles Luggage Tag | Driver Appreciation Solutions',
+    metaDescription: 'A premium Safe Service Miles driver identification tag for road bags and travel gear — durable, professional, and a daily reminder of verified safe-driving achievement.',
+    description: 'A premium driver identification tag inspired by the professional driver’s lifestyle — designed for road bags and travel gear. Durable and professional, it celebrates verified safety achievement and extends recognition beyond the workplace.',
+    included: ['Safe Service Miles driver luggage / road-bag tag', 'Premium durable construction', 'Secure attachment loop'],
+    images: ['/images/milestone-kit-luggage.jpg', '/images/milestone-kit-luggage-master.jpg'],
+    imageAlt: 'Safe Service Miles driver luggage tag',
+    imageAlts: [
+      'Safe Service Miles driver luggage tag — front and back',
+      'Safe Service Miles luggage tag, master product shot',
+    ],
+    productType: 'safe-miles', safeMiles: true, representativeNote: true,
+    fitContain: true, reviews: 0, rating: 0,
+    relatedIds: ['ssm-lapel-pin', 'msm-s-1m', 'msm-s-2m'],
+  };
+})();
+
+/* ── Merge the SERVICE MILESTONE AWARDS (medals + early-career awards) as single-price products ──
+   FUTURE: engraving option → add a PDP text input here + pass on the cart line;
+           custom logo / bulk pricing / CSV recipient upload → extend the cart item + api/portal.js. */
+if (window.DAS_MILESTONES) {
+  const ms = window.DAS_MILESTONES;
+  ms.forEach((k) => {
+    const isExec = k.track === 'exec';
+    // Related products keep the three recognition paths separate (reorg 2026-06-12):
+    //   • Career medal  → other Career Service Milestone medals ONLY (never Safe).
+    //   • Safe medal    → other Safe Miles medals + Executive Collection items (the safety family).
+    //   • Exec package  → its Standard Safe medal + sibling Executive packages.
+    let rel;
+    if (isExec) {
+      rel = [k.executive.baseId].concat(ms.filter(o => o.track === 'exec' && o.id !== k.id).slice(0, 2).map(o => o.id));
+    } else if (k.track === 'safe') {
+      // Safe medal → the full Safe Service Miles ecosystem: adjacent Safe medals, the
+      // everyday Accessories, and an Executive upgrade. Never standard Service Milestone products.
+      const otherSafe = ms.filter(o => o.track === 'safe' && o.id !== k.id).slice(0, 2).map(o => o.id);
+      const someExec = ms.filter(o => o.track === 'exec').slice(0, 1).map(o => o.id);
+      rel = otherSafe.concat(['ssm-lapel-pin', 'ssm-luggage-tag']).concat(someExec);
+    } else {
+      // Career milestone medal → lead with the flagship Professional Driver Milestone
+      // Recognition Kit (the complete package), then other career medals. Never Safe products.
+      rel = ['milestone-kit'].concat(ms.filter(o => o.track === 'career' && o.id !== k.id).slice(0, 2).map(o => o.id));
+    }
+    PRODUCTS[k.id] = {
+      id: k.id,
+      name: k.name,
+      category: isExec ? 'Executive Driver Recognition Collection'
+              : (k.track === 'safe' ? 'Safety Recognition' : 'Service Milestone Awards'),
+      productType: isExec ? 'executive' : (k.track === 'safe' ? 'safe-miles' : 'milestone'),
+      safeMiles: k.track === 'safe',        // → green interior border on the PDP gallery image
+      price: k.price,                       // PLACEHOLDER price (see js/milestones.js / lib/catalog.js)
+      minQty: k.minQty,
+      pricingModel: 'single',
+      tierLabel: isExec ? 'Executive Collection' : (k.track === 'safe' ? 'Safe Service Miles' : 'Service Miles'),
+      singleBadge: isExec ? 'Executive Collection · Premium Gift Included'
+                 : (k.track === 'safe' ? 'Safe Service Miles' : 'Service Miles') + (k.type === 'medal' ? ' Medal' : ' Award'),
+      unitNoun: isExec ? 'package' : (k.type === 'medal' ? 'medal' : 'item'),
+      ctaLabel: isExec ? (k.comingSoon ? 'Executive Upgrade Pricing Coming Soon' : 'Order Executive Collection') : undefined,
+      comingSoon: isExec ? !!k.comingSoon : false,   // Food Jar: present but not yet purchasable
+      flagship: isExec ? !!k.flagship : false,       // Pack Leader: flagship visual treatment
+      imageWrapDark: isExec ? !!k.darkImg : false,   // dark-background product shots (tote, pack leader)
+      // Coming-soon exec gift (Food Jar) reuses the availability/notify flow with custom copy.
+      availability: (isExec && k.comingSoon) ? 'coming_soon' : undefined,
+      availEyebrow: (isExec && k.comingSoon) ? 'Executive Collection' : undefined,
+      availTitle: (isExec && k.comingSoon) ? 'Executive Upgrade Pricing Coming Soon' : undefined,
+      availSub: (isExec && k.comingSoon) ? ('The ' + k.executive.gift + ' executive upgrade is being finalized. Add your email and we’ll let you know the moment it opens — or choose the Water Bottle or Lunch Bag executive upgrade for this milestone now.') : undefined,
+      availBtn: (isExec && k.comingSoon) ? 'Notify me when available' : undefined,
+      styleId: k.id.toUpperCase(), sku: 'DAS-' + k.id.toUpperCase(),
+      description: k.description,
+      included: isExec
+        ? ['Safe Service Miles recognition medal', 'Premium presentation packaging', 'Recognition materials',
+           k.executive.gift + (k.executive.secondary ? ' (' + k.executive.secondary + ')' : '') + ' — premium executive gift']
+        : (k.type === 'medal'
+          ? ['Premium recognition medal', 'Milestone engraving (engraving options coming soon)', 'Branded presentation packaging']
+          : ['Placeholder award — final physical item coming soon']),
+      images: (k.photos && k.photos.length) ? k.photos : [k.image],
+      fitContain: true,                     // 16:9 placeholders → contain on the 1:1 PDP hero (full, no crop)
+      reviews: 0, rating: 0,
+      relatedIds: rel,
+      executive: isExec ? k.executive : undefined,
+      imageAlt: k.imageAlt || undefined,   // exact required alt for the gift hero (e.g. YETI Food Jar / Lunch Bag)
+    };
+  });
+}
+
 let currentProduct = null;
 let currentTier    = 'standard';
 let currentImgIdx  = 0;
@@ -1210,6 +2050,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initTierSelector();
   initAccordions();
   initExpressCheckout();
+  initTermsModal();
+  initNotifyModal();
   Favorites._updateNav();
 
   // FBT bundle widget — populates the #fbt-section below the PDP grid.
@@ -1235,20 +2077,35 @@ document.addEventListener('DOMContentLoaded', () => {
 function getProductDetailsHTML(p) {
   const dimMap = {
     'das-001': '12" × 10" × 4"',
-    'das-002': '11" × 9" × 3"',
     'das-003': '14" × 12" × 5"',
     'das-004': '13" × 11" × 4"',
     'das-005': '15" × 12" × 6"',
+    'das-006': '11" × 8" × 3"',
   };
-  const dims = dimMap[p.id] || '12" × 10" × 4"';
+  const dims = dimMap[p.id] || null;   // omit the dimensions line when we don't have real dims
+  if (isVolume(p)) {
+    return `
+    <ul>
+      <li>Sold individually — corporate volume pricing applies automatically by quantity</li>
+      <li>Production lead time: Confirmed at time of order</li>
+      <li>Custom insert: Driver name or company message</li>
+      <li>Fleet / company branding: Applied to packaging and branded items — provide PNG or SVG at 300 dpi+</li>
+      ${dims ? `<li>Kit dimensions (approx.): ${dims} per unit</li>` : ''}
+      <li>Style #: ${p.styleId}</li>
+    </ul>
+    <p style="margin-top:10px">Corporate volume pricing is structured by quantity (see the pricing tiers above). For 250+ unit programs or custom branding, <a href="contact.html" style="color:var(--gold);text-decoration:underline">contact our fleet team</a>.</p>
+  `;
+  }
   return `
     <ul>
-      <li>Minimum order quantity: ${p.minQty} units</li>
+      <li>${p.perHire
+        ? 'Minimum order: 10 units (first order) · as few as 1 per hire on reorders'
+        : 'Minimum order quantity: ' + p.minQty + ' ' + (Number(p.minQty) === 1 ? (p.unitNoun || 'unit') : ((p.unitNoun || 'unit') + 's'))}</li>
       <li>Production lead time: Confirmed at time of order</li>
       <li>Name personalization: Driver name printed on recognition card and certificate</li>
       <li>Fleet logo branding: Applied to all major branded items — provide PNG or SVG at 300 dpi+</li>
       <li>Custom message insert: Up to 150 words per order batch</li>
-      <li>Kit dimensions (approx.): ${dims} per unit</li>
+      ${dims ? `<li>Kit dimensions (approx.): ${dims} per unit</li>` : ''}
       <li>Style #: ${p.styleId}</li>
     </ul>
     <p style="margin-top:10px">Volume discounts available for 100+ driver programs. <a href="contact.html" style="color:var(--gold);text-decoration:underline">Contact our fleet team</a> for custom pricing and white-glove fulfillment options.</p>
@@ -1258,16 +2115,89 @@ function getProductDetailsHTML(p) {
 function renderProduct() {
   const p = currentProduct;
 
-  // Page meta
-  document.title = `${p.name} — Driver Appreciation Solutions`;
-  document.getElementById('page-desc').setAttribute('content', p.description.slice(0, 155));
+  // Page meta (per-product overrides via metaTitle / metaDescription)
+  document.title = p.metaTitle || `${p.name} — Driver Appreciation Solutions`;
+  document.getElementById('page-desc').setAttribute('content', p.metaDescription || p.description.slice(0, 155));
+  // Per-product canonical / og:url so each product is its own indexable page (not all → one URL).
+  const canonicalUrl = `https://driverappreciationsolutions.com/product?id=${encodeURIComponent(p.id)}`;
+  const canEl = document.getElementById('page-canonical'); if (canEl) canEl.setAttribute('href', canonicalUrl);
+  const ogUrlEl = document.getElementById('page-ogurl');   if (ogUrlEl) ogUrlEl.setAttribute('content', canonicalUrl);
   document.getElementById('breadcrumb-name').textContent = p.name;
+  // Category crumb reinforces the three recognition paths (Service Milestone Awards /
+  // Safety Recognition / Executive Driver Recognition Collection).
+  const bcCat = document.getElementById('breadcrumb-cat');
+  const bcSep = document.getElementById('breadcrumb-cat-sep');
+  if (bcCat && bcSep && p.category) {
+    bcCat.textContent = p.category;
+    bcCat.href = 'shop.html?category=' + shopCategoryFor(p);
+    bcCat.style.display = '';
+    bcSep.style.display = '';
+  }
 
   // Core info
   document.getElementById('pi-category').textContent = p.category;
   document.getElementById('pi-name').textContent = p.name;
   document.getElementById('pi-description').textContent = p.description;
-  document.getElementById('acc-reviews-label').textContent = `Reviews (${p.reviews}) ★${p.rating.toFixed(1)}`;
+  document.getElementById('acc-reviews-label').textContent = p.reviews
+    ? `Reviews (${p.reviews}) ★${(p.rating || 0).toFixed(1)}`
+    : 'Reviews';
+  renderReviews(p);
+
+  // ── Pricing model: volume (quantity breaks) | single (flat + tier label) | tier (std/prem/ent) ──
+  const vol = isVolume(p), single = isSingle(p);
+  document.getElementById('tier-block').style.display   = (vol || single) ? 'none' : '';
+  document.getElementById('volume-block').style.display = vol ? '' : 'none';
+  const unitWord = (n, noun) => `${n} ${noun || 'unit'}${n === 1 ? '' : 's'}`;
+  const qml = document.getElementById('qty-min-label');
+  if (qml) {
+    // Per-hire kits (e.g. Welcome Kit): first order = 10-unit minimum, reorders as
+    // few as 1 per hire. Server enforces; this label sets the expectation.
+    qml.textContent = p.perHire
+      ? '(first order: min. 10 · reorders: 1 per hire)'
+      : (vol ? '(sold individually)' : `(min. ${unitWord(p.minQty, p.unitNoun)})`);
+    // Optional product-specific MOQ helper (e.g. Driver Road Warrior Backpack).
+    if (p.moqNote && !vol && !p.perHire) qml.textContent += ' — ' + p.moqNote;
+  }
+  const idf = document.getElementById('pi-idealfor');
+  if (idf) {
+    if (vol && Array.isArray(p.idealFor) && p.idealFor.length) {
+      idf.style.display = '';
+      idf.innerHTML = `<strong>Ideal for:</strong> ${p.idealFor.join(' · ')}`;
+    } else if (single && (p.singleBadge || p.tierLabel)) {
+      idf.style.display = '';
+      idf.innerHTML = `<strong>${p.singleBadge || p.tierLabel}</strong> · min. ${unitWord(p.minQty, p.unitNoun)}`;
+    } else { idf.style.display = 'none'; }
+  }
+  if (vol) renderVolumeRows(p);
+
+  // das-006 commercial terms: "included" callout + Net-30 CTA
+  renderCommercial(p);
+
+  // Availability (coming-soon / sold-out) — hides purchase controls + shows notify
+  renderAvailability(p);
+
+  // Customization-coordinated product (e.g. Welcome Kit) — process/use-cases/contact + custom CTA label
+  renderCustomization(p);
+  // Milestone-select kits — populate the milestone dropdown (+ representative-image disclaimer)
+  renderMilestoneSelect(p);
+  renderStory(p);
+  // "Complete the Kit → View All" jumps straight to THIS product's shop section
+  // (e.g. a medal → the Milestone/medals section) instead of the generic shop top.
+  const viewAll = document.getElementById('related-view-all');
+  if (viewAll) viewAll.href = 'shop.html?category=' + shopCategoryFor(p);
+  if (p.ctaLabel) {
+    const cb = document.getElementById('btn-add-to-cart');
+    if (cb) { const svg = cb.querySelector('svg'); cb.innerHTML = (svg ? svg.outerHTML : '') + ' ' + p.ctaLabel; }
+  }
+
+  // "Buy for My Company" — carry this product's context to the procurement form (smart capture).
+  const bfc = document.getElementById('buy-for-company-link');
+  if (bfc) {
+    bfc.href = 'company-purchasing.html?id=' + encodeURIComponent(p.id) +
+      '&product=' + encodeURIComponent(p.name) +
+      '&category=' + encodeURIComponent(p.category || '') +
+      (p.sku ? '&sku=' + encodeURIComponent(p.sku) : '');
+  }
 
   // Price
   updatePriceDisplay();
@@ -1275,28 +2205,92 @@ function renderProduct() {
   // Product details accordion content
   document.getElementById('acc-details-content').innerHTML = getProductDetailsHTML(p);
 
-  // Tier prices on buttons
-  document.getElementById('tier-price-standard').textContent  = `$${p.price.toFixed(2)}/unit`;
-  document.getElementById('tier-price-premium').textContent   = `$${(p.price * 1.45).toFixed(2)}/unit`;
-  document.getElementById('tier-price-enterprise').textContent = `$${(p.price * 1.95).toFixed(2)}/unit`;
+  // Tier prices on buttons (tier-priced products only)
+  if (!vol && !single) {
+    document.getElementById('tier-price-standard').textContent  = `$${p.price.toFixed(2)}/unit`;
+    document.getElementById('tier-price-premium').textContent   = `$${(p.price * 1.45).toFixed(2)}/unit`;
+    document.getElementById('tier-price-enterprise').textContent = `$${(p.price * 1.95).toFixed(2)}/unit`;
+  }
 
   // Included list
   renderIncluded();
 
-  // Thumbnails
+  // Thumbnails — kit image(s) first, then kit COMPONENTS (Interactive Kit Component Explorer).
   const rail = document.getElementById('thumb-rail');
   rail.innerHTML = '';
+  const components = (p.components || []).filter(c => c && c.active !== false)
+                       .slice().sort((a, b) => (a.order || 0) - (b.order || 0));
+
+  // (function declarations — hoisted within renderProduct, so the click handlers below can use them)
+  function setActiveThumb(el) {
+    rail.querySelectorAll('.thumb-item').forEach(t => t.classList.remove('active'));
+    if (el) el.classList.add('active');
+  }
+  function showComponent(c) {
+    const area = document.getElementById('main-image-area');
+    const mi = document.getElementById('main-product-img');
+    mi.onerror = function () { this.style.visibility = 'hidden'; };
+    mi.style.visibility = '';
+    mi.src = c.image;            // browser caches → no duplicate request when reselected
+    mi.alt = c.name;
+    area.classList.add('fit-contain');                              // show the FULL component photo (no crop)
+    document.getElementById('thumb-rail').classList.add('fit-contain');
+    renderComponentPanel(c);
+  }
+  function hideComponentPanel() {
+    const panel = document.getElementById('component-explorer');
+    if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+    document.getElementById('main-image-area').classList.toggle('fit-contain', !!p.fitContain);
+    document.getElementById('thumb-rail').classList.toggle('fit-contain', !!p.fitContain);
+  }
+
   p.images.forEach((src, i) => {
     const div = document.createElement('div');
     div.className = `thumb-item${i === 0 ? ' active' : ''}`;
-    div.innerHTML = `<img src="${src}" alt="${p.name} image ${i + 1}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
-    div.addEventListener('click', () => switchImage(i));
+    div.title = (i === 0 && components.length) ? 'Entire kit' : `${p.name} image ${i + 1}`;
+    div.innerHTML = `<img src="${src}" alt="${div.title}" loading="lazy" onerror="this.parentElement.style.display='none'">`;
+    div.addEventListener('click', () => { switchImage(i); hideComponentPanel(); setActiveThumb(div); });
+    rail.appendChild(div);
+  });
+  components.forEach((c) => {
+    const div = document.createElement('div');
+    div.className = 'thumb-item thumb-component';
+    div.title = c.name;
+    const im = document.createElement('img');
+    im.src = c.image; im.alt = c.name; im.loading = 'lazy';
+    im.onerror = function () { this.parentElement.style.display = 'none'; };
+    div.appendChild(im);
+    div.addEventListener('click', () => { showComponent(c); setActiveThumb(div); });
     rail.appendChild(div);
   });
 
-  // Main image
-  document.getElementById('main-product-img').src = p.images[0];
-  document.getElementById('main-product-img').alt = p.name;
+  // Landscape product photos shown in full (no crop) when fitContain is set.
+  const fitContain = !!p.fitContain;
+  document.getElementById('main-image-area').classList.toggle('fit-contain', fitContain);
+  document.getElementById('thumb-rail').classList.toggle('fit-contain', fitContain);
+  // Dark-background product shots (Camino tote, Pack Leader) → seamless near-black wrap.
+  document.getElementById('main-image-area').classList.toggle('img-dark', !!p.imageWrapDark);
+  document.getElementById('thumb-rail').classList.toggle('img-dark', !!p.imageWrapDark);
+  // Safe Service Miles → green interior border (visual program distinction; medals + Safe Miles Kit).
+  document.getElementById('main-image-area').classList.toggle('safe-frame', !!p.safeMiles);
+  document.getElementById('thumb-rail').classList.toggle('safe-frame', !!p.safeMiles);
+
+  // Main image (with a fallback if the source 404s — show the area's neutral bg, not a broken icon)
+  const mainImg = document.getElementById('main-product-img');
+  mainImg.onerror = function () { this.style.visibility = 'hidden'; };
+  mainImg.style.visibility = '';
+  mainImg.src = p.images[0];
+  mainImg.alt = p.imageAlt || p.name;
+
+  // Default view: kit hero, component panel hidden.
+  hideComponentPanel();
+
+  // Show the thumb rail when there's more than one thumbnail (kit images OR components).
+  const hasThumbs = (p.images && p.images.length > 1) || components.length > 0;
+  rail.style.display = hasThumbs ? '' : 'none';
+  // Prev/next arrows navigate only the kit images.
+  const navBtns = document.querySelector('.img-nav-btns');
+  if (navBtns) navBtns.style.display = (p.images && p.images.length > 1) ? '' : 'none';
 
   // Add to cart button
   document.getElementById('btn-add-to-cart').addEventListener('click', addToCart);
@@ -1334,16 +2328,42 @@ function syncFavBtn(productId) {
 
 function updatePriceDisplay() {
   const p = currentProduct;
-  const mult = TIER_MULTS[currentTier];
-  const price = (p.price * mult).toFixed(2);
-  document.getElementById('pi-price').innerHTML = `$${price} <span class="price-per">per unit</span>`;
+  if (isVolume(p)) {
+    // Retail price shown prominently; volume tiers shown in the pricing table below.
+    const retail = p.volumeTiers[0].price;
+    document.getElementById('pi-price').innerHTML = `$${retail.toFixed(2)} <span class="price-per">per kit</span>`;
+  } else if (isSingle(p)) {
+    document.getElementById('pi-price').innerHTML = (p.comingSoon || p.price == null)
+      ? `<span class="price-soon">Executive Upgrade Pricing Coming Soon</span>`
+      : `$${p.price.toFixed(2)} <span class="price-per">per ${p.unitNoun || 'unit'}</span>`;
+  } else {
+    const mult = TIER_MULTS[currentTier];
+    const price = (p.price * mult).toFixed(2);
+    document.getElementById('pi-price').innerHTML = `$${price} <span class="price-per">per unit</span>`;
+  }
   updateSubtotal();
   updateExpressCheckoutAmount();
 }
 
+function renderMilestoneSelect(p) {
+  const block = document.getElementById('milestone-select-block');
+  const sel = document.getElementById('pdp-milestone-select');
+  if (!block || !sel) return;
+  if (!p.milestoneSelect || !Array.isArray(p.milestoneOptions) || !p.milestoneOptions.length) {
+    block.style.display = 'none';
+    return;
+  }
+  sel.innerHTML = p.milestoneOptions.map(o => `<option value="${o.key}">${o.label}</option>`).join('');
+  // Default selection: ?milestone= query param (Featured 1M card links here) else product default.
+  const params = new URLSearchParams(window.location.search);
+  const want = (params.get('milestone') || p.defaultMilestone || '').toLowerCase();
+  if (want && p.milestoneOptions.some(o => o.key === want)) sel.value = want;
+  block.style.display = '';
+}
+
 function renderIncluded() {
   const p = currentProduct;
-  const items = p.tiers[currentTier].included;
+  const items = (isVolume(p) || isSingle(p)) ? (p.included || []) : p.tiers[currentTier].included;
   const list = document.getElementById('pi-included-list');
   list.innerHTML = items.map(item => `<li>${item}</li>`).join('');
 }
@@ -1360,6 +2380,29 @@ function initImageGallery() {
     const total = currentProduct.images.length;
     switchImage((currentImgIdx + 1) % total);
   });
+  // Mobile swipe — left/right on the main image navigates the kit gallery.
+  const area = document.getElementById('main-image-area');
+  if (area && !area._swipeWired) {
+    area._swipeWired = true;
+    let x0 = null;
+    area.addEventListener('touchstart', (e) => { x0 = e.touches[0].clientX; }, { passive: true });
+    area.addEventListener('touchend', (e) => {
+      if (x0 == null) return;
+      const dx = e.changedTouches[0].clientX - x0; x0 = null;
+      const total = currentProduct.images.length;
+      if (total < 2 || Math.abs(dx) < 40) return;
+      switchImage(dx < 0 ? (currentImgIdx + 1) % total : (currentImgIdx - 1 + total) % total);
+      hideComponentPanelGlobal();
+    }, { passive: true });
+  }
+}
+// Reset to a kit image (clear component panel) — used after a swipe.
+function hideComponentPanelGlobal() {
+  const panel = document.getElementById('component-explorer');
+  if (panel) { panel.style.display = 'none'; panel.innerHTML = ''; }
+  const p = currentProduct;
+  document.getElementById('main-image-area').classList.toggle('fit-contain', !!p.fitContain);
+  document.getElementById('thumb-rail').classList.toggle('fit-contain', !!p.fitContain);
 }
 
 function switchImage(idx) {
@@ -1370,6 +2413,8 @@ function switchImage(idx) {
   area.classList.add('transitioning');
   setTimeout(() => {
     img.src = currentProduct.images[idx];
+    // Per-image alt when provided (e.g. truck-cab gallery shot), else the product default.
+    img.alt = (currentProduct.imageAlts && currentProduct.imageAlts[idx]) || currentProduct.imageAlt || currentProduct.name;
     area.classList.remove('transitioning');
   }, 180);
 
@@ -1413,8 +2458,16 @@ function getQty() {
 }
 
 function updateSubtotal() {
-  const qty   = getQty();
-  const price = currentProduct.price * TIER_MULTS[currentTier];
+  const p   = currentProduct;
+  const qty = getQty();
+  const up = document.getElementById('qty-unitprice');
+  const price = currentUnit(p, qty);
+  if (isVolume(p)) {
+    if (up) { up.style.display = 'block'; up.innerHTML = `Your price: <strong>$${price.toFixed(2)} / kit</strong>`; }
+    highlightVolumeRow(qty);
+  } else {
+    if (up) up.style.display = 'none';
+  }
   const total = (qty * price).toFixed(2);
   document.getElementById('qty-subtotal-val').textContent = `$${Number(total).toLocaleString('en-US', {minimumFractionDigits:2})}`;
 }
@@ -1463,19 +2516,40 @@ function initAccordions() {
 ═══════════════════════════════════════════════════════════════ */
 function addToCart() {
   const p    = currentProduct;
+  if (p && (p.availability === 'coming_soon' || p.availability === 'sold_out')) return; // not orderable
   const qty  = getQty();
-  const mult = TIER_MULTS[currentTier];
-  const price = parseFloat((p.price * mult).toFixed(2));
-  const tierLabel = currentTier.charAt(0).toUpperCase() + currentTier.slice(1);
-
-  Cart.add({
-    id:       `${p.id}-${currentTier}`,
-    name:     `${p.name} (${tierLabel})`,
-    price:    price,
-    category: p.category,
-    image:    p.images[0],
-    minQty:   p.minQty,
-  }, qty);
+  let cartItem;
+  if (isVolume(p) || isSingle(p)) {
+    cartItem = {
+      id:       p.id,                      // no tier suffix — server is price authority (qty-tier or flat)
+      name:     p.name,
+      price:    currentUnit(p, qty),
+      category: p.category,
+      image:    p.images[0],
+      minQty:   p.minQty,
+    };
+    // Milestone-select kits — carry the chosen level to the cart line / checkout / fulfillment.
+    if (p.milestoneSelect) {
+      const sel = document.getElementById('pdp-milestone-select');
+      if (sel && sel.value) {
+        cartItem.milestone = sel.value;
+        const opt = sel.options[sel.selectedIndex];
+        cartItem.milestoneLabel = opt ? opt.text : sel.value;
+      }
+    }
+  } else {
+    const mult = TIER_MULTS[currentTier];
+    const tierLabel = currentTier.charAt(0).toUpperCase() + currentTier.slice(1);
+    cartItem = {
+      id:       `${p.id}-${currentTier}`,
+      name:     `${p.name} (${tierLabel})`,
+      price:    parseFloat((p.price * mult).toFixed(2)),
+      category: p.category,
+      image:    p.images[0],
+      minQty:   p.minQty,
+    };
+  }
+  Cart.add(cartItem, qty);
 
   const btn = document.getElementById('btn-add-to-cart');
   const orig = btn.innerHTML;
@@ -1483,6 +2557,38 @@ function addToCart() {
   btn.classList.add('added');
   setTimeout(() => { btn.innerHTML = orig; btn.classList.remove('added'); }, 1800);
 }
+
+/* Quick add-to-order for cross-sell cards (related grid + the story mile-pack pairing).
+   Adds at the product's own minimum; tier-priced products add at the Standard tier.
+   Mirrors addToCart's cart-item shape so the server price authority validates it. */
+function quickAdd(id, btn) {
+  const p = PRODUCTS[id];
+  if (!p) return;
+  if (p.availability === 'coming_soon' || p.availability === 'sold_out') return;
+  const qty = p.minQty || 10;
+  let cartItem;
+  if (isVolume(p) || isSingle(p)) {
+    cartItem = { id: p.id, name: p.name, price: isVolume(p) ? volumeUnitPrice(p, qty) : p.price,
+                 category: p.category, image: p.images[0], minQty: p.minQty };
+  } else {
+    const m = (typeof TIER_MULTS !== 'undefined' && TIER_MULTS.standard) || 1.0;
+    cartItem = { id: p.id + '-standard', name: p.name + ' (Standard)',
+                 price: parseFloat((p.price * m).toFixed(2)), category: p.category, image: p.images[0], minQty: p.minQty };
+  }
+  Cart.add(cartItem, qty);
+  if (btn) {
+    btn.classList.add('qadded');
+    btn.textContent = '✓ Added';
+    setTimeout(() => { btn.textContent = btn.dataset.label || 'Add to order'; btn.classList.remove('qadded'); }, 1600);
+  }
+}
+// Delegated click → any quick-add button on the page (related cards + story mile-pack card).
+document.addEventListener('click', function (e) {
+  const b = e.target.closest('[data-quick-add]');
+  if (!b) return;
+  e.preventDefault();
+  quickAdd(b.getAttribute('data-quick-add'), b);
+});
 
 /* ═══════════════════════════════════════════════════════════════
    STRIPE EXPRESS CHECKOUT ELEMENT
@@ -1493,14 +2599,25 @@ let _stripe   = null;
 let _elements = null;
 
 async function initExpressCheckout() {
+  // ── DISABLED (2026-06, audit P0) ─────────────────────────────────────────────
+  // The express wallet path created NO order record, sent NO confirmation email, and
+  // skipped the bundle discount — a payment could capture money with no order on file.
+  // Until it's brought to parity with the standard cart → /api/create-checkout flow
+  // (order row + discount + emails + a confirmable session_id), hide it entirely so every
+  // purchase runs through the verified checkout. Re-enable by removing this guard.
+  const _expr = document.querySelector('.express-checkout-section');
+  if (_expr) _expr.style.display = 'none';
+  return;
+  /* eslint-disable no-unreachable */
+
   const stripeKey = window.STRIPE_PUBLISHABLE_KEY || '';
   if (!stripeKey || !window.Stripe) return;
   if (_stripe) return; // already mounted — prevent double-init
 
   const p      = currentProduct;
   const qty    = getQty();
-  const mult   = TIER_MULTS[currentTier];
-  const amount = Math.round(p.price * mult * qty * 100); // cents
+  const unit0  = currentUnit(p, qty);
+  const amount = Math.round(unit0 * qty * 100); // cents
 
   try {
     _stripe   = Stripe(stripeKey);
@@ -1523,27 +2640,38 @@ async function initExpressCheckout() {
     });
 
     ece.on('confirm', async (event) => {
-      const p2        = currentProduct;
-      const qty2      = getQty();
-      const mult2     = TIER_MULTS[currentTier];
-      const price     = parseFloat((p2.price * mult2).toFixed(2));
-      const tierLabel = currentTier.charAt(0).toUpperCase() + currentTier.slice(1);
+      const p2   = currentProduct;
+      const qty2 = getQty();
+      let lineItem;
+      if (isVolume(p2) || isSingle(p2)) {
+        lineItem = {
+          id:       p2.id,
+          name:     p2.name,
+          price:    currentUnit(p2, qty2),
+          qty:      qty2,
+          image:    p2.images[0],
+          category: p2.category,
+          minQty:   p2.minQty,
+        };
+      } else {
+        const mult2     = TIER_MULTS[currentTier];
+        const tierLabel = currentTier.charAt(0).toUpperCase() + currentTier.slice(1);
+        lineItem = {
+          id:       `${p2.id}-${currentTier}`,
+          name:     `${p2.name} — ${tierLabel} Tier`,
+          price:    parseFloat((p2.price * mult2).toFixed(2)),
+          qty:      qty2,
+          image:    p2.images[0],
+          category: p2.category,
+          minQty:   p2.minQty,
+        };
+      }
 
       try {
         const res = await fetch('/api/create-payment-intent', {
           method:  'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            items: [{
-              id:       `${p2.id}-${currentTier}`,
-              name:     `${p2.name} — ${tierLabel} Tier`,
-              price,
-              qty:      qty2,
-              image:    p2.images[0],
-              category: p2.category,
-              minQty:   p2.minQty,
-            }],
-          }),
+          body: JSON.stringify({ items: [lineItem] }),
         });
         const { clientSecret, error: serverErr } = await res.json();
         if (serverErr) throw new Error(serverErr);
@@ -1569,34 +2697,381 @@ async function initExpressCheckout() {
 
 function updateExpressCheckoutAmount() {
   if (!_elements) return;
-  const p      = currentProduct;
-  const qty    = getQty();
-  const mult   = TIER_MULTS[currentTier];
-  _elements.update({ amount: Math.round(p.price * mult * qty * 100) });
+  const p   = currentProduct;
+  const qty = getQty();
+  const unit = currentUnit(p, qty);
+  _elements.update({ amount: Math.round(unit * qty * 100) });
 }
 
 /* ═══════════════════════════════════════════════════════════════
    RELATED PRODUCTS
 ═══════════════════════════════════════════════════════════════ */
+/* ── das-006 commercial: "included in price" callout + Net-30 terms CTA ── */
+function renderCommercial(p) {
+  const check = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>';
+  const vb = document.getElementById('das-value-block');
+  const list = document.getElementById('dvb-list');
+  if (vb && list) {
+    const items = [];
+    if (p.includesShipping)      items.push('<strong>Shipping included</strong> — in the price you see');
+    if (p.includesCustomization) items.push('<strong>Customization included</strong> — your fleet logo, colors &amp; branding');
+    if (p.flexibleDelivery)      items.push('<strong>Flexible delivery</strong> — ship to one hub facility or to individual driver addresses');
+    if (items.length) {
+      items.push('<strong>No hidden fees</strong>');
+      list.innerHTML = items.map(t => '<li>' + check + '<span>' + t + '</span></li>').join('');
+      vb.style.display = '';
+    } else { vb.style.display = 'none'; }
+  }
+  const tc = document.getElementById('das-terms-cta');
+  if (tc) tc.style.display = p.termsAvailable ? '' : 'none';
+}
+
+/* ── 30-day (Net-30) terms application modal → /api/contact → info@driverappreciationsolutions.com ── */
+function initTermsModal() {
+  const modal = document.getElementById('terms-modal');
+  const openBtn = document.getElementById('btn-apply-terms');
+  if (!modal || !openBtn) return;
+  const closeBtn = document.getElementById('terms-modal-close');
+  const backdrop = document.getElementById('terms-modal-backdrop');
+  const successClose = document.getElementById('terms-success-close');
+  const form = document.getElementById('terms-form');
+  const wrap = document.getElementById('terms-form-wrap');
+  const success = document.getElementById('terms-success');
+  const errEl = document.getElementById('terms-error');
+  const submitBtn = document.getElementById('terms-submit');
+  const open = () => { modal.style.display = 'flex'; document.body.style.overflow = 'hidden'; };
+  const close = () => { modal.style.display = 'none'; document.body.style.overflow = ''; };
+  openBtn.addEventListener('click', open);
+  closeBtn && closeBtn.addEventListener('click', close);
+  backdrop && backdrop.addEventListener('click', close);
+  successClose && successClose.addEventListener('click', close);
+  form && form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.style.display = 'none';
+    const fd = new FormData(form);
+    const get = k => (fd.get(k) || '').toString().trim();
+    const company = get('company'), contact = get('contact'), email = get('email');
+    if (!company || !contact || !email) {
+      errEl.textContent = 'Please fill in company, contact name, and work email.'; errEl.style.display = 'block'; return;
+    }
+    const prod = currentProduct ? currentProduct.name : 'Professional Driver Essentials Kit';
+    const message =
+      'NET-30 (30-DAY) TERMS APPLICATION — subject to approval.\n\n' +
+      'Product: ' + prod + '\n' +
+      'Company: ' + company + '\n' +
+      'Contact: ' + contact + '\n' +
+      'Work email: ' + email + '\n' +
+      'Phone: ' + (get('phone') || '—') + '\n' +
+      'Estimated quantity: ' + (get('qty') || '—') + '\n' +
+      'Delivery preference: ' + (get('delivery') || '—') + '\n' +
+      'Notes: ' + (get('notes') || '—');
+    submitBtn.disabled = true; submitBtn.textContent = 'Submitting…';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: contact, email: email, company: company, fleetSize: get('qty'), program: 'Net-30 Terms Application — ' + prod, message: message }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      wrap.style.display = 'none'; success.style.display = 'block';
+    } catch (err) {
+      errEl.textContent = (err && err.message) || 'Something went wrong. Please try again, or email info@driverappreciationsolutions.com.';
+      errEl.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false; submitBtn.textContent = 'Submit application';
+    }
+  });
+}
+
+/* ── Customization-coordinated product (Welcome Kit): process + ideal use cases + contact ── */
+function renderCustomization(p) {
+  const block = document.getElementById('customization-block');
+  if (!block) return;
+  const c = p.customization;
+  if (!c) { block.style.display = 'none'; return; }
+  const email = c.email || 'info@driverappreciationsolutions.com';
+  const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const mail = '<a href="mailto:' + email + '">' + email + '</a>';
+  const processHtml = esc(c.process || '').split(email).join(mail);
+  const chips = (c.idealFor || []).map(x => '<span>' + esc(x) + '</span>').join('');
+  block.innerHTML =
+    '<div class="dvb-title">Customization — handled after purchase</div>' +
+    '<p class="cust-process">' + processHtml + '</p>' +
+    (chips ? '<div class="cust-ideal-label">Ideal for</div><div class="cust-chips">' + chips + '</div>' : '') +
+    '<p class="cust-contact">Questions or artwork ready? Email ' + mail + '.</p>';
+  block.style.display = '';
+}
+
+/* ── Map a product to its shop category-filter value (for "View All" deep-linking). ── */
+function shopCategoryFor(p) {
+  const id  = String((p && p.id) || '');
+  const cat = String((p && p.category) || '').toLowerCase();
+  // Explicit overrides for products whose PDP category label predates the shop
+  if (id === 'das-004') return 'holiday';
+  // Reorg 2026-06-12: Safe Service Miles medals + Executive Collection live under Safety
+  // Recognition; only CAREER milestone medals stay under Service Milestone Awards.
+  if (id.indexOf('-exec') >= 0 || id.indexOf('msm-s-') === 0 || id === 'safe-miles-kit' || id.indexOf('ssm-') === 0) return 'safety';
+  if (id.indexOf('msm-c-') === 0 || id === 'milestone-kit' || cat.indexOf('milestone') >= 0) return 'milestone';
+  if (id.indexOf('mp-')  === 0 || cat.indexOf('mile pack') >= 0)  return 'milepacks';
+  if (cat.indexOf('safety')   >= 0) return 'safety';
+  if (cat.indexOf('onboarding')>= 0) return 'onboarding';
+  if (cat.indexOf('holiday')  >= 0 || cat.indexOf('seasonal') >= 0) return 'holiday';
+  return 'appreciation';
+}
+
+/* ── Interactive Kit Component Explorer: render the selected component's detail panel.
+   Reusable for any product with a `components: [{name, image, paragraphs|description, benefits, specs, order, active}]` array. ── */
+function renderComponentPanel(c) {
+  const el = document.getElementById('component-explorer');
+  if (!el || !c) return;
+  const esc = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const paras = arr => (arr || []).map(t => '<p>' + esc(t) + '</p>').join('');
+  const list = (title, arr) => (Array.isArray(arr) && arr.length)
+    ? '<div class="ce-sub">' + esc(title) + '</div><ul class="ce-list">' + arr.map(x => '<li>' + esc(x) + '</li>').join('') + '</ul>'
+    : '';
+  const bodyParas = Array.isArray(c.paragraphs) ? c.paragraphs
+                  : (c.description ? String(c.description).split(/\n{2,}/).map(s => s.trim()).filter(Boolean) : []);
+  el.innerHTML =
+    '<div class="ce-eyebrow">Included in this kit</div>' +
+    '<h2 class="ce-name">' + esc(c.name) + '</h2>' +
+    paras(bodyParas) +
+    list('Benefits', c.benefits) +
+    list('Specifications', c.specs);
+  el.style.display = '';
+}
+
+/* ── Reviews: render from product data only (no fabricated reviews). Empty-state when 0. ── */
+function renderReviews(p) {
+  const el = document.getElementById('acc-reviews-content');
+  if (!el) return;
+  const esc = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  const count = Number(p.reviews) || 0;
+  if (count <= 0) {
+    el.innerHTML = '<p style="color:var(--text-muted);font-size:0.9375rem;margin:0">No reviews yet — be the first to review this product after your order ships.</p>';
+    return;
+  }
+  const rating = Number(p.rating) || 0;
+  const full = Math.floor(rating), half = (rating - full) >= 0.5;
+  let stars = '';
+  for (let i = 0; i < 5; i++) stars += '<span class="star' + (i < full ? '' : (i === full && half ? ' half' : '')) + '">★</span>';
+  let html = '<div class="review-stars">' + stars +
+    '<span style="font-size:0.9375rem;color:var(--text-muted);margin-left:6px">' + rating.toFixed(1) +
+    ' out of 5 (' + count + ' review' + (count === 1 ? '' : 's') + ')</span></div>';
+  if (Array.isArray(p.reviewItems)) {
+    html += p.reviewItems.map(r =>
+      '<div class="review-card"><div class="review-header"><span class="reviewer-name">' + esc(r.name) +
+      '</span><span class="review-date">' + esc(r.date || '') + '</span></div>' +
+      (r.rating ? '<div style="color:#1A2E6E;font-size:0.875rem;margin-bottom:6px">' + '★'.repeat(Math.round(r.rating)) + '</div>' : '') +
+      '<div class="review-body">' + esc(r.body || '') + '</div></div>').join('');
+  }
+  el.innerHTML = html;
+}
+
+/* ── Product story: narrative sales content beneath the image (data-driven via p.story) ── */
+function renderStory(p) {
+  const el = document.getElementById('product-story');
+  if (!el) return;
+  const s = p.story;
+  if (!s) { el.style.display = 'none'; el.innerHTML = ''; return; }
+  const esc = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const paras = arr => (arr || []).map(t => '<p>' + esc(t) + '</p>').join('');
+  let html = '<div class="product-story-divider"></div>';
+  if (s.heading) html += '<h2>' + esc(s.heading) + '</h2>';
+  html += paras(s.paragraphs);
+  // Optional multi-section long-form body (sales narrative): each section is a
+  // sub-heading + paragraphs + an optional bullet list + trailing paragraphs.
+  // Additive — products without `sections` are unaffected.
+  const bullets = arr => (Array.isArray(arr) && arr.length)
+    ? '<ul class="story-bullets">' + arr.map(b => '<li>' + esc(b) + '</li>').join('') + '</ul>' : '';
+  if (Array.isArray(s.sections)) {
+    for (const sec of s.sections) {
+      if (sec.heading) html += '<h3 class="story-section-h">' + esc(sec.heading) + '</h3>';
+      html += paras(sec.paragraphs);
+      html += bullets(sec.bullets);
+      html += paras(sec.paragraphsAfter);
+    }
+  }
+  // Optional features grid (checkmark cards) — uses existing DAS feature styling.
+  if (Array.isArray(s.features) && s.features.length) {
+    if (s.featuresTitle) html += '<h3 class="story-section-h">' + esc(s.featuresTitle) + '</h3>';
+    html += '<div class="story-features">' + s.features.map(f =>
+      '<div class="story-feature">' +
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>' +
+        '<span>' + esc(f) + '</span></div>').join('') + '</div>';
+  }
+  // Optional customization marketing sub-section.
+  if (s.customSection) {
+    if (s.customSection.title) html += '<h3 class="story-section-h">' + esc(s.customSection.title) + '</h3>';
+    html += paras(s.customSection.paragraphs || (s.customSection.body ? [s.customSection.body] : []));
+  }
+  if (s.addon) {
+    html += '<div class="product-story-addon">';
+    if (s.addon.heading) html += '<h3>' + esc(s.addon.heading) + '</h3>';
+    html += paras(s.addon.paragraphs);
+    // Featured mile-pack pairing — a real preview card: click through OR add to order inline.
+    const mp = s.addon.featuredId && PRODUCTS[s.addon.featuredId];
+    if (mp) {
+      html +=
+        '<div class="story-mp-card">' +
+          '<a class="story-mp-imglink" href="product.html?id=' + esc(mp.id) + '"><img src="' + esc(mp.images[0]) + '" alt="' + esc(mp.name) + '" loading="lazy" onerror="this.style.display=\'none\'"></a>' +
+          '<div class="story-mp-info">' +
+            '<div class="story-mp-tier">' + esc(mp.tierLabel || 'Mile Pack') + ' · Mile Pack</div>' +
+            '<a class="story-mp-name" href="product.html?id=' + esc(mp.id) + '">' + esc(mp.name) + '</a>' +
+            '<div class="story-mp-price">$' + Number(mp.price).toFixed(2) + '/kit · min ' + (mp.minQty || 10) + '</div>' +
+            '<button type="button" class="story-mp-add" data-quick-add="' + esc(mp.id) + '" data-label="Add to order">Add to order</button>' +
+          '</div>' +
+        '</div>';
+    }
+    if (s.addon.linkHref) {
+      html += '<a class="story-addon-link" href="' + esc(s.addon.linkHref) + '">' + esc(s.addon.linkText || 'Learn more') +
+        ' <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/></svg></a>';
+    }
+    html += '</div>';
+  }
+  if (s.closing) html += '<p class="product-story-closing">' + esc(s.closing) + '</p>';
+  el.innerHTML = html;
+  el.style.display = '';
+}
+
+/* ── Availability: coming-soon / sold-out → hide purchase controls + offer "Notify me" ── */
+let _availabilityCtx = null;
+function renderAvailability(p) {
+  const block = document.getElementById('availability-block');
+  const state = p.availability;
+  const unavailable = (state === 'coming_soon' || state === 'sold_out');
+  if (unavailable) {
+    ['#tier-block', '#volume-block', '.qty-section', '.express-checkout-section', '#btn-add-to-cart', '#das-value-block', '#das-terms-cta']
+      .forEach(sel => document.querySelectorAll(sel).forEach(el => { el.style.display = 'none'; }));
+  }
+  if (!unavailable) {
+    // Available product — make sure the purchase controls hidden by a prior coming-soon
+    // render are restored (defensive; PDPs normally load one product per page).
+    ['.qty-section', '.express-checkout-section', '#btn-add-to-cart'].forEach(sel =>
+      document.querySelectorAll(sel).forEach(el => { el.style.display = ''; }));
+    if (block) { block.style.display = 'none'; block.innerHTML = ''; }
+    _availabilityCtx = null;
+    return;
+  }
+  if (!block) return;
+  _availabilityCtx = { state: state, date: p.availableDate || '', product: p.name };
+  let eyebrow, title, sub, btnLabel;
+  if (state === 'coming_soon' && p.availTitle) {
+    // Per-product override (e.g. Executive Collection Food Jar — pricing being finalized).
+    eyebrow = p.availEyebrow || 'Coming Soon';
+    title = p.availTitle;
+    sub = p.availSub || 'Add your email and we’ll let you know the moment it’s available to order.';
+    btnLabel = p.availBtn || 'Notify me when available';
+  } else if (state === 'coming_soon') {
+    eyebrow = 'Seasonal — Coming Soon';
+    title = 'Available ' + (p.availableDate || 'soon');
+    sub = 'This is a seasonal item. It will be available to order starting ' + (p.availableDate || 'soon') + '. Add your email and we’ll let you know the moment it opens.';
+    btnLabel = 'Notify me when available';
+  } else {
+    eyebrow = 'Currently Unavailable';
+    title = 'Sold Out';
+    sub = 'This item is temporarily out of stock. Add your email and we’ll let you know the moment it’s back.';
+    btnLabel = 'Notify me when it’s back in stock';
+  }
+  block.innerHTML =
+    '<div class="avail-banner avail-' + state + '">' +
+      '<div class="avail-eyebrow">' + eyebrow + '</div>' +
+      '<div class="avail-title">' + title + '</div>' +
+      '<div class="avail-sub">' + sub + '</div>' +
+      '<button type="button" class="btn-terms" id="btn-notify">' + btnLabel + '</button>' +
+    '</div>';
+  block.style.display = '';
+  const nb = document.getElementById('btn-notify');
+  if (nb) nb.addEventListener('click', openNotifyModal);
+}
+
+function openNotifyModal() {
+  const ctx = _availabilityCtx || {};
+  const title = document.getElementById('notify-title');
+  const sub = document.getElementById('notify-sub');
+  if (ctx.state === 'coming_soon') {
+    title.textContent = 'Notify me when available';
+    sub.textContent = 'We’ll email you the moment this item is available to order' + (ctx.date ? ' (' + ctx.date + ')' : '') + '. No spam.';
+  } else {
+    title.textContent = 'Notify me when back in stock';
+    sub.textContent = 'We’ll email you the moment this item is back in stock. No spam.';
+  }
+  document.getElementById('notify-form-wrap').style.display = '';
+  document.getElementById('notify-success').style.display = 'none';
+  document.getElementById('notify-error').style.display = 'none';
+  document.getElementById('notify-modal').style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function initNotifyModal() {
+  const modal = document.getElementById('notify-modal');
+  if (!modal) return;
+  const close = () => { modal.style.display = 'none'; document.body.style.overflow = ''; };
+  const backdrop = document.getElementById('notify-backdrop');
+  const closeBtn = document.getElementById('notify-close');
+  const successClose = document.getElementById('notify-success-close');
+  const form = document.getElementById('notify-form');
+  const errEl = document.getElementById('notify-error');
+  const submitBtn = document.getElementById('notify-submit');
+  backdrop && backdrop.addEventListener('click', close);
+  closeBtn && closeBtn.addEventListener('click', close);
+  successClose && successClose.addEventListener('click', close);
+  form && form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.style.display = 'none';
+    const email = (new FormData(form).get('email') || '').toString().trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errEl.textContent = 'Please enter a valid email address.'; errEl.style.display = 'block'; return; }
+    const ctx = _availabilityCtx || {};
+    const prod = (currentProduct && currentProduct.name) || ctx.product || 'a product';
+    const status = ctx.state === 'coming_soon' ? ('Coming soon — available ' + (ctx.date || 'soon')) : 'Sold out (notify when back in stock)';
+    const message = 'STOCK / AVAILABILITY NOTIFICATION REQUEST\n\nProduct: ' + prod + '\nStatus: ' + status + '\nCustomer email: ' + email + '\n\nAction: email this customer when the item is available / in stock.';
+    submitBtn.disabled = true; submitBtn.textContent = 'Submitting…';
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: 'Stock notification request', email: email, program: 'Stock Notification — ' + prod, message: message }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      document.getElementById('notify-form-wrap').style.display = 'none';
+      document.getElementById('notify-success').style.display = 'block';
+    } catch (err) {
+      errEl.textContent = (err && err.message) || 'Something went wrong. Please try again, or email info@driverappreciationsolutions.com.';
+      errEl.style.display = 'block';
+    } finally {
+      submitBtn.disabled = false; submitBtn.textContent = 'Notify me';
+    }
+  });
+}
+
 function renderRelated() {
   const grid = document.getElementById('related-grid');
-  const ids  = currentProduct.relatedIds || [];
+  // Only keep ids that resolve to a live product (archived mile packs etc. are dropped),
+  // so the grid never renders empty/partial. Hide the whole section if none remain.
+  const ids  = (currentProduct.relatedIds || []).filter(id => PRODUCTS[id]);
   if (!ids.length) { grid.closest('.related-section').style.display = 'none'; return; }
+  grid.closest('.related-section').style.display = '';
 
   grid.innerHTML = ids.map(id => {
     const p = PRODUCTS[id];
     if (!p) return '';
+    const priceText = (p.price != null) ? `from $${p.price.toFixed(2)}/unit` : 'Pricing coming soon';
     return `
-      <a href="product.html?id=${p.id}" class="related-card">
-        <div class="related-card-img">
-          <img src="${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
+      <div class="related-card" data-product-type="${p.productType || ''}">
+        <a href="product.html?id=${p.id}" class="related-card-link">
+          <div class="related-card-img">
+            <img src="${p.images[0]}" alt="${p.name}" loading="lazy" onerror="this.style.display='none'">
+          </div>
+          <div class="related-card-body">
+            <div class="related-card-cat">${p.category}</div>
+            <div class="related-card-name">${p.name}</div>
+            <div class="related-card-price">${priceText}</div>
+          </div>
+        </a>
+        <div class="related-card-actions">
+          <button type="button" class="related-add-btn" data-quick-add="${p.id}" data-label="Add to order">Add to order</button>
+          <a href="product.html?id=${p.id}" class="related-details-link">Details</a>
         </div>
-        <div class="related-card-body">
-          <div class="related-card-cat">${p.category}</div>
-          <div class="related-card-name">${p.name}</div>
-          <div class="related-card-price">from $${p.price.toFixed(2)}/unit</div>
-        </div>
-      </a>`;
+      </div>`;
   }).join('');
 }
 </script>
