@@ -97,6 +97,61 @@
   </style>
 </head>
 <body>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-splash-logo"><img src="/images/logo.png" alt="Driver Appreciation Solutions" width="300"></div>
+  <div class="das-splash-bar"><i></i></div>
+  <div class="das-splash-tag">driver appreciation made simple for fleets</div>
+</div>
+<style>
+  #das-splash{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:22px;transition:opacity .45s ease}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .das-splash-logo{position:relative;overflow:hidden;line-height:0}
+  #das-splash .das-splash-logo img{width:min(68vw,300px);height:auto;opacity:0;
+    animation:dasRise .7s cubic-bezier(.2,.7,.2,1) .05s forwards}
+  #das-splash .das-splash-logo::after{content:'';position:absolute;top:0;bottom:0;left:0;width:42%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    transform:translateX(-130%) skewX(-18deg);animation:dasShine 1.1s ease-in-out .7s 1 both;pointer-events:none}
+  #das-splash .das-splash-bar{width:200px;height:3px;border-radius:3px;background:#e7eaf0;overflow:hidden;opacity:0;
+    animation:dasFade .4s ease .45s forwards}
+  #das-splash .das-splash-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#1A2E6E,#1A2E6E 70%,#C8A14B);animation:dasFill 1.25s cubic-bezier(.4,.1,.2,1) .5s forwards}
+  #das-splash .das-splash-tag{font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    letter-spacing:.18em;text-transform:uppercase;color:#6b7585;opacity:0;animation:dasFade .5s ease .55s forwards}
+  #das-splash.das-quick .das-splash-tag{display:none}
+  #das-splash.das-quick .das-splash-bar i{animation-duration:.55s}
+  @keyframes dasRise{to{opacity:1;transform:none}}
+  @keyframes dasShine{to{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes dasFill{to{width:100%}}
+  @keyframes dasFade{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    #das-splash .das-splash-logo img,#das-splash .das-splash-logo::after,
+    #das-splash .das-splash-bar,#das-splash .das-splash-bar i,#das-splash .das-splash-tag{animation:none;opacity:1}
+    #das-splash .das-splash-bar i{width:100%}
+  }
+</style>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 320 : 1000, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);
+  })();
+</script>
+
 
 <div class="announcement-bar">
   Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
