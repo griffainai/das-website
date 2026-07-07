@@ -8,13 +8,70 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=10">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
-  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/tracking.js?v=2" defer></script>
   <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-splash-logo"><img src="/images/logo.png" alt="Driver Appreciation Solutions" width="300"></div>
+  <div class="das-splash-bar"><i></i></div>
+  <div class="das-splash-tag">driver appreciation made simple for fleets</div>
+</div>
+<style>
+  #das-splash{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:22px;transition:opacity .45s ease}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .das-splash-logo{position:relative;overflow:hidden;line-height:0}
+  #das-splash .das-splash-logo img{width:min(68vw,300px);height:auto;opacity:0;
+    animation:dasRise .7s cubic-bezier(.2,.7,.2,1) .05s forwards}
+  #das-splash .das-splash-logo::after{content:'';position:absolute;top:0;bottom:0;left:0;width:42%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    transform:translateX(-130%) skewX(-18deg);animation:dasShine 1.1s ease-in-out .7s 1 both;pointer-events:none}
+  #das-splash .das-splash-bar{width:200px;height:3px;border-radius:3px;background:#e7eaf0;overflow:hidden;opacity:0;
+    animation:dasFade .4s ease .45s forwards}
+  #das-splash .das-splash-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#1A2E6E,#1A2E6E 70%,#C8A14B);animation:dasFill 1.25s cubic-bezier(.4,.1,.2,1) .5s forwards}
+  #das-splash .das-splash-tag{font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    letter-spacing:.18em;text-transform:uppercase;color:#6b7585;opacity:0;animation:dasFade .5s ease .55s forwards}
+  #das-splash.das-quick .das-splash-tag{display:none}
+  #das-splash.das-quick .das-splash-bar i{animation-duration:.55s}
+  @keyframes dasRise{to{opacity:1;transform:none}}
+  @keyframes dasShine{to{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes dasFill{to{width:100%}}
+  @keyframes dasFade{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    #das-splash .das-splash-logo img,#das-splash .das-splash-logo::after,
+    #das-splash .das-splash-bar,#das-splash .das-splash-bar i,#das-splash .das-splash-tag{animation:none;opacity:1}
+    #das-splash .das-splash-bar i{width:100%}
+  }
+</style>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 320 : 1000, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);
+  })();
+</script>
+
 
 <div class="announcement-bar">
   All orders include free standard shipping &nbsp;·&nbsp; program-managed fulfillment
@@ -30,7 +87,7 @@
         <a href="index.html"  class="nav-link">Home</a>
         <a href="shop.html"   class="nav-link">Shop</a>
         <a href="about.html"  class="nav-link">About</a>
-        <a href="ideas.html"  class="nav-link">Ideas</a>
+        <a href="ideas.html"  class="nav-link">Insights &amp; Ideas</a>
         <a href="publications.html" class="nav-link">Newsletter</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
@@ -53,12 +110,12 @@
 <div class="mobile-drawer">
   <div class="mobile-drawer-header">
     <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
-    <button class="mobile-close-btn">✕</button>
+    <button class="mobile-close-btn" aria-label="Close menu">✕</button>
   </div>
   <a href="index.html"  class="mobile-nav-link">Home</a>
   <a href="shop.html"   class="mobile-nav-link">Shop</a>
   <a href="about.html"  class="mobile-nav-link">About</a>
-  <a href="ideas.html"  class="mobile-nav-link">Ideas</a>
+  <a href="ideas.html"  class="mobile-nav-link">Insights &amp; Ideas</a>
   <a href="contact.html" class="mobile-nav-link">Contact</a>
   <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
@@ -91,6 +148,29 @@
             Continue Shopping
           </a>
         </div>
+
+        <!-- ── Appreciation / mission block — fills the left column, reinforces why this purchase matters ── -->
+        <div style="margin-top:28px;background:linear-gradient(180deg,#F5F8FF 0%,#FFFFFF 100%);border:1px solid #E2E8F0;border-radius:16px;padding:28px 30px;position:relative;overflow:hidden">
+          <div style="position:absolute;top:-18px;right:-18px;width:120px;height:120px;background:radial-gradient(circle,rgba(26,46,110,0.06) 0%,rgba(26,46,110,0) 70%)"></div>
+          <div style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;background:#1A2E6E;margin-bottom:16px">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF" style="width:24px;height:24px"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
+          </div>
+          <h3 style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#0F172A;margin:0 0 12px;line-height:1.25">Thank you for recognizing your drivers.</h3>
+          <p style="font-size:0.9375rem;line-height:1.7;color:#475569;margin:0 0 18px">
+            Behind this order is a simple belief: the professional drivers who keep this country moving deserve to feel seen. Your investment tells them their dedication — and every safe mile they've given this industry — never goes unnoticed.
+          </p>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;margin-top:1px"><path d="m5 13 4 4L19 7"/></svg>
+              <span style="font-size:0.9375rem;color:#1F2937;font-weight:600">Thank you for your commitment to safety.</span>
+            </div>
+            <div style="display:flex;gap:10px;align-items:flex-start">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;margin-top:1px"><path d="m5 13 4 4L19 7"/></svg>
+              <span style="font-size:0.9375rem;color:#1F2937;font-weight:600">Thank you for recognizing the professional contribution of drivers.</span>
+            </div>
+          </div>
+          <p style="margin:20px 0 0;font-size:0.8125rem;font-weight:700;letter-spacing:0.02em;color:#1A2E6E">— The Driver Appreciation Solutions team</p>
+        </div>
       </div>
 
       <!-- ORDER SUMMARY -->
@@ -105,15 +185,6 @@
           </div>
         </div>
 
-        <!-- ── Premium guarantee upsell — optional checkbox ── -->
-        <label id="premium-guarantee-row" style="display:none;align-items:flex-start;gap:10px;padding:10px 12px;border:1px dashed #E5E7EB;border-radius:10px;margin-bottom:14px;cursor:pointer">
-          <input type="checkbox" id="premium-guarantee-cb" style="margin-top:2px;width:16px;height:16px;accent-color:#1A2E6E;cursor:pointer">
-          <div style="flex:1;min-width:0">
-            <p style="margin:0;font-size:0.75rem;font-weight:700;color:#1A2E6E;letter-spacing:1px;text-transform:uppercase">Optional · Premium Guarantee</p>
-            <p style="margin:2px 0 0;font-size:0.8125rem;color:#374151;line-height:1.4">Add overnight replacement on damaged items + 1-year quality lock. <strong style="color:#1A2E6E">+10%</strong> of order subtotal.</p>
-          </div>
-        </label>
-
         <div class="order-line">
           <span>Subtotal</span>
           <strong id="summary-subtotal">$0.00</strong>
@@ -122,13 +193,9 @@
           <span style="color:#059669;font-weight:600">Bundle discount</span>
           <strong style="color:#059669" id="summary-bundle-discount">−$0.00</strong>
         </div>
-        <div class="order-line" id="guarantee-fee-row" style="display:none">
-          <span>Premium guarantee</span>
-          <strong id="summary-guarantee-fee">+$0.00</strong>
-        </div>
         <div class="order-line">
           <span>Shipping</span>
-          <strong>Calculated at checkout</strong>
+          <strong style="color:#059669">Free shipping</strong>
         </div>
         <div class="order-line">
           <span>Taxes</span>
@@ -151,7 +218,17 @@
         </div>
 
         <div class="checkout-note">
-          By placing your order you agree to our <a href="#">Terms &amp; Conditions</a>. Minimum order of 10 units per product.
+          By placing your order you agree to our <a href="#">Terms &amp; Conditions</a>. Minimum order quantities apply per product.
+        </div>
+
+        <!-- Corporate purchasing pathway — subtle, for buyers who can't use a company card -->
+        <div style="margin-top:18px;padding:14px 16px;background:var(--black-2);border:1px solid var(--gold-border);border-radius:12px">
+          <div style="font-size:0.875rem;font-weight:700;color:var(--text-primary);margin-bottom:2px">Buying on behalf of your organization?</div>
+          <p style="font-size:0.8125rem;color:var(--text-secondary);margin:0 0 10px;line-height:1.5">Need a quote, PO, vendor setup, or Net 30 terms? We'll bring your cart along.</p>
+          <a href="company-purchasing.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.8125rem;font-weight:700;color:#1A2E6E;text-decoration:none">
+            Buy for My Company
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" style="width:13px;height:13px"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
         </div>
 
         <!-- TRUST SIGNALS -->
@@ -186,6 +263,8 @@
   </div>
 </footer>
 
+<script src="/lib/recognition-pricing.js"></script>
+<script src="/lib/catalog.js"></script>
 <script src="js/cart.js"></script>
 <script>
 function renderCart() {
@@ -227,17 +306,19 @@ function renderCart() {
       <div>
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-cat">${item.category}</div>
+        ${item.milestoneLabel ? `<div class="cart-item-cat" style="color:#1A2E6E;font-weight:700">Selected Milestone: ${item.milestoneLabel}</div>` : ''}
+        ${item.kitConfigLabel ? `<div class="cart-item-cat" style="color:#1A2E6E;font-weight:600">Kit: ${item.kitConfigLabel}</div>` : ''}
         <div style="font-size:0.875rem;color:var(--text-muted);margin-top:4px">$${item.price.toFixed(2)} / unit</div>
       </div>
       <div style="display:flex;align-items:center;gap:6px;justify-content:center">
-        <button class="qty-btn" onclick="changeQty('${item.id}', -1)" style="width:26px;height:26px;font-size:0.9rem">−</button>
+        <button class="qty-btn" onclick="changeQty('${item.id}', -1)" aria-label="Decrease quantity" style="width:26px;height:26px;font-size:0.9rem">−</button>
         <input type="number"
                class="qty-input"
                style="width:48px"
                value="${item.qty}"
                min="${item.minQty || 10}"
                onchange="setQty('${item.id}', this.value)">
-        <button class="qty-btn" onclick="changeQty('${item.id}', 1)" style="width:26px;height:26px;font-size:0.9rem">+</button>
+        <button class="qty-btn" onclick="changeQty('${item.id}', 1)" aria-label="Increase quantity" style="width:26px;height:26px;font-size:0.9rem">+</button>
       </div>
       <div class="cart-item-subtotal" style="text-align:right">$${(item.price * item.qty).toFixed(2)}</div>
       <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Remove ${item.name}">
@@ -253,7 +334,6 @@ function renderCart() {
   // ── Bundle threshold mechanics (mirrors the portal's cart context) ──
   const BUNDLE_THRESHOLD    = 575;
   const BUNDLE_DISCOUNT_PCT = 0.15;
-  const GUARANTEE_PCT       = 0.10;
 
   const qualified = subtotal >= BUNDLE_THRESHOLD;
   const bundleDiscount = qualified ? Math.round(subtotal * BUNDLE_DISCOUNT_PCT * 100) / 100 : 0;
@@ -288,37 +368,14 @@ function renderCart() {
     discountRow.style.display = 'none';
   }
 
-  // ── Premium guarantee row visibility + math ──
-  const guaranteeRow = document.getElementById('premium-guarantee-row');
-  const guaranteeCb  = document.getElementById('premium-guarantee-cb');
-  guaranteeRow.style.display = 'flex';
-
-  const postBundle    = subtotal - bundleDiscount;
-  const guaranteeOn   = !!(guaranteeCb && guaranteeCb.checked);
-  const guaranteeFee  = guaranteeOn ? Math.round(postBundle * GUARANTEE_PCT * 100) / 100 : 0;
-  const guaranteeRow2 = document.getElementById('guarantee-fee-row');
-  if (guaranteeOn) {
-    guaranteeRow2.style.display = '';
-    document.getElementById('summary-guarantee-fee').textContent = `+$${guaranteeFee.toFixed(2)}`;
-  } else {
-    guaranteeRow2.style.display = 'none';
-  }
-
-  const grandTotal = Math.round((postBundle + guaranteeFee) * 100) / 100;
+  const grandTotal = Math.round((subtotal - bundleDiscount) * 100) / 100;
   document.getElementById('summary-total').textContent = `$${grandTotal.toFixed(2)}`;
 
   // Expose for goToCheckout()
   window.__dasCheckoutMeta = {
-    bundleDiscount:   bundleDiscount,
-    premiumGuarantee: guaranteeOn,
-    guaranteeFee:     guaranteeFee,
+    bundleDiscount: bundleDiscount,
   };
 }
-
-// Recompute when premium-guarantee checkbox toggles
-document.addEventListener('change', function (e) {
-  if (e.target && e.target.id === 'premium-guarantee-cb') renderCart();
-});
 
 function removeItem(id) { Cart.remove(id); renderCart(); }
 function changeQty(id, delta) {

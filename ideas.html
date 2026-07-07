@@ -5,22 +5,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Driver Recognition Blog — Ideas &amp; Insights for Fleet Operators</title>
   <meta name="description" content="Practical guides, safety research, retention data, and recognition strategies for fleet operators building driver programs that reduce accidents and keep drivers longer.">
-  <link rel="canonical" href="https://driverappreciationsolutions.com/ideas.html">
+  <link rel="canonical" href="https://www.driverappreciationsolutions.com/ideas">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Driver Appreciation Solutions">
   <meta property="og:title" content="Driver Recognition Ideas — Blog &amp; Insights for Fleet Operators">
   <meta property="og:description" content="Practical guides, safety research, retention data, and recognition strategies for fleet operators building driver programs that reduce accidents and keep drivers longer.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
-  <meta property="og:url" content="https://driverappreciationsolutions.com/ideas.html">
+  <meta property="og:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
+  <meta property="og:url" content="https://www.driverappreciationsolutions.com/ideas">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Driver Recognition Ideas — Blog &amp; Insights for Fleet Operators">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta name="twitter:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="css/styles.css?v=10">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#1A2E6E">
 
   <script type="application/ld+json">
@@ -35,11 +37,17 @@
   </script>
   <style>
     /* ── Blog-specific styles ── */
-    .blog-hero { background: #0D1B45; padding: 80px 0 72px; }
-    .blog-hero-eyebrow { display: inline-block; background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 5px 14px; border-radius: 100px; margin-bottom: 20px; }
-    .blog-hero-title { font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 900; color: #fff; letter-spacing: -0.04em; line-height: 1.06; margin-bottom: 20px; }
-    .blog-hero-title em { color: rgba(255,255,255,0.55); font-style: normal; }
-    .blog-hero-desc { font-size: 1.125rem; color: rgba(255,255,255,0.65); line-height: 1.7; max-width: 560px; margin-bottom: 40px; }
+    .blog-hero { position: relative; overflow: hidden; padding: 72px 0 64px;
+      background: linear-gradient(135deg, #16264F 0%, #0B1430 100%); border-bottom: 1px solid rgba(200,168,75,.30); }
+    .blog-hero::before { content: ""; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(120% 130% at 88% 0%, rgba(200,168,75,.16) 0%, transparent 55%); }
+    .blog-hero .container { position: relative; z-index: 1; }
+    .blog-hero-mark { width: 54px; height: auto; display: block; margin-bottom: 22px; filter: brightness(0) invert(1); opacity: .94; }
+    .blog-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.10); border: 1px solid rgba(200,168,75,.35); color: #E8C766; font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; padding: 6px 14px; border-radius: 100px; margin-bottom: 18px; }
+    .blog-hero-title { font-size: clamp(2.1rem, 5vw, 3.5rem); font-weight: 900; color: #fff; letter-spacing: -0.03em; line-height: 1.07; margin-bottom: 16px; }
+    .blog-hero-title em { color: #E8C766; font-style: normal; }
+    .blog-hero-desc { font-size: 1.0625rem; color: rgba(255,255,255,0.72); line-height: 1.65; max-width: 580px; margin: 0; }
+    @media (max-width: 640px) { .blog-hero { padding: 44px 0 40px; } .blog-hero-mark { width: 44px; margin-bottom: 16px; } .blog-hero-desc { font-size: 1rem; } }
     .blog-stats { display: flex; gap: 32px; flex-wrap: wrap; }
     .blog-stat { display: flex; flex-direction: column; gap: 4px; }
     .blog-stat-num { font-size: 1.75rem; font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1; }
@@ -354,9 +362,64 @@
     @media (max-width: 640px) { .article-grid { grid-template-columns: 1fr; } .featured-content { padding: 28px 24px; } .blog-stats { gap: 20px; } .insight-item { padding: 24px 20px; } .blog-sidebar { grid-template-columns: 1fr; } }
   </style>
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
-  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/tracking.js?v=2" defer></script>
 </head>
 <body>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-splash-logo"><img src="/images/logo.png" alt="Driver Appreciation Solutions" width="300"></div>
+  <div class="das-splash-bar"><i></i></div>
+  <div class="das-splash-tag">driver appreciation made simple for fleets</div>
+</div>
+<style>
+  #das-splash{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:22px;transition:opacity .45s ease}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .das-splash-logo{position:relative;overflow:hidden;line-height:0}
+  #das-splash .das-splash-logo img{width:min(68vw,300px);height:auto;opacity:0;
+    animation:dasRise .7s cubic-bezier(.2,.7,.2,1) .05s forwards}
+  #das-splash .das-splash-logo::after{content:'';position:absolute;top:0;bottom:0;left:0;width:42%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    transform:translateX(-130%) skewX(-18deg);animation:dasShine 1.1s ease-in-out .7s 1 both;pointer-events:none}
+  #das-splash .das-splash-bar{width:200px;height:3px;border-radius:3px;background:#e7eaf0;overflow:hidden;opacity:0;
+    animation:dasFade .4s ease .45s forwards}
+  #das-splash .das-splash-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#1A2E6E,#1A2E6E 70%,#C8A14B);animation:dasFill 1.25s cubic-bezier(.4,.1,.2,1) .5s forwards}
+  #das-splash .das-splash-tag{font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    letter-spacing:.18em;text-transform:uppercase;color:#6b7585;opacity:0;animation:dasFade .5s ease .55s forwards}
+  #das-splash.das-quick .das-splash-tag{display:none}
+  #das-splash.das-quick .das-splash-bar i{animation-duration:.55s}
+  @keyframes dasRise{to{opacity:1;transform:none}}
+  @keyframes dasShine{to{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes dasFill{to{width:100%}}
+  @keyframes dasFade{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    #das-splash .das-splash-logo img,#das-splash .das-splash-logo::after,
+    #das-splash .das-splash-bar,#das-splash .das-splash-bar i,#das-splash .das-splash-tag{animation:none;opacity:1}
+    #das-splash .das-splash-bar i{width:100%}
+  }
+</style>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 320 : 1000, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);
+  })();
+</script>
+
 
 <div class="announcement-bar">
   Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
@@ -373,7 +436,7 @@
         <a href="index.html"  class="nav-link">Home</a>
         <a href="shop.html"   class="nav-link">Shop</a>
         <a href="about.html"  class="nav-link">About</a>
-        <a href="ideas.html"  class="nav-link active">Ideas</a>
+        <a href="ideas.html"  class="nav-link active">Insights &amp; Ideas</a>
         <a href="publications.html" class="nav-link">Newsletter</a>
         <a href="contact.html" class="nav-link">Contact</a>
       </div>
@@ -401,21 +464,20 @@
   <a href="index.html"  class="mobile-nav-link">Home</a>
   <a href="shop.html"   class="mobile-nav-link">Shop</a>
   <a href="about.html"  class="mobile-nav-link">About</a>
-  <a href="ideas.html"  class="mobile-nav-link active">Ideas</a>
+  <a href="ideas.html"  class="mobile-nav-link active">Insights &amp; Ideas</a>
   <a href="contact.html" class="mobile-nav-link">Contact</a>
   <div class="mobile-drawer-footer"><a href="cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
 
-<!-- PAGE LABEL (minimal — featured article is the visual anchor) -->
-<div style="background:#FFFFFF;border-bottom:1px solid #F1F5F9;padding:28px 0 20px">
+<!-- BRANDED PAGE HERO -->
+<section class="blog-hero">
   <div class="container">
-    <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
-      <span style="font-size:0.6875rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#1A2E6E;">Ideas &amp; Insights</span>
-      <span style="width:1px;height:12px;background:#D1D5DB;display:inline-block;align-self:center;"></span>
-      <h1 style="font-size:1rem;font-weight:500;color:#6B7280;margin:0;letter-spacing:-0.01em;">Research, playbooks, and guides for fleet operators</h1>
-    </div>
+    <img src="images/favicon-mark.png" alt="" aria-hidden="true" class="blog-hero-mark">
+    <div class="blog-hero-eyebrow">Insights &amp; Ideas</div>
+    <h1 class="blog-hero-title">Research, playbooks &amp;<br><em>guides for Fleet Leadership Teams.</em></h1>
+    <p class="blog-hero-desc">The strategy behind driver recognition, retention, and safety culture — written for the people who run fleets.</p>
   </div>
-</div>
+</section>
 
 <!-- CATEGORY FILTER -->
 <div class="category-bar">
@@ -511,7 +573,7 @@
             <span class="card-date">Mar 2026 · 6 min</span>
           </div>
           <h3 class="card-title">The Real ROI of Driver Recognition Programs: A Data-Backed Analysis</h3>
-          <p class="card-excerpt">Replacing a single driver costs $8,000–$20,000. A full recognition program costs $110 per driver per year. The ROI math is not close — and most fleet operators have never run it with all the line items visible.</p>
+          <p class="card-excerpt">Replacing a single driver costs $8,000–$20,000. A full recognition program costs a small fraction of that. The ROI math is not close — and most fleet operators have never run it with all the line items visible.</p>
           <span class="card-readmore">
             Read Article
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>

@@ -20,7 +20,13 @@ Disallow: /success.html
 # Block URL parameters (prevents duplicate indexing via UTM/tracking params)
 Disallow: /*?*
 
+# ...but allow the shop category facets (real landing pages the service cards + redirects target)
+Allow: /shop?category=
+Allow: /shop.html?category=
+Allow: /product?id=
+Allow: /product.html?id=
+
 # Allow clean URLs without parameters
 Allow: /$
 
-Sitemap: https://driverappreciationsolutions.com/sitemap.xml
+Sitemap: https://www.driverappreciationsolutions.com/sitemap.xml

@@ -5,54 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title id="page-title">Product — Driver Appreciation Solutions</title>
   <meta name="description" id="page-desc" content="Fleet recognition kits built for the trucking industry.">
-  <link rel="canonical" id="page-canonical" href="https://driverappreciationsolutions.com/product.html">
+  <link rel="canonical" id="page-canonical" href="https://www.driverappreciationsolutions.com/product">
   <meta property="og:type" content="product">
   <meta property="og:site_name" content="Driver Appreciation Solutions">
   <meta property="og:title" content="Fleet Recognition Kits — Driver Appreciation Solutions">
   <meta property="og:description" content="Fleet recognition kits built for the trucking industry. Driver appreciation, onboarding, milestone, and safety recognition programs. Fleet-scale programs.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta property="og:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
   <meta property="og:url" id="page-ogurl" content="https://driverappreciationsolutions.com/product.html">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Fleet Recognition Kits — Driver Appreciation Solutions">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta name="twitter:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#1A2E6E">
 
-  <script type="application/ld+json">
+  <!-- Per-product JSON-LD is generated client-side in renderProduct() (id=page-jsonld). This static
+       fallback is intentionally generic (no specific price) so non-JS crawlers never see a mismatch. -->
+  <script type="application/ld+json" id="page-jsonld">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://driverappreciationsolutions.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://driverappreciationsolutions.com/shop.html" },
-          { "@type": "ListItem", "position": 3, "name": "Product", "item": "https://driverappreciationsolutions.com/product.html" }
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.driverappreciationsolutions.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Shop", "item": "https://www.driverappreciationsolutions.com/shop" }
         ]
       },
       {
         "@type": "Product",
-        "@id": "https://driverappreciationsolutions.com/product.html#product",
-        "name": "Driver Appreciation Kit",
-        "description": "Curated driver appreciation kits, onboarding packs, and milestone awards built for trucking fleets. Fleet-scale orders from 10 units. Fleet-scale fulfillment.",
-        "image": "https://images.unsplash.com/photo-1549465231-2f652e31be48?w=1200&q=80&fit=crop",
+        "name": "Driver Recognition Products",
+        "description": "Custom-branded driver appreciation kits, onboarding packs, milestone medals, and safety recognition programs built for trucking fleets.",
+        "image": "https://www.driverappreciationsolutions.com/images/og-default.jpg",
         "brand": { "@type": "Brand", "name": "Driver Appreciation Solutions" },
-        "url": "https://driverappreciationsolutions.com/product.html",
-        "offers": {
-          "@type": "AggregateOffer",
-          "priceCurrency": "USD",
-          "lowPrice": "44.99",
-          "highPrice": "97.00",
-          "offerCount": "8",
-          "availability": "https://schema.org/InStock",
-          "seller": { "@type": "Organization", "name": "Driver Appreciation Solutions" }
-        }
+        "url": "https://www.driverappreciationsolutions.com/shop"
       }
     ]
   }
@@ -102,6 +94,9 @@
       gap: 0 20px;
       align-items: start;
     }
+    /* Single-image products have no thumb rail — drop the 72px rail column so the main image
+       FILLS the space instead of collapsing into the narrow rail column. */
+    .product-detail-grid.no-thumbs { grid-template-columns: 1fr 440px; }
 
     /* THUMBNAIL RAIL */
     .thumb-rail {
@@ -119,19 +114,20 @@
     .thumb-item:hover:not(.active) { border-color: #999; }
 
     /* MAIN IMAGE AREA */
+    /* (2026-06-26) The main viewer IS the photo: the image fills the column width and the box
+       takes the image's own height. No background, no fixed ratio, no object-fit → the photo
+       fills edge-to-edge with NO letterbox bars and NO crop, matching every other product. */
     .main-image-area {
       position: sticky; top: 96px;
-      background: #F5F5F5; border-radius: 12px; overflow: hidden;
-      aspect-ratio: 1/1; max-height: 600px;
+      border-radius: 12px; overflow: hidden;
     }
     .main-image-area img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
+      width: 100%; height: auto; display: block;
       transition: opacity 0.2s ease;
     }
     .main-image-area.transitioning img { opacity: 0; }
-    /* Full-photo (uncropped) display for landscape product shots */
-    .main-image-area.fit-contain { aspect-ratio: 3/2; }
-    .main-image-area.fit-contain img { object-fit: contain; }
+    /* fitContain / cover no longer force a frame — kept as no-ops so the JS toggles don't error. */
+    .main-image-area.fit-contain { }
     .thumb-rail.fit-contain .thumb-item img { object-fit: contain; }
     /* Dark-background product shots (Camino tote, Pack Leader) blend into a near-black wrap. */
     .main-image-area.img-dark { background: #0A0A0A; }
@@ -141,6 +137,18 @@
     .main-image-area.safe-frame:hover { box-shadow: inset 0 0 0 6px #059669, 0 0 0 4px rgba(5,150,105,0.18); }
     .thumb-rail.safe-frame .thumb-item.active { box-shadow: inset 0 0 0 3px #059669; }
     @media (max-width: 640px) { .main-image-area.safe-frame { box-shadow: inset 0 0 0 4px #059669; } }
+    /* D10 — Custom Laser Engraving badge + upgrade block (navy brand, white text). */
+    .laser-badge { display:inline-block; margin:2px 0 14px; padding:6px 12px; background:#1A2E6E; color:#fff;
+      border-radius:6px; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; }
+    .laser-block { margin:20px 0; padding:20px 22px; background:#F7F8FB; border:1px solid var(--gold-border, #E3D7B8);
+      border-left:3px solid #1A2E6E; border-radius:10px; }
+    .laser-block-title { font-weight:700; color:#1A2E6E; font-size:15px; margin-bottom:10px; }
+    .laser-block p { font-size:14px; line-height:1.6; color:var(--text-secondary, #444); margin:0 0 10px; }
+    .laser-options { list-style:none; padding:0; margin:0 0 12px; display:grid; grid-template-columns:1fr 1fr; gap:4px 16px; }
+    .laser-options li { font-size:13.5px; color:var(--text-secondary, #444); position:relative; padding-left:20px; }
+    .laser-options li::before { content:'✓'; position:absolute; left:0; color:#1A2E6E; font-weight:700; }
+    .laser-ask { margin-bottom:0 !important; }
+    @media (max-width:640px){ .laser-options { grid-template-columns:1fr; } }
     /* Coming-soon exec gift (Food Jar) — pricing-pending label in the price slot */
     .price-soon { font-size: 1.0625rem; font-weight: 800; letter-spacing: -0.01em; color: #1A2E6E; }
     /* Milestone-select kits — milestone dropdown + representative-image disclaimer */
@@ -153,7 +161,61 @@
       background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px;
     }
     .milestone-select:focus-visible { outline: 3px solid rgba(26,46,110,.35); outline-offset: 1px; border-color: #1A2E6E; }
+    /* Color-coded custom milestone dropdown (E71) — swatch conveys the color so option TEXT stays
+       dark/readable (fixes white/silver/platinum contrast) and it works on Safari/iOS where native
+       <option> colors don't render. The native <select> stays in the DOM (synced) for all logic. */
+    .ms-cd { position: relative; margin-top: 8px; }
+    .ms-cd-native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; margin: -1px; clip: rect(0 0 0 0); }
+    .ms-cd-trigger { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 38px 12px 14px; border: 1.5px solid #D5DBE6;
+      border-radius: 10px; background: #fff; font-size: 1rem; font-weight: 700; color: #0F172A; cursor: pointer; text-align: left; position: relative; }
+    .ms-cd-trigger::after { content: ''; position: absolute; right: 15px; top: 50%; width: 8px; height: 8px;
+      border-right: 2.5px solid #1A2E6E; border-bottom: 2.5px solid #1A2E6E; transform: translateY(-65%) rotate(45deg); }
+    .ms-cd.open .ms-cd-trigger, .ms-cd-trigger:focus-visible { border-color: #1A2E6E; outline: none; }
+    .ms-cd-sw { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; border: 1px solid rgba(15,23,42,.3); box-shadow: inset 0 0 0 2px #fff; }
+    .ms-cd-menu { position: absolute; z-index: 50; top: calc(100% + 6px); left: 0; right: 0; background: #fff; border: 1px solid #D5DBE6;
+      border-radius: 10px; padding: 6px; max-height: 320px; overflow: auto; box-shadow: 0 18px 40px -16px rgba(15,23,42,.35); display: none; }
+    .ms-cd.open .ms-cd-menu { display: block; }
+    .ms-cd-opt { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 7px; cursor: pointer; font-size: .95rem; font-weight: 600; color: #0F172A; }
+    .ms-cd-opt:hover, .ms-cd-opt.active { background: #F1F4FB; }
+    .ms-cd-opt[aria-selected="true"] { background: #EAF0FF; font-weight: 700; }
+    .ms-cd-opt .ms-cd-cname { margin-left: auto; font-size: .72rem; font-weight: 600; color: #94A3B8; text-transform: uppercase; letter-spacing: .04em; }
+    .ms-legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin: 12px 2px 0; }
+    .ms-legend span { display: inline-flex; align-items: center; gap: 6px; font-size: .72rem; color: #64748B; font-weight: 600; }
+    .ms-legend i { width: 11px; height: 11px; border-radius: 50%; border: 1px solid rgba(15,23,42,.3); box-shadow: inset 0 0 0 1.5px #fff; }
     .milestone-disclaimer { margin: 9px 2px 0; font-size: 0.78rem; line-height: 1.45; color: #64748B; font-style: italic; }
+    .kit-config-block { margin-top: 4px; }
+    .kit-premium-link {
+      display: inline-flex; align-items: center; gap: 8px; margin: 12px 2px 0;
+      font-size: 0.85rem; font-weight: 600; letter-spacing: -0.01em; color: #1A2E6E;
+      text-decoration: none; padding: 9px 14px; border: 1px solid rgba(26,46,110,.22);
+      border-radius: 10px; background: rgba(26,46,110,.04); transition: all .18s ease;
+    }
+    .kit-premium-link:hover { background: rgba(26,46,110,.09); border-color: rgba(26,46,110,.4); transform: translateY(-1px); }
+    .kit-premium-mark { color: #B8902F; font-size: 0.95rem; }
+    .kit-premium-arrow { transition: transform .18s ease; }
+    .kit-premium-link:hover .kit-premium-arrow { transform: translateX(3px); }
+
+    /* ── KIT BUILDER — visual "assembly" of the kit contents for the selected milestone ── */
+    .kit-builder { margin: 22px 0 6px; padding: 20px 20px 18px; border: 1px solid rgba(26,46,110,.18);
+      border-radius: 16px; background: linear-gradient(160deg, #16264F 0%, #0F1D3D 100%); color: #fff; }
+    .kit-builder-eyebrow { font-size: 0.68rem; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; color: #E8C766; }
+    .kit-builder-title { font-size: 1.18rem; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin: 4px 0 6px; line-height: 1.2; }
+    .kit-builder-sub { font-size: 0.84rem; line-height: 1.5; color: #B9C4E0; margin: 0 0 16px; }
+    .kit-builder-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    @media (min-width: 560px) { .kit-builder-grid { grid-template-columns: repeat(3, 1fr); } }
+    .kb-item { position: relative; display: flex; flex-direction: column; gap: 7px; padding: 13px 13px 12px;
+      background: rgba(255,255,255,.05); border: 1px solid rgba(200,168,75,.28); border-radius: 11px;
+      opacity: 0; transform: translateY(10px); transition: opacity .42s ease-out, transform .42s ease-out; }
+    .kit-builder.is-built .kb-item { opacity: 1; transform: none; }
+    .kb-item-icon { width: 30px; height: 30px; color: #E8C766; }
+    .kb-item-icon svg { width: 100%; height: 100%; }
+    .kb-item-name { font-size: 0.84rem; font-weight: 700; color: #fff; line-height: 1.25; }
+    .kb-item-desc { font-size: 0.72rem; color: #9FB0D6; line-height: 1.4; }
+    .kb-item-check { position: absolute; top: 10px; right: 10px; width: 16px; height: 16px; color: #6FCF97; }
+    .kit-builder-foot { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding-top: 13px;
+      border-top: 1px solid rgba(255,255,255,.12); font-size: 0.8rem; font-weight: 700; color: #E8EDFA; }
+    .kit-builder-foot svg { width: 18px; height: 18px; color: #6FCF97; flex: none; }
+    @media (prefers-reduced-motion: reduce) { .kb-item { transition: none; opacity: 1; transform: none; } }
 
     /* ── das-006 commercial: "included" callout + Net-30 terms + application modal (explicit hex) ── */
     .das-value-block { background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 12px; padding: 16px 18px; margin: 0 0 20px; }
@@ -372,6 +434,15 @@
     }
 
     /* INCLUDED LIST */
+    .demo-branding-note {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin: 16px 0 4px; padding: 12px 14px;
+      background: rgba(26,46,110,.05); border: 1px solid rgba(26,46,110,.18);
+      border-left: 3px solid #1A2E6E; border-radius: 8px;
+    }
+    .demo-branding-note svg { flex: none; width: 18px; height: 18px; color: #1A2E6E; margin-top: 1px; }
+    .demo-branding-note p { margin: 0; font-size: 0.8125rem; line-height: 1.5; color: #334155; }
+    .demo-branding-note strong { color: #1A2E6E; font-weight: 700; }
     .included-list { margin: 0; }
     .included-list li {
       font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6;
@@ -518,6 +589,7 @@
     /* RESPONSIVE */
     @media (max-width: 1100px) {
       .product-detail-grid { grid-template-columns: 64px 1fr 380px; }
+      .product-detail-grid.no-thumbs { grid-template-columns: 1fr 380px; }
     }
     @media (max-width: 900px) {
       .product-detail-grid {
@@ -531,7 +603,7 @@
         order: 2;
       }
       .thumb-item { flex-shrink: 0; }
-      .main-image-area { position: relative; aspect-ratio: 4/3; order: 1; top: 0; }
+      .main-image-area { position: relative; order: 1; top: 0; }
       .product-info-panel { order: 3; }
       .related-grid { grid-template-columns: repeat(2, 1fr); }
     }
@@ -665,12 +737,67 @@
     .fbt-add-btn     { white-space:nowrap; }
   </style>
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
-  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/tracking.js?v=2" defer></script>
   <script src="/js/upsell-modal.js?v=1" defer></script>
   <!-- FBT bundle widget — populated by DASFBTInit() after the product loads -->
   <script src="/js/fbt.js?v=1" defer></script>
 </head>
 <body>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-splash-logo"><img src="/images/logo.png" alt="Driver Appreciation Solutions" width="300"></div>
+  <div class="das-splash-bar"><i></i></div>
+  <div class="das-splash-tag">driver appreciation made simple for fleets</div>
+</div>
+<style>
+  #das-splash{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:22px;transition:opacity .45s ease}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .das-splash-logo{position:relative;overflow:hidden;line-height:0}
+  #das-splash .das-splash-logo img{width:min(68vw,300px);height:auto;opacity:0;
+    animation:dasRise .7s cubic-bezier(.2,.7,.2,1) .05s forwards}
+  #das-splash .das-splash-logo::after{content:'';position:absolute;top:0;bottom:0;left:0;width:42%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    transform:translateX(-130%) skewX(-18deg);animation:dasShine 1.1s ease-in-out .7s 1 both;pointer-events:none}
+  #das-splash .das-splash-bar{width:200px;height:3px;border-radius:3px;background:#e7eaf0;overflow:hidden;opacity:0;
+    animation:dasFade .4s ease .45s forwards}
+  #das-splash .das-splash-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#1A2E6E,#1A2E6E 70%,#C8A14B);animation:dasFill 1.25s cubic-bezier(.4,.1,.2,1) .5s forwards}
+  #das-splash .das-splash-tag{font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    letter-spacing:.18em;text-transform:uppercase;color:#6b7585;opacity:0;animation:dasFade .5s ease .55s forwards}
+  #das-splash.das-quick .das-splash-tag{display:none}
+  #das-splash.das-quick .das-splash-bar i{animation-duration:.55s}
+  @keyframes dasRise{to{opacity:1;transform:none}}
+  @keyframes dasShine{to{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes dasFill{to{width:100%}}
+  @keyframes dasFade{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    #das-splash .das-splash-logo img,#das-splash .das-splash-logo::after,
+    #das-splash .das-splash-bar,#das-splash .das-splash-bar i,#das-splash .das-splash-tag{animation:none;opacity:1}
+    #das-splash .das-splash-bar i{width:100%}
+  }
+</style>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 320 : 1000, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);
+  })();
+</script>
+
 
 <div class="announcement-bar">
   Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
@@ -765,6 +892,7 @@
         <!-- Category + Name + Price -->
         <div class="product-info-category" id="pi-category"></div>
         <h1 class="product-info-name" id="pi-name"></h1>
+        <div class="laser-badge" id="pi-laser-badge" style="display:none">Custom Laser Engraving Available</div>
         <div class="product-info-price" id="pi-price"></div>
         <div class="ideal-for" id="pi-idealfor" style="display:none"></div>
 
@@ -807,6 +935,33 @@
           </div>
           <select id="pdp-milestone-select" class="milestone-select" aria-label="Milestone level"></select>
           <p class="milestone-disclaimer">Images shown are representative. Final award components will be customized to the selected milestone level.</p>
+        </div>
+
+        <!-- Kit configurator (milestone-select kits) — step 2: how the keepsake is finished. Populated via JS -->
+        <div id="kit-config-block" class="milestone-select-block kit-config-block" style="display:none">
+          <div class="section-label" id="kit-config-label">Build Your Kit
+            <span class="section-label-muted" id="kit-config-hint">— choose how the keepsake pieces are finished</span>
+          </div>
+          <select id="pdp-kit-config" class="milestone-select" aria-label="Kit configuration"></select>
+          <a id="kit-premium-link" class="kit-premium-link" href="shop.html?category=safety#cat-executive">
+            <span class="kit-premium-mark" aria-hidden="true">✦</span>
+            <span id="kit-premium-text">Want something more? Explore the Executive Collection</span>
+            <span class="kit-premium-arrow" aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <!-- Kit Builder — reveals the fixed kit contents for the selected milestone, assembly-style -->
+        <div id="kit-builder" class="kit-builder" style="display:none">
+          <div class="kit-builder-head">
+            <span class="kit-builder-eyebrow">Your Recognition Kit</span>
+            <h3 class="kit-builder-title" id="kit-builder-title">Your Recognition Kit</h3>
+            <p class="kit-builder-sub">Every piece below is included and customized to the milestone you selected — assembled into one complete presentation.</p>
+          </div>
+          <div class="kit-builder-grid" id="kit-builder-grid" aria-live="polite"></div>
+          <div class="kit-builder-foot">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Complete kit — assembled and ready. Nothing else to add.</span>
+          </div>
         </div>
 
         <!-- Quantity -->
@@ -902,6 +1057,28 @@
 
         <!-- Description -->
         <p class="product-desc-text" id="pi-description"></p>
+
+        <!-- Demo-branding note — shown via JS for products whose photos carry the fictitious sample brand -->
+        <div id="demo-branding-note" class="demo-branding-note" style="display:none">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+          <p><strong>Shown customized for a sample fleet.</strong> “NorthStar Transportation” is a fictitious company used only to demonstrate how these awards can be personalized — it is not a real customer. Every item is fully customized with <strong>your</strong> company’s name, logo, and colors.</p>
+        </div>
+
+        <!-- Optional Upgrade: Custom Laser Engraved Lid — shown via JS for presentation-case kits (p.laserEngraving) -->
+        <div id="pi-laser-block" class="laser-block" style="display:none">
+          <div class="laser-block-title">Optional Upgrade: Custom Laser Engraved Lid</div>
+          <p>Transform your recognition program into a truly personalized presentation experience. Many of our premium presentation cases can be upgraded with <strong>custom laser engraving directly into the interior lid</strong>, creating a lasting impression before the recipient even opens the kit.</p>
+          <ul class="laser-options">
+            <li>Company logo</li>
+            <li>Safety program branding</li>
+            <li>Driver recognition program names</li>
+            <li>Anniversary campaign logos</li>
+            <li>Corporate recognition messages</li>
+            <li>Customer-specific branding</li>
+          </ul>
+          <p>The laser engraving is permanently integrated into the case lid for a refined, executive-level presentation that elevates the overall gifting experience.</p>
+          <p class="laser-ask"><strong>Ask your DAS representative about custom laser engraving options when requesting your quote.</strong></p>
+        </div>
 
         <!-- Accordions -->
         <div class="accordion-item">
@@ -1148,8 +1325,328 @@
    PRODUCT DATA — core products + MILE PACKS (merged in below)
 ═══════════════════════════════════════════════════════════════ */
 const PRODUCTS = {
+  // ── Premium Appreciation Kits™ (D3) ──
+  'road-ready-kit': {
+    id: 'road-ready-kit',
+    laserEngraving: true,
+    name: 'The Road Ready™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Onboarding Solutions',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-RRK', sku: 'DAS-PAK-RRK',
+    description: 'Designed for drivers who believe preparation is part of professionalism. The Road Ready™ Kit provides the essential tools drivers use to monitor equipment, improve safety, and stay prepared throughout the workday. Encourages pre-trip inspections, reinforces safety culture, supports professional driving habits, demonstrates employer investment in driver success.',
+    included: [
+      'Tire Thumper',
+      'Small Flashlight',
+      'Tire Pressure Gauge',
+      'Tire Tread Depth Gauge',
+    ],
+    images: ['/images/pak-road-ready-kit-heroA.webp', '/images/pak-road-ready-kit-hero.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['safety-first-kit', 'pride-in-your-ride-kit', 'long-haul-hydration-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'safety-first-kit': {
+    id: 'safety-first-kit',
+    laserEngraving: true,
+    name: 'The Safety First™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Onboarding Solutions',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-SFK', sku: 'DAS-PAK-SFK',
+    description: 'A visible reminder that safety is more than a policy — it is a commitment. Emergency preparedness, increased roadside visibility, reinforcement of safety initiatives, practical everyday use.',
+    included: [
+      'Reflective Triangle',
+      'Tire Pressure Gauge',
+      'Flashlight',
+    ],
+    images: ['/images/pak-safety-first-kit-heroA.webp', '/images/pak-safety-first-kit-hero.webp', '/images/pak-safety-first-kit-g1.webp', '/images/pak-safety-first-kit-2.webp', '/images/pak-safety-first-kit-3.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['road-ready-kit', 'pride-in-your-ride-kit', 'long-haul-hydration-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'pride-in-your-ride-kit': {
+    id: 'pride-in-your-ride-kit',
+    laserEngraving: true,
+    name: 'The Pride in Your Ride™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Onboarding Solutions',
+    price: 249.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-PYR', sku: 'DAS-PAK-PYR',
+    description: 'For drivers who take pride in maintaining a clean, organized, and professional workspace. Cleaner cab environment, improved organization, enhanced driver pride, practical daily utility.',
+    included: [
+      'Portable Vacuum Cleaner',
+    ],
+    images: ['/images/pak-pride-in-your-ride-kit-heroB.webp', '/images/pak-pride-in-your-ride-kit-2.webp', '/images/pak-pride-in-your-ride-kit-g1.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['road-ready-kit', 'safety-first-kit', 'long-haul-hydration-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'long-haul-hydration-kit': {
+    id: 'long-haul-hydration-kit',
+    laserEngraving: true,
+    name: 'The Long Haul Hydration™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Onboarding Solutions',
+    price: 199.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-LHH', sku: 'DAS-PAK-LHH',
+    description: 'Hydration and comfort for the professionals who spend their days on the road. Supports hydration, encourages healthy habits, everyday practicality, long-term appreciation value.',
+    included: [
+      'Small Stanley Coffee Tumbler',
+      'Large Stanley Water Tumbler',
+      'Premium Pen',
+    ],
+    images: ['/images/pak-long-haul-hydration-kit-heroA.webp', '/images/pak-long-haul-hydration-kit-hero.webp', '/images/pak-long-haul-hydration-kit-2.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['road-ready-kit', 'safety-first-kit', 'pride-in-your-ride-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'professional-driver-kit': {
+    id: 'professional-driver-kit',
+    laserEngraving: true,
+    name: 'The Professional Driver™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-PDK', sku: 'DAS-PAK-PDK',
+    description: 'A practical appreciation kit focused on the everyday essentials professional drivers use on and off the road. Useful daily carry items, professional appearance, long-term utility, everyday reminder of employer appreciation.',
+    included: [
+      'Wallet',
+      'Flashlight',
+      'Premium Pen',
+    ],
+    images: ['/images/pak-professional-driver-kit-heroA.webp', '/images/pak-professional-driver-kit-hero.webp', '/images/pak-professional-driver-kit-2.webp', '/images/pak-professional-driver-kit-3.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['command-center-kit', 'working-hands-kit', 'highway-guardian-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'command-center-kit': {
+    id: 'command-center-kit',
+    laserEngraving: true,
+    name: 'The Command Center™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 499.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-CCK', sku: 'DAS-PAK-CCK',
+    description: 'Built for communication, productivity, and professionalism. The Command Center™ Kit supports drivers who spend their days coordinating deliveries, communicating with dispatch, and representing the company on the road. Improved communication, increased productivity, enhanced driver convenience, premium recognition value.',
+    included: [
+      'Bluetooth Headset',
+      'Tire Tread Depth Gauge',
+      'Premium Pen',
+    ],
+    images: ['/images/pak-command-center-kit-heroA.webp', '/images/pak-command-center-kit-hero.webp', '/images/pak-command-center-kit-g1.webp', '/images/pak-command-center-kit-2.webp', '/images/pak-command-center-kit-3.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'working-hands-kit', 'highway-guardian-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'working-hands-kit': {
+    id: 'working-hands-kit',
+    laserEngraving: true,
+    name: 'The Working Hands™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 249.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-WHK', sku: 'DAS-PAK-WHK',
+    description: 'A recognition kit focused on the hardworking hands that keep freight moving. Supports driver comfort, promotes personal care, encourages wellness, demonstrates genuine appreciation.',
+    included: [
+      'Work Gloves',
+      'Working Man\'s Hand Cream',
+      'Manicure Kit',
+    ],
+    images: ['/images/pak-working-hands-kit-heroC.webp', '/images/pak-working-hands-kit-hero.webp', '/images/pak-working-hands-kit-2.webp', '/images/pak-working-hands-kit-3.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'command-center-kit', 'highway-guardian-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'highway-guardian-kit': {
+    id: 'highway-guardian-kit',
+    laserEngraving: true,
+    name: 'The Highway Guardian™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-HGK', sku: 'DAS-PAK-HGK',
+    description: 'Designed for drivers who prioritize safety, awareness, and preparedness. Supports safer operations, reinforces inspection routines, encourages proactive maintenance, builds safety culture.',
+    included: [
+      'Tire Pressure Gauge',
+      'Heavy-Duty Flashlight',
+      'Tire Thumper',
+    ],
+    images: ['/images/pak-highway-guardian-kit-heroC.webp', '/images/pak-highway-guardian-kit-heroB.webp', '/images/pak-highway-guardian-kit-hero.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'command-center-kit', 'working-hands-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'dot-ready-kit': {
+    id: 'dot-ready-kit',
+    laserEngraving: true,
+    name: 'The DOT Ready™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-DRK', sku: 'DAS-PAK-DRK',
+    description: 'Built for drivers who take pride in being prepared for every inspection and every mile. Supports DOT readiness, encourages proper inspection habits, reinforces safety culture, highly practical daily-use tools.',
+    included: [
+      'Tire Pressure Gauge',
+      'Tire Thumper',
+      'Flashlight',
+      'Tire Tread Depth Gauge',
+    ],
+    images: ['/images/pak-dot-ready-kit-heroA.webp', '/images/pak-dot-ready-kit-hero.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'command-center-kit', 'working-hands-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'clear-vision-kit': {
+    id: 'clear-vision-kit',
+    laserEngraving: true,
+    name: 'The Clear Vision™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 249.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-CVK', sku: 'DAS-PAK-CVK',
+    description: 'Designed for professional drivers who spend long hours behind the windshield. The Clear Vision™ Kit helps reduce glare, improve comfort, and keep attention focused on the road ahead. Reduced glare, improved visibility, increased driving comfort, premium recognition experience.',
+    included: [
+      'Oakley Sunglasses',
+      'Premium Ink Pen',
+    ],
+    images: ['/images/pak-clear-vision-kit-heroA.webp', '/images/pak-clear-vision-kit-hero.webp', '/images/pak-clear-vision-kit-g1.webp', '/images/pak-clear-vision-kit-2.webp', '/images/pak-clear-vision-kit-3.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'command-center-kit', 'working-hands-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
+  'recharge-kit': {
+    id: 'recharge-kit',
+    laserEngraving: true,
+    name: 'The Recharge™ Kit',
+    family: 'Premium Appreciation Kits',
+    category: 'Driver Appreciation Kits',
+    price: 299.00,
+    minQty: 1,
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
+    idealFor: ['Driver Appreciation Week', 'Safety Recognition', 'New Hire Welcome', 'Retention & Recognition'],
+    styleId: 'DAS-PAK-RCK', sku: 'DAS-PAK-RCK',
+    description: 'A wellness-focused appreciation experience designed to help drivers recover, recharge, and reset. Supports driver wellness, encourages recovery, reduces fatigue, demonstrates thoughtful appreciation.',
+    included: [
+      'Massage Gun',
+      'Aromatherapy Pack',
+      'Dr. Squatch Soap',
+    ],
+    images: ['/images/pak-recharge-kit-hero.webp', '/images/pak-recharge-kit-2.webp'],
+    fitContain: false,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['professional-driver-kit', 'command-center-kit', 'working-hands-kit'],
+    includesShipping: true,
+    includesCustomization: true,
+    flexibleDelivery: true,
+    termsAvailable: true,
+  },
   'das-001': {
     id: 'das-001',
+    laserEngraving: true,
     name: 'Driver Appreciation Kit',
     category: 'Appreciation Kits',
     price: 49.99,
@@ -1157,11 +1654,9 @@ const PRODUCTS = {
     styleId: 'DAK-001-BLK', sku: 'DAS-DAK-001',
     description: 'The signature Driver Appreciation Kit — built for fleet operators who understand that recognition is the highest-leverage retention tool available. Curated with the driver\'s professional identity in mind: quality items, personalized acknowledgment, and premium packaging that communicates your company planned ahead for this moment.',
     images: [
-      'https://images.unsplash.com/photo-1549465231-2f652e31be48?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fit=crop',
+      '/images/das-da-kit-1.webp',
+      '/images/das-da-kit-2.webp',
+      '/images/das-da-kit-3.webp',
     ],
     tiers: {
       standard: {
@@ -1200,7 +1695,7 @@ const PRODUCTS = {
     },
     reviews: 0,
     rating: 0,
-    relatedIds: ['das-003', 'das-005'],
+    relatedIds: ['das-003'],
   },
 
   'das-003': {
@@ -1210,12 +1705,10 @@ const PRODUCTS = {
     price: 59.99,
     minQty: 10,
     styleId: 'OBP-003-NVY', sku: 'DAS-OBP-001',
-    description: 'First impressions determine retention trajectories. The Premium Onboarding Pack ensures every new driver\'s first day communicates a clear message: we were expecting you, we planned for you, and you matter here. Curated to build professional identity and company loyalty from the moment a driver walks through the door.',
+    description: 'First impressions determine retention trajectories. The Premium Onboarding Pack ensures every new driver\'s first day communicates a clear message: we were expecting you, we planned for you, and you matter here. Curated to build professional identity and company loyalty from the moment a driver walks through the door. The outcome: a new hire who feels valued from day one and is far more likely to still be with your fleet at 90 days. Every pack is fully custom-branded to your fleet — the items shown are representative of what\'s possible; you\'ll work one-on-one with a DAS recognition specialist to bring your vision together, from logo, colors, and messaging to the exact contents of each kit.',
     images: [
-      'https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=900&q=80&fit=crop',
+      '/images/pak-premium-onboarding-hero.webp',
+      '/images/pak-premium-onboarding-light.webp',
     ],
     tiers: {
       standard: {
@@ -1255,7 +1748,7 @@ const PRODUCTS = {
     },
     reviews: 0,
     rating: 0,
-    relatedIds: ['das-001', 'das-005'],
+    relatedIds: ['das-001'],
   },
 
   'das-004': {
@@ -1311,78 +1804,164 @@ const PRODUCTS = {
     },
     reviews: 0,
     rating: 0,
-    relatedIds: ['das-001', 'das-005'],
+    relatedIds: ['das-001'],
   },
 
-  'das-005': {
-    id: 'das-005',
-    name: 'Service Milestone Award Box',
-    category: 'Milestone Gifts',
-    price: 79.99,
-    minQty: 10,
-    styleId: 'SMA-005-PRE', sku: 'DAS-SMA-001',
-    description: 'Honor years of professional dedication with an award worthy of the milestone. The Service Milestone Award Box is our most elevated recognition product — designed for 1-, 3-, 5-, and 10-year service anniversaries with tiered acknowledgment that reflects the weight of the achievement. This is the recognition drivers display in their cabs for years.',
-    images: [
-      'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1549465231-2f652e31be48?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1607082349566-187342175e2f?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1519003722824-194d4455a60c?w=900&q=80&fit=crop',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80&fit=crop',
+  // Safe Driver Awards — ANNUAL safety recognition (separate from Safe Service Miles & Career
+  // milestones). Placement is live; PRICING IS HELD (no invented price) → coming-soon notify
+  // flow + the "Buy for My Company" quote path. Assets carry the fictitious NorthStar sample brand.
+  'safe-driver-award': {
+    id: 'safe-driver-award',
+    name: 'Safe Driver Award — Annual Recognition',
+    category: 'Safe Driver Awards',
+    price: 549.00,
+    minQty: 1,
+    pricingModel: 'single',
+    ctaLabel: 'Order Safe Driver Awards',
+    tierLabel: 'Safe Driver Awards',
+    singleBadge: 'Annual Safety Recognition',
+    unitNoun: 'award',
+    styleId: 'SDA-2026', sku: 'DAS-SDA-2026',
+    description: 'Annual safety recognition for drivers who complete the calendar year safely — the year itself is the achievement (Safe Driver 2026, 2027, 2028…), a separate honor from Safe Service Miles and Career Service Milestones. Each award pairs a premium, weather-durable vehicle door decal with a matching lapel pin, custom-engraved with your fleet’s brand, and progresses with consecutive years of safe performance: 5-Year Enhanced Silver Laurel, 10-Year Gold Laurel, 15-Year Platinum, and 20-Year Executive Legacy editions.',
+    included: [
+      'Premium vehicle door decal — custom-branded, weather-durable',
+      'Matching Safe Driver lapel pin',
+      'Recognition medal (program editions)',
+      'Year-of-achievement engraving (Safe Driver 2026, 2027…)',
+      'Consecutive-year progression: 5yr Silver Laurel · 10yr Gold · 15yr Platinum · 20yr Executive Legacy',
+      'Branded presentation packaging',
     ],
-    tiers: {
-      standard: {
-        description: 'A premium milestone recognition package — heavy, tangible, professional. Built to communicate that this anniversary was planned for and matters.',
-        included: [
-          'Milestone anniversary plaque (engraved with name and years)',
-          'Certificate of service recognition',
-          'Personalized letter from fleet leadership',
-          'Anniversary recognition pin (year-specific)',
-          'Premium branded item (tenure-calibrated)',
-          'Rigid gift presentation box',
-        ],
-      },
-      premium: {
-        description: 'Elevated milestone recognition for drivers reaching 3-year and 5-year marks — reflecting a deeper organizational investment in their career.',
-        included: [
-          'All Standard items',
-          'Premium die-cast commemorative coin (year-specific)',
-          'Professional photo frame with service certificate',
-          'Elevated apparel item (branded, tenure-tier)',
-          'Manager acknowledgment kit (conversation guide + talking points)',
-          'Fleet-wide announcement template included',
-        ],
-      },
-      enterprise: {
-        description: 'Elite recognition for 5-, 10-, and 15-year anniversaries. The highest expression of professional respect a fleet can deliver.',
-        included: [
-          'All Premium items',
-          'Premium branded watch or jewelry (year-specific luxury item)',
-          'Personalized crystal award (name, fleet, years, achievement)',
-          'Executive letter from company ownership',
-          'Public recognition toolkit (LinkedIn post kit, newsletter feature)',
-          'Anniversary celebration event support (catering guide, agenda)',
-          'Home delivery with white-glove presentation',
-          'Family recognition acknowledgment package',
-        ],
-      },
-    },
+    images: [
+      '/images/safedriver-decal-v2.webp',
+      '/images/safedriver-truck.webp',
+      '/images/safedriver-medal-v2.webp',
+      '/images/safedriver-driver.webp',
+    ],
+    fitContain: false,
+    demoBranding: true,
     reviews: 0,
     rating: 0,
-    relatedIds: ['das-001', 'das-004'],
+    relatedIds: ['msm-s-250k', 'msm-s-500k'],
   },
+
+  // Retirement Legacy Collection — the CULMINATION of a career (separate from every other path).
+  // Placement live; PRICING HELD + product photography pending (no real retirement assets yet) →
+  // coming-soon notify flow + the "Buy for My Company" quote path. Hero = branded crest emblem
+  // (honest brand graphic, NOT a misrepresented product photo) until real photography arrives.
+  'retirement-legacy-collection': {
+    id: 'retirement-legacy-collection',
+    name: 'Professional Driver Retirement Legacy Collection™',
+    category: 'Retirement Recognition Programs',
+    price: 649.00,
+    minQty: 1,
+    pricingModel: 'single',
+    ctaLabel: 'Order Retirement Legacy Collection',
+    tierLabel: 'Retirement Recognition',
+    singleBadge: 'The Culmination of a Career',
+    unitNoun: 'collection',
+    styleId: 'RLC-LEGACY', sku: 'DAS-RLC-001',
+    description: 'The final stage of a driver’s professional journey — the completion of an entire career, not another award. Throughout their careers, professional drivers miss birthdays, holidays, and countless moments at home while keeping businesses supplied and communities moving. Many dedicate twenty, thirty, or even forty years before quietly retiring. The Retirement Legacy Collection gives organizations a meaningful, dignified way to publicly acknowledge that commitment, sacrifice, professionalism, and service — transforming retirement from a departure into a celebration of achievement, gratitude, and lasting impact. Because retirement is not simply another milestone; it is the successful completion of an entire career.',
+    included: [
+      'Retirement Legacy Medal',
+      'Retirement Legacy Lapel Pin',
+      'Retirement Luggage Tag',
+      'Executive Leather Keychain',
+      'Retirement Recognition T-Shirt',
+      'Personalized Leadership Letter',
+      'Premium Presentation Box',
+    ],
+    images: [
+      '/images/retirement-medal-front-v2.webp',
+      '/images/retirement-luggage-tags-v2.webp',
+      '/images/retirement-medal-back-v2.webp',
+      '/images/retirement-legacy-crest-v2.webp',
+    ],
+    imageAlt: 'Professional Driver Retirement Legacy medal in a presentation box — gold and navy, with a blue ribbon',
+    fitContain: false,
+    demoBranding: true,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['safe-driver-award', 'msm-c-1m'],
+  },
+
+  // Professional Driver Road Warrior Duffel — appreciation + onboarding gift (E79–E82).
+  'das-010': {
+    id: 'das-010',
+    name: 'Professional Driver Road Warrior Duffel™',
+    category: 'Driver Appreciation Kits',
+    price: 159.00,
+    minQty: 10,
+    pricingModel: 'single',
+    customization: true,
+    singleBadge: 'Custom-branded · Built for the road',
+    unitNoun: 'duffel',
+    ctaLabel: 'Order Duffels',
+    styleId: 'RWD-010', sku: 'DAS-RWD-001',
+    description: 'Built for life on the road. The Professional Driver Road Warrior Duffel™ is a spacious, durable, custom-branded duffel sized for the 34-hour reset, the weekly laundry run, and the overnight haul — everything a professional driver needs to live out of the cab with dignity. Like the Road Warrior Backpack, it’s a practical, everyday-use gift that keeps your brand in front of the driver long after Driver Appreciation Week. A high-value appreciation, onboarding, and retention gift.',
+    included: [
+      'Premium custom-logo duffel bag',
+      'Spacious main compartment + zippered end pockets',
+      'Reinforced carry handles + adjustable shoulder strap',
+      'Your fleet logo embroidered/printed (coordinated after purchase)',
+      'Built for the 34-hour reset and life on the road',
+    ],
+    images: [
+      '/images/road-warrior-duffel-hero-v2.webp',
+      '/images/road-warrior-duffel-1.webp',
+      '/images/road-warrior-duffel-2-v2.webp',
+      '/images/road-warrior-duffel-3-v2.webp',
+    ],
+    imageAlt: 'Professional Driver Road Warrior Duffel — black custom-branded duffel bag in a fleet terminal',
+    fitContain: false,
+    demoBranding: true,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-008', 'das-007'],
+  },
+
+  // Professional Driver Seat Back Organizer (E84–E86). PRICING HELD (no price provided) →
+  // coming-soon + Buy-for-Company quote path. Real photography provided.
+  'das-011': {
+    id: 'das-011',
+    name: 'Professional Driver Seat Back Organizer™',
+    category: 'Holiday & Seasonal',
+    price: 149.00,
+    minQty: 10,
+    pricingModel: 'single',
+    customization: true,
+    ctaLabel: 'Order Seat Back Organizers',
+    singleBadge: 'Custom-branded · In-cab organization',
+    unitNoun: 'organizer',
+    styleId: 'SBO-011', sku: 'DAS-SBO-001',
+    description: 'Keep the cab organized and the essentials within reach. The Professional Driver Seat Back Organizer™ mounts to the passenger seat back and puts logbooks, paperwork, electronics, a water bottle, pens, and personal items in one custom-branded, professional-grade caddy. A practical, daily-use appreciation gift drivers actually keep — built for the realities of life in the cab.',
+    included: [
+      'Custom-branded seat-back organizer (mounts to the seat back)',
+      'Multiple pockets — documents, electronics, water bottle, pens',
+      'Durable, professional-grade construction',
+      'Your fleet logo (coordinated after purchase)',
+    ],
+    images: [
+      '/images/seat-back-organizer-hero.webp',
+      '/images/seat-back-organizer-1.webp',
+      '/images/seat-back-organizer-2.webp',
+    ],
+    imageAlt: 'Professional Driver Seat Back Organizer — black custom-branded in-cab organizer',
+    fitContain: false,
+    demoBranding: true,
+    reviews: 0,
+    rating: 0,
+    relatedIds: ['das-010', 'das-008'],
+  },
+
   'das-006': {
     id: 'das-006',
     name: 'Professional Driver Essentials Kit™',
     category: 'Driver Appreciation Kits',
-    price: 79.95,                 // retail per-kit baseline; volumeTiers drive actual pricing
+    price: 99.00,                 // E90 2026-06-24: flat $99 (was volume-tiered)
     minQty: 1,
-    pricingModel: 'volume',
-    volumeTiers: [
-      { min: 1,   max: 24,   price: 79.95 },
-      { min: 25,  max: 99,   price: 74.95 },
-      { min: 100, max: 249,  price: 69.95 },
-      { min: 250, max: null, price: 64.95 },
-    ],
+    pricingModel: 'single',
+    singleBadge: 'Custom-branded',
+    unitNoun: 'kit',
     idealFor: ['Driver Appreciation Week', 'Safety Week', 'New Hire Welcome Kits', 'Driver Recognition Programs'],
     styleId: 'PDE-006-PRO', sku: 'DAS-PDE-001',
     description: 'A premium driver recognition, safety, onboarding, and appreciation kit — built around the tools a professional driver actually uses. Each kit pairs a tire pressure gauge and tire tread depth gauge with a branded keychain, a custom insert, and premium branded presentation packaging. Add optional fleet/company branding and every kit becomes a daily reminder that your operation invests in the people behind the wheel.',
@@ -1414,7 +1993,7 @@ const PRODUCTS = {
     id: 'das-007',
     name: 'Welcome Driver Appreciation Kit',
     category: 'Driver Appreciation Kits',
-    price: 97.00,
+    price: 229.00,
     // minQty stays 1 client-side so the stepper never blocks a legitimate
     // per-hire reorder. The 10-unit FIRST-ORDER minimum is enforced server-side
     // (api/create-checkout.js + lib/catalog.js perHire). perHire drives the UX note.
@@ -1425,16 +2004,17 @@ const PRODUCTS = {
     unitNoun: 'kit',
     ctaLabel: 'Order Welcome Kits',
     styleId: 'WDA-007', sku: 'DAS-WDA-001',
-    description: 'Welcome new drivers with a premium branded appreciation kit designed to make them feel valued from day one. Each kit can be customized with your company logo, colors, and messaging through direct coordination with a DAS representative.',
+    description: 'Welcome new drivers with a premium branded appreciation kit designed to make them feel part of the team from day one. Each kit includes a custom hat, coffee travel mug, ink pen, t-shirt, and a professional onboarding binder with welcome pamphlet — all fully customizable with your company logo, colors, and messaging, and presented in a premium gift box. The included Welcome Aboard pamphlet carries your leadership welcome message, company core values, new-hire expectations and success tips, and company information in a polished, branded format — a professional first impression that builds belonging before the first load.',
     included: [
-      'Custom coffee travel mug',
-      'Custom t-shirt',
-      'Custom bag',
-      'Custom welcome pamphlet',
       'Custom hat',
+      'Custom coffee travel mug',
+      'Custom ink pen',
+      'Custom t-shirt',
+      'Onboarding binder with Welcome Aboard pamphlet',
+      'Premium gift-box presentation',
     ],
-    // Kit hero + lifestyle gallery (custom-branded tee on a driver + Driver Appreciation Week event).
-    images: ['/images/welcome-driver-kit-v2.png', '/images/wk-driver-lifestyle.jpg', '/images/wk-group-lifestyle.jpg'],
+    // Kit hero + lifestyle gallery (custom-branded tee on a driver + Driver Appreciation Week event) + onboarding binder (E87).
+    images: ['/images/wk-driver-lifestyle.jpg', '/images/welcome-driver-kit-v2.webp', '/images/wk-group-lifestyle.jpg', '/images/onboarding-binder-2.webp', '/images/onboarding-binder-3.webp', '/images/onboarding-binder-1.webp'],
     // Customization is coordinated AFTER purchase (no embedded builder) — drives the PDP customization block.
     customization: {
       process: 'After your order is received, a DAS representative will contact you by email or phone to collect your company logo, brand colors, preferred messaging, and customization details. You may also email your artwork and customization requests directly to info@driverappreciationsolutions.com.',
@@ -1458,7 +2038,7 @@ const PRODUCTS = {
         ],
         featuredId: 'mp-05',   // The Long Haul Snack Pack — rendered as a preview card with add-to-order
         linkHref: 'shop.html?category=milepacks',
-        linkText: 'Browse all DAS Mile Packs',
+        linkText: 'Browse all DAS Safe Miles Programs',
       },
       closing: 'Welcome them well. Recognize them early. Build loyalty from day one.',
     },
@@ -1493,7 +2073,7 @@ const PRODUCTS = {
       {
         order: 2, active: true,
         name: 'Custom Company-Branded Driver T-Shirt™',
-        image: '/images/wk-comp-shirt.png',
+        image: '/images/wk-comp-shirt.webp',
         paragraphs: [
           'A great company culture starts with pride, and few items create that sense of belonging better than a professionally branded company shirt. Whether presented during orientation, Driver Appreciation Week, a milestone celebration, a safety recognition event, or a company gathering, this premium custom t-shirt helps drivers feel connected to the organization they represent.',
           'Each shirt is customized with your company’s logo, colors, and preferred branding for a professional appearance both on and off the job. Drivers can wear it at orientation, company events, training, community outreach, or on their personal time — extending the visibility of your brand while reinforcing employee pride.',
@@ -1536,7 +2116,7 @@ const PRODUCTS = {
     id: 'das-008',
     name: 'Driver Road Warrior Backpack™',
     category: 'Driver Appreciation Kits',
-    price: 85.99,
+    price: 149.00,
     minQty: 10,
     moqNote: 'Custom backpack orders begin at 10 units.',
     pricingModel: 'single',
@@ -1555,7 +2135,7 @@ const PRODUCTS = {
       'Branded, presentation-ready packaging',
     ],
     // Real product photography — clean studio hero + lifestyle (in-cab, event) shots.
-    images: ['/images/rwb-hero.png', '/images/rwb-cab.png', '/images/rwb-angle.png', '/images/rwb-event.png'],
+    images: ['/images/rwb-hero.webp', '/images/rwb-cab.webp', '/images/rwb-angle.webp', '/images/rwb-event.webp'],
     fitContain: true,   // mixed portrait/landscape shots → show each in full (no crop) on the PDP hero
     // Customization (company logo) coordinated AFTER purchase — drives the PDP customization block.
     customization: {
@@ -1600,7 +2180,7 @@ const PRODUCTS = {
         ],
         featuredId: 'mp-05',
         linkHref: 'shop.html?category=milepacks',
-        linkText: 'Browse all DAS Mile Packs',
+        linkText: 'Browse all DAS Safe Miles Programs',
       },
     },
     reviews: 0, rating: 0,
@@ -1609,31 +2189,32 @@ const PRODUCTS = {
 
   'das-009': {
     id: 'das-009',
-    name: 'Professional Travel Kit',
+    name: 'Professional Driver Self-Care Kit™',
     category: 'Driver Appreciation Kits',
-    price: 77.00,
+    price: 149.00,
     minQty: 1,
     pricingModel: 'single',
     singleBadge: 'Driver Wellness · Custom-logo',
     unitNoun: 'kit',
-    ctaLabel: 'Order Travel Kits',
+    ctaLabel: 'Order Self-Care Kits',
     styleId: 'PTK-009', sku: 'DAS-PTK-001',
-    metaTitle: 'Professional Travel Kit | Driver Appreciation Solutions',
-    metaDescription: 'A custom-logo Professional Travel Kit for drivers — a durable travel bag plus self-care essentials. The perfect driver wellness, onboarding, and appreciation gift.',
-    description: 'A practical, daily-use appreciation gift designed to support drivers on the road. Complete with a customized travel bag and essential self-care items, this kit helps drivers stay refreshed, organized, and ready for the miles ahead.',
+    metaTitle: 'Professional Driver Self-Care Kit™ | Driver Appreciation Solutions',
+    metaDescription: 'The Professional Driver Self-Care Kit™ — a custom-logo wellness gift that helps professional drivers refresh, recharge, and care for themselves on the road. The thoughtful driver appreciation gift.',
+    description: 'Your drivers take care of your freight. This kit helps them take care of themselves. The Professional Driver Self-Care Kit™ is a driver wellness and appreciation solution designed to help professional drivers refresh, recharge, and care for themselves while spending extended periods away from home — a complete self-care package, not just a branded bag.',
     included: [
-      'Professional Travel Kit Bag — customized with your company logo',
-      'Sasquatch Soap (fragrance may vary based on availability)',
-      'Q-Tips',
-      'Loofah',
+      'Professional Driver Self-Care Kit™ Bag — customized with your company logo',
+      'Dr. Squatch Soap',
       'Dude Wipes',
+      'Gray Body Cleaning Towel',
+      'Loofah',
+      'Q-Tips',
     ],
-    images: ['/images/travel-kit-hero-v2.jpg', '/images/travel-kit-truckcab.jpg', '/images/professional-travel-kit-hero.png'],
-    imageAlt: 'Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers',
+    images: ['/images/travel-kit-hero-v2.jpg', '/images/travel-kit-truckcab.jpg', '/images/professional-travel-kit-hero.webp'],
+    imageAlt: 'Professional Driver Self-Care Kit™ — custom-logo wellness bag with self-care essentials for professional drivers',
     imageAlts: [
-      'Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers',
-      'Professional Travel Kit displayed inside a truck cab at a truck stop, showcasing organizational capacity and storage possibilities for professional drivers.',
-      'Professional Travel Kit open on a truck dashboard at a truck stop, fully stocked with travel essentials',
+      'Professional Driver Self-Care Kit™ — custom-logo wellness bag with self-care essentials for professional drivers',
+      'Professional Driver Self-Care Kit™ displayed inside a truck cab at a truck stop, showing organizational capacity and storage for professional drivers.',
+      'Professional Driver Self-Care Kit™ open on a truck dashboard at a truck stop, fully stocked with self-care essentials',
     ],
     fitContain: true,   // landscape hero graphic → show in full; component photos use the explorer below
     customization: {
@@ -1645,7 +2226,7 @@ const PRODUCTS = {
       heading: 'Self-Care That Travels Every Mile',
       paragraphs: [
         'For over-the-road drivers, the truck is their workplace — but the shower stop is often the one place during the day where they can reset, recharge, and take care of themselves.',
-        'The Professional Travel Kit is designed to keep personal essentials organized, protected, and readily accessible. Whether used at truck-stop shower facilities, hotels, orientation travel, or during life on the road, this practical kit helps drivers stay prepared wherever their route takes them.',
+        'The Professional Driver Self-Care Kit™ is designed to keep personal essentials organized, protected, and readily accessible. Whether used at truck-stop shower facilities, hotels, orientation travel, or during life on the road, this practical kit helps drivers stay prepared, refreshed, and cared for wherever their route takes them.',
         'Customized with your company logo and branding, this kit is more than a gift — it’s a statement that your organization recognizes the sacrifices drivers make every day and values their comfort and well-being beyond the driver’s seat.',
         'Unlike many appreciation gifts that are used once and forgotten, the travel bag and included essentials provide lasting value that drivers will use again and again. (Soap fragrance may vary based on availability.)',
       ],
@@ -1656,7 +2237,7 @@ const PRODUCTS = {
         ],
         featuredId: 'mp-05',
         linkHref: 'shop.html?category=milepacks',
-        linkText: 'Browse all DAS Mile Packs',
+        linkText: 'Browse all DAS Safe Miles Programs',
       },
     },
     // ── Interactive Kit Component Explorer — the kit contents. Q-Tips pending a photo. ──
@@ -1805,20 +2386,36 @@ if (window.DAS_MILEPACKS) {
   PRODUCTS['milestone-kit'] = {
     id: 'milestone-kit',
     name: 'Professional Driver Milestone Recognition Kit',
-    category: 'Service Milestone Award Box',
-    price: 179.00, minQty: 1, pricingModel: 'single',
+    category: 'Service Milestone Awards',
+    price: 499.00, minQty: 1, pricingModel: 'single',
     singleBadge: 'Complete Recognition Kit', unitNoun: 'kit',
     ctaLabel: 'Add Recognition Kit',
     milestoneSelect: true, defaultMilestone: '1m',
     milestoneOptions: MS_MILES.map(m => ({ key:m.key, label:m.n + ' Miles' })),
+    // Build-your-kit: after picking a milestone level, the buyer chooses how the
+    // keepsake pieces are finished. Flat-priced configuration (no upcharge) — the
+    // selection rides the cart line into Stripe metadata + fulfillment. The final
+    // "premium" option is a link out to the Executive Collection (see premiumHref).
+    kitConfig: true, kitBuilder: true,
+    kitConfigLabel: 'Build Your Kit',
+    kitConfigHint: '— choose how the keepsake pieces are finished',
+    kitConfigOptions: [
+      { key:'standard',         label:'Standard Kit — medal, 2 lapel pins, t-shirt, keychain & road bag tag' },
+      { key:'custom-tag',       label:'Customized Driver Luggage Tag (name & milestone engraved)' },
+      { key:'tag-medal-insert', label:'Luggage Tag with Engraved Medal Insert' },
+      { key:'one-pin',          label:'Single Premium Lapel Pin' },
+      { key:'two-pins',         label:'Two Premium Lapel Pins (matched set)' },
+    ],
+    premiumHref: 'shop.html?category=safety#cat-executive',
+    premiumLabel: 'Want something more? Explore the Executive Collection',
     styleId: 'PDMRK', sku: 'DAS-PDMRK-001',
     metaTitle: 'Professional Driver Milestone Recognition Kit | Driver Appreciation Solutions',
     metaDescription: 'A complete career-mileage recognition kit — milestone medal, lapel pins, recognition t-shirt, keychain, and road bag tag. Select any milestone from 250,000 to 6 Million miles.',
-    description: 'Recognize professional drivers for extraordinary career mileage achievements with a complete recognition package designed to be displayed, worn, and celebrated. Select the milestone level being honored — every kit is customized to the achievement.',
-    included: ['1 Milestone Medal', '2 Lapel Pins', '1 Recognition T-Shirt', '1 Keychain', '1 Driver Road Bag Tag'],
+    description: 'Recognize professional drivers for extraordinary career mileage achievements with a complete, assembled recognition package — a milestone medal in a premium display case, two customized driver luggage tags, two premium lapel pins, a recognition t-shirt, and an engraved keychain. Select the milestone level being honored and watch the kit build itself; every piece is customized to the achievement.',
+    included: ['1 Milestone Medal', '1 Premium Medal Display Case', '2 Customized Driver Luggage Tags', '2 Premium Lapel Pins', '1 Recognition T-Shirt', '1 Engraved Keychain'],
     // New premium photography (2026-06-12): hero = kit contents (tag + medal), then the
     // Driver Road Bag Tag lifestyle shot, then existing close-ups. Career milestone — NO Safe styling.
-    images: ['/images/mrk-lapel-lifestyle.webp', '/images/mrk-hero.webp', '/images/mrk-lifestyle.webp', '/images/milestone-kit-medal.jpg'],
+    images: ['/images/mrk-shirt-model.webp', '/images/mrk-shirt-table.webp', '/images/milestone-kit-luggage.jpg', '/images/mrk-lapel-lifestyle.webp', '/images/mrk-medal-case.webp', '/images/mrk-keychain-1.webp', '/images/mrk-keychain-2.webp'],
     imageAlt: 'Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride',
     imageAlts: [
       'Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride',
@@ -1828,27 +2425,44 @@ if (window.DAS_MILEPACKS) {
     ],
     productType: 'milestone', imageWrapDark: true,
     fitContain: true, reviews: 0, rating: 0,
-    relatedIds: ['safe-miles-kit', 'das-005', 'msm-c-1m'],
+    relatedIds: ['safe-miles-kit', 'msm-c-1m'],
   };
   PRODUCTS['safe-miles-kit'] = {
     id: 'safe-miles-kit',
     name: 'Safe Miles Recognition Kit',
-    category: 'Service Milestone Award Box',
-    price: 179.00, minQty: 1, pricingModel: 'single',
+    category: 'Safe Service Miles',
+    price: 549.00, minQty: 1, pricingModel: 'single',
     singleBadge: 'Safe Miles · Complete Recognition Kit', unitNoun: 'kit',
     ctaLabel: 'Add Recognition Kit',
     milestoneSelect: true, defaultMilestone: '1m',
     milestoneOptions: MS_MILES.map(m => ({ key:m.key, label:m.n + ' Safe Miles' })),
+    kitConfig: true, kitBuilder: true,
+    kitConfigLabel: 'Build Your Kit',
+    kitConfigHint: '— choose how the keepsake pieces are finished',
+    kitConfigOptions: [
+      { key:'standard',         label:'Standard Kit — Safe Miles medal, 2 lapel pins, t-shirt, keychain & road bag tag' },
+      { key:'custom-tag',       label:'Customized Driver Luggage Tag (name & safe-miles level engraved)' },
+      { key:'tag-medal-insert', label:'Luggage Tag with Engraved Medal Insert' },
+      { key:'one-pin',          label:'Single Premium Lapel Pin' },
+      { key:'two-pins',         label:'Two Premium Lapel Pins (matched set)' },
+    ],
+    premiumHref: 'shop.html?category=safety#cat-executive',
+    premiumLabel: 'Want something more? Explore the Executive Collection',
     styleId: 'SMRK', sku: 'DAS-SMRK-001',
     metaTitle: 'Safe Miles Recognition Kit | Driver Appreciation Solutions',
     metaDescription: 'A complete safe-driving recognition kit — Safe Miles medal, Safe Miles lapel pins, recognition t-shirt, keychain, and road bag tag. Select any safe-miles milestone from 250,000 to 6 Million.',
     description: 'More than a gift — a safety recognition program. The Safe Miles Recognition Kit turns a safety milestone into a recognition experience drivers can see, use, wear, and remember. Select the safe-miles level being honored — every kit is customized to the achievement.',
     included: ['1 Safe Miles Medal', '2 Safe Miles Lapel Pins', '1 Recognition T-Shirt', '1 Keychain', '1 Driver Road Bag Tag'],
-    images: kitImages,
-    imageAlt: 'Safe Miles Recognition Kit — Safe Miles medal, lapel pins, recognition apparel, keychain, and road bag tag',
+    // E39/E24 HERO: the real composed recognition scene (YETI drinkware + medal + lapel pins +
+    // apparel on a conference table, fleet truck behind) — this IS the premium composite E24 was
+    // waiting on. E40: gallery deduped to one lapel + one leather tag shot (removed duplicate
+    // lapel-detail / lapel-lapel / luggage-master). kitImages left defined but no longer used.
+    demoBranding: true,   // hero shows the fictitious "NorthStar" sample brand → customization note
+    images: ['/images/safe-kit-full.webp', '/images/safe-kit-medal.webp', '/images/safe-kit-presentation.webp', '/images/safe-kit-luggage.webp', '/images/safe-kit-lapel.webp'],
+    imageAlt: 'Safe Miles Recognition Kit — premium recognition package with Safe Miles medal, lapel pins, recognition apparel, keychain, and leather road bag tag',
     productType: 'safe-miles', safeMiles: true,
     fitContain: true, reviews: 0, rating: 0,
-    relatedIds: ['milestone-kit', 'das-005', 'msm-s-1m'],
+    relatedIds: ['milestone-kit', 'msm-s-1m'],
     story: {
       heading: 'More Than a Gift. A Safety Recognition Program.',
       paragraphs: [
@@ -1910,7 +2524,7 @@ if (window.DAS_MILEPACKS) {
     id: 'ssm-lapel-pin',
     name: 'Safe Service Miles Lapel Pin',
     category: 'Safety Recognition',
-    price: 12.99, minQty: 10, pricingModel: 'single',
+    price: 14.99, minQty: 10, pricingModel: 'single',
     singleBadge: 'Safe Recognition · Accessory', unitNoun: 'pin',
     ctaLabel: 'Add Lapel Pins',
     styleId: 'SSM-PIN', sku: 'DAS-SSM-PIN-001',
@@ -1918,7 +2532,7 @@ if (window.DAS_MILEPACKS) {
     metaDescription: 'A professional Safe Service Miles recognition lapel pin — worn daily on uniforms, jackets, hats, and safety apparel as a visible symbol of accident-free driving excellence.',
     description: 'A professional recognition pin designed to be worn on uniforms, jackets, hats, and safety apparel — a daily, visible symbol of safety excellence that complements the Safe Service Miles medals.',
     included: ['Safe Service Miles recognition lapel pin', 'Secure clutch backing', 'Professional finish — built for daily wear'],
-    images: ['/images/milestone-kit-lapel-detail.jpg', '/images/milestone-kit-lapel-hat.jpg'],
+    images: ['/images/milestone-kit-lapel-hat.jpg', '/images/milestone-kit-lapel-detail.jpg'],
     imageAlt: 'Safe Service Miles recognition lapel pin',
     imageAlts: [
       'Safe Service Miles recognition lapel pin — detailed view',
@@ -1932,7 +2546,9 @@ if (window.DAS_MILEPACKS) {
     id: 'ssm-luggage-tag',
     name: 'Safe Service Miles Luggage Tag',
     category: 'Safety Recognition',
-    price: 19.99, minQty: 10, pricingModel: 'single',
+    price: 79.99, minQty: 10, pricingModel: 'single',
+    milestoneSelect: true, defaultMilestone: '1m',   // customizable to the safe-miles level being honored
+    milestoneOptions: MS_MILES.map(m => ({ key:m.key, label:m.n + ' Safe Miles' })),
     singleBadge: 'Safe Recognition · Accessory', unitNoun: 'tag',
     ctaLabel: 'Add Luggage Tags',
     styleId: 'SSM-TAG', sku: 'DAS-SSM-TAG-001',
@@ -1940,11 +2556,11 @@ if (window.DAS_MILEPACKS) {
     metaDescription: 'A premium Safe Service Miles driver identification tag for road bags and travel gear — durable, professional, and a daily reminder of verified safe-driving achievement.',
     description: 'A premium driver identification tag inspired by the professional driver’s lifestyle — designed for road bags and travel gear. Durable and professional, it celebrates verified safety achievement and extends recognition beyond the workplace.',
     included: ['Safe Service Miles driver luggage / road-bag tag', 'Premium durable construction', 'Secure attachment loop'],
-    images: ['/images/milestone-kit-luggage.jpg', '/images/milestone-kit-luggage-master.jpg'],
-    imageAlt: 'Safe Service Miles driver luggage tag',
+    images: ['/images/ssm-luggage-tag-card-v2.webp', '/images/milestone-kit-luggage.jpg'],
+    imageAlt: 'Safe Service Miles driver luggage tag — premium engraved front-and-back layout',
     imageAlts: [
-      'Safe Service Miles driver luggage tag — front and back',
-      'Safe Service Miles luggage tag, master product shot',
+      'Safe Service Miles driver luggage tag — premium engraved front-and-back layout with coin',
+      'Safe Service Miles luggage tag, product shot',
     ],
     productType: 'safe-miles', safeMiles: true, representativeNote: true,
     fitContain: true, reviews: 0, rating: 0,
@@ -1993,6 +2609,7 @@ if (window.DAS_MILESTONES) {
       unitNoun: isExec ? 'package' : (k.type === 'medal' ? 'medal' : 'item'),
       ctaLabel: isExec ? (k.comingSoon ? 'Executive Upgrade Pricing Coming Soon' : 'Order Executive Collection') : undefined,
       comingSoon: isExec ? !!k.comingSoon : false,   // Food Jar: present but not yet purchasable
+      priceSoonLabel: (isExec && k.comingSoon) ? 'Executive Upgrade Pricing Coming Soon' : undefined,
       flagship: isExec ? !!k.flagship : false,       // Pack Leader: flagship visual treatment
       imageWrapDark: isExec ? !!k.darkImg : false,   // dark-background product shots (tote, pack leader)
       // Coming-soon exec gift (Food Jar) reuses the availability/notify flow with custom copy.
@@ -2003,18 +2620,24 @@ if (window.DAS_MILESTONES) {
       availBtn: (isExec && k.comingSoon) ? 'Notify me when available' : undefined,
       styleId: k.id.toUpperCase(), sku: 'DAS-' + k.id.toUpperCase(),
       description: k.description,
-      included: isExec
-        ? ['Safe Service Miles recognition medal', 'Premium presentation packaging', 'Recognition materials',
-           k.executive.gift + (k.executive.secondary ? ' (' + k.executive.secondary + ')' : '') + ' — premium executive gift']
+      included: (k.included && k.included.length) ? k.included
+        : isExec
+        ? ['Everything in the Safe Service Miles Recognition Kit: medal, 2 Safe Miles lapel pins, recognition t-shirt, keychain & driver road-bag tag',
+           'Premium presentation packaging',
+           'Company-issued recognition certificate (admin-approved, presented to the driver)',
+           k.executive.gift + (k.executive.secondary ? ' (' + k.executive.secondary + ')' : '') + ' — the premium executive upgrade']
         : (k.type === 'medal'
           ? ['Premium recognition medal', 'Milestone engraving (engraving options coming soon)', 'Branded presentation packaging']
           : ['Placeholder award — final physical item coming soon']),
       images: (k.photos && k.photos.length) ? k.photos : [k.image],
-      fitContain: true,                     // 16:9 placeholders → contain on the 1:1 PDP hero (full, no crop)
+      // Cutout medals float on the dark hero (contain); real landscape PHOTOS (250K/500K
+      // combos, exec product shots) fill the frame (cover) so there are no black letterbox bars.
+      fitContain: (k.type === 'medal'),
       reviews: 0, rating: 0,
       relatedIds: rel,
       executive: isExec ? k.executive : undefined,
       imageAlt: k.imageAlt || undefined,   // exact required alt for the gift hero (e.g. YETI Food Jar / Lunch Bag)
+      demoBranding: !!k.demoBranding,       // photos carry the fictitious "NorthStar" sample brand → show the note
     };
   });
 }
@@ -2079,7 +2702,6 @@ function getProductDetailsHTML(p) {
     'das-001': '12" × 10" × 4"',
     'das-003': '14" × 12" × 5"',
     'das-004': '13" × 11" × 4"',
-    'das-005': '15" × 12" × 6"',
     'das-006': '11" × 8" × 3"',
   };
   const dims = dimMap[p.id] || null;   // omit the dimensions line when we don't have real dims
@@ -2115,13 +2737,41 @@ function getProductDetailsHTML(p) {
 function renderProduct() {
   const p = currentProduct;
 
+  // D10 — Custom Laser Engraving: presentation-case kits append the callout as the FINAL gallery
+  // image (hero + existing order preserved) and reveal the upgrade block + badge. Driven entirely
+  // by p.laserEngraving so any future foam-insert kit gets it by setting one flag.
+  if (p.laserEngraving) {
+    const _eng = '/images/das-laser-engraving-callout.webp';
+    if (Array.isArray(p.images) && p.images.indexOf(_eng) === -1) p.images.push(_eng);
+  }
+
   // Page meta (per-product overrides via metaTitle / metaDescription)
   document.title = p.metaTitle || `${p.name} — Driver Appreciation Solutions`;
   document.getElementById('page-desc').setAttribute('content', p.metaDescription || p.description.slice(0, 155));
   // Per-product canonical / og:url so each product is its own indexable page (not all → one URL).
-  const canonicalUrl = `https://driverappreciationsolutions.com/product?id=${encodeURIComponent(p.id)}`;
+  const ORIGIN = 'https://www.driverappreciationsolutions.com';
+  const canonicalUrl = `${ORIGIN}/product?id=${encodeURIComponent(p.id)}`;
   const canEl = document.getElementById('page-canonical'); if (canEl) canEl.setAttribute('href', canonicalUrl);
   const ogUrlEl = document.getElementById('page-ogurl');   if (ogUrlEl) ogUrlEl.setAttribute('content', canonicalUrl);
+  // Per-product JSON-LD (Breadcrumb + Product). Price Offer ONLY for publicly-priced products
+  // (≤$110, not gated/coming-soon) so consultation-priced items never carry a mismatched price.
+  try {
+    const _img = (p.images && p.images[0]) ? (p.images[0].indexOf('http') === 0 ? p.images[0] : ORIGIN + p.images[0]) : ORIGIN + '/images/og-default.jpg';
+    const _gated = p.price != null && Number(p.price) > 110;
+    const _prod = { '@type': 'Product', name: p.name,
+      description: (p.metaDescription || p.description || '').slice(0, 300),
+      image: _img, brand: { '@type': 'Brand', name: 'Driver Appreciation Solutions' }, url: canonicalUrl };
+    if (p.price != null && !_gated && !p.comingSoon) {
+      _prod.offers = { '@type': 'Offer', priceCurrency: 'USD', price: String(p.price), availability: 'https://schema.org/InStock', url: canonicalUrl, seller: { '@type': 'Organization', name: 'Driver Appreciation Solutions' } };
+    }
+    const _graph = { '@context': 'https://schema.org', '@graph': [
+      { '@type': 'BreadcrumbList', itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: ORIGIN + '/' },
+        { '@type': 'ListItem', position: 2, name: 'Shop', item: ORIGIN + '/shop' },
+        { '@type': 'ListItem', position: 3, name: p.name, item: canonicalUrl } ] }, _prod ] };
+    const _jl = document.getElementById('page-jsonld'); if (_jl) _jl.textContent = JSON.stringify(_graph);
+  } catch (e) {}
+  if (window.dasTrack) { try { dasTrack.viewItem({ sku: p.sku || p.id, name: p.name, price: p.price, category: p.category }); } catch (e) {} }
   document.getElementById('breadcrumb-name').textContent = p.name;
   // Category crumb reinforces the three recognition paths (Service Milestone Awards /
   // Safety Recognition / Executive Driver Recognition Collection).
@@ -2138,6 +2788,14 @@ function renderProduct() {
   document.getElementById('pi-category').textContent = p.category;
   document.getElementById('pi-name').textContent = p.name;
   document.getElementById('pi-description').textContent = p.description;
+
+  // D10 — reveal the laser-engraving badge + upgrade block on qualifying kits
+  const _lz = !!p.laserEngraving;
+  const _lzBadge = document.getElementById('pi-laser-badge'); if (_lzBadge) _lzBadge.style.display = _lz ? '' : 'none';
+  const _lzBlock = document.getElementById('pi-laser-block'); if (_lzBlock) _lzBlock.style.display = _lz ? '' : 'none';
+  // Demo-branding note: products whose photos carry the fictitious "NorthStar" sample brand.
+  const demoNote = document.getElementById('demo-branding-note');
+  if (demoNote) demoNote.style.display = p.demoBranding ? 'flex' : 'none';
   document.getElementById('acc-reviews-label').textContent = p.reviews
     ? `Reviews (${p.reviews}) ★${(p.rating || 0).toFixed(1)}`
     : 'Reviews';
@@ -2288,6 +2946,10 @@ function renderProduct() {
   // Show the thumb rail when there's more than one thumbnail (kit images OR components).
   const hasThumbs = (p.images && p.images.length > 1) || components.length > 0;
   rail.style.display = hasThumbs ? '' : 'none';
+  // No rail → drop the rail column so the main image fills the space (otherwise it collapses
+  // into the narrow 72px rail column and renders tiny).
+  var pdg = document.querySelector('.product-detail-grid');
+  if (pdg) pdg.classList.toggle('no-thumbs', !hasThumbs);
   // Prev/next arrows navigate only the kit images.
   const navBtns = document.querySelector('.img-nav-btns');
   if (navBtns) navBtns.style.display = (p.images && p.images.length > 1) ? '' : 'none';
@@ -2334,7 +2996,7 @@ function updatePriceDisplay() {
     document.getElementById('pi-price').innerHTML = `$${retail.toFixed(2)} <span class="price-per">per kit</span>`;
   } else if (isSingle(p)) {
     document.getElementById('pi-price').innerHTML = (p.comingSoon || p.price == null)
-      ? `<span class="price-soon">Executive Upgrade Pricing Coming Soon</span>`
+      ? `<span class="price-soon">${p.priceSoonLabel || 'Pricing Coming Soon'}</span>`
       : `$${p.price.toFixed(2)} <span class="price-per">per ${p.unitNoun || 'unit'}</span>`;
   } else {
     const mult = TIER_MULTS[currentTier];
@@ -2345,12 +3007,83 @@ function updatePriceDisplay() {
   updateExpressCheckoutAmount();
 }
 
+// Color-coded milestone scale (E71). Swatch conveys color; option text stays dark for contrast.
+const MILESTONE_COLORS = {
+  '250k': { c: '#FFFFFF', name: 'White' },
+  '500k': { c: '#F2C200', name: 'Yellow' },
+  '1m':   { c: '#2E9E5B', name: 'Green' },
+  '2m':   { c: '#B0763B', name: 'Bronze' },
+  '3m':   { c: '#AEB6BF', name: 'Silver' },
+  '4m':   { c: '#C8A84B', name: 'Gold' },
+  '5m':   { c: '#7FA6B8', name: 'Platinum' },
+  '6m':   { c: '#111111', name: 'Black' },
+};
+function milestoneColor(key) { return MILESTONE_COLORS[(key || '').toLowerCase()] || null; }
+
+// Build a custom swatch dropdown over the native milestone <select> (which stays synced for all logic).
+function enhanceMilestoneDropdown(sel, options) {
+  if (!sel || !Array.isArray(options) || !options.length) return;
+  if (!options.some(o => milestoneColor(o.key))) return;   // only the mileage scale gets color-coding
+  const block = document.getElementById('milestone-select-block');
+  const sw = (key) => { const m = milestoneColor(key); return m ? `<span class="ms-cd-sw" style="background:${m.c}"></span>` : ''; };
+
+  let wrap = (sel.parentElement && sel.parentElement.classList.contains('ms-cd')) ? sel.parentElement : null;
+  if (!wrap) {
+    wrap = document.createElement('div'); wrap.className = 'ms-cd';
+    sel.parentNode.insertBefore(wrap, sel); wrap.appendChild(sel);
+    sel.classList.add('ms-cd-native'); sel.setAttribute('aria-hidden', 'true'); sel.tabIndex = -1;
+  } else {
+    wrap.querySelectorAll('.ms-cd-trigger, .ms-cd-menu').forEach(n => n.remove());
+  }
+  const trigger = document.createElement('button');
+  trigger.type = 'button'; trigger.className = 'ms-cd-trigger';
+  trigger.setAttribute('aria-haspopup', 'listbox'); trigger.setAttribute('aria-expanded', 'false');
+  trigger.setAttribute('aria-label', 'Milestone level');
+  const menu = document.createElement('div'); menu.className = 'ms-cd-menu'; menu.setAttribute('role', 'listbox');
+
+  const open = () => { wrap.classList.add('open'); trigger.setAttribute('aria-expanded', 'true'); };
+  const close = () => { wrap.classList.remove('open'); trigger.setAttribute('aria-expanded', 'false'); };
+  const syncTrigger = () => { const cur = options.find(o => o.key === sel.value) || options[0]; trigger.innerHTML = sw(cur.key) + '<span>' + cur.label + '</span>'; };
+  const selectVal = (key) => {
+    if (sel.value !== key) { sel.value = key; sel.dispatchEvent(new Event('change', { bubbles: true })); }
+    menu.querySelectorAll('.ms-cd-opt').forEach(el => el.setAttribute('aria-selected', String(el.dataset.value === key)));
+    syncTrigger(); close(); trigger.focus();
+  };
+  options.forEach(o => {
+    const m = milestoneColor(o.key);
+    const opt = document.createElement('div');
+    opt.className = 'ms-cd-opt'; opt.setAttribute('role', 'option'); opt.dataset.value = o.key;
+    opt.setAttribute('aria-selected', String(o.key === sel.value));
+    opt.innerHTML = sw(o.key) + '<span>' + o.label + '</span>' + (m ? `<span class="ms-cd-cname">${m.name}</span>` : '');
+    opt.addEventListener('click', () => selectVal(o.key));
+    menu.appendChild(opt);
+  });
+  trigger.addEventListener('click', (e) => { e.stopPropagation(); wrap.classList.contains('open') ? close() : open(); });
+  trigger.addEventListener('keydown', (e) => {
+    const keys = options.map(o => o.key), i = keys.indexOf(sel.value);
+    if (e.key === 'ArrowDown') { e.preventDefault(); selectVal(keys[Math.min(keys.length - 1, i + 1)]); }
+    else if (e.key === 'ArrowUp') { e.preventDefault(); selectVal(keys[Math.max(0, i - 1)]); }
+    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); wrap.classList.contains('open') ? close() : open(); }
+    else if (e.key === 'Escape') { close(); }
+  });
+  if (!document._msCdOutsideWired) { document._msCdOutsideWired = true; document.addEventListener('click', (e) => { document.querySelectorAll('.ms-cd.open').forEach(w => { if (!w.contains(e.target)) { w.classList.remove('open'); const t = w.querySelector('.ms-cd-trigger'); if (t) t.setAttribute('aria-expanded', 'false'); } }); }); }
+  wrap.appendChild(trigger); wrap.appendChild(menu); syncTrigger();
+
+  let legend = block.querySelector('.ms-legend');
+  if (!legend) { legend = document.createElement('div'); legend.className = 'ms-legend'; block.appendChild(legend); }
+  legend.innerHTML = options.map(o => { const m = milestoneColor(o.key); return m ? `<span><i style="background:${m.c}"></i>${m.name}</span>` : ''; }).join('');
+}
+
 function renderMilestoneSelect(p) {
   const block = document.getElementById('milestone-select-block');
   const sel = document.getElementById('pdp-milestone-select');
   if (!block || !sel) return;
   if (!p.milestoneSelect || !Array.isArray(p.milestoneOptions) || !p.milestoneOptions.length) {
     block.style.display = 'none';
+    const kc = document.getElementById('kit-config-block'); // hide step-2 too when not a kit
+    if (kc) kc.style.display = 'none';
+    const kb = document.getElementById('kit-builder');       // hide the kit builder too
+    if (kb) kb.style.display = 'none';
     return;
   }
   sel.innerHTML = p.milestoneOptions.map(o => `<option value="${o.key}">${o.label}</option>`).join('');
@@ -2359,6 +3092,83 @@ function renderMilestoneSelect(p) {
   const want = (params.get('milestone') || p.defaultMilestone || '').toLowerCase();
   if (want && p.milestoneOptions.some(o => o.key === want)) sel.value = want;
   block.style.display = '';
+  renderKitConfig(p);
+  renderKitBuilder(p);
+  // Re-assemble the kit builder whenever the milestone changes (the "assembly" experience).
+  if (!sel.dataset.kbWired) {
+    sel.dataset.kbWired = '1';
+    sel.addEventListener('change', function () { renderKitBuilder(currentProduct); });
+  }
+  // E71: color-coded custom dropdown over the native select (swatch + legend, Safari/iOS-safe).
+  enhanceMilestoneDropdown(sel, p.milestoneOptions);
+}
+
+/* Step 2 of the milestone kits: how the keepsake pieces are finished. Flat-priced
+   configuration; the final "premium" path is a link out to the Executive Collection. */
+function renderKitConfig(p) {
+  const block = document.getElementById('kit-config-block');
+  const sel   = document.getElementById('pdp-kit-config');
+  if (!block || !sel) return;
+  if (!p.kitConfig || !Array.isArray(p.kitConfigOptions) || !p.kitConfigOptions.length) {
+    block.style.display = 'none';
+    return;
+  }
+  document.getElementById('kit-config-label').firstChild.textContent = (p.kitConfigLabel || 'Build Your Kit') + ' ';
+  document.getElementById('kit-config-hint').textContent = p.kitConfigHint || '';
+  sel.innerHTML = p.kitConfigOptions.map(o => `<option value="${o.key}">${o.label}</option>`).join('');
+  sel.value = 'standard';
+  const link = document.getElementById('kit-premium-link');
+  if (link) {
+    if (p.premiumHref) { link.href = p.premiumHref; link.style.display = ''; }
+    else link.style.display = 'none';
+    document.getElementById('kit-premium-text').textContent = p.premiumLabel || 'Explore premium upgrades';
+  }
+  block.style.display = '';
+}
+
+/* ── KIT BUILDER — reveals the fixed kit contents for the selected milestone, assembly-style.
+   Contents are predefined (same complete set every tier); each piece is personalized to the
+   selected milestone level so the kit feels built-to-order, not generic. ── */
+const KB_ICONS = {
+  medal: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="14.5" r="6"/><path d="M9 9.2 7 3M15 9.2 17 3"/><path d="M12 12.4l.9 1.9 2 .3-1.5 1.4.35 2L12 17l-1.75 1 .35-2L9 14.6l2-.3z"/></svg>',
+  case:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7.5" width="18" height="12.5" rx="2"/><path d="M8 7.5V6a2 2 0 012-2h4a2 2 0 012 2v1.5"/><path d="M3 12.5h18"/></svg>',
+  tag:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.6 12.4l8-8a2 2 0 011.4-.6H19a2 2 0 012 2v6a2 2 0 01-.6 1.4l-8 8a2 2 0 01-2.8 0l-6-6a2 2 0 010-2.8z"/><circle cx="16.4" cy="7.6" r="1.3"/></svg>',
+  pin:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7"/><path d="M9.8 7.2l1.4 1.4 2.8-2.8"/></svg>',
+  shirt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M15.5 3l5 3-2 4-1.5-.8V21H7V9.2L5.5 10l-2-4 5-3 1.7 2.2h3.6z"/></svg>',
+  key:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="4.2"/><path d="M11 11l9 9M18.5 18.5l1.8-1.8M15 15l1.8-1.8"/></svg>',
+};
+const KB_CHECK = '<svg class="kb-item-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
+const KIT_BUILDER_CONTENTS = [
+  { icon:'shirt', name:'Recognition T-Shirt',           desc:'1 Million Mile Club recognition apparel' },
+  { icon:'tag',   name:'Two Customized Driver Luggage Tags', desc:'Engraved with driver name + {LVL}' },
+  { icon:'pin',   name:'Two Premium Lapel Pins',        desc:'Matched set — one to wear, one to keep' },
+  { icon:'medal', name:'{LVL} Medal',                  desc:'Die-struck milestone medal, engraved to the level' },
+  { icon:'case',  name:'Premium Medal Display Case',    desc:'Velvet-lined presentation case' },
+  { icon:'key',   name:'Engraved Keychain',             desc:'Everyday {LVL} keepsake' },
+];
+function renderKitBuilder(p) {
+  const wrap = document.getElementById('kit-builder');
+  if (!wrap) return;
+  if (!p || !p.kitBuilder) { wrap.style.display = 'none'; return; }
+  const sel = document.getElementById('pdp-milestone-select');
+  let lvl = 'Milestone';
+  if (sel && sel.value) { const opt = sel.options[sel.selectedIndex]; lvl = opt ? opt.text : sel.value; }
+  const titleEl = document.getElementById('kit-builder-title');
+  if (titleEl) titleEl.textContent = 'Your ' + lvl + ' Recognition Kit';
+  const grid = document.getElementById('kit-builder-grid');
+  grid.innerHTML = KIT_BUILDER_CONTENTS.map(function (it, i) {
+    const name = it.name.replace('{LVL}', lvl);
+    const desc = it.desc.replace('{LVL}', lvl);
+    return '<div class="kb-item" style="transition-delay:' + (i * 70) + 'ms">' + KB_CHECK +
+      '<span class="kb-item-icon">' + (KB_ICONS[it.icon] || '') + '</span>' +
+      '<span class="kb-item-name">' + name + '</span>' +
+      '<span class="kb-item-desc">' + desc + '</span></div>';
+  }).join('');
+  wrap.style.display = '';
+  // Re-trigger the staggered "assembly" reveal.
+  wrap.classList.remove('is-built');
+  void wrap.offsetWidth;
+  requestAnimationFrame(function () { wrap.classList.add('is-built'); });
 }
 
 function renderIncluded() {
@@ -2535,6 +3345,15 @@ function addToCart() {
         cartItem.milestone = sel.value;
         const opt = sel.options[sel.selectedIndex];
         cartItem.milestoneLabel = opt ? opt.text : sel.value;
+      }
+    }
+    // Kit configuration (flat-priced) — carry the chosen build to cart line / checkout.
+    if (p.kitConfig) {
+      const kc = document.getElementById('pdp-kit-config');
+      if (kc && kc.value && kc.value !== 'standard') {
+        cartItem.kitConfig = kc.value;
+        const opt = kc.options[kc.selectedIndex];
+        cartItem.kitConfigLabel = opt ? opt.text : kc.value;
       }
     }
   } else {
@@ -3077,5 +3896,7 @@ function renderRelated() {
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
+<script src="js/pricing-gate.js?v=4"></script>
+  <script src="js/quote.js?v=2" defer></script>
 </body>
 </html>

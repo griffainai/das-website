@@ -4,7 +4,13 @@
    Built by GRIFFAIN AI
    ========================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap');
+/* Fonts now load via <link rel="preload"/"stylesheet"> in each page <head> — parallel, not the
+   serial @import waterfall (faster LCP). */
+/* A11y (WCAG 2.4.7): visible keyboard focus on all interactive elements. Inputs keep their own
+   box-shadow focus; this covers buttons/links/nav/cards that previously had none. */
+:focus-visible { outline: 2px solid #C8A14B; outline-offset: 2px; }
+a:focus-visible, button:focus-visible, [role="button"]:focus-visible, .nav-link:focus-visible,
+summary:focus-visible, [tabindex]:focus-visible { outline: 2px solid #C8A14B; outline-offset: 2px; border-radius: 3px; }
 
 /* =========================================
    DESIGN TOKENS
@@ -224,18 +230,24 @@ ul { list-style: none; }
 }
 .ann-bar-cta:hover { background: rgba(255,255,255,0.20); }
 .ann-bar-cta svg { width: 12px; height: 12px; }
-/* ── Tablet (≤860px): strip countdown + delivery msg, keep label + date + CTA ── */
+/* ── Tablet (≤860px): KEEP the countdown (it's the point). Drop the delivery message and the
+   "DAW begins in" prefix to save width so the bar stays one clean row. ── */
 @media (max-width: 860px) {
-  .ann-bar-countdown { display: none; }
-  .ann-bar-msg       { display: none; }
-  .ann-bar-inner     { flex-wrap: nowrap; min-height: 38px; }
+  .ann-bar-msg     { display: none !important; }
+  .ann-cd-prefix   { display: none; }
+  .ann-bar-inner   { flex-wrap: nowrap; min-height: 38px; gap: 12px; }
+  .ann-bar-right   { gap: 10px; }
 }
-/* ── Small screens (≤640px): drop the date, keep "Driver Appreciation Week" + CTA ── */
+/* ── Small screens (≤640px): stack into two centered rows so the countdown shows in FULL with
+   no overlap — row 1: event label, row 2: live countdown + Shop Now. ── */
 @media (max-width: 640px) {
-  .ann-bar-dates   { display: none; }
-  .ann-bar-divider { display: none; }
+  .ann-bar-dates    { display: none; }
+  .ann-bar-divider  { display: none; }
+  .ann-bar-inner    { flex-direction: column; align-items: center; justify-content: center; gap: 3px; min-height: 0; padding: 6px 0; flex-wrap: nowrap; }
+  .ann-bar-left     { justify-content: center; }
+  .ann-bar-right    { justify-content: center; gap: 12px; }
 }
-/* ── Phones (≤480px): drop icon, tighten text so bar stays one clean row ── */
+/* ── Phones (≤480px): drop icon, tighten text ── */
 @media (max-width: 480px) {
   .ann-bar-icon { display: none; }
   .ann-bar-left { min-width: 0; }
@@ -247,6 +259,7 @@ ul { list-style: none; }
     padding: 5px 12px;
     font-size: 0.75rem;
   }
+  .ann-cd-num { font-size: 0.875rem; }
 }
 
 /* =========================================
@@ -304,6 +317,19 @@ ul { list-style: none; }
   flex-shrink: 0;
   text-decoration: none;
 }
+/* E93: © copyright mark on the Driver Appreciation Solutions wordmark logo (site-wide). */
+.nav-logo::after {
+  content: "\00A9";
+  align-self: flex-start;
+  margin-left: -7px;
+  margin-top: 2px;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 700;
+  color: #1A2E6E;
+}
+/* Footer sits on deep navy + already carries an explicit "© … Inc." line → no logo © there. */
+.footer .nav-logo::after { display: none; }
 .nav-logo-img {
   height: 36px;
   width: auto;
@@ -402,6 +428,11 @@ ul { list-style: none; }
 @media (max-width: 860px) {
   .nav-links { display: none; }
   .nav-mobile-toggle { display: flex; }
+}
+/* Tablet-landscape band: the longer "Insights & Ideas" label needs a touch
+   less padding so all six nav items fit on one line without overflow. */
+@media (min-width: 861px) and (max-width: 1040px) {
+  .nav-link { padding-left: 10px; padding-right: 10px; }
 }
 
 /* ── DAW Countdown Pill ── */
@@ -1072,10 +1103,14 @@ ul { list-style: none; }
   margin-top: auto;
 }
 .product-card-price-row {
+  /* Stack amount over its unit text so a long unit ("per backpack · min. 10 ·
+     customized after purchase") never crowds/collides with the price on narrow cards. */
   display: flex;
-  align-items: baseline;
-  gap: 8px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
 }
+.product-price-unit { line-height: 1.35; }
 .product-price-amount {
   font-size: 1.25rem;
   font-weight: 800;
@@ -3914,6 +3949,62 @@ ul { list-style: none; }
     width: 100%;
     justify-content: center;
   }
+}
+
+/* ─────────────────────────────────────────
+   NEWSLETTER MOCKUP CTA — make the in-artifact
+   button read as a button (it sits navy-on-navy)
+   ───────────────────────────────────────── */
+.newsletter-mock-cta {
+  display: block;
+  width: 100%;
+  background: #1A2E6E;
+  color: #ffffff;
+  border: 1px solid rgba(200,168,75,0.45);
+  border-radius: 10px;
+  padding: 11px;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  /* Raised at rest: edge highlight + drop shadow separate it from the card */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 4px 14px rgba(0,0,0,0.35),
+    0 0 0 0 rgba(200,168,75,0);
+  transition: transform 0.18s ease, box-shadow 0.25s ease,
+              background 0.2s ease, border-color 0.2s ease;
+}
+.newsletter-mock-cta:hover {
+  background: #243a82;
+  border-color: rgba(200,168,75,0.9);
+  transform: translateY(-2px);
+  /* Gold glow ring announces the affordance */
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.18),
+    0 10px 24px rgba(0,0,0,0.45),
+    0 0 20px 2px rgba(200,168,75,0.38);
+}
+.newsletter-mock-cta:active {
+  transform: translateY(0);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.10),
+    0 3px 10px rgba(0,0,0,0.40);
+}
+.newsletter-mock-cta .nl-cta-arrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.newsletter-mock-cta:hover .nl-cta-arrow {
+  transform: translateX(4px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .newsletter-mock-cta,
+  .newsletter-mock-cta .nl-cta-arrow {
+    transition: none;
+  }
+  .newsletter-mock-cta:hover { transform: none; }
 }
 
 /* =========================================

@@ -5,21 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shop — Driver Appreciation Solutions</title>
   <meta name="description" content="Browse all driver appreciation kits, onboarding packs, and service milestone gifts. Fleet-scale orders from 10 units.">
-  <link rel="canonical" href="https://driverappreciationsolutions.com/shop.html">
+  <link rel="canonical" href="https://www.driverappreciationsolutions.com/shop">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Driver Appreciation Solutions">
   <meta property="og:title" content="Shop Driver Appreciation Kits — Fleet Recognition Programs">
   <meta property="og:description" content="Browse all driver appreciation kits, onboarding packs, and service milestone gifts. Fleet-scale orders from 10 units. Fleet-scale programs.">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
-  <meta property="og:url" content="https://driverappreciationsolutions.com/shop.html">
+  <meta property="og:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
+  <meta property="og:url" content="https://www.driverappreciationsolutions.com/shop">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Shop Driver Appreciation Kits — Fleet Recognition Programs">
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=1200&q=80&fit=crop">
+  <meta name="twitter:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop" fetchpriority="high">
-  <link rel="stylesheet" href="css/styles.css?v=12">
+  <link rel="preload" as="image" href="/images/das-da-kit-1.webp" fetchpriority="high">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
@@ -48,7 +49,7 @@
               "@type": "Product",
               "name": "Driver Appreciation Kit",
               "description": "The signature kit. Curated recognition merchandise for Driver Appreciation Week — branded items, personalized card, and premium packaging.",
-              "image": "https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop",
+              "image": "/images/das-da-kit-1.webp",
               "url": "https://driverappreciationsolutions.com/product.html?id=das-001",
               "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "49.99", "availability": "https://schema.org/InStock" }
             }
@@ -76,17 +77,6 @@
             }
           },
           {
-            "@type": "ListItem", "position": 5,
-            "item": {
-              "@type": "Product",
-              "name": "Service Milestone Award Box",
-              "description": "Honor years of dedication with premium awards. Our most elevated recognition product — something drivers display with pride for years to come.",
-              "image": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=75&fit=crop",
-              "url": "https://driverappreciationsolutions.com/product.html?id=das-005",
-              "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "79.99", "availability": "https://schema.org/InStock" }
-            }
-          },
-          {
             "@type": "ListItem", "position": 6,
             "item": {
               "@type": "Product",
@@ -103,10 +93,65 @@
   }
   </script>
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
-  <script src="/js/tracking.js?v=1" defer></script>
+  <script src="/js/tracking.js?v=2" defer></script>
   <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-splash-logo"><img src="/images/logo.png" alt="Driver Appreciation Solutions" width="300"></div>
+  <div class="das-splash-bar"><i></i></div>
+  <div class="das-splash-tag">driver appreciation made simple for fleets</div>
+</div>
+<style>
+  #das-splash{position:fixed;inset:0;z-index:100000;background:#fff;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:22px;transition:opacity .45s ease}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .das-splash-logo{position:relative;overflow:hidden;line-height:0}
+  #das-splash .das-splash-logo img{width:min(68vw,300px);height:auto;opacity:0;
+    animation:dasRise .7s cubic-bezier(.2,.7,.2,1) .05s forwards}
+  #das-splash .das-splash-logo::after{content:'';position:absolute;top:0;bottom:0;left:0;width:42%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    transform:translateX(-130%) skewX(-18deg);animation:dasShine 1.1s ease-in-out .7s 1 both;pointer-events:none}
+  #das-splash .das-splash-bar{width:200px;height:3px;border-radius:3px;background:#e7eaf0;overflow:hidden;opacity:0;
+    animation:dasFade .4s ease .45s forwards}
+  #das-splash .das-splash-bar i{display:block;height:100%;width:0;border-radius:3px;
+    background:linear-gradient(90deg,#1A2E6E,#1A2E6E 70%,#C8A14B);animation:dasFill 1.25s cubic-bezier(.4,.1,.2,1) .5s forwards}
+  #das-splash .das-splash-tag{font:600 11px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    letter-spacing:.18em;text-transform:uppercase;color:#6b7585;opacity:0;animation:dasFade .5s ease .55s forwards}
+  #das-splash.das-quick .das-splash-tag{display:none}
+  #das-splash.das-quick .das-splash-bar i{animation-duration:.55s}
+  @keyframes dasRise{to{opacity:1;transform:none}}
+  @keyframes dasShine{to{transform:translateX(230%) skewX(-18deg)}}
+  @keyframes dasFill{to{width:100%}}
+  @keyframes dasFade{to{opacity:1}}
+  @media (prefers-reduced-motion: reduce){
+    #das-splash .das-splash-logo img,#das-splash .das-splash-logo::after,
+    #das-splash .das-splash-bar,#das-splash .das-splash-bar i,#das-splash .das-splash-tag{animation:none;opacity:1}
+    #das-splash .das-splash-bar i{width:100%}
+  }
+</style>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 320 : 1000, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);
+  })();
+</script>
+
 
 <div class="announcement-bar">
   Driver Appreciation Week — September 13–19, 2026 &nbsp;·&nbsp;
@@ -117,7 +162,7 @@
   <div class="container">
     <div class="nav-inner">
       <a href="index.html" class="nav-logo">
-        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" width="148" height="36" style="height:36px;width:auto">
       </a>
       <div class="nav-links">
         <a href="index.html" class="nav-link">Home</a>
@@ -179,17 +224,32 @@
 <section class="section" style="background:var(--black)">
   <div class="container">
 
+    <!-- Product search -->
+    <div class="shop-search">
+      <svg class="shop-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.6 5.6a7.5 7.5 0 0011.05 11.05z"/></svg>
+      <input id="shop-search-input" type="search" class="shop-search-input" placeholder="Search products — e.g. “safe miles”, “lapel pin”, “kit”…" aria-label="Search products" autocomplete="off">
+      <button type="button" id="shop-search-clear" class="shop-search-clear" aria-label="Clear search" style="display:none">&times;</button>
+    </div>
+
     <!-- Filter Bar -->
     <div class="shop-filter-bar">
       <span class="shop-filter-bar-label">Filter:</span>
+      <!-- E96: ordered by the driver-recognition journey. Slugs unchanged (links safe); milepacks relabeled "Safe Miles Programs". -->
       <button type="button" class="filter-btn active" data-filter="all">All Products</button>
-      <button type="button" class="filter-btn" data-filter="appreciation">Appreciation Kits</button>
-      <button type="button" class="filter-btn" data-filter="safety">Safety Recognition</button>
+      <button type="button" class="filter-btn" data-filter="appreciation">Driver Appreciation Kits</button>
       <button type="button" class="filter-btn" data-filter="onboarding">Onboarding Solutions</button>
+      <button type="button" class="filter-btn" data-filter="safety">Safety Recognition</button>
+      <button type="button" class="filter-btn" data-filter="safedriver">Safe Driver Awards</button>
       <button type="button" class="filter-btn" data-filter="milestone">Service Milestone Awards</button>
+      <button type="button" class="filter-btn" data-filter="milepacks">Safe Miles Programs</button>
+      <button type="button" class="filter-btn" data-filter="medals">Medals</button>
+      <button type="button" class="filter-btn" data-filter="retirement">Retirement Recognition</button>
+      <button type="button" class="filter-btn" data-filter="birthday">Birthday Recognition</button>
       <button type="button" class="filter-btn" data-filter="holiday">Holiday &amp; Seasonal</button>
-      <button type="button" class="filter-btn" data-filter="milepacks">Mile Packs</button>
     </div>
+
+    <!-- No-results message (shown by search when nothing matches) -->
+    <p id="shop-no-results" class="shop-no-results" style="display:none">No products match your search. <button type="button" id="shop-no-results-clear" class="shop-search-reset">Clear search</button> or browse the categories above.</p>
 
     <!-- APPRECIATION KITS -->
     <div class="mb-xl" data-category-section="appreciation">
@@ -197,19 +257,259 @@
         <div>
           <span class="section-eyebrow">Appreciation Kits</span>
           <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Driver Appreciation Kits</h2>
+          <p style="font-size:0.9rem;margin-top:6px"><a href="premium-appreciation-kits.html" style="color:#9A7B2E;font-weight:700;text-decoration:none">Explore the full Premium Appreciation Kits™ collection →</a></p>
         </div>
         <div style="flex:1;height:1px;background:var(--gold-border)"></div>
       </div>
+
       <div class="product-grid">
+        <div class="product-card"
+             data-product-id="professional-driver-kit" data-product-name="The Professional Driver™ Kit"
+             data-product-price="299.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-professional-driver-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=professional-driver-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-professional-driver-kit-heroA.webp" alt="The Professional Driver™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=professional-driver-kit" style="text-decoration:none;color:inherit">The Professional Driver™ Kit</a></h3>
+            <p class="product-card-desc">A practical appreciation kit focused on the everyday essentials professional drivers use on and off the road.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=professional-driver-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="command-center-kit" data-product-name="The Command Center™ Kit"
+             data-product-price="499.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-command-center-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=command-center-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-command-center-kit-heroA.webp" alt="The Command Center™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=command-center-kit" style="text-decoration:none;color:inherit">The Command Center™ Kit</a></h3>
+            <p class="product-card-desc">Built for communication, productivity, and professionalism. The Command Center™ Kit supports drivers who spend their days coordinating deliveries, communicating with dispatch, and representing the company on the road.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$499.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=command-center-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="working-hands-kit" data-product-name="The Working Hands™ Kit"
+             data-product-price="249.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-working-hands-kit-heroC.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=working-hands-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-working-hands-kit-heroC.webp" alt="The Working Hands™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=working-hands-kit" style="text-decoration:none;color:inherit">The Working Hands™ Kit</a></h3>
+            <p class="product-card-desc">A recognition kit focused on the hardworking hands that keep freight moving.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$249.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=working-hands-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="highway-guardian-kit" data-product-name="The Highway Guardian™ Kit"
+             data-product-price="299.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-highway-guardian-kit-heroC.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=highway-guardian-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-highway-guardian-kit-heroC.webp" alt="The Highway Guardian™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=highway-guardian-kit" style="text-decoration:none;color:inherit">The Highway Guardian™ Kit</a></h3>
+            <p class="product-card-desc">Designed for drivers who prioritize safety, awareness, and preparedness.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=highway-guardian-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="dot-ready-kit" data-product-name="The DOT Ready™ Kit"
+             data-product-price="299.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-dot-ready-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=dot-ready-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-dot-ready-kit-heroA.webp" alt="The DOT Ready™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=dot-ready-kit" style="text-decoration:none;color:inherit">The DOT Ready™ Kit</a></h3>
+            <p class="product-card-desc">Built for drivers who take pride in being prepared for every inspection and every mile.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=dot-ready-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="clear-vision-kit" data-product-name="The Clear Vision™ Kit"
+             data-product-price="249.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-clear-vision-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=clear-vision-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-clear-vision-kit-heroA.webp" alt="The Clear Vision™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=clear-vision-kit" style="text-decoration:none;color:inherit">The Clear Vision™ Kit</a></h3>
+            <p class="product-card-desc">Designed for professional drivers who spend long hours behind the windshield. The Clear Vision™ Kit helps reduce glare, improve comfort, and keep attention focused on the road ahead.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$249.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=clear-vision-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="recharge-kit" data-product-name="The Recharge™ Kit"
+             data-product-price="299.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/pak-recharge-kit-hero.webp"
+             data-product-min-qty="1" data-filter-cat="appreciation">
+          <a href="product.html?id=recharge-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-recharge-kit-hero.webp" alt="The Recharge™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=recharge-kit" style="text-decoration:none;color:inherit">The Recharge™ Kit</a></h3>
+            <p class="product-card-desc">A wellness-focused appreciation experience designed to help drivers recover, recharge, and reset.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=recharge-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="product-card"
              data-product-id="das-001" data-product-name="Driver Appreciation Kit"
              data-product-price="49.99" data-product-category="Appreciation Kits"
-             data-product-image="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop"
+             data-product-image="/images/das-da-kit-1.webp"
              data-product-min-qty="10" data-filter-cat="appreciation">
           <a href="product.html?id=das-001" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="https://images.unsplash.com/photo-1549465231-2f652e31be48?w=600&q=75&fit=crop" alt="Driver Appreciation Kit" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/das-da-kit-1.webp" alt="Driver Appreciation Kit" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Appreciation Kits</span>
             </div>
           </a>
@@ -243,7 +543,7 @@
 
         <div class="product-card"
              data-product-id="das-006" data-product-name="Professional Driver Essentials Kit™"
-             data-product-price="79.95" data-product-category="Driver Appreciation Kits"
+             data-product-price="99.00" data-product-category="Driver Appreciation Kits"
              data-product-image="/images/pde-kit-01.jpg"
              data-product-min-qty="1" data-filter-cat="appreciation">
           <a href="product.html?id=das-006" style="text-decoration:none;color:inherit;display:block">
@@ -256,7 +556,7 @@
             <h3 class="product-card-title"><a href="product.html?id=das-006" style="text-decoration:none;color:inherit">Professional Driver Essentials Kit™</a></h3>
             <p class="product-card-desc">A premium recognition, safety, and onboarding kit — tire pressure gauge, tire tread depth gauge, branded keychain, custom insert, and branded presentation packaging. Optional fleet branding.</p>
             <div class="product-card-tiers">
-              <span class="product-tier-pill">Corporate volume pricing</span>
+              <span class="product-tier-pill">Custom-branded</span>
             </div>
             <div class="qty-label">Quantity</div>
             <div class="qty-control">
@@ -266,8 +566,8 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$79.95</span>
-                <span class="product-price-unit">per kit · volume pricing</span>
+                <span class="product-price-amount">$99.00</span>
+                <span class="product-price-unit">per kit</span>
               </div>
               <div class="product-card-actions">
                 <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
@@ -280,12 +580,12 @@
 
         <div class="product-card"
              data-product-id="das-007" data-product-name="Welcome Driver Appreciation Kit"
-             data-product-price="97.00" data-product-category="Driver Appreciation Kits"
-             data-product-image="/images/welcome-driver-kit-v2.png"
+             data-product-price="229.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/wk-driver-lifestyle.jpg"
              data-product-min-qty="1" data-filter-cat="appreciation">
           <a href="product.html?id=das-007" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="/images/welcome-driver-kit-v2.png" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/wk-driver-lifestyle.jpg" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Welcome Kit</span>
             </div>
           </a>
@@ -304,7 +604,7 @@
             <p class="perhire-note">First order: 10-unit minimum · Reorders: as few as 1 per hire</p>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$97.00</span>
+                <span class="product-price-amount">$229.00</span>
                 <span class="product-price-unit">per kit · customized after purchase</span>
               </div>
               <div class="product-card-actions">
@@ -318,12 +618,12 @@
 
         <div class="product-card"
              data-product-id="das-008" data-product-name="Driver Road Warrior Backpack™"
-             data-product-price="85.99" data-product-category="Driver Appreciation Kits"
-             data-product-image="/images/rwb-hero.png"
+             data-product-price="149.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/rwb-angle.webp"
              data-product-min-qty="10" data-filter-cat="appreciation">
           <a href="product.html?id=das-008" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="/images/rwb-hero.png" alt="Driver Road Warrior Backpack — premium custom-logo backpack" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/rwb-angle.webp" alt="Driver Road Warrior Backpack — premium custom-logo backpack" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Premium Gift</span>
             </div>
           </a>
@@ -341,7 +641,7 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$85.99</span>
+                <span class="product-price-amount">$149.00</span>
                 <span class="product-price-unit">per backpack · min. 10 · customized after purchase</span>
               </div>
               <div class="product-card-actions">
@@ -354,19 +654,56 @@
         </div>
 
         <div class="product-card"
-             data-product-id="das-009" data-product-name="Professional Travel Kit"
-             data-product-price="77.00" data-product-category="Driver Appreciation Kits"
+             data-product-id="das-010" data-product-name="Professional Driver Road Warrior Duffel™"
+             data-product-price="159.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/road-warrior-duffel-hero-v2.webp"
+             data-product-min-qty="10" data-filter-cat="appreciation">
+          <a href="product.html?id=das-010" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/road-warrior-duffel-hero-v2.webp" alt="Professional Driver Road Warrior Duffel — premium custom-logo duffel bag" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Gift</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-010" style="text-decoration:none;color:inherit">Professional Driver Road Warrior Duffel™</a></h3>
+            <p class="product-card-desc">Built for the 34-hour reset and life on the road. A spacious, durable custom-logo duffel drivers use every week — a high-value Driver Appreciation Week, onboarding &amp; retention gift.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$159.00</span>
+                <span class="product-price-unit">per duffel · min. 10 · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-010" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Duffels</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="product-card"
+             data-product-id="das-009" data-product-name="Professional Driver Self-Care Kit™"
+             data-product-price="149.00" data-product-category="Driver Appreciation Kits"
              data-product-image="/images/travel-kit-hero-v2.jpg"
              data-product-min-qty="1" data-filter-cat="appreciation">
           <a href="product.html?id=das-009" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="/images/travel-kit-hero-v2.jpg" alt="Professional Travel Kit — premium custom-logo travel bag with organized self-care essentials for professional drivers" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/travel-kit-hero-v2.jpg" alt="Professional Driver Self-Care Kit™ — custom-logo wellness bag with self-care essentials for professional drivers" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Driver Wellness</span>
             </div>
           </a>
           <div class="product-card-body">
-            <h3 class="product-card-title"><a href="product.html?id=das-009" style="text-decoration:none;color:inherit">Professional Travel Kit</a></h3>
-            <p class="product-card-desc">A daily-use wellness gift for the road — a custom-logo travel bag plus self-care essentials (soap, loofah, Q-Tips, Dude Wipes) that keep drivers refreshed and organized mile after mile.</p>
+            <h3 class="product-card-title"><a href="product.html?id=das-009" style="text-decoration:none;color:inherit">Professional Driver Self-Care Kit™</a></h3>
+            <p class="product-card-desc">Your drivers take care of your freight — this kit helps them take care of themselves. A custom-logo wellness bag plus self-care essentials (Dr. Squatch soap, Dude Wipes, body towel, loofah, Q-Tips) that keep drivers refreshed mile after mile.</p>
             <div class="product-card-tiers">
               <span class="product-tier-pill">Custom-logo</span>
             </div>
@@ -378,13 +715,13 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$77.00</span>
+                <span class="product-price-amount">$149.00</span>
                 <span class="product-price-unit">per kit · customized after purchase</span>
               </div>
               <div class="product-card-actions">
                 <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
                 <a href="product.html?id=das-009" class="btn-ghost-sm">Details</a>
-                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Travel Kits</button>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Self-Care Kits</button>
               </div>
             </div>
           </div>
@@ -588,14 +925,14 @@
         </div>
         <div style="flex:1;height:1px;background:var(--gold-border)"></div>
       </div>
-      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 28px">Recognize drivers who have achieved verified safe driving milestones through discipline, professionalism, and a commitment to roadway safety. Safety Recognition is its own flagship program — distinct from career-mileage <a href="#cat-milestone" style="color:var(--gold);font-weight:700">Service Milestone Awards</a>.</p>
+      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 14px">Recognize drivers who have achieved verified safe driving milestones through discipline, professionalism, and a commitment to roadway safety. Safety Recognition is its own flagship program — distinct from career-mileage <a href="#cat-milestone" style="color:var(--gold);font-weight:700">Service Milestone Awards</a>.</p>
       <div class="product-grid">
 
         <!-- Safe Miles Recognition Kit — relocated here (2026-06-12) so NO Safe Miles product
              sits under Service Milestone Awards. Milestone selector flows to checkout/fulfillment. -->
         <div class="product-card mrk-card"
              data-product-id="safe-miles-kit" data-product-name="Safe Miles Recognition Kit"
-             data-product-price="179.00" data-product-category="Safety Recognition"
+             data-product-price="549.00" data-product-category="Safety Recognition"
              data-product-image="/images/milestone-kit-medal.jpg"
              data-product-type="safe-miles"
              data-product-min-qty="1" data-filter-cat="safety">
@@ -628,7 +965,7 @@
             </div>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$179.00</span>
+                <span class="product-price-amount">$549.00</span>
                 <span class="product-price-unit">per kit</span>
               </div>
               <div class="product-card-actions">
@@ -644,7 +981,7 @@
 
       <!-- ════════ SAFE SERVICE MILES MEDALS — the safe-track medals also surface here under
            Safety Recognition. Rendered from js/milestones.js (same data as the Milestone section). ════════ -->
-      <div class="msm-block" style="margin-top:46px">
+      <div class="msm-block" data-medals-block style="margin-top:46px">
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
           <div>
             <span class="section-eyebrow">Safe Service Miles</span>
@@ -671,12 +1008,12 @@
 
           <div class="product-card" data-product-type="safe-miles"
                data-product-id="ssm-lapel-pin" data-product-name="Safe Service Miles Lapel Pin"
-               data-product-price="12.99" data-product-category="Safety Recognition"
-               data-product-image="/images/milestone-kit-lapel-detail.jpg"
+               data-product-price="14.99" data-product-category="Safety Recognition"
+               data-product-image="/images/milestone-kit-lapel-hat.jpg"
                data-product-min-qty="10" data-filter-cat="safety">
             <a href="product.html?id=ssm-lapel-pin" style="text-decoration:none;color:inherit;display:block">
               <div class="product-card-img-wrap">
-                <img class="product-card-img" src="/images/milestone-kit-lapel-detail.jpg" alt="Safe Service Miles recognition lapel pin" loading="lazy" onerror="this.style.display='none'">
+                <img class="product-card-img" src="/images/milestone-kit-lapel-hat.jpg" alt="Safe Service Miles recognition lapel pin" loading="lazy" onerror="this.style.display='none'">
                 <span class="product-card-category-pill">Safe Recognition</span>
               </div>
             </a>
@@ -692,7 +1029,7 @@
               </div>
               <div class="product-card-footer">
                 <div class="product-card-price-row">
-                  <span class="product-price-amount">$12.99</span>
+                  <span class="product-price-amount">$14.99</span>
                   <span class="product-price-unit">per pin · min. 10</span>
                 </div>
                 <div class="product-card-actions">
@@ -706,12 +1043,12 @@
 
           <div class="product-card" data-product-type="safe-miles"
                data-product-id="ssm-luggage-tag" data-product-name="Safe Service Miles Luggage Tag"
-               data-product-price="19.99" data-product-category="Safety Recognition"
-               data-product-image="/images/milestone-kit-luggage.jpg"
+               data-product-price="79.99" data-product-category="Safety Recognition"
+               data-product-image="/images/ssm-luggage-tag-card-v2.webp"
                data-product-min-qty="10" data-filter-cat="safety">
             <a href="product.html?id=ssm-luggage-tag" style="text-decoration:none;color:inherit;display:block">
-              <div class="product-card-img-wrap">
-                <img class="product-card-img" src="/images/milestone-kit-luggage.jpg" alt="Safe Service Miles driver luggage tag" loading="lazy" onerror="this.style.display='none'">
+              <div class="product-card-img-wrap" style="background:#0c0c0c">
+                <img class="product-card-img" src="/images/ssm-luggage-tag-card-v2.webp" alt="Safe Service Miles driver luggage tag — premium engraved front-and-back layout" loading="lazy" style="object-fit:cover" onerror="this.style.display='none'">
                 <span class="product-card-category-pill">Safe Recognition</span>
               </div>
             </a>
@@ -719,6 +1056,18 @@
               <div class="msm-badges"><span class="msm-badge msm-badge-safe">Safe Service Miles</span></div>
               <h3 class="product-card-title"><a href="product.html?id=ssm-luggage-tag" style="text-decoration:none;color:inherit">Safe Service Miles Luggage Tag</a></h3>
               <p class="product-card-desc">A premium driver ID tag for road bags and travel gear — durable, professional, and a daily reminder of verified safe-driving achievement.</p>
+              <div class="mrk-select-label">Safe Miles Level</div>
+              <select class="mrk-select" data-milestone aria-label="Safe Miles level">
+                <option value="250k">250,000 Safe Miles</option>
+                <option value="500k">500,000 Safe Miles</option>
+                <option value="1m" selected>1 Million Safe Miles</option>
+                <option value="2m">2 Million Safe Miles</option>
+                <option value="3m">3 Million Safe Miles</option>
+                <option value="4m">4 Million Safe Miles</option>
+                <option value="5m">5 Million Safe Miles</option>
+                <option value="6m">6 Million Safe Miles</option>
+              </select>
+              <p class="mrk-disclaimer">Each tag is engraved to the selected safe-miles level.</p>
               <div class="qty-label">Quantity</div>
               <div class="qty-control">
                 <button type="button" class="qty-btn" data-dir="down">−</button>
@@ -727,7 +1076,7 @@
               </div>
               <div class="product-card-footer">
                 <div class="product-card-price-row">
-                  <span class="product-price-amount">$19.99</span>
+                  <span class="product-price-amount">$79.99</span>
                   <span class="product-price-unit">per tag · min. 10</span>
                 </div>
                 <div class="product-card-actions">
@@ -977,6 +1326,142 @@
         <div style="flex:1;height:1px;background:var(--gold-border)"></div>
       </div>
       <div class="product-grid">
+        <div class="product-card"
+             data-product-id="road-ready-kit" data-product-name="The Road Ready™ Kit"
+             data-product-price="299.00" data-product-category="Onboarding Solutions"
+             data-product-image="/images/pak-road-ready-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="onboarding">
+          <a href="product.html?id=road-ready-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-road-ready-kit-heroA.webp" alt="The Road Ready™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=road-ready-kit" style="text-decoration:none;color:inherit">The Road Ready™ Kit</a></h3>
+            <p class="product-card-desc">Designed for drivers who believe preparation is part of professionalism. The Road Ready™ Kit provides the essential tools drivers use to monitor equipment, improve safety, and stay prepared throughout the workday.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=road-ready-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="safety-first-kit" data-product-name="The Safety First™ Kit"
+             data-product-price="299.00" data-product-category="Onboarding Solutions"
+             data-product-image="/images/pak-safety-first-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="onboarding">
+          <a href="product.html?id=safety-first-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-safety-first-kit-heroA.webp" alt="The Safety First™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=safety-first-kit" style="text-decoration:none;color:inherit">The Safety First™ Kit</a></h3>
+            <p class="product-card-desc">A visible reminder that safety is more than a policy — it is a commitment.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$299.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=safety-first-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="pride-in-your-ride-kit" data-product-name="The Pride in Your Ride™ Kit"
+             data-product-price="249.00" data-product-category="Onboarding Solutions"
+             data-product-image="/images/pak-pride-in-your-ride-kit-heroB.webp"
+             data-product-min-qty="1" data-filter-cat="onboarding">
+          <a href="product.html?id=pride-in-your-ride-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-pride-in-your-ride-kit-heroB.webp" alt="The Pride in Your Ride™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=pride-in-your-ride-kit" style="text-decoration:none;color:inherit">The Pride in Your Ride™ Kit</a></h3>
+            <p class="product-card-desc">For drivers who take pride in maintaining a clean, organized, and professional workspace.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$249.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=pride-in-your-ride-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="product-card"
+             data-product-id="long-haul-hydration-kit" data-product-name="The Long Haul Hydration™ Kit"
+             data-product-price="199.00" data-product-category="Onboarding Solutions"
+             data-product-image="/images/pak-long-haul-hydration-kit-heroA.webp"
+             data-product-min-qty="1" data-filter-cat="onboarding">
+          <a href="product.html?id=long-haul-hydration-kit" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/pak-long-haul-hydration-kit-heroA.webp" alt="The Long Haul Hydration™ Kit — Premium Appreciation Kit (product photography coming soon)" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Kit</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=long-haul-hydration-kit" style="text-decoration:none;color:inherit">The Long Haul Hydration™ Kit</a></h3>
+            <p class="product-card-desc">Hydration and comfort for the professionals who spend their days on the road.</p>
+            <div class="product-card-tiers"><span class="product-tier-pill">Custom-logo</span></div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 1)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="1" min="1" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$199.00</span>
+                <span class="product-price-unit">per kit · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=long-haul-hydration-kit" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Kit</button>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div class="product-card"
              data-product-id="das-003" data-product-name="Premium Onboarding Pack"
@@ -985,7 +1470,7 @@
              data-product-min-qty="10" data-filter-cat="onboarding">
           <a href="product.html?id=das-003" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="https://images.unsplash.com/photo-1541746972996-4e0b0f43e02a?w=600&q=75&fit=crop" alt="Premium Onboarding Pack" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/pak-premium-onboarding-hero.webp" alt="Premium Onboarding Pack" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Onboarding</span>
             </div>
           </a>
@@ -1017,15 +1502,53 @@
           </div>
         </div>
 
+        <!-- Road Warrior Duffel — also featured here (Appreciation AND Onboarding). -->
+        <div class="product-card"
+             data-product-id="das-010" data-product-name="Professional Driver Road Warrior Duffel™"
+             data-product-price="159.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/road-warrior-duffel-hero-v2.webp"
+             data-product-min-qty="10" data-filter-cat="onboarding">
+          <a href="product.html?id=das-010" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/road-warrior-duffel-hero-v2.webp" alt="Professional Driver Road Warrior Duffel — premium custom-logo duffel bag" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Gift</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-010" style="text-decoration:none;color:inherit">Professional Driver Road Warrior Duffel™</a></h3>
+            <p class="product-card-desc">Give new drivers something they’ll use from day one — a spacious, durable custom-logo duffel built for the road. A high-value onboarding &amp; retention gift.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$159.00</span>
+                <span class="product-price-unit">per duffel · min. 10 · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-010" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Duffels</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Welcome Driver Appreciation Kit — also featured here (falls in Appreciation AND Onboarding). -->
         <div class="product-card"
              data-product-id="das-007" data-product-name="Welcome Driver Appreciation Kit"
-             data-product-price="97.00" data-product-category="Driver Appreciation Kits"
-             data-product-image="/images/welcome-driver-kit-v2.png"
+             data-product-price="229.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/wk-driver-lifestyle.jpg"
              data-product-min-qty="1" data-filter-cat="onboarding">
           <a href="product.html?id=das-007" style="text-decoration:none;color:inherit;display:block">
             <div class="product-card-img-wrap">
-              <img class="product-card-img" src="/images/welcome-driver-kit-v2.png" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
+              <img class="product-card-img" src="/images/wk-driver-lifestyle.jpg" alt="Welcome Driver Appreciation Kit — custom-branded onboarding kit" loading="lazy" onerror="this.style.display='none'">
               <span class="product-card-category-pill">Welcome Kit</span>
             </div>
           </a>
@@ -1044,7 +1567,7 @@
             <p class="perhire-note">First order: 10-unit minimum · Reorders: as few as 1 per hire</p>
             <div class="product-card-footer">
               <div class="product-card-price-row">
-                <span class="product-price-amount">$97.00</span>
+                <span class="product-price-amount">$229.00</span>
                 <span class="product-price-unit">per kit · customized after purchase</span>
               </div>
               <div class="product-card-actions">
@@ -1250,7 +1773,7 @@
            bundled recognition package and is elevated above the individual medals/accessories. ════════ -->
       <a href="product.html?id=milestone-kit" class="mrk-flagship" aria-label="Professional Driver Milestone Recognition Kit — the complete recognition package">
         <div class="mrk-flagship-media">
-          <img src="/images/mrk-lapel-lifestyle.webp" alt="Professional driver wearing the milestone recognition lapel pin on a company uniform — recognition you can wear with pride" loading="eager">
+          <img src="/images/mrk-hero-card.webp" alt="Professional Driver Milestone Recognition Kit — complete recognition package contents" loading="eager">
           <span class="mrk-flagship-tag">Flagship Recognition Kit</span>
         </div>
         <div class="mrk-flagship-body">
@@ -1265,7 +1788,7 @@
             <span>Driver Road Bag Tag</span>
           </div>
           <div class="mrk-flagship-foot">
-            <div class="mrk-flagship-price">$179<span>/ kit · choose any milestone 250K–6M</span></div>
+            <div class="mrk-flagship-price">$499<span>/ kit · choose any milestone 250K–6M</span></div>
             <span class="mrk-flagship-cta">Build the Recognition Kit
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
             </span>
@@ -1273,52 +1796,9 @@
         </div>
       </a>
 
-      <div class="product-grid">
 
-        <div class="product-card"
-             data-product-id="das-005" data-product-name="Service Milestone Award Box"
-             data-product-price="79.99" data-product-category="Milestone Gifts"
-             data-product-image="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=75&fit=crop"
-             data-product-min-qty="10" data-filter-cat="milestone">
-          <a href="product.html?id=das-005" style="text-decoration:none;color:inherit;display:block">
-            <div class="product-card-img-wrap">
-              <img class="product-card-img" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=75&fit=crop" alt="Service Milestone Award Box" loading="lazy" onerror="this.style.display='none'">
-              <span class="product-card-category-pill">Milestone Gifts</span>
-            </div>
-          </a>
-          <div class="product-card-body">
-            <h3 class="product-card-title"><a href="product.html?id=das-005" style="text-decoration:none;color:inherit">Service Milestone Award Box</a></h3>
-            <p class="product-card-desc">Honor years of dedication with premium awards. Our most elevated recognition product — something drivers display with pride for years to come.</p>
-            <div class="product-card-tiers">
-              <span class="product-tier-pill">Standard</span>
-              <span class="product-tier-pill">Premium</span>
-              <span class="product-tier-pill product-tier-pill-ent">Enterprise</span>
-            </div>
-            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
-            <div class="qty-control">
-              <button type="button" class="qty-btn" data-dir="down">−</button>
-              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
-              <button type="button" class="qty-btn" data-dir="up">+</button>
-            </div>
-            <div class="product-card-footer">
-              <div class="product-card-price-row">
-                <span class="product-price-amount">$79.99</span>
-                <span class="product-price-unit">per unit · min. 10</span>
-              </div>
-              <div class="product-card-actions">
-                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
-                <a href="product.html?id=das-005" class="btn-ghost-sm">Details</a>
-                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Add to Cart</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ════════ SERVICE MILESTONE AWARDS (medals + early-career awards) — expansion of this section.
-           Preserves the Service Milestone Award Box above. Cards render from js/milestones.js. ════════ -->
-      <div class="msm-block" style="margin-top:46px">
+      <!-- ════════ SERVICE MILESTONE AWARDS (medals + early-career awards). Cards render from js/milestones.js. ════════ -->
+      <div class="msm-block" data-medals-block style="margin-top:46px">
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:16px">
           <div>
             <span class="section-eyebrow">Service Milestone Awards</span>
@@ -1542,6 +2022,120 @@
       </div>
       <div class="product-grid">
 
+        <!-- Seat Back Organizer (coming-soon / pricing held) — Holiday + standalone -->
+        <div class="product-card"
+             data-product-id="das-011" data-product-name="Professional Driver Seat Back Organizer™"
+             data-product-price="149.00" data-product-category="Holiday &amp; Seasonal"
+             data-product-image="/images/seat-back-organizer-hero.webp"
+             data-product-min-qty="10" data-filter-cat="holiday">
+          <a href="product.html?id=das-011" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/seat-back-organizer-hero.webp" alt="Professional Driver Seat Back Organizer — custom-branded in-cab organizer" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">In-Cab Organization</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-011" style="text-decoration:none;color:inherit">Professional Driver Seat Back Organizer™</a></h3>
+            <p class="product-card-desc">A custom-branded seat-back caddy that keeps logbooks, paperwork, electronics, and essentials within reach — a practical, daily-use gift drivers actually keep.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$149.00</span>
+                <span class="product-price-unit">per organizer · min. 10 · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-011" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Organizers</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Road Warrior Duffel — also under Holiday -->
+        <div class="product-card"
+             data-product-id="das-010" data-product-name="Professional Driver Road Warrior Duffel™"
+             data-product-price="159.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/road-warrior-duffel-hero-v2.webp"
+             data-product-min-qty="10" data-filter-cat="holiday">
+          <a href="product.html?id=das-010" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/road-warrior-duffel-hero-v2.webp" alt="Professional Driver Road Warrior Duffel — premium custom-logo duffel bag" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Gift</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-010" style="text-decoration:none;color:inherit">Professional Driver Road Warrior Duffel™</a></h3>
+            <p class="product-card-desc">A spacious, durable custom-logo duffel built for the road — a high-value holiday, appreciation &amp; retention gift drivers use every week.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$159.00</span>
+                <span class="product-price-unit">per duffel · min. 10 · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-010" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Duffels</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Road Warrior Backpack — featured here too (also under Driver Appreciation Kits) -->
+        <div class="product-card"
+             data-product-id="das-008" data-product-name="Driver Road Warrior Backpack™"
+             data-product-price="149.00" data-product-category="Driver Appreciation Kits"
+             data-product-image="/images/rwb-angle.webp"
+             data-product-min-qty="10" data-filter-cat="holiday">
+          <a href="product.html?id=das-008" style="text-decoration:none;color:inherit;display:block">
+            <div class="product-card-img-wrap">
+              <img class="product-card-img" src="/images/rwb-angle.webp" alt="Driver Road Warrior Backpack — premium custom-logo backpack" loading="lazy" onerror="this.style.display='none'">
+              <span class="product-card-category-pill">Premium Gift</span>
+            </div>
+          </a>
+          <div class="product-card-body">
+            <h3 class="product-card-title"><a href="product.html?id=das-008" style="text-decoration:none;color:inherit">Driver Road Warrior Backpack™</a></h3>
+            <p class="product-card-desc">Built for the road, appreciated for years. A premium custom-logo backpack drivers use every day — the high-value appreciation, holiday &amp; retention gift.</p>
+            <div class="product-card-tiers">
+              <span class="product-tier-pill">Custom-logo</span>
+            </div>
+            <div class="qty-label">Quantity <span style="color:var(--gold)">(min. 10)</span></div>
+            <div class="qty-control">
+              <button type="button" class="qty-btn" data-dir="down">−</button>
+              <input class="qty-input" type="number" value="10" min="10" data-step="1" aria-label="Quantity">
+              <button type="button" class="qty-btn" data-dir="up">+</button>
+            </div>
+            <div class="product-card-footer">
+              <div class="product-card-price-row">
+                <span class="product-price-amount">$149.00</span>
+                <span class="product-price-unit">per backpack · min. 10 · customized after purchase</span>
+              </div>
+              <div class="product-card-actions">
+                <button type="button" class="btn-save-fav" data-save-to-fav aria-label="Save for later"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg></button>
+                <a href="product.html?id=das-008" class="btn-ghost-sm">Details</a>
+                <button type="button" class="btn btn-primary btn-sm" data-add-to-cart>Order Backpacks</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="product-card"
              data-product-id="das-004" data-product-name="Holiday Gift Set"
              data-product-price="1.00" data-product-category="Holiday &amp; Seasonal"
@@ -1763,9 +2357,9 @@
     <div class="mb-xl" data-category-section="milepacks">
       <div style="display:flex;align-items:center;gap:16px;margin-bottom:28px">
         <div>
-          <span class="section-eyebrow">Mile Packs</span>
-          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">MILE PACKS</h2>
-          <p style="font-size:0.9375rem;color:var(--text-secondary);margin-top:6px;max-width:560px">Curated recognition kits for every moment on the road — fuel, hydration, comfort, safety, and milestone tributes. Three tiers: Essential, Premium, and Signature.</p>
+          <span class="section-eyebrow">Safe Miles Programs</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">SAFE MILES PROGRAMS</h2>
+          <p style="font-size:0.9375rem;color:var(--text-secondary);margin-top:6px;max-width:560px">Premium recognition snack boxes for drivers on the move — appreciation, comfort, and gratitude in a format that respects their time.</p>
         </div>
         <div style="flex:1;height:1px;background:var(--gold-border)"></div>
       </div>
@@ -1775,7 +2369,7 @@
 <div class="shop-service-detail" id="service-detail-milepacks" style="border-top:1px solid var(--gold-border);margin-top:48px">
   <div class="container" style="text-align:center;padding-top:40px">
     <span class="section-eyebrow">Program Details</span>
-    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How Mile Packs &amp; enterprise fleet programs work</h2>
+    <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">How Safe Miles Programs &amp; enterprise fleet programs work</h2>
     <p style="color:var(--text-secondary);max-width:640px;margin:8px auto 0">Everything below explains the program, volume tiers, and process — scroll on if you want the full picture before ordering.</p>
   </div>
 
@@ -1981,6 +2575,339 @@
 </div>
     </div>
 
+    <!-- ════════ SAFE DRIVER AWARDS — a SEPARATE annual safety-recognition program (NOT mileage).
+         The year is the achievement (Safe Driver 2026/2027…). Decal + matching lapel pin, with a
+         consecutive-year progression. Pricing on request → company-purchasing inquiry. ════════ -->
+    <div class="mb-xl" id="cat-safedriver" data-category-section="safedriver">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+        <div>
+          <span class="section-eyebrow">Safe Driver Awards</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Safe Driver Award Program</h2>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:760px;margin:0 0 24px">Annual safety recognition for drivers who complete the calendar year safely — <strong>the year is the achievement, not the mileage</strong> (Safe Driver 2026, 2027, 2028…). A separate program from Safe Service Miles and Career Service Milestones, built to make safe performance visible, celebrated, and repeated every year.</p>
+
+      <!-- Hero banner -->
+      <a href="company-purchasing.html?product=Safe%20Driver%20Award%20Program%20(Annual%20Safety%20Recognition)&category=Safe%20Driver%20Awards" class="sd-hero" aria-label="Build your annual safety recognition program">
+        <img src="/images/safedriver-truck.webp" alt="NorthStar fleet truck with the Safe Driver 2026 door decal" loading="lazy">
+        <div class="sd-hero-overlay"></div>
+        <div class="sd-hero-copy">
+          <span class="sd-hero-eyebrow">Annual Safety Recognition</span>
+          <h3 class="sd-hero-title">Recognize the Year.<br>Reinforce the Culture.</h3>
+          <p class="sd-hero-sub">Reward drivers who complete the year safely with a premium vehicle door decal and matching lapel pin — a professional honor that complements your existing safety initiatives.</p>
+          <span class="sd-hero-cta">Build Your Annual Safety Recognition Program
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </span>
+        </div>
+      </a>
+
+      <!-- What's in the annual award (gallery of the real assets) -->
+      <div class="sd-gallery">
+        <figure class="sd-item"><img src="/images/safedriver-decal-v2.webp" alt="Safe Driver 2026 premium chrome vehicle door decal" loading="lazy"><figcaption>Premium Vehicle Door Decal</figcaption></figure>
+        <figure class="sd-item"><img src="/images/safedriver-medal-v2.webp" alt="Safe Driver award medal in a presentation case" loading="lazy"><figcaption>Recognition Medal</figcaption></figure>
+        <figure class="sd-item"><img src="/images/safedriver-driver.webp" alt="Professional driver wearing the Safe Driver lapel pin" loading="lazy"><figcaption>Matching Lapel Pin</figcaption></figure>
+      </div>
+      <div style="text-align:center;margin:0 0 36px">
+        <a href="product.html?id=safe-driver-award" class="sd-detail-link">View the Safe Driver Award
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <p style="font-size:.8rem;color:var(--text-secondary);margin:9px 0 0">Custom-branded · pricing by consultation · fleet quotes available anytime.</p>
+      </div>
+
+      <!-- Consecutive-year progression -->
+      <div class="sd-prog-head"><span class="section-eyebrow">Recognition Progression</span><h3 style="font-size:1.25rem;font-weight:700;color:#16264F;margin:2px 0 4px">Years of safe performance, recognized</h3><p style="font-size:0.85rem;color:var(--text-secondary);max-width:680px">Consecutive years of safe driving — completely separate from Safe Miles milestones.</p></div>
+      <div class="sd-tiers">
+        <div class="sd-tier"><span class="sd-tier-yrs">5 Years</span><span class="sd-tier-name">Enhanced Silver Laurel Edition</span></div>
+        <div class="sd-tier"><span class="sd-tier-yrs">10 Years</span><span class="sd-tier-name">Gold Laurel Edition</span></div>
+        <div class="sd-tier"><span class="sd-tier-yrs">15 Years</span><span class="sd-tier-name">Platinum Edition</span></div>
+        <div class="sd-tier"><span class="sd-tier-yrs">20 Years</span><span class="sd-tier-name">Executive Legacy Edition</span></div>
+      </div>
+    </div>
+
+    <!-- ════════ RETIREMENT RECOGNITION PROGRAMS — the culmination of a career.
+         Premium black/gold/silver, dignified, typographic. Separate from every other path.
+         PRICING HELD + product photography pending (no real assets yet) → coming-soon PDP +
+         Buy-for-Company quote path. ════════ -->
+    <div class="mb-xl" id="cat-retirement" data-category-section="retirement">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:18px">
+        <div>
+          <span class="section-eyebrow">Retirement Recognition Programs</span>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+
+      <!-- E94: photos FIRST, then the wording -->
+      <div class="rl-gallery">
+        <figure class="rl-shot"><img src="/images/retirement-medal-front-v2.webp" alt="Retirement Legacy medal, front — gold and navy in a premium presentation box with a blue ribbon" loading="lazy"><figcaption>Retirement Legacy Medal</figcaption></figure>
+        <figure class="rl-shot"><img src="/images/retirement-medal-back-v2.webp" alt="Retirement Legacy medal, reverse — personalized with the driver's name, years of service, and career miles" loading="lazy"><figcaption>Personalized Reverse</figcaption></figure>
+        <figure class="rl-shot"><img src="/images/retirement-luggage-tags-v2.webp" alt="Retirement luggage tags in black and gold with a career-of-excellence retirement message" loading="lazy"><figcaption>Retirement Luggage Tag</figcaption></figure>
+      </div>
+      <p style="font-size:.78rem;color:var(--text-muted);text-align:center;margin:12px 0 30px">Photography shown with the fictitious “NorthStar Albany Transportation” sample brand — every piece is engraved with your fleet’s identity.</p>
+
+      <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin:0 0 10px">Professional Driver Retirement Legacy Collection™</h2>
+      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:780px;margin:0 0 24px">The final stage of a driver's professional journey — <strong>the completion of an entire career, not another award</strong>. A meaningful, dignified way to honor drivers who gave twenty, thirty, or forty years to the company, the industry, and the road.</p>
+
+      <!-- Premium typographic hero (black / gold / silver — the highest level of recognition) -->
+      <div class="rl-hero">
+        <div class="rl-hero-frame">
+          <span class="rl-hero-eyebrow">The Highest Recognition in the DAS Collection</span>
+          <h3 class="rl-hero-title">Honoring a Career.<br><span class="rl-gold">Celebrating a Legacy.</span></h3>
+          <p class="rl-hero-line">The Road Ends. The Legacy Doesn't.</p>
+          <div class="rl-hero-actions">
+            <a href="company-purchasing.html?product=Professional%20Driver%20Retirement%20Legacy%20Collection&category=Retirement%20Recognition%20Programs" class="rl-cta-primary">Honor a Career Worth Remembering
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+            <a href="product.html?id=retirement-legacy-collection" class="rl-cta-secondary">View the Collection</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- THE FINAL MILE DESERVES RECOGNITION -->
+      <div class="rl-statement">
+        <span class="section-eyebrow">The Final Mile Deserves Recognition</span>
+        <p>Every professional driver reaches thousands of milestones throughout a career — safe miles, service anniversaries, safety awards, performance achievements. But retirement is different. Retirement is not another milestone. <strong>It is the completion of the journey.</strong> The Retirement Legacy Collection was created to ensure the final mile receives the recognition it deserves.</p>
+      </div>
+
+      <!-- Core collection contents -->
+      <div class="rl-contents-head"><span class="section-eyebrow">What's in the Collection</span><h3>A complete, presentation-ready legacy package</h3></div>
+      <div class="rl-contents">
+        <div class="rl-item"><span class="rl-item-mark">01</span><span class="rl-item-name">Retirement Legacy Medal</span></div>
+        <div class="rl-item"><span class="rl-item-mark">02</span><span class="rl-item-name">Retirement Legacy Lapel Pin</span></div>
+        <div class="rl-item"><span class="rl-item-mark">03</span><span class="rl-item-name">Retirement Luggage Tag</span></div>
+        <div class="rl-item"><span class="rl-item-mark">04</span><span class="rl-item-name">Executive Leather Keychain</span></div>
+        <div class="rl-item"><span class="rl-item-mark">05</span><span class="rl-item-name">Retirement Recognition T-Shirt</span></div>
+        <div class="rl-item"><span class="rl-item-mark">06</span><span class="rl-item-name">Personalized Leadership Letter</span></div>
+        <div class="rl-item rl-item-wide"><span class="rl-item-mark">07</span><span class="rl-item-name">Premium Presentation Box</span></div>
+      </div>
+
+      <div style="text-align:center;margin:0 0 38px">
+        <a href="product.html?id=retirement-legacy-collection" class="sd-detail-link">View the Collection
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </div>
+
+      <!-- COMPLETE THE RECOGNITION CYCLE -->
+      <div class="rl-cycle">
+        <div class="rl-cycle-head"><span class="section-eyebrow" style="color:#C8A84B">Complete the Recognition Cycle</span><h3>Recognition that follows a driver from day one through retirement</h3></div>
+        <div class="rl-chain">
+          <span class="rl-chain-step">Welcome Appreciation Kit</span><span class="rl-chain-sep">→</span>
+          <span class="rl-chain-step">Safe Driver Awards</span><span class="rl-chain-sep">→</span>
+          <span class="rl-chain-step">Safe Service Miles</span><span class="rl-chain-sep">→</span>
+          <span class="rl-chain-step">Career Service Miles</span><span class="rl-chain-sep">→</span>
+          <span class="rl-chain-step">Executive Recognition</span><span class="rl-chain-sep">→</span>
+          <span class="rl-chain-step rl-chain-final">Retirement Legacy Collection</span>
+        </div>
+      </div>
+
+      <!-- A LEGACY WORTH CELEBRATING -->
+      <div class="rl-uses-head"><span class="section-eyebrow">A Legacy Worth Celebrating</span><h3>Designed for the moments that close a career with dignity</h3></div>
+      <div class="rl-uses">
+        <div class="rl-use">Retirement ceremonies</div>
+        <div class="rl-use">Safety banquets</div>
+        <div class="rl-use">Driver appreciation events</div>
+        <div class="rl-use">Company meetings</div>
+        <div class="rl-use">Family retirement celebrations</div>
+        <div class="rl-use">Leadership presentations</div>
+      </div>
+
+      <!-- Closing + held-pricing note -->
+      <div class="rl-closing">
+        <p class="rl-closing-quote">Every driver begins a career. Few complete one with distinction.<br><span class="rl-gold">Honor the journey. Celebrate the legacy. Recognize the final mile.</span></p>
+        <a href="company-purchasing.html?product=Professional%20Driver%20Retirement%20Legacy%20Collection&category=Retirement%20Recognition%20Programs" class="rl-cta-primary">Build Your Retirement Recognition Program
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+        <p style="font-size:.8rem;color:var(--text-secondary);margin:14px 0 0">Custom-engraved with your fleet's identity · pricing by consultation · fleet quotes available anytime.</p>
+      </div>
+    </div>
+
+    <!-- ════════ PROFESSIONAL DRIVER BIRTHDAY RECOGNITION PROGRAM (E89) — a managed ANNUAL
+         recognition program, not merchandise. $65/driver/year, budget-capped, DAS-managed.
+         No product photos provided → warm typographic treatment + challenge-coin motif.
+         CTAs route to the Buy-for-Company inquiry (managed program = inquiry, not checkout). ════════ -->
+    <div class="mb-xl" id="cat-birthday" data-category-section="birthday">
+      <div style="display:flex;align-items:center;gap:16px;margin-bottom:10px">
+        <div>
+          <span class="section-eyebrow">Recognition Programs</span>
+          <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em">Professional Driver Birthday Recognition Program™</h2>
+        </div>
+        <div style="flex:1;height:1px;background:var(--gold-border)"></div>
+      </div>
+      <p style="font-size:0.95rem;color:var(--text-secondary);line-height:1.6;max-width:800px;margin:0 0 24px">Not a one-time birthday gift — a <strong>managed annual recognition program</strong> for fleets. One budget approval, and DAS handles birthdays, gift selection, personalization, fulfillment, and shipping for every driver, all year, without ever exceeding your approved cap.</p>
+
+      <!-- Hero -->
+      <div class="br-hero">
+        <div class="br-hero-copy">
+          <span class="br-coin">★</span>
+          <span class="br-hero-eyebrow">Managed Annual Recognition</span>
+          <h3 class="br-hero-title">One budget approval.<br><span class="br-gold">Year-round birthday recognition.</span></h3>
+          <p class="br-hero-sub">For <strong>$65 per driver per year</strong> — shipping included — every driver receives personalized recognition on their birthday, delivered to their home or terminal, with zero administrative burden on your team.</p>
+          <div class="br-actions">
+            <a href="company-purchasing.html?product=Professional%20Driver%20Birthday%20Recognition%20Program&category=Recognition%20Programs" class="br-cta-primary">Start Birthday Recognition Program
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+            </a>
+            <a href="company-purchasing.html?product=Birthday%20Recognition%20Program%20%E2%80%94%20Driver%20Roster%20Upload&category=Recognition%20Programs" class="br-cta-secondary">Upload Driver Roster</a>
+          </div>
+          <p class="br-price-note">$65 / driver / year · shipping included · budget-capped · DAS-managed</p>
+        </div>
+      </div>
+
+      <!-- How It Works -->
+      <div class="br-head"><span class="section-eyebrow">How It Works</span><h3>Approve once. We handle the rest, all year.</h3></div>
+      <div class="br-steps">
+        <div class="br-step"><span class="br-step-n">1</span><div><strong>Approve a simple annual budget</strong><p>$65 per driver per year — one line item, fully budget-capped. No surprises, no overages.</p></div></div>
+        <div class="br-step"><span class="br-step-n">2</span><div><strong>Send your driver roster</strong><p>Names, birthdays, and shipping preferences. Upload a CSV or send it over — we build the recognition calendar.</p></div></div>
+        <div class="br-step"><span class="br-step-n">3</span><div><strong>DAS manages every birthday</strong><p>Gift selection, personalization, fulfillment, and shipping — direct to home, terminal, or domicile manager.</p></div></div>
+        <div class="br-step"><span class="br-step-n">4</span><div><strong>Drivers feel remembered</strong><p>Every driver receives personalized recognition on their birthday, all year, with zero work for your team.</p></div></div>
+      </div>
+
+      <!-- What Every Driver Receives -->
+      <div class="br-head"><span class="section-eyebrow">What Every Driver Receives</span><h3>Tangible, recognition-focused — never cash or a gift card</h3></div>
+      <div class="br-receives">
+        <div class="br-item"><strong>Annual Collectible Challenge Coin</strong><p>A new commemorative birthday challenge coin each year — a tradition drivers look forward to and keep.</p></div>
+        <div class="br-item"><strong>Personalized Card from Leadership</strong><p>A genuine birthday message from leadership, personalized to the driver.</p></div>
+        <div class="br-item"><strong>Curated Yearly Recognition Item</strong><p>A thoughtfully chosen recognition item that changes every year — always fresh, never repetitive.</p></div>
+        <div class="br-item"><strong>Direct-to-Driver Shipment</strong><p>Delivered to the driver's home, terminal, or domicile manager — wherever works best.</p></div>
+      </div>
+
+      <!-- Why Fleets Use It -->
+      <div class="br-head"><span class="section-eyebrow">Why Fleets Use It</span><h3>Recognition that retains — without the administrative load</h3></div>
+      <div class="br-why">
+        <div class="br-why-card"><strong>Zero administrative burden</strong><p>DAS handles selection, personalization, fulfillment, and shipping. Your team approves a budget and nothing else.</p></div>
+        <div class="br-why-card"><strong>Predictable, capped spend</strong><p>One annual number you control. DAS manages the program so you never exceed the approved budget.</p></div>
+        <div class="br-why-card"><strong>Drivers feel seen</strong><p>Birthdays are personal. Recognizing them — every driver, every year — signals a culture that values the people behind the wheel.</p></div>
+      </div>
+
+      <!-- Simple Budgeting + Coin Tradition + Yearly Gift -->
+      <div class="br-grid2">
+        <div class="br-feature">
+          <span class="section-eyebrow">Simple Budgeting</span>
+          <h4>$65 per driver, per year. That's the whole decision.</h4>
+          <p>Shipping is included. The program is budget-capped and DAS-managed — fleet leaders approve a single annual amount and DAS stays within it while handling birthdays for every driver on the roster.</p>
+        </div>
+        <div class="br-feature">
+          <span class="section-eyebrow">Annual Challenge Coin Tradition</span>
+          <h4>A new coin every year — a tradition worth collecting.</h4>
+          <p>The collectible birthday challenge coin anchors the program. Each year's coin is distinct, building a personal collection that marks a driver's tenure and belonging.</p>
+        </div>
+        <div class="br-feature">
+          <span class="section-eyebrow">Yearly Surprise Gift</span>
+          <h4>A curated item that changes each year.</h4>
+          <p>Alongside the coin, every driver receives a curated recognition item that's refreshed annually — so the program stays meaningful year after year, never predictable.</p>
+        </div>
+      </div>
+
+      <!-- Closing CTAs -->
+      <div class="br-closing">
+        <p class="br-closing-line">For $65 per driver annually, every driver receives personalized recognition on their birthday — delivered directly, with no administrative burden on your team.</p>
+        <div class="br-actions" style="justify-content:center">
+          <a href="company-purchasing.html?product=Professional%20Driver%20Birthday%20Recognition%20Program&category=Recognition%20Programs" class="br-cta-primary">Start Birthday Recognition Program
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+          </a>
+          <a href="company-purchasing.html?product=Birthday%20Recognition%20Program%20%E2%80%94%20Driver%20Roster%20Upload&category=Recognition%20Programs" class="br-cta-secondary">Upload Driver Roster</a>
+        </div>
+        <p style="font-size:.78rem;color:var(--text-muted);margin:14px 0 0">Roster intake (name · birthday · company · terminal · shipping preference · address · manager · leadership message) is collected through the inquiry — full CSV self-serve upload is being finalized.</p>
+      </div>
+    </div>
+    <!-- E97: Recognition Kit Collection moved to the BOTTOM of the All-Products scroll (still tagged
+         appreciation so it shows under the Driver Appreciation Kits filter). -->
+    <div class="mb-xl" data-category-section="appreciation">
+        <!-- ════════ RECOGNITION KIT COLLECTION™ (E92) + Signature Kit (E91). Quote-based
+             (Request Quote); product photos coming soon → typographic kit cards. Series prices
+             are display-only (no checkout) until photos + the E90 pricing review land. ════════ -->
+        <div class="rkc" id="recognition-kit-collection">
+          <div class="rkc-hero">
+            <span class="rkc-eyebrow">Recognition Kit Collection™</span>
+            <h3 class="rkc-title">Recognition That Fits Every Budget.</h3>
+            <p class="rkc-sub">Professional driver recognition should be meaningful, easy to implement, and scalable across your entire fleet. The DAS Recognition Kit Collection™ gives organizations a simple way to celebrate, reward, and appreciate professional drivers throughout the year.</p>
+            <p class="rkc-support">Whether it’s a birthday, Driver Appreciation Week, a safety achievement, a company milestone, or simply saying thank you — from simple appreciation gifts to executive-level recognition experiences, every kit reinforces a culture of respect, professionalism, and appreciation.</p>
+            <div class="rkc-actions">
+              <a href="company-purchasing.html?product=Recognition%20Kit%20Collection&category=Driver%20Appreciation%20Kits" class="rkc-cta">Request Quote
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+              </a>
+              <a href="#rkc-compare" class="rkc-cta-ghost">Compare Recognition Kits</a>
+            </div>
+          </div>
+
+          <!-- Featured: Professional Driver Signature Kit™ (E91) -->
+          <div class="rkc-signature">
+            <div class="rkc-sig-tag">Featured Recognition Kit</div>
+            <h4 class="rkc-sig-title">Professional Driver Signature Kit™</h4>
+            <p class="rkc-sig-tagline">“Three simple items. One lasting impression.”</p>
+            <p class="rkc-sig-desc">For companies that believe recognition should be meaningful, professional, and practical — three premium items drivers wear, use, and proudly display, long after the recognition moment passes.</p>
+            <ul class="rkc-sig-list">
+              <li><strong>Premium Embroidered Cap</strong> — your company logo on the front</li>
+              <li><strong>Commemorative Year</strong> — embroidered on the back (2026 · 2027 · 2028…), turning a cap into a keepsake</li>
+              <li><strong>Executive Ink Pen</strong></li>
+              <li><strong>Professional Driver Lapel Pin</strong></li>
+            </ul>
+            <p class="rkc-sig-note">Logo upload · year selection · direct-to-driver shipping · bulk fleet &amp; multi-address CSV orders</p>
+            <div class="rkc-actions">
+              <a href="company-purchasing.html?product=Professional%20Driver%20Signature%20Kit&category=Driver%20Appreciation%20Kits" class="rkc-cta">Request Quote
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+              </a>
+              <a href="company-purchasing.html?product=Professional%20Driver%20Signature%20Kit%20%E2%80%94%20Customize&category=Driver%20Appreciation%20Kits" class="rkc-cta-ghost">Customize My Kit</a>
+            </div>
+          </div>
+
+          <!-- 4 series -->
+          <div class="rkc-series">
+            <div class="rkc-serie">
+              <div class="rkc-serie-head"><span class="rkc-serie-name">Simple Recognition Series™</span><span class="rkc-serie-price">$65</span></div>
+              <p class="rkc-serie-desc">Meaningful recognition made simple — affordable, presentation-ready, ideal for large fleet deployments.</p>
+              <div class="rkc-kit"><strong>Simple Recognition Kit™</strong><span>Executive ink pen · driver lapel pin · custom keychain · personalized card</span><em>Meaningful recognition made simple.</em></div>
+              <div class="rkc-kit"><strong>Simple Recognition Coin Kit™</strong><span>Challenge coin · coin presentation pouch · lapel pin · personalized card</span><em>A lasting symbol of appreciation.</em></div>
+              <div class="rkc-kit"><strong>Simple Recognition Travel Kit™</strong><span>Executive ink pen · driver luggage tag · lapel pin · personalized card</span><em>Professional recognition on and off the road.</em></div>
+              <div class="rkc-pres">Standard Bedding Presentation</div>
+              <a href="company-purchasing.html?product=Simple%20Recognition%20Series&category=Driver%20Appreciation%20Kits" class="rkc-cta-sm">Request Quote</a>
+            </div>
+            <div class="rkc-serie">
+              <div class="rkc-serie-head"><span class="rkc-serie-name">Enhanced Recognition Series™</span><span class="rkc-serie-price">$95</span></div>
+              <p class="rkc-serie-desc">Recognition with added utility — practical items drivers use both on and off the road.</p>
+              <div class="rkc-kit"><strong>Enhanced Recognition Kit™</strong><span>Travel &amp; shower bag · executive ink pen · lapel pin · personalized card</span><em>Recognition with added utility.</em></div>
+              <div class="rkc-kit"><strong>Enhanced Recognition Coffee Kit™</strong><span>Insulated tumbler · specialty coffee assortment · lapel pin · personalized card</span><em>Fueling the professionals who keep America moving.</em></div>
+              <div class="rkc-kit"><strong>Enhanced Recognition Essentials Kit™</strong><span>Premium work gloves · executive ink pen · lapel pin · personalized card</span><em>Recognition that works as hard as they do.</em></div>
+              <div class="rkc-pres">Standard Bedding Presentation</div>
+              <a href="company-purchasing.html?product=Enhanced%20Recognition%20Series&category=Driver%20Appreciation%20Kits" class="rkc-cta-sm">Request Quote</a>
+            </div>
+            <div class="rkc-serie rkc-serie-feat">
+              <div class="rkc-serie-head"><span class="rkc-serie-name">Premium Recognition Series™</span><span class="rkc-serie-price">By quote</span></div>
+              <p class="rkc-serie-desc">Elevated recognition with lasting visibility — wearable items that create ongoing pride.</p>
+              <div class="rkc-kit"><strong>Premium Recognition Kit™</strong><span>Premium embroidered cap · executive ink pen · lapel pin · personalized card</span><em>Three simple items. One lasting impression.</em></div>
+              <div class="rkc-kit"><strong>Premium Recognition Travel Kit™</strong><span>Embroidered cap · travel &amp; shower bag · lapel pin · personalized card</span><em>Built for professionals on the move.</em></div>
+              <div class="rkc-kit"><strong>Premium Recognition Coin Kit™</strong><span>Embroidered cap · challenge coin · lapel pin · personalized card</span><em>Commemorative recognition with lasting value.</em></div>
+              <div class="rkc-pres">Premium Bedding · cap: logo front, year back</div>
+              <a href="company-purchasing.html?product=Premium%20Recognition%20Series&category=Driver%20Appreciation%20Kits" class="rkc-cta-sm">Request Quote</a>
+            </div>
+            <div class="rkc-serie rkc-serie-exec">
+              <div class="rkc-serie-head"><span class="rkc-serie-name">Executive Recognition Series™</span><span class="rkc-serie-price">By quote</span></div>
+              <p class="rkc-serie-desc">Executive-level recognition with custom foam-insert presentation — a memorable unboxing worthy of the occasion.</p>
+              <div class="rkc-kit"><strong>Executive Recognition Kit™</strong><span>Embroidered cap · insulated tumbler · executive ink pen · lapel pin · personalized card</span><em>Built for the professionals who keep America moving.</em></div>
+              <div class="rkc-kit"><strong>Executive Recognition Travel Kit™</strong><span>Embroidered cap · travel &amp; shower bag · ink pen · lapel pin · personalized card</span><em>Professional recognition with executive-level presentation.</em></div>
+              <div class="rkc-kit"><strong>Executive Recognition Signature Kit™</strong><span>Embroidered cap · challenge coin · ink pen · lapel pin · personalized card</span><em>Recognition worthy of exceptional service.</em></div>
+              <div class="rkc-pres">Executive Foam Presentation · cap: logo front, year back</div>
+              <a href="company-purchasing.html?product=Executive%20Recognition%20Series&category=Driver%20Appreciation%20Kits" class="rkc-cta-sm">Request Quote</a>
+            </div>
+          </div>
+
+          <!-- Compare -->
+          <div class="rkc-compare-wrap" id="rkc-compare">
+            <table class="rkc-compare">
+              <thead><tr><th>Series</th><th>From</th><th>Signature item</th><th>Presentation</th></tr></thead>
+              <tbody>
+                <tr><td>Simple Recognition</td><td>$65</td><td>Ink pen · keychain · pin</td><td>Standard Bedding</td></tr>
+                <tr><td>Enhanced Recognition</td><td>$95</td><td>Tumbler / gloves / shower bag</td><td>Standard Bedding</td></tr>
+                <tr><td>Premium Recognition</td><td>By quote</td><td>Embroidered cap (logo + year)</td><td>Premium Bedding</td></tr>
+                <tr><td>Executive Recognition</td><td>By quote</td><td>Cap + tumbler / coin</td><td>Executive Foam Insert</td></tr>
+              </tbody>
+            </table>
+            <p class="rkc-foot">Professionally packaged and presentation-ready upon arrival. Photos for each kit coming soon — request a quote and we’ll match the right series to your fleet, budget, and occasion.</p>
+          </div>
+        </div>
+
+    </div>
+
+
     <!-- ════════ OVERALL DRIVER APPRECIATION SOLUTIONS SUMMARY — shown ONLY on the
          "All Products" view (applyShopFilter), AFTER the full product gallery. On a
          filtered category view this is hidden and that category's own program-detail
@@ -2019,6 +2946,9 @@
       </div>
     </div>
 
+    <!-- Subtle, non-blocking compliance footnote (keeps us honest without interrupting shopping) -->
+    <p style="max-width:760px;margin:36px auto 0;font-size:0.7rem;line-height:1.5;color:#94A3B8;text-align:center">Product photos show representative customization. Any company name shown (e.g. “NorthStar Transportation”) is a fictitious example; every item is personalized with your fleet’s own name, logo, and colors.</p>
+
   </div>
 </section>
 
@@ -2028,7 +2958,7 @@
     <div class="footer-top">
       <div>
         <a href="index.html" class="nav-logo">
-          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" width="148" height="36" style="height:36px;width:auto">
         </a>
         <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, and milestone awards built for the trucking industry.</p>
       </div>
@@ -2082,6 +3012,28 @@
      Real photos use cover (perfect fill); placeholder cards (.mp-ph) use contain so the
      full 3:2 placeholder shows (navy letterbox to match the card). -->
 <style>
+  /* Product search bar — matches the filter-bar / pill aesthetic (DAS tokens). */
+  .shop-search { position: relative; max-width: 540px; margin: 0 0 18px; }
+  .shop-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; color: var(--text-muted); pointer-events: none; }
+  .shop-search-input {
+    width: 100%; padding: 13px 44px; font-size: 1rem; font-family: inherit;
+    color: #0F172A; background: var(--black); /* --black is inverted (white) on DAS */
+    border: 2px solid #1A2E6E; border-radius: var(--radius-full);   /* darker navy so it's clearly visible */
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    -webkit-appearance: none; appearance: none;
+  }
+  .shop-search-input::placeholder { color: #64748B; }
+  .shop-search-input::-webkit-search-cancel-button { -webkit-appearance: none; }
+  .shop-search-input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(26,46,110,.12); }
+  .shop-search-clear { position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+    width: 26px; height: 26px; border: none; border-radius: 50%; cursor: pointer;
+    background: rgba(15,23,42,.08); color: #475569; font-size: 1.15rem; line-height: 1;
+    align-items: center; justify-content: center; }
+  .shop-search-clear:hover { background: rgba(15,23,42,.16); color: #0F172A; }
+  .shop-no-results { color: var(--text-secondary); font-size: 1rem; margin: 4px 0 40px; }
+  .shop-search-reset { background: none; border: none; padding: 0; font: inherit; color: var(--gold); font-weight: 700; text-decoration: underline; cursor: pointer; }
+  @media (max-width: 640px) { .shop-search { max-width: 100%; } }
+
   [data-filter-cat="milepacks"] .product-card-img-wrap { aspect-ratio: 1 / 1; }
   [data-filter-cat="milepacks"].mp-ph .product-card-img-wrap { background: #14224F; }
   [data-filter-cat="milepacks"].mp-ph .product-card-img { object-fit: contain; }
@@ -2093,15 +3045,23 @@
      das-006 fill via the default object-fit:cover. */
   [data-category-section="appreciation"] .product-card-img-wrap,
   [data-category-section="onboarding"] .product-card-img-wrap { aspect-ratio: 1 / 1; }
-  /* Professional Travel Kit (das-009): its hero is a landscape graphic — show it in FULL
-     (contain) inside the square frame instead of cropping the bag off the sides. */
-  [data-product-id="das-009"] .product-card-img-wrap { background: #0E1A33; }
-  [data-product-id="das-009"] .product-card-img { object-fit: contain; }
-  /* Professional Driver Essentials Kit (das-006): its photos are 3:2 landscape lifestyle shots.
-     The square appreciation frame was cropping the sides (and the cover-crop zoom read as
-     pixelation). Show the FULL photo (contain) on a dark letterbox that matches the scene. */
-  [data-product-id="das-006"] .product-card-img-wrap { background: #0E1A33; }
-  [data-product-id="das-006"] .product-card-img { object-fit: contain; }
+  /* Professional Driver Essentials Kit (das-006): full-size photo, fill the square (cover). */
+  [data-product-id="das-006"] .product-card-img-wrap { background: #F5F5F5; }
+  [data-product-id="das-006"] .product-card-img { object-fit: cover; }
+  /* das-008 Backpack · das-009 Self-Care · das-010 Duffel · das-011 Seat-Back — FILL the frame
+     edge-to-edge so there is NO navy letterbox border and NO awkward 16:9 crop. 4:3 cell + cover +
+     neutral bg. Their photos are 4:3 (das-009 1400x1050, das-011 1448x1086) → cover trims ~0; the
+     duffel is square (1254²) → tiny centered top/bottom trim; the backpack card now uses the
+     LANDSCAPE rwb-angle shot (1448x1086, swapped from the portrait hero) so it fills with no crop.
+     (Jayden 2026-06-27 — replaces the old contain-on-navy treatment that read as a border.) */
+  [data-product-id="das-008"] .product-card-img-wrap,
+  [data-product-id="das-009"] .product-card-img-wrap,
+  [data-product-id="das-010"] .product-card-img-wrap,
+  [data-product-id="das-011"] .product-card-img-wrap { aspect-ratio: 4 / 3; background: #F5F5F5; }
+  [data-product-id="das-008"] .product-card-img,
+  [data-product-id="das-009"] .product-card-img,
+  [data-product-id="das-010"] .product-card-img,
+  [data-product-id="das-011"] .product-card-img { object-fit: cover; object-position: center; }
 
   /* ── Service Milestone Awards (medals) — explicit hex (DAS CSS vars are inverted) ── */
   .msm-intro { font-size: 0.95rem; color: #475569; line-height: 1.7; max-width: 760px; margin: 0 0 22px; }
@@ -2195,6 +3155,14 @@
   .product-card--exec .product-card-category-pill { background: #16264F; color: #D9BE72; }
   /* Dark-background product shots (Camino tote, Pack Leader) blend into a near-black card image. */
   .product-card--dark .product-card-img-wrap { background: #0A0A0A !important; }
+  /* Black-border fix: landscape product PHOTOS fill the card (cover) so there are no dark
+     letterbox bars. Cutout medals keep contain. Targets exec shots + the 250K/500K combos. */
+  .product-card--exec .product-card-img,
+  [data-product-id="msm-s-250k"] .product-card-img,
+  [data-product-id="msm-s-500k"] .product-card-img { object-fit: cover !important; }
+  /* Executive card photos are 3:2 banner cards (Shaq, 2026-06-18) — give the exec card image a
+     3:2 frame so the banner fills exactly (no crop, no letterbox). */
+  .product-card--exec .product-card-img-wrap { aspect-ratio: 3 / 2 !important; }
   /* Flagship Pack Leader — elevated gold framing + larger image presence */
   .msm-badge-flagship { background: linear-gradient(135deg,#C8A84B,#9A7B2E); color: #16264F; }
   .product-card--flagship { border-color: #C8A84B; box-shadow: 0 6px 22px rgba(200,168,75,.22); }
@@ -2215,12 +3183,13 @@
   .mrk-card--featured { border-color: #C8A84B; box-shadow: 0 6px 22px rgba(200,168,75,.20); }
 
   /* ── FLAGSHIP — Professional Driver Milestone Recognition Kit (elevated hero feature) ── */
-  .mrk-flagship { display: grid; grid-template-columns: minmax(0,320px) 1fr; align-items: stretch;
+  .mrk-flagship { display: grid; grid-template-columns: minmax(0,1.05fr) 1fr; align-items: center; max-width: 880px; margin: 0 auto 30px;
     text-decoration: none; color: inherit; background: linear-gradient(135deg,#16264F,#0C1733);
-    border: 1.5px solid rgba(200,168,75,.5); border-radius: 16px; overflow: hidden; margin-bottom: 30px;
+    border: 1.5px solid rgba(200,168,75,.5); border-radius: 16px; overflow: hidden;
     box-shadow: 0 10px 30px rgba(12,23,51,.18); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
   .mrk-flagship:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(12,23,51,.30); border-color: #C8A84B; }
-  .mrk-flagship-media { position: relative; background: #0A0A0A; min-height: 250px; }
+  /* Media panel at the infographic's exact 4:3 ratio → whole graphic fills it, no border, no crop. */
+  .mrk-flagship-media { position: relative; background: transparent; aspect-ratio: 4 / 3; }
   .mrk-flagship-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .mrk-flagship-tag { position: absolute; top: 14px; left: 14px; background: linear-gradient(135deg,#C8A84B,#9A7B2E);
     color: #16264F; font-size: .6875rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: 6px; }
@@ -2228,7 +3197,7 @@
   .mrk-flagship-badge { font-size: .6875rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #D9BE72; }
   .mrk-flagship-title { font-size: clamp(1.35rem,2.4vw,1.875rem); font-weight: 800; letter-spacing: -.02em; color: #fff; line-height: 1.15; margin: 0; }
   .mrk-flagship-sub { font-size: .95rem; color: #B9C4E0; line-height: 1.55; max-width: 560px; margin: 0; }
-  .mrk-flagship-items { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .mrk-flagship-items { display: none; }  /* contents already shown in the infographic — keeps the banner compact */
   .mrk-flagship-items span { display: inline-flex; align-items: center; gap: 7px; font-size: .8125rem; font-weight: 700; color: #E8EDFA;
     background: rgba(200,168,75,.12); border: 1px solid rgba(200,168,75,.35); border-radius: 999px; padding: 5px 13px; }
   .mrk-flagship-items span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #D9BE72; flex: 0 0 auto; }
@@ -2238,7 +3207,209 @@
   .mrk-flagship-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .9375rem; color: #16264F;
     background: linear-gradient(135deg,#E8C766,#C8A84B); padding: 11px 20px; border-radius: 10px; }
   .mrk-flagship-cta svg { width: 15px; height: 15px; }
-  @media (max-width: 760px) { .mrk-flagship { grid-template-columns: 1fr; } .mrk-flagship-media { min-height: 210px; } }
+  @media (max-width: 760px) { .mrk-flagship { grid-template-columns: 1fr; } }
+
+  /* ─── Safe Driver Awards category ─── */
+  .sd-hero { position: relative; display: block; border-radius: 16px; overflow: hidden; text-decoration: none;
+    margin: 0 0 30px; min-height: 360px; box-shadow: 0 18px 48px -22px rgba(15,29,61,.55); }
+  .sd-hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% center; }
+  .sd-hero-overlay { position: absolute; inset: 0;
+    background: linear-gradient(100deg, rgba(11,21,46,.94) 0%, rgba(15,29,61,.82) 42%, rgba(15,29,61,.30) 100%); }
+  .sd-hero-copy { position: relative; max-width: 560px; padding: 40px 38px; color: #fff; }
+  .sd-hero-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: #E8C766; margin-bottom: 12px; }
+  .sd-hero-title { font-size: 2rem; line-height: 1.08; font-weight: 800; letter-spacing: -.02em; margin: 0 0 14px; color: #fff; }
+  .sd-hero-sub { font-size: .98rem; line-height: 1.55; color: rgba(255,255,255,.86); margin: 0 0 22px; max-width: 460px; }
+  .sd-hero-cta { display: inline-flex; align-items: center; gap: 9px; background: #C8A84B; color: #16264F;
+    font-size: .9rem; font-weight: 700; padding: 12px 22px; border-radius: 9px; transition: background .18s, transform .18s; }
+  .sd-hero-cta svg { width: 17px; height: 17px; }
+  .sd-hero:hover .sd-hero-cta { background: #E8C766; transform: translateX(3px); }
+
+  .sd-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 0 0 36px; }
+  .sd-item { margin: 0; border: 1px solid var(--gold-border); border-radius: 13px; overflow: hidden; background: #fff; }
+  .sd-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
+  .sd-item figcaption { padding: 13px 16px; font-size: .85rem; font-weight: 700; color: #16264F; text-align: center; }
+
+  .sd-detail-link { display: inline-flex; align-items: center; gap: 8px; border: 1.5px solid #16264F; color: #16264F;
+    font-size: .9rem; font-weight: 700; padding: 11px 24px; border-radius: 9px; text-decoration: none; transition: background .18s, color .18s; }
+  .sd-detail-link svg { width: 16px; height: 16px; }
+  .sd-detail-link:hover { background: #16264F; color: #fff; }
+  /* ─── Retirement Legacy Collection (black / gold / silver — highest recognition) ─── */
+  .rl-gold { color: #C8A84B; }
+  .rl-hero { position: relative; border-radius: 18px; overflow: hidden; margin: 0 0 30px;
+    background:
+      radial-gradient(120% 120% at 50% 0%, rgba(200,168,75,.16) 0%, rgba(200,168,75,0) 46%),
+      linear-gradient(180deg, #15171C 0%, #0A0B0E 60%, #050608 100%);
+    border: 1px solid rgba(200,168,75,.28); box-shadow: 0 24px 60px -28px rgba(0,0,0,.7); }
+  .rl-hero-frame { position: relative; text-align: center; padding: 58px 30px 52px; }
+  .rl-hero-frame::before, .rl-hero-frame::after { content: ""; position: absolute; left: 50%; transform: translateX(-50%);
+    width: 64px; height: 1px; background: linear-gradient(90deg, transparent, #C8A84B, transparent); }
+  .rl-hero-frame::before { top: 30px; } .rl-hero-frame::after { bottom: 28px; }
+  .rl-hero-eyebrow { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase;
+    color: #C8A84B; margin-bottom: 18px; }
+  .rl-hero-title { font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; font-weight: 800; letter-spacing: -.02em; color: #F4F5F7; margin: 0 0 16px; }
+  .rl-hero-line { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 1.05rem; color: #AEB4BC; margin: 0 0 26px; letter-spacing: .01em; }
+  .rl-hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .rl-cta-primary { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(180deg, #E8C766, #C8A84B);
+    color: #14160F; font-size: .9rem; font-weight: 700; padding: 12px 24px; border-radius: 9px; text-decoration: none;
+    transition: transform .18s, box-shadow .18s; box-shadow: 0 10px 26px -12px rgba(200,168,75,.6); }
+  .rl-cta-primary svg { width: 17px; height: 17px; }
+  .rl-cta-primary:hover { transform: translateY(-1px); box-shadow: 0 14px 32px -12px rgba(200,168,75,.75); }
+  .rl-cta-secondary { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 9px; text-decoration: none;
+    font-size: .9rem; font-weight: 700; color: #E6E8EB; border: 1px solid rgba(231,233,236,.34); transition: background .18s, border-color .18s; }
+  .rl-cta-secondary:hover { background: rgba(255,255,255,.07); border-color: rgba(231,233,236,.6); }
+
+  .rl-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 0 0 16px; }
+  .rl-shot { margin: 0; border-radius: 13px; overflow: hidden; background: #0A0B0E; border: 1px solid rgba(200,168,75,.22); }
+  .rl-shot img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; display: block; }
+  .rl-shot figcaption { padding: 11px 14px; font-size: .8rem; font-weight: 700; letter-spacing: .02em; color: #C8A84B; text-align: center;
+    background: linear-gradient(180deg, #101216, #0A0B0E); }
+  @media (max-width: 760px) { .rl-gallery { grid-template-columns: 1fr; } }
+
+  .rl-statement { max-width: 820px; margin: 0 auto 36px; text-align: center; }
+  .rl-statement p { font-size: 1rem; line-height: 1.7; color: var(--text-secondary); margin: 10px 0 0; }
+  .rl-statement strong, .rl-cycle strong { color: #16264F; }
+
+  .rl-contents-head, .rl-uses-head { text-align: center; margin: 0 0 18px; }
+  .rl-contents-head h3, .rl-uses-head h3 { font-size: 1.2rem; font-weight: 700; color: #16264F; margin: 4px 0 0; }
+  .rl-contents { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 38px; }
+  .rl-item { display: flex; align-items: center; gap: 13px; padding: 16px 18px; border: 1px solid var(--gold-border); border-radius: 12px;
+    background: linear-gradient(180deg, #fff, #FBF9F3); }
+  .rl-item-wide { grid-column: span 3; justify-content: center; background: linear-gradient(180deg, #FBF7EC, #F6F0DF); }
+  .rl-item-mark { font-family: Georgia, serif; font-size: 1.05rem; font-weight: 700; color: #C8A84B; min-width: 26px; }
+  .rl-item-name { font-size: .92rem; font-weight: 600; color: #16264F; }
+
+  .rl-cycle { background: linear-gradient(180deg, #0F1116, #07080A); border-radius: 16px; padding: 34px 28px; margin: 0 0 38px; text-align: center;
+    border: 1px solid rgba(200,168,75,.22); }
+  .rl-cycle-head h3 { font-size: 1.18rem; font-weight: 700; color: #F4F5F7; margin: 4px 0 22px; }
+  .rl-chain { display: flex; flex-wrap: wrap; gap: 8px 6px; align-items: center; justify-content: center; }
+  .rl-chain-step { font-size: .82rem; font-weight: 600; color: #C9CDD3; background: rgba(255,255,255,.05);
+    border: 1px solid rgba(255,255,255,.12); padding: 8px 14px; border-radius: 999px; }
+  .rl-chain-final { color: #14160F; background: linear-gradient(180deg, #E8C766, #C8A84B); border-color: transparent; font-weight: 700; }
+  .rl-chain-sep { color: #C8A84B; font-weight: 700; }
+
+  .rl-uses { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 0 0 40px; }
+  .rl-use { text-align: center; padding: 16px 14px; border: 1px solid var(--gold-border); border-radius: 12px; background: #fff;
+    font-size: .9rem; font-weight: 600; color: #16264F; }
+
+  .rl-closing { text-align: center; max-width: 720px; margin: 0 auto; padding: 36px 24px 8px; border-top: 1px solid var(--gold-border); }
+  .rl-closing-quote { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-size: 1.15rem; line-height: 1.55; color: #16264F; margin: 0 0 24px; }
+  @media (max-width: 760px) {
+    .rl-contents, .rl-uses { grid-template-columns: 1fr 1fr; }
+    .rl-item-wide { grid-column: span 2; }
+    .rl-chain-sep { display: none; }
+    .rl-chain { gap: 8px; }
+  }
+
+  /* ─── Birthday Recognition Program (warm enterprise — cream / gold / navy) ─── */
+  .br-gold { color: #B8923A; }
+  .br-hero { border-radius: 18px; overflow: hidden; margin: 0 0 32px;
+    background: radial-gradient(120% 130% at 50% 0%, #FBF3DE 0%, #FBF7EC 45%, #FFFFFF 100%);
+    border: 1px solid var(--gold-border); box-shadow: 0 20px 48px -26px rgba(184,146,58,.4); }
+  .br-hero-copy { text-align: center; padding: 52px 30px 44px; max-width: 760px; margin: 0 auto; }
+  .br-coin { display: inline-flex; align-items: center; justify-content: center; width: 54px; height: 54px; border-radius: 50%;
+    background: linear-gradient(180deg, #E8C766, #C8A84B); color: #6B5417; font-size: 1.5rem; box-shadow: 0 6px 16px -6px rgba(200,168,75,.7); margin-bottom: 16px; }
+  .br-hero-eyebrow { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: #B8923A; margin-bottom: 12px; }
+  .br-hero-title { font-size: clamp(1.7rem, 3.6vw, 2.4rem); line-height: 1.12; font-weight: 800; letter-spacing: -.02em; color: #16264F; margin: 0 0 14px; }
+  .br-hero-sub { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin: 0 0 24px; }
+  .br-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .br-cta-primary { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(180deg, #E8C766, #C8A84B); color: #16264F;
+    font-size: .9rem; font-weight: 700; padding: 12px 24px; border-radius: 9px; text-decoration: none; transition: transform .18s, box-shadow .18s; box-shadow: 0 10px 24px -12px rgba(200,168,75,.6); }
+  .br-cta-primary svg { width: 17px; height: 17px; }
+  .br-cta-primary:hover { transform: translateY(-1px); }
+  .br-cta-secondary { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 9px; text-decoration: none; font-size: .9rem; font-weight: 700;
+    color: #16264F; border: 1.5px solid #16264F; transition: background .18s, color .18s; }
+  .br-cta-secondary:hover { background: #16264F; color: #fff; }
+  .br-price-note { font-size: .8rem; font-weight: 600; color: #B8923A; margin: 18px 0 0; letter-spacing: .01em; }
+
+  .br-head { text-align: center; margin: 34px 0 18px; }
+  .br-head h3 { font-size: 1.2rem; font-weight: 700; color: #16264F; margin: 4px 0 0; }
+  .br-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 12px; }
+  .br-step { display: flex; gap: 12px; align-items: flex-start; padding: 18px; border: 1px solid var(--gold-border); border-radius: 12px; background: linear-gradient(180deg,#fff,#FBF9F3); }
+  .br-step-n { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: #16264F; color: #fff; font-weight: 700; font-size: .9rem; display: flex; align-items: center; justify-content: center; }
+  .br-step strong { display: block; color: #16264F; font-size: .92rem; margin-bottom: 4px; }
+  .br-step p { font-size: .82rem; line-height: 1.5; color: var(--text-secondary); margin: 0; }
+  .br-receives { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .br-item { padding: 20px 18px; border: 1px solid var(--gold-border); border-radius: 12px; background: #fff; border-top: 3px solid #C8A84B; }
+  .br-item strong { display: block; color: #16264F; font-size: .92rem; margin-bottom: 6px; }
+  .br-item p { font-size: .82rem; line-height: 1.5; color: var(--text-secondary); margin: 0; }
+  .br-why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .br-why-card { padding: 22px 20px; border: 1px solid var(--gold-border); border-radius: 12px; background: linear-gradient(180deg,#fff,#FBF9F3); }
+  .br-why-card strong { display: block; color: #16264F; font-size: .98rem; margin-bottom: 6px; }
+  .br-why-card p { font-size: .85rem; line-height: 1.55; color: var(--text-secondary); margin: 0; }
+  .br-grid2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 34px 0 0; }
+  .br-feature { padding: 24px 22px; border-radius: 14px; background: linear-gradient(180deg, #16264F, #0F1B3A); color: #E8ECF3; }
+  .br-feature .section-eyebrow { color: #E8C766; }
+  .br-feature h4 { font-size: 1rem; font-weight: 700; color: #fff; margin: 6px 0 8px; line-height: 1.3; }
+  .br-feature p { font-size: .85rem; line-height: 1.55; color: rgba(232,236,243,.82); margin: 0; }
+  .br-closing { text-align: center; max-width: 720px; margin: 40px auto 0; padding: 34px 24px 8px; border-top: 1px solid var(--gold-border); }
+  .br-closing-line { font-size: 1.05rem; line-height: 1.55; color: #16264F; font-weight: 600; margin: 0 0 22px; }
+  @media (max-width: 880px) { .br-steps, .br-receives { grid-template-columns: 1fr 1fr; } .br-why, .br-grid2 { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) { .br-steps, .br-receives { grid-template-columns: 1fr; } }
+
+  /* ─── Recognition Kit Collection (E92) + Signature Kit (E91) ─── */
+  .rkc { margin: 0 0 40px; }
+  .rkc-hero { text-align: center; max-width: 820px; margin: 0 auto 24px; }
+  .rkc-eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #9A7B2E; margin-bottom: 10px; }
+  .rkc-title { font-size: clamp(1.6rem, 3.4vw, 2.3rem); font-weight: 800; letter-spacing: -.02em; color: #16264F; margin: 0 0 14px; }
+  .rkc-sub { font-size: 1rem; line-height: 1.6; color: var(--text-secondary); margin: 0 0 10px; }
+  .rkc-support { font-size: .9rem; line-height: 1.6; color: var(--text-muted); margin: 0 0 20px; }
+  .rkc-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .rkc-cta { display: inline-flex; align-items: center; gap: 9px; background: linear-gradient(180deg, #E8C766, #C8A84B); color: #16264F; font-size: .9rem; font-weight: 700; padding: 12px 24px; border-radius: 9px; text-decoration: none; transition: transform .18s; }
+  .rkc-cta svg { width: 17px; height: 17px; } .rkc-cta:hover { transform: translateY(-1px); }
+  .rkc-cta-ghost { display: inline-flex; align-items: center; padding: 12px 22px; border-radius: 9px; text-decoration: none; font-size: .9rem; font-weight: 700; color: #16264F; border: 1.5px solid #16264F; transition: background .18s, color .18s; }
+  .rkc-cta-ghost:hover { background: #16264F; color: #fff; }
+
+  .rkc-signature { max-width: 760px; margin: 0 auto 30px; padding: 28px 28px 24px; border-radius: 16px; text-align: center;
+    background: linear-gradient(180deg, #16264F, #0F1B3A); color: #E8ECF3; border: 1px solid rgba(200,168,75,.3); }
+  .rkc-sig-tag { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #E8C766; margin-bottom: 10px; }
+  .rkc-sig-title { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 0 0 6px; }
+  .rkc-sig-tagline { font-family: Georgia, serif; font-style: italic; color: #C8A84B; margin: 0 0 12px; }
+  .rkc-sig-desc { font-size: .92rem; line-height: 1.55; color: rgba(232,236,243,.85); margin: 0 auto 16px; max-width: 560px; }
+  .rkc-sig-list { list-style: none; padding: 0; margin: 0 auto 14px; max-width: 460px; text-align: left; display: inline-block; }
+  .rkc-sig-list li { font-size: .88rem; color: #DBE0EA; padding: 6px 0 6px 22px; position: relative; }
+  .rkc-sig-list li::before { content: '✦'; position: absolute; left: 0; color: #C8A84B; }
+  .rkc-sig-list strong { color: #fff; }
+  .rkc-sig-note { font-size: .76rem; color: rgba(232,236,243,.6); margin: 0 0 18px; }
+
+  .rkc-series { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 0 0 28px; }
+  .rkc-serie { display: flex; flex-direction: column; border: 1px solid var(--gold-border); border-radius: 14px; padding: 20px 18px; background: linear-gradient(180deg, #fff, #FBF9F3); }
+  .rkc-serie-feat { border-color: #C8A84B; box-shadow: 0 8px 26px -14px rgba(200,168,75,.5); }
+  .rkc-serie-exec { background: linear-gradient(180deg, #FBF7EC, #F6F0DF); border-color: #C8A84B; }
+  .rkc-serie-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+  .rkc-serie-name { font-size: .95rem; font-weight: 800; color: #16264F; letter-spacing: -.01em; }
+  .rkc-serie-price { font-size: 1.25rem; font-weight: 800; color: #9A7B2E; }
+  .rkc-serie-desc { font-size: .8rem; line-height: 1.5; color: var(--text-secondary); margin: 0 0 14px; }
+  .rkc-kit { border-top: 1px solid var(--gold-border); padding: 10px 0; }
+  .rkc-kit strong { display: block; font-size: .85rem; color: #16264F; }
+  .rkc-kit span { display: block; font-size: .76rem; color: var(--text-secondary); line-height: 1.45; margin: 2px 0 3px; }
+  .rkc-kit em { font-size: .74rem; color: #9A7B2E; font-style: italic; }
+  .rkc-pres { font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #64748B; margin: 12px 0 14px; }
+  .rkc-cta-sm { margin-top: auto; display: block; text-align: center; background: #16264F; color: #fff; font-size: .82rem; font-weight: 700; padding: 10px; border-radius: 8px; text-decoration: none; transition: background .18s; }
+  .rkc-cta-sm:hover { background: #C8A84B; color: #16264F; }
+
+  .rkc-compare-wrap { border: 1px solid var(--gold-border); border-radius: 14px; overflow: hidden; }
+  .rkc-compare { width: 100%; border-collapse: collapse; }
+  .rkc-compare th, .rkc-compare td { text-align: left; padding: 12px 16px; border-bottom: 1px solid var(--gold-border); font-size: .85rem; }
+  .rkc-compare th { font-size: .7rem; text-transform: uppercase; letter-spacing: .05em; color: #64748B; background: #FBF9F3; }
+  .rkc-compare td:first-child { font-weight: 700; color: #16264F; }
+  .rkc-foot { font-size: .78rem; color: var(--text-muted); padding: 14px 16px; margin: 0; background: #FBF9F3; }
+  @media (max-width: 900px) { .rkc-series { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .rkc-series { grid-template-columns: 1fr; } }
+
+  .sd-prog-head { text-align: center; margin: 0 0 18px; }
+  .sd-tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .sd-tier { border: 1px solid var(--gold-border); border-radius: 12px; padding: 20px 16px; text-align: center;
+    background: linear-gradient(180deg, #fff, #FBF9F3); }
+  .sd-tier-yrs { display: block; font-size: 1.35rem; font-weight: 800; color: #16264F; letter-spacing: -.01em; }
+  .sd-tier-name { display: block; font-size: .82rem; font-weight: 600; color: #9A7B2E; margin-top: 6px; line-height: 1.35; }
+  @media (max-width: 760px) {
+    .sd-gallery { grid-template-columns: 1fr; }
+    .sd-tiers { grid-template-columns: 1fr 1fr; }
+    .sd-hero-title { font-size: 1.6rem; }
+    .sd-hero-overlay { background: linear-gradient(180deg, rgba(11,21,46,.92), rgba(15,29,61,.78)); }
+  }
+
   /* Milestone Recognition Kit cards use marketing/lifestyle photos (medal, lapel, luggage) —
      show them in FULL (contain) on a dark letterbox instead of the default 16:9 cover crop. */
   .mrk-card .product-card-img-wrap { aspect-ratio: 4 / 3; background: #0E1A33; }
@@ -2387,7 +3558,7 @@
     var pill = exec ? 'Executive Collection' : safe ? 'Safe Service Miles' : 'Service Miles';
     var cat = exec ? 'Executive Driver Recognition Collection'
             : safe ? 'Safe Service Milestone Awards' : 'Service Milestone Awards';
-    var unitText = exec ? 'per package' : 'per item · placeholder price';
+    var unitText = exec ? 'per package' : 'per item';
     // Future-proof productType attribute (drives the Safe Miles green interior border).
     var productType = exec ? 'executive' : (safe ? 'safe-miles' : 'milestone');
     return '<div class="product-card' + (exec ? ' product-card--exec' : '') + (darkImg ? ' product-card--dark' : '') + (flagship ? ' product-card--flagship' : '') + '" data-track="' + k.track + '" data-product-type="' + productType + '" ' +
@@ -2461,32 +3632,163 @@
 <script>
 // Filter logic — show/hide whole category sections only. The Milestone section keeps its own
 // Career/Safe track toggle (selectTrack); the filter never merges the two medal tracks.
+let currentFilter = 'all';
+let currentSearch = '';
+
+// Fuzzy search: map vague/everyday terms to what we actually stock, so "food"→food jar,
+// "badge"→lapel pin/medal, "cup/drink"→bottle/tumbler, "bag"→tote/cooler, "kits"→kits, etc.
+const SEARCH_SYNONYMS = {
+  food:['food jar','jar','soup','meal'], jar:['food jar'], meal:['food jar','lunch'],
+  drink:['bottle','tumbler','rambler','water','drinkware'], drinkware:['bottle','tumbler','rambler'],
+  cup:['bottle','tumbler','rambler','mug'], bottle:['rambler','tumbler','water bottle','drinkware'],
+  tumbler:['rambler','bottle'], water:['bottle','rambler','tumbler'], rambler:['bottle','tumbler'], yeti:['rambler','roadie','camino','tumbler','cooler','tote','bottle'],
+  bag:['tote','cooler','lunch bag','backpack','carryall','luggage','travel'], tote:['carryall','camino','bag'],
+  cooler:['roadie','cooler','lunch bag'], lunch:['lunch bag','food jar'], carryall:['camino','tote'],
+  backpack:['pack leader','backpack','tote'], pack:['pack leader','backpack'],
+  badge:['lapel pin','pin','medal','patch'], pin:['lapel pin','badge'], lapel:['lapel pin','pin'],
+  medal:['medal','award','medallion','milestone'], medallion:['medal','coin'], coin:['medallion','medal'],
+  award:['medal','milestone','recognition','award'], trophy:['medal','award'], patch:['patch','embroidered'],
+  shirt:['t-shirt','tee','apparel'], tee:['t-shirt','shirt'], apparel:['t-shirt','shirt','hat','cap'], hat:['cap'], cap:['hat'],
+  tag:['luggage tag','road bag tag','luggage'], luggage:['luggage tag','tote','bag'], keychain:['keychain','key'], key:['keychain'],
+  kit:['kit','recognition kit','essentials','travel','self-care','mile pack'], gift:['kit','gift','appreciation'], set:['kit','set','award'],
+  safety:['safe miles','safe service miles','safe driver','safety recognition'], safe:['safe miles','safe service miles'],
+  milestone:['milestone','service miles','mile','anniversary','tenure'], mile:['miles','milestone','service miles'], miles:['mile','milestone'],
+  anniversary:['milestone','tenure'], tenure:['milestone','anniversary','years of service'], service:['service miles','milestone'],
+  onboarding:['onboarding','welcome','new driver','new hire'], welcome:['onboarding','welcome kit'], new:['onboarding','new driver'],
+  holiday:['holiday','seasonal'], seasonal:['holiday'], travel:['travel kit','self-care','shower'], shower:['self-care','travel'],
+  soap:['dr squatch','soap','self-care'], towel:['towel','self-care'], wipes:['dude wipes','self-care'],
+  steam:['steam cleaner'], pressure:['pressure washer'], coffee:['coffee maker'],
+  premium:['executive','premium'], executive:['executive collection','premium'], million:['1 million','2 million','3 million','milestone'],
+};
+function searchTermsFor(q) {
+  const terms = new Set();
+  if (q) terms.add(q);                                  // full query (strongest)
+  q.split(/\s+/).filter(Boolean).forEach(t => {
+    terms.add(t);
+    const singular = (t.length > 3 && t.endsWith('s')) ? t.slice(0, -1) : null;
+    if (singular) terms.add(singular);
+    [t, singular].filter(Boolean).forEach(k => (SEARCH_SYNONYMS[k] || []).forEach(s => terms.add(s)));
+  });
+  return Array.from(terms).filter(Boolean);
+}
+
+function hasVisibleCard(c) {
+  return Array.prototype.some.call(c.querySelectorAll('.product-card, .mrk-flagship'), el => el.style.display !== 'none');
+}
+
+// Unified shop view. A text SEARCH (card-level, across every section) takes precedence;
+// otherwise the category FILTER (section-level) drives the view. Search and category are
+// mutually exclusive — picking a category clears the search, and searching spans all categories.
+function applyShop() {
+  // Reset any card / sub-block / section-child visibility a previous search or Medals view may have set.
+  document.querySelectorAll('.product-card, .mrk-flagship, .msm-block, [data-category-section] > *').forEach(el => el.style.display = '');
+  const q = currentSearch.trim().toLowerCase();
+  const noRes = document.getElementById('shop-no-results');
+
+  if (q) {
+    // SEARCH MODE — match each product card (+ the flagship kit) on name, category, and body text.
+    document.querySelectorAll('[data-category-section]').forEach(s => s.style.display = '');
+    document.querySelectorAll('.shop-service-detail').forEach(el => el.style.display = 'none');
+    const overallS = document.getElementById('shop-overall-detail'); if (overallS) overallS.style.display = 'none';
+    let any = false;
+    const terms = searchTermsFor(q);   // full query + tokens + synonyms (fuzzy, keyword-aware)
+    document.querySelectorAll('.product-card, .mrk-flagship').forEach(el => {
+      const hay = ((el.getAttribute('data-product-name') || '') + ' ' +
+                   (el.getAttribute('data-product-category') || '') + ' ' + el.textContent).toLowerCase();
+      const match = terms.some(t => hay.indexOf(t) !== -1);
+      el.style.display = match ? '' : 'none';
+      if (match) any = true;
+    });
+    // Collapse sub-blocks, then whole sections, that ended up with no visible cards (hides stray headers).
+    document.querySelectorAll('.msm-block').forEach(c => { if (!hasVisibleCard(c)) c.style.display = 'none'; });
+    document.querySelectorAll('[data-category-section]').forEach(c => { if (!hasVisibleCard(c)) c.style.display = 'none'; });
+    if (noRes) noRes.style.display = any ? 'none' : '';
+  } else if (currentFilter === 'medals') {
+    // MEDALS MODE — one entry point, but the two tracks stay SEPARATE: show only the medal blocks
+    // (Career Mileage Medals + Safe Service Miles Medals), each in its own labeled sub-section,
+    // and hide everything else in those sections (kits, accessories, exec, flagship, program copy).
+    document.querySelectorAll('[data-category-section]').forEach(section => {
+      const medalBlock = section.querySelector('[data-medals-block]');
+      if (medalBlock) {
+        section.style.display = '';
+        Array.prototype.forEach.call(section.children, function (ch) {
+          ch.style.display = (ch === medalBlock || ch.contains(medalBlock)) ? '' : 'none';
+        });
+      } else {
+        section.style.display = 'none';
+      }
+    });
+    document.querySelectorAll('.shop-service-detail').forEach(el => el.style.display = 'none');
+    const overallM = document.getElementById('shop-overall-detail'); if (overallM) overallM.style.display = 'none';
+    if (noRes) noRes.style.display = 'none';
+  } else {
+    // CATEGORY MODE — original section-level show/hide + per-program detail copy.
+    document.querySelectorAll('[data-category-section]').forEach(section => {
+      section.style.display = (currentFilter === 'all' || section.dataset.categorySection === currentFilter) ? '' : 'none';
+    });
+    document.querySelectorAll('.shop-service-detail').forEach(el => {
+      const cat = el.id.replace('service-detail-', '');
+      el.style.display = (currentFilter !== 'all' && cat === currentFilter) ? '' : 'none';
+    });
+    const overall = document.getElementById('shop-overall-detail');
+    if (overall) overall.style.display = (currentFilter === 'all') ? '' : 'none';
+    if (noRes) noRes.style.display = 'none';
+  }
+}
+
+// Category filter buttons — selecting one clears any active search.
 function applyShopFilter(filter) {
+  currentFilter = filter;
+  currentSearch = '';
+  const si = document.getElementById('shop-search-input');
+  const sc = document.getElementById('shop-search-clear');
+  if (si) si.value = '';
+  if (sc) sc.style.display = 'none';
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
-  document.querySelectorAll('[data-category-section]').forEach(section => {
-    section.style.display = (filter === 'all' || section.dataset.categorySection === filter) ? '' : 'none';
-  });
-  // Per-program detail blocks (the "How the X program works" copy + diagrams) only
-  // belong on a single-category (filtered) view — and only the matching one. On the
-  // "All Products" view they're ALL hidden so the product gallery flows uninterrupted,
-  // and the one overall Driver Appreciation Solutions summary shows at the bottom instead.
-  document.querySelectorAll('.shop-service-detail').forEach(el => {
-    const cat = el.id.replace('service-detail-', '');
-    el.style.display = (filter !== 'all' && cat === filter) ? '' : 'none';
-  });
-  const overall = document.getElementById('shop-overall-detail');
-  if (overall) overall.style.display = (filter === 'all') ? '' : 'none';
+  applyShop();
 }
 document.querySelectorAll('.filter-btn').forEach(btn => {
   btn.addEventListener('click', () => applyShopFilter(btn.dataset.filter));
 });
+
+// Product search — filters cards live as the user types, across every category.
+(function () {
+  const input = document.getElementById('shop-search-input');
+  const clearBtn = document.getElementById('shop-search-clear');
+  if (!input) return;
+  function clearSearch() { input.value = ''; currentSearch = ''; if (clearBtn) clearBtn.style.display = 'none'; applyShop(); input.focus(); }
+  input.addEventListener('input', () => {
+    currentSearch = input.value;
+    if (clearBtn) clearBtn.style.display = input.value ? 'flex' : 'none';
+    applyShop();
+  });
+  if (clearBtn) clearBtn.addEventListener('click', clearSearch);
+  const noResClear = document.getElementById('shop-no-results-clear');
+  if (noResClear) noResClear.addEventListener('click', clearSearch);
+})();
+// Mile Packs is the 2nd category in the "All Products" scroll order (after Driver
+// Appreciation Kits). Reorder the section node once on load; filtered views show a
+// single section so DOM order is irrelevant there.
+(function () {
+  const sections = document.querySelectorAll('[data-category-section]');
+  const first = sections[0];
+  const milepacks = document.querySelector('[data-category-section="milepacks"]');
+  if (first && milepacks && first.parentNode && first !== milepacks) {
+    first.parentNode.insertBefore(milepacks, first.nextSibling);
+  }
+})();
 // On load: honor ?category= if it maps to a real filter, otherwise default to "All Products".
+// E96: slug aliases so renamed/external links never break (Safe Miles Programs kept the `milepacks` slug).
+const CATEGORY_ALIASES = { 'safe-miles-programs': 'milepacks', 'mile-packs': 'milepacks', 'safemiles': 'milepacks' };
 const urlParams = new URLSearchParams(window.location.search);
-const catParam = urlParams.get('category');
+let catParam = urlParams.get('category');
+if (catParam && CATEGORY_ALIASES[catParam]) catParam = CATEGORY_ALIASES[catParam];
 const validCat = catParam && document.querySelector(`.filter-btn[data-filter="${catParam}"]`);
 applyShopFilter(validCat ? catParam : 'all');
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
+<script src="js/pricing-gate.js?v=4"></script>
+  <script src="js/quote.js?v=2" defer></script>
 </body>
 </html>

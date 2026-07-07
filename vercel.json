@@ -2,6 +2,29 @@
   "outputDirectory": ".",
   "cleanUrls": true,
   "trailingSlash": false,
+  "redirects": [
+    { "source": "/:path*",
+      "has": [{ "type": "host", "value": "portal.driverappreciationsolutions.com" }],
+      "destination": "https://driverappreciationsolutions.com/account",
+      "permanent": false },
+    { "source": "/:path*",
+      "has": [{ "type": "host", "value": "app.driverappreciationsolutions.com" }],
+      "destination": "https://driverappreciationsolutions.com/account",
+      "permanent": false },
+
+    { "source": "/solution-appreciation",      "destination": "/shop?category=appreciation", "permanent": true },
+    { "source": "/solution-appreciation.html", "destination": "/shop?category=appreciation", "permanent": true },
+    { "source": "/solution-safety",            "destination": "/shop?category=safety",       "permanent": true },
+    { "source": "/solution-safety.html",       "destination": "/shop?category=safety",       "permanent": true },
+    { "source": "/solution-onboarding",        "destination": "/shop?category=onboarding",   "permanent": true },
+    { "source": "/solution-onboarding.html",   "destination": "/shop?category=onboarding",   "permanent": true },
+    { "source": "/solution-milestone",         "destination": "/shop?category=milestone",    "permanent": true },
+    { "source": "/solution-milestone.html",    "destination": "/shop?category=milestone",    "permanent": true },
+    { "source": "/solution-holiday",           "destination": "/shop?category=holiday",      "permanent": true },
+    { "source": "/solution-holiday.html",      "destination": "/shop?category=holiday",      "permanent": true },
+    { "source": "/solution-enterprise",        "destination": "/shop?category=milepacks",    "permanent": true },
+    { "source": "/solution-enterprise.html",   "destination": "/shop?category=milepacks",    "permanent": true }
+  ],
   "rewrites": [
     { "source": "/api/submit-quote",     "destination": "/api/portal?action=submit-quote" },
     { "source": "/api/billing-checkout", "destination": "/api/portal?action=billing-checkout" },
@@ -26,18 +49,14 @@
       "headers": [
         { "key": "Link", "value": "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\"" },
         { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"https://agentskills.io/rel/skills-index\"; type=\"application/json\"" },
-        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\"" },
-        { "key": "Link", "value": "</docs/api>; rel=\"service-doc\"; type=\"text/html\"" }
-      ]
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\"" }      ]
     },
     {
       "source": "/index.html",
       "headers": [
         { "key": "Link", "value": "</.well-known/api-catalog>; rel=\"api-catalog\"; type=\"application/linkset+json\"" },
         { "key": "Link", "value": "</.well-known/agent-skills/index.json>; rel=\"https://agentskills.io/rel/skills-index\"; type=\"application/json\"" },
-        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\"" },
-        { "key": "Link", "value": "</docs/api>; rel=\"service-doc\"; type=\"text/html\"" }
-      ]
+        { "key": "Link", "value": "</sitemap.xml>; rel=\"sitemap\"; type=\"application/xml\"" }      ]
     },
     {
       "source": "/.well-known/api-catalog",
@@ -56,19 +75,19 @@
     {
       "source": "/css/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/js/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/lib/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+        { "key": "Cache-Control", "value": "public, max-age=600, stale-while-revalidate=86400" }
       ]
     },
     {
