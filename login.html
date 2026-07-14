@@ -8,8 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=10">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <style>
     /* ── Auth Page Layout ─────────────────────────────────── */
     .auth-page {
@@ -265,6 +267,7 @@
     }
     .auth-trust svg { width: 14px; height: 14px; color: var(--success); flex-shrink: 0; }
   </style>
+<script src="/js/tracking.js?v=2" defer></script>
 </head>
 <body class="auth-page">
 <!-- ============================================================================
@@ -391,6 +394,20 @@
       <button class="auth-submit" type="submit" id="login-btn">Sign In</button>
     </form>
 
+    <!-- Set-new-password form — shown when arriving from a password-reset link -->
+    <form id="recovery-form" novalidate style="display:none">
+      <p style="font-size:0.9375rem;color:#475569;margin:0 0 16px">Choose a new password for your account.</p>
+      <div class="auth-field">
+        <label class="auth-label" for="recovery-password">New password</label>
+        <input class="auth-input" type="password" id="recovery-password" placeholder="At least 8 characters" autocomplete="new-password" required>
+      </div>
+      <div class="auth-field">
+        <label class="auth-label" for="recovery-password2">Confirm new password</label>
+        <input class="auth-input" type="password" id="recovery-password2" placeholder="Re-enter new password" autocomplete="new-password" required>
+      </div>
+      <button class="auth-submit" type="submit" id="recovery-btn">Set new password</button>
+    </form>
+
     <!-- Footer links -->
     <p class="auth-footer-link">
       Don't have an account? <a href="signup.html">Create account</a>
@@ -411,8 +428,52 @@
 <script src="js/cart.js"></script>
 
 <script>
-  // Redirect already-logged-in users
-  redirectIfAuthed('account.html');
+  // ── Password-reset (recovery) handling ──────────────────────────────────────
+  // A reset link lands here with a transient recovery session. We must NOT bounce the
+  // user to /account (which the normal auth redirect would do) — instead show a
+  // set-new-password form and call supabase.auth.updateUser({ password }).
+  const isRecovery = /type=recovery/.test(window.location.hash) || /type=recovery/.test(window.location.search);
+
+  function showRecoveryForm() {
+    ['.btn-google', '.auth-or', '#login-form', '.auth-forgot'].forEach(sel => {
+      const el = document.querySelector(sel); if (el) el.style.display = 'none';
+    });
+    const rf = document.getElementById('recovery-form'); if (rf) rf.style.display = '';
+    const title = document.querySelector('.auth-title'); if (title) title.textContent = 'Set a New Password';
+    const sub = document.querySelector('.auth-subtitle'); if (sub) sub.textContent = 'Enter a new password to finish resetting your account.';
+  }
+
+  if (isRecovery) {
+    showRecoveryForm();
+  } else {
+    // Only auto-redirect signed-in users when this is NOT a recovery visit.
+    redirectIfAuthed('account.html');
+  }
+
+  // Supabase fires PASSWORD_RECOVERY after it parses the link hash — catch it too (robust).
+  try {
+    const _sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+    if (_sb && _sb.auth && _sb.auth.onAuthStateChange) {
+      _sb.auth.onAuthStateChange((event) => { if (event === 'PASSWORD_RECOVERY') showRecoveryForm(); });
+    }
+  } catch (e) { /* noop */ }
+
+  // Recovery form submit → set the new password
+  document.getElementById('recovery-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    clearAuthError();
+    const btn = document.getElementById('recovery-btn');
+    const pw  = document.getElementById('recovery-password').value;
+    const pw2 = document.getElementById('recovery-password2').value;
+    if (pw.length < 8) { showAuthError('Password must be at least 8 characters.'); return; }
+    if (pw !== pw2)    { showAuthError('Those passwords don’t match.'); return; }
+    const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+    if (!sb) { showAuthError('Unable to reset password right now. Please try the reset link again.'); return; }
+    btn.disabled = true; btn.textContent = 'Updating…';
+    const { error } = await sb.auth.updateUser({ password: pw });
+    if (error) { showAuthError(error.message || 'Could not update password.'); btn.disabled = false; btn.textContent = 'Set new password'; return; }
+    window.location.href = 'account.html';
+  });
 
   // Form submit
   document.getElementById('login-form').addEventListener('submit', async e => {

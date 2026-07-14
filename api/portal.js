@@ -24,6 +24,7 @@ const { getServiceClient, getUserFromToken } = require('./_supabase');
 // Shared pure-logic libs (UMD → CommonJS). No Supabase/Stripe coupling.
 const Shipping    = require('../lib/shipping');
 const Pricing     = require('../lib/recognition-pricing');
+const OrderEmails = require('../lib/order-emails');
 
 const ALLOWED_ORIGINS = [
   'https://driverappreciationsolutions.com',
@@ -64,7 +65,7 @@ async function sendLeadNotification(lead) {
   const body = {
     from:    'Scout <scout@driverappreciationsolutions.com>',
     to,
-    subject: `🚛 New quote request — ${lead.contact_name || 'Anonymous'} (${lead.driver_count || '?'} drivers)`,
+    subject: `🚛 New quote request — ${esc(lead.contact_name || 'Anonymous')} (${esc(lead.driver_count || '?')} drivers)`,
     html: `
       <div style="font-family:sans-serif;max-width:600px;margin:0 auto">
         <div style="background:#1A2E6E;padding:20px 24px;border-radius:12px 12px 0 0">
@@ -73,14 +74,14 @@ async function sendLeadNotification(lead) {
         </div>
         <div style="background:#fff;padding:24px;border:1px solid #E5E7EB;border-top:0;border-radius:0 0 12px 12px">
           <table style="width:100%;border-collapse:collapse;font-size:14px">
-            <tr><td style="padding:8px 0;color:#6B7280;width:140px">Contact</td><td style="padding:8px 0;font-weight:600;color:#111">${lead.contact_name || '—'}</td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Email</td><td style="padding:8px 0"><a href="mailto:${lead.contact_email || ''}" style="color:#1A2E6E">${lead.contact_email || '—'}</a></td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Company</td><td style="padding:8px 0">${lead.company || '—'}</td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Program type</td><td style="padding:8px 0">${lead.type || '—'}</td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Driver count</td><td style="padding:8px 0">${lead.driver_count || '—'}</td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Budget/driver</td><td style="padding:8px 0">${lead.budget_per_driver ? `$${lead.budget_per_driver}` : '—'}</td></tr>
-            <tr><td style="padding:8px 0;color:#6B7280">Timeline</td><td style="padding:8px 0">${lead.timeline || '—'}</td></tr>
-            ${lead.notes ? `<tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Notes</td><td style="padding:8px 0">${lead.notes}</td></tr>` : ''}
+            <tr><td style="padding:8px 0;color:#6B7280;width:140px">Contact</td><td style="padding:8px 0;font-weight:600;color:#111">${esc(lead.contact_name || '—')}</td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Email</td><td style="padding:8px 0"><a href="mailto:${encodeURIComponent(lead.contact_email || '')}" style="color:#1A2E6E">${esc(lead.contact_email || '—')}</a></td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Company</td><td style="padding:8px 0">${esc(lead.company || '—')}</td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Program type</td><td style="padding:8px 0">${esc(lead.type || '—')}</td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Driver count</td><td style="padding:8px 0">${esc(lead.driver_count || '—')}</td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Budget/driver</td><td style="padding:8px 0">${lead.budget_per_driver ? `$${esc(lead.budget_per_driver)}` : '—'}</td></tr>
+            <tr><td style="padding:8px 0;color:#6B7280">Timeline</td><td style="padding:8px 0">${esc(lead.timeline || '—')}</td></tr>
+            ${lead.notes ? `<tr><td style="padding:8px 0;color:#6B7280;vertical-align:top">Notes</td><td style="padding:8px 0">${esc(lead.notes)}</td></tr>` : ''}
           </table>
           <div style="margin-top:20px;padding:12px 16px;background:#F0F4FF;border-radius:8px;font-size:13px;color:#374151">
             💡 <strong>Estimated deal value:</strong> ${dealValue}
@@ -294,6 +295,153 @@ async function handleSubmitQuote(req, res, payload) {
 }
 
 /* =============================================================
+   ACTION: confirm-order   (success-page finalizer — webhook-independent)
+   The success page calls this with the Stripe session id right after the
+   buyer returns from Checkout. We verify the session is actually PAID,
+   confirm the order belongs to the caller's company, flip it to
+   'confirmed', and capture the shipping address. Idempotent: a second call
+   (or the webhook arriving first) just returns the current order. This
+   removes the hard dependency on the Stripe webhook for order visibility.
+   ============================================================= */
+/* -------------------------------------------------------------------
+   Transactional order emails for a confirmed order. Best-effort:
+   - dedup via flags stored inside das_orders.notes (no migration needed),
+   - never throws into the request path (wrapped in try/catch here AND
+     inside lib/order-emails.js),
+   - persists per-email send status back onto the order row.
+   `orderRow` must include: order_number, items, subtotal, shipping_cost,
+   total, notes, created_at. `session` is the retrieved Stripe Checkout
+   Session (for customer/billing/shipping/tax/discount/txn id).
+   ------------------------------------------------------------------- */
+async function dispatchOrderEmails(supabase, orderRow, session) {
+  try {
+    const existingFlags = OrderEmails.parseEmailFlags(orderRow.notes);
+
+    // Both already sent → nothing to do (idempotent on retried confirm-order).
+    if (OrderEmails.emailFlagSent(existingFlags.customer) && OrderEmails.emailFlagSent(existingFlags.internal)) {
+      return;
+    }
+
+    const model  = OrderEmails.normalizeOrderForEmail(orderRow, session);
+    const result = await OrderEmails.sendOrderEmails(model, existingFlags);
+
+    // Persist updated send-status flags into notes (strip old tag, append fresh).
+    const newNotes = OrderEmails.buildNotesWithFlags(orderRow.notes, result.flags);
+    if (newNotes !== orderRow.notes) {
+      const { error } = await supabase
+        .from('das_orders')
+        .update({ notes: newNotes })
+        .eq('id', orderRow.id);
+      if (error) console.error('[confirm-order] persist email flags failed:', error.message);
+    }
+  } catch (err) {
+    // A failure here must NOT break order confirmation.
+    console.error('[confirm-order] dispatchOrderEmails error:', err && err.message);
+  }
+}
+
+async function handleConfirmOrder(req, res, payload) {
+  const user = await getUserFromToken(req.headers.authorization);
+  if (!user) return res.status(401).json({ error: 'Unauthenticated' });
+
+  const sessionId = String((payload && payload.session_id) || '').trim();
+  if (!sessionId) return res.status(400).json({ error: 'Missing session_id' });
+
+  const supabase = getServiceClient();
+  const { data: profile } = await supabase.from('users').select('company_id').eq('id', user.id).maybeSingle();
+  const callerCompany = (profile && profile.company_id) || null;
+
+  // Locate the order by Stripe session id (set up-front by create-checkout /
+  // recognition-order).
+  const { data: order, error: lookErr } = await supabase
+    .from('das_orders')
+    .select('id, company_id, order_number, items, subtotal, shipping_cost, total, status, notes, created_at')
+    .eq('stripe_session_id', sessionId)
+    .maybeSingle();
+  if (lookErr) { console.error('[confirm-order] lookup', lookErr.message); return res.status(500).json({ error: 'Lookup failed' }); }
+  if (!order)  return res.status(404).json({ error: 'Order not found for this session' });
+
+  // Ownership: a company match authorizes; a company MISMATCH is an immediate reject.
+  const ownsByCompany = !!(order.company_id && callerCompany && order.company_id === callerCompany);
+  if (order.company_id && callerCompany && order.company_id !== callerCompany) {
+    return res.status(403).json({ error: 'This order belongs to a different account' });
+  }
+
+  if (!process.env.STRIPE_SECRET_KEY) {
+    // Payment system unavailable — only return an already-advanced order to a company owner.
+    if (ownsByCompany && order.status && order.status !== 'payment_pending') {
+      return res.status(200).json({ ok: true, order, alreadyConfirmed: true });
+    }
+    return res.status(500).json({ error: 'Payment system not configured' });
+  }
+  const Stripe = require('stripe');
+  const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, { apiVersion: '2024-04-10' });
+
+  // Retrieve the session once — used for ownership-by-email, payment verification, and email data.
+  let session = null;
+  try { session = await stripe.checkout.sessions.retrieve(sessionId); }
+  catch (err) { console.error('[confirm-order] stripe retrieve', err && err.message); return res.status(502).json({ error: 'Could not verify payment' }); }
+
+  // Ownership for company-less (guest) orders: the caller's account email must match the Stripe
+  // buyer email. Without this, any signed-in user with a leaked cs_… session id could read a
+  // guest order's PII. Company-owned orders are already authorized via ownsByCompany above.
+  if (!ownsByCompany) {
+    const buyerEmail  = ((session && session.customer_details && session.customer_details.email) || '').toLowerCase();
+    const callerEmail = (user.email || '').toLowerCase();
+    if (!buyerEmail || !callerEmail || buyerEmail !== callerEmail) {
+      return res.status(403).json({ error: 'This order belongs to a different account' });
+    }
+  }
+
+  // Already advanced (webhook beat us, or a repeat call) — ensure emails went out (deduped).
+  if (order.status && order.status !== 'payment_pending') {
+    await dispatchOrderEmails(supabase, order, session);
+    return res.status(200).json({ ok: true, order, alreadyConfirmed: true });
+  }
+
+  // Verify the Stripe session is genuinely paid before confirming.
+  if (!session || session.payment_status !== 'paid') {
+    return res.status(409).json({ error: 'Payment not completed yet', payment_status: session && session.payment_status });
+  }
+
+  const addr = session.shipping_details && session.shipping_details.address;
+  const shippingAddress = addr
+    ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code].filter(Boolean).join(', ')
+    : null;
+  const newNotes = [order.notes || '', shippingAddress ? `Ship to: ${shippingAddress}` : null]
+    .filter(Boolean).join(' | ') || null;
+
+  const { data: updated, error: updErr } = await supabase
+    .from('das_orders')
+    .update({ status: 'confirmed', notes: newNotes, updated_at: new Date().toISOString() })
+    .eq('id', order.id)
+    .eq('status', 'payment_pending')   // guard against double-confirm race
+    .select('id, order_number, items, subtotal, shipping_cost, total, status, created_at')
+    .maybeSingle();
+  if (updErr) { console.error('[confirm-order] update', updErr.message); return res.status(500).json({ error: 'Could not confirm order' }); }
+
+  // If the guard matched nothing, the webhook confirmed it in the meantime — re-read.
+  const finalOrder = updated || order;
+
+  // Send transactional emails AFTER the confirmed update succeeded. Best-effort:
+  // dispatchOrderEmails never throws and writes its own dedup flags into notes.
+  // Build the row view from what we have on hand (notes = the value we just wrote).
+  await dispatchOrderEmails(supabase, {
+    id:            order.id,
+    order_number:  finalOrder.order_number || order.order_number,
+    items:         finalOrder.items        != null ? finalOrder.items        : order.items,
+    subtotal:      finalOrder.subtotal     != null ? finalOrder.subtotal     : order.subtotal,
+    shipping_cost: finalOrder.shipping_cost!= null ? finalOrder.shipping_cost: order.shipping_cost,
+    total:         finalOrder.total        != null ? finalOrder.total        : order.total,
+    created_at:    finalOrder.created_at   || order.created_at,
+    company_name:  order.company_name || null,
+    notes:         updated ? newNotes : order.notes,
+  }, session);
+
+  return res.status(200).json({ ok: true, order: finalOrder });
+}
+
+/* =============================================================
    ACTION: billing-checkout   (subscription Checkout session)
    ============================================================= */
 const PRICE_IDS = {
@@ -416,6 +564,11 @@ async function handleStripeWebhook(req, res, rawBody) {
     switch (event.type) {
       case 'checkout.session.completed': {
         const session = event.data.object;
+        // The event's session object can be thin / from an older API version. Retrieve the
+        // live session so the order emails get complete customer/tax/discount/custom-field data.
+        let emailSession = session;
+        try { emailSession = await stripe.checkout.sessions.retrieve(session.id); }
+        catch (e) { console.error('[stripe-webhook] session retrieve for email failed:', e && e.message); }
 
         // ── Portal shop order payment (order created up-front) ──────────
         if (session.metadata && session.metadata.orderId) {
@@ -434,6 +587,16 @@ async function handleStripeWebhook(req, res, rawBody) {
           await supabase.from('das_orders')
             .update({ status: 'confirmed', notes: newNotes })
             .eq('id', session.metadata.orderId);
+          // Transactional emails (customer receipt + internal notification). Deduped vs
+          // confirm-order through the das_orders.notes flags, so a signed-in buyer who also
+          // returns to the success page never gets duplicates. Best-effort — must NOT throw
+          // (a non-200 makes Stripe retry the whole webhook).
+          try {
+            const { data: emRow } = await supabase.from('das_orders')
+              .select('id, order_number, items, subtotal, shipping_cost, total, notes, created_at')
+              .eq('id', session.metadata.orderId).maybeSingle();
+            if (emRow) await dispatchOrderEmails(supabase, emRow, emailSession);
+          } catch (e) { console.error('[stripe-webhook] order emails (orderId) failed:', e && e.message); }
           break;
         }
 
@@ -460,20 +623,38 @@ async function handleStripeWebhook(req, res, rawBody) {
             unit_price: ((li.amount_total || 0) / (li.quantity || 1)) / 100,
           }));
 
-          const total   = (session.amount_total || 0) / 100;
+          // amount_total includes shipping (+ tax); amount_subtotal is goods only.
+          const total        = (session.amount_total    || 0) / 100;
+          const goodsSubtotal = (session.amount_subtotal || session.amount_total || 0) / 100;
+          const shippingCost = (session.total_details && session.total_details.amount_shipping != null)
+            ? session.total_details.amount_shipping / 100
+            : Math.max(0, Number((total - goodsSubtotal).toFixed(2)));
+          const addr = session.shipping_details && session.shipping_details.address;
+          const shipTo = addr ? [addr.line1, addr.line2, addr.city, addr.state, addr.postal_code].filter(Boolean).join(', ') : null;
           const payload = {
             order_number:      `DAS-${Date.now().toString(36).toUpperCase()}`,
             stripe_session_id: session.id,
             items,
-            subtotal:          total,
-            total,
+            subtotal:          Number(goodsSubtotal.toFixed(2)),
+            shipping_cost:     Number(shippingCost.toFixed(2)),
+            total:             Number(total.toFixed(2)),
             status:            'confirmed',
-            notes:             customerName ? `Customer: ${customerName} <${email}>` : email,
+            notes:             [customerName ? `Customer: ${customerName} <${email}>` : email, shipTo ? `Ship to: ${shipTo}` : null].filter(Boolean).join(' | '),
           };
           if (companyId) payload.company_id = companyId;
 
-          const { error } = await supabase.from('das_orders').insert(payload);
-          if (error) console.error('[stripe-webhook] insert das_order failed:', error.message);
+          const { data: emRow, error } = await supabase.from('das_orders')
+            .insert(payload)
+            .select('id, order_number, items, subtotal, shipping_cost, total, notes, created_at')
+            .single();
+          if (error) {
+            console.error('[stripe-webhook] insert das_order failed:', error.message);
+          } else if (emRow) {
+            // Guest / non-portal store checkout — this webhook is the ONLY place these
+            // orders get recorded AND emailed. Best-effort, never throws into the webhook.
+            try { await dispatchOrderEmails(supabase, emRow, emailSession); }
+            catch (e) { console.error('[stripe-webhook] order emails (guest) failed:', e && e.message); }
+          }
           break;
         }
 
@@ -855,6 +1036,9 @@ async function handleRecognitionOrder(req, res, body) {
     const session = await stripe.checkout.sessions.create({
       line_items,
       mode:                       'payment',
+      // Webhook records via checkout.session.completed (orderId branch); flag the PI so the
+      // payment_intent.succeeded handler skips it (no duplicate order row).
+      payment_intent_data:        { metadata: { skip_pi_handler: 'true' } },
       success_url:                `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}&order_id=${order.id}`,
       cancel_url:                 `${siteUrl}/account.html#recognition`,
       billing_address_collection: 'required',
@@ -915,6 +1099,7 @@ module.exports = async (req, res) => {
     case 'billing-portal':       return handleBillingPortal(req, res);
     case 'recognition-catalog':  return handleRecognitionCatalog(req, res);
     case 'recognition-order':    return handleRecognitionOrder(req, res, payload);
+    case 'confirm-order':        return handleConfirmOrder(req, res, payload);
     default:
       return res.status(404).json({ error: `Unknown portal action: ${action || '(none)'}` });
   }

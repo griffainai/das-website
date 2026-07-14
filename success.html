@@ -7,8 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=10">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <!-- DAS tracking pixels (Google Ads + GTM + Meta Pixel) — see js/tracking.js -->
+  <script src="/js/tracking.js?v=2"></script>
 </head>
 <body>
 <!-- ============================================================================
@@ -89,9 +93,21 @@
 
         <span class="section-eyebrow" style="display:block;margin-bottom:12px">Order Confirmed</span>
         <h1 style="font-size:1.75rem;font-weight:800;letter-spacing:-0.025em;margin-bottom:12px">Your order is on its way.</h1>
-        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.75;margin-bottom:32px">
+        <p style="font-size:1rem;color:var(--text-secondary);line-height:1.75;margin-bottom:24px">
           Thank you for your order. A confirmation has been sent to your email. Your kits will be processed and shipped per your program timeline.
         </p>
+
+        <!-- ── Dynamic order summary (populated by confirm-order) ── -->
+        <div id="order-summary-dynamic" style="margin-bottom:32px"></div>
+
+        <!-- ── Custom-branded kit follow-up (shown only when a customization product was ordered) ── -->
+        <div id="customization-note" style="display:none;background:var(--gold-tint);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:20px;margin-bottom:32px;text-align:left">
+          <div style="font-size:0.6875rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:10px">Customizing Your Welcome Kits</div>
+          <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.7;margin:0">
+            A DAS representative will contact you by email or phone to collect your company logo, brand colors, preferred messaging, and customization details. Want to get a head start? Email your artwork and requests to
+            <a href="mailto:info@driverappreciationsolutions.com?subject=Welcome%20Kit%20Customization%20Details" style="color:var(--gold);font-weight:600">info@driverappreciationsolutions.com</a>.
+          </p>
+        </div>
 
         <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:20px;margin-bottom:32px;text-align:left">
           <div style="font-size:0.6875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px">What Happens Next</div>
@@ -141,11 +157,106 @@
 </footer>
 
 <script src="js/cart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js?v=2"></script>
 <script>
-  // Clear cart on successful purchase
+  // Clear cart on successful purchase (payment already taken by Stripe).
+  // Before clearing, check whether a custom-branded kit (das-007) was ordered so
+  // we can show the customization follow-up note.
   document.addEventListener('DOMContentLoaded', () => {
-    Cart.clear();
+    try {
+      const lines = (typeof Cart !== 'undefined' && Cart.get) ? Cart.get() : [];
+      const hadCustomKit = Array.isArray(lines) && lines.some(l => l && (l.id === 'das-007' || l.id === 'das-008' || /welcome driver appreciation kit|road warrior backpack/i.test(l.name || '')));
+      if (hadCustomKit) { const el = document.getElementById('customization-note'); if (el) el.style.display = ''; }
+
+      // Google Ads purchase conversion — fire once per Stripe session, computed
+      // from the cart before it clears. transaction_id dedupes on Google's side too.
+      const sessionId = new URLSearchParams(window.location.search).get('session_id');
+      if (sessionId && window.dasTrack && !localStorage.getItem('das_conv_' + sessionId)) {
+        const total = (Array.isArray(lines) ? lines : []).reduce((s, l) => s + (Number(l && l.price) || 0) * (Number(l && l.qty) || 1), 0);
+        dasTrack.purchase({
+          orderId: sessionId,
+          total: total,
+          items: (Array.isArray(lines) ? lines : []).map(l => ({ item_id: l.id, item_name: l.name, price: l.price, quantity: l.qty || 1 })),
+        });
+        try { localStorage.setItem('das_conv_' + sessionId, '1'); } catch (e) {}
+      }
+    } catch (e) {}
+    try { Cart.clear(); } catch (e) {}
   });
+
+  function fmtMoney(n) { return '$' + (Number(n) || 0).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+  function escTxt(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
+
+  function getParam(name) { return new URLSearchParams(window.location.search).get(name); }
+
+  async function getToken() {
+    try {
+      const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+      if (!sb) return null;
+      const { data } = await sb.auth.getSession();
+      return (data && data.session && data.session.access_token) || null;
+    } catch { return null; }
+  }
+
+  function renderOrder(order) {
+    const wrap = document.getElementById('order-summary-dynamic');
+    if (!wrap || !order) return;
+    const items = Array.isArray(order.items) ? order.items : [];
+    const rows = items.map(it => `
+      <div style="display:flex;justify-content:space-between;gap:12px;font-size:0.8125rem;color:var(--text-secondary);padding:4px 0">
+        <span style="text-align:left">${escTxt(it.name)} <span style="color:var(--text-muted)">×${escTxt(it.qty)}</span></span>
+        <span style="white-space:nowrap">${fmtMoney((Number(it.unit_price)||0) * (Number(it.qty)||0))}</span>
+      </div>`).join('');
+    wrap.innerHTML = `
+      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:20px;text-align:left">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <span style="font-size:0.6875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em">Order ${escTxt(order.order_number || '')}</span>
+          <span style="font-size:0.6875rem;font-weight:700;color:#059669;text-transform:uppercase;letter-spacing:0.08em">${escTxt((order.status || 'confirmed').replace(/_/g,' '))}</span>
+        </div>
+        ${rows}
+        <div style="border-top:1px solid var(--gold-border);margin-top:10px;padding-top:10px">
+          ${order.subtotal != null ? `<div style="display:flex;justify-content:space-between;font-size:0.8125rem;color:var(--text-secondary);padding:2px 0"><span>Subtotal</span><span>${fmtMoney(order.subtotal)}</span></div>` : ''}
+          ${order.shipping_cost != null ? `<div style="display:flex;justify-content:space-between;font-size:0.8125rem;color:var(--text-secondary);padding:2px 0"><span>Shipping</span><span>${fmtMoney(order.shipping_cost)}</span></div>` : ''}
+          <div style="display:flex;justify-content:space-between;font-size:0.95rem;font-weight:800;color:var(--text-primary);padding-top:6px"><span>Total</span><span>${order.total != null ? fmtMoney(order.total) : '—'}</span></div>
+        </div>
+        <a href="account.html" class="btn btn-primary btn-full" style="margin-top:16px">View in your account</a>
+      </div>`;
+  }
+
+  function renderNeedsLogin() {
+    const wrap = document.getElementById('order-summary-dynamic');
+    if (!wrap) return;
+    wrap.innerHTML = `
+      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:18px;text-align:left">
+        <p style="margin:0 0 12px;font-size:0.8125rem;color:var(--text-secondary)">Sign in to see this order and track it in your account.</p>
+        <a href="login.html?returnUrl=${encodeURIComponent('/account.html')}" class="btn btn-primary btn-full">Sign in to track your order</a>
+      </div>`;
+  }
+
+  async function confirmOrder(attempt) {
+    const sessionId = getParam('session_id');
+    if (!sessionId) return; // direct visit / express path — keep generic message
+    const token = await getToken();
+    if (!token) { renderNeedsLogin(); return; }
+    try {
+      const res = await fetch('/api/confirm-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + token },
+        body: JSON.stringify({ session_id: sessionId }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.order) { renderOrder(data.order); return; }
+      // Payment still settling — retry once after a short delay.
+      if (res.status === 409 && (attempt || 0) < 2) { setTimeout(() => confirmOrder((attempt || 0) + 1), 2500); return; }
+    } catch (e) {
+      console.warn('[success] confirm-order failed', e && e.message);
+    }
+  }
+
+  // Wait for auth.js to initialize the Supabase client, then confirm.
+  if (typeof onAuthReady === 'function') { onAuthReady(() => confirmOrder(0)); }
+  else { document.addEventListener('DOMContentLoaded', () => confirmOrder(0)); }
 </script>
 </body>
 </html>

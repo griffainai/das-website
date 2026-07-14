@@ -33,6 +33,34 @@ const Favorites = {
   },
 };
 
+/* Volume (quantity-break) pricing: if this product is a volume-priced catalog
+   item, return the correct unit price for the given quantity; else null.
+   Keeps the cart's displayed unit price in sync with the server price authority. */
+function cartVolumeUnitPrice(id, qty) {
+  try {
+    if (window.DASCatalog && window.DASCatalog.lookup && window.DASCatalog.volumeUnitPrice) {
+      const known = window.DASCatalog.lookup(id);
+      if (known && known.volumeTiers) return window.DASCatalog.volumeUnitPrice(known, qty);
+    }
+  } catch (e) { /* fall through */ }
+  return null;
+}
+
+/* Human-readable recognition type for a SERVICE MILESTONE product, so the cart /
+   order summary clearly states which track was chosen. Returns e.g.
+   "Safe Miles Milestone" or "Career Service Milestone"; null for non-milestone items.
+   Milestone ids look like "msm-c-1m" (career) or "msm-s-1m" (safe). */
+function recognitionTypeFor(id, category) {
+  const sid = String(id == null ? '' : id);
+  if (/^msm-s-/.test(sid)) return 'Safe Miles Milestone';
+  if (/^msm-c-/.test(sid)) return 'Career Service Milestone';
+  // Fallback for items whose id wasn't passed but whose category encodes the track.
+  const cat = String(category == null ? '' : category).toLowerCase();
+  if (cat.indexOf('safe') !== -1 && cat.indexOf('milestone') !== -1) return 'Safe Miles Milestone';
+  if (cat.indexOf('milestone') !== -1 && cat.indexOf('service') !== -1) return 'Career Service Milestone';
+  return null;
+}
+
 const Cart = {
   get() {
     try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; }
@@ -47,13 +75,31 @@ const Cart = {
 
   add(product, qty) {
     const items = this.get();
-    const existing = items.find(i => i.id === product.id);
+    // Match by id AND milestone — milestone-select kits (Milestone Recognition Kit /
+    // Safe Miles Recognition Kit) can sit in the cart as distinct lines per milestone level.
+    const existing = items.find(i => i.id === product.id
+      && (i.milestone || '') === (product.milestone || '')
+      && (i.kitConfig || '') === (product.kitConfig || ''));
     const minQty = product.minQty || 10;
+    // Tag milestone medals/awards with an explicit, human-readable recognition
+    // type ("Safe Miles Milestone" / "Career Service Milestone") so the cart and
+    // order summary make the chosen track unmistakable. Derived from the product
+    // id (msm-s-* = safe, msm-c-* = career) or, as a fallback, its category text.
+    // Non-milestone products get no recognitionType (field simply stays absent).
+    if (!product.recognitionType) {
+      const rt = recognitionTypeFor(product.id, product.category);
+      if (rt) product.recognitionType = rt;
+    }
     if (existing) {
       existing.qty += qty;
       if (existing.qty < minQty) existing.qty = minQty;
+      const vp = cartVolumeUnitPrice(existing.id, existing.qty);
+      if (vp != null) existing.price = vp;
     } else {
-      items.push({ ...product, qty: Math.max(qty, minQty) });
+      const newItem = { ...product, qty: Math.max(qty, minQty) };
+      const vp = cartVolumeUnitPrice(newItem.id, newItem.qty);
+      if (vp != null) newItem.price = vp;
+      items.push(newItem);
     }
     this.save(items);
     showToast(`${product.name} added to cart`, 'success');
@@ -69,6 +115,8 @@ const Cart = {
     const item = items.find(i => i.id === productId);
     if (item) {
       item.qty = Math.max(parseInt(qty) || item.minQty || 10, item.minQty || 10);
+      const vp = cartVolumeUnitPrice(item.id, item.qty);
+      if (vp != null) item.price = vp;
       this.save(items);
     }
   },
@@ -191,6 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
         image:    card.dataset.productImage    || '',
         minQty:   parseInt(card.dataset.productMinQty) || 10,
       };
+      // Milestone-select kits: attach the chosen milestone level so it flows to the
+      // cart line, checkout, Stripe metadata, order record, and fulfillment.
+      const msSel = card.querySelector('select[data-milestone]');
+      if (msSel) {
+        product.milestone = msSel.value;
+        const opt = msSel.options[msSel.selectedIndex];
+        product.milestoneLabel = opt ? opt.text : msSel.value;
+      }
       const qtyInput = card.querySelector('.qty-input');
       const qty = qtyInput ? (parseInt(qtyInput.value) || product.minQty) : product.minQty;
       Cart.add(product, qty);
@@ -231,22 +287,38 @@ async function goToCheckout() {
 
   try {
     const meta = (typeof window !== 'undefined' && window.__dasCheckoutMeta) || {};
+
+    // Attach the signed-in buyer's Supabase access token so the server can link
+    // the order to their company AND apply the repeat-customer per-hire minimum
+    // (first order = 10-unit minimum; reorders of per-hire kits can be as few as 1).
+    // Guests simply send no token → the server treats it as a first order.
+    const headers = { 'Content-Type': 'application/json' };
+    try {
+      const sb = (typeof getSupabase === 'function') ? getSupabase() : null;
+      if (sb) {
+        const { data } = await sb.auth.getSession();
+        const token = data && data.session && data.session.access_token;
+        if (token) headers.Authorization = 'Bearer ' + token;
+      }
+    } catch (e) { /* no session → proceed as guest */ }
+
+    if (window.dasTrack) { try { dasTrack.beginCheckout({ items: items, total: Cart.total ? Cart.total() : 0 }); } catch (er) {} }
     const res = await fetch('/api/create-checkout', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({
         items,
         // Upsell-stack metadata computed by cart.html — server re-validates.
-        bundleDiscount:   meta.bundleDiscount   || 0,
-        premiumGuarantee: !!meta.premiumGuarantee,
-        guaranteeFee:     meta.guaranteeFee     || 0,
+        bundleDiscount: meta.bundleDiscount || 0,
       }),
     });
     let data;
     try { data = await res.json(); } catch { data = {}; }
     if (data.url) {
-      // Clear AFTER we have a confirmed Stripe URL — not before
-      Cart.clear();
+      // Do NOT clear the cart here — the buyer hasn't paid yet. If they
+      // abandon Stripe Checkout (cancel_url → /cart.html) their cart must
+      // still be intact. The cart is cleared only on success.html, after
+      // payment is confirmed.
       window.location.assign(data.url);
     } else {
       throw new Error(data.error || `Server error ${res.status}`);

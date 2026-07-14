@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Professional Driver Birthday Recognition Program emblem">
+  <defs>
+    <linearGradient id="bdBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1B2C57"/>
+      <stop offset="1" stop-color="#0F1B3A"/>
+    </linearGradient>
+    <radialGradient id="bdCoin" cx="0.4" cy="0.35" r="0.75">
+      <stop offset="0" stop-color="#F3D98B"/>
+      <stop offset="0.55" stop-color="#C8A84B"/>
+      <stop offset="1" stop-color="#9A7B2E"/>
+    </radialGradient>
+    <radialGradient id="bdGlow" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#E8C766" stop-opacity="0.20"/>
+      <stop offset="1" stop-color="#E8C766" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="900" fill="url(#bdBg)"/>
+  <rect width="1200" height="900" fill="url(#bdGlow)"/>
+  <!-- challenge coin -->
+  <g transform="translate(600 400)">
+    <circle r="190" fill="url(#bdCoin)"/>
+    <circle r="190" fill="none" stroke="#6B5417" stroke-width="3" opacity="0.5"/>
+    <circle r="158" fill="none" stroke="#6B5417" stroke-width="4" opacity="0.45" stroke-dasharray="3 12"/>
+    <g fill="#6B5417">
+      <path d="M0 -96 L22 -34 L88 -34 L34 6 L54 70 L0 32 L-54 70 L-34 6 L-88 -34 L-22 -34 Z" opacity="0.9"/>
+    </g>
+    <text x="0" y="120" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700" letter-spacing="3" fill="#6B5417">BIRTHDAY</text>
+  </g>
+  <text x="600" y="700" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="46" fill="#F3D98B">Recognized. Every year.</text>
+  <text x="600" y="754" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="6" fill="#AEB9D4" opacity="0.85">ANNUAL DRIVER RECOGNITION PROGRAM</text>
+</svg>

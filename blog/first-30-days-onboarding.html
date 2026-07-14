@@ -19,9 +19,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image" href="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80&fit=crop" fetchpriority="high">
-  <link rel="stylesheet" href="../css/styles.css?v=9">
+  <link rel="stylesheet" href="../css/styles.css?v=12">
   <link rel="manifest" href="/manifest.json">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#1A2E6E">
 
   <script type="application/ld+json">
@@ -172,7 +173,7 @@
         <a href="../index.html"  class="nav-link">Home</a>
         <a href="../shop.html"   class="nav-link">Shop</a>
         <a href="../about.html"  class="nav-link">About</a>
-        <a href="../ideas.html"  class="nav-link active">Ideas</a>
+        <a href="../ideas.html"  class="nav-link active">Insights &amp; Ideas</a>
         <a href="../contact.html" class="nav-link">Contact</a>
       </div>
       <div class="nav-actions">
@@ -198,7 +199,7 @@
   <a href="../index.html"  class="mobile-nav-link">Home</a>
   <a href="../shop.html"   class="mobile-nav-link">Shop</a>
   <a href="../about.html"  class="mobile-nav-link">About</a>
-  <a href="../ideas.html"  class="mobile-nav-link active">Ideas</a>
+  <a href="../ideas.html"  class="mobile-nav-link active">Insights &amp; Ideas</a>
   <a href="../contact.html" class="mobile-nav-link">Contact</a>
   <div class="mobile-drawer-footer"><a href="../cart.html" class="btn btn-primary btn-full">View Cart</a></div>
 </div>
@@ -213,26 +214,31 @@
           Back to Ideas
         </a>
       </div>
-      <div class="article-meta-bar">
-        <span class="article-category">Onboarding</span>
-        <span class="article-date">April 2026</span>
-        <span class="article-readtime">· 5 min read</span>
-      </div>
-      <h1 class="article-title">5 Things New Drivers Notice About Your Company in the First 30 Days</h1>
-      <p class="article-subtitle">The first month sets the retention trajectory for a driver's entire tenure. What high-retention fleets do in those 30 days is not complicated — but it is deliberate. Here is what your new drivers are watching for.</p>
-      <div class="article-author-row">
-        <div class="author-avatar">🚛</div>
-        <div>
-          <div class="author-name">Driver Appreciation Solutions Editorial Team</div>
-          <div class="author-title">Fleet Recognition Specialists</div>
+      <!-- E102: title/meta/author are baked into the hero banner image below; kept here
+           visually-hidden so the <h1> still serves SEO + screen readers (no visual duplicate). -->
+      <div style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">
+        <div class="article-meta-bar">
+          <span class="article-category">Onboarding</span>
+          <span class="article-date">April 2026</span>
+          <span class="article-readtime">· 5 min read</span>
+        </div>
+        <h1 class="article-title">5 Things New Drivers Notice About Your Company in the First 30 Days</h1>
+        <p class="article-subtitle">The first month sets the retention trajectory for a driver's entire tenure. What high-retention fleets do in those 30 days is not complicated — but it is deliberate. Here is what your new drivers are watching for.</p>
+        <div class="article-author-row">
+          <div class="author-avatar">🚛</div>
+          <div>
+            <div class="author-name">Driver Appreciation Solutions Editorial Team</div>
+            <div class="author-title">Fleet Recognition Specialists</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <img
-    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1400&q=80&fit=crop"
-    alt="New driver onboarding and training orientation"
+    src="../images/insights-first30-card.webp"
+    alt="5 Things New Drivers Notice About Your Company in the First 30 Days — Driver Appreciation Solutions"
     class="article-hero-image"
+    style="max-height:none;height:auto;max-width:1000px;margin:20px auto 0;border-radius:12px"
     loading="eager"
     onerror="this.style.display='none'">
 </div>
@@ -280,7 +286,7 @@
     <p>Manager name recognition sounds like a low bar. In the trucking industry, with dispatchers managing 30 to 60 driver relationships simultaneously and administrative turnover creating frequent manager changes, it is not always met. High-retention fleets build it in deliberately through onboarding protocols that brief managers before a new hire's first day with their name, prior experience, any noted preferences or concerns from recruiting, and a specific prompt to introduce themselves personally within the first two hours.</p>
 
     <figure class="article-figure">
-      <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=75&fit=crop" alt="Fleet manager having a personal conversation with a new driver during onboarding" loading="lazy" onerror="this.style.display='none'">
+      <img src="../images/first30-manager-driver.webp" alt="A fleet manager and a new driver talking across a desk during onboarding — People · Safety · Service" loading="lazy" onerror="this.style.display='none'">
       <figcaption>The manager-driver relationship is the strongest predictor of long-term retention. It starts with a name — and the conversation that follows it on day one.</figcaption>
     </figure>
 

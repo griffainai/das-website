@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600" role="img" aria-label="YETI Camino 35 Carryall Tote — premium executive gift">
+  <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#16264F"/><stop offset="1" stop-color="#0C1733"/></linearGradient></defs>
+  <rect width="600" height="600" fill="url(#g)"/>
+  <rect x="22" y="22" width="556" height="556" rx="16" fill="none" stroke="#C8A84B" stroke-opacity="0.5" stroke-width="1.5"/>
+  <text x="300" y="92" text-anchor="middle" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="15" font-weight="800" letter-spacing="4" fill="#C8A84B">EXECUTIVE COLLECTION</text>
+  <g transform="translate(300,295)" fill="none" stroke="#E8EDFA" stroke-width="9" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <path d="M-78 -22 h156 v120 a16 16 0 0 1 -16 16 h-124 a16 16 0 0 1 -16 -16 z"/>
+    <path d="M-44 -22 v-26 a44 30 0 0 1 88 0 v26"/>
+  </g>
+  <text x="300" y="486" text-anchor="middle" font-family="Georgia,'Times New Roman',serif" font-size="30" font-weight="700" fill="#FFFFFF">Camino® 35 Carryall Tote</text>
+  <text x="300" y="522" text-anchor="middle" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="14" letter-spacing="1.5" fill="#8FA0CC">PREMIUM EXECUTIVE GIFT · IMAGE COMING SOON</text>
+</svg>

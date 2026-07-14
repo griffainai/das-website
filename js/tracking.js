@@ -29,9 +29,39 @@
   var GTM_CONTAINER_ID = ''; // e.g. 'GTM-XXXXXXX'
   var META_PIXEL_ID    = ''; // e.g. '1234567890123456'
 
+  // Google Ads (Starbridge Holdings account 917-415-8774) — conversion tracking.
+  // Labels come from Goals → Conversions → each action's event snippet.
+  var GOOGLE_ADS_ID = 'AW-18300085783';
+  var ADS_LABELS = {
+    purchase:   'seB1COWsnsscEJfMlJZE', // Purchase — dynamic value, count Every
+    lead:       'UI2iCOisnsscEJfMlJZE', // Quote Request — $150 fixed in Ads, count One
+    calculator: '0Y8vCOusnsscEJfMlJZE', // calculator_complete — $25 fixed in Ads, count One
+  };
+
   // ─── DataLayer (works without any container — events queue) ─────────────────
   window.dataLayer = window.dataLayer || [];
   window.dataLayer.push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+
+  // ─── Google Ads gtag loader ─────────────────────────────────────────────────
+  if (GOOGLE_ADS_ID) {
+    var adsScript = document.createElement('script');
+    adsScript.async = true;
+    adsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + GOOGLE_ADS_ID;
+    var ref = document.getElementsByTagName('script')[0];
+    if (ref && ref.parentNode) { ref.parentNode.insertBefore(adsScript, ref); }
+    else { document.head.appendChild(adsScript); }
+    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
+    window.gtag('js', new Date());
+    window.gtag('config', GOOGLE_ADS_ID);
+  }
+
+  // Fire a Google Ads conversion by label. Safe no-op when Ads isn't configured.
+  function adsConvert(label, params) {
+    if (!GOOGLE_ADS_ID || !label || !window.gtag) return;
+    var payload = { send_to: GOOGLE_ADS_ID + '/' + label };
+    if (params) { for (var k in params) { if (params[k] != null) payload[k] = params[k]; } }
+    window.gtag('event', 'conversion', payload);
+  }
 
   // ─── GTM loader (only if container ID set) ──────────────────────────────────
   if (GTM_CONTAINER_ID) {
@@ -102,13 +132,28 @@
         event: 'purchase',
         ecommerce: { transaction_id: data.orderId, value: data.total, items: data.items || [] },
       });
+      adsConvert(ADS_LABELS.purchase, {
+        value: Number(data.total) || 0,
+        currency: 'USD',
+        transaction_id: data.orderId || '',
+      });
       fbq('track', 'Purchase', { value: data.total, currency: 'USD' });
     },
 
     lead: function (data) {
-      // Used by cart-save / exit-intent / newsletter signup
+      // Quote requests / cart-save / exit-intent / newsletter signup
       window.dataLayer.push({ event: 'lead', email: data && data.email });
+      adsConvert(ADS_LABELS.lead); // value fixed at $150 in Google Ads
       fbq('track', 'Lead');
+    },
+
+    calculatorComplete: function () {
+      // Turnover calculator engagement — fires once per page view.
+      if (window.__dasCalcFired) return;
+      window.__dasCalcFired = true;
+      window.dataLayer.push({ event: 'calculator_complete' });
+      adsConvert(ADS_LABELS.calculator); // value fixed at $25 in Google Ads
+      fbq('trackCustom', 'CalculatorComplete');
     },
   };
 })();

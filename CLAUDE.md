@@ -88,6 +88,20 @@ This site implements several agent-discoverability standards. See `AGENT_READINE
 
 ---
 
+## Migration Plan
+
+If the site ever needs to move to Next.js (SSR for SEO, auth consolidation, or JS sprawl becomes unmaintainable): **read `MIGRATION.md` first.** It maps every page, API route, JS module, and env var to its Next.js equivalent, documents the color system landmine, and lays out a 1-day execution checklist. Do not make migration decisions from scratch — the plan is already done.
+
+**Trigger conditions to migrate:**
+- Need SSR/SSG for SEO (current site is client-rendered, Google sees empty HTML)
+- Want to consolidate auth from CDN Supabase client → `@supabase/ssr` server-side sessions
+- JS module count grows past ~15 and `<script>` tag ordering becomes fragile
+- Need TypeScript or a component library
+
+**Do NOT migrate** just because the site is static HTML. It's working.
+
+---
+
 ## Sister codebases
 
 | Codebase | Path | Purpose |

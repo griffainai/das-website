@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" width="1600" height="1200" role="img" aria-label="Professional Driver Retirement Legacy Collection emblem">
+  <defs>
+    <linearGradient id="rlBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#13151A"/>
+      <stop offset="0.55" stop-color="#0A0B0E"/>
+      <stop offset="1" stop-color="#050608"/>
+    </linearGradient>
+    <linearGradient id="rlGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F3D98B"/>
+      <stop offset="0.5" stop-color="#C8A84B"/>
+      <stop offset="1" stop-color="#9A7B2E"/>
+    </linearGradient>
+    <linearGradient id="rlSilver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#EDF0F3"/>
+      <stop offset="1" stop-color="#AEB4BC"/>
+    </linearGradient>
+    <radialGradient id="rlGlow" cx="0.5" cy="0.42" r="0.55">
+      <stop offset="0" stop-color="#C8A84B" stop-opacity="0.18"/>
+      <stop offset="1" stop-color="#C8A84B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1600" height="1200" fill="url(#rlBg)"/>
+  <rect width="1600" height="1200" fill="url(#rlGlow)"/>
+
+  <!-- horizon road motif: "the road ends, the legacy doesn't" -->
+  <g opacity="0.5" stroke="url(#rlGold)" fill="none" stroke-linecap="round">
+    <line x1="800" y1="690" x2="800" y2="498" stroke-width="3" stroke-dasharray="22 20" opacity="0.55"/>
+    <path d="M540 692 L735 500" stroke-width="2" opacity="0.32"/>
+    <path d="M1060 692 L865 500" stroke-width="2" opacity="0.32"/>
+    <line x1="470" y1="692" x2="1130" y2="692" stroke-width="2" opacity="0.45"/>
+  </g>
+
+  <!-- laurel wreath -->
+  <g fill="url(#rlGold)" opacity="0.95">
+    <g id="rlLeafL" transform="translate(800 600)">
+      <g transform="rotate(0)">
+        <!-- left branch -->
+        <g transform="translate(-250 0)">
+          <path d="M0 -200 q -46 -18 -78 14 q 40 24 78 -14 Z"/>
+          <path d="M-14 -150 q -50 -14 -84 22 q 44 22 84 -22 Z"/>
+          <path d="M-26 -100 q -52 -8 -88 30 q 48 18 88 -30 Z"/>
+          <path d="M-34 -50 q -54 -2 -90 38 q 50 14 90 -38 Z"/>
+          <path d="M-40 0 q -54 4 -90 44 q 52 10 90 -44 Z"/>
+          <path d="M-42 50 q -52 10 -86 50 q 52 6 86 -50 Z"/>
+          <path d="M-40 100 q -48 16 -80 54 q 50 2 80 -54 Z"/>
+          <path d="M-34 150 q -42 22 -70 56 q 46 -2 70 -56 Z"/>
+        </g>
+        <!-- right branch (mirrored) -->
+        <g transform="translate(250 0) scale(-1 1)">
+          <path d="M0 -200 q -46 -18 -78 14 q 40 24 78 -14 Z"/>
+          <path d="M-14 -150 q -50 -14 -84 22 q 44 22 84 -22 Z"/>
+          <path d="M-26 -100 q -52 -8 -88 30 q 48 18 88 -30 Z"/>
+          <path d="M-34 -50 q -54 -2 -90 38 q 50 14 90 -38 Z"/>
+          <path d="M-40 0 q -54 4 -90 44 q 52 10 90 -44 Z"/>
+          <path d="M-42 50 q -52 10 -86 50 q 52 6 86 -50 Z"/>
+          <path d="M-40 100 q -48 16 -80 54 q 50 2 80 -54 Z"/>
+          <path d="M-34 150 q -42 22 -70 56 q 46 -2 70 -56 Z"/>
+        </g>
+      </g>
+    </g>
+  </g>
+
+  <!-- central monogram: steering wheel / final mile -->
+  <g transform="translate(800 580)">
+    <circle r="118" fill="none" stroke="url(#rlSilver)" stroke-width="5" opacity="0.9"/>
+    <circle r="92" fill="none" stroke="url(#rlGold)" stroke-width="3" opacity="0.8"/>
+    <circle r="20" fill="url(#rlGold)"/>
+    <g stroke="url(#rlSilver)" stroke-width="9" stroke-linecap="round" opacity="0.92">
+      <line x1="0" y1="-20" x2="0" y2="-92"/>
+      <line x1="-17" y1="10" x2="-80" y2="46"/>
+      <line x1="17" y1="10" x2="80" y2="46"/>
+    </g>
+  </g>
+
+  <!-- type -->
+  <g text-anchor="middle" font-family="Georgia, 'Times New Roman', serif">
+    <text x="800" y="812" fill="url(#rlGold)" font-size="62" font-style="italic" letter-spacing="1">Retirement Legacy Collection</text>
+    <text x="800" y="872" fill="#C7CCD1" font-size="26" letter-spacing="9" font-family="Arial, Helvetica, sans-serif" opacity="0.86">PROFESSIONAL DRIVER RECOGNITION</text>
+    <line x1="660" y1="912" x2="940" y2="912" stroke="url(#rlGold)" stroke-width="2" opacity="0.7"/>
+    <text x="800" y="966" fill="#9CA3AD" font-size="27" font-style="italic" opacity="0.92">The Road Ends. The Legacy Doesn't.</text>
+  </g>
+</svg>

@@ -8,8 +8,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <meta name="robots" content="noindex,nofollow">
-  <link rel="stylesheet" href="css/styles.css?v=10">
-  <link rel="icon" href="/images/logo.png" type="image/png">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <style>
     body { overflow-x: hidden; }
 
@@ -309,6 +311,7 @@
       .support-resources { grid-template-columns: 1fr; }
     }
   </style>
+<script src="/js/tracking.js?v=2" defer></script>
 </head>
 <body>
 <!-- ============================================================================
@@ -1559,12 +1562,17 @@ const obAnswers = {};
 let _activeSection = 'dashboard';
 
 /* ── Boot ── */
+let accountBooted = false;
 onAuthReady(user => {
   if (!user) {
     window.location.href = 'login.html?returnUrl=' + encodeURIComponent(window.location.pathname);
     return;
   }
   currentUser = user;
+  // onAuthReady re-fires on every auth change incl. hourly TOKEN_REFRESHED. Boot the portal
+  // only once so a long session doesn't silently re-hydrate/re-render on each refresh.
+  if (accountBooted) return;
+  accountBooted = true;
   storeUserSession(user);
   maybeShowAdmin(user);
 
