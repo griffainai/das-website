@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "echo 'Static site — run: npx vercel dev --listen 8888'",
     "build": "echo 'Static site — no build step required'",
+    "test": "node --test",
     "deploy": "npx vercel --prod"
   },
   "dependencies": {
