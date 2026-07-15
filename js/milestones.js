@@ -73,12 +73,6 @@ window.DAS_MILESTONES = (function () {
   // Real medal product photos — full collection. Career: 1M–6M. Safe: 1M–6M.
   var CAREER_PHOTO = { 1:'/images/medal-c-1m-v1.webp', 2:'/images/medal-c-2m-v1.webp', 3:'/images/medal-c-3m-v1.webp', 4:'/images/medal-c-4m-v1.webp', 5:'/images/5-million-mile-medal.webp', 6:'/images/medal-c-6m-v1.webp' };
   var CAREER_ALT   = { 5:'5 Million Mile Professional Driver Recognition Medal', 6:'6 Million Mile Professional Driver Recognition Medal' };  // exact required alt
-  // Mile Club recognition apparel that accompanies the milestone (CC task O13, 2026-07-14).
-  // Appended AFTER the medal — the product IS the medal, so it stays photos[0].
-  var CAREER_EXTRA = {
-    1: ['/images/club-1m-tee-2026.webp', '/images/club-1m-jacket-2026.webp', '/images/club-1m-lifestyle-2026.webp', '/images/club-1m-lifestyle-2-2026.webp'],
-    2: ['/images/club-2m-tee-2026.webp', '/images/club-2m-hat-2026.webp', '/images/club-2m-tee-2-2026.webp', '/images/club-2m-hero-2026.webp'],
-  };
   var SAFE_PHOTO   = { 1:'/images/medal-s-1m-v1.webp', 2:'/images/medal-s-2m-v1.webp', 3:'/images/medal-s-3m-v1.webp', 4:'/images/medal-s-4m-v1.webp', 5:'/images/medal-s-5m-v1.webp', 6:'/images/medal-s-6m-v1.webp' };
   var SAFE_ALT     = { 5:'5 Million Safe Miles Professional Driver Recognition Medal', 6:'6 Million Mile Professional Driver Recognition Medal' };  // exact required alt
   [1,2,3,4,5,6].forEach(function (m) {
@@ -86,7 +80,7 @@ window.DAS_MILESTONES = (function () {
       id:'msm-c-' + m + 'm', track:'career', milestone:m + 'M', type:'medal', status:'Medal Available',
       name: WORD[m] + ' Service Miles Medal', price: MED_PRICE.career[m], minQty: 1,
       description: 'A premium medal honoring the professional achievement of reaching ' + LOWER[m] + ' career service miles.',
-      photos: CAREER_PHOTO[m] ? [CAREER_PHOTO[m]].concat(CAREER_EXTRA[m] || []) : undefined,
+      photos: CAREER_PHOTO[m] ? [CAREER_PHOTO[m]] : undefined,
       imageAlt: CAREER_ALT[m] || undefined,
     });
     items.push({
