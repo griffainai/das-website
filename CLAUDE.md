@@ -111,3 +111,24 @@ If the site ever needs to move to Next.js (SSR for SEO, auth consolidation, or J
 | **Engagement record** | `E:/Workspaces/griffain-agency-workspace/04_clients/driver-appreciation-solutions/` | Strategy, comms, decisions, brand-overrides |
 
 When in doubt, check the agency-side `CONTEXT.md` for which file owns a given question.
+
+## Logbook — write a touchdown before you finish
+
+This repo keeps a logbook at `log/`. It is the black box: a self-building record of every
+job, committed alongside the work it describes.
+
+**Before you finish any job that changed files in this repo**, write a touchdown:
+
+1. Read `log/TOUCHDOWN_TEMPLATE.md` for the format, the depth rule, and the model/effort rule.
+2. Take the next sequence number — highest four-digit number across `log/touchdowns/` and
+   `log/journals/`, plus one; `0001` if both are empty.
+3. Write it to `log/touchdowns/<NNNN>_<slug>_<YYYY-MM-DD>.md`.
+4. Commit it with the work, not as a separate commit.
+
+Go deep on `## How it went` and `## Any errors` — those two sections are the whole point of
+the record. Stay terse elsewhere. Report failures and correction passes honestly; a
+touchdown that grades itself well when the job went badly makes the logbook worthless.
+
+Read-only jobs that changed nothing do not need a touchdown.
+
+Run `/logbook-review` to read the whole record back.
