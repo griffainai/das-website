@@ -904,7 +904,7 @@
               Standard
               <span class="tier-price" id="tier-price-standard"></span>
             </button>
-            <button type="button" class="tier-btn" data-tier="premium" data-mult="1.45">
+            <button type="button" class="tier-btn" data-tier="premium" data-mult="1.5">
               Premium
               <span class="tier-price" id="tier-price-premium"></span>
             </button>
@@ -2296,7 +2296,7 @@ const PRODUCTS = {
 ═══════════════════════════════════════════════════════════════ */
 // Tier multipliers + base prices come from the shared catalog (lib/catalog.js) when loaded,
 // so the storefront and the checkout price-authority can never drift. Hardcoded values are fallbacks.
-const TIER_MULTS = (window.DASCatalog && window.DASCatalog.MULTIPLIERS) || { standard: 1.0, premium: 1.45, enterprise: 1.95 };
+const TIER_MULTS = (window.DASCatalog && window.DASCatalog.MULTIPLIERS) || { standard: 1.0, premium: 1.5, enterprise: 1.95 };
 try {
   if (window.DASCatalog) Object.keys(PRODUCTS).forEach(function (pid) {
     var c = window.DASCatalog.lookup(pid);
@@ -2867,7 +2867,7 @@ function renderProduct() {
   // Tier prices on buttons (tier-priced products only)
   if (!vol && !single) {
     document.getElementById('tier-price-standard').textContent  = `$${p.price.toFixed(2)}/unit`;
-    document.getElementById('tier-price-premium').textContent   = `$${(p.price * 1.45).toFixed(2)}/unit`;
+    document.getElementById('tier-price-premium').textContent   = `$${(p.price * TIER_MULTS.premium).toFixed(2)}/unit`;
     document.getElementById('tier-price-enterprise').textContent = `$${(p.price * 1.95).toFixed(2)}/unit`;
   }
 
