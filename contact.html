@@ -988,6 +988,9 @@
       .then(r => r.json())
       .then(data => {
         if (data.error) throw new Error(data.error);
+        // Primary B2B conversion: quote / contact request. Fired only on a CONFIRMED
+        // server success — not on submit — so failed posts never count as leads.
+        if (window.dasTrack) { try { dasTrack.lead({ email: payload.email }); } catch (er) {} }
         form.style.display    = 'none';
         if (note) note.style.display = 'none';
         const header = document.getElementById('cr-card-header');
