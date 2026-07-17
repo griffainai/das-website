@@ -3,9 +3,10 @@
 One record per Claude Code job. This is the fine-grained build log — the thing you mine
 later when you need to know what actually happened.
 
-**Where it goes.** `log/touchdowns/<NNNN>_<slug>_<YYYY-MM-DD>.md`, committed by the job that
-wrote it. For `<NNNN>`, see the sequence-number rule in `log/README.md` — highest number
-across `log/touchdowns/` and `log/journals/`, plus one, starting at `0001`.
+**Where it goes.** `log/touchdowns/<YYYY-MM-DD>_<HHMM>_<slug>.md`, committed by the job that
+wrote it. Local time at the moment of writing, 24-hour, zero-padded —
+`2026-07-16_1907_logbook-install.md`. No counter: see `log/README.md` for why an
+incrementing number cannot be made safe here.
 
 **Depth rule.** Go deep where it pays. `## How it went` and `## Any errors` are the build map
 and the error log you will actually mine, so they earn detail. Stay terse on `## Aim` and
@@ -20,6 +21,11 @@ cannot tell what ran, write `unknown` rather than guessing.
 **Error status.** Tag every error `status: open` (left unresolved, action needed) or
 `status: recovered` (fixed inside this same job). `/logbook-review` keys off those exact
 tokens, so keep them literal.
+
+**Nested repos.** If the work landed inside a gitlink (e.g. `05_acquisition/lead-crm`), the
+touchdown lives in the parent repo's `log/` and *cannot* share a commit with the work — the
+two are different repositories. Record the deviation in `## What it did` rather than claiming
+the commit rule held.
 
 **Commit rule — do not write this commit's own sha.** This record ships inside the commit it
 describes, so that commit's sha cannot be known while writing it: any sha you write is either

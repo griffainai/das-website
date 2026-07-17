@@ -4,13 +4,12 @@ One record per design or planning chat, written when the chat is done drafting. 
 touchdowns are the build record; the journal is the narrative — why the work took the shape
 it did, which a diff can never tell you.
 
-**Where it goes.** `log/journals/<NNNN>_<slug>_<YYYY-MM-DD>_chat.md`. Same sequence as the
-touchdowns — see `log/README.md`.
+**Where it goes.** `log/journals/<YYYY-MM-DD>_<HHMM>_<slug>_chat.md` — same timestamp naming
+as the touchdowns, so both sort chronologically together. See `log/README.md`.
 
 **How to use it in a chat that has no repo access.** Paste the fenced block below into the
-chat at handover and ask for the result as a downloadable file. Save the file into
-`log/journals/` yourself and give it its sequence number then — the chat cannot see the
-folder, so it cannot know the next number.
+chat at handover and ask for the result as a downloadable file. Save it into `log/journals/`
+yourself and add the `<YYYY-MM-DD>_<HHMM>_` prefix as you file it.
 
 Two parts, one file. Part 1 is the work. Part 2 is how the operator reasoned. Do not split
 them.
@@ -23,7 +22,7 @@ artefact — a real file attachment, not inline prose and not a code block in th
 
 Name it: <slug>_chat.md — lowercase, underscores, ending in _chat.md.
 Example: intake_builder_design_chat.md
-Do not include a sequence number; that is assigned when the file is filed.
+Do not add a date or time prefix; that is added when the file is filed into the repo.
 
 ---
 

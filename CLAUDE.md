@@ -120,10 +120,15 @@ job, committed alongside the work it describes.
 **Before you finish any job that changed files in this repo**, write a touchdown:
 
 1. Read `log/TOUCHDOWN_TEMPLATE.md` for the format, the depth rule, and the model/effort rule.
-2. Take the next sequence number — highest four-digit number across `log/touchdowns/` and
-   `log/journals/`, plus one; `0001` if both are empty.
-3. Write it to `log/touchdowns/<NNNN>_<slug>_<YYYY-MM-DD>.md`.
-4. Commit it with the work, not as a separate commit.
+2. Write it to `log/touchdowns/<YYYY-MM-DD>_<HHMM>_<slug>.md` — local time, 24-hour,
+   zero-padded. No counter; see `log/README.md` for why.
+3. Commit it with the work, not as a separate commit. If the work landed in a nested repo
+   (a gitlink), the touchdown still goes in this repo and cannot share the commit — say so
+   in the record instead of claiming otherwise.
+
+This is enforced by a `Stop` hook (`.claude/hooks/touchdown-guard.ps1`): if the session
+commits and no commit touches `log/touchdowns/`, the hook blocks the session from finishing
+and tells you to write the record. Do not work around it — write the touchdown.
 
 Go deep on `## How it went` and `## Any errors` — those two sections are the whole point of
 the record. Stay terse elsewhere. Report failures and correction passes honestly; a

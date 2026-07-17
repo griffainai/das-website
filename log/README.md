@@ -12,24 +12,35 @@ log/
   README.md              this file
   TOUCHDOWN_TEMPLATE.md  the template a Claude Code job fills in when it finishes
   JOURNAL_TEMPLATE.md    the template a design chat fills in when it is done drafting
-  touchdowns/            one file per job    — NNNN_<slug>_<YYYY-MM-DD>.md
-  journals/              one file per chat   — NNNN_<slug>_<YYYY-MM-DD>_chat.md
+  touchdowns/            one file per job    — <YYYY-MM-DD>_<HHMM>_<slug>.md
+  journals/              one file per chat   — <YYYY-MM-DD>_<HHMM>_<slug>_chat.md
   handovers/             anything handed from one session to the next
 ```
 
-## Sequence numbers
+## Naming — timestamps, not a counter
 
-`NNNN` is a zero-padded four-digit number, per repo, ever-incrementing, never reset per
-day. Touchdowns and journals share one sequence, so the numbers alone put the whole repo's
-history in order regardless of type.
+Every entry is named `<YYYY-MM-DD>_<HHMM>_<slug>.md`, using local time at the moment you
+write it. `2026-07-16_1907_logbook-install.md`. Zero-padded, 24-hour, so plain lexicographic
+sort is chronological sort across touchdowns and journals alike.
 
-Before writing, list `log/touchdowns/` and `log/journals/` and take the highest number
-present across both. Use the next one. If both are empty, start at `0001`.
+**Do not use an incrementing counter.** An earlier version of this logbook did, and it broke
+on day one: two concurrent sessions each read the highest number, each added one, and both
+wrote `0001`. A counter needs a coordination point to be safe, and there isn't one — you run
+sessions in parallel, and this repo is cloned on more than one machine that sync through git.
+Two writers with no lock always risk picking the same number. A timestamp needs no
+coordination and cannot collide the same way.
+
+Timestamps do collide if two entries share a slug *and* a minute. If that happens, add a
+letter: `..._1907a_...`. It has not happened yet and is not worth designing around.
 
 ## Writing an entry
 
 - **Finishing a Claude Code job that changed files?** Copy `TOUCHDOWN_TEMPLATE.md`, fill it
-  in, save to `log/touchdowns/`, commit it with the work.
+  in, save to `log/touchdowns/`, commit it with the work. A `Stop` hook enforces this — a
+  session that commits without one is blocked from finishing until it writes the record.
+  If the work landed in a **nested repo** (a gitlink like `05_acquisition/lead-crm`), the
+  touchdown still goes in *this* repo's `log/`, and it therefore cannot share a commit with
+  the work. Say so in the record rather than pretending the rule held.
 - **Closing a design or planning chat?** Copy `JOURNAL_TEMPLATE.md`, fill it in, save to
   `log/journals/`.
 - **Handing state to a future session?** Drop it in `log/handovers/`.
