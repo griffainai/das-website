@@ -102,7 +102,32 @@ bar ("prove it fires, don't assert it"), which is what the follow-up prompt actu
    baseline behavioural trial (T17) as a clean result. Not diagnosed; may affect later runs.
    status: open
 
-6. **"Automatically" is not guaranteed.** CLAUDE.md is documented as advisory context, not
+6. **Sequence number hardcoded instead of computed — caused a real collision.** I wrote `0001`
+   as a literal across all 10 repos rather than recomputing max+1 at write time, which is what
+   the rule I was installing requires. In griffain-agency-workspace it collided: a concurrent
+   session had already committed `0001_lead-crm-retired-pink-sweep` (231368e) minutes earlier —
+   in fact the very commit I recorded as my parent. Two files numbered 0001, one already pushed.
+   Caught by an unexpected file count (2 touchdowns where I wrote 1), not by any check of mine.
+   Mine renumbered to 0002; the earlier entry keeps 0001. The other 9 repos were correct only by
+   luck, because their logbooks were empty. Installing a rule while violating it is the failure
+   mode worth remembering here.
+   status: recovered
+
+7. **The sequence rule has a race condition.** Two sessions that compute max+1 concurrently get
+   the same number; nothing serialises it. This is a real design gap in the rule as written, not
+   just my mistake — my collision was one instance of it. Jayden runs concurrent sessions (this
+   is how it surfaced), so it will recur. Needs a tiebreak: a timestamp or session suffix in the
+   filename, or accept collisions and dedupe at review time.
+   status: open
+
+8. **`commit it with the work` cannot hold across a nested-repo boundary.** Surfaced by the
+   concurrent session, not by me: `05_acquisition/lead-crm` is a gitlink (`160000`), so work done
+   inside it cannot share a commit with a touchdown in the parent repo. That session logged the
+   deviation rather than faking compliance. The rule as written has no answer for nested repos,
+   and this workspace has several.
+   status: open
+
+9. **"Automatically" is not guaranteed.** CLAUDE.md is documented as advisory context, not
    enforced configuration. 3 of 3 valid behavioural trials fired, including with the rule buried
    at 96% of a 28k-char file — but that is evidence, not a guarantee. The documented enforcement
    layer is a `Stop` hook, which can block completion and feed context back. Pending Jayden's
