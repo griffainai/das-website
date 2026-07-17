@@ -21,6 +21,18 @@ cannot tell what ran, write `unknown` rather than guessing.
 `status: recovered` (fixed inside this same job). `/logbook-review` keys off those exact
 tokens, so keep them literal.
 
+**Commit rule — do not write this commit's own sha.** This record ships inside the commit it
+describes, so that commit's sha cannot be known while writing it: any sha you write is either
+invented, or goes stale the moment an amend rewrites the commit. It does not converge.
+Identify the commit by **message and parent sha** instead — both are knowable before you
+commit, and `git log -- <path-to-this-file>` recovers the real sha at read time. This is why
+the field below is not `<sha>`.
+
+**Never pre-fill a field with invented data.** If a value does not exist yet, leave it blank
+or write `unknown`. A placeholder that looks like real data (a plausible 7-hex sha, a guessed
+model id) is worse than an obvious blank — it survives into a permanent record and reads as
+fact. This applies to `commit:`, `model:`, `effort:`, and grades alike.
+
 ---
 
 ```markdown
@@ -42,7 +54,7 @@ effort: <effort | n/a>
 
 ## What it did                [terse — the facts]
 - files changed: <paths>
-- commit: <sha> — <message>
+- commit: "<commit message>" on <branch>, parent <parent-sha>   # NOT this commit's own sha — see Commit rule
 - tree: clean | dirty
 - tests/build: green | red | n/a
 
