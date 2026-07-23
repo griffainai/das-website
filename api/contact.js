@@ -107,6 +107,27 @@ module.exports = async (req, res) => {
       });
     } catch (e) { console.error('[Contact] auto-responder failed:', e && e.message); }
 
+    // SMS opt-in → trigger the DAS concierge's instant speed-to-lead first touch.
+    // Same contract as the company-purchasing path. Best-effort: a failure here
+    // must never fail the form submission the visitor just made.
+    const b = req.body || {};
+    if (b.smsConsent && b.phone && process.env.LEAD_INGEST_SECRET) {
+      try {
+        await fetch((process.env.SMS_SERVICE_URL || 'https://sms-service-griffainai.vercel.app') + '/api/lead-ingest', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            phone: b.phone,
+            firstName: b.firstName || (name || '').split(' ')[0],
+            company,
+            fleetSize,
+            consentText: b.smsConsentText || 'Agree that Driver Appreciation Solutions may text me in response to my inquiry — quotes, order and proof updates, and answers to my questions. Not marketing; messages are sent in reply to my request. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
+            secret: process.env.LEAD_INGEST_SECRET,
+          }),
+        });
+      } catch (e) { console.error('[Contact] SMS lead-ingest forward failed:', e && e.message); }
+    }
+
     return res.status(200).json({ ok: true });
 
   } catch (err) {
