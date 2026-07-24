@@ -121,6 +121,7 @@ module.exports = async (req, res) => {
             firstName: b.firstName || (name || '').split(' ')[0],
             company,
             fleetSize,
+            interest: program || null,
             consentText: b.smsConsentText || 'Agree that Driver Appreciation Solutions may text me in response to my inquiry — quotes, order and proof updates, and answers to my questions. Not marketing; messages are sent in reply to my request. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
             secret: process.env.LEAD_INGEST_SECRET,
           }),
@@ -266,6 +267,11 @@ async function handleCompanyPurchasing(req, res) {
     //    Best-effort: never fail the form submission if this errors.
     if (b.smsConsent && b.phone && process.env.LEAD_INGEST_SECRET) {
       try {
+        // Forward the FULL quote context so the concierge's first-touch (and the whole
+        // conversation) is specific to what they requested — product, quantity, drivers,
+        // procurement needs — not a generic "how many drivers?" opener.
+        const product = b.productInterest || ctx.productName || null;
+        const drivers = b.numDrivers || b.fleetSize || null;
         await fetch((process.env.SMS_SERVICE_URL || 'https://sms-service-griffainai.vercel.app') + '/api/lead-ingest', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -273,7 +279,17 @@ async function handleCompanyPurchasing(req, res) {
             phone: b.phone,
             firstName: b.firstName,
             company: b.company,
-            fleetSize: b.fleetSize,
+            fleetSize: drivers,
+            interest: product,
+            quote: {
+              product,
+              category: ctx.productCategory || null,
+              quantity: b.estQuantity || null,
+              drivers,
+              needs: Array.isArray(b.needs) ? b.needs : [],
+              targetDate: b.targetDeliveryDate || null,
+              notes: b.notes || null,
+            },
             consentText: b.smsConsentText || 'Opted in to recurring SMS from Driver Appreciation Solutions about recognition programs, quotes, and updates. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
             secret: process.env.LEAD_INGEST_SECRET,
           }),
