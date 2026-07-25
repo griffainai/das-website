@@ -120,6 +120,7 @@ module.exports = async (req, res) => {
             phone: b.phone,
             firstName: b.firstName || (name || '').split(' ')[0],
             company,
+            email: email || null,
             fleetSize,
             interest: program || null,
             consentText: b.smsConsentText || 'Agree that Driver Appreciation Solutions may text me in response to my inquiry — quotes, order and proof updates, and answers to my questions. Not marketing; messages are sent in reply to my request. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent is not a condition of purchase.',
@@ -279,6 +280,7 @@ async function handleCompanyPurchasing(req, res) {
             phone: b.phone,
             firstName: b.firstName,
             company: b.company,
+            email: workEmail || null,
             fleetSize: drivers,
             interest: product,
             quote: {
