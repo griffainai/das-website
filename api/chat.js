@@ -251,8 +251,30 @@ module.exports = async (req, res) => {
     return res.status(503).json({ error: 'Chat not yet configured. Add ANTHROPIC_API_KEY to your environment.' });
   }
 
-  const { messages, context } = req.body || {};
-  if (!Array.isArray(messages) || messages.length === 0) {
+  const { messages: rawMessages, context } = req.body || {};
+  if (!Array.isArray(rawMessages) || rawMessages.length === 0) {
+    return res.status(400).json({ error: 'Bad request — messages[] required' });
+  }
+
+  // ── COST BOUNDS ────────────────────────────────────────────────────────────
+  // This endpoint is PUBLIC and unauthenticated, and it used to forward the body
+  // to Claude verbatim: unlimited messages, unlimited length. One caller could
+  // therefore spend the whole Anthropic balance in a handful of requests — a
+  // denial-of-WALLET, not merely a cost bug. The same hole on GRIFFAIN's own
+  // /api/web-chat is what produced a ~$8/day bill.
+  //
+  // Bounds, not features: a real visitor asking about driver kits never comes
+  // close to these, so nothing legitimate changes.
+  const MAX_TURNS = 16;      // a support chat, not a novel
+  const MAX_CHARS = 4000;    // per message
+  const messages = rawMessages
+    .slice(-MAX_TURNS)
+    .filter((m) => m && typeof m.content === 'string' && m.content.trim())
+    .map((m) => ({
+      role: m.role === 'assistant' ? 'assistant' : 'user',
+      content: m.content.slice(0, MAX_CHARS),
+    }));
+  if (!messages.length) {
     return res.status(400).json({ error: 'Bad request — messages[] required' });
   }
 
@@ -278,13 +300,40 @@ If they're on a lower loyalty tier, show them what the next tier unlocks.`;
   const model  = process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5';
 
   try {
-    const stream = await client.messages.create({
-      model,
-      max_tokens: 1500,
-      system:     systemPrompt,
-      messages,
-      stream:     true,
-    });
+    // PROMPT CACHING. The base brief is ~12,000 chars (~3,000 tokens) and was
+    // being re-billed at FULL input rate on every single message — the exact
+    // `input_no_cache` signature that made GRIFFAIN's own bill ~80% input.
+    //
+    // Split deliberately into two blocks: the CONSTANT brief is marked ephemeral
+    // so it caches across messages and visitors, and any per-company context is a
+    // separate uncached block. Appending the context to the same block would
+    // change its text per company and defeat the cache entirely.
+    const systemBlocks = [{ type: 'text', text: SYSTEM_PROMPT, cache_control: { type: 'ephemeral' } }];
+    if (systemPrompt !== SYSTEM_PROMPT) {
+      systemBlocks.push({ type: 'text', text: systemPrompt.slice(SYSTEM_PROMPT.length) });
+    }
+
+    // This SDK is pinned at ^0.32, which needs an explicit beta header for
+    // cache_control — without it the API answers 400 and the chat dies. So the
+    // cached form is ATTEMPTED and the plain form is the fallback: an optimisation
+    // must never be able to break the feature it optimises. (It did, for about
+    // four minutes, which is exactly why the fallback is here.)
+    let stream;
+    try {
+      stream = await client.messages.create(
+        { model, max_tokens: 1500, system: systemBlocks, messages, stream: true },
+        { headers: { 'anthropic-beta': 'prompt-caching-2024-07-31' } }
+      );
+    } catch (cacheErr) {
+      console.warn('[Scout API] caching rejected, falling back uncached:', cacheErr && cacheErr.message);
+      stream = await client.messages.create({
+        model,
+        max_tokens: 1500,
+        system: systemPrompt,
+        messages,
+        stream: true,
+      });
+    }
 
     res.setHeader('Content-Type',      'text/plain; charset=utf-8');
     res.setHeader('Cache-Control',     'no-cache, no-store');
