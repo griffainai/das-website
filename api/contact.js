@@ -182,8 +182,18 @@ async function handleCompanyPurchasing(req, res) {
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   const FROM_ADDRESS   = process.env.FROM_EMAIL || 'noreply@driverappreciationsolutions.com';
 
+  // Follow-up preference from the form's selector (book / call / email).
+  const cpFollowUpTag =
+    b.followUp === 'book' ? ' · WANTS TO BOOK A CALL'
+    : b.followUp === 'call' ? ' · WANTS A CALLBACK' : '';
+  const cpFollowUpLabel =
+    b.followUp === 'book' ? 'Walk me through it live (calendar path)'
+    : b.followUp === 'call' ? 'Have us call you'
+    : b.followUp === 'email' ? 'Email me everything' : null;
+
   // Normalize the rest of the payload.
   const fields = {
+    'Requested Follow-up': cpFollowUpLabel,
     'Name': `${firstName} ${lastName}`,
     'Title': b.title, 'Company': company,
     'Work Email': workEmail, 'Phone': b.phone,
@@ -245,7 +255,7 @@ async function handleCompanyPurchasing(req, res) {
         from: `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
         to: RECIPIENTS,
         reply_to: workEmail,
-        subject: `DAS Company Purchasing Request – ${company}`,
+        subject: `DAS Company Purchasing Request – ${company}${cpFollowUpTag}`,
         html,
       }),
     });
