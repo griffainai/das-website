@@ -20,7 +20,18 @@ module.exports = async (req, res) => {
     return handleCompanyPurchasing(req, res);
   }
 
-  const { name, email, company, fleetSize, message, program } = req.body || {};
+  const { name, email, company, fleetSize, message, program, followUp } = req.body || {};
+  // Follow-up preference from the contact form's selector (book / pricing / email).
+  const FOLLOW_UP_TAGS = {
+    book: ' · WANTS TO BOOK A CALL',
+    pricing: ' · WANTS CUSTOM PRICING',
+    email: '',
+  };
+  const followUpTag = FOLLOW_UP_TAGS[followUp] || '';
+  const followUpLabel =
+    followUp === 'book' ? 'Book a strategy call (calendar path)'
+    : followUp === 'pricing' ? 'Send custom pricing'
+    : followUp === 'email' ? 'Written reply' : null;
 
   // Basic validation
   if (!name || !email || !message) {
@@ -57,6 +68,7 @@ module.exports = async (req, res) => {
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Company</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(company || '—')}</td></tr>
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Fleet Size</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(fleetSize || '—')}</td></tr>
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Program</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(program || '—')}</td></tr>
+        <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Requested Follow-up</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5;font-weight:700;color:#0D1B45">${escHtml(followUpLabel || '—')}</td></tr>
       </table>
       <h3 style="color:#0D1B45;margin:24px 0 8px">Message</h3>
       <div style="background:#F5F5F5;padding:16px;border-radius:8px;white-space:pre-wrap">${escHtml(message)}</div>
@@ -74,7 +86,7 @@ module.exports = async (req, res) => {
         from:    `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
         to:      [CONTACT_TO],
         reply_to: email,
-        subject: `Fleet inquiry from ${name}${company ? ` — ${company}` : ''}`,
+        subject: `Fleet inquiry from ${name}${company ? ` — ${company}` : ''}${followUpTag}`,
         html,
       }),
     });

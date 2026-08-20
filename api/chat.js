@@ -9,6 +9,9 @@
    ============================================= */
 
 const Anthropic = require('@anthropic-ai/sdk');
+// Kill switch, spend ceiling, rate ceiling, meter. This endpoint is PUBLIC and every call spends
+// real money — see griffain 06_operations/AI-ENDPOINT-GUARD-WALL.md.
+const { guardDecision, meter } = require('./_ai-guard.js');
 
 const ALLOWED_ORIGINS = [
   'https://driverappreciationsolutions.com',
@@ -299,6 +302,15 @@ If they're on a lower loyalty tier, show them what the next tier unlocks.`;
   const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const model  = process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5';
 
+  // ---- GUARD: cheapest possible refusal, before any vendor work -------------
+  // Public + unauthenticated means a stranger, a crawler or a retry loop can spend the whole
+  // balance. The payload bounds below cap the size of ONE call; this caps the NUMBER of them.
+  const gate = guardDecision({ feature: 'das-web-chat', trust: 'public' });
+  if (!gate.ok) {
+    res.status(gate.reason === 'kill_switch' ? 503 : 429);
+    return res.end("One moment — we're a little busy. Try again shortly, or call us.");
+  }
+
   try {
     // PROMPT CACHING. The base brief is ~12,000 chars (~3,000 tokens) and was
     // being re-billed at FULL input rate on every single message — the exact
@@ -340,11 +352,21 @@ If they're on a lower loyalty tier, show them what the next tier unlocks.`;
     res.setHeader('X-Accel-Buffering', 'no');
     res.status(200);
 
+    // Metering off a STREAM: input usage arrives on message_start, output on message_delta.
+    // Without this the ledger silently reports a streaming endpoint as free.
+    let _usage = {};
     for await (const event of stream) {
+      if (event.type === 'message_start' && event.message && event.message.usage) {
+        _usage = { ..._usage, ...event.message.usage };
+      }
+      if (event.type === 'message_delta' && event.usage) {
+        _usage = { ..._usage, ...event.usage };
+      }
       if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
         res.write(event.delta.text);
       }
     }
+    meter({ feature: 'das-web-chat', model, usage: _usage });
     res.end();
   } catch (err) {
     console.error('[Scout API]', err && err.message);

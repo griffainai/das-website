@@ -5,3 +5,24 @@ dev-server.js
 FIREBASE_SETUP.md
 .claude
 *.log
+
+# Test files and operator scripts must NEVER deploy.
+#
+# Vercel turns every `api/*.js` into a public serverless function. A test script or a one-off
+# operator script living in api/ therefore becomes an internet-addressable endpoint that runs its
+# body on every cold start, for anyone who finds the URL.
+#
+# This is not hypothetical. On 2026-08-14 TSC Roofing's site burned ~$12/day — roughly 12,000
+# model calls — because `api/concierge-eval.js` was a test script in api/. Its body fired TEN live
+# model calls at module scope and then called process.exit(), crashing the lambda into a 500,
+# which is exactly what crawlers and retries hit again.
+#
+# The instructive part: that file was deliberately NOT named *.test.js, so it would not burn
+# credits on every `node --test`. A correct instinct — and `.vercelignore` keyed on exactly
+# *.test.js. The naming choice that protected it from the test runner is what exposed it to the
+# internet. Hence BOTH rules below, plus the location rule (scripts live in scripts/).
+#
+# Doctrine: griffain-agency-workspace 06_operations/AI-ENDPOINT-GUARD-WALL.md
+*.test.js
+*.test.mjs
+scripts/
