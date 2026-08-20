@@ -26,3 +26,16 @@ FIREBASE_SETUP.md
 *.test.js
 *.test.mjs
 scripts/
+
+# Internal records and infrastructure files must never be publicly downloadable.
+# outputDirectory:"." serves the whole repo — everything not listed here ships.
+# Found live 2026-08-20: touchdown logs, DB migrations (schema + RLS policies),
+# internal review pages, and ops docs were all fetchable from the production domain.
+log/
+supabase/
+internal/
+*.md
+SEO-IMPLEMENTATION-BRIEF.html
+_v2c.png
+package.json
+package-lock.json

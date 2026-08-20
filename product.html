@@ -1756,11 +1756,9 @@ const PRODUCTS = {
     id: 'das-004',
     name: 'Holiday Gift Set',
     category: 'Milestone Gifts',
-    price: 1.00,   // TEMP: $1 live-payment test — revert to 54.99
+    price: 54.99,
     minQty: 10,
-    // TEMP (testing): seasonal block lifted so das-004 is purchasable for the $1 test.
-    // REVERT — re-add this line (+ `unavailable: true` for das-004 in lib/catalog.js):
-    //   availability: 'coming_soon', availableDate: 'September 21',
+    availability: 'coming_soon', availableDate: 'September 21',
     styleId: 'HGS-004-GLD', sku: 'DAS-HGS-001',
     description: 'The year-end recognition moment that drivers talk about longest. The Holiday Gift Set is curated to land during the season when drivers are most reflective about their work relationships — and to send a signal that lasts well into the new year. Particularly effective for OTR drivers whose families see the package at home.',
     images: [
