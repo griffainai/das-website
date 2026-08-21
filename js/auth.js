@@ -14,7 +14,7 @@
 
 // ─────────────────────────────────────────────
 // SUPABASE CONFIG
-// window.SUPABASE_* values are injected by /api/supabase-config
+// Supabase URL/key: hardcoded public anon values below (api/supabase-config was dead and removed 2026-08-21)
 // Falls back to env-style placeholders you can hardcode for local dev
 // ─────────────────────────────────────────────
 const _SUPABASE_URL      = window.SUPABASE_URL      || 'https://afqrwezmwfgwakgfdcty.supabase.co';
@@ -324,8 +324,9 @@ function renderAuthNav(user) {
   if (user) {
     const initials = (user.displayName || user.email || 'U')
       .split(/\s+/).map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    const escAttr = (v) => String(v).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
     const avatarHTML = user.photoURL
-      ? `<img src="${user.photoURL}" alt="${initials}" referrerpolicy="no-referrer" ` +
+      ? `<img src="${escAttr(user.photoURL)}" alt="${escAttr(initials)}" referrerpolicy="no-referrer" ` +
         `style="width:32px;height:32px;border-radius:50%;object-fit:cover;flex-shrink:0">`
       : `<span style="width:32px;height:32px;border-radius:50%;background:var(--gold);` +
         `color:#fff;font-size:0.8125rem;font-weight:700;display:flex;align-items:center;` +

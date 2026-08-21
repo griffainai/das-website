@@ -10,13 +10,20 @@
    ============================================= */
 
 module.exports = async (req, res) => {
-  const allowedOrigin = process.env.SITE_URL || '*';
+  const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST')    return res.status(405).json({ error: 'Method not allowed' });
+
+  const { rateLimit } = require('./_rate');
+  const rl = rateLimit(req, 'newsletter', { burst: 3, perHour: 10 });
+  if (!rl.allowed) {
+    res.setHeader('Retry-After', String(rl.retryAfter));
+    return res.status(429).json({ error: 'Too many requests.' });
+  }
 
   const { email } = req.body || {};
 

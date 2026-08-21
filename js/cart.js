@@ -105,20 +105,37 @@ const Cart = {
     showToast(`${product.name} added to cart`, 'success');
   },
 
-  remove(productId) {
-    this.save(this.get().filter(i => i.id !== productId));
-    showToast('Item removed', 'info');
+  // Lines are keyed by (id, milestone, kitConfig) — the same kit can sit in the
+  // cart once per milestone level, so id-only ops hit the wrong line. Index-
+  // addressed ops are the primary API; the id forms remain for compatibility.
+  removeAt(index) {
+    const items = this.get();
+    if (index >= 0 && index < items.length) {
+      items.splice(index, 1);
+      this.save(items);
+      showToast('Item removed', 'info');
+    }
   },
 
-  setQty(productId, qty) {
+  setQtyAt(index, qty) {
     const items = this.get();
-    const item = items.find(i => i.id === productId);
+    const item = items[index];
     if (item) {
       item.qty = Math.max(parseInt(qty) || item.minQty || 10, item.minQty || 10);
       const vp = cartVolumeUnitPrice(item.id, item.qty);
       if (vp != null) item.price = vp;
       this.save(items);
     }
+  },
+
+  remove(productId) {
+    const items = this.get();
+    const i = items.findIndex(x => x.id === productId);
+    if (i >= 0) this.removeAt(i);
+  },
+
+  setQty(productId, qty) {
+    this.setQtyAt(this.get().findIndex(x => x.id === productId), qty);
   },
 
   clear() {

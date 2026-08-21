@@ -11,12 +11,10 @@
   // Primary: same-origin serverless functions (api/chat.js, api/submit-quote.js).
   // Fallback: das-portal — kept alive during the migration window so live chat
   // never breaks if the .com endpoints aren't fully configured yet. Remove the
-  // fallbacks once ANTHROPIC_API_KEY etc. are confirmed on the .com and
-  // das-portal is retired.
+  // das-portal is RETIRED (never deploy there — standing rule). The old
+  // fallbacks pointed at it and silently swallowed leads when /api failed.
   const API_URL          = '/api/chat'
-  const API_FALLBACK     = 'https://das-portal-ten.vercel.app/api/chat'
   const SUBMIT_URL       = '/api/submit-quote'
-  const SUBMIT_FALLBACK  = 'https://das-portal-ten.vercel.app/api/chat/submit-quote'
   const SESSION_KEY    = 'das_scout_messages'
   const PULSE_DELAY_MS = 10000   // show unread dot after 10s
 
@@ -369,8 +367,8 @@
 
     const items = [
       quote.type              && `🏷️ <strong>Program:</strong> ${escHtml(quote.type)}`,
-      quote.driver_count      && `👥 <strong>Drivers:</strong> ${quote.driver_count}`,
-      quote.budget_per_driver && `💵 <strong>Budget:</strong> $${quote.budget_per_driver}/driver`,
+      quote.driver_count      && `👥 <strong>Drivers:</strong> ${Number(quote.driver_count) || '—'}`,
+      quote.budget_per_driver && `💵 <strong>Budget:</strong> $${Number(quote.budget_per_driver) || '—'}/driver`,
       quote.timeline          && `📅 <strong>Timeline:</strong> ${escHtml(quote.timeline)}`,
       quote.contact_name      && `👤 <strong>Contact:</strong> ${escHtml(quote.contact_name)}`,
       quote.contact_email     && `✉️ <strong>Email:</strong> ${escHtml(quote.contact_email)}`,
@@ -459,17 +457,8 @@
         signal:  abortCtrl.signal,
       }
 
-      // Try the .com endpoint first; fall back to das-portal if it's not
-      // configured/available yet (non-ok status or network error).
-      let res
-      try {
-        res = await fetch(API_URL, reqInit)
-        if (!res.ok || !res.body) throw new Error(res.status)
-      } catch (primaryErr) {
-        if (primaryErr.name === 'AbortError') throw primaryErr
-        res = await fetch(API_FALLBACK, reqInit)
-        if (!res.ok || !res.body) throw new Error(res.status)
-      }
+      const res = await fetch(API_URL, reqInit)
+      if (!res.ok || !res.body) throw new Error(res.status)
 
       removeTyping()
 
@@ -503,7 +492,7 @@
       if (err.name !== 'AbortError') {
         pushMessage({
           role:    'assistant',
-          content: "Sorry, I'm having a connection issue. Try again in a moment or email **support@driverappreciationsolutions.com**.",
+          content: "Sorry, I'm having a connection issue. Try again in a moment or email **info@driverappreciationsolutions.com**.",
         })
       }
     } finally {
@@ -527,22 +516,21 @@
 
     const payload = JSON.stringify(quote)
 
-    // Try the .com endpoint first (may carry the portal auth token → PATH A).
-    try {
-      const res = await fetch(SUBMIT_URL, { method: 'POST', headers, body: payload })
-      if (!res.ok) throw new Error(res.status)
-    } catch {
-      // Fall back to das-portal during migration so a lead is never lost.
-      // das-portal authenticates via its own SSR cookie, not a bearer token,
-      // and its CORS only allows Content-Type — so the Authorization header is
-      // both useless and would fail the cross-origin preflight. Drop it here.
+    // One retry, then SURFACE the failure — a swallowed error here is a lost lead.
+    for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        await fetch(SUBMIT_FALLBACK, {
-          method:  'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body:    payload,
-        })
-      } catch {}
+        const res = await fetch(SUBMIT_URL, { method: 'POST', headers, body: payload })
+        if (!res.ok) throw new Error(res.status)
+        return true
+      } catch (e) {
+        if (attempt === 1) {
+          pushMessage({
+            role:    'assistant',
+            content: "I couldn't send your quote request just now — please email **info@driverappreciationsolutions.com** or call **302.681.0995** and we'll take it from there.",
+          })
+          return false
+        }
+      }
     }
   }
 

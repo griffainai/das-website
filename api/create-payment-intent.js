@@ -40,12 +40,38 @@ module.exports = async function handler(req, res) {
       } else if (verdict.status === 'rejected') {
         return res.status(400).json({ error: 'Item pricing is out of date — please refresh the page and try again.' });
       } else {
-        const cp = Number(item.price);
-        if (!isFinite(cp) || cp < 0.50) {
-          return res.status(400).json({ error: `Unit price for "${label}" must be at least $0.50.` });
+        // DB price authority for non-catalog items — same rule as create-checkout:
+        // client price accepted only inside the legit 10–15% discount window.
+        const cp  = Math.round(Number(item.price) * 100) / 100;
+        const sku = String(item.sku || item.id || '').trim();
+        let dbProd = null;
+        let lookupFailed = false;
+        if (sku) {
+          try {
+            const { getServiceClient } = require('./_supabase');
+            const svc = getServiceClient();
+            const { data, error } = await svc.from('das_products').select('price, min_qty').eq('sku', sku).limit(1).maybeSingle();
+            if (error) { lookupFailed = true; console.error('[create-payment-intent] das_products lookup error:', error.message); }
+            else dbProd = data;
+          } catch (e) { lookupFailed = true; console.error('[create-payment-intent] das_products lookup threw:', e && e.message); }
         }
-        unitPrice = Math.round(cp * 100) / 100;
-        minQty    = Number(item.minQty) > 0 ? Number(item.minQty) : 1;
+        if (dbProd && isFinite(Number(dbProd.price)) && Number(dbProd.price) > 0) {
+          const dbPrice = Number(dbProd.price);
+          if (!isFinite(cp) || cp < dbPrice * 0.80 - 0.01 || cp > dbPrice * 1.005 + 0.01) {
+            return res.status(400).json({ error: 'Item pricing is out of date — please refresh the page and try again.' });
+          }
+          unitPrice = cp;
+          minQty    = Number(dbProd.min_qty) > 0 ? Number(dbProd.min_qty) : (Number(item.minQty) > 0 ? Number(item.minQty) : 1);
+        } else if (lookupFailed) {
+          if (!isFinite(cp) || cp < 0.50) {
+            return res.status(400).json({ error: `Unit price for "${label}" must be at least $0.50.` });
+          }
+          console.warn('[create-payment-intent] db unavailable — legacy floor pricing for', sku || label);
+          unitPrice = cp;
+          minQty    = Number(item.minQty) > 0 ? Number(item.minQty) : 1;
+        } else {
+          return res.status(400).json({ error: `"${label}" is not available for purchase right now.` });
+        }
       }
       if (qty < minQty) {
         return res.status(400).json({ error: `Minimum order for "${label}" is ${minQty} units.` });
@@ -65,6 +91,7 @@ module.exports = async function handler(req, res) {
 
     res.json({ clientSecret: paymentIntent.client_secret });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('[create-payment-intent]', err && err.message);
+    res.status(500).json({ error: 'Payment could not be started. Please try again or contact info@driverappreciationsolutions.com.' });
   }
 };

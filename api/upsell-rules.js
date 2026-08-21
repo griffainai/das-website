@@ -10,7 +10,7 @@
    ============================================= */
 
 module.exports = async (req, res) => {
-  const allowedOrigin = process.env.SITE_URL || '*';
+  const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Cache-Control', 'public, s-maxage=300, stale-while-revalidate=60'); // 5-min CDN cache

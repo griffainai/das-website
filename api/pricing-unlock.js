@@ -7,6 +7,9 @@ let getServiceClient;
 try { ({ getServiceClient } = require('./_supabase')); } catch (e) { /* helper optional */ }
 
 module.exports = async (req, res) => {
+  const { rateLimit } = require('./_rate');
+  const rl = rateLimit(req, 'pricing-unlock', { burst: 5, perHour: 30 });
+  if (!rl.allowed) return res.status(429).json({ error: 'Too many attempts — try again shortly.' });
   if (req.method !== 'POST') return res.status(405).json({ ok: false, error: 'Method not allowed' });
 
   const code = String((req.body && req.body.code) || '').trim();

@@ -6,13 +6,21 @@
    ============================================= */
 
 module.exports = async (req, res) => {
-  const allowedOrigin = process.env.SITE_URL || '*';
+  const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
 
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  // Rate ceiling — this endpoint sends up to 2 Resend emails per call.
+  const { rateLimit } = require('./_rate');
+  const rl = rateLimit(req, 'contact', { burst: 4, perHour: 12 });
+  if (!rl.allowed) {
+    res.setHeader('Retry-After', String(rl.retryAfter));
+    return res.status(429).json({ error: 'Too many requests — please wait a moment and try again, or call 302.681.0995.' });
+  }
 
   // ── Company Purchasing Request (procurement pathway: quotes / PO / Net-30 / vendor setup) ──
   //    Handled here (not a new serverless function) to stay under the Vercel 12-function cap.
@@ -21,6 +29,18 @@ module.exports = async (req, res) => {
   }
 
   const { name, email, company, fleetSize, message, program, followUp } = req.body || {};
+  // Raw select VALUES must never reach customer copy ("regarding general").
+  const PROGRAM_LABELS = {
+    'appreciation': 'Driver Appreciation Kits',
+    'safety': 'a Safety Recognition Program',
+    'onboarding': 'New Driver Onboarding',
+    'milestone': 'Service Milestone Awards',
+    'holiday': 'a Holiday & Seasonal Program',
+    'enterprise': 'an Enterprise / Volume Quote',
+    'order-support': 'Order Support',
+    'general': 'your fleet',
+  };
+  const programLabel = PROGRAM_LABELS[program] || null;
   // Follow-up preference from the contact form's selector (book / pricing / email).
   const FOLLOW_UP_TAGS = {
     book: ' · WANTS TO BOOK A CALL',
@@ -67,7 +87,7 @@ module.exports = async (req, res) => {
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Email</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5"><a href="mailto:${escHtml(email)}">${escHtml(email)}</a></td></tr>
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Company</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(company || '—')}</td></tr>
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Fleet Size</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(fleetSize || '—')}</td></tr>
-        <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Program</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(program || '—')}</td></tr>
+        <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Program</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5">${escHtml(programLabel || program || '—')}</td></tr>
         <tr><td style="padding:8px 12px;background:#F5F5F5;font-weight:600">Requested Follow-up</td><td style="padding:8px 12px;border-bottom:1px solid #E5E5E5;font-weight:700;color:#0D1B45">${escHtml(followUpLabel || '—')}</td></tr>
       </table>
       <h3 style="color:#0D1B45;margin:24px 0 8px">Message</h3>
@@ -97,14 +117,39 @@ module.exports = async (req, res) => {
       return res.status(500).json({ error: 'Failed to send message. Please try again or email us directly.' });
     }
 
-    // E98: acknowledge the customer by email (best-effort — never fail the request if this errors).
+    // Customer acknowledgment — DAS-branded, follow-up-aware, written to sell
+    // the next step (best-effort — never fail the request if this errors).
+    const firstName = escHtml((name || '').split(' ')[0] || 'there');
+    const about = programLabel ? ` about <strong>${escHtml(programLabel)}</strong>` : '';
+    const coName = company ? escHtml(company) + '’s' : 'your';
+    let ackSubject, ackLede, ackNext;
+    if (followUp === 'book') {
+      ackSubject = 'Your strategy call — what happens before it';
+      ackLede = `${firstName} — your call is on the board. Before we get on it, a fleet specialist builds ${coName} numbers${about}: real per-driver pricing, not a brochure.`;
+      ackNext = `If you grabbed a time on the calendar, you’re set — the invite is in your inbox. If you didn’t, just reply with two times that work and we’ll lock one in.`;
+    } else if (followUp === 'pricing') {
+      ackSubject = 'Your custom pricing is being built';
+      ackLede = `${firstName} — got it. A fleet specialist is building ${coName} pricing${about} now: your driver count, real unit costs, and what the program looks like on day one.`;
+      ackNext = `It lands in your inbox within one business day. When it does, the numbers make one thing obvious: replacing a driver costs $8,000–$15,000 — recognizing one costs a fraction of that.`;
+    } else {
+      ackSubject = 'Got it — a real answer is coming';
+      ackLede = `${firstName} — your message${about} is with the fleet team. A specialist replies in writing within one business day — a real answer from a person, not an autoresponder.`;
+      ackNext = `Meanwhile, if it’s time-sensitive, skip the queue: call us and you’ll get a human.`;
+    }
     const ackHtml = `
-      <div style="font-family:sans-serif;max-width:560px;color:#111;line-height:1.6">
-        <p>Hi ${escHtml((name || '').split(' ')[0] || 'there')},</p>
-        <p>Thank you for reaching out to Driver Appreciation Solutions. We've received your message${program ? ` regarding <strong>${escHtml(program)}</strong>` : ''} and a member of our fleet team will follow up shortly.</p>
-        <p>If your request is time-sensitive, you can also reach us directly at <a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a>.</p>
-        <p>We look forward to helping you recognize your professional drivers.</p>
-        <p style="color:#0D1B45;font-weight:600;margin-top:20px">Driver Appreciation Solutions</p>
+      <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
+        <div style="background:#0C1840;padding:24px 28px;border-radius:12px 12px 0 0;">
+          <p style="margin:0;color:#8B9BAC;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;">Driver Appreciation Solutions</p>
+          <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Appreciated drivers stay.<br>Here’s what happens next.</h2>
+        </div>
+        <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
+          <p style="margin:0 0 14px;font-size:15px;line-height:1.7;color:#1F2937;">${ackLede}</p>
+          <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">${ackNext}</p>
+          <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
+          <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT. A person answers.</p>
+          <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
+          <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. The average fleet loses more to turnover in a month than a year of recognition costs. That math is exactly what we’ll show you.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
+        </div>
       </div>`;
     try {
       await fetch('https://api.resend.com/emails', {
@@ -113,7 +158,8 @@ module.exports = async (req, res) => {
         body: JSON.stringify({
           from: `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
           to: [email],
-          subject: 'We received your message — Driver Appreciation Solutions',
+          reply_to: 'info@driverappreciationsolutions.com',
+          subject: ackSubject,
           html: ackHtml,
         }),
       });
@@ -267,11 +313,19 @@ async function handleCompanyPurchasing(req, res) {
 
     // 2) Auto-responder to the buyer (best-effort — never fail the request if this errors).
     const autoHtml = `
-      <div style="font-family:sans-serif;max-width:560px;color:#111;line-height:1.6">
-        <p>Thank you for your interest in Driver Appreciation Solutions.</p>
-        <p>Your company purchasing request has been received and a member of our team will follow up shortly regarding your quote, purchase order, vendor onboarding, invoice billing, or Net 30 request.</p>
-        <p>We look forward to helping you recognize your professional drivers.</p>
-        <p style="color:#0D1B45;font-weight:600;margin-top:20px">Driver Appreciation Solutions</p>
+      <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
+        <div style="background:#0C1840;padding:24px 28px;border-radius:12px 12px 0 0;">
+          <p style="margin:0;color:#8B9BAC;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;">Driver Appreciation Solutions</p>
+          <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Your request is in.<br>Here’s exactly what happens next.</h2>
+        </div>
+        <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
+          <p style="margin:0 0 14px;font-size:15px;line-height:1.7;color:#1F2937;">A fleet specialist takes ${escHtml(company)}’s request from here — quote, purchase order, vendor onboarding, invoice billing, or Net 30, whatever procurement needs. You’ll hear back within one business day with real numbers, not a form letter.</p>
+          <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">Need it moving faster, or have a PO process we should know about? Reply to this email or call — you’ll get a person, not a phone tree.</p>
+          <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
+          <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT.</p>
+          <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
+          <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. Replacing one driver runs $8,000–$15,000. The program you just asked about costs a fraction of losing one. Your quote will show that math for your exact driver count.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
+        </div>
       </div>`;
     try {
       await fetch('https://api.resend.com/emails', {
@@ -280,7 +334,7 @@ async function handleCompanyPurchasing(req, res) {
         body: JSON.stringify({
           from: `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
           to: [workEmail],
-          subject: 'Thank You for Contacting Driver Appreciation Solutions',
+          subject: `${company}’s purchasing request is in — next steps`,
           html: autoHtml,
         }),
       });

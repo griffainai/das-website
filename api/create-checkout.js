@@ -7,7 +7,7 @@
 const { getServiceClient, getUserFromToken } = require('./_supabase');
 
 module.exports = async (req, res) => {
-  const allowedOrigin = process.env.SITE_URL || '*';
+  const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -116,7 +116,7 @@ module.exports = async (req, res) => {
 
   const priced = [];
   for (const item of items) {
-    const name = String(item && item.name ? item.name : '').trim().slice(0, 200);
+    let name = String(item && item.name ? item.name : '').trim().slice(0, 200);
     if (!name) return res.status(400).json({ error: 'Invalid item data (missing name).' });
 
     const qty = Number(item.qty);
@@ -136,18 +136,50 @@ module.exports = async (req, res) => {
     if (verdict.status === 'verified') {
       unitPrice = verdict.unitPrice;                 // server-trusted tier price
       minQty    = verdict.minQty || 10;
+      if (verdict.name) name = verdict.name;         // server-derived label — the client's can lie about the tier
     } else if (verdict.status === 'rejected') {
       // Known product, but the price matches no real tier → tampering. Reject.
       console.error('[create-checkout] price mismatch', { id: item.id, sent: item.price, allowed: verdict.allowed });
       return res.status(400).json({ error: 'Item pricing is out of date — please refresh the page and try again.' });
     } else {
-      // Unknown product (FBT / Supabase-sourced): sanity-check the client price.
-      const cp = Number(item.price);
-      if (!isFinite(cp) || cp < 0.50) {
-        return res.status(400).json({ error: `Unit price for "${name}" must be at least $0.50.` });
+      // Unknown to the static catalog (FBT / upsell / Supabase-sourced): the DB is
+      // the price authority, NOT the client. Previously any unknown id rode through
+      // at the client-sent price with only a $0.50 floor — a tampered request could
+      // buy any das_products row for 50 cents. Legit bundle/upsell discounts run
+      // 10–15%, so the client price is accepted only inside that window.
+      const cp  = Math.round(Number(item.price) * 100) / 100;
+      const sku = String(item.sku || item.id || '').trim();
+      let dbProd = null;
+      let lookupFailed = false;
+      if (sku) {
+        try {
+          const svc = getServiceClient();
+          const { data, error } = await svc.from('das_products').select('price, min_qty').eq('sku', sku).limit(1).maybeSingle();
+          if (error) { lookupFailed = true; console.error('[create-checkout] das_products lookup error:', error.message); }
+          else dbProd = data;
+        } catch (e) { lookupFailed = true; console.error('[create-checkout] das_products lookup threw:', e && e.message); }
       }
-      unitPrice = Math.round(cp * 100) / 100;
-      minQty    = Number(item.minQty) > 0 ? Number(item.minQty) : 10;
+      if (dbProd && isFinite(Number(dbProd.price)) && Number(dbProd.price) > 0) {
+        const dbPrice = Number(dbProd.price);
+        if (!isFinite(cp) || cp < dbPrice * 0.80 - 0.01 || cp > dbPrice * 1.005 + 0.01) {
+          console.error('[create-checkout] DB price mismatch', { sku, sent: item.price, db: dbPrice });
+          return res.status(400).json({ error: 'Item pricing is out of date — please refresh the page and try again.' });
+        }
+        unitPrice = cp;
+        minQty    = Number(dbProd.min_qty) > 0 ? Number(dbProd.min_qty) : (Number(item.minQty) > 0 ? Number(item.minQty) : 10);
+      } else if (lookupFailed) {
+        // Infra blip, not tampering (a forged sku returns not-found, not an error).
+        // Keep checkout alive on the legacy floor, loudly.
+        if (!isFinite(cp) || cp < 0.50) {
+          return res.status(400).json({ error: `Unit price for "${name}" must be at least $0.50.` });
+        }
+        console.warn('[create-checkout] db unavailable — legacy floor pricing for', sku || name);
+        unitPrice = cp;
+        minQty    = Number(item.minQty) > 0 ? Number(item.minQty) : 10;
+      } else {
+        console.error('[create-checkout] unknown product rejected', { sku, name, sent: item.price });
+        return res.status(400).json({ error: `"${name}" is not available for purchase right now.` });
+      }
     }
 
     // ── First-order minimum vs repeat-customer per-hire minimum ──────────────
@@ -251,12 +283,30 @@ module.exports = async (req, res) => {
     const bundleApplies = bundleEligibleSubtotal >= 575;
     let discountsArg = undefined;
     if (bundleApplies) {
-      const coupon = await stripe.coupons.create({
-        percent_off: 15,
-        duration:    'once',
-        name:        'Bundle Discount 15% off',   // Stripe coupon name max = 40 chars
-      });
-      discountsArg = [{ coupon: coupon.id }];
+      // Durable coupon: one fixed id reused across checkouts (this used to mint a
+      // brand-new Stripe coupon object on every >=\$575 order, forever).
+      const COUPON_ID = 'das-bundle-15';
+      let couponId = COUPON_ID;
+      try {
+        await stripe.coupons.retrieve(COUPON_ID);
+      } catch {
+        try {
+          const c = await stripe.coupons.create({
+            id:          COUPON_ID,
+            percent_off: 15,
+            duration:    'once',
+            name:        'Bundle Discount 15% off',
+          });
+          couponId = c.id;
+        } catch (ce) {
+          console.error('[create-checkout] coupon ensure failed:', ce && ce.message);
+          couponId = null; // fail open: no discount beats a failed checkout? No —
+          // the buyer EXPECTS 15% off. Fall back to a one-off coupon.
+          const one = await stripe.coupons.create({ percent_off: 15, duration: 'once', name: 'Bundle Discount 15% off' });
+          couponId = one.id;
+        }
+      }
+      discountsArg = [{ coupon: couponId }];
     }
 
     const siteUrl = (process.env.SITE_URL || 'https://driverappreciationsolutions.com').replace(/\/$/, '');

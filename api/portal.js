@@ -271,6 +271,18 @@ async function handleSubmitQuote(req, res, payload) {
   }
 
   // ── PATH B: Anonymous website visitor ──────────────────────────────
+  // Unauthenticated + sends email → rate ceiling and basic field validation
+  // (this path previously accepted anything and mailed on demand).
+  {
+    const { rateLimit } = require('./_rate');
+    const rl = rateLimit(req, 'submit-quote', { burst: 3, perHour: 10 });
+    if (!rl.allowed) return res.status(429).json({ error: 'Too many requests.' });
+    const em = String(payload.contact_email || '').trim();
+    const nm = String(payload.contact_name || '').trim();
+    if (!nm || nm.length > 120 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em) || em.length > 200) {
+      return res.status(400).json({ error: 'A valid name and email are required.' });
+    }
+  }
   try {
     const service = getServiceClient();
     await service.from('website_leads').insert({
@@ -498,7 +510,8 @@ async function handleBillingCheckout(req, res, payload) {
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('[billing-checkout]', err && err.message);
-    return res.status(500).json({ error: err.message || 'Failed to create checkout session.' });
+    console.error('[portal billing-checkout]', err && err.message);
+    return res.status(500).json({ error: 'Failed to create checkout session.' });
   }
 }
 
@@ -532,7 +545,8 @@ async function handleBillingPortal(req, res) {
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('[billing-portal]', err && err.message);
-    return res.status(500).json({ error: err.message || 'Failed to open billing portal.' });
+    console.error('[portal billing-portal]', err && err.message);
+    return res.status(500).json({ error: 'Failed to open billing portal.' });
   }
 }
 
@@ -738,10 +752,19 @@ async function handleStripeWebhook(req, res, rawBody) {
         }
 
         const total   = (pi.amount_received || 0) / 100;
+        // Recover the line items create-payment-intent stamped into metadata —
+        // an express order with items:[] is unfulfillable from the order record.
+        let piItems = [];
+        try {
+          const parsed = JSON.parse(metadata.order_items || '[]');
+          if (Array.isArray(parsed)) piItems = parsed.slice(0, 100).map((i) => ({
+            id: String(i.id || ''), name: String(i.name || '').slice(0, 200), qty: Number(i.qty) || 0,
+          }));
+        } catch (e) { console.warn('[stripe-webhook] order_items metadata unparsable:', e && e.message); }
         const payload  = {
           order_number:      `DAS-${Date.now().toString(36).toUpperCase()}`,
           stripe_session_id: pi.id,
-          items:             [],
+          items:             piItems,
           subtotal:          total,
           total,
           status:            'confirmed',

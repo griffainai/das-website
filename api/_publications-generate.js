@@ -116,7 +116,7 @@ async function htmlToPdf(html) {
 }
 
 module.exports = async (req, res) => {
-  const allowedOrigin = process.env.SITE_URL || '*';
+  const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');

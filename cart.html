@@ -265,7 +265,7 @@
 
 <script src="/lib/recognition-pricing.js"></script>
 <script src="/lib/catalog.js"></script>
-<script src="js/cart.js"></script>
+<script src="js/cart.js?v=2"></script>
 <script>
 function renderCart() {
   const items = Cart.get();
@@ -297,7 +297,7 @@ function renderCart() {
       <span></span>
     </div>`;
 
-  const rows = items.map(item => `
+  const rows = items.map((item, idx) => `
     <div class="cart-item">
       <img class="cart-item-img"
            src="${item.image || ''}"
@@ -311,17 +311,17 @@ function renderCart() {
         <div style="font-size:0.875rem;color:var(--text-muted);margin-top:4px">$${item.price.toFixed(2)} / unit</div>
       </div>
       <div style="display:flex;align-items:center;gap:6px;justify-content:center">
-        <button class="qty-btn" onclick="changeQty('${item.id}', -1)" aria-label="Decrease quantity" style="width:26px;height:26px;font-size:0.9rem">−</button>
+        <button class="qty-btn" onclick="changeQty(${idx}, -1)" aria-label="Decrease quantity" style="width:26px;height:26px;font-size:0.9rem">−</button>
         <input type="number"
                class="qty-input"
                style="width:48px"
                value="${item.qty}"
                min="${item.minQty || 10}"
-               onchange="setQty('${item.id}', this.value)">
-        <button class="qty-btn" onclick="changeQty('${item.id}', 1)" aria-label="Increase quantity" style="width:26px;height:26px;font-size:0.9rem">+</button>
+               onchange="setQty(${idx}, this.value)">
+        <button class="qty-btn" onclick="changeQty(${idx}, 1)" aria-label="Increase quantity" style="width:26px;height:26px;font-size:0.9rem">+</button>
       </div>
       <div class="cart-item-subtotal" style="text-align:right">$${(item.price * item.qty).toFixed(2)}</div>
-      <button class="cart-item-remove" onclick="removeItem('${item.id}')" aria-label="Remove ${item.name}">
+      <button class="cart-item-remove" onclick="removeItem(${idx})" aria-label="Remove ${item.name}">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
       </button>
     </div>`).join('');
@@ -377,14 +377,13 @@ function renderCart() {
   };
 }
 
-function removeItem(id) { Cart.remove(id); renderCart(); }
-function changeQty(id, delta) {
-  const items = Cart.get();
-  const item = items.find(i => i.id === id);
-  if (item) Cart.setQty(id, item.qty + delta);
+function removeItem(idx) { Cart.removeAt(idx); renderCart(); }
+function changeQty(idx, delta) {
+  const item = Cart.get()[idx];
+  if (item) Cart.setQtyAt(idx, item.qty + delta);
   renderCart();
 }
-function setQty(id, val) { Cart.setQty(id, parseInt(val)); renderCart(); }
+function setQty(idx, val) { Cart.setQtyAt(idx, parseInt(val)); renderCart(); }
 
 window.addEventListener('das:cartchange', renderCart);
 document.addEventListener('DOMContentLoaded', renderCart);
