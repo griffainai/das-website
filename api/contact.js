@@ -138,8 +138,10 @@ module.exports = async (req, res) => {
     }
     const ackHtml = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
-        <div style="background:#0C1840;padding:24px 28px;border-radius:12px 12px 0 0;">
-          <p style="margin:0;color:#8B9BAC;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;">Driver Appreciation Solutions</p>
+        <div style="background:#ffffff;border:1px solid #E2E8F0;border-bottom:0;border-radius:12px 12px 0 0;padding:16px 28px;">
+          <img src="https://www.driverappreciationsolutions.com/images/logo.png" alt="Driver Appreciation Solutions" height="34" style="height:34px;display:block;border:0;" />
+        </div>
+        <div style="background:#0C1840;padding:22px 28px;">
           <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Appreciated drivers stay.<br>Here’s what happens next.</h2>
         </div>
         <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
@@ -314,8 +316,10 @@ async function handleCompanyPurchasing(req, res) {
     // 2) Auto-responder to the buyer (best-effort — never fail the request if this errors).
     const autoHtml = `
       <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
-        <div style="background:#0C1840;padding:24px 28px;border-radius:12px 12px 0 0;">
-          <p style="margin:0;color:#8B9BAC;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;">Driver Appreciation Solutions</p>
+        <div style="background:#ffffff;border:1px solid #E2E8F0;border-bottom:0;border-radius:12px 12px 0 0;padding:16px 28px;">
+          <img src="https://www.driverappreciationsolutions.com/images/logo.png" alt="Driver Appreciation Solutions" height="34" style="height:34px;display:block;border:0;" />
+        </div>
+        <div style="background:#0C1840;padding:22px 28px;">
           <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Your request is in.<br>Here’s exactly what happens next.</h2>
         </div>
         <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
