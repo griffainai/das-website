@@ -26,7 +26,7 @@
 (function () {
   // ─── CONFIGURE THESE ────────────────────────────────────────────────────────
   // Replace with real IDs when accounts exist. Empty string = pixel not loaded.
-  var GTM_CONTAINER_ID = ''; // e.g. 'GTM-XXXXXXX'
+  var GTM_CONTAINER_ID = 'GTM-523F9QFC'; // published 2026-08-21 — GA4 (G-STJ0NDEGPB) fires via this container
   var META_PIXEL_ID    = ''; // e.g. '1234567890123456'
 
   // Google Ads (Starbridge Holdings account 917-415-8774) — conversion tracking.
