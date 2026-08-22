@@ -17,7 +17,7 @@
   <meta name="twitter:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&display=swap">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&family=Anton&family=Chivo:wght@400;700&display=swap">
   <link rel="stylesheet" href="css/styles.css?v=14">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
@@ -46,45 +46,60 @@
     /* ══════════════════════════════════════════════════════
        HERO — white, navy text, minimal
     ══════════════════════════════════════════════════════ */
+    /* H07 "Centered Monument" — Anton, centered, vertical navy gradient on a
+       light prism ground. Scoped to the hero; the form below is untouched. */
     .contact-hero {
-      background: #FFFFFF;
-      padding: 72px 0 64px;
-      border-bottom: 1px solid #F3F4F6;
+      background: #F7F9FD;
+      padding: clamp(52px, 7vw, 96px) 0 clamp(44px, 6vw, 76px);
+      border-bottom: 1px solid #E7EDF6;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
     }
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      inset: -46% -10% auto -10%;
+      height: 180%;
+      z-index: 0;
+      background:
+        radial-gradient(38% 46% at 50% 6%, rgba(46,79,168,0.16), transparent 62%),
+        radial-gradient(46% 40% at 50% 96%, rgba(26,46,110,0.10), transparent 62%);
+      pointer-events: none;
+    }
+    .contact-hero > * { position: relative; z-index: 1; }
     .ch-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.75rem;
+      display: inline-block;
+      font-family: 'Chivo', system-ui, sans-serif;
+      font-size: 0.6875rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
       color: #1A2E6E;
       margin-bottom: 16px;
     }
-    .ch-eyebrow::before {
-      content: '';
-      width: 18px;
-      height: 2px;
-      background: #1A2E6E;
-      border-radius: 2px;
-    }
     .ch-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(2rem, 4vw, 2.75rem);
-      font-weight: 600;
+      font-family: 'Anton', sans-serif;
+      font-size: clamp(2.25rem, 6vw, 4.25rem);
+      font-weight: 400;
       text-transform: uppercase;
-      color: #16264F;
-      letter-spacing: 0.01em;
-      line-height: 1.08;
-      margin-bottom: 16px;
+      letter-spacing: 0.005em;
+      line-height: 0.94;
+      margin: 0 auto 18px;
+      max-width: 14ch;
+      /* vertical navy gradient — DAS navy family only */
+      background: linear-gradient(180deg, #16264F 0%, #1A2E6E 46%, #3A5FC0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
-    .ch-title span { color: #1A2E6E; }
+    .ch-title span { color: inherit; }
     .ch-subtitle {
       font-size: 1.0625rem;
-      color: #6B7280;
+      color: #64748B;
       line-height: 1.7;
-      max-width: 540px;
+      max-width: 560px;
+      margin-inline: auto;
     }
 
     /* ══════════════════════════════════════════════════════
