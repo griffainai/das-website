@@ -4415,3 +4415,73 @@ ul { list-style: none; }
 }
 /* The landmark must be focusable as a jump target without becoming a tab stop. */
 main:focus { outline: none; }
+
+
+/* =========================================
+   PAGE HEADER SYSTEM — "Centered Monument + Underlay Word"
+   Anton display with a vertical DAS-navy gradient, centered on a prism ground,
+   with a giant ghosted Anton word behind the block. The word is set per page
+   via data-hero-word="…" so every page reads as its own chapter.
+   SCOPED TO PAGE HEROES ONLY — section headers are unchanged.
+   ========================================= */
+/* contact-family heroes centre like .page-hero already does */
+.contact-hero { text-align: center; }
+.contact-hero .ch-title { margin-inline: auto; max-width: 14ch; }
+.contact-hero .ch-subtitle { margin-inline: auto; }
+
+.page-hero h1,
+.contact-hero .ch-title,
+.blog-hero .blog-hero-title {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.94;
+  background: linear-gradient(180deg, #16264F 0%, #1A2E6E 46%, #3A5FC0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+
+/* prism ground — replaces the old flat 3%-navy ellipse */
+.page-hero::before {
+  top: -46% !important;
+  left: -10% !important;
+  right: -10% !important;
+  transform: none !important;
+  width: auto !important;
+  height: 180% !important;
+  background:
+    radial-gradient(38% 46% at 50% 6%, rgba(46,79,168,0.16), transparent 62%),
+    radial-gradient(46% 40% at 50% 96%, rgba(26,46,110,0.10), transparent 62%) !important;
+}
+
+/* the underlay word */
+[data-hero-word] { position: relative; overflow: hidden; }
+[data-hero-word]::after {
+  content: attr(data-hero-word);
+  position: absolute;
+  right: -2%;
+  top: 46%;
+  transform: translateY(-50%);
+  z-index: 0;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(120px, 22vw, 300px);
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  background: linear-gradient(180deg, rgba(26,46,110,0.11), rgba(46,79,168,0.03));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  pointer-events: none;
+  user-select: none;
+}
+/* keep every hero's real content above the ghost word */
+.page-hero-content,
+.contact-hero > *,
+.blog-hero > * { position: relative; z-index: 1; }
+
+@media (max-width: 700px) {
+  [data-hero-word]::after { opacity: 0.55; font-size: 34vw; right: -8%; }
+}
