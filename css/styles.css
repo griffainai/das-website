@@ -4485,3 +4485,34 @@ main:focus { outline: none; }
 @media (max-width: 700px) {
   [data-hero-word]::after { opacity: 0.55; font-size: 34vw; right: -8%; }
 }
+
+
+/* =========================================
+   SECTION HEADER FONT — OFFICIAL
+   Anton + the DAS navy gradient. This is the same treatment as the page
+   heroes, so a section header and a page header read as one system.
+   Brand law: 09_reference/das-brand-kit.md
+   ========================================= */
+.section-title {
+  font-family: 'Anton', sans-serif !important;
+  font-weight: 400 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 0.96;
+  background: linear-gradient(180deg, #16264F 0%, #1A2E6E 46%, #3A5FC0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+/* Dark grounds invert the gradient — navy-on-navy would vanish. */
+.on-dark .section-title,
+.section-title.on-dark {
+  background: linear-gradient(180deg, #FFFFFF 0%, #CFE0F8 52%, #7FB0FF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+.section-eyebrow {
+  font-family: 'Chivo', system-ui, sans-serif;
+  letter-spacing: 0.22em;
+}
