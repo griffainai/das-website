@@ -4387,3 +4387,31 @@ ul { list-style: none; }
     padding-top: 24px;
   }
 }
+
+/* =========================================
+   SKIP LINK — WCAG 2.4.1 Bypass Blocks
+   Every page now has a <main> landmark; this lets keyboard and screen-reader
+   users jump the nav instead of tabbing through it on every page load.
+   Hidden until focused, then pinned top-left above everything.
+   ========================================= */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100000;
+  padding: 12px 20px;
+  background: #1A2E6E;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus,
+.skip-link:focus-visible {
+  left: 0;
+  outline: 3px solid #FFFFFF;
+  outline-offset: -6px;
+}
+/* The landmark must be focusable as a jump target without becoming a tab stop. */
+main:focus { outline: none; }

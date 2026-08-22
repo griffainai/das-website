@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=13">
+  <link rel="stylesheet" href="css/styles.css?v=14">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
        as a single sticky unit while scrolling. -->
@@ -303,6 +303,7 @@
   <script src="/js/upsell-modal.js?v=1" defer></script>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to main content</a>
 <!-- ============================================================================
      DAS branded load screen (treatment A "polish"). Paints an opaque branded
      overlay INSTANTLY so the unbranded white / broken-image flash never shows on
@@ -490,6 +491,8 @@
     </a>
   </div>
 </div>
+
+<main id="main">
 
 <!-- ============================================================
      HERO
@@ -1593,6 +1596,8 @@
 <!-- ============================================================
      FOOTER
      ============================================================ -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
