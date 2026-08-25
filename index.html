@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=17">
+  <link rel="stylesheet" href="css/styles.css?v=18">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
        as a single sticky unit while scrolling. -->
@@ -833,47 +833,59 @@
 <!-- ============================================================
      DRIVER NEWSLETTER — PORTAL FEATURE SPOTLIGHT
      ============================================================ -->
-<section class="section" style="background:linear-gradient(160deg,#081230 0%,#1A2E6E 100%);border-top:1px solid rgba(200,168,75,.18)">
+<section class="section nlp-sec">
+  <div class="nlp-prism" aria-hidden="true"></div>
   <div class="container">
-    <div class="newsletter-split">
+    <div class="nlp-grid">
 
       <!-- Left: copy -->
       <div>
-        <span class="section-eyebrow" style="color:#ffffff">Fleet Portal Feature</span>
-        <h2 class="section-title on-dark" style="font-size:clamp(1.7rem,3.2vw,2.5rem)">Your fleet's own<br>driver newsletter.</h2>
-        <p style="color:rgba(255,255,255,.65);font-size:1rem;line-height:1.75;margin-bottom:24px">Physical kits make an impact on delivery day. A quarterly driver newsletter keeps that recognition alive all quarter — on bulletin boards, in the cab, shared with family.</p>
-        <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:13px">
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">Driver Spotlight sections</strong> — name, tenure, and personal recognition</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">Safety awards, milestones, new hires</strong> — 8 content modules to choose from</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">Your brand, colors, and logo</strong> — applied automatically throughout</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">One shareable link</strong> — email it, print it, or post it in your portal</span></li>
-          <li style="display:flex;align-items:flex-start;gap:10px;font-size:14px;color:rgba(255,255,255,.75)"><svg style="flex-shrink:0;margin-top:2px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg><span><strong style="color:#fff">Free with every portal account</strong> — no extra charge, no design team needed</span></li>
-        </ul>
-        <div class="newsletter-cta-row">
-          <a href="publications.html" class="btn btn-primary btn-lg" style="background:#ffffff;color:#1A2E6E;border-color:#ffffff">See How It Works</a>
-          <a href="signup.html" class="btn btn-lg" style="background:transparent;border:2px solid rgba(255,255,255,.4);color:#fff">Create Free Account</a>
+        <span class="section-eyebrow" data-reveal>Fleet Portal Feature</span>
+        <h2 class="section-title" style="font-size:clamp(1.7rem,3.2vw,2.5rem)" data-reveal data-reveal-delay="1">Your fleet's own<br>driver newsletter.</h2>
+        <p class="nlp-lede">Physical kits make an impact on delivery day. A quarterly driver newsletter keeps that recognition alive all quarter &mdash; on bulletin boards, in the cab, shared with family.</p>
+        <ul class="nlp-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Driver Spotlight sections</b> &mdash; name, tenure, and personal recognition</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Safety awards, milestones, new hires</b> &mdash; 8 content modules to choose from</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Your brand, colors, and logo</b> &mdash; applied automatically throughout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>One shareable link</b> &mdash; email it, print it, or post it in your portal</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Free with every portal account</b> &mdash; no extra charge, no design team needed</span></li></ul>
+        <div class="nlp-ctas">
+          <a href="publications.html" class="nlp-btn nlp-btn-p">See a sample issue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="signup.html" class="nlp-btn nlp-btn-s">Create free account</a>
         </div>
+        <p class="nlp-foot">Free with every DAS fleet portal account.</p>
       </div>
 
-      <!-- Right: UI mockup -->
-      <div>
-        <div style="background:#0C1840;border:1px solid rgba(200,168,75,.2);border-radius:18px;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.5)">
-          <div style="background:#1A2E6E;padding:12px 16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(255,255,255,.07)">
-            <div style="width:10px;height:10px;border-radius:50%;background:#ff5f57"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#8B9BAC"></div>
-            <div style="width:10px;height:10px;border-radius:50%;background:#28c840"></div>
-            <span style="font-size:12px;font-weight:600;color:rgba(255,255,255,.7);margin-left:6px">Q3 2026 Newsletter Builder</span>
+      <!-- Right: the printed issue -->
+      <div class="nlp-stack">
+        <div class="nlp-sheet2" aria-hidden="true"></div>
+        <div class="nlp-sheet">
+          <div class="nlp-mast">
+            <div class="nlp-mast-name">Ridgeline<br>Driver Report</div>
+            <div class="nlp-mast-meta">Q3 2026<br>Issue No. 11<br>412 drivers</div>
           </div>
-          <div style="padding:18px">
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:7px;background:#1A2E6E;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg style="width:14px;height:14px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0"/></svg></div><span style="font-size:12px;color:rgba(255,255,255,.7);flex:1">Driver Spotlight</span><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:#4ade80">ON</span></div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:7px;background:#1A2E6E;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg style="width:14px;height:14px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span style="font-size:12px;color:rgba(255,255,255,.7);flex:1">Safety Awards</span><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:#4ade80">ON</span></div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:7px;background:#1A2E6E;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg style="width:14px;height:14px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872"/></svg></div><span style="font-size:12px;color:rgba(255,255,255,.7);flex:1">Years of Service</span><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:#4ade80">ON</span></div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;margin-bottom:8px"><div style="width:28px;height:28px;border-radius:7px;background:#1A2E6E;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg style="width:14px;height:14px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5"/></svg></div><span style="font-size:12px;color:rgba(255,255,255,.7);flex:1">New Hires</span><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(74,222,128,.15);color:#4ade80">ON</span></div>
-            <div style="display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 14px;margin-bottom:14px"><div style="width:28px;height:28px;border-radius:7px;background:#1A2E6E;display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg style="width:14px;height:14px;color:#ffffff" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 7.5h1.5m-1.5 3h1.5m-7.5 3h7.5m-7.5 3h7.5"/></svg></div><span style="font-size:12px;color:rgba(255,255,255,.7);flex:1">Company News</span><span style="font-size:10px;font-weight:600;padding:2px 8px;border-radius:20px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.35)">OFF</span></div>
-            <a href="publications.html" class="newsletter-mock-cta">Generate PDF Newsletter <span class="nl-cta-arrow">→</span></a>
+          <div class="nlp-body">
+            <div class="nlp-spot">
+              <img src="/images/das-safety-recognition-home.webp" alt="A driver receiving his million-mile recognition medals in front of the fleet" loading="lazy" width="1200" height="896">
+              <div class="nlp-spot-body">
+                <span class="nlp-kicker">Driver Spotlight</span>
+                <h4>Ray Delgado &mdash; 1,000,000 miles</h4>
+                <p>Nineteen years, zero preventables, and the guy every new hire asks to ride with. Ray took his million-mile medal at the Joliet terminal on August 6.</p>
+              </div>
+            </div>
+            <div>
+              <div class="nlp-blk"><h5>Safe miles this quarter</h5>
+                <div class="nlp-row"><span>Drivers at 100% safe</span><b>318</b></div>
+                <div class="nlp-row"><span>Preventables</span><b>4</b></div>
+                <div class="nlp-row"><span>Quarter over quarter</span><b>&minus;38%</b></div>
+              </div>
+              <div class="nlp-blk"><h5>Years of service</h5>
+                <div class="nlp-row"><span>M. Whitfield</span><b>15 yr</b></div>
+                <div class="nlp-row"><span>D. Okonkwo</span><b>10 yr</b></div>
+                <div class="nlp-row"><span>S. Barrera</span><b>5 yr</b></div>
+              </div>
+              <div class="nlp-blk"><h5>Welcome aboard</h5>
+                <div class="nlp-row"><span>New hires, Q3</span><b>27</b></div>
+              </div>
+            </div>
           </div>
+          <div class="nlp-pfoot"><span>Ridgeline Carriers</span><span>Built with DAS Fleet Portal</span></div>
         </div>
-        <p style="text-align:center;font-size:11px;color:rgba(255,255,255,.3);margin-top:12px">Free with every DAS fleet portal account</p>
       </div>
 
     </div>

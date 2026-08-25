@@ -4592,3 +4592,116 @@ main:focus { outline: none; }
   .tst-mq-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
   .tst-mq { -webkit-mask-image: none; mask-image: none; }
 }
+
+
+/* =========================================
+   FLEET PORTAL -- P2 PAPER PROOF  (chosen 2026-08-23)
+   Shows the printed issue rather than a mock builder UI. Light ground; this was
+   the last dark section on the homepage.
+   Explicit hex on purpose: --black-2 is LIGHT and --gold is NAVY in this file.
+   Lab: _sandbox/das-10x/03-portal/p2-paper-proof.html
+   ========================================= */
+.nlp-sec {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(180deg, #FFFFFF, #F7F9FD 62%, #F1F5FB);
+  border-top: 1px solid #E7EDF6;
+}
+/* the navy prism, behind the header only */
+.nlp-prism {
+  position: absolute; left: 50%; top: 0; transform: translateX(-50%);
+  width: min(1500px, 132%); height: clamp(320px, 46vw, 600px);
+  pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(30% 52% at 50% 0%, rgba(46,79,168,.18), transparent 66%),
+    radial-gradient(24% 40% at 22% 14%, rgba(109,91,208,.12), transparent 62%),
+    radial-gradient(24% 40% at 80% 10%, rgba(78,139,232,.14), transparent 62%);
+}
+.nlp-grid {
+  position: relative; z-index: 1;
+  display: grid; grid-template-columns: 1fr 1.05fr;
+  gap: clamp(28px, 4.4vw, 72px); align-items: center;
+}
+.nlp-lede { font-size: 1.0625rem; line-height: 1.72; color: #67718A; max-width: 52ch; margin: 16px 0 0; }
+.nlp-list { list-style: none; margin: 26px 0 0; padding: 0; display: grid; gap: 12px; }
+.nlp-list li {
+  display: grid; grid-template-columns: 19px 1fr; gap: 11px; align-items: start;
+  font-size: 0.9375rem; line-height: 1.55; color: #67718A;
+}
+.nlp-list li svg { width: 14px; height: 14px; margin-top: 4px; color: #2E4FA8; flex: none; }
+.nlp-list b { color: #0B1020; font-weight: 700; }
+.nlp-ctas { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 30px; }
+.nlp-btn {
+  display: inline-flex; align-items: center; gap: 9px; height: 48px; padding: 0 24px;
+  border-radius: 10px; font-size: 0.9375rem; font-weight: 700; text-decoration: none;
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.nlp-btn svg { width: 15px; height: 15px; }
+.nlp-btn-p { background: #1A2E6E; color: #fff; box-shadow: 0 12px 26px -14px rgba(26,46,110,.95); }
+.nlp-btn-p:hover { background: #122356; transform: translateY(-1px); }
+.nlp-btn-s { border: 1.5px solid #E3E8F2; color: #0C1840; background: #fff; }
+.nlp-btn-s:hover { border-color: #1A2E6E; background: #FAFCFF; }
+.nlp-foot { margin-top: 18px; font-size: 0.78125rem; color: #8B96AE; }
+
+/* ---- the printed sheet ---- */
+.nlp-stack { position: relative; padding: 10px 0 0 12px; }
+.nlp-sheet2 {
+  position: absolute; left: 0; top: 26px; width: 88%; height: 94%;
+  background: #fff; border-radius: 3px;
+  box-shadow: 0 20px 44px -26px rgba(12,24,64,.44);
+  transform: rotate(-2.4deg);
+}
+.nlp-sheet {
+  position: relative; background: #fff; border-radius: 3px; overflow: hidden;
+  box-shadow: 0 34px 74px -30px rgba(12,24,64,.55), 0 0 0 1px rgba(12,24,64,.07);
+  transform: rotate(1deg);
+}
+/* the paper's own sheen — a fold, not a gradient overlay */
+.nlp-sheet::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(101deg, transparent 46%, rgba(12,24,64,.05) 50%, transparent 54%);
+}
+.nlp-mast {
+  padding: 20px 24px 15px; border-bottom: 3px solid #0C1840;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 12px;
+}
+.nlp-mast-name {
+  font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: 0.005em; font-size: clamp(1.375rem, 2.5vw, 2rem);
+  line-height: .92; color: #0C1840;
+}
+.nlp-mast-meta {
+  text-align: right; font-size: 0.59375rem; font-weight: 800; letter-spacing: .16em;
+  text-transform: uppercase; color: #93A0B8; line-height: 1.5;
+}
+.nlp-body { padding: 18px 24px 26px; display: grid; grid-template-columns: 1.35fr 1fr; gap: 20px; }
+.nlp-spot { border: 1px solid #E3E8F2; border-radius: 8px; overflow: hidden; }
+.nlp-spot img { width: 100%; aspect-ratio: 1200/896; object-fit: cover; display: block; }
+.nlp-spot-body { padding: 11px 13px 13px; }
+.nlp-kicker {
+  font-size: 0.5625rem; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+  color: #C8A14B; display: block; margin-bottom: 5px;
+}
+.nlp-spot h4 {
+  font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  font-size: 1.0625rem; color: #0C1840; line-height: 1; letter-spacing: .01em; margin: 0;
+}
+.nlp-spot p { font-size: 0.6875rem; line-height: 1.55; color: #67718A; margin: 6px 0 0; }
+.nlp-blk { border-top: 1px solid #E3E8F2; padding: 10px 0; }
+.nlp-blk:first-child { border-top: 0; padding-top: 0; }
+.nlp-blk h5 {
+  font-size: 0.625rem; font-weight: 800; letter-spacing: .15em; text-transform: uppercase;
+  color: #1A2E6E; margin: 0 0 6px;
+}
+.nlp-row { display: flex; justify-content: space-between; font-size: 0.65625rem; color: #4A5674; padding: 2.5px 0; }
+.nlp-row b { color: #0B1020; font-weight: 700; }
+.nlp-pfoot {
+  padding: 11px 24px; border-top: 1px solid #E3E8F2; display: flex; justify-content: space-between;
+  font-size: 0.5625rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #A3AEC2;
+}
+@media (max-width: 960px) {
+  .nlp-grid { grid-template-columns: 1fr; gap: 34px; }
+  .nlp-sheet, .nlp-sheet2 { transform: none; }
+  .nlp-sheet2 { display: none; }
+  .nlp-body { grid-template-columns: 1fr; }
+}
