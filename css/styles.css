@@ -4516,3 +4516,79 @@ main:focus { outline: none; }
   font-family: 'Chivo', system-ui, sans-serif;
   letter-spacing: 0.22em;
 }
+
+
+/* =========================================
+   CLIENT RESULTS -- R07 MARQUEE  (chosen 2026-08-22)
+   A continuous drift so the section holds a short vertical band no matter how
+   many testimonials exist later. Pauses on hover; honours reduced-motion.
+   Explicit hex on purpose: --black-2 is LIGHT and --gold is NAVY in this file,
+   so the token names would mislead anyone editing this block.
+   Lab: _sandbox/das-10x/07-results/r07-marquee.html
+   ========================================= */
+.tst-mq-sec { background: linear-gradient(180deg, #FFFFFF, #F7F9FD); }
+.tst-mq-head { text-align: center; max-width: 820px; margin: 0 auto clamp(30px, 3.8vw, 52px); }
+.tst-mq {
+  position: relative;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.tst-mq-track {
+  display: flex;
+  gap: 20px;
+  width: max-content;
+  animation: tstDrift 46s linear infinite;
+}
+.tst-mq:hover .tst-mq-track { animation-play-state: paused; }
+@keyframes tstDrift { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 10px)); } }
+
+.tst-mq-card {
+  width: min(380px, 80vw);
+  flex: none;
+  background: #fff;
+  border: 1px solid #E3E8F2;
+  border-radius: 16px;
+  padding: 22px 23px 20px;
+  display: flex;
+  flex-direction: column;
+}
+.tst-mq-stars { display: inline-flex; gap: 2px; color: #C8A14B; margin-bottom: 13px; }
+.tst-mq-stars svg { width: 14px; height: 14px; }
+.tst-mq-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #2C3550;
+  margin: 0 0 16px;
+  flex: 1;
+  font-style: normal;
+}
+.tst-mq-metric {
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #9A7B2E;
+  margin-bottom: 16px;
+}
+.tst-mq-foot {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding-top: 14px;
+  border-top: 1px solid #E3E8F2;
+}
+.tst-mq-av {
+  width: 34px; height: 34px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  background: linear-gradient(155deg, #2E4FA8, #16264F);
+  color: #fff; font-size: 11px; font-weight: 800; letter-spacing: 0.02em;
+}
+.tst-mq-nm { font-size: 13px; font-weight: 700; color: #0C1840; line-height: 1.2; }
+.tst-mq-rl { font-size: 11px; color: #67718A; margin-top: 2px; }
+.tst-mq-sub { text-align: center; margin-top: 26px; font-size: 12.5px; color: #67718A; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tst-mq-track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; }
+  .tst-mq { -webkit-mask-image: none; mask-image: none; }
+}
