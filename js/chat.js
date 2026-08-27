@@ -77,8 +77,10 @@
     const style = document.createElement('style')
     style.id = 'das-scout-styles'
     style.textContent = `
+      /* Positioning is owned by #das-dock (js/das-dock.js), not by this file.
+         Two widgets fixing themselves to the same corner is what buried the
+         quote pill. Keep the look here; the dock decides where it sits. */
       #das-scout-btn {
-        position: fixed; bottom: 24px; right: 24px; z-index: 9999;
         display: flex; align-items: center; gap: 10px;
         background: #1A2E6E; color: #fff;
         border: none; border-radius: 100px;
@@ -97,7 +99,7 @@
       }
 
       #das-scout-panel {
-        position: fixed; bottom: 94px; right: 24px; z-index: 9999;
+        position: fixed; bottom: 96px; right: 24px; z-index: 10000;
         width: 380px; height: 560px; max-height: calc(100dvh - 110px);
         background: #fff; border-radius: 18px;
         box-shadow: 0 20px 60px rgba(0,0,0,.18);
@@ -256,7 +258,7 @@
     btn.setAttribute('aria-label', 'Chat with Scout')
     btn.innerHTML = `<div style="position:relative">${ICON_TRUCK}<div class="das-scout-pulse" id="das-pulse" style="display:none"></div></div><span>Chat with Scout</span>`
     btn.addEventListener('click', toggleChat)
-    document.body.appendChild(btn)
+    if (window.DASDock) window.DASDock.mount(btn, 90); else document.body.appendChild(btn)
 
     // Panel
     const panel = document.createElement('div')
@@ -537,6 +539,8 @@
   // ── UI helpers ────────────────────────────────────────────────
   function toggleChat(forceOpen) {
     isOpen = typeof forceOpen === 'boolean' ? forceOpen : !isOpen
+    // Tell the dock, so the quote pill steps aside instead of being covered.
+    if (window.DASDock) window.DASDock.setPanelOpen(isOpen)
     if (isOpen) {
       panelEl.classList.remove('hidden')
       const pulse = document.getElementById('das-pulse')

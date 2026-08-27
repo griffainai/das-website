@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=19">
+  <link rel="stylesheet" href="css/styles.css?v=23">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
@@ -1505,14 +1505,15 @@
 
 <script src="js/countdown.js?v=2"></script>
 <!-- Single source of truth for storefront prices: lib/catalog.js → store-pricing.js syncs the cards. -->
-<script src="/lib/catalog.js"></script>
+<script src="/lib/catalog.js?v=1"></script>
 <script src="/js/store-pricing.js?v=1"></script>
 <script src="js/cart.js?v=2"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
 <script src="js/pricing-gate.js?v=4"></script>
 <!-- Scout AI chat widget — self-contained, no dependencies -->
-<script src="js/chat.js" defer></script>
+<script src="js/das-dock.js?v=2" defer></script>
+<script src="js/chat.js?v=1" defer></script>
 <script>
   // ── Solution Modal ─────────────────────────────────────────
   const SOLUTION_DATA = {
@@ -1771,6 +1772,6 @@
   });
 })();
 </script>
-  <script src="js/quote.js?v=2" defer></script>
+  <script src="js/quote.js?v=4" defer></script>
 </body>
 </html>

@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image" href="/images/das-da-kit-1.webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=19">
+  <link rel="stylesheet" href="css/styles.css?v=23">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
@@ -219,7 +219,7 @@
       <span>Shop</span>
     </div>
     <span class="section-eyebrow">Full Product Catalog</span>
-    <h1 class="section-title" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:12px">All Products</h1>
+    <h1 class="section-title" style="margin-bottom:12px">All Products</h1>
     <p style="font-size:1.0625rem;color:var(--text-secondary);max-width:520px;margin:0 auto">Fleet-scale recognition kits starting at 10 units. All orders ship per your program timeline.</p>
     <div style="max-width:660px;margin:30px auto 0">
       <div style="width:38px;height:2px;background:#1A2E6E;opacity:.28;margin:0 auto 18px;border-radius:2px"></div>
@@ -3017,7 +3017,7 @@
 </button>
 
 <!-- Single source of truth for storefront prices: lib/catalog.js → store-pricing.js syncs the cards. -->
-<script src="/lib/catalog.js"></script>
+<script src="/lib/catalog.js?v=1"></script>
 <script src="/js/store-pricing.js?v=1"></script>
 <!-- MILE PACKS: square card frames so the square product photos fill with NO crop.
      Real photos use cover (perfect fill); placeholder cards (.mp-ph) use contain so the
@@ -3481,7 +3481,7 @@
   .soon-pill { position: absolute; top: 12px; right: 12px; background: #C8A84B; color: #1A2E6E; font-size: 0.6875rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; padding: 4px 10px; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,.2); }
 </style>
 <!-- MILE PACKS: render the 23 cards synchronously (before cart.js wires add-to-cart on DOMContentLoaded) -->
-<script src="js/mile-packs.js"></script>
+<script src="js/mile-packs.js?v=1"></script>
 <script>
 (function () {
   var grid = document.getElementById('mile-packs-grid');
@@ -3530,7 +3530,7 @@
 })();
 </script>
 <!-- SERVICE MILESTONE AWARDS: render medal/award cards synchronously + wire the Career/Safe toggle -->
-<script src="js/milestones.js"></script>
+<script src="js/milestones.js?v=1"></script>
 <script>
 (function () {
   var grid = document.getElementById('milestone-grid');
@@ -3800,6 +3800,7 @@ applyShopFilter(validCat ? catParam : 'all');
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
 <script src="js/pricing-gate.js?v=4"></script>
-  <script src="js/quote.js?v=2" defer></script>
+  <script src="js/das-dock.js?v=2" defer></script>
+<script src="js/quote.js?v=4" defer></script>
 </body>
 </html>

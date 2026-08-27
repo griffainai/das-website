@@ -4821,3 +4821,34 @@ main:focus { outline: none; }
 @media (min-width: 900px) { .fw-band { aspect-ratio: 2.5/1; } .fw-band img { object-position: center 46%; } }
 @media (max-width: 820px) { .fw-rail { grid-template-columns: 1fr; gap: 18px; }
   .fw-rail .c { border-right: 0; padding-left: 0; } }
+
+
+/* =========================================================================
+   HERO TYPE SCALE
+   Sixteen pages carried font-size on the hero h1 as an INLINE style, which
+   outranks every stylesheet rule - so a mobile bump could never apply, and no
+   future type change would have either. Those inline declarations are stripped
+   from the markup and the whole curve lives here as ONE rule; a base plus a
+   media override at equal specificity would have had the base win wherever it
+   came later in the file.
+
+   Floor is 38px, up from a measured 30px against 17px body copy - a 1.76:1
+   display-to-body ratio, and Anton is CONDENSED so it reads smaller than its
+   point size. Jayden: "make it a tiny bit bigger." 38px = +27%, ratio 2.24:1.
+   Checked against the real constraint rather than estimated: TRANSPORTATION,
+   the longest unbreakable word on the site, measures 140px at 43px Anton
+   inside a 320px measure - so 38px has room to spare.
+   ========================================================================= */
+.page-hero h1,
+.contact-hero .ch-title,
+.blog-hero .blog-hero-title {
+  /* !important is required, not lazy: a blanket mobile safety net at ~line 3839
+     sets  h1 { font-size: clamp(1.75rem, 8vw, 2.75rem) !important }  to stop
+     headings overflowing narrow viewports. That net should keep protecting every
+     other h1 - it just should not cap the hero, whose fit is verified (the
+     longest unbreakable word measures 140px at 43px Anton in a 320px measure).
+     These selectors are more specific than a bare h1, so with both marked
+     important the hero wins and the net still governs everything else. */
+  font-size: clamp(38px, 8.2vw, 60px) !important;
+  line-height: .93;
+}

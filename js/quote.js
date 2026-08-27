@@ -17,13 +17,13 @@
   // ---- Floating "Request Quote (N)" pill ----
   function render() {
     var l = read(); var pill = document.getElementById('das-quote-pill');
-    if (!l.length) { if (pill) pill.parentNode.removeChild(pill); return; }
+    if (!l.length) { if (pill) pill.parentNode.removeChild(pill); if (window.DASDock) window.DASDock.el().dataset.quote = '0'; return; }
     if (!pill) {
       pill = document.createElement('a'); pill.id = 'das-quote-pill';
       pill.href = 'company-purchasing.html?quote=1';
       pill.setAttribute('aria-label', 'Review your quote request');
-      pill.style.cssText = 'position:fixed;right:18px;bottom:18px;z-index:9000;background:#1A2E6E;color:#fff;font-weight:700;font-size:.9rem;padding:12px 18px;border-radius:999px;box-shadow:0 10px 30px -8px rgba(0,0,0,.45);text-decoration:none;display:inline-flex;align-items:center;gap:8px';
-      document.body.appendChild(pill);
+      pill.style.cssText = 'background:#1A2E6E;color:#fff;font-weight:700;font-size:.9rem;padding:12px 18px;border-radius:999px;box-shadow:0 10px 30px -8px rgba(0,0,0,.45);text-decoration:none';
+      if (window.DASDock) window.DASDock.mount(pill, 10); else document.body.appendChild(pill);
     }
     pill.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4"/><path d="M9 7V4h6v3"/><path d="M9 11h6"/></svg> Request Quote (' + l.length + ')';
   }
