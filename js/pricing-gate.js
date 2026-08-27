@@ -82,6 +82,22 @@
   }
   function gateCards(root) {
     (root || document).querySelectorAll('.product-card[data-product-price]').forEach(gateCard);
+    (root || document).querySelectorAll('.pc[data-product-price]').forEach(gateFeatured);
+  }
+  // index featured cards (.pc) — same doctrine, different anatomy
+  function gateFeatured(card) {
+    if (card.dataset.planGated === '1') return;
+    var price = parseFloat(card.getAttribute('data-product-price'));
+    if (!(price > THRESHOLD)) return;
+    card.dataset.planGated = '1';
+    var qtyLbl = card.querySelector('.qty'); if (qtyLbl) qtyLbl.style.display = 'none';
+    var row = card.querySelector('.row');
+    if (row) {
+      var pid = card.getAttribute('data-product-id');
+      row.innerHTML = '<span class="plan-cta-label">' + PLAN_LABEL + '</span>';
+      row.appendChild(learnMoreBtn(pid ? 'product.html?id=' + encodeURIComponent(pid) : CONSULT, 'Learn More'));
+      row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap';
+    }
   }
 
   // ---- PDP main price + buy controls ----
@@ -104,8 +120,10 @@
       pe.appendChild(learnMoreBtn(quoteHref, 'Request Pricing'));
       pe.appendChild(codeTrigger('Have a planning code? Enter it'));
     }
-    // hide purchase controls (product stays fully visible — images, description, options)
-    ['.qty-section', '.express-checkout-section', '#btn-add-to-cart', '#das-terms-cta'].forEach(function (sel) {
+    // hide purchase controls (product stays fully visible — images, description, options).
+    // #tier-block joined 2026-08-27: das-001 at $249 was the first TIERED product over
+    // the threshold, and the tier buttons were leaking the exact prices the gate hides.
+    ['.qty-section', '.express-checkout-section', '#btn-add-to-cart', '#das-terms-cta', '#tier-block'].forEach(function (sel) {
       document.querySelectorAll(sel).forEach(function (el) { el.style.display = 'none'; });
     });
   }

@@ -39,8 +39,8 @@ ABOUT DAS
 Driver Appreciation Solutions builds custom driver recognition programs — kits, branded merchandise, safety awards, holiday packages, printed newsletters, and full annual programs — for commercial fleets across North America. Minimum order: 10 drivers.
 
 PRODUCTS & PRICING — THESE ARE THE REAL NUMBERS ON THE SITE. Quote ONLY these.
-The store sells kits in three tiers on a $49.99 base:
-• Driver Appreciation Kit — Standard $49.99 / Premium $74.99 / Enterprise $97.48 per driver
+The store sells kits in three tiers on a $249 base:
+• Driver Appreciation Kit — Standard $249 / Premium $373.50 / Enterprise $485.55 per driver
 • Premium Onboarding Pack — from $59.99/driver — day-one welcome, first-90-day retention
 • Professional Driver Milestone Recognition Kit (flagship) — $499/kit complete — medal,
   lapel pins, recognition t-shirt, keychain, road bag tag; any milestone 250K–6M miles
