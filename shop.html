@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://images.unsplash.com">
   <link rel="preload" as="image" href="/images/das-da-kit-1.webp" fetchpriority="high">
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=35">
+  <link rel="stylesheet" href="css/styles.css?v=38">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
@@ -221,7 +221,7 @@
       <span>Shop</span>
     </div>
     <span class="section-eyebrow">Full Product Catalog</span>
-    <h1 class="section-title" style="margin-bottom:12px">All Products</h1>
+    <h1 class="section-title" id="shop-page-title" style="margin-bottom:12px">All Products</h1>
     <p style="font-size:1.0625rem;color:var(--text-secondary);max-width:520px;margin:0 auto">Fleet-scale recognition kits starting at 10 units. All orders ship per your program timeline.</p>
     <div style="max-width:660px;margin:30px auto 0">
       <div style="width:38px;height:2px;background:#1A2E6E;opacity:.28;margin:0 auto 18px;border-radius:2px"></div>
@@ -3747,6 +3747,11 @@ function applyShopFilter(filter) {
   if (si) si.value = '';
   if (sc) sc.style.display = 'none';
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
+  // The page title follows the filter - 'All Products' over a filtered grid read
+  // as a miscommunication (Jayden, 2026-08-27).
+  const activeBtn = document.querySelector('.filter-btn.active');
+  const titleEl = document.getElementById('shop-page-title');
+  if (titleEl && activeBtn) titleEl.textContent = activeBtn.textContent;
   applyShop();
 }
 document.querySelectorAll('.filter-btn').forEach(btn => {
