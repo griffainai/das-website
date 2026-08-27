@@ -193,7 +193,7 @@
     panel.classList.toggle('open', open);
     if (window.DASDock) window.DASDock.setPanelOpen(open);
     launcher.setAttribute('aria-expanded', String(open));
-    launcher.innerHTML = (open ? I.down : I.chat) + '<span class="dw-dot"></span>';
+    launcher.innerHTML = I.chat + '<span class="dw-dot"></span>';
     if (open) {
       launcher.classList.remove('has-unread');
       hidePreview();
