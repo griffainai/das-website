@@ -13,7 +13,7 @@ Admin panels appear for the `ADMIN_EMAILS` allowlist (server-verified per reques
 | Role | Login | Password | Lands at | Owns |
 |---|---|---|---|---|
 | Company / customer (TEST) | testcompany@dastest.test | `DAS-Test-a3f5062d` | `/account` | Dashboard, orders, recognition programs, roster, publications, billing, quotes, ideas & guides, support |
-| Admin — Shaq (REAL) | ssshafeek@driverappreciationsolutions.com | 🔴 **NEVER SET** | `/account` + admin | Admin orders, tickets, quotes, products |
+| Admin — Shaq (REAL) | ssshafeek@driverappreciationsolutions.com | set 2026-08-27 via service role, emailed to Shaq (he should change it) | `/account` + admin | Admin orders, tickets, quotes, products |
 | Admin — Shaq personal (REAL) | shaqisvictory@gmail.com | his own | `/account` + admin | Same |
 | Admin — Jayden (REAL) | griffainai@gmail.com | his own | `/account` + admin | Same |
 
@@ -24,14 +24,15 @@ read-only:
 
 | Account | Exists | Last sign-in |
 |---|---|---|
-| ssshafeek@driverappreciationsolutions.com | yes | 🔴 **NEVER** — no password has ever been set on it |
+| ssshafeek@driverappreciationsolutions.com | yes | password SET + sign-in verified 2026-08-27 |
 | shaqisvictory@gmail.com | yes | 2026-06-06 |
 | griffainai@gmail.com | yes | 2026-05-22 |
 | testcompany@dastest.test | yes | 2026-08-21 |
 
-**The gap:** Shaq's primary DAS admin account has never been signed into, so
-there is no password to recover — he has to use "Forgot password" once to set
-one. Emailed to him 2026-08-22 along with the ODNDR set.
+**Closed 2026-08-27:** the account had never had a password. A temp password
+was set via service role, verified by an actual sign-in, and emailed to Shaq
+with instructions to change it. testcompany@dastest.test re-verified by live
+sign-in the same day.
 
 **Not verifiable from here:** `ADMIN_EMAILS` is stored `--sensitive` on Vercel,
 so it reads back empty (write-once-read-never — correct posture). The
