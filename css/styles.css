@@ -5382,3 +5382,77 @@ main:focus { outline: none; }
   .gbp-business-row { padding: 0.85rem 1.25rem; }
   .gbp-business-name { font-size: 1.02rem; }
 }
+
+
+/* ── CTA panel mesh variants (round 8: one colour world per panel) ── */
+.cta-panel--deep .cta-mesh { background:
+  radial-gradient(70% 90% at 50% -10%, #2E4FA8 0%, rgba(46,79,168,0) 58%),
+  radial-gradient(50% 60% at 90% 80%, #3A5FC0 0%, rgba(58,95,192,0) 60%),
+  linear-gradient(168deg, #16264F 0%, #0C1840 58%, #060E24 100%); }
+.cta-panel--prism .cta-mesh { background:
+  conic-gradient(from 196deg at 68% 8%, #2E4FA8 0deg, #6D5BD0 78deg, #4E8BE8 168deg,
+                 #16264F 250deg, #1A2E6E 320deg, #2E4FA8 360deg); }
+.cta-panel--prism .cta-mesh::after { content: ""; position: absolute; inset: 0;
+  background: radial-gradient(60% 70% at 50% 110%, rgba(6,14,36,.72), transparent 66%); }
+.cta-panel--engraved .cta-mesh { background:
+  radial-gradient(60% 80% at 16% 4%, #2E4FA8 0%, rgba(46,79,168,0) 60%),
+  radial-gradient(56% 72% at 86% 16%, #6D5BD0 0%, rgba(109,91,208,0) 58%),
+  linear-gradient(158deg, #16264F 0%, #1A2E6E 50%, #0C1840 100%); }
+.cta-panel--engraved::before { content: ""; position: absolute; left: 50%; top: 0;
+  transform: translateX(-50%); width: min(420px,60%); height: 2px; z-index: 1; border-radius: 2px;
+  background: linear-gradient(90deg, transparent, #9A7B2E, #C8A14B 38%, #E8C766 50%, #C8A14B 62%, #9A7B2E, transparent); }
+
+/* ── why-cards with photos (round 8: keep the cards, add the photo layer) ── */
+.whycard { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+.why-photo { aspect-ratio: 16/9; overflow: hidden; background: #F7F9FD;
+  border-bottom: 1px solid #E3E8F2; }
+.why-photo img { width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .5s cubic-bezier(.2,.8,.3,1); }
+.whycard:hover .why-photo img { transform: scale(1.05); }
+.why-body { padding: 20px 24px 22px; display: flex; flex-direction: column; flex: 1; }
+.why-body .mark { margin-top: -47px; position: relative; z-index: 1;
+  box-shadow: 0 0 0 4px #fff; }
+
+/* ── newsletter section goes navy, letters white (round 8: 'like how it was before') ── */
+.nlp-sec { background: linear-gradient(160deg, #081230 0%, #16264F 55%, #1A2E6E 100%);
+  border-top: 0; }
+.nlp-prism { background:
+  radial-gradient(30% 52% at 50% 0%, rgba(78,139,232,.22), transparent 66%),
+  radial-gradient(24% 40% at 22% 14%, rgba(109,91,208,.16), transparent 62%),
+  radial-gradient(24% 40% at 80% 10%, rgba(156,196,245,.14), transparent 62%); }
+.nlp-sec .section-eyebrow { color: #9CC4F5; }
+.nlp-sec .section-title { color: #fff !important; background: none !important;
+  -webkit-background-clip: initial !important; background-clip: initial !important;
+  -webkit-text-fill-color: #fff !important; }
+.nlp-sec .nlp-lede { color: rgba(255,255,255,.78); }
+.nlp-sec .nlp-list li { color: rgba(255,255,255,.75); }
+.nlp-sec .nlp-list li svg { color: #9CC4F5; }
+.nlp-sec .nlp-list b { color: #fff; }
+.nlp-sec .nlp-btn-p { background: #fff; color: #0C1840; box-shadow: 0 12px 26px -14px rgba(0,0,0,.6); }
+.nlp-sec .nlp-btn-p:hover { background: #F2F6FF; }
+.nlp-sec .nlp-btn-s { border: 1.5px solid rgba(255,255,255,.35); color: #fff; background: transparent; }
+.nlp-sec .nlp-btn-s:hover { border-color: rgba(255,255,255,.7); background: rgba(255,255,255,.06); }
+.nlp-sec .nlp-foot { color: rgba(255,255,255,.55); }
+
+/* ── contact business card: the sticky card was riding over What-Happens-Next
+     on scroll (numbered circles bleeding through the rows) - the rail scrolls
+     as one column now. Plus narrow-rail crunch fixes. ── */
+.gbp-business-card { position: static; }
+.gbp-business-row-primary { overflow-wrap: anywhere; }
+.gbp-business-row-primary a { font-size: 0.84rem; }
+.gbp-business-hours-list li { flex-wrap: wrap; }
+.gbp-business-hours-list .day { flex: none; min-width: 72px; }
+.gbp-business-hours-list .hours { text-align: right; flex: 1; }
+@media (max-width: 1100px) {
+  .gbp-business-row { padding: 0.85rem 1.1rem; gap: 0.75rem; }
+  .gbp-business-header { padding: 1.2rem; }
+}
+
+/* ── pl-sec mobile: kill the perceived dead zone above the cards ── */
+@media (max-width: 600px) {
+  .tenx.pl-sec { padding-top: 30px; }
+  .tenx.pl-sec .hprism { display: none; }
+  .tenx.pl-sec .hd { margin-bottom: 16px; }
+  .tenx.pl-sec .hd .dsc { display: none; }
+  .tenx.pl-sec .g3 { gap: 14px; }
+}
