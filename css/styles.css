@@ -4766,8 +4766,9 @@ main:focus { outline: none; }
    ========================================================================= */
 .fw-sec { position: relative; overflow: hidden; background: #fff;
   padding: clamp(52px, 6.4vw, 96px) 0 0; }
-.fw-glow { position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-  width: min(1700px, 142%); height: clamp(420px, 58vw, 760px); pointer-events: none; z-index: 0;
+.fw-glow { position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  /* full-bleed (2026-08-27): the centered max-width version read as a cropped
+     block floating on the page - the wash now covers the whole section */
   background:
     radial-gradient(42% 62% at 50% 4%, rgba(46,79,168,.26), transparent 68%),
     radial-gradient(30% 46% at 16% 24%, rgba(109,91,208,.16), transparent 64%),

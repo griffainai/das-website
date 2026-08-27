@@ -49,7 +49,7 @@
 
   function ill(name) {
     return '<svg class="das-ill das-ill-' + name + '" aria-hidden="true">' +
-           '<use href="' + (window.DAS_SPRITE || '/images/das-illustrations.svg') + '#das-' + name + '"></use></svg>';
+           '<use href="' + (window.DAS_SPRITE || '/images/das-illustrations.svg?v=2') + '#das-' + name + '"></use></svg>';
   }
 
   /* ── persistence — same key the old widget used, so history survives ────── */

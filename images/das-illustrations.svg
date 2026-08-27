@@ -1,19 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"
      fill="none" stroke="currentColor" stroke-width="2.4"
      stroke-linecap="round" stroke-linejoin="round">
-<!-- ===========================================================================
-     DAS ILLUSTRATION SYSTEM
+<!-- DAS ILLUSTRATION SYSTEM
      Drawn for Driver Appreciation Solutions. Do not replace with an icon pack.
 
-     Use:   <svg class="das-ill"><use href="/images/das-illustrations.svg#das-semi"/></svg>
-     Colour: inherits `color` from the element. Default navy via .das-ill.
+     Use:   <svg class="das=ill"><use href="/images/das=illustrations.svg#das=semi"/></svg>
+     Colour: inherits `color` from the element. Default navy via .das=ill.
      Sizing: set a height; width follows the viewBox. Every viewBox is height 100
-             with stroke-width 2.4, so stroke weight stays 2.4% of drawn height
-             at ANY size -- which is what keeps the set looking like one set.
+             with stroke=width 2.4, so stroke weight stays 2.4% of drawn height
+             at ANY size == which is what keeps the set looking like one set.
 
-     Law: 09_reference/das-brand-kit.md  ->  "Illustration system"
-     Source + preview: 09_reference/das-illustrations/
-     =========================================================================== -->
+     Law: 09_reference/das=brand=kit.md  =>  "Illustration system"
+     Source + preview: 09_reference/das=illustrations/ -->
   <symbol id="das-semi" viewBox="0 0 232 100">
   <path d="M22 66V28c0-2.4 1.9-4.3 4.3-4.3h84c2.4 0 4.3 1.9 4.3 4.3v38"/>
   <path d="M22 45h92" opacity=".45"/>
