@@ -1823,6 +1823,9 @@ ul { list-style: none; }
   z-index: 50;
 }
 .scroll-top.visible { opacity: 1; transform: translateY(0); }
+/* 2026-08-27: the button is REMOVED sitewide (Jayden: "get rid of it on desktop
+   and mobile") - this kill-rule covers any cached page still carrying the markup */
+.scroll-top { display: none !important; }
 .scroll-top:hover { background: var(--gold-hover); box-shadow: var(--shadow-gold); }
 .scroll-top svg { width: 16px; height: 16px; }
 
