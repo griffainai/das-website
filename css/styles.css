@@ -5464,13 +5464,22 @@ main:focus { outline: none; }
    2.4%-of-height strokes on a bare white ground disappear at a glance.
    Section marks now sit in a filled chip with a heavier stroke.
    ============================================================ */
-.pl-sec .bd .mark { width: 64px; height: 64px; border-radius: 14px;
+/* THE ROOT CAUSE, found 2026-08-27 after four rounds: the original card design
+   declared .pl-sec .mark / .ff-sec .mark as CORNER WATERMARKS — absolute,
+   opacity .055/.07 — and that opacity kept winning over every later restyle
+   because no override ever set it. The marks are now real chips: in flow,
+   fully opaque, every inherited watermark property explicitly reversed. */
+.pl-sec .bd .mark { position: static !important; opacity: 1 !important;
+  right: auto; bottom: auto; z-index: auto; pointer-events: none;
+  width: 64px; height: 64px; border-radius: 14px;
   background: #EEF3FB; border: 1px solid #DCE5F2;
   display: grid; place-items: center; margin-bottom: 12px; }
 .pl-sec .bd .mark .das-ill { height: 38px; min-height: 0; width: auto;
   stroke-width: 3.4; color: #1A2E6E; }
 .whycard .mark .das-ill { stroke-width: 3.2; }
-.ff-sec .pc .mark { width: 56px; height: 56px; border-radius: 12px;
+.ff-sec .pc .mark { position: static !important; opacity: 1 !important;
+  right: auto; bottom: auto; z-index: auto; pointer-events: none;
+  width: 56px; height: 56px; border-radius: 12px;
   background: #EEF3FB; border: 1px solid #DCE5F2;
   display: grid; place-items: center; margin-bottom: 10px; }
 .ff-sec .pc .mark .das-ill { height: 32px; min-height: 0; stroke-width: 3.4; }
