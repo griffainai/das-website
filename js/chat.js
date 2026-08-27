@@ -60,6 +60,25 @@
   }
 
   // ── Parse <quote_data>...</quote_data> ────────────────────────
+  // The model ends every reply with <suggested_replies>[...]</suggested_replies>.
+  // The tag was never parsed here, so it rendered as literal text in the bubble —
+  // "it keeps saying suggested replies". Extract the options, strip the tag.
+  function parseSuggestions(text) {
+    const m = text.match(/<suggested_replies>([\s\S]*?)<\/suggested_replies>/)
+    let replies = []
+    if (m) { try { replies = JSON.parse(m[1].trim()).filter(x => typeof x === 'string').slice(0, 3) } catch {} }
+    return {
+      clean: text.replace(/<suggested_replies>[\s\S]*?(<\/suggested_replies>|$)/g, '').trim(),
+      replies,
+    }
+  }
+
+  // While STREAMING, the tag arrives half-open — hide it from the first '<sug'
+  // so the user never sees even a flash of it.
+  function hidePartialTag(text) {
+    return text.replace(/<sug[\s\S]*$/, '').replace(/<quote_data[\s\S]*$/, '')
+  }
+
   function parseQuote(text) {
     const m = text.match(/<quote_data>([\s\S]*?)<\/quote_data>/)
     if (!m) return { clean: text, quote: null }
@@ -358,6 +377,22 @@
     scrollBottom()
   }
 
+  function renderSuggestions(replies) {
+    const prev = document.getElementById('das-sug'); if (prev) prev.remove()
+    const wrap = document.createElement('div')
+    wrap.className = 'das-quick-replies'
+    wrap.id = 'das-sug'
+    replies.forEach(text => {
+      const btn = document.createElement('button')
+      btn.className = 'das-quick-btn'
+      btn.innerHTML = `<span>${escHtml(text)}</span>`
+      btn.addEventListener('click', () => { wrap.remove(); sendMessage(text) })
+      wrap.appendChild(btn)
+    })
+    msgsEl.appendChild(wrap)
+    scrollBottom()
+  }
+
   function renderQuoteCard(quote) {
     // Remove existing card if any
     const existing = document.getElementById('das-quote-card')
@@ -434,6 +469,7 @@
   }
 
   async function sendMessage(content) {
+    const stale = document.getElementById('das-sug'); if (stale) stale.remove()
     if (!content.trim() || isStreaming) return
     inputEl.value = ''
     setStreaming(true)
@@ -479,15 +515,18 @@
         if (done) break
         accumulated += decoder.decode(value, { stream: true })
         messages[idx].content = accumulated
-        if (bubble) bubble.innerHTML = `<p>${md(accumulated)}</p>`
+        if (bubble) bubble.innerHTML = `<p>${md(hidePartialTag(accumulated))}</p>`
         scrollBottom()
       }
 
-      // Parse quote
-      const { clean, quote } = parseQuote(accumulated)
+      // Parse the machine tags out of the reply. Order matters: suggestions
+      // first (so a reply carrying both tags cleans fully), then the quote.
+      const sug = parseSuggestions(accumulated)
+      const { clean, quote } = parseQuote(sug.clean)
       messages[idx].content = clean
       if (bubble) bubble.innerHTML = `<p>${md(clean)}</p>`
       if (quote) renderQuoteCard(quote)
+      if (sug.replies.length && !quote) renderSuggestions(sug.replies)
       saveSession()
     } catch (err) {
       removeTyping()

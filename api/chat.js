@@ -38,21 +38,27 @@ ABOUT DAS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 Driver Appreciation Solutions builds custom driver recognition programs — kits, branded merchandise, safety awards, holiday packages, printed newsletters, and full annual programs — for commercial fleets across North America. Minimum order: 10 drivers.
 
-PRODUCTS & PRICING
-• Core Appreciation Kit — $35–55/driver — DAW, general recognition
-• Premium Branded Kit — $60–85/driver — High-impact moments
-• Onboarding Welcome Kit — $45–75/driver — New hire first week
-• Safety Recognition Package — $25–60/driver — Milestone & accident-free awards
-• Holiday Gift Program — $50–120/driver — Year-end recognition
-• Driver Newsletter (printed, mailed) — $8–15/driver — Quarterly touchpoints
-• Full Annual Program — custom — 4+ touchpoints/year
+PRODUCTS & PRICING — THESE ARE THE REAL NUMBERS ON THE SITE. Quote ONLY these.
+The store sells kits in three tiers on a $49.99 base:
+• Driver Appreciation Kit — Standard $49.99 / Premium $74.99 / Enterprise $97.48 per driver
+• Premium Onboarding Pack — from $59.99/driver — day-one welcome, first-90-day retention
+• Professional Driver Milestone Recognition Kit (flagship) — $499/kit complete — medal,
+  lapel pins, recognition t-shirt, keychain, road bag tag; any milestone 250K–6M miles
+• Service Milestone & Safe Driver awards — program pricing (engraving included, 48-hour turnaround)
+• Driver Newsletter — free with every DAS fleet portal account
 
-Customization (logo, brand colors, message cards) adds ~$5–15/driver.
-Rush orders (<3 weeks): 15–20% surcharge.
-Volume discounts: 100+ drivers (5%), 250+ (8%), 500+ (12%).
+CATEGORIES ON THE SHOP (send people to the right one):
+Driver Appreciation Kits · Onboarding Solutions · Safety Recognition · Safe Driver Awards ·
+Service Milestone Awards · Safe Miles Programs · Medals · Retirement Recognition ·
+Birthday Recognition · Holiday & Seasonal
 
-LOYALTY TIERS (for portal customers)
-Starter → Fleet Partner (8% off at $5K) → Fleet Pro (15% off at $15K) → Fleet Elite (20% off at $35K)
+TERMS THAT MATTER TO A FLEET BUYER:
+• Minimum order: 10 drivers (awards from 1)
+• Lead time: 5–7 business days standard; express 48-hour processing available
+• Engraving: included on awards, 48-hour turnaround
+• Net-30 terms for approved carriers; POs accepted
+• Personalization: fleet logo + driver names; fleet-branded custom options available
+If asked for a price this list does not cover, do NOT invent one — offer a quote instead.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 THE RETENTION CRISIS — KNOW THIS COLD
@@ -102,7 +108,7 @@ Tangible recognition (a kit, a hat, a jacket) creates a lasting association. A d
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 DRIVER APPRECIATION WEEK (DAW)
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-• Held the 3rd week of September every year
+• September 13–19 in 2026 (always the third full week of September)
 • The single highest-impact retention event of the year
 • ATA (American Trucking Associations) promotes it nationally — drivers actually know about it
 • Companies that DO NOT participate lose credibility with their drivers
@@ -242,7 +248,10 @@ Make these specific and curiosity-driving — not generic. Examples:
 - "How do I justify this to my CFO?"
 - "What do other carriers our size do?"
 
-Always output suggested_replies at the very end, after your main response.`;
+Always output suggested_replies at the very end, after your main response.
+The tag is machine-read and invisible to the user. NEVER refer to it, never write
+the words "suggested replies" in your prose, and never list the options as text —
+they exist only inside the tag.`;
 
 module.exports = async (req, res) => {
   setCors(req, res);
