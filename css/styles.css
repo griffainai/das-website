@@ -5191,3 +5191,32 @@ main:focus { outline: none; }
   .ff-sec .pc .pi { border-right: 0; border-bottom: 1px solid #E3E8F2; }
   .ff-sec .pc .pi img { aspect-ratio: 1200/896; }
 }
+
+
+/* ============================================================
+   MOBILE COUNTDOWN TRIM (2026-08-27) — the segmented clock.
+   On a phone the bar drops its prose and unit letters; the
+   countdown reads as a clock: 16 : 09 : 41 : 05, tabular digits
+   with colon separators. Jayden's pick, from the timer reference.
+   ============================================================ */
+@media (max-width: 760px) {
+  .announcement-bar-enterprise .ann-bar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; padding: 7px 14px; flex-wrap: nowrap; }
+  .ann-bar-left { gap: 6px; min-width: 0; }
+  .ann-bar-dates, .ann-bar-divider, .ann-bar-msg,
+  .ann-cd-prefix, .ann-cd-label { display: none; }
+  .ann-bar-event-label { font-size: 9.5px; font-weight: 700;
+    letter-spacing: .13em; text-transform: uppercase;
+    color: rgba(255,255,255,.85); white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; }
+  .ann-bar-right { gap: 10px; flex: none; }
+  .ann-bar-countdown { gap: 0; }
+  .ann-cd-unit { gap: 0; }
+  .announcement-bar-enterprise .ann-cd-num { font-size: 17px; font-weight: 700;
+    letter-spacing: .02em; font-variant-numeric: tabular-nums; }
+  .ann-cd-sep { width: auto; height: auto; background: none; align-self: baseline; }
+  .ann-cd-sep::before { content: ":"; font-size: 14px; font-weight: 700;
+    color: rgba(255,255,255,.45); padding: 0 5px; line-height: 1; }
+  .ann-bar-cta { padding: 6px 12px; font-size: 11.5px; flex: none; }
+}
