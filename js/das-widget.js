@@ -48,8 +48,11 @@
   };
 
   function ill(name) {
+    /* LOCAL fragment — iOS Safari never supported external <use>; js/das-sprite.js
+       inlines the sprite so #das-* resolves on every browser. */
+    if (window.DASSpriteInject) window.DASSpriteInject();
     return '<svg class="das-ill das-ill-' + name + '" aria-hidden="true">' +
-           '<use href="' + (window.DAS_SPRITE || '/images/das-illustrations.svg?v=2') + '#das-' + name + '"></use></svg>';
+           '<use href="#das-' + name + '"></use></svg>';
   }
 
   /* ── persistence — same key the old widget used, so history survives ────── */
