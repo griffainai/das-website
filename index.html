@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=29">
+  <link rel="stylesheet" href="css/styles.css?v=30">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
@@ -302,6 +302,7 @@
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
   <script src="/js/tracking.js?v=3" defer></script>
   <script src="/js/upsell-modal.js?v=1" defer></script>
+  <link rel="stylesheet" href="css/das-widget.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -1425,14 +1426,7 @@
      ============================================================ -->
 <section class="section-sm" style="border-top:1px solid var(--gold-border)">
   <div class="container">
-    <div class="cta-banner" style="text-align:center">
-      <div class="cta-banner-eyebrow">Corporate Purchasing</div>
-      <h2 class="cta-banner-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Buying for Your Company?</h2>
-      <p class="cta-banner-desc" style="font-size:1.05rem;max-width:620px;margin-left:auto;margin-right:auto">Need a quote, purchase order, vendor setup, or Net 30 terms? We make corporate purchasing simple — whether you pay today or work through your company's process.</p>
-      <div class="cta-banner-actions">
-        <a href="company-purchasing.html" class="btn btn-primary btn-lg">Buy for My Company</a>
-      </div>
-    </div>
+    <div class="cta-panel"><div class="cta-mesh"></div><div class="cta-grain"></div><span class="cta-panel-eyebrow">Corporate Purchasing</span><h2 class="cta-panel-title">Buying for your company?</h2><p class="cta-panel-desc">Need a quote, purchase order, vendor setup, or Net 30 terms? We make corporate purchasing simple — whether you pay today or work through your company's process.</p><div class="cta-panel-acts"><a href="company-purchasing.html" class="pill pill-white">Buy for My Company <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="contact.html" class="pill pill-glass">Talk to Our Team</a></div></div>
   </div>
 </section>
 
@@ -1518,7 +1512,7 @@
 <script src="js/pricing-gate.js?v=4"></script>
 <!-- Scout AI chat widget — self-contained, no dependencies -->
 <script src="js/das-dock.js?v=2" defer></script>
-<script src="js/chat.js?v=2" defer></script>
+<script src="js/das-widget.js?v=1" defer></script>
 <script>
   // ── Solution Modal ─────────────────────────────────────────
   const SOLUTION_DATA = {

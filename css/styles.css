@@ -4961,3 +4961,38 @@ main:focus { outline: none; }
   body { padding-bottom: env(safe-area-inset-bottom, 0); }
   .nav { padding-left: env(safe-area-inset-left, 0); padding-right: env(safe-area-inset-right, 0); }
 }
+
+
+/* ============================================================
+   THE CLOSER — the aurora CTA panel (ratified 2026-08-27)
+   One panel, sitewide: navy mesh with violet and sky blooms,
+   grain overlay, Anton headline reversed out, white + glass pills.
+   The mesh is rebuilt inside the navy family — colourway is law.
+   ============================================================ */
+.cta-panel { position: relative; overflow: hidden; border-radius: 24px; isolation: isolate;
+  padding: clamp(44px,6vw,86px) clamp(24px,4vw,64px); text-align: center;
+  box-shadow: 0 40px 90px -50px rgba(6,14,36,.7); }
+.cta-panel .cta-mesh { position: absolute; inset: 0; z-index: -2; background:
+  radial-gradient(58% 78% at 12% 6%, #2E4FA8 0%, rgba(46,79,168,0) 62%),
+  radial-gradient(52% 70% at 88% 12%, #6D5BD0 0%, rgba(109,91,208,0) 60%),
+  radial-gradient(64% 82% at 74% 92%, #4E8BE8 0%, rgba(78,139,232,0) 64%),
+  radial-gradient(48% 60% at 26% 88%, #16264F 0%, rgba(22,38,79,0) 62%),
+  linear-gradient(152deg, #16264F 0%, #1A2E6E 46%, #0C1840 100%); }
+.cta-panel .cta-grain { position: absolute; inset: 0; z-index: -1; opacity: .32; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E"); }
+.cta-panel-eyebrow { display: inline-block; font-family: 'Inter', -apple-system, sans-serif;
+  font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
+  color: rgba(255,255,255,.68); margin-bottom: 16px; }
+.cta-panel-title { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: .008em; line-height: 1.02; font-size: clamp(30px,4.4vw,54px) !important;
+  color: #fff; margin: 0; -webkit-text-fill-color: #fff; background: none; }
+.cta-panel-desc { font-family: 'Inter', -apple-system, sans-serif;
+  font-size: clamp(15px,1.3vw,17px); line-height: 1.68; color: rgba(255,255,255,.74);
+  max-width: 56ch; margin: 16px auto 0; }
+.cta-panel-acts { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+  margin-top: clamp(26px,3.2vw,38px); }
+.cta-panel .pill-white { background: #fff; color: var(--ink); }
+.cta-panel .pill-white:hover { background: #F2F6FF; }
+.cta-panel-foot { font-family: 'Inter', -apple-system, sans-serif; font-size: 12.5px;
+  color: rgba(255,255,255,.55); margin-top: clamp(18px,2vw,24px); }
+@media (max-width: 600px) { .cta-panel-acts .pill { width: 100%; justify-content: center; min-height: 48px; } }
