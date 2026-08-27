@@ -4938,6 +4938,12 @@ main:focus { outline: none; }
      Saved / Cart / Sign In into 188px of space in the first place */
   .nav-cart-label { display: none; }
 
+  /* Sign In moves into the drawer on phones — it now exists there on every
+     page. An 85px pill was the single largest object in a 188px action area;
+     iOS convention keeps account entry behind the menu. Bar is now
+     logo + Saved + Cart + burger: four targets, all 44px. */
+  .nav-login-btn { display: none; }
+
   /* ---- 3. never let Safari zoom the page on input focus ---- */
   /* An input with NO type attribute defaults to text but does not match
      input[type="text"] — two on shop.html were slipping through and would

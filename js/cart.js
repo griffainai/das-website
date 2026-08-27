@@ -229,7 +229,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const drawer  = document.querySelector('.mobile-drawer');
   const closeBtn= document.querySelector('.mobile-close-btn');
 
-  function openNav()  { overlay?.classList.add('open'); drawer?.classList.add('open'); document.body.style.overflow='hidden'; }
+  function openNav()  {
+    // If the page has no drawer, do nothing at all. The old body ran
+    // document.body.style.overflow='hidden' unconditionally, so on any page
+    // missing the markup a tap on the hamburger FROZE scrolling with no menu
+    // and no way back short of reloading. Three live pages shipped that way.
+    if (!drawer) return;
+    overlay?.classList.add('open'); drawer.classList.add('open');
+    document.body.style.overflow='hidden';
+  }
   function closeNav() { overlay?.classList.remove('open'); drawer?.classList.remove('open'); document.body.style.overflow=''; }
 
   toggle?.addEventListener('click', openNav);
