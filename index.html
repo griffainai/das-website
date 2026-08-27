@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=23">
+  <link rel="stylesheet" href="css/styles.css?v=25">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
@@ -1399,9 +1399,14 @@
   </div>
   <div class="fw-band">
     <picture>
-      <source media="(min-width:900px)" srcset="/images/insights-first30-card.webp" width="1774" height="887">
-      <img src="/images/first30-manager-driver.webp" width="1536" height="1024"
-           alt="A fleet manager recognising a driver" loading="lazy">
+      <!-- Desktop: a real photograph of the fleet at the terminal. The previous
+           source was insights-first30-card.webp - the BLOG CARD graphic for the
+           first-30-days article, chosen only because it was the widest file we
+           had. It was never a photograph. -->
+      <source media="(min-width:900px)" srcset="/images/safedriver-truck.webp" width="1536" height="1024">
+      <img src="/images/home-hero-1400.webp" width="1400" height="1050"
+           alt="A professional truck driver recognised by two fleet managers beside a Driver Appreciation kit"
+           loading="lazy">
     </picture>
     <div class="fw-scrim"></div>
     <div class="fw-bandin"><div class="container">
