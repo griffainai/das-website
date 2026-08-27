@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"
+     fill="none" stroke="currentColor" stroke-width="2.4"
+     stroke-linecap="round" stroke-linejoin="round">
+<!-- ===========================================================================
+     DAS ILLUSTRATION SYSTEM
+     Drawn for Driver Appreciation Solutions. Do not replace with an icon pack.
+
+     Use:   <svg class="das-ill"><use href="/images/das-illustrations.svg#das-semi"/></svg>
+     Colour: inherits `color` from the element. Default navy via .das-ill.
+     Sizing: set a height; width follows the viewBox. Every viewBox is height 100
+             with stroke-width 2.4, so stroke weight stays 2.4% of drawn height
+             at ANY size -- which is what keeps the set looking like one set.
+
+     Law: 09_reference/das-brand-kit.md  ->  "Illustration system"
+     Source + preview: 09_reference/das-illustrations/
+     =========================================================================== -->
+  <symbol id="das-semi" viewBox="0 0 232 100">
+  <path d="M22 66V28c0-2.4 1.9-4.3 4.3-4.3h84c2.4 0 4.3 1.9 4.3 4.3v38"/>
+  <path d="M22 45h92" opacity=".45"/>
+  <path d="M114.6 66V35h24.6c2.1 0 4.1 1 5.3 2.8l13.4 20c.6 1 1 2.2 1 3.4V66"/>
+  <path d="M140 39h12.4l9.3 13.4h-21.7z"/>
+  <path d="M158.8 66h11.6"/>
+  <path d="M131 35V24.6c0-1.2 1-2.1 2.1-2.1h5.2c1.2 0 2.1 1 2.1 2.1V35"/>
+  <path d="M30 32.5h10.4M30 38.7h6.2" opacity=".5"/>
+  <circle cx="46" cy="66.5" r="9.3"/><circle cx="46" cy="66.5" r="3.5"/>
+  <circle cx="83" cy="66.5" r="9.3"/><circle cx="83" cy="66.5" r="3.5"/>
+  <circle cx="140" cy="66.5" r="9.3"/><circle cx="140" cy="66.5" r="3.5"/>
+  <path d="M6 76h20M38 76h16M92 76h20M148 76h78" opacity=".5" stroke-dasharray="13 10"/>
+  </symbol>
+  <symbol id="das-road" viewBox="0 0 240 100">
+  <path d="M0 50h240" stroke-dasharray="26 20"/>
+  </symbol>
+  <symbol id="das-medal" viewBox="0 0 84 100">
+  <path d="M25 6l8.5 33M59 6l-8.5 33"/><path d="M19 6h46"/>
+  <circle cx="42" cy="64" r="27"/><circle cx="42" cy="64" r="18.6" opacity=".5"/>
+  <path d="M42 53l3.5 7.1 7.8 1.1-5.6 5.5 1.3 7.8L42 70.8l-7 3.7 1.3-7.8-5.6-5.5 7.8-1.1z"/>
+  </symbol>
+  <symbol id="das-kit" viewBox="0 0 96 100">
+  <path d="M9 30l39-18.5L87 30v41L48 89.5 9 71z"/>
+  <path d="M9 30l39 18.5L87 30M48 48.5v41"/>
+  <path d="M28.5 20.7L67 39v13.5" opacity=".45"/>
+  <path d="M36 60h11" opacity=".65"/>
+  </symbol>
+  <symbol id="das-sign" viewBox="0 0 88 100">
+  <path d="M44 42v52"/><path d="M30 94h28"/>
+  <path d="M11 8h53l12.5 17L64 42H11z"/>
+  <path d="M23 25h29"/><path d="M48 19l6.5 6-6.5 6"/>
+  </symbol>
+  <symbol id="das-driver" viewBox="0 0 80 100">
+  <path d="M22 30h36"/><path d="M25.5 30c0-8 6.5-14.5 14.5-14.5S54.5 22 54.5 30"/>
+  <path d="M54.5 26.5h8.5c1.5 0 2.4 1.7 1.5 2.9l-2.2 3" opacity=".6"/>
+  <circle cx="40" cy="45" r="12.5"/>
+  <path d="M15 92c0-13.8 11.2-25 25-25s25 11.2 25 25"/>
+  </symbol>
+  <symbol id="das-clipboard" viewBox="0 0 84 100">
+  <path d="M18 16h9v-4c0-2.2 1.8-4 4-4h22c2.2 0 4 1.8 4 4v4h9c2.2 0 4 1.8 4 4v68c0 2.2-1.8 4-4 4H18c-2.2 0-4-1.8-4-4V20c0-2.2 1.8-4 4-4z"/>
+  <path d="M27 16h30" opacity=".5"/>
+  <path d="M26 44l7 7 14-15"/><path d="M54 44h14" opacity=".7"/>
+  <path d="M26 66l7 7 14-15"/><path d="M54 66h14" opacity=".7"/>
+  </symbol>
+  <symbol id="das-mug" viewBox="0 0 68 100">
+  <path d="M16 22h32c1.7 0 3 1.4 2.9 3.1l-3.6 62c-.1 1.6-1.4 2.9-3 2.9H19.7c-1.6 0-2.9-1.3-3-2.9l-3.6-62c-.1-1.7 1.2-3.1 2.9-3.1z"/>
+  <path d="M13 22c0-6.6 5.4-12 12-12h14c6.6 0 12 5.4 12 12"/>
+  <path d="M14.6 44h34.8" opacity=".5"/>
+  <path d="M50.6 52h6.4c3.9 0 7 3.1 7 7s-3.1 7-7 7h-7" opacity=".75"/>
+  </symbol>
+  <symbol id="das-wrench" viewBox="0 0 92 100">
+  <path d="M62 12a22 22 0 00-19 33L14 74a9.5 9.5 0 1013.5 13.5l29-29A22 22 0 0084 39l-14 8-12-7 1-16a22 22 0 013-12z"/>
+  <circle cx="20.5" cy="80.5" r="3" opacity=".6"/>
+  </symbol>
+  <symbol id="das-calendar" viewBox="0 0 88 100">
+  <path d="M14 22h60c2.2 0 4 1.8 4 4v58c0 2.2-1.8 4-4 4H14c-2.2 0-4-1.8-4-4V26c0-2.2 1.8-4 4-4z"/>
+  <path d="M10 40h68"/>
+  <path d="M27 12v16M61 12v16"/>
+  <path d="M23 53h8M40 53h8M57 53h8" opacity=".7"/>
+  <path d="M23 70h8M40 70h8" opacity=".7"/>
+  <circle cx="61" cy="70" r="6"/>
+  </symbol>
+  <symbol id="das-pin" viewBox="0 0 72 100">
+  <path d="M36 8c14.4 0 26 11.6 26 26 0 19.5-26 50-26 50S10 53.5 10 34C10 19.6 21.6 8 36 8z"/>
+  <circle cx="36" cy="34" r="10"/>
+  <path d="M18 92h36" opacity=".5" stroke-dasharray="9 8"/>
+  </symbol>
+  <symbol id="das-wheel" viewBox="0 0 96 100">
+  <circle cx="48" cy="50" r="40"/><circle cx="48" cy="50" r="13"/>
+  <path d="M48 10v27M13.5 70l23.4-13.5M82.5 70L59.1 56.5"/>
+  <path d="M9.5 44a39 39 0 0177 0" opacity=".45"/>
+  </symbol>
+  <symbol id="das-clock" viewBox="0 0 88 100">
+  <circle cx="44" cy="52" r="38"/>
+  <path d="M44 30v22l15 9"/>
+  <path d="M44 14v-6M30 9h28" opacity=".6"/>
+  </symbol>
+  <symbol id="das-paper" viewBox="0 0 80 100">
+  <path d="M12 10h40l16 16v56c0 2.2-1.8 4-4 4H12c-2.2 0-4-1.8-4-4V14c0-2.2 1.8-4 4-4z"/>
+  <path d="M52 10v16h16"/>
+  <path d="M18 44h30M18 56h30M18 68h20" opacity=".65"/>
+  <path d="M18 32h20" opacity=".4"/>
+  </symbol>
+  <symbol id="das-badge" viewBox="0 0 80 100">
+  <path d="M40 8l28 11v25c0 20.5-12.4 35.5-28 42-15.6-6.5-28-21.5-28-42V19z"/>
+  <path d="M40 33l4.6 9.3 10.3 1.5-7.4 7.2 1.7 10.2L40 56.4l-9.2 4.8 1.7-10.2-7.4-7.2 10.3-1.5z"/>
+  </symbol>
+  <symbol id="das-headset" viewBox="0 0 88 100">
+  <path d="M16 58V48a28 28 0 0156 0v10"/>
+  <path d="M16 52h6c2.2 0 4 1.8 4 4v16c0 2.2-1.8 4-4 4h-6c-3.3 0-6-2.7-6-6V58c0-3.3 2.7-6 6-6z"/>
+  <path d="M72 52h-6c-2.2 0-4 1.8-4 4v16c0 2.2 1.8 4 4 4h6c3.3 0 6-2.7 6-6V58c0-3.3-2.7-6-6-6z"/>
+  <path d="M72 74v4c0 4.4-3.6 8-8 8H48" opacity=".7"/>
+  <circle cx="43" cy="86" r="4" opacity=".7"/>
+  </symbol>
+</svg>

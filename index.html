@@ -32,7 +32,8 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=18">
+  <link rel="stylesheet" href="css/styles.css?v=19">
+  <link rel="stylesheet" href="css/das-illustrations.css">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
        as a single sticky unit while scrolling. -->
@@ -1373,112 +1374,45 @@
 <!-- ============================================================
      HOW WE HELP FLEETS — enterprise split section
      ============================================================ -->
-<section class="how-help-section">
-
-  <!-- Decorative artifacts -->
-  <div class="how-help-dot-grid" aria-hidden="true"></div>
-  <div class="how-help-orb" aria-hidden="true"></div>
-
-  <div class="container" style="position:relative;z-index:2">
-    <div class="how-help-grid">
-
-      <!-- LEFT: content -->
-      <div class="how-help-content">
-        <span class="section-eyebrow">What Sets Us Apart</span>
-        <h2 class="how-help-title">How We Help<br>Fleets Win.</h2>
-        <p class="how-help-intro">Recognition isn't a nice-to-have — it's an operating lever. Fleets that invest in structured driver appreciation programs run safer, retain more drivers, and spend less on replacement. We make running that program effortless.</p>
-
-        <div class="how-help-kpi-grid">
-
-          <div class="how-help-kpi-card how-help-kpi-card--green">
-            <div class="how-help-kpi-num">23%</div>
-            <div class="how-help-kpi-name">Fewer Preventable Accidents</div>
-            <p class="how-help-kpi-detail">Recognized drivers are engaged drivers. Engagement reduces accident rates by 23% — recognition is a safety program, not a morale exercise.</p>
-          </div>
-
-          <div class="how-help-kpi-card how-help-kpi-card--blue">
-            <div class="how-help-kpi-num">30%</div>
-            <div class="how-help-kpi-name">Reduction in Early Turnover</div>
-            <p class="how-help-kpi-detail">Every departure costs $8,450–$20,050 in recruiting and lost productivity. Structured programs cut first-90-day attrition by 30%.</p>
-          </div>
-
-          <div class="how-help-kpi-card how-help-kpi-card--amber">
-            <div class="how-help-kpi-num">$134K</div>
-            <div class="how-help-kpi-name">Annual Savings Per 50-Driver Fleet</div>
-            <p class="how-help-kpi-detail">Calculated from reduced turnover costs alone. Add insurance premium improvements and accident-related savings and the number climbs further.</p>
-          </div>
-
-          <div class="how-help-kpi-card how-help-kpi-card--navy">
-            <div class="how-help-kpi-num">10:1</div>
-            <div class="how-help-kpi-name">Average Program ROI</div>
-            <p class="how-help-kpi-detail">For every $1 invested in a structured driver recognition program, fleets recover $10 through lower turnover, lower premiums, and improved performance.</p>
-          </div>
-
-        </div><!-- /kpi-grid -->
-
-        <div class="how-help-actions">
-          <a href="ideas.html" class="btn btn-ghost">
-            Read the Research
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-          </a>
-          <a href="shop.html" class="btn btn-primary">Start Your Program</a>
+<section class="fw-sec">
+  <div class="fw-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="fw-head">
+      <span class="section-eyebrow" data-reveal>What Sets Us Apart</span>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">How we help<br>fleets win.</h2>
+    </div>
+    <div class="fw-top">
+      <div class="fw-k">Return</div>
+      <div class="fw-big">10:1</div>
+      <div class="fw-tt">Average Program ROI</div>
+      <div class="fw-lede">
+        <p class="fw-dd">Recognition isn&rsquo;t a nice-to-have &mdash; it&rsquo;s an <b>operating lever</b>.
+        Fleets that invest in structured driver appreciation <b>run safer</b>, <b>retain more drivers</b>,
+        and <b>spend less on replacement</b>.</p>
+        <div class="fw-road">
+          <svg class="das-ill das-ill-road" aria-hidden="true"><use href="/images/das-illustrations.svg#das-road"></use></svg>
+          <svg class="das-ill das-ill-semi" aria-hidden="true"><use href="/images/das-illustrations.svg#das-semi"></use></svg>
         </div>
-      </div><!-- /content -->
-
-      <!-- RIGHT: visual stack -->
-      <div class="how-help-visual">
-
-        <!-- Floating stat chips -->
-        <div class="how-help-chip how-help-chip-1">
-          <div class="how-help-chip-value">23%</div>
-          <div class="how-help-chip-label">Fewer Accidents</div>
-        </div>
-        <div class="how-help-chip how-help-chip-2">
-          <div class="how-help-chip-value">10:1</div>
-          <div class="how-help-chip-label">Average ROI</div>
-        </div>
-        <div class="how-help-chip how-help-chip-3">
-          <div class="how-help-chip-value">30%</div>
-          <div class="how-help-chip-label">Less Turnover</div>
-        </div>
-
-        <!-- Main image -->
-        <div class="how-help-img-main">
-          <img src="images/Das Website Replacement Photo 1.0.png"
-               alt="American fleet truck — Driver Appreciation Solutions" loading="lazy"
-               onerror="this.style.background='var(--black-5)'">
-        </div>
-        <!-- Secondary image -->
-        <div class="how-help-img-secondary">
-          <img src="https://images.unsplash.com/photo-1566576721346-d4a3b4eaeb55?w=500&q=80&fit=crop"
-               alt="Driver appreciation kit" loading="lazy"
-               onerror="this.style.background='var(--black-5)'">
-        </div>
-
-        <!-- Bottom proof strip -->
-        <div class="how-help-proof">
-          <div class="how-help-proof-item">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Industry-Informed Selection
-          </div>
-          <div class="how-help-proof-item">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Dedicated Driver Focus
-          </div>
-          <div class="how-help-proof-item">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Simple Decisions for Fleets
-          </div>
-          <div class="how-help-proof-item">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-            Selected for Real Driver Use
-          </div>
-        </div>
-
-      </div><!-- /visual -->
-
-    </div><!-- /grid -->
+      </div>
+      <div class="fw-src"><span>For every $1 invested, fleets recover $10</span></div>
+    </div>
   </div>
+  <div class="fw-band">
+    <picture>
+      <source media="(min-width:900px)" srcset="/images/insights-first30-card.webp" width="1774" height="887">
+      <img src="/images/first30-manager-driver.webp" width="1536" height="1024"
+           alt="A fleet manager recognising a driver" loading="lazy">
+    </picture>
+    <div class="fw-scrim"></div>
+    <div class="fw-bandin"><div class="container">
+      <div class="fw-bandtitle">And what it does across the fleet</div>
+      <div class="fw-rail"><div class="c"><div class="n">23%</div><h3>Fewer Preventable Accidents</h3><div class="fw-src on-photo"><span>Derived from Gallup, State of the Global Workplace</span></div></div><div class="c"><div class="n">30%</div><h3>Reduction in Early Turnover</h3><div class="fw-src on-photo"><span>Departure cost: ATRI turnover research</span></div></div><div class="c"><div class="n">$128K</div><h3>Annual Saving, 50-Driver Fleet</h3><div class="fw-src on-photo"><span>Calculated from turnover cost alone</span></div></div></div>
+    </div></div>
+  </div>
+  <div class="fw-after"><div class="container"><div class="fw-ctas">
+    <a class="pill pill-blue" href="shop.html">Start your program<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a>
+    <a class="pill pill-ghost" href="ideas.html">Read the research</a>
+  </div></div></div>
 </section>
 
 <!-- ============================================================

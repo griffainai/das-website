@@ -80,6 +80,50 @@ Live words: FLEET (contact) · KITS (shop) · STORY (about) · CART · SUPPORT �
 PRESS · PROCURE · IDEAS · PREMIUM · GIFTS · WEEK · PRIVACY · TERMS · LEGAL ·
 REFUNDS · RETURNS · CHANGES · SMS
 
+## Illustration system (LOCKED 2026-08-23)
+
+DAS has its own drawings. **Do not substitute an icon pack** — that is the
+"no stupid-ass icons" rule, and a bought set is exactly what it forbids.
+
+**The asset:** `09_reference/das-illustrations/` — sprite, stylesheet, preview,
+and the generator that produces them. Deployed copies live at
+`das/web/images/das-illustrations.svg` and `das/web/css/das-illustrations.css`.
+
+```html
+<link rel="stylesheet" href="/css/das-illustrations.css">
+<svg class="das-ill das-ill-semi"><use href="/images/das-illustrations.svg#das-semi"/></svg>
+```
+
+**16 drawings:** semi · road · medal · kit · sign · driver · clipboard · mug ·
+wrench · calendar · pin · wheel · clock · paper · badge · headset.
+
+### The rules that make it a system
+
+- **Every viewBox is height 100, stroke-width 2.4.** Stroke therefore stays a
+  constant 2.4% of drawn height at any size. Mixed viewBox heights are the usual
+  reason a set stops looking like a set the moment one member is scaled.
+- **One sprite, referenced by `use`.** One request, cached site-wide, and no
+  duplicate path data to drift out of sync. Never paste a drawing inline.
+- **Stroke is `currentColor`.** A drawing inherits `color` from its context:
+  navy by default, `.das-ill-on-navy` (#9CC4F5) on dark grounds,
+  `.das-ill-brass` for earned-metal contexts only.
+- **Set a HEIGHT, never a width.** Width comes from the per-drawing
+  `aspect-ratio` in the stylesheet. A host `svg` wrapping a `use` has no
+  intrinsic ratio of its own — without those rules every drawing collapses into
+  an identically-shaped box and the wide ones letterbox. *(Caught in
+  verification 2026-08-23: all 16 were reporting the same three ratios. Now
+  measured correct at three sizes each.)*
+- **Minimum 44px tall.** At 34px the stroke computes to 0.8px and renders faint
+  on a 1x screen. Below 44px reach for a UI icon, not an illustration.
+- **`.das-ill-quiet` (opacity .42) for supporting marks.** Illustration frames
+  type; it must never compete with it.
+
+### Where it belongs
+
+Section ledes, empty states, process steps, category headers, 404 and thank-you
+pages, email headers. **Not** over photography, and **never as a product image**
+— real product photography still governs anything a fleet is actually buying.
+
 ## Layout rules Jayden has ruled on
 
 - **Sections stay horizontal.** Do not convert a horizontal three-up into a

@@ -1,0 +1,40 @@
+/* =========================================================================
+   DAS ILLUSTRATION SYSTEM
+   <svg class="das-ill das-ill-semi"><use href="/images/das-illustrations.svg#das-semi"/></svg>
+
+   Set a HEIGHT. Width follows from aspect-ratio below -- a host <svg> wrapping
+   <use> has no intrinsic ratio of its own, so without these rules every drawing
+   renders into an identically-shaped box and the wide ones letterbox.
+   Colour inherits `color`; default is DAS navy.
+   Law: 09_reference/das-brand-kit.md -> "Illustration system"
+   ========================================================================= */
+.das-ill{
+  display:inline-block; vertical-align:middle;
+  height:2.5rem; width:auto;
+  color:#1A2E6E; fill:none;
+}
+.das-ill-on-navy{ color:#9CC4F5 }
+.das-ill-brass{ color:#C8A14B }
+.das-ill-quiet{ opacity:.42 }
+
+/* MINIMUM SIZE. Stroke is 2.4% of height, so at 34px it computes to 0.8px and
+   renders faint on a 1x screen. Do not use these below 44px -- at that point
+   reach for a UI icon, not an illustration. */
+.das-ill{ min-height:44px }
+
+.das-ill-semi{aspect-ratio:232/100}
+.das-ill-road{aspect-ratio:240/100}
+.das-ill-medal{aspect-ratio:84/100}
+.das-ill-kit{aspect-ratio:96/100}
+.das-ill-sign{aspect-ratio:88/100}
+.das-ill-driver{aspect-ratio:80/100}
+.das-ill-clipboard{aspect-ratio:84/100}
+.das-ill-mug{aspect-ratio:68/100}
+.das-ill-wrench{aspect-ratio:92/100}
+.das-ill-calendar{aspect-ratio:88/100}
+.das-ill-pin{aspect-ratio:72/100}
+.das-ill-wheel{aspect-ratio:96/100}
+.das-ill-clock{aspect-ratio:88/100}
+.das-ill-paper{aspect-ratio:80/100}
+.das-ill-badge{aspect-ratio:80/100}
+.das-ill-headset{aspect-ratio:88/100}
