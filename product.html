@@ -899,6 +899,37 @@
 .story-acc-body .story-bullets { margin: 4px 0 12px; }
 .story-acc-body .story-bullets li { color: var(--pdp-muted); }
 
+/* gated (pricing-by-consultation) path — pricing-gate.js injects its own
+   runtime styles, so these carry the panel class for specificity */
+.product-info-panel .plan-cta-label { font-family: var(--pdp-ui); font-size: 22px;
+  font-weight: 700; letter-spacing: 0; color: var(--pdp-navy-800); line-height: 1.2; }
+.product-info-panel .plan-cta-sub { font-family: var(--pdp-ui); font-size: 11px;
+  font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--pdp-brass-deep); margin-top: 4px; }
+.product-info-panel .plan-learn-more { height: 52px; border-radius: 999px;
+  font-family: var(--pdp-ui); font-size: 15px; font-weight: 500; color: #fff;
+  background: var(--pdp-pill-blue); padding: 0 24px; margin-top: 14px;
+  box-shadow: var(--pdp-pill-glow), inset 0 1px 0 rgba(255,255,255,.3);
+  transition: filter .2s, transform .18s; }
+.product-info-panel .plan-learn-more:hover { background: var(--pdp-pill-blue);
+  filter: brightness(1.1); transform: translateY(-1px); }
+#pi-price .plan-learn-more { width: 100%; }
+
+/* value / customization blocks in the wash-card family */
+.das-value-block { background: var(--pdp-wash); border: 1px solid var(--pdp-line);
+  border-radius: 12px; }
+.das-value-block .dvb-title, .das-value-block .cust-title { font-family: var(--pdp-ui);
+  font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--pdp-navy); }
+
+/* laser block: a quiet collapsed row, not a 970px wall */
+.laser-block { background: transparent; border: 0; border-top: 1px solid var(--pdp-line);
+  border-bottom: 1px solid var(--pdp-line); border-radius: 0; padding: 0; margin: 20px 0; }
+.laser-block .story-acc { border-bottom: 0; }
+.laser-block .laser-options { margin: 6px 0 12px; }
+.laser-block .laser-options li { font-family: var(--pdp-ui); font-size: 13px; color: var(--pdp-muted); }
+.laser-block p { font-family: var(--pdp-ui); font-size: 13.5px; color: var(--pdp-muted); }
+
 /* mobile */
 @media (max-width: 760px) {
   .qty-step-input { font-size: 16px; }
@@ -1240,7 +1271,9 @@
 
         <!-- Optional Upgrade: Custom Laser Engraved Lid — shown via JS for presentation-case kits (p.laserEngraving) -->
         <div id="pi-laser-block" class="laser-block" style="display:none">
-          <div class="laser-block-title">Optional Upgrade: Custom Laser Engraved Lid</div>
+          <details class="story-acc">
+          <summary>Optional Upgrade: Custom Laser Engraved Lid <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+          <div class="story-acc-body">
           <p>Transform your recognition program into a truly personalized presentation experience. Many of our premium presentation cases can be upgraded with <strong>custom laser engraving directly into the interior lid</strong>, creating a lasting impression before the recipient even opens the kit.</p>
           <ul class="laser-options">
             <li>Company logo</li>
@@ -1252,6 +1285,8 @@
           </ul>
           <p>The laser engraving is permanently integrated into the case lid for a refined, executive-level presentation that elevates the overall gifting experience.</p>
           <p class="laser-ask"><strong>Ask your DAS representative about custom laser engraving options when requesting your quote.</strong></p>
+          </div>
+          </details>
         </div>
 
         <!-- Accordions -->
@@ -2194,16 +2229,13 @@ const PRODUCTS = {
     story: {
       heading: 'Because First Impressions Matter.',
       paragraphs: [
-        'You have already invested in bringing a new driver through the door — transportation to orientation, hotel accommodations, onboarding materials, safety training, recruiting time, and operational resources.',
-        'The Welcome Driver Appreciation Kit helps turn that investment into an immediate sense of belonging.',
-        'Imagine your new driver arriving during orientation and receiving a custom-branded kit featuring your company logo, colors, and welcome message. From week one, they feel seen, valued, and part of the team.',
-        'Each kit includes a custom coffee travel mug, t-shirt, bag, welcome pamphlet, and hat — all coordinated to reflect your company culture.',
+        'You have already invested real money getting a new driver through the door — recruiting, orientation travel, training, operational resources. The Welcome Driver Appreciation Kit turns that investment into an immediate sense of belonging.',
+        'Your new driver arrives at orientation and receives a custom-branded kit — your logo, your colors, your welcome message. Each kit includes a coffee travel mug, t-shirt, bag, welcome pamphlet, and hat.',
       ],
       addon: {
         heading: 'Pair it with a DAS Mile Pack.',
         paragraphs: [
-          'Complete the welcome experience with a DAS Mile Pack filled with snacks your new driver can enjoy in their hotel room, during breaks, or after a long day of onboarding and safety training.',
-          'Small gestures create lasting impressions. Help every new driver feel like they belong before they ever take their first load.',
+          'Complete the welcome with a Mile Pack of snacks for the hotel room, breaks, and the long days of orientation.',
         ],
         featuredId: 'mp-05',   // The Long Haul Snack Pack — rendered as a preview card with add-to-order
         linkHref: 'shop.html?category=milepacks',
@@ -2316,36 +2348,28 @@ const PRODUCTS = {
     story: {
       heading: 'A Gift They’ll Use Long After Driver Appreciation Week',
       paragraphs: [
-        'Every year, companies invest thousands of dollars recognizing the professional drivers who keep their operation moving. The Driver Road Warrior Backpack™ is designed to be more than a one-day gift.',
-        'Built for the realities of life on the road, this premium backpack provides drivers with a durable and professional way to carry everyday essentials, paperwork, electronics, personal belongings, travel items, and overnight necessities.',
-        'Whether it’s used during orientation, on regional routes, over-the-road trips, hotel stays, family travel, or daily commuting, this backpack quickly becomes a trusted companion.',
-        'Unlike gifts that are consumed, stored away, or forgotten, the Driver Road Warrior Backpack™ delivers value every day it is used.',
-        'A driver may enjoy this backpack for years after receiving it, creating thousands of positive interactions with your company’s appreciation investment.',
-        'When a driver uses this backpack at truck stops, terminals, hotels, airports, training events, and family outings, your company’s recognition continues to make an impression long after Driver Appreciation Week has ended.',
+        'Every year, companies invest thousands of dollars recognizing the professional drivers who keep their operation moving. The Driver Road Warrior Backpack™ is built to be more than a one-day gift: a durable, professional way to carry paperwork, electronics, travel items, and overnight essentials.',
+        'Unlike gifts that are consumed or stored away, a backpack gets used — at terminals, truck stops, hotels, and on family trips — so your recognition keeps making an impression for years after Driver Appreciation Week has ended.',
       ],
       featuresTitle: 'Why fleets choose it',
       features: [
         'Customized with Your Company Logo',
         'Premium Professional Appearance',
         'Spacious Multi-Compartment Design',
-        'Ideal for Tablets, Documents & Personal Items',
+        'Fits Tablets, Documents & Personal Items',
         'Durable Construction Built for Daily Use',
         'Comfortable for Long-Haul Travel',
-        'Excellent Driver Appreciation Week Gift',
-        'Outstanding New Hire & Orientation Gift',
-        'Long-Term Recognition Value',
       ],
       customSection: {
         title: 'Customized for Your Fleet',
         paragraphs: [
-          'Each Driver Road Warrior Backpack™ can be customized with your company logo to create a meaningful and professional recognition gift that reinforces pride, culture, and appreciation throughout your organization.',
-          'Customization details will be coordinated directly with a DAS representative after purchase.',
+          'Each backpack is customized with your company logo; details are coordinated directly with a DAS representative after purchase.',
         ],
       },
       addon: {
         heading: 'Complete the Experience',
         paragraphs: [
-          'Pair the Driver Road Warrior Backpack™ with a DAS Mile Pack to create a complete appreciation experience. Drivers can enjoy premium snacks and essentials during orientation, training, hotel stays, and while on the road.',
+          'Pair it with a DAS Mile Pack so drivers have premium snacks and essentials for orientation, hotel stays, and the road.',
         ],
         featuredId: 'mp-05',
         linkHref: 'shop.html?category=milepacks',
@@ -2394,15 +2418,13 @@ const PRODUCTS = {
     story: {
       heading: 'Self-Care That Travels Every Mile',
       paragraphs: [
-        'For over-the-road drivers, the truck is their workplace — but the shower stop is often the one place during the day where they can reset, recharge, and take care of themselves.',
-        'The Professional Driver Self-Care Kit™ is designed to keep personal essentials organized, protected, and readily accessible. Whether used at truck-stop shower facilities, hotels, orientation travel, or during life on the road, this practical kit helps drivers stay prepared, refreshed, and cared for wherever their route takes them.',
-        'Customized with your company logo and branding, this kit is more than a gift — it’s a statement that your organization recognizes the sacrifices drivers make every day and values their comfort and well-being beyond the driver’s seat.',
-        'Unlike many appreciation gifts that are used once and forgotten, the travel bag and included essentials provide lasting value that drivers will use again and again. (Soap fragrance may vary based on availability.)',
+        'For over-the-road drivers, the truck is the workplace — and the shower stop is often the one moment in the day to reset. The Professional Driver Self-Care Kit™ keeps personal essentials organized, protected, and ready, from truck-stop facilities to hotels and orientation travel.',
+        'Customized with your logo, it says your organization values drivers’ comfort beyond the driver’s seat — and unlike one-use gifts, the travel bag keeps working trip after trip. (Soap fragrance may vary based on availability.)',
       ],
       addon: {
         heading: 'Complete the Driver Experience',
         paragraphs: [
-          'Pair this kit with a DAS Mile Pack™ to provide drivers with convenient snacks and refreshments for the road ahead — perfect for shower stops, rest areas, and breaks between loads.',
+          'Pair it with a DAS Mile Pack™ for snacks and refreshments at shower stops, rest areas, and breaks between loads.',
         ],
         featuredId: 'mp-05',
         linkHref: 'shop.html?category=milepacks',
@@ -2640,54 +2662,35 @@ if (window.DAS_MILEPACKS) {
     story: {
       heading: 'More Than a Gift. A Safety Recognition Program.',
       paragraphs: [
-        'Every fleet wants a stronger safety culture. The challenge is finding meaningful ways to recognize the drivers who make that culture possible.',
-        'The Safe Miles Recognition Kit was designed to transform a safety milestone into a memorable recognition experience.',
-        'Rather than simply tracking safe miles internally, forward-thinking fleets use Safe Miles Recognition Kits to celebrate achievement at the moment it matters most. Whether recognizing 500,000 Safe Miles, 1 Million Safe Miles, or beyond, each kit serves as a tangible reminder that safe driving is noticed, valued, and appreciated.',
-        'When a professional driver reaches a major safety milestone, the accomplishment deserves more than a mention in a meeting or a certificate that ends up in a drawer. It deserves recognition that the driver can see, use, wear, and remember.',
+        'Every fleet wants a stronger safety culture. The Safe Miles Recognition Kit turns a safety milestone into a recognition event — something the driver can see, use, wear, and remember, not a certificate that ends up in a drawer.',
+        'Whether it’s 500,000 Safe Miles, 1 Million, or beyond, each kit makes the achievement visible at the moment it matters most.',
       ],
       sections: [
         {
           heading: 'Create a Recognition Event Drivers Remember',
-          paragraphs: ['Many fleets choose to present Safe Miles Recognition Kits during:'],
+          paragraphs: ['Many fleets present Safe Miles Recognition Kits during:'],
           bullets: ['Safety meetings', 'Driver appreciation events', 'Annual awards banquets', 'Terminal celebrations', 'Leadership recognition ceremonies', 'Driver milestone presentations'],
           paragraphsAfter: [
-            'The result is a visible demonstration that safety matters within your organization. Drivers see their peers being recognized. Managers reinforce company values. Families celebrate the accomplishment.',
-            'The culture becomes stronger with every milestone achieved.',
-          ],
-        },
-        {
-          heading: 'Built to Reinforce Safety Culture',
-          paragraphs: [
-            'The Safe Miles Recognition Kit combines practical driver-focused items with meaningful recognition pieces to create a complete milestone presentation. Each component has been selected to ensure the recipient receives something that is both useful and memorable.',
-            'The program is designed to support ongoing recognition at multiple milestones throughout a driver’s career, creating a clear pathway of achievement and reinforcing the behaviors that contribute to long-term safety success.',
-            'When implemented consistently, these recognition moments become part of the company’s safety culture rather than isolated awards.',
+            'Drivers see their peers recognized, managers reinforce company values, families celebrate — and the culture gets stronger with every milestone.',
           ],
         },
         {
           heading: 'Flexible Delivery Options',
-          paragraphs: ['Every fleet operates differently. That’s why Safe Miles Recognition Kits can be delivered in the manner that best supports your recognition program. Choose to have kits shipped directly to:'],
+          paragraphs: ['Kits ship wherever your program needs them:'],
           bullets: ['The driver’s home address', 'A terminal or domicile location', 'A safety manager', 'A fleet manager', 'A company headquarters', 'A driver appreciation event'],
           paragraphsAfter: [
-            'Some organizations prefer to present the award personally during a recognition ceremony. Others choose to surprise drivers by having the kit delivered directly to their home so family members can participate in the celebration.',
-            'Both approaches create meaningful recognition experiences that drivers remember.',
+            'Present it at a ceremony, or ship it to the driver’s home so the family shares the moment.',
           ],
         },
         {
-          heading: 'Designed for Growing Fleets',
-          paragraphs: ['Whether recognizing a handful of drivers each year or implementing a company-wide safety recognition strategy, the Safe Miles Recognition Kit provides a scalable solution that grows alongside your program. Ideal for:'],
-          bullets: ['Truckload Carriers', 'Dedicated Fleets', 'Private Fleets', 'LTL Operations', 'Ready-Mix Fleets', 'Construction Fleets', 'Municipal Fleets', 'Utility Fleets', 'Oil & Gas Transportation Operations'],
-        },
-        {
-          heading: 'Recognition That Supports Retention',
-          paragraphs: ['Professional drivers notice when safety achievements are recognized. The Safe Miles Recognition Kit helps organizations:'],
-          bullets: ['Celebrate verified safety milestones', 'Reinforce desired driving behaviors', 'Increase driver engagement', 'Strengthen safety culture', 'Improve recognition consistency', 'Demonstrate appreciation for professional drivers'],
-          paragraphsAfter: [
-            'Most importantly, it helps create moments that remind drivers their commitment to safety matters.',
-            'Because every safe mile represents a decision. Every milestone represents discipline. And every achievement deserves recognition.',
+          heading: 'Built for Any Fleet, Built for Retention',
+          paragraphs: [
+            'Practical driver-focused items plus meaningful recognition pieces, designed to repeat at multiple milestones across a career — from truckload and LTL to ready-mix, municipal, utility, and oil & gas fleets.',
           ],
+          bullets: ['Celebrate verified safety milestones', 'Reinforce safe driving behaviors', 'Strengthen safety culture', 'Show drivers their discipline is noticed'],
         },
       ],
-      closing: 'Safe Miles Recognition Kits — helping fleets recognize the drivers who set the standard for safety, professionalism, and excellence.',
+      closing: 'Safe Miles Recognition Kits — for the drivers who set the standard.',
     },
   };
 
