@@ -5457,3 +5457,20 @@ main:focus { outline: none; }
   .tenx.pl-sec .hd .dsc { display: none; }
   .tenx.pl-sec .g3 { gap: 14px; }
 }
+
+
+/* ============================================================
+   MARK CHIPS (2026-08-27) — the drawings were painting but not READING:
+   2.4%-of-height strokes on a bare white ground disappear at a glance.
+   Section marks now sit in a filled chip with a heavier stroke.
+   ============================================================ */
+.pl-sec .bd .mark { width: 64px; height: 64px; border-radius: 14px;
+  background: #EEF3FB; border: 1px solid #DCE5F2;
+  display: grid; place-items: center; margin-bottom: 12px; }
+.pl-sec .bd .mark .das-ill { height: 38px; min-height: 0; width: auto;
+  stroke-width: 3.4; color: #1A2E6E; }
+.whycard .mark .das-ill { stroke-width: 3.2; }
+.ff-sec .pc .mark { width: 56px; height: 56px; border-radius: 12px;
+  background: #EEF3FB; border: 1px solid #DCE5F2;
+  display: grid; place-items: center; margin-bottom: 10px; }
+.ff-sec .pc .mark .das-ill { height: 32px; min-height: 0; stroke-width: 3.4; }
