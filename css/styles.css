@@ -4831,8 +4831,24 @@ main:focus { outline: none; }
 /* desktop source is 1536x1024 (1.5); a 2.2:1 band keeps 68% of the frame,
    where the old 2.5:1 against a 2.0 source kept 80% but of a blog graphic */
 @media (min-width: 900px) { .fw-band { aspect-ratio: 2.2/1; } .fw-band img { object-position: center 44%; } }
-@media (max-width: 820px) { .fw-rail { grid-template-columns: 1fr; gap: 18px; }
-  .fw-rail .c { border-right: 0; padding-left: 0; } }
+@media (max-width: 820px) {
+  /* Mobile band redesign (2026-08-27): on a phone the photo and the stats stop
+     fighting for one 300px strip. The photo becomes its own 4:3 block; the
+     stats stack below it on solid navy at a size that actually reads. */
+  .fw-band { display: block; aspect-ratio: auto; }
+  .fw-band picture { position: static; display: block; width: 100%; height: auto; }
+  .fw-band picture img { position: static; width: 100%; height: auto;
+    aspect-ratio: 4/3; object-fit: cover; object-position: center 35%; }
+  .fw-scrim { display: none; }
+  .fw-bandin { background: linear-gradient(180deg, #0C1840, #16264F); padding: 28px 0 30px; }
+  .fw-bandtitle { margin-bottom: 18px; }
+  .fw-rail { grid-template-columns: 1fr; gap: 22px; }
+  .fw-rail .c { border-right: 0; padding-left: 0; padding-right: 0;
+    border-bottom: 1px solid rgba(255,255,255,.14); padding-bottom: 18px; }
+  .fw-rail .c:last-child { border-bottom: 0; padding-bottom: 0; }
+  .fw-rail .n { font-size: 44px; }
+  .fw-rail h3 { font-size: 15px; margin: 6px 0 6px; }
+}
 
 
 /* =========================================================================

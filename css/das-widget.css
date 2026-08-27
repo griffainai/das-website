@@ -229,6 +229,9 @@
   box-shadow:0 12px 40px rgba(6,14,36,.28);padding:14px 16px;cursor:pointer;
   font-family:var(--dw-ui);opacity:0;transform:translateY(8px);display:none;
   transition:opacity .24s ease,transform .24s ease}
+/* docked (the normal case): the dock lays it out — no fixed coordinates, no z fight */
+#das-dock #dwPreview{position:static;right:auto;bottom:auto;z-index:auto}
+#das-dock #dwPreview:not(.open){display:none}
 #dwPreview.open{display:block}
 #dwPreview.in{opacity:1;transform:none}
 .dw-preview-row{display:flex;align-items:flex-start;gap:10px}

@@ -155,11 +155,16 @@
       '<span class="dw-preview-txt">Recognising drivers this quarter? I can size a program in about a minute.</span></span></div>';
 
     document.body.appendChild(panel);
-    document.body.appendChild(previewEl);
     /* the dock owns the bottom-right corner (see js/das-dock.js) — the
-       launcher joins it as a flex child; the panel stays a fixed overlay */
-    if (window.DASDock) window.DASDock.mount(launcher, 90);
-    else document.body.appendChild(launcher);
+       launcher AND the preview bubble join it as flex children so nothing in
+       the corner can overlap anything else; the panel stays a fixed overlay */
+    if (window.DASDock) {
+      window.DASDock.mount(previewEl, 5);
+      window.DASDock.mount(launcher, 90);
+    } else {
+      document.body.appendChild(previewEl);
+      document.body.appendChild(launcher);
+    }
 
     msgsEl  = panel.querySelector('#dwMsgs');
     inputEl = panel.querySelector('#dwText');
@@ -323,12 +328,16 @@
   }
 
   /* ── proactive preview ──────────────────────────────────────────────────── */
+  var previewTimer = null;
   function showPreview() {
     if (panel.classList.contains('open')) return;
     previewEl.classList.add('open');
     requestAnimationFrame(function () { previewEl.classList.add('in'); });
     launcher.classList.add('has-unread');
     panel.querySelector('#dwBadge').classList.add('on');
+    /* self-dismissing: nobody should have to press the X (Jayden, 2026-08-27) */
+    clearTimeout(previewTimer);
+    previewTimer = setTimeout(hidePreview, 6000);
   }
   function hidePreview() {
     previewEl.classList.remove('in');

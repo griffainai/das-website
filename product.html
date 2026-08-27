@@ -18,8 +18,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=33">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap">
+  <link rel="stylesheet" href="css/styles.css?v=35">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
@@ -742,7 +742,170 @@
   <script src="/js/upsell-modal.js?v=1" defer></script>
   <!-- FBT bundle widget — populated by DASFBTInit() after the product loads -->
   <script src="/js/fbt.js?v=1" defer></script>
-  <link rel="stylesheet" href="css/das-widget.css?v=2">
+  <link rel="stylesheet" href="css/das-widget.css?v=3">
+
+<style id="pdp-merch-skin">
+/* ============================================================
+   PDP MERCH SKIN (2026-08-27) — the shop.griffain.io anatomy
+   ported onto the live commerce page. Reference:
+   _sandbox/das-10x/14-pdp/pdp-reference.html. CSS layer only:
+   every id and class the page JS drives is unchanged.
+   ============================================================ */
+:root {
+  --pdp-navy-800: #0C1840; --pdp-navy: #1A2E6E; --pdp-brass-deep: #9A7B2E;
+  --pdp-muted: #67718A; --pdp-line: #E3E8F2; --pdp-wash: #F7F9FD;
+  --pdp-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --pdp-pill-blue: linear-gradient(96deg, #16264F 0%, #1A2E6E 46%, #2E4FA8 100%);
+  --pdp-pill-glow: 0 10px 30px rgba(46,79,168,.42);
+}
+
+/* breadcrumb */
+.product-breadcrumb { font-size: 12px; color: var(--pdp-muted); margin-bottom: 24px; }
+.product-breadcrumb a { color: var(--pdp-muted); }
+.product-breadcrumb a:hover { color: var(--pdp-navy); text-decoration: none; }
+
+/* gallery */
+.main-image-area { border-radius: 14px; border: 1px solid var(--pdp-line); background: var(--pdp-wash); }
+.thumb-item { border-radius: 9px; border: 1.5px solid var(--pdp-line); background: var(--pdp-wash); }
+.thumb-item.active { border-color: var(--pdp-navy); }
+.thumb-item:hover:not(.active) { border-color: #B9C6DE; }
+
+/* info panel — Inter commerce UI, Anton identity */
+.product-info-panel { font-family: var(--pdp-ui); }
+.product-info-category { font-size: 11px; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--pdp-brass-deep); margin-bottom: 8px; }
+.product-info-name { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: .01em; font-size: clamp(26px, 2.8vw, 38px) !important; line-height: 1;
+  color: var(--pdp-navy-800); margin-bottom: 10px; }
+.product-info-price { font-size: 26px; font-weight: 700; color: var(--pdp-navy-800); margin-bottom: 20px; }
+.price-per { font-size: 13px; color: var(--pdp-muted); font-weight: 400; }
+.ideal-for { color: var(--pdp-muted); }
+.laser-badge { background: var(--pdp-navy); border-radius: 99px; font-family: var(--pdp-ui); }
+
+/* section labels */
+.section-label { font-size: 12px; font-weight: 600; color: var(--pdp-navy-800);
+  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 8px; }
+.section-label-muted { font-size: 11.5px; text-transform: none; letter-spacing: 0; color: var(--pdp-muted); }
+
+/* tiers — the size-card row */
+.tier-selector { gap: 7px; margin-bottom: 10px; }
+.tier-btn { border: 1.5px solid var(--pdp-line); border-radius: 10px; padding: 10px 6px 9px;
+  font-family: var(--pdp-ui); font-size: 11px; font-weight: 700; letter-spacing: .05em;
+  text-transform: uppercase; color: #5B6A8A; line-height: 1.3;
+  transition: border-color .15s, box-shadow .15s, color .15s; }
+.tier-btn:hover:not(.active) { border-color: #B9C6DE; color: var(--pdp-navy-800); }
+.tier-btn.active { border-color: var(--pdp-navy); background: #fff; color: var(--pdp-navy);
+  box-shadow: 0 0 0 3px rgba(46,79,168,.08); }
+.tier-btn .tier-price { font-size: 14px; font-weight: 700; color: var(--pdp-navy-800);
+  letter-spacing: 0; margin-top: 3px; }
+.tier-btn.active .tier-price { color: var(--pdp-navy-800); }
+.tier-desc { background: var(--pdp-wash); border: 1px solid var(--pdp-line); border-radius: 10px;
+  font-size: 12.5px; color: #3D4763; margin-bottom: 20px; }
+
+/* volume table */
+.volume-table { border: 1px solid var(--pdp-line); border-radius: 10px; }
+.volume-table tr.vt-active { background: var(--pdp-navy); }
+
+/* quantity — the pill stepper */
+.qty-stepper { border: 1.5px solid var(--pdp-line); border-radius: 999px; height: 48px; }
+.qty-step-btn { width: 40px; height: 100%; font-family: var(--pdp-ui); font-weight: 600;
+  font-size: 17px; color: var(--pdp-navy-800); }
+.qty-step-btn:hover { background: #F1F5FB; }
+.qty-step-input { font-family: var(--pdp-ui); font-weight: 600; color: var(--pdp-navy-800); }
+.qty-subtotal { font-size: 13px; color: var(--pdp-muted); }
+.qty-subtotal strong { color: var(--pdp-navy-800); font-weight: 700; font-size: 15px; }
+
+/* lead-time strip */
+.pdp-leadtime { display: flex; align-items: center; gap: 10px; background: var(--pdp-wash);
+  border: 1px solid var(--pdp-line); border-radius: 10px; padding: 11px 13px;
+  font-family: var(--pdp-ui); font-size: 12.5px; color: #3D4763; margin-bottom: 18px; }
+.pdp-leadtime svg { width: 20px; height: 20px; flex: none; color: var(--pdp-navy); }
+.pdp-leadtime b { font-weight: 700; }
+.pdp-leadtime .net { margin-left: auto; color: var(--pdp-brass-deep); font-weight: 600; white-space: nowrap; }
+
+/* primary actions — the pill system */
+.btn-add-cart { height: 52px; border-radius: 999px; font-family: var(--pdp-ui);
+  font-size: 15px; font-weight: 500; color: #fff; background: var(--pdp-pill-blue);
+  box-shadow: var(--pdp-pill-glow), inset 0 1px 0 rgba(255,255,255,.3);
+  transition: filter .2s, transform .18s, box-shadow .2s; }
+.btn-add-cart:hover { background: var(--pdp-pill-blue); filter: brightness(1.1); transform: translateY(-1px);
+  box-shadow: 0 16px 38px rgba(46,79,168,.52), inset 0 1px 0 rgba(255,255,255,.3); }
+.btn-add-cart:active { transform: translateY(0) scale(.98); }
+.btn-add-cart.added { background: #16a34a; box-shadow: none; filter: none; }
+.btn-favorite { height: 48px; border-radius: 999px; font-family: var(--pdp-ui);
+  font-size: 14px; font-weight: 500; border: 0; background: #fff; color: var(--pdp-navy-800);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.16); margin-bottom: 22px; }
+.btn-favorite:hover { background: #fff; box-shadow: inset 0 0 0 1px rgba(0,0,0,.34); }
+.btn-favorite.saved { box-shadow: inset 0 0 0 1.5px #e53e3e; border: 0; }
+#buy-for-company-link { border-radius: 999px; border: 1px solid rgba(26,46,110,.3);
+  color: var(--pdp-navy); font-family: var(--pdp-ui); padding: 10px 18px; }
+#buy-for-company-link:hover { background: var(--pdp-navy); color: #fff; }
+
+/* shipping rows + accordions */
+.shipping-row { border-color: var(--pdp-line); }
+.shipping-row:first-child { border-top-color: var(--pdp-line); }
+.shipping-title { font-family: var(--pdp-ui); }
+.accordion-item { border-color: var(--pdp-line); }
+.accordion-item:first-of-type { border-top-color: var(--pdp-line); }
+.accordion-trigger { font-family: var(--pdp-ui); font-size: 13px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em; color: var(--pdp-navy-800); padding: 15px 0; }
+.accordion-content p, .accordion-content li { font-family: var(--pdp-ui); color: var(--pdp-muted); }
+
+/* the two full-width sections below the grid */
+.product-story h2 { font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: .01em; color: var(--pdp-navy-800); line-height: 1.04; }
+.component-explorer { border: 1px solid var(--pdp-line); background: var(--pdp-wash); }
+
+/* FBT — Frequently Bought Together card */
+.fbt-card { border: 1px solid var(--pdp-line); border-radius: 14px; }
+.fbt-eyebrow { font-family: var(--pdp-ui); color: var(--pdp-brass-deep); letter-spacing: .14em; }
+.fbt-tile-on { border-color: var(--pdp-navy); background: rgba(46,79,168,.05); }
+
+/* related — You may also like */
+.related-section { background: linear-gradient(180deg, #FFFFFF, #F7F9FD); border-top: 1px solid var(--pdp-line); }
+.related-section .section-eyebrow { color: var(--pdp-navy); font-weight: 700;
+  letter-spacing: .24em; text-transform: uppercase; font-size: 11px; }
+.related-section h2 { font-family: 'Anton', sans-serif !important; font-weight: 400 !important;
+  text-transform: uppercase; letter-spacing: .01em !important; color: var(--pdp-navy-800) !important;
+  font-size: clamp(22px, 2.6vw, 32px) !important; line-height: 1.04; }
+#related-view-all { color: var(--pdp-navy) !important; }
+.related-card { border: 1px solid var(--pdp-line); border-radius: 14px; }
+.related-card:hover { border-color: #C0CDE6; box-shadow: 0 18px 40px -28px rgba(12,24,64,.4);
+  transform: translateY(-3px); }
+.related-card-img { background: var(--pdp-wash); }
+.related-card-cat { font-family: var(--pdp-ui); font-size: 10px; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase; color: #93A0B8; }
+.related-card-name { font-family: var(--pdp-ui); }
+.related-add-btn { border-radius: 999px; background: var(--pdp-pill-blue);
+  font-family: var(--pdp-ui); font-weight: 500; }
+.related-add-btn:hover { background: var(--pdp-pill-blue); filter: brightness(1.1); }
+.related-add-btn.qadded { background: #16a34a; filter: none; }
+
+/* product story - the collapsed detail pattern */
+.product-story h2 { font-size: clamp(22px, 2.6vw, 32px) !important; margin-bottom: 14px; }
+.product-story > p { font-size: 15px; line-height: 1.75; color: var(--pdp-muted); }
+.story-accs { margin-top: 10px; border-top: 1px solid var(--pdp-line); }
+.story-acc { border-bottom: 1px solid var(--pdp-line); }
+.story-acc summary { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 15px 2px; font-family: var(--pdp-ui); font-size: 13px; font-weight: 600;
+  color: var(--pdp-navy-800); cursor: pointer; list-style: none;
+  text-transform: uppercase; letter-spacing: .06em; }
+.story-acc summary::-webkit-details-marker { display: none; }
+.story-acc summary svg { flex: none; color: var(--pdp-muted); transition: transform .2s; }
+.story-acc[open] summary svg { transform: rotate(180deg); }
+.story-acc-body { padding: 0 2px 16px; }
+.story-acc-body p { font-size: 14px; line-height: 1.7; color: var(--pdp-muted); margin: 0 0 12px; }
+.story-acc-body p:last-child { margin-bottom: 0; }
+.story-acc-body .story-bullets { margin: 4px 0 12px; }
+.story-acc-body .story-bullets li { color: var(--pdp-muted); }
+
+/* mobile */
+@media (max-width: 760px) {
+  .qty-step-input { font-size: 16px; }
+  .pdp-leadtime { flex-wrap: wrap; }
+  .pdp-leadtime .net { margin-left: 30px; }
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#product-page-wrap">Skip to main content</a>
@@ -987,6 +1150,13 @@
           </div>
         </div>
 
+
+        <!-- Lead time + Net-30 strip (merch-skin, 2026-08-27) -->
+        <div class="pdp-leadtime">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.2V12l3.2 1.9"/></svg>
+          <span>Ships in <b>5&ndash;7 business days</b> to your terminal</span>
+          <span class="net">Net-30 available</span>
+        </div>
         <!-- ── EXPRESS CHECKOUT ── -->
         <div class="express-checkout-section">
           <div class="express-label-row">
@@ -2295,6 +2465,11 @@ const PRODUCTS = {
 // Tier multipliers + base prices come from the shared catalog (lib/catalog.js) when loaded,
 // so the storefront and the checkout price-authority can never drift. Hardcoded values are fallbacks.
 const TIER_MULTS = (window.DASCatalog && window.DASCatalog.MULTIPLIERS) || { standard: 1.0, premium: 1.5, enterprise: 1.95 };
+/* Tier price in INTEGER CENTS. 49.99*1.5 in floats is 74.98499999... which
+   toFixed(2) truncates to $74.98 - a price published nowhere on the site
+   (seven pages advertise $74.99). Math.round(4999*1.5)=7499 -> $74.99. Same
+   defect and same fix as lib/recognition-pricing.js's July note. */
+function tierUnitPrice(base, mult) { return Math.round(Math.round(Number(base) * 100) * Number(mult)) / 100; }
 try {
   if (window.DASCatalog) Object.keys(PRODUCTS).forEach(function (pid) {
     var c = window.DASCatalog.lookup(pid);
@@ -2333,7 +2508,7 @@ function isSingle(p) { return !!(p && p.pricingModel === 'single'); }
 function currentUnit(p, qty) {
   if (isVolume(p)) return volumeUnitPrice(p, qty);
   if (isSingle(p)) return p.price;
-  return p.price * TIER_MULTS[currentTier];
+  return tierUnitPrice(p.price, TIER_MULTS[currentTier]);
 }
 
 /* ── Merge the MILE PACKS into PRODUCTS as single-price products (archived ones skipped → no PDP) ── */
@@ -2865,8 +3040,8 @@ function renderProduct() {
   // Tier prices on buttons (tier-priced products only)
   if (!vol && !single) {
     document.getElementById('tier-price-standard').textContent  = `$${p.price.toFixed(2)}/unit`;
-    document.getElementById('tier-price-premium').textContent   = `$${(p.price * TIER_MULTS.premium).toFixed(2)}/unit`;
-    document.getElementById('tier-price-enterprise').textContent = `$${(p.price * 1.95).toFixed(2)}/unit`;
+    document.getElementById('tier-price-premium').textContent   = `$${tierUnitPrice(p.price, TIER_MULTS.premium).toFixed(2)}/unit`;
+    document.getElementById('tier-price-enterprise').textContent = `$${tierUnitPrice(p.price, TIER_MULTS.enterprise).toFixed(2)}/unit`;
   }
 
   // Included list
@@ -2965,7 +3140,7 @@ function renderProduct() {
       name: p.name,
       tier: currentTier,
       tierLabel,
-      price: parseFloat((p.price * TIER_MULTS[currentTier]).toFixed(2)),
+      price: tierUnitPrice(p.price, TIER_MULTS[currentTier]),
       image: p.images[0],
       category: p.category,
     };
@@ -2999,7 +3174,7 @@ function updatePriceDisplay() {
       : `$${p.price.toFixed(2)} <span class="price-per">per ${p.unitNoun || 'unit'}</span>`;
   } else {
     const mult = TIER_MULTS[currentTier];
-    const price = (p.price * mult).toFixed(2);
+    const price = tierUnitPrice(p.price, mult).toFixed(2);
     document.getElementById('pi-price').innerHTML = `$${price} <span class="price-per">per unit</span>`;
   }
   updateSubtotal();
@@ -3361,7 +3536,7 @@ function addToCart() {
     cartItem = {
       id:       `${p.id}-${currentTier}`,
       name:     `${p.name} (${tierLabel})`,
-      price:    parseFloat((p.price * mult).toFixed(2)),
+      price:    tierUnitPrice(p.price, mult),
       category: p.category,
       image:    p.images[0],
       minQty:   p.minQty,
@@ -3391,7 +3566,7 @@ function quickAdd(id, btn) {
   } else {
     const m = (typeof TIER_MULTS !== 'undefined' && TIER_MULTS.standard) || 1.0;
     cartItem = { id: p.id + '-standard', name: p.name + ' (Standard)',
-                 price: parseFloat((p.price * m).toFixed(2)), category: p.category, image: p.images[0], minQty: p.minQty };
+                 price: tierUnitPrice(p.price, m), category: p.category, image: p.images[0], minQty: p.minQty };
   }
   Cart.add(cartItem, qty);
   if (btn) {
@@ -3477,7 +3652,7 @@ async function initExpressCheckout() {
         lineItem = {
           id:       `${p2.id}-${currentTier}`,
           name:     `${p2.name} — ${tierLabel} Tier`,
-          price:    parseFloat((p2.price * mult2).toFixed(2)),
+          price:    tierUnitPrice(p2.price, mult2),
           qty:      qty2,
           image:    p2.images[0],
           category: p2.category,
@@ -3693,22 +3868,31 @@ function renderStory(p) {
   if (!s) { el.style.display = 'none'; el.innerHTML = ''; return; }
   const esc = v => String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   const paras = arr => (arr || []).map(t => '<p>' + esc(t) + '</p>').join('');
+  /* Redesigned 2026-08-27 to the top-ecom detail pattern: a SHORT visible lead
+     (heading + at most two paragraphs), and everything else collapsed into
+     scannable accordions. The five story products ran 215-609 words rendered
+     as one flat wall; the content stays in the DOM (SEO intact) but the page
+     shows structure, not an essay. */
+  const CHEV = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  const acc = (title, inner) => inner
+    ? '<details class="story-acc"><summary>' + esc(title) + CHEV + '</summary><div class="story-acc-body">' + inner + '</div></details>' : '';
   let html = '<div class="product-story-divider"></div>';
   if (s.heading) html += '<h2>' + esc(s.heading) + '</h2>';
-  html += paras(s.paragraphs);
-  // Optional multi-section long-form body (sales narrative): each section is a
-  // sub-heading + paragraphs + an optional bullet list + trailing paragraphs.
-  // Additive — products without `sections` are unaffected.
+  const lead = (s.paragraphs || []).slice(0, 2);
+  const overflow = (s.paragraphs || []).slice(2);
+  html += paras(lead);
   const bullets = arr => (Array.isArray(arr) && arr.length)
     ? '<ul class="story-bullets">' + arr.map(b => '<li>' + esc(b) + '</li>').join('') + '</ul>' : '';
+  let accs = '';
+  if (overflow.length) accs += acc('More about this program', paras(overflow));
   if (Array.isArray(s.sections)) {
     for (const sec of s.sections) {
-      if (sec.heading) html += '<h3 class="story-section-h">' + esc(sec.heading) + '</h3>';
-      html += paras(sec.paragraphs);
-      html += bullets(sec.bullets);
-      html += paras(sec.paragraphsAfter);
+      const inner = paras(sec.paragraphs) + bullets(sec.bullets) + paras(sec.paragraphsAfter);
+      if (sec.heading) accs += acc(sec.heading, inner);
+      else accs += inner;
     }
   }
+  html += accs ? '<div class="story-accs">' + accs + '</div>' : '';
   // Optional features grid (checkmark cards) — uses existing DAS feature styling.
   if (Array.isArray(s.features) && s.features.length) {
     if (s.featuresTitle) html += '<h3 class="story-section-h">' + esc(s.featuresTitle) + '</h3>';
@@ -3717,10 +3901,10 @@ function renderStory(p) {
         '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 4 4L19 7"/></svg>' +
         '<span>' + esc(f) + '</span></div>').join('') + '</div>';
   }
-  // Optional customization marketing sub-section.
+  // Optional customization marketing sub-section - collapsed like the rest.
   if (s.customSection) {
-    if (s.customSection.title) html += '<h3 class="story-section-h">' + esc(s.customSection.title) + '</h3>';
-    html += paras(s.customSection.paragraphs || (s.customSection.body ? [s.customSection.body] : []));
+    const csInner = paras(s.customSection.paragraphs || (s.customSection.body ? [s.customSection.body] : []));
+    html += '<div class="story-accs">' + acc(s.customSection.title || 'Customization', csInner) + '</div>';
   }
   if (s.addon) {
     html += '<div class="product-story-addon">';
@@ -3897,7 +4081,7 @@ function renderRelated() {
 <script src="js/auth.js?v=2"></script>
 <script src="js/pricing-gate.js?v=4"></script>
   <script src="js/das-dock.js?v=2" defer></script>
-<script src="js/das-widget.js?v=2" defer></script>
-<script src="js/quote.js?v=4" defer></script>
+<script src="js/das-widget.js?v=3" defer></script>
+<script src="js/quote.js?v=5" defer></script>
 </body>
 </html>

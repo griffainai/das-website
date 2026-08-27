@@ -22,7 +22,14 @@
       pill = document.createElement('a'); pill.id = 'das-quote-pill';
       pill.href = 'company-purchasing.html?quote=1';
       pill.setAttribute('aria-label', 'Review your quote request');
-      pill.style.cssText = 'background:#1A2E6E;color:#fff;font-weight:700;font-size:.9rem;padding:12px 18px;border-radius:999px;box-shadow:0 10px 30px -8px rgba(0,0,0,.45);text-decoration:none';
+      /* the chat widget's ring, worn as a pill (Jayden, 2026-08-27): white body,
+         2px gradient border from the same family as the launcher orb */
+      pill.style.cssText = 'display:inline-flex;align-items:center;gap:8px;' +
+        'border:2px solid transparent;border-radius:999px;padding:11px 18px;' +
+        'background:linear-gradient(#fff,#fff) padding-box,' +
+        'linear-gradient(135deg,#9CC4F5,#4E8BE8 30%,#2E4FA8 55%,#6D5BD0 78%,#16264F) border-box;' +
+        'color:#0C1840;font-family:Inter,-apple-system,sans-serif;font-weight:600;font-size:.85rem;' +
+        'box-shadow:0 10px 30px -8px rgba(12,24,64,.4);text-decoration:none;white-space:nowrap';
       if (window.DASDock) window.DASDock.mount(pill, 10); else document.body.appendChild(pill);
     }
     pill.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11H5a2 2 0 0 0-2 2v7h18v-7a2 2 0 0 0-2-2h-4"/><path d="M9 7V4h6v3"/><path d="M9 11h6"/></svg> Request Quote (' + l.length + ')';
