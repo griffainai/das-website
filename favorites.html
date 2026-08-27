@@ -351,7 +351,8 @@
   </div>
 </footer>
 
-<script src="js/cart.js?v=3"></script>
+<script src="/lib/catalog.js?v=1"></script>
+<script src="js/cart.js?v=4"></script>
 <script>
 // FAV_KEY is already declared in cart.js — do not redeclare here
 
@@ -400,11 +401,26 @@ function render() {
       </div>`;
     return;
   }
+      // Self-heal stale saved prices against the live catalog (2026-08-27):
+      // a favorite stores the price from the day it was saved.
+      try {
+        if (window.DASCatalog && window.DASCatalog.resolve) {
+          favs.forEach(f => {
+            const id = f.tier ? (f.productId + '-' + f.tier) : f.productId;
+            const v = window.DASCatalog.resolve({ id: id, price: f.price, qty: 10 });
+            if (v.status === 'verified' && typeof v.unitPrice === 'number') f.price = v.unitPrice;
+            else if (v.status === 'rejected' && v.allowed && v.allowed.length) f.price = v.allowed[0];
+          });
+        }
+      } catch (e) {}
+
 
   container.innerHTML = `<div class="fav-grid">${favs.map(f => `
     <div class="fav-card" data-pid="${f.productId}">
       <div class="fav-card-img">
+        <a href="product.html?id=${f.productId}" aria-label="View ${f.name}">
         <img src="${f.image}" alt="${f.name}" loading="lazy" onerror="this.style.display='none'">
+        </a>
         <button class="fav-card-remove" data-pid="${f.productId}" aria-label="Remove from saved kits">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
@@ -412,7 +428,7 @@ function render() {
       </div>
       <div class="fav-card-body">
         <div class="fav-card-cat">${f.category}</div>
-        <div class="fav-card-name">${f.name}</div>
+        <div class="fav-card-name"><a href="product.html?id=${f.productId}" style="color:inherit;text-decoration:none">${f.name}</a></div>
         <div class="fav-card-price"><strong>$${f.price.toFixed(2)}</strong> per unit &middot; min. 10</div>
         <div class="fav-card-actions">
           <button class="fav-btn-cart" data-pid="${f.productId}">

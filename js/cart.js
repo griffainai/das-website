@@ -46,6 +46,39 @@ function cartVolumeUnitPrice(id, qty) {
   return null;
 }
 
+/* PRICE SELF-HEAL (2026-08-27). Cart lines store the price from the moment of
+   add; when the catalog changes (das-001 went 49.99 -> 249), those lines go
+   stale and the server rejects checkout with "pricing is out of date" - an
+   error a page refresh cannot fix, because the stale number lives in
+   localStorage. So the cart revalidates itself against lib/catalog.js on load
+   and before checkout: known items get today's price, unknown items (DB-priced
+   bundles etc.) pass through for the server to judge. */
+function revalidateCartPrices() {
+  try {
+    if (!window.DASCatalog || !window.DASCatalog.resolve) return false;
+    const items = Cart.get();
+    let changed = false;
+    for (const it of items) {
+      const verdict = window.DASCatalog.resolve({ id: it.id, price: it.price, qty: it.qty || it.minQty || 10 });
+      if (verdict.status === 'verified' && typeof verdict.unitPrice === 'number' &&
+          Math.abs(verdict.unitPrice - it.price) > 0.005) {
+        it.price = verdict.unitPrice; changed = true;
+      } else if (verdict.status === 'rejected' && Array.isArray(verdict.allowed) && verdict.allowed.length) {
+        // tier-suffixed ids get exactly one legitimate price; bare ids default
+        // to the standard tier (allowed[0]) - the server re-verifies regardless.
+        it.price = verdict.allowed[0]; changed = true;
+      }
+    }
+    if (changed) {
+      Cart.save(items);
+      if (typeof renderCart === 'function') { try { renderCart(); } catch (e) {} }
+      if (typeof showToast === 'function') showToast('Prices updated to the current catalog', 'success');
+    }
+    return changed;
+  } catch (e) { return false; }
+}
+document.addEventListener('DOMContentLoaded', function () { revalidateCartPrices(); });
+
 /* Human-readable recognition type for a SERVICE MILESTONE product, so the cart /
    order summary clearly states which track was chosen. Returns e.g.
    "Safe Miles Milestone" or "Career Service Milestone"; null for non-milestone items.
@@ -304,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 /* ---- Stripe Checkout ---- */
 async function goToCheckout() {
+  revalidateCartPrices();
   const items = Cart.get();
   if (!items.length) { showToast('Your cart is empty', 'error'); return; }
 
