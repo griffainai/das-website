@@ -4861,3 +4861,97 @@ main:focus { outline: none; }
   font-size: clamp(38px, 8.2vw, 60px) !important;
   line-height: .93;
 }
+
+/* =========================================================================
+   MOBILE — NATIVE iOS PATTERNS
+   Two real defects, both measured on shop.html at 390px before changing
+   anything.
+
+   1. THE FILTER BAR. 11 chips in `flex-wrap:wrap` landed across EIGHT rows in
+      a ragged 1/1/1/2/1/2/1/2 pattern, eating ~280px of vertical space before
+      a single product. Wrapping is the wrong pattern for a category filter on
+      a phone; iOS uses a single horizontally scrolling rail (App Store
+      categories, Apple Music). One row, 34px, momentum scroll, snap points,
+      no scrollbar, and a fade at each edge so it reads as scrollable.
+      The rail is also full-bleed — it runs to both screen edges and carries
+      its own inset padding, which is the native detail that makes a scroller
+      feel like a scroller rather than a clipped row.
+
+   2. THE NAV BADGE COLLISION. `.fav-count` on the Saved button spans x=173..191
+      while the Cart button starts at x=174 — the Saved badge was rendering ON
+      TOP of Cart. Cause: the badge overhangs its button by 21px while the gap
+      between buttons is 4px. Badges now sit INSIDE the button's top-right
+      corner, which is also the iOS convention.
+
+   Plus the iOS input trap: any input under 16px makes Safari zoom the whole
+   page on focus, and the user cannot zoom back out with one hand.
+   ========================================================================= */
+@media (max-width: 760px) {
+
+  /* ---- 1. the filter rail ---- */
+  .shop-filter-bar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: 20px;
+    /* full-bleed out of the container, with its own inset */
+    margin-left: calc(-1 * var(--container-pad, 20px));
+    margin-right: calc(-1 * var(--container-pad, 20px));
+    padding: 2px var(--container-pad, 20px) 10px;
+    margin-bottom: 22px;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+            mask-image: linear-gradient(90deg, transparent, #000 16px, #000 calc(100% - 16px), transparent);
+  }
+  .shop-filter-bar::-webkit-scrollbar { display: none; }
+  .shop-filter-bar .filter-btn {
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+    /* iOS HIG minimum touch target */
+    min-height: 40px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .shop-filter-bar .filter-btn:active { transform: scale(.96); transition: transform .12s; }
+  /* the FILTER: label would eat a third of the rail — it is redundant next to
+     an obviously-selectable row of chips */
+  .shop-filter-bar-label { display: none; }
+
+  /* ---- 2. badges inside the button, not overhanging it ---- */
+  .nav-cart-btn { position: relative; }
+  .nav-cart-btn .cart-badge,
+  .nav-cart-btn .fav-count {
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    left: auto;
+    transform: none;
+    min-width: 16px;
+    height: 16px;
+    line-height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    box-shadow: 0 0 0 2px #fff;
+  }
+  /* labels off on a phone: the icons carry it, and the words were what forced
+     Saved / Cart / Sign In into 188px of space in the first place */
+  .nav-cart-label { display: none; }
+
+  /* ---- 3. never let Safari zoom the page on input focus ---- */
+  /* An input with NO type attribute defaults to text but does not match
+     input[type="text"] — two on shop.html were slipping through and would
+     still have triggered Safari's zoom-on-focus. Match by exclusion instead. */
+  /* !important is load-bearing here. Form rules carrying a class (.contact-form
+     select, .mrk-select) outrank a bare element selector, and four controls on
+     contact.html plus two on shop.html were still under 16px after the first
+     attempt. This is not a style preference - under 16px Safari zooms the whole
+     page on focus and the user cannot zoom back with one hand. It is a usability
+     guard, and it has to win. */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="submit"]):not([type="button"]),
+  select, textarea { font-size: 16px !important; }
+
+  /* ---- 4. respect the notch / home indicator ---- */
+  body { padding-bottom: env(safe-area-inset-bottom, 0); }
+  .nav { padding-left: env(safe-area-inset-left, 0); padding-right: env(safe-area-inset-right, 0); }
+}
