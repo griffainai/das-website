@@ -17,6 +17,108 @@
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
   <script src="/js/tracking.js?v=3" defer></script>
   <script src="/js/upsell-modal.js?v=1" defer></script>
+
+<style id="cart-rp-skin">
+/* ============================================================
+   CART — the Represent anatomy (shop.griffain.io), DAS-mapped.
+   Small utilitarian type, hairlines, square corners. Inter is
+   the DAS commerce face; sizes/case/tracking are theirs.
+   ============================================================ */
+.cart-layout, .cart-layout * { border-radius: 0 !important; }
+.cart-layout { font-family: 'Inter', -apple-system, sans-serif; }
+
+.rp-head { display: flex; align-items: baseline; gap: 4px; padding: 2px 0 12px;
+  font-size: 14px; line-height: 17px; text-transform: uppercase; color: #0B1020; }
+.rp-head sup { font-size: 8px; transform: translateY(-4px); }
+
+/* bundle tier bar — their free-shipping bar, repurposed for the 15% bundle */
+#bundle-nudge { background: transparent !important; border: 0 !important; padding: 0 0 4px !important; }
+#bundle-nudge .rp-bar { width: 100%; height: 5px; border-bottom: 1px solid #E8E8E8; overflow: hidden; }
+#bundle-nudge .rp-bar span { display: block; height: 100%; background: #059669; transition: width .5s; }
+#bundle-nudge-text { font-size: 10px !important; font-weight: 400 !important; color: #0B1020 !important; margin-top: 6px !important; }
+#bundle-nudge-text b, #bundle-nudge-text strong { font-weight: 700; }
+#bundle-nudge.rp-hit #bundle-nudge-text { color: #059669 !important; }
+
+/* line items */
+.rp-line { display: flex; gap: 9px; padding: 0; }
+.rp-line + .rp-line { margin-top: 11px; }
+.rp-thumb { width: 110px; flex: none; background: #F7F7F7; display: block; }
+.rp-thumb img { display: block; width: 110px; height: 138px; object-fit: cover; }
+.rp-body { flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: space-between; margin: 13px 0; }
+.rp-row1 { display: flex; justify-content: space-between; gap: 16px; }
+.rp-name { font-size: 12px; font-weight: 400; margin: 0; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rp-name a { color: #0B1020; text-decoration: none; }
+.rp-lineprice { font-size: 11px; flex: none; }
+.rp-meta { font-size: 11px; text-transform: uppercase; color: #0B1020; margin-top: 2px; }
+.rp-meta .soft { font-size: 10px; text-transform: none; color: #67718A; }
+.rp-unit { font-size: 10px; color: #67718A; margin-top: 2px; }
+.rp-ctl { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+.rp-qty { display: inline-flex; align-items: center; }
+.rp-qty button { height: 16px; padding: 0 4px; border: 0; background: none; cursor: pointer;
+  font-size: 13px; line-height: 1; color: #0B1020; }
+.rp-qty input { width: 40px; padding: 0; border: 0; background: transparent; text-align: center;
+  font-size: 11px; font-family: inherit; color: #0B1020; outline: 0; -moz-appearance: textfield; }
+.rp-qty input::-webkit-outer-spin-button, .rp-qty input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.rp-save { margin-left: auto; font-size: 10px; color: #0B1020; text-decoration: underline;
+  background: none; border: 0; cursor: pointer; }
+.rp-x { margin-left: 10px; width: 12px; height: 12px; flex: none; border: 0; background: none;
+  cursor: pointer; padding: 0; color: #0B1020; display: flex; align-items: center; justify-content: center; }
+.rp-x svg { width: 12px; height: 12px; }
+
+/* summary — the gray box + accordion + hard total */
+.order-summary { background: #fff !important; border: 1px solid #E3E8F2 !important;
+  box-shadow: none !important; padding: 18px !important; }
+.order-summary-title { font-size: 14px !important; font-weight: 400 !important;
+  text-transform: uppercase; letter-spacing: 0 !important; margin-bottom: 12px !important; }
+.rp-box { background: #F4F4F4; padding: 10px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px; }
+.rp-box .order-line, .rp-box > div { display: flex; justify-content: space-between;
+  font-size: 11px; font-weight: 300; color: #0B1020; margin: 0 !important; padding: 0 !important; border: 0 !important; }
+.rp-box .order-line strong { font-weight: 300; }
+.rp-box .rp-green, .rp-box .rp-green strong { color: #059669 !important; }
+.rp-box .rp-fine { font-size: 8px; line-height: 1.5; color: #0B1020; display: block; }
+.rp-acc { border-top: 1px solid #CACACA; border-bottom: 1px solid #CACACA; padding: 10px 0; margin: 10px 0; }
+.rp-acc summary { display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; font-weight: 300; color: #0B1020; cursor: pointer; list-style: none; }
+.rp-acc summary::-webkit-details-marker { display: none; }
+.rp-acc .rp-acc-bd { font-size: 11px; line-height: 1.6; color: #0B1020; padding-top: 10px; }
+.rp-acc .rp-acc-bd p { margin: 0 0 8px; }
+.rp-acc .rp-acc-bd strong { font-weight: 700; }
+#promo-entry input { height: 36px !important; font-size: 11px !important; border: 1px solid #CACACA !important; text-transform: uppercase; }
+#promo-entry button { height: 36px !important; font-size: 10px !important; font-weight: 700 !important;
+  text-transform: uppercase; background: #0C1840 !important; }
+.rp-total { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; color: #0B1020; margin: 12px 0; }
+#checkout-btn { height: 53px !important; background: #0C1840 !important; color: #fff !important;
+  font-size: 12px !important; font-weight: 700 !important; text-transform: uppercase;
+  letter-spacing: .02em; border: 0 !important; box-shadow: none !important;
+  display: flex !important; align-items: center; justify-content: center; gap: 6px; width: 100%; cursor: pointer; }
+#checkout-btn:hover { background: #16264F !important; }
+#checkout-btn svg { width: 10px; height: 12px; }
+.rp-pay { display: flex; justify-content: center; gap: 4px; margin-top: 10px;
+  font-size: 9px; color: #737373; text-transform: uppercase; letter-spacing: .36px; list-style: none; padding: 0; }
+.checkout-trust, .checkout-note { display: none !important; }
+
+/* empty state + minis */
+.rp-empty { text-align: center; padding: 40px 0 24px; }
+.rp-empty h3 { font-size: 14px; font-weight: 400; text-transform: uppercase; margin: 0 0 18px; }
+.rp-empty a { display: inline-block; background: #0C1840; color: #fff; font-size: 10px;
+  font-weight: 700; text-transform: uppercase; line-height: 1; padding: 10px 24px; text-decoration: none; }
+.rp-pop h4 { font-size: 12px; font-weight: 400; text-transform: uppercase; margin: 24px 0 6px; }
+.rp-pop-row { display: flex; gap: 7px; overflow-x: auto; padding-bottom: 6px; }
+.rp-pop-row a { flex: 0 0 calc(100%/3.2); text-decoration: none; color: #0B1020; }
+.rp-pop-row img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: #F7F7F7; display: block; }
+.rp-pop-row span { display: block; font-size: 10px; text-transform: uppercase; margin-top: 4px; }
+
+/* the promo/mission card — their navy Prestige card */
+.rp-promo { position: relative; overflow: hidden; background: #0C1840; margin-top: 24px;
+  border-radius: 5px !important; }
+.rp-promo .in { position: relative; color: #fff; font-size: 12px; line-height: 1.5;
+  letter-spacing: -0.4px; padding: 24px 14px; }
+.rp-promo .wm { font-family: 'Anton', sans-serif; font-size: 14px; letter-spacing: .04em;
+  text-transform: uppercase; }
+.rp-promo ul { margin: 14px 0 0; padding: 0; list-style: none; }
+.rp-promo li { margin-top: 9px; }
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -145,7 +247,12 @@
 
       <!-- CART ITEMS -->
       <div>
-        <div class="cart-table" id="cart-items-wrap">
+        <div class="rp-head"><span id="rp-head-label">Your cart</span><sup id="rp-count"></sup></div>
+        <div id="bundle-nudge" style="display:none">
+          <div class="rp-bar"><span id="bundle-nudge-bar" style="width:0%"></span></div>
+          <p id="bundle-nudge-text"></p>
+        </div>
+        <div class="cart-table" id="cart-items-wrap" style="background:none;border:0;box-shadow:none;padding:0">
           <!-- Rendered by JS -->
         </div>
         <div style="margin-top:16px">
@@ -154,28 +261,16 @@
             Continue Shopping
           </a>
         </div>
-
-        <!-- ── Appreciation / mission block — fills the left column, reinforces why this purchase matters ── -->
-        <div style="margin-top:28px;background:linear-gradient(180deg,#F5F8FF 0%,#FFFFFF 100%);border:1px solid #E2E8F0;border-radius:16px;padding:28px 30px;position:relative;overflow:hidden">
-          <div style="position:absolute;top:-18px;right:-18px;width:120px;height:120px;background:radial-gradient(circle,rgba(26,46,110,0.06) 0%,rgba(26,46,110,0) 70%)"></div>
-          <div style="display:inline-flex;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;background:#1A2E6E;margin-bottom:16px">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFF" style="width:24px;height:24px"><path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"/></svg>
+        <div class="rp-promo">
+          <div class="in">
+            <span class="wm">Driver Appreciation Solutions</span>
+            <p style="margin:14px 0 0">Behind this order is a simple belief: the drivers who keep this country moving deserve to feel seen.</p>
+            <ul>
+              <li>&#10003; Branded to your fleet, packed by hand</li>
+              <li>&#10003; Ships on your program timeline</li>
+              <li>&#10003; Net-30 for approved carriers</li>
+            </ul>
           </div>
-          <h3 style="font-size:1.25rem;font-weight:800;letter-spacing:-0.02em;color:#0F172A;margin:0 0 12px;line-height:1.25">Thank you for recognizing your drivers.</h3>
-          <p style="font-size:0.9375rem;line-height:1.7;color:#475569;margin:0 0 18px">
-            Behind this order is a simple belief: the professional drivers who keep this country moving deserve to feel seen. Your investment tells them their dedication — and every safe mile they've given this industry — never goes unnoticed.
-          </p>
-          <div style="display:flex;flex-direction:column;gap:10px">
-            <div style="display:flex;gap:10px;align-items:flex-start">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;margin-top:1px"><path d="m5 13 4 4L19 7"/></svg>
-              <span style="font-size:0.9375rem;color:#1F2937;font-weight:600">Thank you for your commitment to safety.</span>
-            </div>
-            <div style="display:flex;gap:10px;align-items:flex-start">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#2E9E6B" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;margin-top:1px"><path d="m5 13 4 4L19 7"/></svg>
-              <span style="font-size:0.9375rem;color:#1F2937;font-weight:600">Thank you for recognizing the professional contribution of drivers.</span>
-            </div>
-          </div>
-          <p style="margin:20px 0 0;font-size:0.8125rem;font-weight:700;letter-spacing:0.02em;color:#1A2E6E">— The Driver Appreciation Solutions team</p>
         </div>
       </div>
 
@@ -183,52 +278,37 @@
       <div class="order-summary">
         <div class="order-summary-title">Order Summary</div>
 
-        <!-- ── Bundle-threshold nudge — populated by JS (hidden when threshold met or cart empty) ── -->
-        <div id="bundle-nudge" style="display:none;background:#FFFBEB;border:1px solid #FEF3C7;border-radius:10px;padding:10px 12px;margin-bottom:14px">
-          <p id="bundle-nudge-text" style="margin:0;font-size:0.75rem;font-weight:600;color:#92400E;line-height:1.4"></p>
-          <div style="margin-top:8px;height:6px;background:#FEF3C7;border-radius:3px;overflow:hidden">
-            <div id="bundle-nudge-bar" style="height:100%;background:#F59E0B;border-radius:3px;transition:width 0.3s ease;width:0%"></div>
+        <div class="rp-box">
+          <div class="order-line"><span>Subtotal:</span><strong id="summary-subtotal">$0.00</strong></div>
+          <div class="order-line rp-green" id="bundle-discount-row" style="display:none"><span>Bundle discount 15%:</span><strong id="summary-bundle-discount">−$0.00</strong></div>
+          <div class="order-line rp-green" id="promo-discount-row" style="display:none"><span>WELCOME10 (10% off):</span><strong id="summary-promo-discount">−$0.00</strong></div>
+          <div class="order-line"><span>Shipping:</span><strong class="rp-green">Free</strong></div>
+          <div class="order-line"><span>Taxes:</span><strong>At checkout</strong></div>
+          <span class="rp-fine">Fleet orders ship FedEx Ground or UPS at no charge. Promo codes and Net-30 terms applied at checkout.</span>
+        </div>
+        <details class="rp-acc">
+          <summary>&#127482;&#127480; Ships from our U.S. facility <svg width="12" height="7" viewBox="0 0 12 7" fill="none"><path d="M1 1l5 5 5-5" stroke="#737373"/></svg></summary>
+          <div class="rp-acc-bd">
+            <p><strong>U.S. SHIPPING</strong></p>
+            <p>Orders ship per your program timeline via FedEx Ground or UPS &mdash; standard 3&ndash;7 business days, expedited available at checkout. 100+ units: freight and multi-terminal delivery coordinated.</p>
+            <p><strong>RETURNS</strong></p>
+            <p>30 days for unopened product. Custom or personalized kits are final sale.</p>
           </div>
-        </div>
-
-        <div class="order-line">
-          <span>Subtotal</span>
-          <strong id="summary-subtotal">$0.00</strong>
-        </div>
-        <div class="order-line" id="bundle-discount-row" style="display:none">
-          <span style="color:#059669;font-weight:600">Bundle discount</span>
-          <strong style="color:#059669" id="summary-bundle-discount">−$0.00</strong>
-        </div>
-        <div class="order-line" id="promo-discount-row" style="display:none">
-          <span style="color:#059669;font-weight:600">WELCOME10 (10% off)</span>
-          <strong style="color:#059669" id="summary-promo-discount">−$0.00</strong>
-        </div>
-        <!-- Promo code (WELCOME10 from the email-capture popups / welcome email) -->
-        <div id="promo-entry" style="display:flex;gap:8px;margin:10px 0 4px">
+        </details>
+        <div id="promo-entry" style="display:flex;gap:8px;margin:2px 0 4px">
           <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters"
-                 style="flex:1;min-width:0;height:42px;padding:0 12px;font:500 16px Inter,-apple-system,sans-serif;border:1.5px solid #E3E8F2;border-radius:10px;outline:0;text-transform:uppercase">
+                 style="flex:1;min-width:0;padding:0 12px;font-family:inherit;outline:0">
           <button type="button" id="promo-apply" onclick="applyPromo()"
-                  style="height:42px;padding:0 16px;border:0;border-radius:10px;cursor:pointer;font:600 13px Inter,sans-serif;color:#fff;background:#1A2E6E">Apply</button>
+                  style="padding:0 16px;border:0;cursor:pointer;color:#fff">Apply</button>
         </div>
-        <div id="promo-msg" style="display:none;font:500 12.5px Inter,sans-serif;margin:0 0 6px"></div>
-        <div class="order-line">
-          <span>Shipping</span>
-          <strong style="color:#059669">Free shipping</strong>
-        </div>
-        <div class="order-line">
-          <span>Taxes</span>
-          <strong>Calculated at checkout</strong>
-        </div>
+        <div id="promo-msg" style="display:none;font:500 11px Inter,sans-serif;margin:0 0 6px"></div>
+        <div class="rp-total"><span>Total:</span><span id="summary-total">$0.00</span></div>
 
-        <div class="order-total">
-          <span>Estimated Total</span>
-          <span id="summary-total">$0.00</span>
-        </div>
-
-        <button class="btn btn-primary btn-full btn-lg" id="checkout-btn" onclick="goToCheckout()">
-          Proceed to Checkout
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        <button id="checkout-btn" onclick="goToCheckout()">
+          Secure Checkout
+          <svg viewBox="0 0 10 12" fill="none"><rect x="1" y="5" width="8" height="6.5" stroke="white"/><path d="M3 5V3.5a2 2 0 0 1 4 0V5" stroke="white"/></svg>
         </button>
+        <ul class="rp-pay"><li>Visa</li><li>&middot;</li><li>Mastercard</li><li>&middot;</li><li>Amex</li><li>&middot;</li><li>Apple Pay</li><li>&middot;</li><li>Google Pay</li><li>&middot;</li><li>Link</li></ul>
 
         <div class="checkout-trust" style="margin-top:14px">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:14px;height:14px;color:var(--success)"><path fill-rule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clip-rule="evenodd"/></svg>
@@ -251,13 +331,6 @@
 
         <!-- TRUST SIGNALS -->
         <div style="margin-top:24px;padding-top:20px;border-top:1px solid var(--gold-border)">
-          <div style="font-size:0.6875rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:14px">Accepted Payments</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
-            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">VISA</div>
-            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">MASTERCARD</div>
-            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">AMEX</div>
-            <div style="padding:6px 12px;background:var(--black-3);border:1px solid var(--gold-border);border-radius:5px;font-size:0.75rem;color:var(--text-muted);font-weight:600">ACH</div>
-          </div>
         </div>
       </div>
 
@@ -291,13 +364,24 @@ function renderCart() {
   const items = Cart.get();
   const wrap  = document.getElementById('cart-items-wrap');
 
+  const headSup = document.getElementById('rp-count');
+  const headLbl = document.getElementById('rp-head-label');
+  if (headSup) headSup.textContent = items.length ? String(items.reduce((s, i) => s + i.qty, 0)) : '';
+  if (headLbl) headLbl.textContent = items.length ? 'Your cart' : 'Your cart is empty.';
+
   if (!items.length) {
     wrap.innerHTML = `
-      <div class="cart-empty">
-        <div class="cart-empty-icon">🛒</div>
-        <h3 style="font-size:1.125rem;font-weight:700;margin-bottom:8px">Your cart is empty</h3>
-        <p style="font-size:0.875rem;color:var(--text-muted);margin-bottom:24px">Add products from the shop to get started.</p>
-        <a href="shop.html" class="btn btn-primary">Browse Products</a>
+      <div class="rp-empty">
+        <a href="shop.html">Explore the shop</a>
+      </div>
+      <div class="rp-pop">
+        <h4>Popular items</h4>
+        <div class="rp-pop-row">
+          <a href="product.html?id=das-001"><img src="/images/das-da-kit-1.webp" alt="Driver Appreciation Kit" loading="lazy"><span>Driver Appreciation Kit</span></a>
+          <a href="product.html?id=milestone-kit"><img src="/images/mrk-hero-card.webp" alt="Milestone Recognition Kit" loading="lazy"><span>Milestone Recognition Kit</span></a>
+          <a href="product.html?id=das-003"><img src="/images/pak-premium-onboarding-hero.webp" alt="Premium Onboarding Pack" loading="lazy"><span>Premium Onboarding Pack</span></a>
+          <a href="product.html?id=safe-miles-kit"><img src="/images/milestone-kit-medal.jpg" alt="Safe Miles Recognition Kit" loading="lazy"><span>Safe Miles Recognition Kit</span></a>
+        </div>
       </div>`;
     document.getElementById('summary-subtotal').textContent = '$0.00';
     document.getElementById('summary-total').textContent    = '$0.00';
@@ -359,41 +443,38 @@ function renderCart() {
   document.getElementById('checkout-btn').disabled = false;
   document.getElementById('checkout-btn').style.opacity = '';
 
-  const header = `
-    <div class="cart-table-head">
-      <span style="grid-column:1/3">Product</span>
-      <span style="text-align:center">Qty</span>
-      <span style="text-align:right">Subtotal</span>
-      <span></span>
-    </div>`;
+  const header = '';
 
+  const pdpId = (id) => String(id || '').replace(/-(standard|premium|enterprise)$/, '');
   const rows = items.map((item, idx) => `
-    <div class="cart-item">
-      <img class="cart-item-img"
-           src="${item.image || ''}"
-           alt="${item.name}"
-           onerror="this.style.background='var(--black-5)';this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1 1%22/>'">
-      <div>
-        <div class="cart-item-name">${item.name}</div>
-        <div class="cart-item-cat">${item.category}</div>
-        ${item.milestoneLabel ? `<div class="cart-item-cat" style="color:#1A2E6E;font-weight:700">Selected Milestone: ${item.milestoneLabel}</div>` : ''}
-        ${item.kitConfigLabel ? `<div class="cart-item-cat" style="color:#1A2E6E;font-weight:600">Kit: ${item.kitConfigLabel}</div>` : ''}
-        <div style="font-size:0.875rem;color:var(--text-muted);margin-top:4px">$${item.price.toFixed(2)} / unit</div>
+    <div class="rp-line">
+      <a class="rp-thumb" href="product.html?id=${pdpId(item.id)}">
+        <img src="${item.image || ''}" alt="${item.name}"
+             onerror="this.style.visibility='hidden'">
+      </a>
+      <div class="rp-body">
+        <div>
+          <div class="rp-row1">
+            <h3 class="rp-name"><a href="product.html?id=${pdpId(item.id)}">${item.name}</a></h3>
+            <span class="rp-lineprice">$${(item.price * item.qty).toFixed(2)}</span>
+          </div>
+          <div class="rp-meta">${item.category || ''}
+            ${item.milestoneLabel ? `<span class="soft"> &middot; ${item.milestoneLabel}</span>` : ''}
+            ${item.kitConfigLabel ? `<span class="soft"> &middot; ${item.kitConfigLabel}</span>` : ''}
+          </div>
+          <div class="rp-unit">$${item.price.toFixed(2)} / unit &middot; min. ${item.minQty || 10}</div>
+        </div>
+        <div class="rp-ctl">
+          <span class="rp-qty">
+            <button type="button" onclick="changeQty(${idx}, -1)" aria-label="Decrease quantity">&minus;</button>
+            <input type="number" value="${item.qty}" min="${item.minQty || 10}" onchange="setQty(${idx}, this.value)" aria-label="Quantity">
+            <button type="button" onclick="changeQty(${idx}, 1)" aria-label="Increase quantity">+</button>
+          </span>
+          <button type="button" class="rp-x" onclick="removeItem(${idx})" aria-label="Remove ${item.name}">
+            <svg viewBox="0 0 12 12" fill="none"><line x1="1" y1="1" x2="11" y2="11" stroke="currentColor"/><line x1="11" y1="1" x2="1" y2="11" stroke="currentColor"/></svg>
+          </button>
+        </div>
       </div>
-      <div style="display:flex;align-items:center;gap:6px;justify-content:center">
-        <button class="qty-btn" onclick="changeQty(${idx}, -1)" aria-label="Decrease quantity" style="width:26px;height:26px;font-size:0.9rem">−</button>
-        <input type="number"
-               class="qty-input"
-               style="width:48px"
-               value="${item.qty}"
-               min="${item.minQty || 10}"
-               onchange="setQty(${idx}, this.value)">
-        <button class="qty-btn" onclick="changeQty(${idx}, 1)" aria-label="Increase quantity" style="width:26px;height:26px;font-size:0.9rem">+</button>
-      </div>
-      <div class="cart-item-subtotal" style="text-align:right">$${(item.price * item.qty).toFixed(2)}</div>
-      <button class="cart-item-remove" onclick="removeItem(${idx})" aria-label="Remove ${item.name}">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
     </div>`).join('');
 
   wrap.innerHTML = header + rows;
@@ -410,23 +491,18 @@ function renderCart() {
   const amountToThreshold = qualified ? 0 : Math.round((BUNDLE_THRESHOLD - subtotal) * 100) / 100;
 
   const nudge     = document.getElementById('bundle-nudge');
+  if (nudge) nudge.classList.toggle('rp-hit', qualified);
   const nudgeText = document.getElementById('bundle-nudge-text');
   const nudgeBar  = document.getElementById('bundle-nudge-bar');
+  // Represent tier-bar styling lives in #cart-rp-skin CSS; JS only sets
+  // display, copy, and width — the amber inline palette is retired.
   if (qualified) {
     nudge.style.display     = 'block';
-    nudge.style.background  = '#ECFDF5';
-    nudge.style.borderColor = '#A7F3D0';
-    nudgeText.style.color   = '#065F46';
-    nudgeText.textContent   = '✓ You unlocked 15% off this order — applied below.';
-    nudgeBar.style.background = '#10B981';
+    nudgeText.textContent   = "You've unlocked 15% off this order — applied below.";
     nudgeBar.style.width = '100%';
   } else {
     nudge.style.display     = 'block';
-    nudge.style.background  = '#FFFBEB';
-    nudge.style.borderColor = '#FEF3C7';
-    nudgeText.style.color   = '#92400E';
-    nudgeText.innerHTML     = `Add <strong>$${amountToThreshold.toFixed(2)}</strong> more to unlock <strong>15% off</strong> your order.`;
-    nudgeBar.style.background = '#F59E0B';
+    nudgeText.innerHTML     = `You're <strong>$${amountToThreshold.toFixed(2)}</strong> away from <strong>15% off</strong> your order.`;
     nudgeBar.style.width = Math.min(100, (subtotal / BUNDLE_THRESHOLD) * 100).toFixed(1) + '%';
   }
 
