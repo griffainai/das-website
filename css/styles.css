@@ -5480,3 +5480,22 @@ main:focus { outline: none; }
 .das-ill { stroke: currentColor; stroke-width: 2.4; fill: none;
   stroke-linecap: round; stroke-linejoin: round; }
 .whycard .mark .das-ill { stroke-width: 3.2; }
+
+
+/* ============================================================
+   SITEWIDE ILLUSTRATION FIELDS (2026-08-27) — the 16-drawing
+   system leaves the homepage. Any section can host a field:
+   class="das-field-host" + one .das-field block. Content is
+   lifted above the marks automatically.
+   ============================================================ */
+.das-field-host { position: relative; overflow: hidden; }
+.das-field-host > :not(.das-field) { position: relative; z-index: 1; }
+.das-field { position: absolute; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.das-field .fm { position: absolute; transform: translate(-50%,-50%) rotate(var(--r)); opacity: var(--o); }
+.das-field .fm .das-ill { height: var(--h); min-height: 0; width: auto; color: #1A2E6E; }
+@media (max-width: 900px) {
+  .das-field .fm { display: none; }
+  .das-field .fm:nth-child(1), .das-field .fm:nth-child(2),
+  .das-field .fm:nth-child(3), .das-field .fm:nth-child(4) { display: block; }
+  .das-field .fm { --h: 90px; }
+}
