@@ -149,7 +149,16 @@ module.exports = async (req, res) => {
           <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">${ackNext}</p>
           <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
           <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT. A person answers.</p>
-          <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
+          
+      <!-- DAS illustration strip (2026-08-27) — the brand's line drawings, email-safe PNGs -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 0 4px">
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-kit.png" height="34" style="height:34px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+        <span style="display:inline-block;width:28px">&nbsp;</span>
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-semi.png" height="30" style="height:30px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+        <span style="display:inline-block;width:28px">&nbsp;</span>
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-medal.png" height="36" style="height:36px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+      </td></tr></table>
+      <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
           <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. The average fleet loses more to turnover in a month than a year of recognition costs. That math is exactly what we’ll show you.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
         </div>
       </div>`;
@@ -327,7 +336,16 @@ async function handleCompanyPurchasing(req, res) {
           <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">Need it moving faster, or have a PO process we should know about? Reply to this email or call — you’ll get a person, not a phone tree.</p>
           <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
           <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT.</p>
-          <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
+          
+      <!-- DAS illustration strip (2026-08-27) — the brand's line drawings, email-safe PNGs -->
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 0 4px">
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-kit.png" height="34" style="height:34px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+        <span style="display:inline-block;width:28px">&nbsp;</span>
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-semi.png" height="30" style="height:30px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+        <span style="display:inline-block;width:28px">&nbsp;</span>
+        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-medal.png" height="36" style="height:36px;width:auto;vertical-align:middle;opacity:0.9" alt="">
+      </td></tr></table>
+      <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
           <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. Replacing one driver runs $8,000–$15,000. The program you just asked about costs a fraction of losing one. Your quote will show that math for your exact driver count.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
         </div>
       </div>`;
