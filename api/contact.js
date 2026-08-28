@@ -5,6 +5,7 @@
    Sends email via Resend (resend.com — free tier: 3,000/mo)
    ============================================= */
 
+const { brandShell, btn } = require('../lib/email-brand');
 module.exports = async (req, res) => {
   const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin', allowedOrigin);
@@ -136,32 +137,21 @@ module.exports = async (req, res) => {
       ackLede = `${firstName} — your message${about} is with the fleet team. A specialist replies in writing within one business day — a real answer from a person, not an autoresponder.`;
       ackNext = `Meanwhile, if it’s time-sensitive, skip the queue: call us and you’ll get a human.`;
     }
-    const ackHtml = `
-      <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
-        <div style="background:#ffffff;border:1px solid #E2E8F0;border-bottom:0;border-radius:12px 12px 0 0;padding:16px 28px;">
-          <img src="https://www.driverappreciationsolutions.com/images/logo.png" alt="Driver Appreciation Solutions" height="34" style="height:34px;display:block;border:0;" />
-        </div>
-        <div style="background:#0C1840;padding:22px 28px;">
-          <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Appreciated drivers stay.<br>Here’s what happens next.</h2>
-        </div>
-        <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
-          <p style="margin:0 0 14px;font-size:15px;line-height:1.7;color:#1F2937;">${ackLede}</p>
-          <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">${ackNext}</p>
-          <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
-          <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT. A person answers.</p>
-          
-      <!-- DAS illustration strip (2026-08-27) — the brand's line drawings, email-safe PNGs -->
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 0 4px">
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-kit.png" height="34" style="height:34px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-        <span style="display:inline-block;width:28px">&nbsp;</span>
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-semi.png" height="30" style="height:30px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-        <span style="display:inline-block;width:28px">&nbsp;</span>
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-medal.png" height="36" style="height:36px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-      </td></tr></table>
-      <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
-          <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. The average fleet loses more to turnover in a month than a year of recognition costs. That math is exactly what we’ll show you.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
-        </div>
-      </div>`;
+    const ackHtml = brandShell({
+      preheader: 'A fleet specialist replies within one business day.',
+      eyebrow: 'Message received',
+      title: ackSubject.replace(/&/g, '&amp;').replace(/</g, '&lt;'),
+      sub: '',
+      photo: 'https://www.driverappreciationsolutions.com/images/email/contact-hero.jpg',
+      bodyRows: `
+        <p style="margin:0 0 14px;font-size:14px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
+        <p style="margin:0 0 14px;font-size:13px;color:#3D4763;line-height:1.7">${ackLede}</p>
+        <p style="margin:0 0 22px;font-size:13px;color:#3D4763;line-height:1.7">${ackNext}</p>
+        <div style="text-align:center;margin-bottom:10px">${btn('tel:3026810995', 'Call the fleet team — 302.681.0995')}</div>
+        <p style="margin:0;text-align:center;font-size:11px;color:#93A0B8">Mon&ndash;Fri, 9am&ndash;5pm CT. A person answers.</p>
+      `,
+      footNote: 'The average fleet loses more to turnover in a month than a year of recognition costs &mdash; that math is exactly what we&rsquo;ll show you.',
+    });
     try {
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
@@ -323,32 +313,21 @@ async function handleCompanyPurchasing(req, res) {
     }
 
     // 2) Auto-responder to the buyer (best-effort — never fail the request if this errors).
-    const autoHtml = `
-      <div style="font-family:Arial,Helvetica,sans-serif;max-width:600px;margin:0 auto;padding:24px;color:#111">
-        <div style="background:#ffffff;border:1px solid #E2E8F0;border-bottom:0;border-radius:12px 12px 0 0;padding:16px 28px;">
-          <img src="https://www.driverappreciationsolutions.com/images/logo.png" alt="Driver Appreciation Solutions" height="34" style="height:34px;display:block;border:0;" />
-        </div>
-        <div style="background:#0C1840;padding:22px 28px;">
-          <h2 style="color:#ffffff;margin:10px 0 0;font-size:21px;line-height:1.3;">Your request is in.<br>Here’s exactly what happens next.</h2>
-        </div>
-        <div style="background:#F7F9FC;padding:26px 28px;border:1px solid #E2E8F0;border-top:0;border-radius:0 0 12px 12px;">
-          <p style="margin:0 0 14px;font-size:15px;line-height:1.7;color:#1F2937;">A fleet specialist takes ${escHtml(company)}’s request from here — quote, purchase order, vendor onboarding, invoice billing, or Net 30, whatever procurement needs. You’ll hear back within one business day with real numbers, not a form letter.</p>
-          <p style="margin:0 0 18px;font-size:14px;line-height:1.7;color:#475569;">Need it moving faster, or have a PO process we should know about? Reply to this email or call — you’ll get a person, not a phone tree.</p>
-          <a href="tel:3026810995" style="display:inline-block;background:#1A2E6E;color:#ffffff;text-decoration:none;font-weight:700;font-size:14px;padding:12px 24px;border-radius:8px;">Call the fleet team — 302.681.0995</a>
-          <p style="margin:10px 0 0;font-size:12px;color:#8B9BAC;">Mon–Fri, 9am–5pm CT.</p>
-          
-      <!-- DAS illustration strip (2026-08-27) — the brand's line drawings, email-safe PNGs -->
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding:24px 0 4px">
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-kit.png" height="34" style="height:34px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-        <span style="display:inline-block;width:28px">&nbsp;</span>
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-semi.png" height="30" style="height:30px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-        <span style="display:inline-block;width:28px">&nbsp;</span>
-        <img src="https://www.driverappreciationsolutions.com/images/email/das-ill-medal.png" height="36" style="height:36px;width:auto;vertical-align:middle;opacity:0.9" alt="">
-      </td></tr></table>
-      <hr style="border:0;border-top:1px solid #E2E8F0;margin:22px 0 14px;"/>
-          <p style="margin:0;font-size:12px;color:#8B9BAC;line-height:1.6;">P.S. Replacing one driver runs $8,000–$15,000. The program you just asked about costs a fraction of losing one. Your quote will show that math for your exact driver count.<br><br>— The Driver Appreciation Solutions fleet team<br>driverappreciationsolutions.com</p>
-        </div>
-      </div>`;
+    const autoHtml = brandShell({
+      preheader: 'Your purchasing request is in — a specialist is on it.',
+      eyebrow: 'Corporate purchasing',
+      title: 'Your request<br>is in',
+      sub: 'Quote, purchase order, vendor setup, or Net-30 &mdash; a fleet specialist is preparing a real answer.',
+      photo: 'https://www.driverappreciationsolutions.com/images/email/contact-hero.jpg',
+      bodyRows: `
+        <p style="margin:0 0 14px;font-size:14px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
+        <p style="margin:0 0 14px;font-size:13px;color:#3D4763;line-height:1.7">We received <b>${company ? String(company).replace(/[<>&]/g,'') : 'your company'}</b>&rsquo;s purchasing request. A fleet specialist will reply within one business day with pricing for your exact driver count &mdash; and can set up purchase orders, vendor onboarding, or Net-30 terms as needed.</p>
+        <p style="margin:0 0 22px;font-size:13px;color:#3D4763;line-height:1.7">Time-sensitive? Skip the queue:</p>
+        <div style="text-align:center;margin-bottom:10px">${btn('tel:3026810995', 'Call the fleet team — 302.681.0995')}</div>
+        <p style="margin:0;text-align:center;font-size:11px;color:#93A0B8">Mon&ndash;Fri, 9am&ndash;5pm CT.</p>
+      `,
+      footNote: 'Replacing one driver runs $8,000&ndash;$15,000. Your quote will show the recognition math for your exact driver count.',
+    });
     try {
       await fetch('https://api.resend.com/emails', {
         method: 'POST',
