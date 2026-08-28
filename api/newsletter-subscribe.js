@@ -80,12 +80,12 @@ module.exports = async (req, res) => {
       <div style="background:#F1F5FB;border:1px solid #DCE5F2;padding:20px 24px;text-align:center;margin-bottom:26px">
         <div style="font-size:11px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#9A7B2E;margin-bottom:6px">Your welcome code</div>
         <div style="font-size:28px;font-weight:800;letter-spacing:0.08em;color:#0C1840;margin-bottom:6px">WELCOME10</div>
-        <div style="font-size:12px;color:#67718A;line-height:1.5">10% off your first kit order &mdash; enter it in your cart at checkout.</div>
+        <div style="font-size:14px;color:#0B1020;line-height:1.5">10% off your first kit order &mdash; enter it in your cart at checkout.</div>
       </div>
-      <div style="font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#0C1840;margin-bottom:14px">What you'll receive</div>
-      <div style="font-size:13px;color:#3D4763;line-height:1.7;margin-bottom:8px"><b style="color:#0C1840">Retention playbooks</b> &mdash; what recognition actually does to turnover, with the math.</div>
-      <div style="font-size:13px;color:#3D4763;line-height:1.7;margin-bottom:8px"><b style="color:#0C1840">Seasonal deadlines</b> &mdash; Driver Appreciation Week order windows, before they close.</div>
-      <div style="font-size:13px;color:#3D4763;line-height:1.7;margin-bottom:24px"><b style="color:#0C1840">Program design</b> &mdash; milestones, safety recognition, and onboarding done right.</div>
+      <div style="font-size:14px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0C1840;margin-bottom:16px">What you'll receive</div>
+      <div style="font-size:15px;color:#1F2937;line-height:1.7;margin-bottom:10px"><b style="color:#0C1840">Retention playbooks</b> &mdash; what recognition actually does to turnover, with the math.</div>
+      <div style="font-size:15px;color:#1F2937;line-height:1.7;margin-bottom:10px"><b style="color:#0C1840">Seasonal deadlines</b> &mdash; Driver Appreciation Week order windows, before they close.</div>
+      <div style="font-size:15px;color:#1F2937;line-height:1.7;margin-bottom:26px"><b style="color:#0C1840">Program design</b> &mdash; milestones, safety recognition, and onboarding done right.</div>
       <div style="text-align:center;margin-bottom:8px">${btn('https://www.driverappreciationsolutions.com/ideas.html', 'Read the Guides')}</div>
     `,
     footNote: 'You are receiving this because you signed up at driverappreciationsolutions.com. Reply to unsubscribe.',

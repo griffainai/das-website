@@ -144,11 +144,11 @@ module.exports = async (req, res) => {
       sub: '',
       photo: 'https://www.driverappreciationsolutions.com/images/email/contact-hero.jpg',
       bodyRows: `
-        <p style="margin:0 0 14px;font-size:14px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
-        <p style="margin:0 0 14px;font-size:13px;color:#3D4763;line-height:1.7">${ackLede}</p>
-        <p style="margin:0 0 22px;font-size:13px;color:#3D4763;line-height:1.7">${ackNext}</p>
+        <p style="margin:0 0 14px;font-size:16px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
+        <p style="margin:0 0 14px;font-size:15px;color:#1F2937;line-height:1.75">${ackLede}</p>
+        <p style="margin:0 0 22px;font-size:15px;color:#1F2937;line-height:1.75">${ackNext}</p>
         <div style="text-align:center;margin-bottom:10px">${btn('tel:3026810995', 'Call the fleet team — 302.681.0995')}</div>
-        <p style="margin:0;text-align:center;font-size:11px;color:#93A0B8">Mon&ndash;Fri, 9am&ndash;5pm CT. A person answers.</p>
+        <p style="margin:0;text-align:center;font-size:12px;color:#3D4763">Mon&ndash;Fri, 9am&ndash;5pm CT. A person answers.</p>
       `,
       footNote: 'The average fleet loses more to turnover in a month than a year of recognition costs &mdash; that math is exactly what we&rsquo;ll show you.',
     });
@@ -320,11 +320,11 @@ async function handleCompanyPurchasing(req, res) {
       sub: 'Quote, purchase order, vendor setup, or Net-30 &mdash; a fleet specialist is preparing a real answer.',
       photo: 'https://www.driverappreciationsolutions.com/images/email/contact-hero.jpg',
       bodyRows: `
-        <p style="margin:0 0 14px;font-size:14px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
-        <p style="margin:0 0 14px;font-size:13px;color:#3D4763;line-height:1.7">We received <b>${company ? String(company).replace(/[<>&]/g,'') : 'your company'}</b>&rsquo;s purchasing request. A fleet specialist will reply within one business day with pricing for your exact driver count &mdash; and can set up purchase orders, vendor onboarding, or Net-30 terms as needed.</p>
-        <p style="margin:0 0 22px;font-size:13px;color:#3D4763;line-height:1.7">Time-sensitive? Skip the queue:</p>
+        <p style="margin:0 0 14px;font-size:16px;color:#0B1020;line-height:1.7">Hi ${firstName ? String(firstName).replace(/[<>&]/g,'') : 'there'},</p>
+        <p style="margin:0 0 14px;font-size:15px;color:#1F2937;line-height:1.75">We received <b>${company ? String(company).replace(/[<>&]/g,'') : 'your company'}</b>&rsquo;s purchasing request. A fleet specialist will reply within one business day with pricing for your exact driver count &mdash; and can set up purchase orders, vendor onboarding, or Net-30 terms as needed.</p>
+        <p style="margin:0 0 22px;font-size:15px;color:#1F2937;line-height:1.75">Time-sensitive? Skip the queue:</p>
         <div style="text-align:center;margin-bottom:10px">${btn('tel:3026810995', 'Call the fleet team — 302.681.0995')}</div>
-        <p style="margin:0;text-align:center;font-size:11px;color:#93A0B8">Mon&ndash;Fri, 9am&ndash;5pm CT.</p>
+        <p style="margin:0;text-align:center;font-size:12px;color:#3D4763">Mon&ndash;Fri, 9am&ndash;5pm CT.</p>
       `,
       footNote: 'Replacing one driver runs $8,000&ndash;$15,000. Your quote will show the recognition math for your exact driver count.',
     });
