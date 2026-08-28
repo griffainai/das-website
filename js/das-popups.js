@@ -21,13 +21,22 @@
   var API = '/api/newsletter-subscribe';
   var BLOCKED = /(^|\/)(cart|success|login|signup|forgot-password|account|contact|company-purchasing)(\.html)?$/;
   var ORDER = ['p1', 'p2', 'p3', 'p4'];
+  // Photo ROTATION (Jayden, 2026-08-27): each layout owns a pool and advances
+  // one frame per impression, so returning visitors never see the same shot.
   var IMG = {
-    p1: '/images/das-da-kit-1.webp',
-    p2: '/images/home-hero-1400.webp',
-    p3: '/images/mrk-hero-card.webp',
-    p4: '/images/das-da-kit-case-2026.webp',
-    p5: '/images/pak-collection-hero.webp'
+    p1: ['/images/das-da-kit-1.webp', '/images/pak-collection-hero.webp', '/images/mrk-hero-card.webp', '/images/das-da-kit-3.webp'],
+    p2: ['/images/home-hero-1400.webp', '/images/medals-hero.webp', '/images/das-da-kit-2.webp'],
+    p3: ['/images/mrk-hero-card.webp', '/images/das-da-kit-case-2026.webp', '/images/pak-premium-onboarding-hero.webp'],
+    p4: ['/images/das-da-kit-case-2026.webp', '/images/das-da-kit-1.webp', '/images/medals-hero.webp'],
+    p5: ['/images/pak-collection-hero.webp', '/images/das-da-kit-2.webp']
   };
+  function pic(which) {
+    var s = load();
+    var n = (s.imgIdx || 0);
+    save(Object.assign(s, { imgIdx: n + 1 }));
+    var pool = IMG[which];
+    return pool[n % pool.length];
+  }
 
   function load() { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } }
   function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
@@ -82,6 +91,18 @@
       '#dasPop .no.lt{color:rgba(255,255,255,.6)}',
       '#dasPop .frm{display:flex;flex-direction:column;gap:12px}',
       '#dasPop .ok{font-family:Inter,-apple-system,sans-serif;font-size:14px;font-weight:600;color:#1A2E6E}',
+      '#dasPop .fine{font-family:Inter,-apple-system,sans-serif;font-size:10px;line-height:1.55;color:#93A0B8;margin-top:2px}',
+      '#dasPop .fine a{color:inherit;text-decoration:underline}',
+      '#dasPop .fine.lt{color:rgba(255,255,255,.5)}',
+      '#dasPop .prefs{display:flex;gap:14px;flex-wrap:wrap;margin-top:2px}',
+      '#dasPop .prefs .pl{font:600 10.5px Inter,-apple-system,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#67718A;width:100%}',
+      '#dasPop .prefs .pl.lt{color:rgba(255,255,255,.65)}',
+      '#dasPop .prefs label{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font:500 13px Inter,-apple-system,sans-serif;color:#0B1020}',
+      '#dasPop .prefs label.lt{color:#fff}',
+      '#dasPop .prefs input{appearance:none;width:16px;height:16px;border-radius:50%;border:1.5px solid #B9C6DE;margin:0}',
+      '#dasPop .prefs label.lt input{border-color:rgba(255,255,255,.5)}',
+      '#dasPop .prefs input:checked{border-color:#1A2E6E;background:radial-gradient(circle,#1A2E6E 0 4.5px,transparent 5px)}',
+      '#dasPop .prefs label.lt input:checked{border-color:#fff;background:radial-gradient(circle,#fff 0 4.5px,transparent 5px)}',
       '#dasPop .ok.lt{color:#fff}',
       /* p1 split */
       '#dasPop .sp{display:grid;grid-template-columns:1fr;max-height:92vh;overflow:auto;max-width:820px}',
@@ -165,8 +186,8 @@
       bar.id = 'dasBar';
       bar.setAttribute('role', 'dialog');
       bar.innerHTML =
-        '<img src="' + IMG.p4 + '" alt="">' +
-        '<form novalidate><div class="ln">DAW is Sept 13&ndash;19. Order deadline: <b>Aug 7</b>.</div>' +
+        '<img src="' + pic('p4') + '" alt="">' +
+        '<form novalidate><div class="ln">Driver Appreciation Week: Sept 13&ndash;19 &middot; Order by <b>Aug 7</b> &middot; <b>10% off</b> your first kit</div>' +
         '<div class="row"><input type="email" required placeholder="Email address" aria-label="Email address">' +
         '<button type="submit" class="go">Get reminders</button></div></form>' +
         '<button type="button" class="x" aria-label="Close">&#10005;</button>';
@@ -184,40 +205,51 @@
 
     if (which === 'p1') inner =
       '<div class="card sp"><button type="button" class="x" aria-label="Close">&#10005;</button>' +
-      '<div class="ph"><img src="' + IMG.p1 + '" alt=""></div>' +
+      '<div class="ph"><img src="' + pic('p1') + '" alt=""></div>' +
       '<form class="frm" novalidate><span class="eb">' + EYEBROW + '</span>' +
-      '<h2>Never miss<br>DAW again</h2>' +
-      '<p class="bd"><b>10% off your first kit order</b> with code WELCOME10, plus deadline reminders and fleet recognition insights.</p>' +
-      '<input type="email" required placeholder="Work email" aria-label="Email address">' +
-      '<button type="submit" class="cta">Get the reminders</button>' +
-      '<button type="button" class="no">No thanks</button></form></div>';
+      '<h2>Get 10% off your<br>first kit order</h2>' +
+      '<p class="bd">Sign up for launch updates, seasonal program deadlines, and fleet recognition insights.</p>' +
+      '<div class="prefs"><span class="pl">What are you planning for?</span>' +
+      '<label><input type="radio" name="pref" value="appreciation-week" checked> Driver Appreciation Week</label>' +
+      '<label><input type="radio" name="pref" value="milestones"> Milestones &amp; Safety</label>' +
+      '<label><input type="radio" name="pref" value="both"> Both</label></div>' +
+      '<input type="email" required placeholder="Email address" aria-label="Email address">' +
+      '<button type="submit" class="cta">Get on the list</button>' +
+      '<button type="button" class="no">No thanks</button>' +
+      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else if (which === 'p2') inner =
       '<div class="card fb" style="background:#0C1840"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
-      '<img src="' + IMG.p2 + '" alt=""><div class="scrim"></div>' +
+      '<img src="' + pic('p2') + '" alt=""><div class="scrim"></div>' +
       '<form class="frm" novalidate><span class="eb lt">' + EYEBROW + '</span>' +
-      '<h2 class="lt">The fleets that win<br>recognize first</h2>' +
-      '<p class="bd lt">Sign up for <b>10% off your first kit order</b> &mdash; plus monthly recognition insights and every seasonal deadline.</p>' +
-      '<input type="email" required placeholder="Work email" aria-label="Email address">' +
-      '<button type="submit" class="cta wh">Sign up</button></form></div>';
+      '<h2 class="lt">Stay in<br>the know</h2>' +
+      '<p class="bd lt">Sign up for early access to seasonal programs, plus <b>10% off your first kit order</b>. *First order, one use.</p>' +
+      '<div class="prefs"><span class="pl lt">What are you planning for?</span>' +
+      '<label class="lt"><input type="radio" name="pref" value="appreciation-week" checked> Driver Appreciation Week</label>' +
+      '<label class="lt"><input type="radio" name="pref" value="milestones"> Milestones &amp; Safety</label>' +
+      '<label class="lt"><input type="radio" name="pref" value="both"> Both</label></div>' +
+      '<input type="email" required placeholder="Email address" aria-label="Email address">' +
+      '<button type="submit" class="cta wh">Continue</button>' +
+      '<p class="fine lt">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else if (which === 'p3') inner =
       '<div class="card pt"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
-      '<div class="ph"><img src="' + IMG.p3 + '" alt=""><div class="ov"></div>' +
-      '<div class="tx"><span class="eb lt">' + EYEBROW + '</span><h2 class="lt">Plan DAW<br>like a pro</h2></div></div>' +
+      '<div class="ph"><img src="' + pic('p3') + '" alt=""><div class="ov"></div>' +
+      '<div class="tx"><span class="eb lt">' + EYEBROW + '</span><h2 class="lt">Unlock your<br>10% off discount</h2></div></div>' +
       '<form class="frm" novalidate>' +
-      '<p class="bd"><b>10% off your first kit order</b>, and the Aug&nbsp;7 deadline reminder before it costs you the window.</p>' +
+      '<p class="bd">Your first kit order, 10% off &mdash; plus the Driver Appreciation Week order-deadline reminder before it costs you the window.</p>' +
       '<input type="text" placeholder="First name" aria-label="First name">' +
-      '<input type="email" required placeholder="Work email" aria-label="Email address">' +
-      '<button type="submit" class="cta">Get the reminders</button>' +
-      '<button type="button" class="no">No thanks</button></form></div>';
+      '<input type="email" required placeholder="Email address" aria-label="Email address">' +
+      '<button type="submit" class="cta">Subscribe</button>' +
+      '<button type="button" class="no">No thanks</button>' +
+      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else inner = /* p5 exit intent — cart has items */
       '<div class="card sp" style="background:#0C1840;color:#fff"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
-      '<div class="ph"><img src="' + IMG.p5 + '" alt=""></div>' +
+      '<div class="ph"><img src="' + pic('p5') + '" alt=""></div>' +
       '<form class="frm" novalidate><span class="eb lt">' + cartCount() + ' kit line' + (cartCount() === 1 ? '' : 's') + ' saved</span>' +
       '<h2 class="lt">Your kits are<br>still in the cart</h2>' +
-      '<p class="bd lt">Checkout takes two minutes &mdash; or take the deadline reminder and come back before Aug&nbsp;7.</p>' +
+      '<p class="bd lt">Checkout takes two minutes &mdash; or email yourself the reminder and come back before the Driver Appreciation Week deadline.</p>' +
       '<a class="cta wh" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="cart.html">Review my cart</a>' +
       '<input type="email" placeholder="Or email me the reminder" aria-label="Email address">' +
       '<button type="submit" class="cta" style="background:rgba(255,255,255,.15);box-shadow:none">Remind me</button>' +
