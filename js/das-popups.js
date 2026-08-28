@@ -145,6 +145,7 @@
     }).then(function (r) {
       if (!r.ok) throw 0;
       save(Object.assign(load(), { subscribed: true }));
+      try { localStorage.setItem('das_promo_v1', 'WELCOME10'); } catch (e) {}
       form.innerHTML = '<p class="ok' + (light ? ' lt' : '') + '">' + doneMsg + '</p>';
       setTimeout(remove, 2200);
     }).catch(function () {
@@ -171,7 +172,7 @@
         '<button type="button" class="x" aria-label="Close">&#10005;</button>';
       document.body.appendChild(bar);
       bar.querySelector('.x').onclick = dismiss;
-      bar.querySelector('form').onsubmit = function (e) { e.preventDefault(); submit(this, "You're on the list.", true); };
+      bar.querySelector('form').onsubmit = function (e) { e.preventDefault(); submit(this, 'Code <b>WELCOME10</b> is yours &mdash; applied at checkout.', true); };
       return;
     }
 
@@ -186,7 +187,7 @@
       '<div class="ph"><img src="' + IMG.p1 + '" alt=""></div>' +
       '<form class="frm" novalidate><span class="eb">' + EYEBROW + '</span>' +
       '<h2>Never miss<br>DAW again</h2>' +
-      '<p class="bd">Deadline reminders and fleet recognition insights, straight to your inbox. The Aug&nbsp;7 order deadline sneaks up every year.</p>' +
+      '<p class="bd"><b>10% off your first kit order</b> with code WELCOME10, plus deadline reminders and fleet recognition insights.</p>' +
       '<input type="email" required placeholder="Work email" aria-label="Email address">' +
       '<button type="submit" class="cta">Get the reminders</button>' +
       '<button type="button" class="no">No thanks</button></form></div>';
@@ -196,7 +197,7 @@
       '<img src="' + IMG.p2 + '" alt=""><div class="scrim"></div>' +
       '<form class="frm" novalidate><span class="eb lt">' + EYEBROW + '</span>' +
       '<h2 class="lt">The fleets that win<br>recognize first</h2>' +
-      '<p class="bd lt">Monthly recognition insights and every seasonal program deadline &mdash; before your competitors see them.</p>' +
+      '<p class="bd lt">Sign up for <b>10% off your first kit order</b> &mdash; plus monthly recognition insights and every seasonal deadline.</p>' +
       '<input type="email" required placeholder="Work email" aria-label="Email address">' +
       '<button type="submit" class="cta wh">Sign up</button></form></div>';
 
@@ -205,7 +206,7 @@
       '<div class="ph"><img src="' + IMG.p3 + '" alt=""><div class="ov"></div>' +
       '<div class="tx"><span class="eb lt">' + EYEBROW + '</span><h2 class="lt">Plan DAW<br>like a pro</h2></div></div>' +
       '<form class="frm" novalidate>' +
-      '<p class="bd">Order deadline is <b>August 7</b> &mdash; fleet orders take three weeks of production plus shipping. Get the reminder before it costs you the window.</p>' +
+      '<p class="bd"><b>10% off your first kit order</b>, and the Aug&nbsp;7 deadline reminder before it costs you the window.</p>' +
       '<input type="text" placeholder="First name" aria-label="First name">' +
       '<input type="email" required placeholder="Work email" aria-label="Email address">' +
       '<button type="submit" class="cta">Get the reminders</button>' +
@@ -229,7 +230,7 @@
     var no = pop.querySelector('.no'); if (no) no.onclick = dismiss;
     var f = pop.querySelector('form');
     var light = which !== 'p1' && which !== 'p3';
-    f.onsubmit = function (e) { e.preventDefault(); submit(this, "You're on the list &mdash; see you before Aug 7.", light); };
+    f.onsubmit = function (e) { e.preventDefault(); submit(this, "You're in &mdash; code <b>WELCOME10</b> is applied to your cart and in your inbox.", light); };
   }
 
   function tryFire() {

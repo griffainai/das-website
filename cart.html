@@ -199,6 +199,18 @@
           <span style="color:#059669;font-weight:600">Bundle discount</span>
           <strong style="color:#059669" id="summary-bundle-discount">−$0.00</strong>
         </div>
+        <div class="order-line" id="promo-discount-row" style="display:none">
+          <span style="color:#059669;font-weight:600">WELCOME10 (10% off)</span>
+          <strong style="color:#059669" id="summary-promo-discount">−$0.00</strong>
+        </div>
+        <!-- Promo code (WELCOME10 from the email-capture popups / welcome email) -->
+        <div id="promo-entry" style="display:flex;gap:8px;margin:10px 0 4px">
+          <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters"
+                 style="flex:1;min-width:0;height:42px;padding:0 12px;font:500 16px Inter,-apple-system,sans-serif;border:1.5px solid #E3E8F2;border-radius:10px;outline:0;text-transform:uppercase">
+          <button type="button" id="promo-apply" onclick="applyPromo()"
+                  style="height:42px;padding:0 16px;border:0;border-radius:10px;cursor:pointer;font:600 13px Inter,sans-serif;color:#fff;background:#1A2E6E">Apply</button>
+        </div>
+        <div id="promo-msg" style="display:none;font:500 12.5px Inter,sans-serif;margin:0 0 6px"></div>
         <div class="order-line">
           <span>Shipping</span>
           <strong style="color:#059669">Free shipping</strong>
@@ -273,7 +285,7 @@
 
 <script src="/lib/recognition-pricing.js?v=1"></script>
 <script src="/lib/catalog.js?v=1"></script>
-<script src="js/cart.js?v=4"></script>
+<script src="js/cart.js?v=5"></script>
 <script>
 function renderCart() {
   const items = Cart.get();
@@ -293,6 +305,56 @@ function renderCart() {
     document.getElementById('checkout-btn').style.opacity = '0.5';
     return;
   }
+
+
+  // ── WELCOME10 promo (2026-08-27) ────────────────────────────
+  function currentPromo() { try { return (localStorage.getItem('das_promo_v1') || '').toUpperCase(); } catch (e) { return ''; } }
+  function applyPromo() {
+    const input = document.getElementById('promo-input');
+    const msg = document.getElementById('promo-msg');
+    const code = (input.value || '').trim().toUpperCase();
+    if (code === 'WELCOME10') {
+      try { localStorage.setItem('das_promo_v1', code); } catch (e) {}
+      msg.style.display = 'block'; msg.style.color = '#059669';
+      msg.textContent = 'WELCOME10 applied — 10% off your first kit order.';
+      renderPromoRow();
+    } else {
+      msg.style.display = 'block'; msg.style.color = '#B0392F';
+      msg.textContent = code ? 'That code isn’t valid.' : 'Enter a code first.';
+    }
+  }
+  function renderPromoRow() {
+    const row = document.getElementById('promo-discount-row');
+    const entry = document.getElementById('promo-entry');
+    const val = document.getElementById('summary-promo-discount');
+    if (!row) return;
+    const items = Cart.get();
+    const goods = Math.round(items.reduce((s, i) => s + Math.round(i.price * 100) * i.qty, 0)) / 100;
+    // the 15% bundle (>= $575 of goods) beats the promo — decide from the DATA,
+    // never from another row's current DOM state (render order races).
+    const bundleEligible = goods >= 575;
+    if (currentPromo() === 'WELCOME10' && goods > 0 && !bundleEligible) {
+      const off = Math.round(goods * 10) / 100;
+      row.style.display = '';
+      val.textContent = '−$' + off.toFixed(2);
+      if (entry) entry.style.display = 'none';
+      // estimated total = goods − promo (shipping free, taxes at checkout);
+      // computed fresh from the cart, never parsed back out of the DOM.
+      const tot = document.getElementById('summary-total');
+      if (tot) tot.textContent = '$' + (goods - off).toFixed(2);
+    } else {
+      row.style.display = 'none';
+      if (entry && currentPromo() === 'WELCOME10' && bundleEligible) {
+        entry.style.display = 'none'; // code held, bundle wins — no dead input
+      }
+    }
+  }
+  window.applyPromo = applyPromo;
+  (function bootPromo() {
+    window.addEventListener('das:cartchange', function () { setTimeout(renderPromoRow, 100); });
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(renderPromoRow, 400); });
+    else setTimeout(renderPromoRow, 400);
+  })();
 
   document.getElementById('checkout-btn').disabled = false;
   document.getElementById('checkout-btn').style.opacity = '';
@@ -398,6 +460,6 @@ document.addEventListener('DOMContentLoaded', renderCart);
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
-<script src="js/das-popups.js?v=1" defer></script>
+<script src="js/das-popups.js?v=2" defer></script>
 </body>
 </html>

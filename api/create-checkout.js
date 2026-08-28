@@ -281,7 +281,34 @@ module.exports = async (req, res) => {
     //    15% off the entire order.
     const bundleEligibleSubtotal = priced.reduce((s, it) => s + it.unitPrice * it.qty, 0);
     const bundleApplies = bundleEligibleSubtotal >= 575;
+    // WELCOME10 (2026-08-27): 10% off, minted for the email-capture popups.
+    // Server-validated; the bundle 15% beats it and Stripe takes ONE coupon,
+    // so the larger discount wins - never both.
+    const promoCode    = String((req.body || {}).promoCode || '').trim().toUpperCase();
+    const promoApplies = !bundleApplies && promoCode === 'WELCOME10';
     let discountsArg = undefined;
+    if (promoApplies) {
+      const PROMO_ID = 'das-welcome-10';
+      let promoCouponId = PROMO_ID;
+      try {
+        await stripe.coupons.retrieve(PROMO_ID);
+      } catch {
+        try {
+          const p = await stripe.coupons.create({
+            id:          PROMO_ID,
+            percent_off: 10,
+            duration:    'once',
+            name:        'WELCOME10 — 10% off your first kit order',
+          });
+          promoCouponId = p.id;
+        } catch (pe) {
+          console.error('[create-checkout] promo coupon ensure failed:', pe && pe.message);
+          const one = await stripe.coupons.create({ percent_off: 10, duration: 'once', name: 'WELCOME10 — 10% off' });
+          promoCouponId = one.id;
+        }
+      }
+      discountsArg = [{ coupon: promoCouponId }];
+    }
     if (bundleApplies) {
       // Durable coupon: one fixed id reused across checkouts (this used to mint a
       // brand-new Stripe coupon object on every >=\$575 order, forever).
@@ -358,6 +385,7 @@ module.exports = async (req, res) => {
         total_qty:         String(totalQty),
         shipping_charged:  String(shippingCents),
         bundle_applied:    bundleApplies ? '1' : '0',
+        promo_applied:     promoApplies ? 'WELCOME10' : '0',
       },
     };
 
@@ -391,7 +419,8 @@ module.exports = async (req, res) => {
     let createdOrderId = null;
     if (buyerCompanyId) {
       const goodsCents     = priced.reduce((s, it) => s + Math.round(it.unitPrice * 100) * it.qty, 0);
-      const discountCents  = bundleApplies ? Math.round(goodsCents * 0.15) : 0;
+      const discountCents  = bundleApplies ? Math.round(goodsCents * 0.15)
+                           : (promoApplies ? Math.round(goodsCents * 0.10) : 0);
       const subtotalCents  = goodsCents - discountCents;   // goods after discount, pre-shipping
       const totalCents     = subtotalCents + shippingCents;
 
@@ -402,6 +431,7 @@ module.exports = async (req, res) => {
       const orderNumber = `DAS-${datePart}-${randPart}`;
       const noteParts   = [
         bundleApplies ? `Bundle discount 15% (−$${(discountCents / 100).toFixed(2)})` : null,
+        promoApplies  ? `WELCOME10 10% (−$${(discountCents / 100).toFixed(2)})` : null,
       ].filter(Boolean);
 
       const orderFields = {

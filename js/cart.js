@@ -369,6 +369,9 @@ async function goToCheckout() {
         items,
         // Upsell-stack metadata computed by cart.html — server re-validates.
         bundleDiscount: meta.bundleDiscount || 0,
+        // Promo code (WELCOME10) — stored by the popup or typed in the cart;
+        // the server validates, and the 15% bundle discount beats it.
+        promoCode: (function () { try { return localStorage.getItem('das_promo_v1') || ''; } catch (e) { return ''; } })(),
       }),
     });
     let data;

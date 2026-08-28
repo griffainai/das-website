@@ -86,6 +86,13 @@ module.exports = async (req, res) => {
     <!-- Body -->
     <div style="background:#ffffff;padding:40px 44px">
 
+      <!-- WELCOME10 (2026-08-27): the popup's promise, delivered -->
+      <div style="background:#F1F5FB;border:1px solid #DCE5F2;border-radius:12px;padding:20px 24px;text-align:center;margin-bottom:32px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#9A7B2E;margin-bottom:6px">Your welcome code</div>
+        <div style="font-size:26px;font-weight:800;letter-spacing:0.06em;color:#0C1840;margin-bottom:6px">WELCOME10</div>
+        <div style="font-size:13px;color:#67718A;line-height:1.5">10% off your first kit order &mdash; enter it in your cart at checkout.</div>
+      </div>
+
       <h2 style="font-size:17px;font-weight:700;color:#0C1840;margin:0 0 20px;letter-spacing:-0.01em">Here's what you'll receive:</h2>
 
       <table cellpadding="0" cellspacing="0" style="width:100%;margin-bottom:32px">
