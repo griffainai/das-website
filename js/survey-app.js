@@ -129,10 +129,12 @@
 
   function paint(bodyNode, footNodes, ghost) {
     clearNode(stage); clearNode(foot);
-    // The ghosted Anton word behind the screen — the site's page-hero device,
-    // here doing the same job: fill the empty middle of a tall phone with brand
-    // texture instead of a hole.
-    stage.setAttribute('data-ghost', ghost || '');
+    // The ghosted word is gone — the illustration field is the ground now (see
+    // .svq-field in survey.css). What paint() still tracks is whether we are on an
+    // opening screen, where the DAS lockup runs large, versus inside the funnel,
+    // where it shrinks so the screen belongs to the question.
+    document.body.classList.toggle('svq-intro',
+      ['role', 'code', 'pick', 'identity'].indexOf(state.screen) > -1);
     var screen = el('div', 'svq-screen');
     screen.appendChild(bodyNode);
     stage.appendChild(screen);
@@ -153,10 +155,10 @@
     b.appendChild(el('p', 'svq-lede', 'The questions are different depending on where you sit. Pick one and it starts.'));
 
     var picks = el('div', 'svq-picks');
-    picks.appendChild(pickCard('das-driver', 'I drive for a fleet',
+    picks.appendChild(pickCard('das-driver', 'I Drive For A Fleet',
       '27 questions about your experience, how you are recognised, and what would actually mean something to you. Tap to answer — about four minutes.',
       'Open to all drivers', function () { startInstrument('driver'); }));
-    picks.appendChild(pickCard('das-clipboard', "I'm with the organization",
+    picks.appendChild(pickCard('das-clipboard', "I'm With The Organization",
       'Leadership, safety, HR, operations or recruiting. The recognition assessment and the 2027 commitment planning guide.',
       'Access code required', function () { screenCode(); }));
     b.appendChild(picks);

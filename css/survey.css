@@ -134,16 +134,28 @@ body.svq-run { background: #0B1430; }
   padding: clamp(20px, 4vw, 44px) clamp(16px, 4vw, 40px) clamp(40px, 11vh, 130px);
   max-width: 940px; width: 100%; margin: 0 auto;
 }
-/* The site's page-hero ghost word, carried into the funnel. A short question on a
-   tall phone leaves a large empty middle; the brand's answer to dead space is the
-   prism and the ghosted Anton word, not a new hue. Set per screen from JS. */
-.svq-stage::before {
-  content: attr(data-ghost);
-  position: absolute; right: -4%; top: 50%; transform: translateY(-50%);
-  z-index: -1; pointer-events: none; user-select: none;
-  font-family: var(--sv-head); font-size: clamp(130px, 30vw, 340px);
-  line-height: .82; letter-spacing: .01em; white-space: nowrap;
-  color: rgba(255,255,255,.055);
+/* THE ILLUSTRATION FIELD — the ground, replacing the ghosted word (Jayden, 2026-08-30:
+   the word was weak, "we can do a better job with a better branded background").
+   The 16 DAS drawings blown up huge and quiet. On-brand by construction, no new assets,
+   and unlike a word it says what the survey is ABOUT. Marks are pushed to the edges and
+   held at 8-13% so they never compete with the answer stack. */
+.svq-field {
+  position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;
+}
+.svq-field svg {
+  position: absolute; color: #fff;
+  stroke: currentColor; stroke-width: 2.4; fill: none;
+  stroke-linecap: round; stroke-linejoin: round;
+}
+/* Sizes are CAPPED in px, not left as pure percentages: .svq grows with a tall
+   screen's content, so a 30%-height mark rendered 388px tall on a 375px phone and
+   swamped the answer stack. Percentage for placement, pixels for scale. */
+.svq-field .m1 { left: -15%; top: 7%;   width: 78%;  max-width: 420px; opacity: .12; }
+.svq-field .m2 { right: -8%; top: 40%;  height: 26%; max-height: 210px; opacity: .10; }
+.svq-field .m3 { left: 3%;   bottom: 4%; height: 22%; max-height: 180px; opacity: .09; }
+@media (max-width: 480px) {
+  .svq-field .m1 { width: 92%; opacity: .11; }
+  .svq-field .m3 { opacity: .08; }
 }
 .svq-screen { animation: svqIn 420ms cubic-bezier(.2, .7, .3, 1) both; }
 @keyframes svqIn { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
@@ -154,11 +166,14 @@ body.svq-run { background: #0B1430; }
 }
 .svq-h {
   font-family: var(--sv-head); font-weight: 400; text-transform: uppercase;
-  letter-spacing: .006em; line-height: .96; color: #fff; margin: 0;
+  /* De-shouted, 2026-08-30. Anton at 38px+ with tight tracking reads as a poster and
+     Jayden called it "too bold and bulky". Wider tracking, more line-height and 92%
+     white keep the DAS display face without it hammering the reader. */
+  letter-spacing: .07em; line-height: 1.08; color: rgba(255,255,255,.92); margin: 0;
   text-wrap: balance;
 }
-.svq-h1 { font-size: clamp(30px, 6.2vw, 62px); }
-.svq-h2 { font-size: clamp(24px, 4vw, 42px); }
+.svq-h1 { font-size: clamp(23px, 3.6vw, 34px); }
+.svq-h2 { font-size: clamp(20px, 2.9vw, 28px); }
 /* Question text stays sentence-case: uppercasing a 20-word question is unreadable. */
 .svq-qtext {
   font-family: var(--sv-ui); font-weight: 300; text-transform: none;
@@ -349,7 +364,10 @@ textarea.svq-field { min-height: 148px; resize: vertical; }
 @media (max-width: 760px) { .svq-picks { grid-template-columns: 1fr; } }
 .svq-pick {
   appearance: none; cursor: pointer; text-align: left; font: inherit; color: #fff;
-  background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.24);
+  /* A navy card, not 10% glass. The glass let the bright ground through and the label
+     disappeared into it — "probably white so we can actually see it". */
+  background: rgba(8,14,32,.55); border: 1.5px solid rgba(255,255,255,.30);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
   border-radius: 14px; padding: 26px 24px;
   transition: transform 160ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
@@ -360,8 +378,10 @@ textarea.svq-field { min-height: 148px; resize: vertical; }
 .svq-pick:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
 .svq-pick .das-ill { height: 54px; color: #fff; margin-bottom: 16px; display: block; }
 .svq-pick-title {
-  font-family: var(--sv-head); text-transform: uppercase; letter-spacing: .01em;
-  font-size: 23px; line-height: 1.04; margin: 0 0 9px;
+  /* Chivo, not Anton: these are the two labels a driver reads first and they must be
+     legible at arm's length in a cab. Title Case comes from the copy in survey-app.js. */
+  font-family: var(--sv-ui); font-weight: 700; letter-spacing: -.005em;
+  font-size: 20px; line-height: 1.2; margin: 0 0 9px; color: #fff;
 }
 .svq-pick-desc { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.8); margin: 0; }
 .svq-pick-tag {
