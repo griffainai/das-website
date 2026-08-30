@@ -533,6 +533,55 @@
 </section>
 
 <!-- ============================================================
+     DRIVER RECOGNITION SURVEYS — electronic intake
+     The paper booklets, answered on a phone. Placed high because its
+     audience (drivers, and a room of decision makers mid-meeting) is not
+     the audience scrolling for the catalog.
+     ============================================================ -->
+<style>
+  .svb { background:#F7F9FD; border-top:1px solid #E7EDF6; border-bottom:1px solid #E7EDF6;
+         padding:clamp(34px,4.5vw,58px) 0; }
+  .svb-inner { display:flex; gap:clamp(20px,4vw,48px); align-items:center; flex-wrap:wrap; }
+  .svb-copy { flex:1 1 380px; min-width:280px; }
+  .svb-eyebrow { font-family:'Chivo',sans-serif; font-weight:700; font-size:11px; letter-spacing:.22em;
+                 text-transform:uppercase; color:#2E4FA8; margin:0 0 10px; }
+  .svb-title { font-family:'Anton',sans-serif; font-weight:400; text-transform:uppercase;
+               letter-spacing:.005em; line-height:.98; font-size:clamp(24px,3.2vw,38px); margin:0;
+               background:linear-gradient(180deg,#16264F 0%,#1A2E6E 46%,#3A5FC0 100%);
+               -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .svb-desc { font-family:'Chivo',sans-serif; font-size:15px; line-height:1.7; color:#5A6480; margin:12px 0 0; max-width:52ch; }
+  .svb-acts { flex:0 1 380px; display:flex; flex-direction:column; gap:10px; min-width:260px; }
+  .svb-btn { display:flex; align-items:center; justify-content:space-between; gap:14px;
+             font-family:'Chivo',sans-serif; text-decoration:none; padding:16px 20px; border-radius:4px;
+             border:1px solid #E3E8F2; background:#fff; transition:border-color .18s, box-shadow .18s, transform .18s; }
+  .svb-btn:hover { border-color:#3A5FC0; box-shadow:0 10px 26px rgba(26,46,110,.10); transform:translateY(-2px); }
+  .svb-btn b { display:block; font-size:15px; font-weight:700; color:#16264F; }
+  .svb-btn span { display:block; font-size:12.5px; color:#5A6480; margin-top:3px; line-height:1.5; }
+  .svb-btn svg { flex:none; width:16px; height:16px; color:#3A5FC0; }
+</style>
+<section class="svb">
+  <div class="container">
+    <div class="svb-inner">
+      <div class="svb-copy">
+        <p class="svb-eyebrow">Driver Recognition Surveys</p>
+        <h2 class="svb-title">The booklets,<br>answered on your phone.</h2>
+        <p class="svb-desc">The same questions we hand out on paper &mdash; driver feedback, the organization-wide recognition assessment, and the 2027 commitment planning guide. Submitted straight to our team. Nothing to print, nothing to mail back.</p>
+      </div>
+      <div class="svb-acts">
+        <a class="svb-btn" href="surveys.html?i=driver">
+          <span style="margin:0"><b>I drive for a fleet</b><span>27 questions, about six minutes. Your name is optional.</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a class="svb-btn" href="surveys.html">
+          <span style="margin:0"><b>I&rsquo;m with the organization</b><span>Recognition assessment &amp; 2027 commitment guide. Access code required.</span></span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
      SOLUTIONS — 6 GLASSMORPHISM CARDS
      ============================================================ -->
 <section class="solutions-section">
@@ -1017,6 +1066,7 @@
           <li><a href="about.html"   class="footer-link">About Us</a></li>
           <li><a href="ideas.html"   class="footer-link">Driver Ideas Blog</a></li>
           <li><a href="contact.html" class="footer-link">Contact</a></li>
+          <li><a href="surveys.html" class="footer-link">Driver Surveys</a></li>
           <li><a href="contact.html" class="footer-link">Request a Quote</a></li>
         </ul>
       </div>

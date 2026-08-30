@@ -23,7 +23,14 @@
     { "source": "/solution-holiday",           "destination": "/shop?category=holiday",      "permanent": true },
     { "source": "/solution-holiday.html",      "destination": "/shop?category=holiday",      "permanent": true },
     { "source": "/solution-enterprise",        "destination": "/shop?category=milepacks",    "permanent": true },
-    { "source": "/solution-enterprise.html",   "destination": "/shop?category=milepacks",    "permanent": true }
+    { "source": "/solution-enterprise.html",   "destination": "/shop?category=milepacks",    "permanent": true },
+
+    { "source": "/driver-survey",       "destination": "/surveys?i=driver",     "permanent": false },
+    { "source": "/driver-feedback",     "destination": "/surveys?i=driver",     "permanent": false },
+    { "source": "/assessment",          "destination": "/surveys?i=assessment", "permanent": false },
+    { "source": "/commitment",          "destination": "/surveys?i=commitment", "permanent": false },
+    { "source": "/commitment-guide",    "destination": "/surveys?i=commitment", "permanent": false },
+    { "source": "/survey",              "destination": "/surveys",              "permanent": false }
   ],
   "rewrites": [
     { "source": "/api/submit-quote",     "destination": "/api/portal?action=submit-quote" },

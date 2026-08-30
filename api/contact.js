@@ -15,6 +15,22 @@ module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') return res.status(204).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  // ── Electronic surveys (driver feedback · recognition assessment · 2027 guide) ──
+  //    Handled here (not a new serverless function) to stay under the Vercel 12-function cap.
+  //    Its own ceiling, deliberately far higher than the contact form's: a room of ten
+  //    decision makers filling this out in a meeting shares ONE NAT IP, and the contact
+  //    limit (4/min) would silently block eight of them.
+  if ((req.body || {}).formType === 'survey') {
+    const { rateLimit: rlSurvey } = require('./_rate');
+    const srl = rlSurvey(req, 'survey', { burst: 12, perHour: 80 });
+    if (!srl.allowed) {
+      res.setHeader('Retry-After', String(srl.retryAfter));
+      return res.status(429).json({ error: 'Too many submissions from this network — please wait a moment and try again.' });
+    }
+    const { handleSurvey } = require('./_survey');
+    return handleSurvey(req, res);
+  }
+
   // Rate ceiling — this endpoint sends up to 2 Resend emails per call.
   const { rateLimit } = require('./_rate');
   const rl = rateLimit(req, 'contact', { burst: 4, perHour: 12 });

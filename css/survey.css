@@ -1,0 +1,300 @@
+/* ============================================================================
+   DAS SURVEY UI  —  driverappreciationsolutions.com/surveys
+   ----------------------------------------------------------------------------
+   Brand-kit law (BRAND-KIT.md, LOCKED 2026-08-22):
+     • Anton for every header, uppercase, vertical navy gradient #16264F→#3A5FC0
+     • Chivo for body/UI. Eyebrows 700 / .22em / uppercase
+     • Navy family only. Brass (#C8A14B) is an EARNED metal — medals, milestones,
+       engraving. Never a flat fill, never a background. Used here for exactly one
+       thing: the "committed" state on the 2027 decision list, which is an earned
+       mark by definition.
+     • Light ground by default (#FFFFFF / #F7F9FD)
+
+   The design problem this file solves is Shaq's: on paper, a 1–10 rating row and a
+   "[ ] Rarely [ ] Annually" row look identical, so nobody knows what to do. Here
+   every answer mechanic has its own unmistakable shape:
+       scale  → numbered segments in a track, anchor words at both ends
+       choice → radio pills, one obviously fills
+       multi  → chips with a check mark that appears
+       text   → a box you type in
+   ========================================================================== */
+
+:root {
+  --sv-navy-900: #060E24;
+  --sv-navy-800: #0C1840;
+  --sv-navy-700: #16264F;
+  --sv-navy-600: #1A2E6E;
+  --sv-navy-500: #2E4FA8;
+  --sv-navy-400: #3A5FC0;
+  --sv-navy-300: #4E8BE8;
+  --sv-navy-100: #9CC4F5;
+  --sv-brass:    #C8A14B;
+  --sv-ground:   #F7F9FD;
+  --sv-hair:     #E3E8F2;
+  --sv-ink:      #0B1020;
+  --sv-muted:    #5A6480;
+  --sv-radius:   4px;
+}
+
+/* ══ Shell ═══════════════════════════════════════════════════════════════ */
+.sv-wrap { background: var(--sv-ground); min-height: 60vh; padding: 0 0 clamp(56px, 8vw, 110px); }
+.sv-shell { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+.sv-shell--wide { max-width: 1040px; }
+
+.sv-step { display: none; }
+.sv-step.is-active { display: block; animation: svIn .28s ease both; }
+@keyframes svIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+/* Headers — the brand signature, reused verbatim so the survey reads as DAS. */
+.sv-h {
+  font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
+  letter-spacing: .005em; line-height: .96; margin: 0;
+  background: linear-gradient(180deg, #16264F 0%, #1A2E6E 46%, #3A5FC0 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.sv-h1 { font-size: clamp(30px, 5.6vw, 52px); }
+.sv-h2 { font-size: clamp(22px, 3.4vw, 32px); }
+.sv-eyebrow {
+  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 11px;
+  letter-spacing: .22em; text-transform: uppercase; color: var(--sv-navy-500);
+  margin: 0 0 12px;
+}
+.sv-lede { font-family: 'Chivo', sans-serif; font-size: 16px; line-height: 1.7; color: var(--sv-muted); margin: 14px 0 0; }
+.sv-note {
+  font-family: 'Chivo', sans-serif; font-size: 13px; line-height: 1.65; color: var(--sv-muted);
+  border-left: 2px solid var(--sv-navy-100); padding: 2px 0 2px 14px; margin: 20px 0 0;
+}
+
+/* ══ Role picker ═════════════════════════════════════════════════════════ */
+.sv-roles { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin: 34px 0 0; }
+@media (max-width: 680px) { .sv-roles { grid-template-columns: 1fr; } }
+.sv-role {
+  appearance: none; text-align: left; cursor: pointer; font: inherit;
+  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
+  padding: 26px 24px 24px; transition: border-color .18s, box-shadow .18s, transform .18s;
+  display: block; width: 100%;
+}
+.sv-role:hover, .sv-role:focus-visible {
+  border-color: var(--sv-navy-400); box-shadow: 0 10px 30px rgba(26,46,110,.10); transform: translateY(-2px);
+  outline: none;
+}
+.sv-role .das-ill { height: 52px; color: var(--sv-navy-600); margin-bottom: 16px; display: block; }
+.sv-role-title {
+  font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .01em;
+  font-size: 21px; line-height: 1.05; color: var(--sv-navy-700); margin: 0 0 8px;
+}
+.sv-role-desc { font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.6; color: var(--sv-muted); margin: 0; }
+.sv-role-tag {
+  display: inline-block; margin-top: 14px; font-family: 'Chivo', sans-serif; font-weight: 700;
+  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--sv-navy-500); border: 1px solid var(--sv-hair); padding: 5px 9px;
+}
+
+/* ══ Progress ════════════════════════════════════════════════════════════ */
+.sv-progress {
+  position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.97);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--sv-hair); margin-bottom: 30px;
+}
+.sv-progress-inner {
+  max-width: 780px; margin: 0 auto; padding: 13px 20px;
+  display: flex; align-items: center; gap: 14px; justify-content: space-between;
+}
+.sv-progress-label {
+  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--sv-navy-600); white-space: nowrap;
+}
+.sv-progress-count { font-family: 'Chivo', sans-serif; font-size: 12px; color: var(--sv-muted); white-space: nowrap; }
+.sv-progress-track { flex: 1; height: 3px; background: var(--sv-hair); overflow: hidden; }
+.sv-progress-fill {
+  height: 100%; width: 0%; transition: width .3s ease;
+  background: linear-gradient(90deg, var(--sv-navy-600), var(--sv-navy-300));
+}
+@media (max-width: 560px) { .sv-progress-count { display: none; } }
+
+/* ══ Question card ═══════════════════════════════════════════════════════ */
+.sv-q {
+  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
+  padding: 22px 22px 20px; margin: 0 0 14px;
+}
+.sv-q.is-answered { border-color: #CBD7EC; }
+.sv-q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 16px; }
+.sv-q-n {
+  font-family: 'Anton', sans-serif; font-size: 15px; color: var(--sv-navy-300);
+  line-height: 1.2; min-width: 22px; flex: none;
+}
+.sv-q-label {
+  font-family: 'Chivo', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5;
+  color: var(--sv-ink); margin: 0;
+}
+.sv-q-help {
+  font-family: 'Chivo', sans-serif; font-size: 13px; line-height: 1.6; color: var(--sv-muted);
+  background: var(--sv-ground); border-left: 2px solid var(--sv-navy-100);
+  padding: 10px 14px; margin: 0 0 16px;
+}
+
+/* ── scale: numbered segments in one track, anchors at the ends ─────────── */
+.sv-scale-anchors {
+  display: flex; justify-content: space-between; gap: 12px;
+  font-family: 'Chivo', sans-serif; font-size: 11px; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--sv-muted); margin-bottom: 7px;
+}
+.sv-scale { display: flex; flex-wrap: wrap; gap: 6px; }
+.sv-scale .sv-seg { flex: 1 1 44px; min-width: 44px; }
+.sv-seg {
+  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-weight: 600;
+  font-size: 14px; color: var(--sv-navy-700); background: #fff;
+  border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
+  min-height: 46px; padding: 6px 8px; line-height: 1.25;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.sv-seg:hover { border-color: var(--sv-navy-400); }
+.sv-seg[aria-pressed="true"] {
+  background: linear-gradient(180deg, var(--sv-navy-700), var(--sv-navy-600));
+  border-color: var(--sv-navy-700); color: #fff;
+}
+.sv-seg:focus-visible { outline: 2px solid var(--sv-navy-300); outline-offset: 2px; }
+
+/* Likert / cadence rendered as a scale — words, not numbers, so they need room. */
+.sv-scale--words .sv-seg { font-size: 12px; flex: 1 1 90px; min-width: 90px; }
+@media (max-width: 560px) { .sv-scale--words .sv-seg { flex: 1 1 100%; text-align: left; padding-left: 14px; } }
+
+/* Extra escape hatch beside a scale ("Not applicable", "No program") */
+.sv-extra { margin-top: 8px; }
+.sv-extra .sv-seg { flex: 0 0 auto; font-size: 12px; min-height: 38px; }
+
+/* ── single choice: pills ───────────────────────────────────────────────── */
+.sv-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.sv-pill {
+  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-size: 14px;
+  color: var(--sv-navy-700); background: #fff; border: 1px solid var(--sv-hair);
+  border-radius: var(--sv-radius); padding: 11px 16px; min-height: 44px;
+  display: inline-flex; align-items: center; gap: 9px; transition: all .15s;
+}
+.sv-pill::before {
+  content: ''; width: 13px; height: 13px; border-radius: 50%; flex: none;
+  border: 1px solid #B9C4DA; transition: all .15s;
+}
+.sv-pill:hover { border-color: var(--sv-navy-400); }
+.sv-pill[aria-pressed="true"] { border-color: var(--sv-navy-700); background: #F2F6FD; font-weight: 600; }
+.sv-pill[aria-pressed="true"]::before { border-color: var(--sv-navy-700); border-width: 4px; background: #fff; }
+.sv-pill:focus-visible { outline: 2px solid var(--sv-navy-300); outline-offset: 2px; }
+
+/* ── multi select: chips with a check that appears ──────────────────────── */
+.sv-chip::before {
+  content: ''; width: 14px; height: 14px; border-radius: 2px; flex: none;
+  border: 1px solid #B9C4DA; background: #fff; transition: all .15s;
+}
+.sv-chip[aria-pressed="true"]::before {
+  background: var(--sv-navy-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E") center/11px no-repeat;
+  border-color: var(--sv-navy-600);
+}
+
+/* ── the 2027 decision list: Commit / Explore / Defer ───────────────────── */
+.sv-q--decision { border-left: 3px solid var(--sv-navy-100); }
+.sv-decide { display: flex; flex-wrap: wrap; gap: 8px; }
+.sv-decide .sv-pill { flex: 1 1 130px; justify-content: center; }
+/* Brass is the earned metal — a commitment is earned. The only brass in this file. */
+.sv-decide .sv-pill[aria-pressed="true"][data-v="Commit"] {
+  border-color: var(--sv-brass); background: #FFFCF4;
+}
+.sv-decide .sv-pill[aria-pressed="true"][data-v="Commit"]::before { border-color: var(--sv-brass); }
+
+/* ── text inputs ────────────────────────────────────────────────────────── */
+.sv-input, .sv-textarea {
+  width: 100%; font-family: 'Chivo', sans-serif; font-size: 16px; color: var(--sv-ink);
+  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
+  padding: 13px 14px; line-height: 1.6; transition: border-color .15s, box-shadow .15s;
+}
+.sv-textarea { min-height: 108px; resize: vertical; }
+.sv-input:focus, .sv-textarea:focus {
+  outline: none; border-color: var(--sv-navy-400); box-shadow: 0 0 0 3px rgba(46,79,168,.10);
+}
+.sv-input.is-invalid, .sv-textarea.is-invalid { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,.10); }
+.sv-field { margin: 0 0 16px; }
+.sv-field-label {
+  display: block; font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 10px;
+  letter-spacing: .18em; text-transform: uppercase; color: var(--sv-navy-600); margin: 0 0 7px;
+}
+.sv-field-opt { color: var(--sv-muted); font-weight: 400; letter-spacing: .06em; }
+.sv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+@media (max-width: 620px) { .sv-grid2 { grid-template-columns: 1fr; } }
+
+/* ── matrix (workstreams, census, commitments) ──────────────────────────── */
+.sv-matrix { width: 100%; border-collapse: collapse; font-family: 'Chivo', sans-serif; }
+.sv-matrix th {
+  text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--sv-navy-600); padding: 0 10px 9px 0; border-bottom: 1px solid var(--sv-hair);
+}
+.sv-matrix td { padding: 9px 10px 9px 0; vertical-align: top; border-bottom: 1px solid #F0F3F9; }
+.sv-matrix-row-label { font-size: 14px; color: var(--sv-ink); line-height: 1.4; }
+.sv-matrix-row-note { display: block; font-size: 12px; color: var(--sv-muted); margin-top: 3px; line-height: 1.45; }
+.sv-matrix .sv-input { padding: 9px 11px; font-size: 15px; }
+.sv-matrix-total td { border-bottom: none; padding-top: 14px; font-weight: 700; color: var(--sv-navy-700); }
+.sv-computed {
+  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 15px; color: var(--sv-navy-600);
+  padding: 9px 0; display: block;
+}
+/* On a phone a 3-column grid is unusable — stack each row into its own block. */
+@media (max-width: 720px) {
+  .sv-matrix, .sv-matrix tbody, .sv-matrix tr, .sv-matrix td { display: block; width: 100%; }
+  .sv-matrix thead { display: none; }
+  .sv-matrix tr { border: 1px solid var(--sv-hair); border-radius: var(--sv-radius); padding: 14px; margin-bottom: 12px; }
+  .sv-matrix td { border: none; padding: 0 0 10px; }
+  .sv-matrix td[data-col]::before {
+    content: attr(data-col); display: block; font-size: 10px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--sv-navy-600); margin-bottom: 5px;
+  }
+}
+
+/* ══ Section header inside the form ══════════════════════════════════════ */
+.sv-section-head { margin: 0 0 18px; }
+.sv-section-lede { font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.7; color: var(--sv-muted); margin: 10px 0 0; }
+
+/* ══ Buttons / nav ═══════════════════════════════════════════════════════ */
+.sv-actions { display: flex; gap: 12px; align-items: center; margin: 26px 0 0; flex-wrap: wrap; }
+.sv-btn {
+  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-weight: 700;
+  font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  padding: 15px 30px; min-height: 48px; border-radius: var(--sv-radius); border: 1px solid transparent;
+  transition: all .18s; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+}
+.sv-btn-primary { background: linear-gradient(180deg, var(--sv-navy-700), var(--sv-navy-800)); color: #fff; }
+.sv-btn-primary:hover { background: linear-gradient(180deg, var(--sv-navy-600), var(--sv-navy-700)); }
+.sv-btn-ghost { background: #fff; color: var(--sv-navy-700); border-color: var(--sv-hair); }
+.sv-btn-ghost:hover { border-color: var(--sv-navy-400); }
+.sv-btn[disabled] { opacity: .55; cursor: not-allowed; }
+.sv-btn-link {
+  background: none; border: none; cursor: pointer; font-family: 'Chivo', sans-serif;
+  font-size: 13px; color: var(--sv-muted); text-decoration: underline; padding: 8px 0;
+}
+.sv-spacer { flex: 1; }
+
+.sv-alert {
+  font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.6; padding: 13px 16px;
+  border-radius: var(--sv-radius); margin: 0 0 18px; display: none;
+}
+.sv-alert.is-on { display: block; }
+.sv-alert--err  { background: #FDF2F1; border: 1px solid #F0C7C2; color: #8E2A1E; }
+.sv-alert--info { background: #F2F6FD; border: 1px solid #CBD7EC; color: var(--sv-navy-700); }
+
+/* ══ Done ════════════════════════════════════════════════════════════════ */
+.sv-done { text-align: center; padding: clamp(40px, 7vw, 80px) 0; }
+.sv-done .das-ill { height: 74px; color: var(--sv-navy-600); margin: 0 auto 24px; display: block; }
+.sv-summary {
+  text-align: left; background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
+  padding: 22px; margin: 28px 0 0; font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--sv-muted);
+}
+.sv-summary b { color: var(--sv-ink); font-weight: 600; }
+
+/* ══ Print — the Commitment Guide has to survive "Save as PDF" ═══════════ */
+@media print {
+  .nav, .footer, .sv-progress, .sv-actions, .das-dock, .sv-btn, .sv-note { display: none !important; }
+  .sv-wrap { background: #fff; padding: 0; }
+  .sv-shell { max-width: 100%; padding: 0; }
+  .sv-q { break-inside: avoid; border-color: #CCC; margin-bottom: 8px; }
+  .sv-seg[aria-pressed="true"], .sv-pill[aria-pressed="true"] {
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .sv-step { display: block !important; }
+}
