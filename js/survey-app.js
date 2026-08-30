@@ -679,6 +679,42 @@
     alert.style.marginTop = '20px';
     b.appendChild(alert);
 
+    /* The driver's opt-in. Deliberately here and not on the identity screen: asking
+       for an email up front reads as "we will contact you" and suppresses honesty on
+       an anonymous survey. Asking at the end, after they have answered, reads as an
+       offer. Unticked by default — opt-IN, never opt-out. */
+    if (state.role === 'driver') {
+      var opt = el('div', 'svq-optin');
+      var row = el('label', 'svq-optin-row');
+      var cb = el('input');
+      cb.type = 'checkbox';
+      cb.id = 'svq-emailme';
+      row.appendChild(cb);
+      row.appendChild(el('span', null, 'Email me a copy of my answers, plus what strong recognition looks like elsewhere.'));
+      opt.appendChild(row);
+
+      var mail = el('input', 'svq-field');
+      mail.type = 'email';
+      mail.id = 'svq-emailme-addr';
+      mail.placeholder = 'your@email.com';
+      mail.style.display = 'none';
+      mail.style.marginTop = '10px';
+      mail.value = state.identity.email || '';
+      opt.appendChild(mail);
+
+      cb.addEventListener('change', function () {
+        mail.style.display = cb.checked ? '' : 'none';
+        state.emailMe = cb.checked;
+        if (cb.checked) setTimeout(function () { mail.focus(); }, 40);
+        else { state.identity.email = ''; mail.classList.remove('is-invalid'); }
+      });
+      mail.addEventListener('input', function () {
+        state.identity.email = mail.value.trim();
+        mail.classList.remove('is-invalid');
+      });
+      b.appendChild(opt);
+    }
+
     var send = btn('svq-btn svq-btn-primary', 'Submit responses');
     send.addEventListener('click', function () { submit(send, alert); });
     var back = btn('svq-skip', 'Back to questions');
@@ -688,6 +724,19 @@
 
   /* ══ SUBMIT ══════════════════════════════════════════════════════════════ */
   function submit(button, alert) {
+    // If they ticked the box, the address has to be real or the copy silently
+    // never arrives and they think we ignored them.
+    if (state.emailMe) {
+      var mail = document.getElementById('svq-emailme-addr');
+      var v = mail ? mail.value.trim() : '';
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) {
+        if (mail) { mail.classList.add('is-invalid'); mail.focus(); }
+        alert.textContent = 'That email address does not look right — or untick the box to submit without a copy.';
+        alert.className = 'svq-alert svq-alert--err is-on';
+        return;
+      }
+      state.identity.email = v;
+    }
     button.disabled = true;
     button.textContent = 'Sending…';
     alert.classList.remove('is-on');
@@ -700,6 +749,7 @@
         instrument: state.instrument,
         accessCode: state.code,
         identity: state.identity,
+        emailMe: state.emailMe === true,
         answers: state.answers
       })
     })
@@ -708,6 +758,7 @@
         if (!res.ok) throw new Error((res.body && res.body.error) || 'Submission failed.');
         clearDraft();
         screenDone();
+        requestAnalysis();   // phase two — the answers are already safe
       })
       .catch(function (err) {
         alert.textContent = err.message || 'Something went wrong. Please try again, or email info@driverappreciationsolutions.com.';
@@ -715,6 +766,28 @@
         button.disabled = false;
         button.textContent = 'Submit responses';
       });
+  }
+
+  /* Phase two. Fired only AFTER the submission succeeded, so the answers are
+     already emailed and stored before a model is ever contacted. Silent on
+     purpose: the analysis goes to the DAS team, not to whoever just answered,
+     and telling a respondent "preparing your summary" would promise them
+     something they will never receive. Failure here is invisible and harmless. */
+  function requestAnalysis() {
+    try {
+      fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          formType: 'survey-analysis',
+          instrument: state.instrument,
+          accessCode: state.code,
+          identity: state.identity,
+          answers: state.answers
+        }),
+        keepalive: true
+      }).catch(function () { /* never surfaced — the response is already safe */ });
+    } catch (e) { /* same */ }
   }
 
   /* ══ SCREEN · DONE ═══════════════════════════════════════════════════════ */
@@ -741,7 +814,9 @@
     var rows = [['Submitted', inst.name],
       ['Organization', state.identity.organization || '—'],
       ['Answered', answeredCount() + ' of ' + state.flat.length]];
-    if (state.role === 'organization' && state.identity.email) rows.push(['Copy sent to', state.identity.email]);
+    if (state.identity.email && (state.role === 'organization' || state.emailMe)) {
+      rows.push(['Copy sent to', state.identity.email]);
+    }
     rows.forEach(function (r) {
       var line = el('div');
       line.appendChild(el('b', null, r[0] + ': '));

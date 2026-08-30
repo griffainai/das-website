@@ -390,6 +390,29 @@ textarea.svq-field { min-height: 148px; resize: vertical; }
   border: 1px solid rgba(255,255,255,.3); border-radius: 99px; padding: 5px 11px;
 }
 
+/* ══ Driver opt-in ═══════════════════════════════════════════════════════
+   Unticked by default. Asking for an email at the END rather than up front:
+   requesting it before someone answers an anonymous survey reads as "we will
+   contact you" and suppresses honesty; asking after reads as an offer. */
+.svq-optin {
+  background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 12px; padding: 16px 18px; margin: 20px 0 0;
+}
+.svq-optin-row {
+  display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+  font-size: 14.5px; line-height: 1.55; color: rgba(255,255,255,.92);
+}
+.svq-optin-row input {
+  appearance: none; flex: none; width: 22px; height: 22px; margin-top: 1px;
+  border: 1.5px solid rgba(255,255,255,.5); border-radius: 5px;
+  background: transparent; cursor: pointer; transition: all .15s;
+}
+.svq-optin-row input:checked {
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%230B1430' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E") center/13px no-repeat;
+  border-color: #fff;
+}
+.svq-optin-row input:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+
 /* ══ Review + done ═══════════════════════════════════════════════════════ */
 .svq-summary {
   background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.22);

@@ -291,6 +291,38 @@ async function handleSurvey(req, res) {
     }
   }
 
+  /* The driver's own copy — OPT-IN ONLY (Jayden, 2026-08-30). Their answers back,
+     plus a fixed piece on what strong recognition looks like industry-wide.
+     Deliberately NOT a model call and deliberately NOT a critique of their employer:
+     a driver forwarding "DAS says your company is failing you" into a group chat is
+     the fastest way to lose the account. Static copy is also free, consistent, and
+     cannot hallucinate. Best-effort — never fails the submission. */
+  if (instrument === 'driver' && b.emailMe === true && identity.email) {
+    try {
+      await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          from: `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
+          to: [identity.email],
+          reply_to: 'info@driverappreciationsolutions.com',
+          subject: 'Your answers — and what good recognition actually looks like',
+          html: brandShell({
+            preheader: 'A copy of what you told us, and what strong recognition looks like.',
+            eyebrow: 'Your copy',
+            title: 'Thank you for answering',
+            sub: 'Here is exactly what you submitted, plus what good looks like elsewhere.',
+            bodyRows: driverDigest(bodyHtml),
+            footNote: 'You asked for this copy when you submitted. We do not add drivers to any mailing list.',
+          }),
+          attachments: [attachment],
+        }),
+      });
+    } catch (e) {
+      console.error('[Survey] driver digest failed:', e && e.message);
+    }
+  }
+
   await archive({
     instrument,
     organization: identity.organization,
@@ -306,6 +338,162 @@ async function handleSurvey(req, res) {
   return res.status(200).json({ ok: true, answered, total });
 }
 
+/* ── The driver's copy ────────────────────────────────────────────────────
+   Their own answers, then a fixed piece of guidance. Nothing here is generated
+   and nothing here is about their employer — it is what strong recognition looks
+   like anywhere, so a driver can read it, recognise the gap themselves, and raise
+   it in their own words. That is the awareness check pointed at the driver. */
+function driverDigest(answersHtml) {
+  return `
+    <div style="font-size:15px;line-height:1.75;color:${INK}">
+      <p style="margin:0 0 18px">Thanks for taking the time. Below is exactly what you submitted — nothing was edited, and your answers went to the Driver Appreciation Solutions team as you wrote them.</p>
+    </div>
+    ${answersHtml}
+    <div style="margin:28px 0 0;padding:22px;background:#F5F7FB;border-left:3px solid ${BRASS}">
+      <div style="font-family:${HEAD_FONT};font-size:17px;text-transform:uppercase;letter-spacing:.02em;color:${NAVY};margin:0 0 12px">What good recognition actually looks like</div>
+      <div style="font-size:14px;line-height:1.75;color:${INK}">
+        <p style="margin:0 0 12px">Across the fleets that get this right, the same six things come up — in this order:</p>
+        <ol style="margin:0 0 14px;padding-left:20px">
+          <li style="margin-bottom:6px">Being seen as a person, not an operator.</li>
+          <li style="margin-bottom:6px">Recognition that happens in front of peers and family, not in a private email.</li>
+          <li style="margin-bottom:6px">Gear worth actually wearing.</li>
+          <li style="margin-bottom:6px">Safety milestones acknowledged formally, not mentioned in passing.</li>
+          <li style="margin-bottom:6px">Tenure that escalates — year one should not look like year ten.</li>
+          <li>Something that reaches home, not just the truck.</li>
+        </ol>
+        <p style="margin:0 0 12px">And the things that reliably undo it: generic "good job" emails, gift cards, recognition that only happens at an annual review, and a milestone passing with nobody saying anything.</p>
+        <p style="margin:0;color:${MUTED};font-size:13px">Industry context, not a comment on your employer: drivers who feel recognised are about three times more likely to stay past their second year, and formal recognition programmes cut turnover by 20&ndash;30%. If something on that list is missing where you drive, it is a reasonable thing to raise &mdash; and now you have the language for it.</p>
+      </div>
+    </div>`;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   THE AWARENESS CHECK — phase two
+   ──────────────────────────────────────────────────────────────────────────
+   Deliberately a SECOND request, made by the done screen after the submission
+   has already been emailed and stored. The response is safe before a model is
+   ever contacted, so a slow, refused, or failed analysis can never cost us the
+   answers themselves — which are the thing we actually cannot recreate.
+
+   Output goes to the DAS team ONLY. The client-facing register is included as a
+   clearly-marked DRAFT for Shaq to send himself. Nothing here auto-sends to a
+   client (Jayden, 2026-08-30: "hold on gate, use safest option for now").
+   ══════════════════════════════════════════════════════════════════════════ */
+async function handleAnalysis(req, res) {
+  const b = req.body || {};
+  const instrument = clip(b.instrument, 40);
+  const inst = DEFS.get(instrument);
+  if (!inst) return res.status(400).json({ error: 'Unknown survey.' });
+
+  if (inst.gated) {
+    const expected = (process.env.SURVEY_ACCESS_CODE || DEFAULT_CODE).trim().toLowerCase();
+    if (clip(b.accessCode, 100).toLowerCase() !== expected) {
+      return res.status(403).json({ error: 'That access code is not valid.' });
+    }
+  }
+
+  const identity = {
+    organization: clip((b.identity || {}).organization, MAX_FIELD),
+    name: clip((b.identity || {}).name, MAX_FIELD),
+    title: clip((b.identity || {}).title, MAX_FIELD),
+    email: clip((b.identity || {}).email, MAX_FIELD),
+  };
+  if (!identity.organization) return res.status(400).json({ error: 'Organization is required.' });
+
+  const answers = b.answers && typeof b.answers === 'object' && !Array.isArray(b.answers) ? b.answers : {};
+
+  const A = require('./_analysis.js');
+  let facts;
+
+  if (instrument === 'driver') {
+    /* One driver is a bad week; a set is a pattern. Pull every driver response
+       this organization has given and only analyse once there are enough. */
+    const rows = await driverRowsFor(identity.organization);
+    if (rows.length < A.DRIVER_BATCH_MIN) {
+      return res.status(200).json({ ok: true, pending: true, have: rows.length, need: A.DRIVER_BATCH_MIN });
+    }
+    facts = A.driverReadiness(rows);
+  } else if (instrument === 'commitment') {
+    facts = A.commitmentReadiness(answers);
+  } else {
+    facts = A.assessmentReadiness(answers);
+  }
+
+  const out = await A.analyze({ instrument, identity, facts });
+  if (!out) return res.status(200).json({ ok: true, analyzed: false });
+
+  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  if (!RESEND_API_KEY) {
+    console.log('[Analysis] no Resend key (dev) — would send:', { instrument, org: identity.organization });
+    return res.status(200).json({ ok: true, analyzed: true, dev: true });
+  }
+
+  const FROM_ADDRESS = process.env.FROM_EMAIL || 'noreply@driverappreciationsolutions.com';
+  const RECIPIENTS = (process.env.SURVEY_TO || DEFAULT_TO).split(',').map((s) => s.trim()).filter(Boolean);
+
+  const body = `
+    <div style="font-size:13px;line-height:1.7;color:${MUTED};margin:0 0 22px">
+      <b style="color:${INK}">${esc(inst.name)}</b> — ${esc(identity.organization)}${facts.n ? ` · ${facts.n} driver responses` : ''}<br>
+      ${esc(facts.headline || '')}
+    </div>
+
+    <div style="background:#0C1840;color:#fff;padding:20px 22px;border-radius:4px;margin:0 0 24px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:${BRASS};margin:0 0 10px">For you only — not for the client</div>
+      <div style="font-size:14px;line-height:1.75;white-space:pre-wrap">${esc(out.shaq)}</div>
+    </div>
+
+    <div style="border:2px dashed ${BRASS};padding:20px 22px;border-radius:4px">
+      <div style="font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#9A7B2E;margin:0 0 4px">Draft for the client — nothing was sent to them</div>
+      <div style="font-size:12px;color:${MUTED};margin:0 0 14px">Read it, change anything you want, then send it yourself.</div>
+      <div style="font-size:14px;line-height:1.75;color:${INK};white-space:pre-wrap">${esc(out.client)}</div>
+    </div>`;
+
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        from: `Driver Appreciation Solutions <${FROM_ADDRESS}>`,
+        to: RECIPIENTS,
+        subject: `[Awareness Check] ${identity.organization} — ${inst.shortName}`,
+        html: brandShell({
+          preheader: `Awareness Check — ${identity.organization}`,
+          eyebrow: 'Awareness Check',
+          title: inst.shortName,
+          sub: esc(identity.organization),
+          bodyRows: body,
+          footNote: 'Findings are computed from the respondent&rsquo;s own answers against the readiness test on page 4 of the 2027 Commitment Guide. The client draft has NOT been sent.',
+        }),
+      }),
+    });
+  } catch (e) {
+    console.error('[Analysis] send failed:', e && e.message);
+    return res.status(200).json({ ok: true, analyzed: true, delivered: false });
+  }
+
+  return res.status(200).json({ ok: true, analyzed: true, delivered: true });
+}
+
+/* Every driver response this organization has given. Returns [] if the store is
+   unavailable — the batch simply stays pending rather than erroring. */
+async function driverRowsFor(organization) {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return [];
+  try {
+    const { getServiceClient } = require('./_supabase');
+    const { data, error } = await getServiceClient()
+      .from('survey_responses')
+      .select('answers')
+      .eq('instrument', 'driver')
+      .ilike('organization', organization)
+      .limit(500);
+    if (error) { console.error('[Analysis] roster read failed:', error.message); return []; }
+    return data || [];
+  } catch (e) {
+    console.error('[Analysis] roster read skipped:', e && e.message);
+    return [];
+  }
+}
+
 // buildBody/renderAnswer are exported for scripts/test-surveys.mjs — the email body
 // is the actual deliverable here, so it has to be assertable without sending mail.
-module.exports = { handleSurvey, buildBody, renderAnswer };
+module.exports = { handleSurvey, handleAnalysis, buildBody, renderAnswer, driverDigest };

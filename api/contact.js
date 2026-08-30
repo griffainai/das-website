@@ -31,6 +31,22 @@ module.exports = async (req, res) => {
     return handleSurvey(req, res);
   }
 
+  // ── The Awareness Check (phase two) ────────────────────────────────────────
+  //    Fired by the done screen AFTER the submission is already emailed and stored,
+  //    so a slow or failed model call can never cost us the answers. Its own tighter
+  //    ceiling: this one reaches a paid model, and the AI guard wall behind it
+  //    (api/_ai-guard.js) enforces the real spend/kill limits.
+  if ((req.body || {}).formType === 'survey-analysis') {
+    const { rateLimit: rlAnalysis } = require('./_rate');
+    const arl = rlAnalysis(req, 'survey-analysis', { burst: 6, perHour: 40 });
+    if (!arl.allowed) {
+      res.setHeader('Retry-After', String(arl.retryAfter));
+      return res.status(429).json({ error: 'Too many analysis requests — please wait a moment.' });
+    }
+    const { handleAnalysis } = require('./_survey');
+    return handleAnalysis(req, res);
+  }
+
   // Rate ceiling — this endpoint sends up to 2 Resend emails per call.
   const { rateLimit } = require('./_rate');
   const rl = rateLimit(req, 'contact', { burst: 4, perHour: 12 });

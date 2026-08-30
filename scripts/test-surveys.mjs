@@ -155,5 +155,122 @@ console.log('\n4. EMAIL BODY RENDERING');
   ok('the "other" free text is attached to its question', html.includes('Terminal ops council'));
 }
 
+/* ══════════════════════════════════════════════════════════════════════════
+   THE AWARENESS CHECK
+   The findings are computed in code precisely so they cannot be hallucinated.
+   That guarantee is worth nothing unless the computation itself is tested.
+   ══════════════════════════════════════════════════════════════════════════ */
+const A = require('../api/_analysis.js');
+const { handleAnalysis } = require('../api/_survey.js');
+
+console.log('\n5. COMMITMENT READINESS (the guide scores itself)');
+{
+  // Six things committed, nobody behind any of them — the case the feature exists for.
+  const r = A.commitmentReadiness({
+    c1: 'Commit', c2: 'Commit', c4: 'Commit', c5: 'Commit', c8: 'Commit', c9: 'Commit',
+    c3: 'Pilot', c10: 'Defer',
+  });
+  eq('counts the commitments', r.committed.length, 6);
+  eq('counts what is only being explored', r.exploring.length, 1);
+  eq('counts deferrals', r.deferred.length, 1);
+  ok('names the initiatives, not their ids', r.committed[0].includes('Driver of the Year'));
+  ok('states the central exposure', /6 initiative\(s\) committed while 6 of 6 workstreams have no owner/.test(r.exposure || ''), r.exposure);
+  eq('every rubric item fails on an unstaffed worksheet', r.failing, 5);
+}
+{
+  const rows = {};
+  ['gov', 'data', 'award', 'ful', 'comms', 'rep'].forEach((k) => { rows[k] = { owner: 'J. Alvarez', date: '2026-11-15' }; });
+  const r = A.commitmentReadiness({
+    c1: 'Commit',
+    cw: rows,
+    cc: { m250: { crossed: '40', recognized: '15' }, m1: { crossed: '6', recognized: '1' } },
+    cl: { r1: { what: 'Driver of the Year', owner: 'Dana', date: '2027-01-01' } },
+    c14: ['Driver name', 'Hire date', 'Verified safe miles'],
+    c15: 'Company-safe miles from telematics, excluding personal conveyance.',
+  });
+  eq('a fully staffed worksheet passes every test', r.failing, 0);
+  ok('no exposure line when every workstream is owned', r.exposure === null);
+  ok('eligible population computed from their numbers (25 + 5)', r.rubric[1].detail.includes('30 drivers eligible'), r.rubric[1].detail);
+}
+
+console.log('\n6. ASSESSMENT READINESS');
+{
+  const r = A.assessmentReadiness({
+    a1: '250', a7: '110',
+    a14: '3', a15: '9', a17: '2', a18: '4', a35: '8',
+    a16: 'Rarely', a21: 'No', a28: 'Often', a34: 'Lagging outcomes', a43: 'Company selects',
+    a19: 'Retention, because we are bleeding second-year drivers.',
+  });
+  eq('turnover cost uses the ATRI figure', r.turnoverCost, 110 * 12799);
+  eq('surfaces every rating of 4 or below', r.weak.length, 3);
+  eq('surfaces what their own leadership rates strong', r.strong.length, 2);
+  ok('flags an unstandardised first day', r.flags.some((f) => f.includes('not standardised')), r.flags.join(' | '));
+  ok('flags lagging-outcome incentives', r.flags.some((f) => f.includes('lagging outcomes')));
+  ok('carries their stated priority through', (r.priority || '').includes('bleeding second-year'));
+}
+
+console.log('\n7. DRIVER BATCH (a set, not one bad week)');
+{
+  const rows = [
+    { answers: { d3: '2', d5: '1', d6: 'Never',     d23: 'Yes',          d25: 'They remember birthdays.' } },
+    { answers: { d3: '3', d5: '2', d6: 'Rarely',    d23: 'Probably yes', d26: 'Pay attention to milestones.' } },
+    { answers: { d3: '2', d5: '2', d6: 'Sometimes', d23: 'Yes' } },
+    { answers: { d3: '4', d5: '3', d6: 'Never',     d23: 'Unsure' } },
+    { answers: { d3: '4', d5: '2', d6: 'Often',     d23: 'Yes' } },
+  ];
+  const r = A.driverReadiness(rows);
+  eq('counts the set', r.n, 5);
+  eq('averages the experience score', r.scores.overallExperience, 3);
+  eq('averages how valued they feel', r.scores.feelValued, 2);
+  eq('percentage never or rarely recognised', r.rarelyRecognised, 60);
+  eq('percentage who would stay for better recognition', r.stayIfRecognised, 80);
+  eq('collects the written comments', r.verbatims.length, 2);
+}
+
+console.log('\n8. PROMPT SAFETY');
+{
+  const facts = A.commitmentReadiness({ c1: 'Commit' });
+  const block = A.factsBlock(facts, { organization: 'Acme Freight', name: 'Dana' });
+  ok('the facts block carries the organisation', block.includes('Acme Freight'));
+  ok('it cites the guide own page-4 test', block.includes('page 4'));
+  ok('it marks what is NOT established', block.includes('NOT ESTABLISHED'));
+
+  const sys = A.systemPrompt();
+  ok('the model is forbidden from inventing findings', /may NOT invent a finding/.test(sys));
+  ok('the model is forbidden from recommending a product', /never recommend a product/.test(sys));
+  ok('driver anonymity is enforced in the prompt', /Never name or identify an individual driver/.test(sys));
+  ok('no SKU or price can leak into either register', !/\$249|\$499|\$59\.99|Onboarding Pack/.test(sys));
+  ok('retention economics ARE available to reason with', sys.includes('12,799'));
+}
+
+console.log('\n9. REGISTER SPLIT (never present half-parsed output as client-ready)');
+{
+  const good = A.splitRegisters('===SHAQ===\nBlunt read.\n===CLIENT===\nDiplomatic read.');
+  eq('splits the blunt register', good.shaq, 'Blunt read.');
+  eq('splits the client register', good.client, 'Diplomatic read.');
+  ok('malformed output is discarded, not guessed at', A.splitRegisters('just some prose') === null);
+  ok('a missing client block is discarded', A.splitRegisters('===SHAQ===\nonly one half') === null);
+}
+
+console.log('\n10. ANALYSIS ENDPOINT');
+{
+  const [req, res, out] = mock({ instrument: 'commitment', accessCode: 'nope', identity: { organization: 'X' }, answers: {} });
+  await handleAnalysis(req, res);
+  eq('gated instrument still needs the code', out.statusCode, 403);
+}
+{
+  const [req, res, out] = mock({ instrument: 'driver', identity: {}, answers: {} });
+  await handleAnalysis(req, res);
+  eq('organisation is still required', out.statusCode, 400);
+}
+{
+  // Supabase is unconfigured here, so the roster reads empty and the batch must hold.
+  const [req, res, out] = mock({ instrument: 'driver', identity: { organization: 'Midwest Carriers' }, answers: {} });
+  await handleAnalysis(req, res);
+  eq('driver batch holds below the threshold', out.statusCode, 200);
+  ok('and says pending rather than analysing one response', out.payload && out.payload.pending === true, JSON.stringify(out.payload));
+  eq('reporting the threshold it needs', out.payload.need, 5);
+}
+
 console.log(`\n${pass} passed, ${fail} failed\n`);
 process.exitCode = fail ? 1 : 0;
