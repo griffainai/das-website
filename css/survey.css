@@ -1,300 +1,401 @@
 /* ============================================================================
-   DAS SURVEY UI  —  driverappreciationsolutions.com/surveys
+   DAS SURVEY — THE CLICK FUNNEL
+   driverappreciationsolutions.com/surveys
    ----------------------------------------------------------------------------
-   Brand-kit law (BRAND-KIT.md, LOCKED 2026-08-22):
-     • Anton for every header, uppercase, vertical navy gradient #16264F→#3A5FC0
-     • Chivo for body/UI. Eyebrows 700 / .22em / uppercase
-     • Navy family only. Brass (#C8A14B) is an EARNED metal — medals, milestones,
-       engraving. Never a flat fill, never a background. Used here for exactly one
-       thing: the "committed" state on the 2027 decision list, which is an earned
-       mark by definition.
-     • Light ground by default (#FFFFFF / #F7F9FD)
+   One question per screen, full-bleed, tap to answer, auto-advance. Built for a
+   driver holding a phone in a truck stop and for a room of executives passing an
+   iPad around — not for someone filling in a form at a desk.
 
-   The design problem this file solves is Shaq's: on paper, a 1–10 rating row and a
-   "[ ] Rarely [ ] Annually" row look identical, so nobody knows what to do. Here
-   every answer mechanic has its own unmistakable shape:
-       scale  → numbered segments in a track, anchor words at both ends
-       choice → radio pills, one obviously fills
-       multi  → chips with a check mark that appears
-       text   → a box you type in
+   BRAND POSITION (BRAND-KIT.md is LOCKED — read this before "fixing" the color):
+     • Anton for every headline, Chivo for UI. Unchanged, non-negotiable.
+     • Brass #C8A14B is DAS's EARNED metal — engraving, medals, milestones.
+       "Never a flat fill, never a background." It appears exactly ONCE in this
+       file: the Commit state on the 2027 decision list, which is an earned mark
+       by definition. Nothing else here is gold, deliberately, so brass keeps
+       meaning something.
+     • The added color is a per-SECTION ground world plus a vivid answer-tile
+       deck. The brand's palette is not recolored; the survey gets its own
+       color environment, the way a quiz does.
+
+   No white space anywhere by design — every screen is a full-viewport colored
+   ground with a prism wash and grain, the way the rest of the site kills dead
+   space without inventing hues.
    ========================================================================== */
 
+/* ══ Answer-tile deck — the Kahoot layer ═════════════════════════════════
+   Six vivid, high-contrast tiles. No gold in the deck: gold is brass, brass is
+   earned, and a gold answer tile would spend that meaning on nothing. */
 :root {
-  --sv-navy-900: #060E24;
-  --sv-navy-800: #0C1840;
-  --sv-navy-700: #16264F;
-  --sv-navy-600: #1A2E6E;
-  --sv-navy-500: #2E4FA8;
-  --sv-navy-400: #3A5FC0;
-  --sv-navy-300: #4E8BE8;
-  --sv-navy-100: #9CC4F5;
-  --sv-brass:    #C8A14B;
-  --sv-ground:   #F7F9FD;
-  --sv-hair:     #E3E8F2;
-  --sv-ink:      #0B1020;
-  --sv-muted:    #5A6480;
-  --sv-radius:   4px;
+  --t1: #E8543F;  --t1d: #BF3F2D;   /* coral  */
+  --t2: #2E86C8;  --t2d: #1F6BA6;   /* blue   */
+  --t3: #2FA36B;  --t3d: #218253;   /* green  */
+  --t4: #8B5CD6;  --t4d: #6E45B4;   /* violet */
+  --t5: #17A2A8;  --t5d: #0F8288;   /* teal   */
+  --t6: #D9457F;  --t6d: #B33465;   /* rose   */
+
+  --brass: #C8A14B;
+  --ink:   #0B1020;
+
+  --sv-head: 'Anton', 'Arial Narrow', Impact, sans-serif;
+  --sv-ui:   'Chivo', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
-/* ══ Shell ═══════════════════════════════════════════════════════════════ */
-.sv-wrap { background: var(--sv-ground); min-height: 60vh; padding: 0 0 clamp(56px, 8vw, 110px); }
-.sv-shell { max-width: 780px; margin: 0 auto; padding: 0 20px; }
-.sv-shell--wide { max-width: 1040px; }
+/* ══ Illustrations ═══════════════════════════════════════════════════════
+   css/das-illustrations.css carries the per-drawing aspect ratios but NOT the
+   stroke: those three declarations live in css/styles.css:5480, which this page
+   deliberately does not load. Without them every drawing computes stroke:none
+   (the SVG initial value) and renders as an empty box — the drawings were
+   invisible here until this was added. Values copied to match the site exactly.
 
-.sv-step { display: none; }
-.sv-step.is-active { display: block; animation: svIn .28s ease both; }
-@keyframes svIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+   The sprite is injected inline by js/das-sprite.js and referenced with LOCAL
+   fragments (#das-medal). Never use href="/images/…svg#id" here — iOS Safari has
+   never supported external SVG <use>, and drivers on iPhones are the audience. */
+.svq .das-ill { stroke: currentColor; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
 
-/* Headers — the brand signature, reused verbatim so the survey reads as DAS. */
-.sv-h {
-  font-family: 'Anton', sans-serif; font-weight: 400; text-transform: uppercase;
-  letter-spacing: .005em; line-height: .96; margin: 0;
-  background: linear-gradient(180deg, #16264F 0%, #1A2E6E 46%, #3A5FC0 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
-}
-.sv-h1 { font-size: clamp(30px, 5.6vw, 52px); }
-.sv-h2 { font-size: clamp(22px, 3.4vw, 32px); }
-.sv-eyebrow {
-  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 11px;
-  letter-spacing: .22em; text-transform: uppercase; color: var(--sv-navy-500);
-  margin: 0 0 12px;
-}
-.sv-lede { font-family: 'Chivo', sans-serif; font-size: 16px; line-height: 1.7; color: var(--sv-muted); margin: 14px 0 0; }
-.sv-note {
-  font-family: 'Chivo', sans-serif; font-size: 13px; line-height: 1.65; color: var(--sv-muted);
-  border-left: 2px solid var(--sv-navy-100); padding: 2px 0 2px 14px; margin: 20px 0 0;
+/* ══ The stage ═══════════════════════════════════════════════════════════ */
+.svq {
+  position: relative;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  color: #fff;
+  font-family: var(--sv-ui);
+  background: linear-gradient(165deg, var(--g1) 0%, var(--g2) 52%, var(--g3) 100%);
+  transition: background 620ms cubic-bezier(.4, 0, .2, 1);
 }
 
-/* ══ Role picker ═════════════════════════════════════════════════════════ */
-.sv-roles { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; margin: 34px 0 0; }
-@media (max-width: 680px) { .sv-roles { grid-template-columns: 1fr; } }
-.sv-role {
-  appearance: none; text-align: left; cursor: pointer; font: inherit;
-  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
-  padding: 26px 24px 24px; transition: border-color .18s, box-shadow .18s, transform .18s;
-  display: block; width: 100%;
+/* Section color worlds. The ground changes as you move through the instrument,
+   so progress is felt before it is read. */
+.svq[data-accent="0"] { --g1:#0B1430; --g2:#16264F; --g3:#2E4FA8; --gl:#7FB0FF; }
+.svq[data-accent="1"] { --g1:#0B1430; --g2:#1A2E6E; --g3:#3A5FC0; --gl:#9CC4F5; }
+.svq[data-accent="2"] { --g1:#04262A; --g2:#0B4F53; --g3:#14A0A6; --gl:#7FE3E8; }
+.svq[data-accent="3"] { --g1:#150F35; --g2:#2E2566; --g3:#6E52C8; --gl:#C4B2FF; }
+.svq[data-accent="4"] { --g1:#2B0F0D; --g2:#6E2A26; --g3:#D3603E; --gl:#FFC0A8; }
+.svq[data-accent="5"] { --g1:#06210F; --g2:#10402C; --g3:#2E8C5A; --gl:#9EE6BE; }
+.svq[data-accent="6"] { --g1:#04182B; --g2:#0A3550; --g3:#1E7FB8; --gl:#A6D8F5; }
+.svq[data-accent="7"] { --g1:#240E22; --g2:#4A1F45; --g3:#A2478F; --gl:#F2B4DE; }
+.svq[data-accent="8"] { --g1:#0D1220; --g2:#232B3D; --g3:#5A6C8C; --gl:#C3CEE0; }
+
+/* The DAS prism, dark variant — layered radials + grain so a big colored
+   ground never reads as a flat fill. */
+.svq::before {
+  content: ''; position: absolute; inset: -20% -10%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(42% 38% at 18% 8%,  rgba(255,255,255,.16), transparent 62%),
+    radial-gradient(50% 44% at 88% 22%, rgba(255,255,255,.10), transparent 60%),
+    radial-gradient(60% 50% at 50% 108%, rgba(0,0,0,.34), transparent 64%);
 }
-.sv-role:hover, .sv-role:focus-visible {
-  border-color: var(--sv-navy-400); box-shadow: 0 10px 30px rgba(26,46,110,.10); transform: translateY(-2px);
-  outline: none;
-}
-.sv-role .das-ill { height: 52px; color: var(--sv-navy-600); margin-bottom: 16px; display: block; }
-.sv-role-title {
-  font-family: 'Anton', sans-serif; text-transform: uppercase; letter-spacing: .01em;
-  font-size: 21px; line-height: 1.05; color: var(--sv-navy-700); margin: 0 0 8px;
-}
-.sv-role-desc { font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.6; color: var(--sv-muted); margin: 0; }
-.sv-role-tag {
-  display: inline-block; margin-top: 14px; font-family: 'Chivo', sans-serif; font-weight: 700;
-  font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--sv-navy-500); border: 1px solid var(--sv-hair); padding: 5px 9px;
+.svq::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.055'/%3E%3C/svg%3E");
 }
 
-/* ══ Progress ════════════════════════════════════════════════════════════ */
-.sv-progress {
-  position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.97);
-  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--sv-hair); margin-bottom: 30px;
-}
-.sv-progress-inner {
-  max-width: 780px; margin: 0 auto; padding: 13px 20px;
-  display: flex; align-items: center; gap: 14px; justify-content: space-between;
-}
-.sv-progress-label {
-  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--sv-navy-600); white-space: nowrap;
-}
-.sv-progress-count { font-family: 'Chivo', sans-serif; font-size: 12px; color: var(--sv-muted); white-space: nowrap; }
-.sv-progress-track { flex: 1; height: 3px; background: var(--sv-hair); overflow: hidden; }
-.sv-progress-fill {
-  height: 100%; width: 0%; transition: width .3s ease;
-  background: linear-gradient(90deg, var(--sv-navy-600), var(--sv-navy-300));
-}
-@media (max-width: 560px) { .sv-progress-count { display: none; } }
+/* While the funnel is running it owns the viewport — the site chrome would only
+   compete with it and eat the screen a driver is answering on. */
+body.svq-run .nav,
+body.svq-run .footer,
+body.svq-run .das-dock { display: none !important; }
+body.svq-run { background: #0B1430; }
 
-/* ══ Question card ═══════════════════════════════════════════════════════ */
-.sv-q {
-  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
-  padding: 22px 22px 20px; margin: 0 0 14px;
+/* ══ Top bar — progress ══════════════════════════════════════════════════ */
+.svq-top { position: relative; z-index: 3; padding: 14px clamp(16px, 4vw, 40px) 0; flex: none; }
+.svq-rail { height: 4px; border-radius: 99px; background: rgba(255,255,255,.18); overflow: hidden; }
+.svq-rail-fill {
+  height: 100%; width: 0%; border-radius: 99px;
+  background: linear-gradient(90deg, #fff, var(--gl));
+  transition: width 420ms cubic-bezier(.4, 0, .2, 1);
 }
-.sv-q.is-answered { border-color: #CBD7EC; }
-.sv-q-head { display: flex; gap: 12px; align-items: baseline; margin-bottom: 16px; }
-.sv-q-n {
-  font-family: 'Anton', sans-serif; font-size: 15px; color: var(--sv-navy-300);
-  line-height: 1.2; min-width: 22px; flex: none;
+.svq-meta {
+  display: flex; align-items: center; gap: 12px; justify-content: space-between;
+  margin-top: 11px; font-size: 11px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
 }
-.sv-q-label {
-  font-family: 'Chivo', sans-serif; font-weight: 400; font-size: 16px; line-height: 1.5;
-  color: var(--sv-ink); margin: 0;
+.svq-meta-left { color: rgba(255,255,255,.92); display: flex; align-items: center; gap: 10px; min-width: 0; }
+.svq-chip {
+  background: rgba(255,255,255,.16); border: 1px solid rgba(255,255,255,.22);
+  padding: 5px 10px; border-radius: 99px; white-space: nowrap;
 }
-.sv-q-help {
-  font-family: 'Chivo', sans-serif; font-size: 13px; line-height: 1.6; color: var(--sv-muted);
-  background: var(--sv-ground); border-left: 2px solid var(--sv-navy-100);
-  padding: 10px 14px; margin: 0 0 16px;
+.svq-section-name {
+  color: rgba(255,255,255,.62); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
+.svq-exit {
+  appearance: none; background: none; border: 0; cursor: pointer; color: rgba(255,255,255,.6);
+  font: inherit; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; padding: 6px;
+}
+.svq-exit:hover { color: #fff; }
+@media (max-width: 560px) { .svq-section-name { display: none; } }
 
-/* ── scale: numbered segments in one track, anchors at the ends ─────────── */
-.sv-scale-anchors {
-  display: flex; justify-content: space-between; gap: 12px;
-  font-family: 'Chivo', sans-serif; font-size: 11px; font-weight: 700;
-  letter-spacing: .1em; text-transform: uppercase; color: var(--sv-muted); margin-bottom: 7px;
+/* ══ Screen body ═════════════════════════════════════════════════════════ */
+.svq-stage {
+  position: relative; z-index: 3; flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  /* Extra bottom padding lifts the block above dead centre so the eye lands on
+     the question immediately on a tall phone, and the answers stay in the
+     thumb zone rather than floating mid-screen. */
+  padding: clamp(20px, 4vw, 44px) clamp(16px, 4vw, 40px) clamp(40px, 11vh, 130px);
+  max-width: 940px; width: 100%; margin: 0 auto;
 }
-.sv-scale { display: flex; flex-wrap: wrap; gap: 6px; }
-.sv-scale .sv-seg { flex: 1 1 44px; min-width: 44px; }
-.sv-seg {
-  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-weight: 600;
-  font-size: 14px; color: var(--sv-navy-700); background: #fff;
-  border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
-  min-height: 46px; padding: 6px 8px; line-height: 1.25;
-  transition: background .15s, border-color .15s, color .15s;
+/* The site's page-hero ghost word, carried into the funnel. A short question on a
+   tall phone leaves a large empty middle; the brand's answer to dead space is the
+   prism and the ghosted Anton word, not a new hue. Set per screen from JS. */
+.svq-stage::before {
+  content: attr(data-ghost);
+  position: absolute; right: -4%; top: 50%; transform: translateY(-50%);
+  z-index: -1; pointer-events: none; user-select: none;
+  font-family: var(--sv-head); font-size: clamp(130px, 30vw, 340px);
+  line-height: .82; letter-spacing: .01em; white-space: nowrap;
+  color: rgba(255,255,255,.055);
 }
-.sv-seg:hover { border-color: var(--sv-navy-400); }
-.sv-seg[aria-pressed="true"] {
-  background: linear-gradient(180deg, var(--sv-navy-700), var(--sv-navy-600));
-  border-color: var(--sv-navy-700); color: #fff;
-}
-.sv-seg:focus-visible { outline: 2px solid var(--sv-navy-300); outline-offset: 2px; }
+.svq-screen { animation: svqIn 420ms cubic-bezier(.2, .7, .3, 1) both; }
+@keyframes svqIn { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
 
-/* Likert / cadence rendered as a scale — words, not numbers, so they need room. */
-.sv-scale--words .sv-seg { font-size: 12px; flex: 1 1 90px; min-width: 90px; }
-@media (max-width: 560px) { .sv-scale--words .sv-seg { flex: 1 1 100%; text-align: left; padding-left: 14px; } }
-
-/* Extra escape hatch beside a scale ("Not applicable", "No program") */
-.sv-extra { margin-top: 8px; }
-.sv-extra .sv-seg { flex: 0 0 auto; font-size: 12px; min-height: 38px; }
-
-/* ── single choice: pills ───────────────────────────────────────────────── */
-.sv-pills { display: flex; flex-wrap: wrap; gap: 8px; }
-.sv-pill {
-  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-size: 14px;
-  color: var(--sv-navy-700); background: #fff; border: 1px solid var(--sv-hair);
-  border-radius: var(--sv-radius); padding: 11px 16px; min-height: 44px;
-  display: inline-flex; align-items: center; gap: 9px; transition: all .15s;
+.svq-eyebrow {
+  font-size: 11px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase;
+  color: var(--gl); margin: 0 0 14px;
 }
-.sv-pill::before {
-  content: ''; width: 13px; height: 13px; border-radius: 50%; flex: none;
-  border: 1px solid #B9C4DA; transition: all .15s;
+.svq-h {
+  font-family: var(--sv-head); font-weight: 400; text-transform: uppercase;
+  letter-spacing: .006em; line-height: .96; color: #fff; margin: 0;
+  text-wrap: balance;
 }
-.sv-pill:hover { border-color: var(--sv-navy-400); }
-.sv-pill[aria-pressed="true"] { border-color: var(--sv-navy-700); background: #F2F6FD; font-weight: 600; }
-.sv-pill[aria-pressed="true"]::before { border-color: var(--sv-navy-700); border-width: 4px; background: #fff; }
-.sv-pill:focus-visible { outline: 2px solid var(--sv-navy-300); outline-offset: 2px; }
-
-/* ── multi select: chips with a check that appears ──────────────────────── */
-.sv-chip::before {
-  content: ''; width: 14px; height: 14px; border-radius: 2px; flex: none;
-  border: 1px solid #B9C4DA; background: #fff; transition: all .15s;
+.svq-h1 { font-size: clamp(30px, 6.2vw, 62px); }
+.svq-h2 { font-size: clamp(24px, 4vw, 42px); }
+/* Question text stays sentence-case: uppercasing a 20-word question is unreadable. */
+.svq-qtext {
+  font-family: var(--sv-ui); font-weight: 300; text-transform: none;
+  font-size: clamp(24px, 3.1vw, 34px); line-height: 1.28; letter-spacing: -.01em;
+  color: #fff; margin: 0 0 clamp(20px, 3vw, 32px); text-wrap: balance;
 }
-.sv-chip[aria-pressed="true"]::before {
-  background: var(--sv-navy-600) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 8.5l3.2 3.2L13 5'/%3E%3C/svg%3E") center/11px no-repeat;
-  border-color: var(--sv-navy-600);
+.svq-lede { font-size: clamp(15px, 1.8vw, 17px); line-height: 1.7; color: rgba(255,255,255,.82); margin: 16px 0 0; max-width: 58ch; }
+.svq-help {
+  font-size: 13.5px; line-height: 1.65; color: rgba(255,255,255,.78);
+  border-left: 2px solid var(--gl); padding: 8px 0 8px 14px; margin: 0 0 22px; max-width: 62ch;
 }
 
-/* ── the 2027 decision list: Commit / Explore / Defer ───────────────────── */
-.sv-q--decision { border-left: 3px solid var(--sv-navy-100); }
-.sv-decide { display: flex; flex-wrap: wrap; gap: 8px; }
-.sv-decide .sv-pill { flex: 1 1 130px; justify-content: center; }
-/* Brass is the earned metal — a commitment is earned. The only brass in this file. */
-.sv-decide .sv-pill[aria-pressed="true"][data-v="Commit"] {
-  border-color: var(--sv-brass); background: #FFFCF4;
-}
-.sv-decide .sv-pill[aria-pressed="true"][data-v="Commit"]::before { border-color: var(--sv-brass); }
+/* ══ Answer tiles — tap to answer, auto-advance ══════════════════════════ */
+.svq-tiles { display: grid; gap: 12px; grid-template-columns: repeat(2, 1fr); }
+.svq-tiles[data-count="1"], .svq-tiles[data-count="2"], .svq-tiles[data-count="3"] { grid-template-columns: 1fr; }
+@media (max-width: 700px) { .svq-tiles { grid-template-columns: 1fr; } }
 
-/* ── text inputs ────────────────────────────────────────────────────────── */
-.sv-input, .sv-textarea {
-  width: 100%; font-family: 'Chivo', sans-serif; font-size: 16px; color: var(--sv-ink);
-  background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
-  padding: 13px 14px; line-height: 1.6; transition: border-color .15s, box-shadow .15s;
+.svq-tile {
+  appearance: none; cursor: pointer; font: inherit; text-align: left; color: #fff;
+  border: 0; border-radius: 12px; padding: 20px 20px 20px 18px;
+  min-height: clamp(74px, 11.5vh, 104px); display: flex; align-items: center; gap: 15px;
+  background: var(--tile); box-shadow: 0 5px 0 var(--tiled), 0 14px 28px rgba(0,0,0,.24);
+  transform: translateY(0);
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+  animation: svqTile 380ms cubic-bezier(.2, .7, .3, 1) both;
+  animation-delay: var(--d, 0ms);
 }
-.sv-textarea { min-height: 108px; resize: vertical; }
-.sv-input:focus, .sv-textarea:focus {
-  outline: none; border-color: var(--sv-navy-400); box-shadow: 0 0 0 3px rgba(46,79,168,.10);
+@keyframes svqTile { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.svq-tile:hover { transform: translateY(-3px); box-shadow: 0 8px 0 var(--tiled), 0 20px 36px rgba(0,0,0,.3); }
+.svq-tile:active { transform: translateY(2px); box-shadow: 0 2px 0 var(--tiled), 0 8px 18px rgba(0,0,0,.26); }
+.svq-tile:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.svq-tile-key {
+  flex: none; width: 32px; height: 32px; border-radius: 8px;
+  background: rgba(0,0,0,.22); display: grid; place-items: center;
+  font-family: var(--sv-head); font-size: 16px; line-height: 1;
 }
-.sv-input.is-invalid, .sv-textarea.is-invalid { border-color: #C0392B; box-shadow: 0 0 0 3px rgba(192,57,43,.10); }
-.sv-field { margin: 0 0 16px; }
-.sv-field-label {
-  display: block; font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 10px;
-  letter-spacing: .18em; text-transform: uppercase; color: var(--sv-navy-600); margin: 0 0 7px;
+.svq-tile-label { font-size: 17px; font-weight: 400; line-height: 1.35; }
+.svq-tile-check {
+  margin-left: auto; flex: none; width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,.95); display: grid; place-items: center;
+  opacity: 0; transform: scale(.4); transition: opacity 160ms ease, transform 220ms cubic-bezier(.2, 1.5, .4, 1);
 }
-.sv-field-opt { color: var(--sv-muted); font-weight: 400; letter-spacing: .06em; }
-.sv-grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
-@media (max-width: 620px) { .sv-grid2 { grid-template-columns: 1fr; } }
+.svq-tile-check svg { width: 15px; height: 15px; stroke: var(--tiled); }
+.svq-tile[aria-pressed="true"] .svq-tile-check { opacity: 1; transform: scale(1); }
+.svq-tile[aria-pressed="true"] { filter: saturate(1.15) brightness(1.06); }
+/* Everything not chosen recedes the instant a choice is made. */
+.svq-tiles.is-committed .svq-tile[aria-pressed="false"] { filter: saturate(.35) brightness(.72); opacity: .62; }
 
-/* ── matrix (workstreams, census, commitments) ──────────────────────────── */
-.sv-matrix { width: 100%; border-collapse: collapse; font-family: 'Chivo', sans-serif; }
-.sv-matrix th {
-  text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .16em;
-  text-transform: uppercase; color: var(--sv-navy-600); padding: 0 10px 9px 0; border-bottom: 1px solid var(--sv-hair);
+/* The 2027 decision list. Brass = Commit, the one earned mark in this file. */
+.svq-tile[data-decision="Commit"][aria-pressed="true"] {
+  background: linear-gradient(180deg, #D9B45E, var(--brass));
+  box-shadow: 0 5px 0 #8A6D24, 0 14px 28px rgba(0,0,0,.28);
+  color: #2A2008;
 }
-.sv-matrix td { padding: 9px 10px 9px 0; vertical-align: top; border-bottom: 1px solid #F0F3F9; }
-.sv-matrix-row-label { font-size: 14px; color: var(--sv-ink); line-height: 1.4; }
-.sv-matrix-row-note { display: block; font-size: 12px; color: var(--sv-muted); margin-top: 3px; line-height: 1.45; }
-.sv-matrix .sv-input { padding: 9px 11px; font-size: 15px; }
-.sv-matrix-total td { border-bottom: none; padding-top: 14px; font-weight: 700; color: var(--sv-navy-700); }
-.sv-computed {
-  font-family: 'Chivo', sans-serif; font-weight: 700; font-size: 15px; color: var(--sv-navy-600);
-  padding: 9px 0; display: block;
+.svq-tile[data-decision="Commit"][aria-pressed="true"] .svq-tile-key { background: rgba(0,0,0,.16); }
+.svq-tile[data-decision="Commit"][aria-pressed="true"] .svq-tile-check svg { stroke: #8A6D24; }
+
+/* ══ Scales — intensity ramp, no implied good/bad ════════════════════════
+   A red-to-green ramp would tell someone that "1 — not important" is a bad
+   answer. These questions have no bad answer, so the ramp reads as AMOUNT:
+   one hue, climbing weight. */
+.svq-anchors {
+  display: flex; justify-content: space-between; gap: 14px; margin-bottom: 12px;
+  font-size: 11.5px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255,255,255,.72);
 }
-/* On a phone a 3-column grid is unusable — stack each row into its own block. */
-@media (max-width: 720px) {
-  .sv-matrix, .sv-matrix tbody, .sv-matrix tr, .sv-matrix td { display: block; width: 100%; }
-  .sv-matrix thead { display: none; }
-  .sv-matrix tr { border: 1px solid var(--sv-hair); border-radius: var(--sv-radius); padding: 14px; margin-bottom: 12px; }
-  .sv-matrix td { border: none; padding: 0 0 10px; }
-  .sv-matrix td[data-col]::before {
-    content: attr(data-col); display: block; font-size: 10px; font-weight: 700;
-    letter-spacing: .16em; text-transform: uppercase; color: var(--sv-navy-600); margin-bottom: 5px;
-  }
+.svq-scale { display: flex; flex-wrap: wrap; gap: 9px; }
+.svq-step {
+  appearance: none; cursor: pointer; font-family: var(--sv-head); font-size: 21px; color: #fff;
+  flex: 1 1 60px; min-width: 58px; min-height: clamp(74px, 13vh, 118px); border-radius: 11px;
+  /* --i is 0→1 across the scale. The climb has to be VISIBLE — at a 0.07 spread
+     the ramp read as five identical boxes, which is the paper problem again. */
+  border: 1.5px solid rgba(255,255,255, calc(.26 + var(--i) * .5));
+  background: linear-gradient(180deg,
+                rgba(255,255,255, calc(.10 + var(--i) * .34)),
+                rgba(255,255,255, calc(.04 + var(--i) * .26)));
+  transition: transform 140ms ease, background 160ms ease, border-color 160ms ease;
+  display: grid; place-items: center;
+}
+.svq-step:hover { transform: translateY(-3px); border-color: #fff; }
+.svq-step[aria-pressed="true"] {
+  background: #fff; color: var(--g2); border-color: #fff; transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(0,0,0,.3);
+}
+.svq-step:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+/* An escape hatch beside a scale ("Not applicable", "No program"). */
+.svq-escape { margin-top: 11px; }
+.svq-escape .svq-step {
+  flex: 0 0 auto; min-height: 48px; padding: 0 20px; font-family: var(--sv-ui);
+  font-size: 13px; font-weight: 600; letter-spacing: .04em;
 }
 
-/* ══ Section header inside the form ══════════════════════════════════════ */
-.sv-section-head { margin: 0 0 18px; }
-.sv-section-lede { font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.7; color: var(--sv-muted); margin: 10px 0 0; }
+/* Agreement scales DO have a direction, so they diverge — and that is a
+   meaningful signal, not decoration. */
+.svq-likert { display: grid; gap: 10px; }
+.svq-likert .svq-tile { min-height: 62px; padding: 14px 18px; }
+.svq-likert .svq-tile[data-pos="0"] { --tile: #C24634; --tiled: #9A3527; }
+.svq-likert .svq-tile[data-pos="1"] { --tile: #D57C4E; --tiled: #AC6039; }
+.svq-likert .svq-tile[data-pos="2"] { --tile: #6B7793; --tiled: #525C73; }
+.svq-likert .svq-tile[data-pos="3"] { --tile: #4E9E6B; --tiled: #3C7D54; }
+.svq-likert .svq-tile[data-pos="4"] { --tile: #2C8C55; --tiled: #206B40; }
 
-/* ══ Buttons / nav ═══════════════════════════════════════════════════════ */
-.sv-actions { display: flex; gap: 12px; align-items: center; margin: 26px 0 0; flex-wrap: wrap; }
-.sv-btn {
-  appearance: none; cursor: pointer; font-family: 'Chivo', sans-serif; font-weight: 700;
-  font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
-  padding: 15px 30px; min-height: 48px; border-radius: var(--sv-radius); border: 1px solid transparent;
-  transition: all .18s; display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+/* ══ Typed answers — same stage, no form-field feeling ═══════════════════ */
+.svq-field {
+  width: 100%; font-family: var(--sv-ui); font-size: clamp(17px, 2.2vw, 21px); color: #fff;
+  background: rgba(255,255,255,.09); border: 1.5px solid rgba(255,255,255,.26);
+  border-radius: 12px; padding: 17px 18px; line-height: 1.55;
+  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
-.sv-btn-primary { background: linear-gradient(180deg, var(--sv-navy-700), var(--sv-navy-800)); color: #fff; }
-.sv-btn-primary:hover { background: linear-gradient(180deg, var(--sv-navy-600), var(--sv-navy-700)); }
-.sv-btn-ghost { background: #fff; color: var(--sv-navy-700); border-color: var(--sv-hair); }
-.sv-btn-ghost:hover { border-color: var(--sv-navy-400); }
-.sv-btn[disabled] { opacity: .55; cursor: not-allowed; }
-.sv-btn-link {
-  background: none; border: none; cursor: pointer; font-family: 'Chivo', sans-serif;
-  font-size: 13px; color: var(--sv-muted); text-decoration: underline; padding: 8px 0;
+textarea.svq-field { min-height: 148px; resize: vertical; }
+.svq-field::placeholder { color: rgba(255,255,255,.42); }
+.svq-field:focus {
+  outline: none; border-color: #fff; background: rgba(255,255,255,.14);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.13);
 }
-.sv-spacer { flex: 1; }
+.svq-field.is-invalid { border-color: #FF9C8A; box-shadow: 0 0 0 4px rgba(255,120,100,.18); }
+.svq-label {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gl); margin: 0 0 8px;
+}
+.svq-label small { color: rgba(255,255,255,.55); font-weight: 400; letter-spacing: .08em; text-transform: none; }
+.svq-fields { display: grid; gap: 16px; grid-template-columns: 1fr 1fr; }
+.svq-fields .svq-full { grid-column: 1 / -1; }
+@media (max-width: 640px) { .svq-fields { grid-template-columns: 1fr; } }
 
-.sv-alert {
-  font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.6; padding: 13px 16px;
-  border-radius: var(--sv-radius); margin: 0 0 18px; display: none;
+/* ══ Matrix — the workstream / census / commitment grids ═════════════════ */
+.svq-matrix { display: grid; gap: 11px; }
+.svq-mrow {
+  background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.18);
+  border-radius: 12px; padding: 15px 16px;
+  display: grid; gap: 11px; grid-template-columns: 1.25fr repeat(var(--cols, 2), 1fr); align-items: end;
 }
-.sv-alert.is-on { display: block; }
-.sv-alert--err  { background: #FDF2F1; border: 1px solid #F0C7C2; color: #8E2A1E; }
-.sv-alert--info { background: #F2F6FD; border: 1px solid #CBD7EC; color: var(--sv-navy-700); }
-
-/* ══ Done ════════════════════════════════════════════════════════════════ */
-.sv-done { text-align: center; padding: clamp(40px, 7vw, 80px) 0; }
-.sv-done .das-ill { height: 74px; color: var(--sv-navy-600); margin: 0 auto 24px; display: block; }
-.sv-summary {
-  text-align: left; background: #fff; border: 1px solid var(--sv-hair); border-radius: var(--sv-radius);
-  padding: 22px; margin: 28px 0 0; font-family: 'Chivo', sans-serif; font-size: 14px; line-height: 1.8; color: var(--sv-muted);
+@media (max-width: 760px) { .svq-mrow { grid-template-columns: 1fr; } }
+.svq-mrow-label { font-size: 15px; font-weight: 600; color: #fff; line-height: 1.35; }
+.svq-mrow-note { display: block; font-size: 12.5px; font-weight: 400; color: rgba(255,255,255,.66); margin-top: 3px; line-height: 1.45; }
+.svq-mrow .svq-field { font-size: 16px; padding: 11px 13px; }
+.svq-computed {
+  font-family: var(--sv-head); font-size: 26px; color: #fff; line-height: 1.1;
+  padding: 8px 0 4px; display: block;
 }
-.sv-summary b { color: var(--sv-ink); font-weight: 600; }
+.svq-mtotal { background: rgba(255,255,255,.17); border-color: rgba(255,255,255,.3); }
 
-/* ══ Print — the Commitment Guide has to survive "Save as PDF" ═══════════ */
+/* ══ Footer controls ═════════════════════════════════════════════════════ */
+.svq-foot {
+  position: relative; z-index: 3; flex: none;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 0 clamp(16px, 4vw, 40px) clamp(18px, 3vw, 30px);
+  max-width: 940px; width: 100%; margin: 0 auto;
+}
+.svq-spacer { flex: 1; }
+.svq-btn {
+  appearance: none; cursor: pointer; font-family: var(--sv-ui); font-weight: 700;
+  font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase;
+  padding: 16px 30px; min-height: 52px; border-radius: 10px; border: 1.5px solid transparent;
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  transition: transform 140ms ease, box-shadow 140ms ease, background 160ms ease;
+}
+.svq-btn-primary { background: #fff; color: var(--g2); box-shadow: 0 5px 0 rgba(0,0,0,.22); }
+.svq-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 0 rgba(0,0,0,.22); }
+.svq-btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 rgba(0,0,0,.22); }
+.svq-btn-ghost { background: rgba(255,255,255,.10); color: #fff; border-color: rgba(255,255,255,.3); }
+.svq-btn-ghost:hover { background: rgba(255,255,255,.18); }
+.svq-btn[disabled] { opacity: .5; cursor: not-allowed; transform: none; }
+.svq-skip {
+  appearance: none; background: none; border: 0; cursor: pointer; color: rgba(255,255,255,.62);
+  font-family: var(--sv-ui); font-size: 12.5px; letter-spacing: .06em; padding: 12px 6px; text-decoration: underline;
+}
+.svq-skip:hover { color: #fff; }
+
+.svq-alert {
+  font-size: 14px; line-height: 1.6; padding: 13px 16px; border-radius: 10px;
+  margin: 0 0 18px; display: none; max-width: 62ch;
+}
+.svq-alert.is-on { display: block; }
+.svq-alert--err  { background: rgba(255,120,100,.18); border: 1px solid rgba(255,160,145,.5); color: #FFE2DC; }
+.svq-alert--info { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.26); color: rgba(255,255,255,.94); }
+
+/* ══ Section interstitial ════════════════════════════════════════════════ */
+.svq-sect { text-align: center; }
+.svq-sect-num {
+  font-family: var(--sv-head); font-size: clamp(72px, 17vw, 168px); line-height: .82;
+  color: rgba(255,255,255,.16); margin: 0 0 4px;
+}
+.svq-sect .svq-lede { margin-inline: auto; }
+
+/* ══ Role / instrument cards on the opening screen ═══════════════════════ */
+.svq-picks { display: grid; gap: 14px; grid-template-columns: 1fr 1fr; margin-top: 30px; }
+@media (max-width: 760px) { .svq-picks { grid-template-columns: 1fr; } }
+.svq-pick {
+  appearance: none; cursor: pointer; text-align: left; font: inherit; color: #fff;
+  background: rgba(255,255,255,.10); border: 1.5px solid rgba(255,255,255,.24);
+  border-radius: 14px; padding: 26px 24px;
+  transition: transform 160ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+.svq-pick:hover {
+  transform: translateY(-4px); background: rgba(255,255,255,.17);
+  border-color: #fff; box-shadow: 0 18px 40px rgba(0,0,0,.28);
+}
+.svq-pick:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.svq-pick .das-ill { height: 54px; color: #fff; margin-bottom: 16px; display: block; }
+.svq-pick-title {
+  font-family: var(--sv-head); text-transform: uppercase; letter-spacing: .01em;
+  font-size: 23px; line-height: 1.04; margin: 0 0 9px;
+}
+.svq-pick-desc { font-size: 14.5px; line-height: 1.6; color: rgba(255,255,255,.8); margin: 0; }
+.svq-pick-tag {
+  display: inline-block; margin-top: 15px; font-size: 10px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--gl);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 99px; padding: 5px 11px;
+}
+
+/* ══ Review + done ═══════════════════════════════════════════════════════ */
+.svq-summary {
+  background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.22);
+  border-radius: 14px; padding: 22px 24px; margin: 24px 0 0;
+  font-size: 15px; line-height: 2; color: rgba(255,255,255,.85);
+}
+.svq-summary b { color: #fff; font-weight: 700; }
+.svq-done { text-align: center; }
+.svq-done .das-ill { height: 88px; color: #fff; margin: 0 auto 22px; display: block; }
+.svq-done .svq-summary { text-align: left; max-width: 480px; margin-inline: auto; }
+
+/* ══ Static / no-JS fallback ═════════════════════════════════════════════ */
+.svq-noscript {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.26);
+  border-radius: 12px; padding: 22px; font-size: 15px; line-height: 1.7;
+}
+.svq-noscript a { color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .svq, .svq-screen, .svq-tile, .svq-step, .svq-btn, .svq-pick { transition: none !important; animation: none !important; }
+}
+
+/* ══ Print — the 2027 guide has to survive "Save as PDF" ═════════════════ */
 @media print {
-  .nav, .footer, .sv-progress, .sv-actions, .das-dock, .sv-btn, .sv-note { display: none !important; }
-  .sv-wrap { background: #fff; padding: 0; }
-  .sv-shell { max-width: 100%; padding: 0; }
-  .sv-q { break-inside: avoid; border-color: #CCC; margin-bottom: 8px; }
-  .sv-seg[aria-pressed="true"], .sv-pill[aria-pressed="true"] {
-    -webkit-print-color-adjust: exact; print-color-adjust: exact;
-  }
-  .sv-step { display: block !important; }
+  .svq { background: #fff !important; color: #000; min-height: 0; }
+  .svq::before, .svq::after, .svq-foot, .svq-top { display: none !important; }
+  .svq-h, .svq-qtext, .svq-summary, .svq-summary b { color: #000 !important; }
+  .svq-summary { border-color: #CCC; background: #fff; }
 }
