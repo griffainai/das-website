@@ -83,8 +83,10 @@
 .rp-acc .rp-acc-bd { font-size: 11px; line-height: 1.6; color: #0B1020; padding-top: 10px; }
 .rp-acc .rp-acc-bd p { margin: 0 0 8px; }
 .rp-acc .rp-acc-bd strong { font-weight: 700; }
-#promo-entry input { height: 36px !important; font-size: 11px !important; border: 1px solid #CACACA !important; text-transform: uppercase; }
-#promo-entry button { height: 36px !important; font-size: 10px !important; font-weight: 700 !important;
+/* 16px and 44px are iOS requirements, not taste: Safari zooms the whole page when a
+   focused input is under 16px — here, mid-checkout — and 44px is the tap-target floor. */
+#promo-entry input { min-height: 44px !important; height: auto !important; font-size: 16px !important; border: 1px solid #CACACA !important; text-transform: uppercase; }
+#promo-entry button { min-height: 44px !important; height: auto !important; font-size: 13px !important; font-weight: 700 !important;
   text-transform: uppercase; background: #0C1840 !important; }
 .rp-total { display: flex; justify-content: space-between; font-size: 12px; font-weight: 700;
   text-transform: uppercase; color: #0B1020; margin: 12px 0; }
@@ -298,10 +300,13 @@
           </div>
         </details>
         <div id="promo-entry" style="display:flex;gap:8px;margin:2px 0 4px">
+          <!-- font-size:16px is NOT cosmetic. It inherited 11px, and iOS Safari zooms the whole
+               page when a focused input is under 16px — on the cart, mid-checkout. min-height 44px
+               is the tap-target floor for the same reason. -->
           <input id="promo-input" type="text" placeholder="Promo code" autocapitalize="characters"
-                 style="flex:1;min-width:0;padding:0 12px;font-family:inherit;outline:0">
+                 style="flex:1;min-width:0;padding:0 12px;font-family:inherit;font-size:16px;min-height:44px;outline:0">
           <button type="button" id="promo-apply" onclick="applyPromo()"
-                  style="padding:0 16px;border:0;cursor:pointer;color:#fff">Apply</button>
+                  style="padding:0 18px;min-height:44px;border:0;cursor:pointer;color:#fff;font-size:14px">Apply</button>
         </div>
         <div id="promo-msg" style="display:none;font:500 11px Inter,sans-serif;margin:0 0 6px"></div>
         <div class="rp-total"><span>Total:</span><span id="summary-total">$0.00</span></div>
