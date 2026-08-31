@@ -63,10 +63,10 @@ async function sendFulfillmentEmail(order) {
         </table>
         <table style="width:100%;border-collapse:collapse;margin-bottom:16px">
           <thead><tr style="border-bottom:2px solid #E5E7EB">
-            <th style="text-align:left;padding:6px 0;font-size:11px;color:#9CA3AF;font-weight:700;text-transform:uppercase">Item</th>
-            <th style="text-align:center;padding:6px 0;font-size:11px;color:#9CA3AF;font-weight:700;text-transform:uppercase">Qty</th>
-            <th style="text-align:right;padding:6px 0;font-size:11px;color:#9CA3AF;font-weight:700;text-transform:uppercase">Unit</th>
-            <th style="text-align:right;padding:6px 0;font-size:11px;color:#9CA3AF;font-weight:700;text-transform:uppercase">Total</th>
+            <th style="text-align:left;padding:6px 0;font-size:11px;color:#5A6478;font-weight:700;text-transform:uppercase">Item</th>
+            <th style="text-align:center;padding:6px 0;font-size:11px;color:#5A6478;font-weight:700;text-transform:uppercase">Qty</th>
+            <th style="text-align:right;padding:6px 0;font-size:11px;color:#5A6478;font-weight:700;text-transform:uppercase">Unit</th>
+            <th style="text-align:right;padding:6px 0;font-size:11px;color:#5A6478;font-weight:700;text-transform:uppercase">Total</th>
           </tr></thead>
           <tbody style="border-bottom:1px solid #E5E7EB">${itemRows}</tbody>
         </table>
