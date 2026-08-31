@@ -452,6 +452,47 @@ textarea.svq-field { min-height: 148px; resize: vertical; }
 }
 
 
+
+/* ══ LAPTOP / DESKTOP ═════════════════════════════════════════════════════
+   Built phone-first and only ever measured at 375-390px, which produced two
+   defects nobody sees on a phone (found 2026-08-31):
+
+   1. The organisation input rendered **847px wide** — a text field the width of a
+      runway. `.svq-fields` is a two-column grid and the full-width row spanned
+      both, so it inherited the whole 940px stage. A form field should never be
+      wider than the text a person types into it.
+   2. The drawings sat INSIDE the centred content column between roughly 1000 and
+      1300px, because they are positioned against the full-width stage while the
+      content is capped at 940 and centred. On a phone they are at the edges; on a
+      laptop the column pulls away from them and they end up underneath the text.
+
+   The fix is to give the content a real measure and push the drawings outside it. */
+@media (min-width: 760px) {
+  /* A funnel reads as a column, not a stretched page. */
+  .svq-screen { max-width: 720px; margin-inline: auto; }
+  .svq-foot   { max-width: 720px; }
+
+  /* Fields sized to their content, not to the stage. */
+  .svq-fields { max-width: 640px; }
+  .svq-fields .svq-full .svq-field { max-width: 100%; }
+  .svq-field  { max-width: 640px; }
+  textarea.svq-field { max-width: 720px; }
+
+  /* Marks move OUT of the column and drop back — they are texture at this size,
+     not illustration. Anchored to the viewport edges so a wider screen pushes them
+     further away rather than dragging them across the reading area. */
+  .svq-ill .m1 { left: -8%;  width: 46%;  max-width: 520px; opacity: .085; }
+  .svq-ill .m2 { right: -3%; top: 34%;  max-height: 260px; opacity: .075; }
+  .svq-ill .m3 { left: -3%;  bottom: 3%; max-height: 230px; opacity: .06; }
+}
+
+@media (min-width: 1200px) {
+  /* Wide enough that the drawings can breathe at the far edges again. */
+  .svq-ill .m1 { left: -6%; width: 40%; opacity: .10; }
+  .svq-ill .m2 { right: 1%; opacity: .09; }
+  .svq-ill .m3 { left: 1%;  opacity: .075; }
+}
+
 /* ══ NATIVE iOS BEHAVIOUR ═════════════════════════════════════════════════
    A full-bleed web flow on an iPhone gives itself away in four specific ways.
    Each rule below kills one of them.
