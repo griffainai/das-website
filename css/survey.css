@@ -139,10 +139,16 @@ body.svq-run { background: #0B1430; }
    The 16 DAS drawings blown up huge and quiet. On-brand by construction, no new assets,
    and unlike a word it says what the survey is ABOUT. Marks are pushed to the edges and
    held at 8-13% so they never compete with the answer stack. */
-.svq-field {
+/* NAMED .svq-ill, NOT .svq-field. It was .svq-field until 2026-08-31 and that class
+   already belonged to the text inputs, so every input inherited `position:absolute;
+   inset:0` and stacked into one invisible full-card box — three fields on top of each
+   other, impossible to see or aim at — while this container inherited the input's
+   translucent background and border and read as a washed-out card over the content.
+   One duplicated class name broke the entire identity screen on a phone. */
+.svq-ill {
   position: absolute; inset: 0; z-index: 1; overflow: hidden; pointer-events: none;
 }
-.svq-field svg {
+.svq-ill svg {
   position: absolute; color: #fff;
   stroke: currentColor; stroke-width: 2.4; fill: none;
   stroke-linecap: round; stroke-linejoin: round;
@@ -150,12 +156,15 @@ body.svq-run { background: #0B1430; }
 /* Sizes are CAPPED in px, not left as pure percentages: .svq grows with a tall
    screen's content, so a 30%-height mark rendered 388px tall on a 375px phone and
    swamped the answer stack. Percentage for placement, pixels for scale. */
-.svq-field .m1 { left: -15%; top: 7%;   width: 78%;  max-width: 420px; opacity: .12; }
-.svq-field .m2 { right: -8%; top: 40%;  height: 26%; max-height: 210px; opacity: .10; }
-.svq-field .m3 { left: 3%;   bottom: 4%; height: 22%; max-height: 180px; opacity: .09; }
-@media (max-width: 480px) {
-  .svq-field .m1 { width: 92%; opacity: .11; }
-  .svq-field .m3 { opacity: .08; }
+.svq-ill .m1 { left: -15%; top: 7%;   width: 78%;  max-width: 420px; opacity: .12; }
+.svq-ill .m2 { right: -8%; top: 40%;  height: 26%; max-height: 210px; opacity: .10; }
+.svq-ill .m3 { left: 3%;   bottom: 4%; height: 22%; max-height: 180px; opacity: .09; }
+/* On a phone the drawings sit directly behind the text rather than beside it, so they
+   have to drop back further or the two read as one mush. */
+@media (max-width: 560px) {
+  .svq-ill .m1 { width: 86%; opacity: .07; }
+  .svq-ill .m2 { opacity: .06; max-height: 168px; }
+  .svq-ill .m3 { opacity: .05; max-height: 140px; }
 }
 .svq-screen { animation: svqIn 420ms cubic-bezier(.2, .7, .3, 1) both; }
 @keyframes svqIn { from { opacity: 0; transform: translateY(18px) scale(.985); } to { opacity: 1; transform: none; } }
@@ -278,17 +287,24 @@ body.svq-run { background: #0B1430; }
 
 /* ══ Typed answers — same stage, no form-field feeling ═══════════════════ */
 .svq-field {
-  width: 100%; font-family: var(--sv-ui); font-size: clamp(17px, 2.2vw, 21px); color: #fff;
-  background: rgba(255,255,255,.09); border: 1.5px solid rgba(255,255,255,.26);
-  border-radius: 12px; padding: 17px 18px; line-height: 1.55;
+  width: 100%; font-family: var(--sv-ui);
+  /* 16px FLOOR: iOS Safari zooms the whole page when a focused input is below 16px,
+     which on this full-bleed layout throws the user out of the funnel. */
+  font-size: 17px; color: #fff;
+  /* Opaque enough to read as a FIELD against a bright ground. At 9% white the input
+     disappeared into the gradient and people could not tell where to type. */
+  background: rgba(4,10,26,.55); border: 1.5px solid rgba(255,255,255,.42);
+  border-radius: 12px; padding: 15px 16px; line-height: 1.45;
+  min-height: 54px; -webkit-appearance: none; appearance: none;
   transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease;
 }
 textarea.svq-field { min-height: 148px; resize: vertical; }
 .svq-field::placeholder { color: rgba(255,255,255,.42); }
 .svq-field:focus {
-  outline: none; border-color: #fff; background: rgba(255,255,255,.14);
-  box-shadow: 0 0 0 4px rgba(255,255,255,.13);
+  outline: none; border-color: #fff; background: rgba(4,10,26,.72);
+  box-shadow: 0 0 0 4px rgba(255,255,255,.22);
 }
+.svq-field::placeholder { color: rgba(255,255,255,.5); }
 .svq-field.is-invalid { border-color: #FF9C8A; box-shadow: 0 0 0 4px rgba(255,120,100,.18); }
 .svq-label {
   display: block; font-size: 11px; font-weight: 700; letter-spacing: .2em;
