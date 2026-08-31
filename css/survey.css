@@ -451,6 +451,47 @@ textarea.svq-field { min-height: 148px; resize: vertical; }
   .svq, .svq-screen, .svq-tile, .svq-step, .svq-btn, .svq-pick { transition: none !important; animation: none !important; }
 }
 
+
+/* ══ NATIVE iOS BEHAVIOUR ═════════════════════════════════════════════════
+   A full-bleed web flow on an iPhone gives itself away in four specific ways.
+   Each rule below kills one of them.
+
+   1. SAFE AREA. The home indicator and the notch overlap fixed edges. Without
+      env(safe-area-inset-*) the Continue button sits under the indicator bar and
+      the lockup tucks under the notch on an X-class phone.
+   2. TAP FLASH. Mobile Safari paints a grey box over anything tappable. Nothing
+      native does that.
+   3. HOVER STICK. A :hover style latches after a tap on touch devices and stays
+      lit until you tap elsewhere — a tile still highlighted after you have moved
+      on reads as a bug. Hover now applies only where a real pointer exists, and
+      touch gets a press state instead, which it can actually produce.
+   4. LONG-PRESS SELECTION and the 300ms double-tap delay on controls.
+   ════════════════════════════════════════════════════════════════════════ */
+.svq-top  { padding-top: calc(14px + env(safe-area-inset-top, 0px)); }
+.svq-foot { padding-bottom: calc(clamp(18px, 3vw, 30px) + env(safe-area-inset-bottom, 0px)); }
+.svq-stage {
+  padding-left:  calc(clamp(16px, 4vw, 40px) + env(safe-area-inset-left, 0px));
+  padding-right: calc(clamp(16px, 4vw, 40px) + env(safe-area-inset-right, 0px));
+}
+
+.svq-tile, .svq-step, .svq-btn, .svq-pick, .svq-skip, .svq-exit, .svq-optin-row {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-user-select: none; user-select: none;
+}
+.svq-field { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+
+@media (hover: none) {
+  .svq-tile:hover, .svq-step:hover, .svq-pick:hover,
+  .svq-btn-primary:hover, .svq-btn-ghost:hover { transform: none; }
+  .svq-tile:active { transform: translateY(2px) scale(.995); }
+  .svq-step:active, .svq-pick:active { transform: scale(.985); }
+  .svq-btn:active { transform: translateY(1px); }
+}
+
+/* Rubber-band scrolling exposes the page behind a full-bleed stage. */
+.svq { overscroll-behavior: none; }
+
 /* ══ Print — the 2027 guide has to survive "Save as PDF" ═════════════════ */
 @media print {
   .svq { background: #fff !important; color: #000; min-height: 0; }

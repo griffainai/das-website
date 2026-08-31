@@ -296,6 +296,17 @@
       input.id = 'svq-id-' + f.id;
       input.value = state.identity[f.id] || '';
       if (f.ph) input.placeholder = f.ph;
+      /* iOS keyboard behaviour. Without these the email field gets a capital first
+         letter and a red autocorrect underline, and the phone field gets the full
+         QWERTY keyboard instead of the number pad — three small things that
+         together make a web form feel unmistakably like a web form. */
+      input.setAttribute('autocorrect', 'off');
+      input.setAttribute('spellcheck', 'false');
+      if (f.type === 'email') { input.setAttribute('autocapitalize', 'off'); input.setAttribute('inputmode', 'email'); input.autocomplete = 'email'; }
+      else if (f.type === 'tel') { input.setAttribute('inputmode', 'tel'); input.autocomplete = 'tel'; }
+      else { input.setAttribute('autocapitalize', 'words'); }
+      if (f.id === 'organization') input.autocomplete = 'organization';
+      if (f.id === 'name') input.autocomplete = 'name';
       input.addEventListener('input', function () {
         state.identity[f.id] = input.value.trim();
         input.classList.remove('is-invalid');
@@ -536,7 +547,7 @@
     var long = q.type === 'text';
     var node = el(long ? 'textarea' : 'input', 'svq-field');
     if (!long) node.type = q.type === 'number' ? 'number' : 'text';
-    if (q.type === 'number') { node.inputMode = 'numeric'; node.min = '0'; }
+    if (q.type === 'number') { node.inputMode = 'numeric'; node.min = '0'; node.setAttribute('pattern', '[0-9]*'); }
     node.placeholder = long ? 'Type your answer…' : 'Your answer';
     node.setAttribute('aria-label', q.label);
     node.value = state.answers[q.id] || '';
@@ -697,6 +708,11 @@
       mail.type = 'email';
       mail.id = 'svq-emailme-addr';
       mail.placeholder = 'your@email.com';
+      mail.setAttribute('autocapitalize', 'off');
+      mail.setAttribute('autocorrect', 'off');
+      mail.setAttribute('spellcheck', 'false');
+      mail.setAttribute('inputmode', 'email');
+      mail.autocomplete = 'email';
       mail.style.display = 'none';
       mail.style.marginTop = '10px';
       mail.value = state.identity.email || '';

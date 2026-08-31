@@ -20,11 +20,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:wght@300;400;600;700;900&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Chivo:wght@300;400;600;700;900&display=swap">
   <link rel="stylesheet" href="css/das-illustrations.css">
-  <link rel="stylesheet" href="css/survey.css?v=3">
+  <link rel="stylesheet" href="css/survey.css?v=4">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
   <link rel="apple-touch-icon" href="/images/favicon-180.png">
   <meta name="theme-color" content="#16264F">
+  <!-- iOS: standalone chrome when saved to the home screen, and stop Safari
+       inflating type in landscape (-webkit-text-size-adjust). -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="DAS Survey">
+  <meta name="format-detection" content="telephone=no">
   <style>
     /* The funnel owns the viewport — no site chrome, no page margin. styles.css is
        deliberately NOT loaded: this page shares the brand (Anton, Chivo, the navy
@@ -32,10 +37,11 @@
        that stylesheet would only fight the stage. Entry is the nav link on every
        other page; Exit (top right) goes back to the site. */
     *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: #0B1430; }
+    html, body { margin: 0; padding: 0; background: #0B1430;
+                 -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
     body { -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; }
     .svq-brand {
-      position: absolute; top: 15px; left: clamp(16px, 4vw, 40px); z-index: 5;
+      position: absolute; top: calc(15px + env(safe-area-inset-top, 0px)); left: clamp(16px, 4vw, 40px); z-index: 5;
       display: inline-flex; align-items: center; opacity: .92;
     }
     .svq-brand img {
@@ -44,8 +50,11 @@
       height: 42px; width: auto; display: block; filter: brightness(0) invert(1);
     }
     body.svq-intro .svq-brand img { height: 60px; }
-    .svq-top { padding-top: 62px; }
-    body.svq-intro .svq-top { padding-top: 80px; }
+    /* env() must live HERE, not in survey.css: these rules are later and more
+       specific, so a safe-area padding declared there is dead on arrival. The
+       inset is what keeps the progress bar clear of the notch on an X-class iPhone. */
+    .svq-top { padding-top: calc(62px + env(safe-area-inset-top, 0px)); }
+    body.svq-intro .svq-top { padding-top: calc(80px + env(safe-area-inset-top, 0px)); }
     .skip-link {
       position: absolute; left: -9999px; background: #fff; color: #16264F;
       padding: 10px 16px; z-index: 20; border-radius: 6px; font-family: 'Chivo', sans-serif;
@@ -99,8 +108,8 @@
 
 <!-- The sprite must be INLINED: iOS Safari has never supported external SVG
      <use> references, and drivers on iPhones are this page's main audience. -->
-<script src="js/das-sprite.js?v=3"></script>
-<script src="js/survey-defs.js?v=3"></script>
-<script src="js/survey-app.js?v=3"></script>
+<script src="js/das-sprite.js?v=4"></script>
+<script src="js/survey-defs.js?v=4"></script>
+<script src="js/survey-app.js?v=4"></script>
 </body>
 </html>
