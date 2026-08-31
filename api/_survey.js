@@ -105,7 +105,7 @@ function buildBody(instrument, identity, answers) {
     .join('');
 
   let html = `
-    <div style="font-size:12px;color:${MUTED};line-height:1.7;margin:0 0 16px">
+    <div style="font-size:13px;color:#2A3350;line-height:1.7;margin:0 0 16px">
       <b style="color:${INK}">${esc(inst.name)}</b><br>
       ${answered} of ${all.length} questions answered
     </div>
@@ -119,8 +119,8 @@ function buildBody(instrument, identity, answers) {
       const rendered = renderAnswer(map[q.id], answers[q.id]);
       const extra = answers[q.id + '_other'] ? ` <i>(${esc(clip(answers[q.id + '_other'], MAX_FIELD))})</i>` : '';
       html += `<div style="margin:0 0 13px">
-        <div style="font-size:12px;color:${MUTED};line-height:1.5">${q.n != null ? q.n + '. ' : ''}${esc(q.label)}</div>
-        <div style="font-size:14px;color:${rendered ? INK : '#A6AEC2'};line-height:1.6;margin-top:3px">${rendered ? rendered + extra : '<i>Not answered</i>'}</div>
+        <div style="font-size:13px;color:#2A3350;line-height:1.5;font-weight:600">${q.n != null ? q.n + '. ' : ''}${esc(q.label)}</div>
+        <div style="font-size:14px;color:${rendered ? INK : '#7C879C'};line-height:1.6;margin-top:4px">${rendered ? rendered + extra : '<i>Not answered</i>'}</div>
       </div>`;
     });
   });
@@ -138,7 +138,7 @@ function repCopyBody(inst, identity, answered, total) {
         <tr><td style="padding:7px 12px;background:#F5F7FB;font-weight:600;font-size:13px">Completed by</td><td style="padding:7px 12px;border-bottom:1px solid ${HAIR};font-size:13px">${esc(clip(identity.name, MAX_FIELD))}</td></tr>
         <tr><td style="padding:7px 12px;background:#F5F7FB;font-weight:600;font-size:13px">Answered</td><td style="padding:7px 12px;border-bottom:1px solid ${HAIR};font-size:13px">${answered} of ${total}</td></tr>
       </table>
-      <p style="margin:0 0 8px;font-size:14px;color:${MUTED}">Your full responses are attached as a file for your records. A DAS representative will follow up with what the answers point to.</p>
+      <p style="margin:0 0 8px;font-size:14px;color:#2A3350">Your full responses are attached as a file for your records. A DAS representative will follow up with what the answers point to.</p>
     </div>`;
 }
 
@@ -474,20 +474,42 @@ async function handleAnalysis(req, res) {
   return res.status(200).json({ ok: true, analyzed: true, delivered: true });
 }
 
-/* Every driver response this organization has given. Returns [] if the store is
-   unavailable — the batch simply stays pending rather than erroring. */
+/* Drivers type their employer's name free-hand, so five drivers at one fleet will
+   produce five spellings — "Midwest Carriers", "Midwest Carriers, Inc.", "midwest
+   carriers", one with an em dash. Matching the raw string means the batch never
+   reaches five and the analysis silently never fires.
+
+   Normalising is deliberately CONSERVATIVE: case, punctuation, unicode dashes and
+   legal suffixes only. It does NOT strip industry words — collapsing "Midwest
+   Carriers" and "Midwest Trucking" to "midwest" would merge two different fleets'
+   driver feedback into one report, which is far worse than missing a batch. */
+function orgKey(s) {
+  return String(s || '')
+    .toLowerCase()
+    .replace(/[‐-―−]/g, '-')          // en/em dashes, minus → hyphen
+    .replace(/[‘’‛]/g, "'")            // curly apostrophes
+    .replace(/&/g, ' and ')
+    .replace(/\b(inc|llc|ltd|corp|corporation|co)\b\.?/g, ' ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
+/* Every driver response from this organization. Returns [] if the store is
+   unavailable — the batch stays pending rather than erroring. */
 async function driverRowsFor(organization) {
   if (!process.env.SUPABASE_URL || !process.env.SUPABASE_SERVICE_ROLE_KEY) return [];
+  const want = orgKey(organization);
+  if (!want) return [];
   try {
     const { getServiceClient } = require('./_supabase');
     const { data, error } = await getServiceClient()
       .from('survey_responses')
-      .select('answers')
+      .select('organization,answers')
       .eq('instrument', 'driver')
-      .ilike('organization', organization)
-      .limit(500);
+      .order('created_at', { ascending: false })
+      .limit(1000);
     if (error) { console.error('[Analysis] roster read failed:', error.message); return []; }
-    return data || [];
+    return (data || []).filter((r) => orgKey(r.organization) === want);
   } catch (e) {
     console.error('[Analysis] roster read skipped:', e && e.message);
     return [];
@@ -496,4 +518,4 @@ async function driverRowsFor(organization) {
 
 // buildBody/renderAnswer are exported for scripts/test-surveys.mjs — the email body
 // is the actual deliverable here, so it has to be assertable without sending mail.
-module.exports = { handleSurvey, handleAnalysis, buildBody, renderAnswer, driverDigest };
+module.exports = { handleSurvey, handleAnalysis, buildBody, renderAnswer, driverDigest, orgKey };

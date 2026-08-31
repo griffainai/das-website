@@ -161,7 +161,7 @@ console.log('\n4. EMAIL BODY RENDERING');
    That guarantee is worth nothing unless the computation itself is tested.
    ══════════════════════════════════════════════════════════════════════════ */
 const A = require('../api/_analysis.js');
-const { handleAnalysis } = require('../api/_survey.js');
+const { handleAnalysis, orgKey } = require('../api/_survey.js');
 
 console.log('\n5. COMMITMENT READINESS (the guide scores itself)');
 {
@@ -270,6 +270,20 @@ console.log('\n10. ANALYSIS ENDPOINT');
   eq('driver batch holds below the threshold', out.statusCode, 200);
   ok('and says pending rather than analysing one response', out.payload && out.payload.pending === true, JSON.stringify(out.payload));
   eq('reporting the threshold it needs', out.payload.need, 5);
+}
+
+console.log('\n11. ORGANISATION MATCHING (drivers type the name free-hand)');
+{
+  const base = orgKey('Midwest Carriers');
+  ok('case is ignored',               orgKey('midwest carriers') === base);
+  ok('a legal suffix is ignored',     orgKey('Midwest Carriers, Inc.') === base);
+  ok('LLC is ignored',                orgKey('Midwest Carriers LLC') === base);
+  ok('punctuation is ignored',        orgKey('Midwest  Carriers.') === base);
+  ok('an em dash normalises',         orgKey('Midwest — Carriers') === orgKey('Midwest - Carriers'));
+  // The line it must NOT cross: merging two fleets is worse than missing a batch.
+  ok('different fleets stay separate', orgKey('Midwest Carriers') !== orgKey('Midwest Trucking'));
+  ok('a different name stays separate', orgKey('Midwest Carriers') !== orgKey('Northbound Carriers'));
+  ok('empty input yields nothing',     orgKey('  ') === '');
 }
 
 console.log(`\n${pass} passed, ${fail} failed\n`);
