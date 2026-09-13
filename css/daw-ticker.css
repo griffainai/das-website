@@ -1,0 +1,76 @@
+/* ============================================================================
+   DAW ANNOUNCEMENT TICKER — A/B test (Jayden, 2026-09-13)
+   A = Red Alert (.daw-tk--a) · B = Stars & Stripes (.daw-tk--b)
+   Rendered by js/daw-ticker.js. Explicit hex only — the DAS CSS variables are
+   inverted (--gold is navy, --black is white), see CLAUDE.md.
+   Design lab: E:/Workspaces/das/design-drafts/daw-ticker (v1 + v4).
+   ============================================================================ */
+.daw-tk{position:relative;overflow:hidden;color:#fff;font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;min-height:62px;background:#0D1B45}
+.daw-tk a{color:inherit;text-decoration:none}
+.daw-tk__in{position:relative;z-index:1;max-width:1240px;margin:0 auto;min-height:62px;padding:10px 24px;display:flex;align-items:center;justify-content:center;gap:24px}
+.daw-tk__r2{display:inline-flex;align-items:center;gap:22px}
+.daw-tk__cta svg{width:15px;height:15px;flex:none}
+.daw-tk__short{display:none}
+.daw-tk.is-after [data-live-only]{display:none!important}
+@keyframes dawTkPulse{0%{box-shadow:0 0 0 0 rgba(255,59,78,.75)}70%{box-shadow:0 0 0 9px rgba(255,59,78,0)}100%{box-shadow:0 0 0 0 rgba(255,59,78,0)}}
+
+/* ── A · RED ALERT ── */
+.daw-tk--a{text-align:center;background:radial-gradient(75% 170% at 50% -40%,#E8243F 0%,#A80F28 46%,#6B0716 100%);box-shadow:inset 0 -1px 0 rgba(255,90,100,.6),inset 0 0 42px rgba(255,40,60,.38)}
+.daw-tk--a::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.38),transparent 20%,transparent 80%,rgba(0,0,0,.38));pointer-events:none}
+.daw-tk--a .daw-tk__lab{display:inline-flex;align-items:center;gap:12px;font-size:16px;font-weight:800;letter-spacing:.005em;text-transform:uppercase;white-space:nowrap}
+.daw-tk--a .daw-tk__dot{width:22px;height:22px;border-radius:50%;background:rgba(0,0,0,.28);display:grid;place-items:center;flex:none}
+.daw-tk--a .daw-tk__dot::after{content:"";width:13px;height:13px;border-radius:50%;background:#FF3B4E;animation:dawTkPulse 1.8s infinite}
+.daw-tk--a .daw-tk__cd{font-size:16px;font-weight:800;letter-spacing:.01em;font-variant-numeric:tabular-nums;white-space:nowrap;text-transform:uppercase}
+.daw-tk--a .daw-tk__cd i{font-style:normal;margin:0 .5em 0 .22em}
+.daw-tk--a .daw-tk__cd i:last-child{margin-right:0}
+.daw-tk--a .daw-tk__cta{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 18px;border-radius:999px;background:#F4F266;color:#0B0B0B;font-size:13.5px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;white-space:nowrap;box-shadow:0 8px 22px -8px rgba(244,242,102,.75);transition:background .15s,transform .15s}
+.daw-tk--a .daw-tk__cta:hover{background:#FFFF8C;transform:translateY(-1px)}
+.daw-tk--a .daw-tk__cta:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+/* ── B · STARS & STRIPES ── */
+.daw-tk--b{background:linear-gradient(90deg,#0A1638 0%,#13275F 50%,#0A1638 100%);box-shadow:inset 0 -3px 0 #E41E3F}
+.daw-tk--b::before{content:"";position:absolute;left:0;top:0;bottom:3px;width:280px;background:repeating-linear-gradient(-58deg,#C8163A 0 12px,#F3F4F6 12px 20px);-webkit-mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);mask-image:linear-gradient(90deg,#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);opacity:.9;pointer-events:none}
+.daw-tk--b::after{content:"";position:absolute;right:0;top:0;bottom:3px;width:340px;background-image:radial-gradient(rgba(255,255,255,.55) 1px,transparent 1.6px);background-size:15px 13px;-webkit-mask-image:linear-gradient(270deg,#000,transparent);mask-image:linear-gradient(270deg,#000,transparent);opacity:.6;pointer-events:none}
+.daw-tk--b .daw-tk__in{padding:9px 24px 12px}
+.daw-tk--b .daw-tk__lab{display:inline-flex;align-items:center;gap:10px;text-transform:uppercase;white-space:nowrap}
+.daw-tk--b .daw-tk__star{width:20px;height:20px;color:#FF3B4E;flex:none}
+.daw-tk--b .daw-tk__name{font-family:'Anton',sans-serif;font-weight:400;font-size:20px;letter-spacing:.03em}
+.daw-tk--b .daw-tk__ends{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:5px;background:#E41E3F;font-size:11px;font-weight:900;letter-spacing:.14em}
+.daw-tk--b .daw-tk__cd{font-family:'Anton',sans-serif;font-size:24px;letter-spacing:.03em;font-variant-numeric:tabular-nums;white-space:nowrap}
+.daw-tk--b .daw-tk__cd i{font-style:normal;font-size:15px;color:#AFC0E4;margin:0 .35em 0 .06em}
+.daw-tk--b .daw-tk__cd i:last-child{margin-right:0}
+.daw-tk--b .daw-tk__cta{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 18px;border-radius:999px;background:#E41E3F;color:#fff;font-size:13.5px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;white-space:nowrap;box-shadow:0 0 0 2px rgba(255,255,255,.9),0 8px 22px -8px rgba(228,30,63,.9);transition:background .15s,transform .15s}
+.daw-tk--b .daw-tk__cta:hover{background:#FF3050;transform:translateY(-1px)}
+.daw-tk--b .daw-tk__cta:focus-visible{outline:2px solid #fff;outline-offset:4px}
+
+/* ── Phones ── */
+@media (max-width:760px){
+  .daw-tk,.daw-tk__in{min-height:0}
+  .daw-tk{min-height:74px}
+  .daw-tk__in{flex-direction:column;gap:6px;padding:9px 12px 10px}
+  .daw-tk__r2{gap:12px}
+  .daw-tk__long{display:none}
+  .daw-tk__short{display:inline}
+  .daw-tk--a .daw-tk__lab{font-size:14.5px;gap:10px}
+  .daw-tk--a .daw-tk__dot{width:20px;height:20px}
+  .daw-tk--a .daw-tk__dot::after{width:12px;height:12px}
+  .daw-tk--a .daw-tk__cd{font-size:14.5px}
+  .daw-tk--a .daw-tk__cd i{margin:0 .38em 0 .18em}
+  .daw-tk--a .daw-tk__cta{height:30px;padding:0 12px;font-size:12px;gap:5px}
+  .daw-tk--a .daw-tk__cta svg{width:13px;height:13px}
+  .daw-tk--b::before{width:120px}
+  .daw-tk--b::after{width:130px}
+  .daw-tk--b .daw-tk__in{padding:8px 12px 12px}
+  .daw-tk--b .daw-tk__name{font-size:17px}
+  .daw-tk--b .daw-tk__star{width:17px;height:17px}
+  .daw-tk--b .daw-tk__ends{height:21px;font-size:10px}
+  .daw-tk--b .daw-tk__cd{font-size:21px}
+  .daw-tk--b .daw-tk__cd i{font-size:13px}
+  .daw-tk--b .daw-tk__cta{height:32px;padding:0 13px;font-size:12px}
+}
+@media (max-width:360px){
+  .daw-tk--a .daw-tk__cd,.daw-tk--a .daw-tk__lab{font-size:13px}
+  .daw-tk--b .daw-tk__cd{font-size:19px}
+  .daw-tk--b .daw-tk__name{font-size:15px}
+}
+@media (prefers-reduced-motion:reduce){.daw-tk *,.daw-tk *::after{animation:none!important;transition:none!important}}

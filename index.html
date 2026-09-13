@@ -304,6 +304,7 @@
   <script src="/js/upsell-modal.js?v=1" defer></script>
   <link rel="stylesheet" href="css/das-widget.css?v=3">
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
+  <link rel="stylesheet" href="/css/daw-ticker.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -371,35 +372,9 @@
 <!-- ============================================================
      ANNOUNCEMENT BAR — enterprise navy event stripe
      ============================================================ -->
-<div class="announcement-bar-enterprise">
-  <div class="ann-bar-inner">
-    <div class="ann-bar-left">
-      <span class="ann-bar-icon" style="color:#ffffff">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="#ffffff"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-      </span>
-      <span class="ann-bar-event-label">Driver Appreciation Week</span>
-      <span class="ann-bar-divider">·</span>
-      <span class="ann-bar-dates">September 13–19, 2026</span>
-    </div>
-    <div class="ann-bar-right">
-      <span class="ann-bar-countdown">
-        <span class="ann-cd-prefix">DAW begins in</span>
-        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-days">--</strong><span class="ann-cd-label">d</span></span>
-        <span class="ann-cd-sep"></span>
-        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-hours">--</strong><span class="ann-cd-label">h</span></span>
-        <span class="ann-cd-sep"></span>
-        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-mins">--</strong><span class="ann-cd-label">m</span></span>
-        <span class="ann-cd-sep"></span>
-        <span class="ann-cd-unit"><strong class="ann-cd-num" id="ann-cd-secs">--</strong><span class="ann-cd-label">s</span></span>
-      </span>
-      <span class="ann-bar-msg">Guarantee on-time delivery — order before Aug 7</span>
-      <a href="shop.html" class="ann-bar-cta">
-        Shop Now
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-      </a>
-    </div>
-  </div>
-</div>
+<!-- DAW ticker A/B (Red Alert vs Stars & Stripes) — js/daw-ticker.js renders the assigned variant -->
+<div class="daw-tk" data-daw-ticker role="region" aria-label="Driver Appreciation Week announcement"></div>
+<script src="/js/daw-ticker.js?v=1"></script>
 
 <!-- ============================================================
      NAVIGATION
