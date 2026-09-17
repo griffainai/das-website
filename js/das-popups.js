@@ -5,8 +5,10 @@
    RULES (identical to the reference):
    - rotate p1 → p4 across visits; show at most ONE per session
    - suppressed 14 days after a dismiss, forever after a subscribe
-   - fires only after ≥8s AND ≥40% scroll — except p4 (slim bar: time only)
-     and p5 (exit-intent: cart must have items; exempt from both)
+   - fires only after ≥8s AND ≥40% scroll — p4 (slim bar) included since
+     2026-09-16; p5 (exit-intent: cart must have items) is exempt from both
+   - never while the menu drawer, sign-in, upsell or Scout panel is open;
+     Escape, the ✕, the backdrop and "No thanks" all dismiss
    - never on cart / checkout / auth / form pages
 
    DESIGN is DAS, not Represent: Anton headlines, Inter UI, navy grounds,
@@ -141,6 +143,22 @@
       '  font:600 12px Inter,sans-serif;color:#0C1840;background:#fff;white-space:nowrap}',
       '#dasBar .x{position:absolute;top:6px;right:6px;width:30px;height:30px;border:0;cursor:pointer;border-radius:999px;',
       '  background:rgba(255,255,255,.15);color:#fff;display:grid;place-items:center;font-size:13px}',
+      /* LAPTOP (2026-09-16). On a 720–900px-tall screen p3 was 707px of a 768px
+         viewport and p1's photo column forced 571px; the bar sat on top of the
+         Scout chat button (bottom-right, z 9999 under the bar's 2147483000).
+         Short screens get compact cards; the bar takes the bottom-LEFT corner. */
+      '@media(min-width:760px) and (max-height:920px){',
+      '  #dasPop .sp{max-height:86vh}',
+      '  #dasPop .sp .ph{min-height:0}',
+      '  #dasPop .sp form{padding:28px 32px}',
+      '  #dasPop .fb{max-height:86vh}',
+      '  #dasPop .fb form{padding:32px 36px}',
+      '  #dasPop .pt{max-height:86vh}',
+      '  #dasPop .pt .ph{height:26vh;min-height:170px}',
+      '  #dasPop .frm{gap:10px}',
+      '  #dasPop h2{font-size:clamp(24px,3.4vw,32px)}',
+      '}',
+      '@media(min-width:760px){#dasBar{right:auto;left:16px}}',
       '@media(prefers-reduced-motion:no-preference){#dasPop .card,#dasBar{animation:dasPopIn .32s cubic-bezier(.2,.8,.3,1)}}',
       '@keyframes dasPopIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}'
     ].join('\n');
@@ -265,10 +283,27 @@
     f.onsubmit = function (e) { e.preventDefault(); submit(this, "You're in &mdash; code <b>WELCOME10</b> is applied to your cart and in your inbox.", light); };
   }
 
+  // Never stack on another layer the visitor opened themselves: the menu drawer,
+  // the sign-in modal, the add-to-cart upsell, the Scout chat panel.
+  function busy() {
+    return !!document.querySelector('.mobile-drawer.open, #signin-modal.active, #das-upsell-modal, #das-dock[data-panel="1"], #dasPop, #dasBar');
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && (document.getElementById('dasPop') || document.getElementById('dasBar'))) dismiss();
+  });
+
   function tryFire() {
     if (fired) return;
-    if (timeOk && (scrollOk || next === 'p4')) { fired = true; show(next); }
+    // Every layout, the slim bar included, waits for time AND a real scroll — on a
+    // laptop the hero IS the first screen, and a bar at 8s sat on top of it.
+    if (!(timeOk && scrollOk)) return;
+    if (busy()) {
+      if (!retry) retry = setTimeout(function () { retry = 0; tryFire(); }, 4000);
+      return;
+    }
+    fired = true; show(next);
   }
+  var retry = 0;
 
   setTimeout(function () { timeOk = true; tryFire(); }, 8000);
   window.addEventListener('scroll', function () {
@@ -280,6 +315,7 @@
     if (e.relatedTarget) return;   // still inside the page
     if (e.clientY > 8) return;     // exit-intent = leaving through the top edge
     if (cartCount() === 0) return; // only worth interrupting when kits are saved
+    if (busy()) return;
     fired = true; show('p5');
   });
 })();

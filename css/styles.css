@@ -429,11 +429,50 @@ ul { list-style: none; }
   .nav-links { display: none; }
   .nav-mobile-toggle { display: flex; }
 }
-/* Tablet-landscape band: the longer "Insights & Ideas" label needs a touch
-   less padding so all six nav items fit on one line without overflow. */
-@media (min-width: 861px) and (max-width: 1040px) {
+/* NAV FIT — laptop widths (2026-09-16).
+   The desktop row was sized for six links. Surveys made it seven, and the row
+   stopped fitting: flex shrank each link's BOX below its text, and because the
+   text is nowrap it painted straight over its neighbours — "Insights & Ideas",
+   "Newsletter" and "Surveys" overprinting each other. Measured before this fix:
+   every width 861–1179px on the plain pages, and EVERY laptop width up to
+   1600px on shop/product (whose Saved + Cart pills eat another 150px).
+   Three rules, so that it cannot happen quietly again:
+   1. a link never shrinks below its text (flex-shrink:0) — a collision becomes
+      a measurable overflow instead of an overprint;
+   2. in the laptop band the row tightens, and two action pills go icon-only;
+   3. below 1140px the row becomes the menu button. js/cart.js (fitNav) adds
+      .nav--burger when the row still overflows at ANY width — signed-in
+      "My Account", a longer label, an eighth link. */
+.nav-link { flex-shrink: 0; }
+@media (min-width: 861px) and (max-width: 1600px) {
+  .nav-inner { gap: 20px; }
+  .nav-links { gap: 0; }
   .nav-link { padding-left: 10px; padding-right: 10px; }
+  .nav-actions:has(.fav-count) .nav-cart-label { display: none; }
+  .nav-actions:has(.fav-count) .nav-cart-btn { padding-left: 14px; padding-right: 14px; }
+  /* icon-only pill: the count rides the corner like .cart-badge instead of
+     reserving invisible space inside the pill */
+  .nav-actions .nav-cart-btn .fav-count { position: absolute; top: -7px; right: -7px; margin-left: 0; }
+  /* signed in (auth.js: avatar + "My Account"): the avatar carries it; the words
+     stay for screen readers */
+  .nav-actions .nav-login-btn > span:last-child:not(:first-child) {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+  }
 }
+/* :has(toggle) — the eight legal pages carry no menu button or drawer, so hiding
+   their links would leave them with no navigation at all. */
+@media (min-width: 861px) and (max-width: 1139px) {
+  .nav-inner:has(.nav-mobile-toggle) .nav-links { display: none; }
+  .nav-mobile-toggle { display: flex; }
+  .nav-inner:has(.nav-mobile-toggle) .nav-actions { margin-left: auto; }
+}
+@media (min-width: 861px) and (max-width: 979px) {
+  .nav-inner:not(:has(.nav-mobile-toggle)) .nav-link { font-size: 0.8125rem; padding-left: 6px; padding-right: 6px; }
+}
+.nav.nav--burger .nav-links { display: none; }
+.nav.nav--burger .nav-mobile-toggle { display: flex; }
+.nav.nav--burger .nav-actions { margin-left: auto; }
 
 /* ── DAW Countdown Pill ── */
 .nav-daw-pill {

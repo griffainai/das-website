@@ -277,6 +277,37 @@ document.addEventListener('DOMContentLoaded', () => {
   overlay?.addEventListener('click', closeNav);
   closeBtn?.addEventListener('click', closeNav);
 
+  /* ----- Nav fit guard -----
+     The CSS breakpoints in styles.css ("NAV FIT") are sized for the markup as
+     it ships. This catches what they cannot know: a signed-in "My Account"
+     button, a Saved count, a new link. If the desktop row does not fit at the
+     current width, the nav falls back to the menu button instead of letting the
+     links overprint each other (the 2026-09-16 Newsletter/Surveys defect).
+     Only where a menu button AND drawer exist — never strand a page with no nav. */
+  const navEl    = document.querySelector('.nav');
+  const navLinks = navEl?.querySelector('.nav-links');
+  const navActs  = navEl?.querySelector('.nav-actions');
+  if (navEl && navLinks && navActs && toggle && drawer) {
+    const fitNav = () => {
+      navEl.classList.remove('nav--burger');
+      if (getComputedStyle(navLinks).display === 'none') return;
+      const links = Array.prototype.slice.call(navLinks.querySelectorAll('.nav-link'));
+      const last  = links[links.length - 1];
+      const collides = navLinks.scrollWidth > navLinks.clientWidth + 1
+        || links.some(a => a.scrollWidth > a.clientWidth + 1)
+        || (last && last.getBoundingClientRect().right > navActs.getBoundingClientRect().left + 0.5);
+      if (collides) navEl.classList.add('nav--burger');
+    };
+    let fitQueued = false;
+    const queueFit = () => { if (fitQueued) return; fitQueued = true; requestAnimationFrame(() => { fitQueued = false; fitNav(); }); };
+    fitNav();
+    window.addEventListener('resize', queueFit, { passive: true });
+    window.addEventListener('load', queueFit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queueFit);
+    // auth.js swaps "Sign In" for avatar + "My Account" after load — that resizes the actions
+    if ('ResizeObserver' in window) new ResizeObserver(queueFit).observe(navActs);
+  }
+
   /* ----- Scroll-to-top ----- */
   const topBtn = document.querySelector('.scroll-top');
   if (topBtn) {
