@@ -87,79 +87,32 @@
     },
     {
       "source": "/driver-survey",
-      "destination": "https://retentionopportunity.com/intake/driver?from=das",
+      "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
     },
     {
       "source": "/driver-feedback",
-      "destination": "https://retentionopportunity.com/intake/driver?from=das",
+      "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
     },
     {
       "source": "/assessment",
-      "destination": "https://retentionopportunity.com/intake/assessment?from=das",
+      "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
     },
     {
       "source": "/commitment",
-      "destination": "https://retentionopportunity.com/intake/commitment?from=das",
+      "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
     },
     {
       "source": "/commitment-guide",
-      "destination": "https://retentionopportunity.com/intake/commitment?from=das",
+      "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
     },
     {
       "source": "/survey",
       "destination": "/surveys",
-      "permanent": false
-    },
-    {
-      "source": "/surveys",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "driver"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/driver?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "assessment"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/assessment?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "commitment"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/commitment?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys",
-      "has": [
-        {
-          "type": "query",
-          "key": "i"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake?from=das",
       "permanent": false
     },
     {
@@ -171,53 +124,6 @@
         }
       ],
       "destination": "https://retentionopportunity.com/assessment?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys.html",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "driver"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/driver?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys.html",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "assessment"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/assessment?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys.html",
-      "has": [
-        {
-          "type": "query",
-          "key": "i",
-          "value": "commitment"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake/commitment?from=das",
-      "permanent": false
-    },
-    {
-      "source": "/surveys.html",
-      "has": [
-        {
-          "type": "query",
-          "key": "i"
-        }
-      ],
-      "destination": "https://retentionopportunity.com/intake?from=das",
       "permanent": false
     },
     {
