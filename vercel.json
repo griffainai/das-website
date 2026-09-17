@@ -25,14 +25,14 @@
     { "source": "/solution-enterprise",        "destination": "/shop?category=milepacks",    "permanent": true },
     { "source": "/solution-enterprise.html",   "destination": "/shop?category=milepacks",    "permanent": true },
 
-    { "source": "/surveys",             "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/surveys.html",        "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/driver-survey",       "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/driver-feedback",     "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/assessment",          "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/commitment",          "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/commitment-guide",    "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
-    { "source": "/survey",              "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false }
+    { "source": "/driver-survey",       "destination": "/surveys?i=driver",     "permanent": false },
+    { "source": "/driver-feedback",     "destination": "/surveys?i=driver",     "permanent": false },
+    { "source": "/assessment",          "destination": "/surveys?i=assessment", "permanent": false },
+    { "source": "/commitment",          "destination": "/surveys?i=commitment", "permanent": false },
+    { "source": "/commitment-guide",    "destination": "/surveys?i=commitment", "permanent": false },
+    { "source": "/survey",              "destination": "/surveys",              "permanent": false },
+    { "source": "/surveys",      "missing": [{ "type": "query", "key": "i" }], "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false },
+    { "source": "/surveys.html", "missing": [{ "type": "query", "key": "i" }], "destination": "https://retentionopportunity.com/assessment?from=das", "permanent": false }
   ],
   "rewrites": [
     { "source": "/api/submit-quote",     "destination": "/api/portal?action=submit-quote" },
