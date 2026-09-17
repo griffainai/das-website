@@ -14,7 +14,7 @@
    DESIGN is DAS, not Represent: Anton headlines, Inter UI, navy grounds,
    pill CTAs, real catalog photography. Every promise is real: subscribing
    sends an actual welcome email (Resend) and joins the fleet newsletter;
-   the dates and the Aug 7 deadline are the site's own.
+   the offer copy is the site's own (the Aug 7 DAW deadline was retired 2026-09-17).
    ============================================================================ */
 (function () {
   'use strict';
@@ -205,7 +205,7 @@
       bar.setAttribute('role', 'dialog');
       bar.innerHTML =
         '<img src="' + pic('p4') + '" alt="">' +
-        '<form novalidate><div class="ln">Driver Appreciation Week: Sept 13&ndash;19 &middot; Order by <b>Aug 7</b> &middot; <b>10% off</b> your first kit</div>' +
+        '<form novalidate><div class="ln">Recognize drivers all year &middot; <b>10% off</b> your first kit</div>' +
         '<div class="row"><input type="email" required placeholder="Email address" aria-label="Email address">' +
         '<button type="submit" class="go">Get reminders</button></div></form>' +
         '<button type="button" class="x" aria-label="Close">&#10005;</button>';
