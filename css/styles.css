@@ -517,33 +517,55 @@ ul { list-style: none; }
   border: 2px solid transparent;
   text-decoration: none;
 }
+/* CTA SYSTEM — adopted from Off Duty Not Driving, 2026-09-19 (Jayden: "use the same design style system
+   that the [Off Duty Not Driving] site has for their CTAs"). Source of truth over there is
+   odndr-web/lib/marketing-chrome.ts: a sentence-case pill, navy #0E1B2E at rest, #2F6BFF on hover, and a
+   small arrow on actions that navigate. No scale-bounce — Off Duty's buttons change colour, they do not grow.
+
+   ONE system, with a hierarchy inside it. Marketing CTAs get the arrow; commerce buttons (Add to Cart and
+   friends, tagged [data-add-to-cart]) take the same shape, type and colour but NO arrow — the arrow promises
+   navigation, and adding to a cart does not navigate. Keeping them visually identical would also mean that on
+   a product page "Add to Cart" and "Request a Quote" compete instead of ranking.
+
+   Typeface is left as the site's Inter rather than pulling Off Duty's Manrope onto 40 static pages for the
+   sake of the buttons; the two are close, and the pill, the colour and the behaviour carry the system. */
 .btn-primary {
-  background: var(--gold);
+  background: #0E1B2E;
   color: #FFFFFF;
-  border-color: var(--gold);
+  border-color: #0E1B2E;
 }
 .btn-primary:hover {
-  background: var(--gold-hover);
-  border-color: var(--gold-hover);
-  transform: scale(1.04);
+  background: #2F6BFF;
+  border-color: #2F6BFF;
+  color: #FFFFFF;
 }
-.btn-primary:active { transform: scale(0.97); opacity: 0.85; }
+.btn-primary:active { opacity: 0.9; }
+.btn-primary:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
+/* the arrow, on actions that go somewhere — never on Add to Cart */
+.btn-primary:not([data-add-to-cart])::after {
+  content: "\2192";
+  display: inline-block;
+  transition: transform 150ms ease;
+}
+.btn-primary:not([data-add-to-cart]):hover::after { transform: translateX(3px); }
 .btn-secondary {
-  background: transparent;
-  color: var(--text-primary);
-  border-color: rgba(10,19,23,0.14);
+  background: #FFFFFF;
+  color: #0E1B2E;
+  border-color: #E2E8F0;
 }
 .btn-secondary:hover {
-  background: rgba(70,90,105,0.08);
-  border-color: rgba(10,19,23,0.28);
-  transform: scale(1.04);
+  background: #F4F8FE;
+  border-color: #5C9BEA;
+  color: #0E1B2E;
 }
+.btn-secondary:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
 .btn-ghost {
   background: transparent;
-  color: var(--gold);
-  border-color: var(--gold-border-strong);
+  color: #0E1B2E;
+  border-color: #E2E8F0;
 }
-.btn-ghost:hover { background: var(--gold-tint); border-color: var(--gold); }
+.btn-ghost:hover { background: #F4F8FE; border-color: #5C9BEA; color: #0E1B2E; }
+.btn-ghost:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
 .btn-lg { padding: 14px 32px; font-size: 1rem; }
 .btn-sm { padding: 8px 18px; font-size: 0.875rem; }
 .btn-full { width: 100%; justify-content: center; }
