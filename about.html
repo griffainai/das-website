@@ -39,6 +39,7 @@
   <script src="/js/tracking.js?v=3" defer></script>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
   <link rel="stylesheet" href="/css/das-nav.css?v=2">
+  <link rel="stylesheet" href="/css/das-about.css?v=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -189,191 +190,168 @@
   </div>
 </div>
 
-<!-- MISSION STATEMENT -->
-<section class="section das-field-host" style="background:var(--black)"><div class="das-field" aria-hidden="true"><span class="fm" style="left:-3%;top:12%;--h:175px;--r:-4deg;--o:0.06"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:94%;top:16%;--h:115px;--r:8deg;--o:0.06"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:5%;top:74%;--h:120px;--r:-7deg;--o:0.055"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:91%;top:72%;--h:105px;--r:6deg;--o:0.055"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:52%;top:-8%;--h:115px;--r:12deg;--o:0.04"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:18%;top:30%;--h:85px;--r:-12deg;--o:0.05"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:66%;top:88%;--h:80px;--r:-9deg;--o:0.045"><svg class="das-ill das-ill-pin" aria-hidden="true"><use href="#das-pin"></use></svg></span><span class="fm" style="left:2%;top:44%;--h:88px;--r:5deg;--o:0.045"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span></div>
-  <div class="container">
-    <div class="about-split">
+<!-- ════════════════════════════════════════════════════════════════════════
+     ABOUT — THE MISSION SPINE
+     Redesign #2 of six. Traced from five references (Jayden's doctrine
+     2026-09-19 — half top tech/AI, half top ecommerce doing real volume,
+     taken for page COMPOSITION rather than product grids):
+
+       Anthropic / Claude  THE SPINE. Every block below is one row of
+                           [short left label][substance right] with a hairline
+                           rule between. One device carries the page.
+       ElevenLabs          the opener — eyebrow and a tight headline (carried
+                           by the page hero above), then a full-width
+                           rounded photograph.
+       Voiceflow           the white statement card sitting ON the photograph.
+       OpenAI              the restraint of the section rhythm.
+       In Common With      hairline rules instead of cards. No shadows, no
+                           boxes, no radius except on photography.
+
+     Styles: css/das-about.css
+     Every figure and every sentence here already existed on this page — this
+     is a recomposition, not a rewrite. Nothing was invented.
+     ════════════════════════════════════════════════════════════════════════ -->
+<div class="ab">
+
+  <div class="ab-wrap">
+    <!-- The photograph, and the mission stated ON it (Voiceflow) -->
+    <div class="ab-shot">
+      <img src="/images/wk-group-lifestyle.jpg" alt="Professional drivers photographed together at a carrier terminal" width="2000" height="2000" fetchpriority="high">
+      <div class="ab-card">
+        <h2>Recognition isn&rsquo;t a perk. It&rsquo;s a retention strategy.</h2>
+        <p>Driver Appreciation Solutions builds the recognition programs that keep professional drivers &mdash; at fleet scale, on a carrier&rsquo;s own timeline, under the carrier&rsquo;s own brand.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ab-wrap">
+
+    <!-- ── Row: the mission ───────────────────────────────────────────── -->
+    <section class="ab-row" aria-labelledby="ab-mission">
+      <div class="ab-label" id="ab-mission">Our Mission<small>Why this company exists</small></div>
       <div>
-        <span class="section-eyebrow">Our Mission</span>
-        <h2 class="section-title">Recognition isn't a perk.<br>It's a retention strategy.</h2>
-        <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:24px">The OTR sector runs at 89% annual turnover among large carriers. ATRI puts the cost of replacing a single driver at $8,000–$15,000 — before you account for lost productivity, training hours, or the cascading effect on team morale. These aren't abstract statistics. They're line items on every fleet operations budget.</p>
-        <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:36px">Driver Appreciation Solutions was founded by transportation veterans who understood one thing clearly: most carriers know they need recognition programs. What they lack is a partner who can execute them at fleet scale — with the right products, the right cadence, and the credibility to do it without it feeling like a corporate afterthought.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:32px;padding-top:32px;border-top:1px solid var(--gold-border)">
-          <div>
-            <div style="font-size:1.75rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold)">10-Unit</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-weight:500">Program Minimum</div>
-          </div>
-          <div>
-            <div style="font-size:1.75rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold)">100%</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-weight:500">Fleet-Branded</div>
-          </div>
-          <div>
-            <div style="font-size:1.75rem;font-weight:600;letter-spacing:-0.02em;color:var(--gold)">Safety-First</div>
-            <div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px;font-weight:500">Program Design</div>
-          </div>
+        <p class="ab-statement">Most carriers already know they need a recognition program. What they lack is a partner who can execute one at fleet scale.</p>
+        <div class="ab-body" style="margin-top:28px">
+          <p>The OTR sector runs at <strong>89% annual turnover</strong> among large carriers. ATRI puts the cost of replacing a single driver at <strong>$8,000&ndash;$15,000</strong> &mdash; before you account for lost productivity, training hours, or the cascading effect on team morale. These aren&rsquo;t abstract statistics. They&rsquo;re line items on every fleet operations budget.</p>
+          <p>Driver Appreciation Solutions was founded by transportation veterans who understood one thing clearly: the gap is never the intent. It is the right products, the right cadence, and the credibility to do it without it feeling like a corporate afterthought.</p>
         </div>
       </div>
-      <div class="about-split-img">
-        <img src="/images/wk-group-lifestyle.jpg" alt="A fleet's drivers and staff gathered for a Driver Appreciation Week recognition event" loading="lazy" onerror="this.style.display='none'">
+    </section>
+  </div>
+
+  <!-- ── The figures band ─────────────────────────────────────────────────
+       The one dark block on the page, and the one place brass appears
+       (BRAND-KIT: earned metal). Every figure carries its source, because an
+       uncited number on an About page is the fastest way to lose an
+       operations buyer. ────────────────────────────────────────────────── -->
+  <div class="ab-figures">
+    <div class="ab-figures-in">
+      <div class="ab-fig">
+        <span class="ab-fig-k">OTR turnover rate</span>
+        <span class="ab-fig-v">89%</span>
+        <p class="ab-fig-d">Annual driver turnover among large carriers &mdash; the highest of any sector tracked by ATRI.</p>
+      </div>
+      <div class="ab-fig">
+        <span class="ab-fig-k">Replacement cost per driver</span>
+        <span class="ab-fig-v">$8K&ndash;$15K</span>
+        <p class="ab-fig-d">Per-driver replacement cost including recruiting, onboarding, training, and lost productivity.</p>
+      </div>
+      <div class="ab-fig">
+        <span class="ab-fig-k">Commercial drivers (US)</span>
+        <span class="ab-fig-v">3.5M</span>
+        <p class="ab-fig-d">Professional drivers operating in the United States &mdash; each one a candidate for structured recognition.</p>
       </div>
     </div>
   </div>
-</section>
 
-<!-- RETENTION DATA CALLOUT -->
-<section class="section-sm" style="background:#0C1840;border-top:1px solid rgba(255,255,255,0.10);border-bottom:1px solid rgba(255,255,255,0.10)">
-  <div class="container">
-    <div class="about-data-grid" style="background:rgba(255,255,255,0.08)">
-      <div style="background:#0C1840;padding:32px 28px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.50);margin-bottom:10px">OTR Turnover Rate</div>
-        <div style="font-size:2.25rem;font-weight:600;letter-spacing:-0.025em;line-height:1;color:#ffffff;margin-bottom:8px">89%</div>
-        <div style="font-size:0.875rem;color:rgba(255,255,255,0.65);line-height:1.6">Annual driver turnover among large carriers — the highest of any sector tracked by ATRI.</div>
-      </div>
-      <div style="background:#0C1840;padding:32px 28px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.50);margin-bottom:10px">Replacement Cost Per Driver</div>
-        <div style="font-size:2.25rem;font-weight:600;letter-spacing:-0.025em;line-height:1;color:#ffffff;margin-bottom:8px">$8K–$15K</div>
-        <div style="font-size:0.875rem;color:rgba(255,255,255,0.65);line-height:1.6">Per-driver replacement cost including recruiting, onboarding, training, and lost productivity.</div>
-      </div>
-      <div style="background:#0C1840;padding:32px 28px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:rgba(255,255,255,0.50);margin-bottom:10px">Commercial Drivers (US)</div>
-        <div style="font-size:2.25rem;font-weight:600;letter-spacing:-0.025em;line-height:1;color:#ffffff;margin-bottom:8px">3.5M</div>
-        <div style="font-size:0.875rem;color:rgba(255,255,255,0.65);line-height:1.6">Professional drivers operating in the United States — each one a candidate for structured recognition.</div>
-      </div>
-    </div>
-    <p style="font-size:0.75rem;color:rgba(255,255,255,0.35);margin-top:16px;text-align:right">Sources: American Trucking Associations (ATA), American Transportation Research Institute (ATRI), FMCSA</p>
-  </div>
-</section>
+  <div class="ab-wrap">
 
-<!-- CORE VALUES -->
-<section class="section-sm das-field-host" style="background:var(--black-2);border-top:1px solid var(--gold-border)"><div class="das-field" aria-hidden="true"><span class="fm" style="left:4%;top:14%;--h:130px;--r:-6deg;--o:0.06"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:96%;top:78%;--h:165px;--r:5deg;--o:0.055"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:92%;top:18%;--h:100px;--r:9deg;--o:0.055"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:8%;top:82%;--h:110px;--r:-8deg;--o:0.05"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:48%;top:-6%;--h:95px;--r:7deg;--o:0.045"><svg class="das-ill das-ill-sign" aria-hidden="true"><use href="#das-sign"></use></svg></span><span class="fm" style="left:80%;top:44%;--h:85px;--r:-10deg;--o:0.05"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span><span class="fm" style="left:26%;top:92%;--h:80px;--r:11deg;--o:0.045"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:2%;top:48%;--h:105px;--r:-5deg;--o:0.045"><svg class="das-ill das-ill-driver" aria-hidden="true"><use href="#das-driver"></use></svg></span></div>
-  <div class="container">
-    <div class="section-header centered">
-      <span class="section-eyebrow">What We Stand For</span>
-      <h2 class="section-title">Three principles behind<br>every product we ship.</h2>
-    </div>
-    <div class="values-grid">
-
-      <div class="value-card">
-        <div class="value-icon">
-          <!-- Truck icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M8.25 18.75h9M3.375 14.25h10.875m0 0V6.375A.375.375 0 0013.875 6H4.5a.375.375 0 00-.375.375v7.875m9.75 0H3.375"/>
-          </svg>
-        </div>
-        <h3 class="value-title">Built for Trucking. Not Adapted from Gifting.</h3>
-        <p class="value-desc">Every kit originates from the trucking profession — not repurposed from a corporate gifting catalog. The products, language, materials, and packaging reflect the specific culture and standards of commercial drivers. That difference is visible the moment a driver opens the box.</p>
+    <!-- ── Row: principles. No ordinals — these are not a sequence. ────── -->
+    <section class="ab-row" aria-labelledby="ab-stand">
+      <div class="ab-label" id="ab-stand">What We Stand For<small>Three principles behind every product we ship</small></div>
+      <div class="ab-items">
+        <article class="ab-item">
+          <h3>Built for trucking. Not adapted from gifting.</h3>
+          <p>Every kit originates from the trucking profession &mdash; not repurposed from a corporate gifting catalog. The products, language, materials, and packaging reflect the specific culture and standards of commercial drivers. That difference is visible the moment a driver opens the box.</p>
+        </article>
+        <article class="ab-item">
+          <h3>Program architecture. Not just products.</h3>
+          <p>We work with VP Safety and operations teams to structure recognition calendars that align with Driver Appreciation Week, service milestones, onboarding, and seasonal programs. The result is a repeatable system &mdash; not a one-time order that gets forgotten until next September.</p>
+        </article>
+        <article class="ab-item">
+          <h3>Fleet-grade quality. No exceptions.</h3>
+          <p>The quality of a recognition kit signals what the carrier thinks of the driver receiving it. We hold every product to a single standard: if we wouldn&rsquo;t be proud to receive it, it doesn&rsquo;t ship. Premium materials, premium presentation &mdash; on every order, at every tier.</p>
+        </article>
       </div>
+    </section>
 
-      <div class="value-card">
-        <div class="value-icon">
-          <!-- Clipboard / program icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/>
-          </svg>
-        </div>
-        <h3 class="value-title">Program Architecture. Not Just Products.</h3>
-        <p class="value-desc">We work with VP Safety and operations teams to structure recognition calendars that align with Driver Appreciation Week, service milestones, onboarding, and seasonal programs. The result is a repeatable system — not a one-time order that gets forgotten until next September.</p>
-      </div>
-
-      <div class="value-card">
-        <div class="value-icon">
-          <!-- Shield-check icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-          </svg>
-        </div>
-        <h3 class="value-title">Fleet-Grade Quality. No Exceptions.</h3>
-        <p class="value-desc">The quality of a recognition kit signals what the carrier thinks of the driver receiving it. We hold every product to a single standard: if we wouldn't be proud to receive it, it doesn't ship. Premium materials, premium presentation — on every order, at every tier.</p>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- HOW WE OPERATE -->
-<section class="section das-field-host" style="background:var(--black);border-top:1px solid var(--gold-border)"><div class="das-field" aria-hidden="true"><span class="fm" style="left:-2%;top:20%;--h:140px;--r:10deg;--o:0.055"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:95%;top:24%;--h:120px;--r:-6deg;--o:0.06"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:6%;top:78%;--h:105px;--r:8deg;--o:0.05"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:90%;top:80%;--h:110px;--r:-9deg;--o:0.055"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:50%;top:-9%;--h:150px;--r:4deg;--o:0.04"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:70%;top:50%;--h:82px;--r:-11deg;--o:0.05"><svg class="das-ill das-ill-pin" aria-hidden="true"><use href="#das-pin"></use></svg></span><span class="fm" style="left:22%;top:40%;--h:90px;--r:6deg;--o:0.045"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:40%;top:94%;--h:78px;--r:-7deg;--o:0.045"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span></div>
-  <div class="container">
-    <div class="about-split" style="gap:48px">
-      <div class="about-split-img">
-        <img src="/images/safedriver-truck.webp" alt="A professional fleet truck at the terminal — the operations DAS recognition programs support" loading="lazy" onerror="this.style.display='none'">
-      </div>
+    <!-- ── Row: operations. Ordinals ARE drawn here — this is a sequence. ─ -->
+    <section class="ab-row" aria-labelledby="ab-operate">
+      <div class="ab-label" id="ab-operate">How We Operate<small>Fleet-scale execution without the friction</small></div>
       <div>
-        <span class="section-eyebrow">How We Operate</span>
-        <h2 class="section-title">Fleet-scale execution<br>without the friction.</h2>
-        <p style="font-size:1.125rem;color:var(--text-secondary);line-height:1.65;margin-bottom:24px">We eliminated the three barriers that keep recognition programs from getting off the ground: long lead times, complex minimums, and pricing you can't verify until after you've committed.</p>
-        <div style="display:flex;flex-direction:column;gap:16px;margin-top:24px">
-          <div style="display:flex;gap:16px;align-items:flex-start">
-            <div style="width:40px;height:40px;background:var(--gold-tint);border:1px solid var(--gold-border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:0.02em">01</div>
-            <div>
-              <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px">Transparent, published pricing</div>
-              <div style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.6">Per-unit pricing is visible before you order — across every tier, every product. No hidden fees, no surprise invoices, no NDAs required to see a number.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start">
-            <div style="width:40px;height:40px;background:var(--gold-tint);border:1px solid var(--gold-border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:0.02em">02</div>
-            <div>
-              <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px">10-unit floor, national-fleet ceiling</div>
-              <div style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.6">Programs start at 10 units per product. Volume pricing unlocks automatically at 100+ drivers — same SKUs, same quality, better unit economics.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start">
-            <div style="width:40px;height:40px;background:var(--gold-tint);border:1px solid var(--gold-border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:0.02em">03</div>
-            <div>
-              <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px">program-managed fulfillment</div>
-              <div style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.6">Standard orders ship per your program timeline, after artwork approval. Express processing available for time-sensitive programs including Driver Appreciation Week.</div>
-            </div>
-          </div>
-          <div style="display:flex;gap:16px;align-items:flex-start">
-            <div style="width:40px;height:40px;background:var(--gold-tint);border:1px solid var(--gold-border);border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--gold);font-size:0.75rem;font-weight:600;letter-spacing:0.02em">04</div>
-            <div>
-              <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:6px">Custom branding on every order</div>
-              <div style="font-size:0.9375rem;color:var(--text-secondary);line-height:1.6">Fleet logo, driver name, and custom message included at every tier. Recognition that looks like it came from the carrier — because it did.</div>
-            </div>
-          </div>
+        <p class="ab-statement">We removed the three barriers that keep recognition programs from getting off the ground: long lead times, complex minimums, and pricing you can&rsquo;t verify until after you&rsquo;ve committed.</p>
+        <div class="ab-items" style="margin-top:32px">
+          <article class="ab-item">
+            <h3><span class="ab-n">01</span>Transparent, published pricing</h3>
+            <p>Per-unit pricing is visible before you order &mdash; across every tier, every product. No hidden fees, no surprise invoices, no NDAs required to see a number.</p>
+          </article>
+          <article class="ab-item">
+            <h3><span class="ab-n">02</span>10-unit floor, national-fleet ceiling</h3>
+            <p>Programs start at 10 units per product. Volume pricing unlocks automatically at 100+ drivers &mdash; same SKUs, same quality, better unit economics.</p>
+          </article>
+          <article class="ab-item">
+            <h3><span class="ab-n">03</span>Program-managed fulfillment</h3>
+            <p>Standard orders ship per your program timeline, after artwork approval. Express processing is available for time-sensitive programs including Driver Appreciation Week.</p>
+          </article>
+          <article class="ab-item">
+            <h3><span class="ab-n">04</span>Custom branding on every order</h3>
+            <p>Fleet logo, driver name, and custom message included at every tier. Recognition that looks like it came from the carrier &mdash; because it did.</p>
+          </article>
         </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- WHO WE SERVE -->
-<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
-  <div class="container">
-    <div class="section-header centered" style="margin-bottom:40px">
-      <span class="section-eyebrow">Who We Serve</span>
-      <h2 class="section-title" style="font-size:clamp(1.5rem,3vw,2.25rem)">Built for every fleet size.<br>From regional to national.</h2>
-    </div>
-    <div class="about-serve-grid">
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Regional Carriers</div>
-        <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px">10–250 Drivers</div>
-        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin-bottom:16px">Standard-tier programs with 10-unit minimums. Driver Appreciation Week kits, onboarding packs, and milestone awards designed for operations teams managing recognition alongside everything else.</p>
-        <a href="shop.html" style="font-size:0.8125rem;color:var(--gold);font-weight:500;text-decoration:none">Browse Standard Programs →</a>
+    <!-- ── Row: who we serve ──────────────────────────────────────────── -->
+    <section class="ab-row" aria-labelledby="ab-serve">
+      <div class="ab-label" id="ab-serve">Who We Serve<small>From regional to national</small></div>
+      <div class="ab-tiers">
+        <div class="ab-tier">
+          <span class="ab-tier-k">Regional carriers</span>
+          <h3>Standard programs</h3>
+          <span class="ab-tier-n">10&ndash;250 drivers</span>
+          <p>Standard-tier programs with 10-unit minimums. Driver Appreciation Week kits, onboarding packs, and milestone awards designed for operations teams managing recognition alongside everything else.</p>
+          <a href="shop.html?category=appreciation">Browse standard programs <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="ab-tier">
+          <span class="ab-tier-k">Mid-size fleets</span>
+          <h3>Premium programs</h3>
+          <span class="ab-tier-n">250&ndash;1,000 drivers</span>
+          <p>Premium-tier programs with dedicated fleet team support. Custom messaging, scheduled recognition calendars, and volume pricing that scales with your driver count throughout the year.</p>
+          <a href="shop.html?category=safety">Browse premium programs <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+        <div class="ab-tier">
+          <span class="ab-tier-k">National &amp; enterprise</span>
+          <h3>Enterprise programs</h3>
+          <span class="ab-tier-n">1,000+ drivers</span>
+          <p>Enterprise programs with custom SKU development, dedicated account management, annual program architecture, and the ability to coordinate recognition across terminals and divisions nationwide.</p>
+          <a href="company-purchasing.html">Contact our fleet team <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
       </div>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Mid-Size Fleets</div>
-        <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px">250–1,000 Drivers</div>
-        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin-bottom:16px">Premium-tier programs with dedicated fleet team support. Custom messaging, scheduled recognition calendars, and volume pricing that scales with your driver count throughout the year.</p>
-        <a href="shop.html" style="font-size:0.8125rem;color:var(--gold);font-weight:500;text-decoration:none">Browse Premium Programs →</a>
-      </div>
-      <div style="background:var(--black-3);border:1px solid var(--gold-border);border-radius:var(--radius-md);padding:28px 24px">
-        <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">National &amp; Enterprise Fleets</div>
-        <div style="font-size:1rem;font-weight:600;letter-spacing:-0.01em;margin-bottom:8px">1,000+ Drivers</div>
-        <p style="font-size:0.875rem;color:var(--text-secondary);line-height:1.65;margin-bottom:16px">Enterprise programs with custom SKU development, dedicated account management, annual program architecture, and the ability to coordinate recognition across terminals and divisions nationwide.</p>
-        <a href="contact.html" style="font-size:0.8125rem;color:var(--gold);font-weight:500;text-decoration:none">Contact Our Fleet Team →</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- CTA -->
-<section class="section-sm" style="background:var(--black-2);border-top:1px solid var(--gold-border)">
-  <div class="container">
-    <div class="cta-panel cta-panel--engraved"><div class="cta-mesh"></div><div class="cta-grain"></div><span class="cta-panel-eyebrow">Get Started</span><h2 class="cta-panel-title">Your next Driver Appreciation<br>Week starts here.</h2><p class="cta-panel-desc">Browse the full product line or speak with our fleet team to scope a recognition program built for your driver count, your budget, and your timeline.</p><div class="cta-panel-acts"><a href="shop.html" class="pill pill-white">Browse Programs <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="contact.html" class="pill pill-glass">Talk to Our Fleet Team</a></div></div>
-  </div>
-</section>
+    <!-- ── Close ──────────────────────────────────────────────────────── -->
+    <section class="ab-close">
+      <h2>Your next Driver Appreciation Week starts here.</h2>
+      <p>Browse the full product line, or speak with our fleet team to scope a recognition program built for your driver count, your budget, and your timeline.</p>
+      <div class="ab-acts">
+        <a href="shop.html" class="btn btn-primary">Browse programs</a>
+        <a href="contact.html" class="btn btn-secondary">Talk to our fleet team</a>
+      </div>
+    </section>
 
-<!-- FOOTER -->
+  </div>
+</div>
+
 </main>
 
 <footer class="footer">

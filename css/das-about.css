@@ -1,0 +1,258 @@
+/* ============================================================================
+   DAS ABOUT — the mission spine
+   ----------------------------------------------------------------------------
+   Traced from five references (doctrine 2026-09-19 — half top tech/AI, half
+   top ecommerce doing real volume, taken for page COMPOSITION):
+
+     TECH  Anthropic / Claude  THE SPINE. Rows of [short left label][substance
+                               right], a hairline rule between each, the left
+                               column about a third of the measure. One device
+                               carries the whole page and it reads as authority
+                               rather than as decoration.
+     TECH  ElevenLabs          the opener: micro eyebrow, a tight left-aligned
+                               headline held to ~60% of the measure, then a
+                               full-width rounded photograph.
+     TECH  Voiceflow           the white statement card sitting ON the
+                               photograph, inset from the left edge.
+     TECH  OpenAI              the restraint of the section rhythm and the
+                               mission sentence carried at reading width.
+     ECOM  In Common With      hairline rules instead of cards. No shadows, no
+                               boxes, no radius except on photography.
+
+   COLOUR LANDMINE: this codebase's vars are INVERTED (--black is #FFFFFF,
+   --gold is #1A2E6E navy). Explicit hex throughout. Navy family per
+   BRAND-KIT.md; brass #C8A14B is EARNED METAL — it appears once on this page.
+   ========================================================================== */
+
+.ab {
+  --ab-ink:    #0F172A;
+  --ab-ink-2:  #374151;
+  --ab-muted:  #6B7280;
+  --ab-faint:  #8A91A4;
+  --ab-navy:   #1A2E6E;
+  --ab-deep:   #0C1840;
+  --ab-darkest:#060E24;
+  --ab-brass:  #C8A14B;
+  --ab-rule:   rgba(26, 46, 110, .14);
+  --ab-soft:   rgba(26, 46, 110, .08);
+  --ab-paper:  #F7F8FA;
+}
+
+.ab-wrap { max-width: 1056px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 24px); }
+
+/* ── The opener (ElevenLabs) ─────────────────────────────────────────────
+   Eyebrow, then a headline deliberately SHORTER than the measure so the
+   ragged right edge is part of the composition, then the photograph. */
+.ab-open { padding: clamp(56px, 8vw, 104px) 0 0; }
+.ab-eyebrow {
+  display: block;
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ab-faint);
+  margin-bottom: 18px;
+}
+.ab-lede {
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
+  line-height: 1.06;
+  letter-spacing: -.03em;
+  font-weight: 700;
+  color: var(--ab-ink);
+  max-width: 17ch;
+  text-wrap: balance;
+  margin: 0;
+}
+.ab-sub {
+  margin: 22px 0 0;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  color: var(--ab-ink-2);
+  max-width: 62ch;
+}
+
+/* ── The photograph + the statement card (ElevenLabs + Voiceflow) ──────── */
+.ab-shot {
+  position: relative;
+  margin-top: clamp(40px, 6vw, 64px);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--ab-paper);
+}
+.ab-shot img {
+  width: 100%;
+  /* height:auto is LOAD-BEARING. The width/height ATTRIBUTES map to presentation
+     hints, and an explicit height beats aspect-ratio — without this the photo
+     renders at its intrinsic height (1029px of square photograph) and the crop
+     never happens. Keep the attributes: they are what reserves layout space. */
+  height: auto;
+  aspect-ratio: 21 / 9;
+  object-fit: cover;
+  display: block;
+}
+/* Voiceflow: the card sits ON the photograph, inset left, vertically centred,
+   and is about 38% of the frame. Below the card's breakpoint it stops
+   overlapping and becomes the block under the photo — an overlay that covers
+   the subject on a phone is worse than no overlay. */
+.ab-card {
+  position: absolute;
+  left: clamp(20px, 4%, 48px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(38%, 400px);
+  background: #fff;
+  padding: 28px 28px 26px;
+  border-radius: 10px;
+}
+.ab-card h2 {
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  line-height: 1.22;
+  letter-spacing: -.02em;
+  font-weight: 700;
+  color: var(--ab-ink);
+  margin: 0 0 12px;
+}
+.ab-card p { font-size: .875rem; line-height: 1.6; color: var(--ab-ink-2); margin: 0; }
+@media (max-width: 860px) {
+  .ab-card { position: static; transform: none; width: auto; border-radius: 0; padding: 24px 20px 4px; }
+  .ab-shot img { aspect-ratio: 16 / 10; }
+}
+
+/* ── THE SPINE (Anthropic) ──────────────────────────────────────────────
+   Every block on this page is one of these rows. The left column is a short
+   label that stays put while its substance scrolls; the rule above the row is
+   what separates one idea from the next. No cards anywhere. */
+.ab-row {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: 40px;
+  padding: clamp(40px, 6vw, 72px) 0;
+  border-top: 1px solid var(--ab-rule);
+}
+.ab-row:first-of-type { border-top: 0; }
+.ab-label {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -.015em;
+  color: var(--ab-ink);
+  position: sticky;
+  top: 108px;
+  align-self: start;
+}
+.ab-label small {
+  display: block;
+  margin-top: 8px;
+  font-size: .75rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--ab-faint);
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .ab-row { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .ab-label { position: static; }
+}
+
+/* The big statement that a row can carry instead of prose (Anthropic's
+   "Our research teams investigate…" block). */
+.ab-statement {
+  font-size: clamp(1.5rem, 3.2vw, 2.4rem);
+  line-height: 1.16;
+  letter-spacing: -.028em;
+  font-weight: 700;
+  color: var(--ab-ink);
+  margin: 0;
+  text-wrap: pretty;
+}
+.ab-body { font-size: 1rem; line-height: 1.75; color: var(--ab-ink-2); }
+.ab-body p { margin: 0 0 18px; max-width: 68ch; }
+.ab-body p:last-child { margin-bottom: 0; }
+.ab-body strong { color: var(--ab-ink); font-weight: 700; }
+
+/* ── Numbered items inside a row (Anthropic's "Research Teams" list) ───── */
+.ab-items { display: flex; flex-direction: column; }
+.ab-item { padding: 26px 0; border-top: 1px solid var(--ab-soft); }
+.ab-item:first-child { padding-top: 0; border-top: 0; }
+.ab-item:last-child { padding-bottom: 0; }
+.ab-item h3 {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -.012em;
+  color: var(--ab-ink);
+  margin: 0 0 8px;
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+}
+/* The ordinal is only drawn where the order is REAL — the four operating steps
+   happen in sequence. The three principles are not a sequence and carry none. */
+.ab-item .ab-n {
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--ab-faint);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+  flex: none;
+}
+.ab-item p { font-size: .9375rem; line-height: 1.7; color: var(--ab-ink-2); margin: 0; max-width: 66ch; }
+
+/* ── The figures band ───────────────────────────────────────────────────
+   The one dark block on the page, and the one place brass appears. Figures
+   are cited where they are cited — ATRI — because an uncited number on an
+   About page is the fastest way to lose an operations buyer. */
+.ab-figures { background: var(--ab-deep); color: #fff; margin-top: 8px; }
+.ab-figures-in {
+  max-width: 1056px; margin: 0 auto; padding: clamp(44px, 6vw, 68px) clamp(20px, 5vw, 24px);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0;
+}
+.ab-fig { padding: 0 32px; border-left: 1px solid rgba(255, 255, 255, .14); }
+.ab-fig:first-child { padding-left: 0; border-left: 0; }
+.ab-fig:last-child { padding-right: 0; }
+.ab-fig-k {
+  display: block;
+  font-size: .625rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ab-brass);
+  margin-bottom: 14px;
+}
+.ab-fig-v {
+  display: block;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1;
+  letter-spacing: -.035em;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 12px;
+}
+.ab-fig-d { font-size: .8125rem; line-height: 1.6; color: rgba(255, 255, 255, .64); margin: 0; }
+@media (max-width: 760px) {
+  .ab-figures-in { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .ab-fig { padding: 0; border-left: 0; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.14); }
+  .ab-fig:first-child { padding-top: 0; border-top: 0; }
+}
+
+/* ── Fleet tiers — the one place a row becomes three columns ───────────── */
+.ab-tiers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.ab-tier { padding-top: 20px; border-top: 2px solid var(--ab-navy); }
+.ab-tier-k { font-size: .625rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--ab-navy); }
+.ab-tier h3 { font-size: 1.0625rem; font-weight: 700; letter-spacing: -.012em; color: var(--ab-ink); margin: 10px 0 4px; }
+.ab-tier-n { font-size: .8125rem; color: var(--ab-faint); font-variant-numeric: tabular-nums; }
+.ab-tier p { font-size: .875rem; line-height: 1.7; color: var(--ab-ink-2); margin: 12px 0 16px; }
+.ab-tier a {
+  font-size: .8125rem; font-weight: 700; color: var(--ab-navy);
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.ab-tier a:hover { text-decoration: underline; text-underline-offset: 3px; }
+@media (max-width: 860px) { .ab-tiers { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+
+/* ── Closing ────────────────────────────────────────────────────────────── */
+.ab-close { border-top: 1px solid var(--ab-rule); padding: clamp(48px, 7vw, 88px) 0 clamp(56px, 8vw, 96px); }
+.ab-close h2 {
+  font-size: clamp(1.75rem, 3.6vw, 2.75rem);
+  line-height: 1.1; letter-spacing: -.03em; font-weight: 700; color: var(--ab-ink);
+  max-width: 20ch; margin: 0 0 18px; text-wrap: balance;
+}
+.ab-close p { font-size: 1rem; line-height: 1.7; color: var(--ab-ink-2); max-width: 60ch; margin: 0 0 28px; }
+.ab-acts { display: flex; gap: 12px; flex-wrap: wrap; }
+
+@media (prefers-reduced-motion: reduce) { .ab-label { position: static; } }
