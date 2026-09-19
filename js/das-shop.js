@@ -41,7 +41,6 @@
   var root = document.querySelector('.shop2');
   if (!root) return;
 
-  var LS_SAVED = 'das_saved_v1';
 
   /* ── Category vocabulary ────────────────────────────────────────────────
      Order is the driver-recognition journey, not the alphabet (E96). The slugs
@@ -475,31 +474,38 @@
     if (p.get('sort')) state.sort = p.get('sort');
   }
 
-  /* ── Saved items ────────────────────────────────────────────────────── */
-  function saved() {
-    try { return JSON.parse(localStorage.getItem(LS_SAVED) || '[]'); } catch (e) { return []; }
-  }
-  function setSaved(list) {
-    try { localStorage.setItem(LS_SAVED, JSON.stringify(list)); } catch (e) {}
-    window.dispatchEvent(new CustomEvent('das:saved-changed', { detail: { count: list.length } }));
-  }
+  /* ── Saved items ────────────────────────────────────────────────────────
+     There is ALREADY a favourites system: js/cart.js owns window.Favorites on
+     das_favorites_v1 and ships a delegated handler for any [data-save-to-fav]
+     button inside a [data-product-id] card. It builds the item, toggles the
+     store, updates the .fav-count nav badge, fires das:favchange, syncs the
+     icon and raises the toast.
+
+     My first pass here wrote IDs to a second key (das_saved_v1). That is a
+     silent divergence of exactly the kind that produces a bug report months
+     later: a kit hearted on the shop would simply never appear on
+     favorites.html, and nothing anywhere would error. The heart below is
+     therefore only MARKUP — every behaviour is cart.js's. */
   var HEART = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.7 1.1-1a5.5 5.5 0 000-7.8z"/></svg>';
 
   function mountHearts() {
-    var list = saved();
     cards.forEach(function (c) {
       if (c.el.querySelector('.shop2-save')) return;
-      var id = c.el.getAttribute('data-product-id') || c.name;
-      if (!id) return;
+      /* cart.js finds the product via closest('[data-product-id]'), so a card
+         without that attribute cannot be saved and must not offer to be. */
+      if (!c.el.getAttribute('data-product-id')) return;
       var b = document.createElement('button');
       b.type = 'button';
       b.className = 'shop2-save';
-      b.setAttribute('data-save-id', id);
+      b.setAttribute('data-save-to-fav', '');
       b.setAttribute('aria-label', 'Save ' + (c.name || 'product').trim() + ' for later');
-      b.setAttribute('aria-pressed', list.indexOf(id) >= 0 ? 'true' : 'false');
       b.innerHTML = HEART;
-      var wrap = c.el.querySelector('.product-card-img-wrap') || c.el;
-      (wrap.parentNode === c.el ? c.el : wrap).appendChild(b);
+      c.el.appendChild(b);
+      if (window.Favorites && window.Favorites.has(c.el.getAttribute('data-product-id'))) {
+        b.classList.add('fav-active');
+        var svg = b.querySelector('svg');
+        if (svg) svg.style.fill = 'currentColor';
+      }
     });
   }
 
@@ -541,17 +547,6 @@
       if (s2) s2.value = '';
       apply();
       return;
-    }
-    var save = e.target.closest && e.target.closest('.shop2-save');
-    if (save) {
-      e.preventDefault();
-      var id = save.getAttribute('data-save-id');
-      var list = saved(), at = list.indexOf(id);
-      if (at >= 0) list.splice(at, 1); else list.push(id);
-      setSaved(list);
-      document.querySelectorAll('.shop2-save[data-save-id="' + id + '"]').forEach(function (b) {
-        b.setAttribute('aria-pressed', at >= 0 ? 'false' : 'true');
-      });
     }
   });
 

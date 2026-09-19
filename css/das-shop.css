@@ -294,9 +294,11 @@
 }
 .product-card:hover .shop2-save,
 .shop2-save:focus-visible,
-.shop2-save[aria-pressed="true"] { opacity: 1; }
+.shop2-save.fav-active { opacity: 1; }
 .shop2-save:hover { transform: scale(1.08); }
-.shop2-save[aria-pressed="true"] svg { fill: var(--s2-navy); }
+/* cart.js marks a saved button with .fav-active and fills the svg inline. */
+.shop2-save.fav-active { opacity: 1; }
+.shop2-save.fav-active svg { fill: var(--s2-navy); }
 @media (hover: none) { .shop2-save { opacity: 1; } }
 
 /* ============================================================================

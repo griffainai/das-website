@@ -1,0 +1,361 @@
+/* ============================================================================
+   DAS CART + SAVED ITEMS
+   ----------------------------------------------------------------------------
+   Loaded AFTER each page's inline <style> so it wins on equal specificity.
+   Two pages, one stylesheet, because they are the same object at two moments:
+   a list of chosen kits with a decision attached.
+
+   Traced from five references per page (doctrine 2026-09-19 — half top
+   tech/AI, half top ecommerce doing real volume, taken for page COMPOSITION):
+
+   CART
+     ECOM  In Common With  THE LINE. Items as table rows on hairlines — no
+                           card per item — with the quantity control inline
+                           beside the price rather than stacked beneath it.
+     ECOM  MANA            the quantity stepper as one rounded pill with real
+                           hit areas, not two cramped chevrons.
+     ECOM  Swap            THE SUMMARY. A distinct panel where subtotal,
+                           shipping and taxes are quiet and the total is not,
+                           with the reassurance line directly under the button.
+     ECOM  The New Yorker  restrained item meta and the ship-date line sitting
+                           with the product, where the question is asked.
+     TECH  PayPal          "Change" and "Remove" as quiet text, never buttons
+                           competing with checkout.
+
+   SAVED ITEMS
+     ECOM  David           THE CARD. A real bordered rectangle with a rule
+                           under the image and the meta inside it — the one
+                           place on this site where a box is right, because
+                           each saved kit is a discrete thing you kept.
+     ECOM  UGLYCASH        the status badge on the image, name and price tight
+                           beneath.
+     ECOM  Dollar Shave    the action carrying its own price.
+     TECH  mymind          the empty state as a designed moment rather than an
+                           apology.
+     TECH  Webflow         the count strip above the list.
+
+   COLOUR LANDMINE: vars are INVERTED (--black is #FFFFFF, --gold is #1A2E6E).
+   Explicit hex throughout.
+   ========================================================================== */
+
+.cart-layout, .fav-page-wrap {
+  --ck-ink:   #0F172A;
+  --ck-ink-2: #374151;
+  --ck-faint: #8A91A4;
+  --ck-navy:  #1A2E6E;
+  --ck-deep:  #0C1840;
+  --ck-rule:  rgba(26, 46, 110, .14);
+  --ck-soft:  rgba(26, 46, 110, .08);
+  --ck-paper: #F7F8FA;
+}
+
+/* ════════════════════════════════════════════════════════════════════════
+   CART
+   ════════════════════════════════════════════════════════════════════════ */
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 368px;
+  gap: 56px;
+  align-items: start;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+@media (max-width: 1023px) { .cart-layout { grid-template-columns: minmax(0, 1fr); gap: 36px; } }
+
+/* The count on the rule — the same header idiom as the shop's "All Products^60" */
+.rp-head {
+  display: flex; align-items: baseline; gap: 6px;
+  font-size: 1.125rem !important; font-weight: 700 !important;
+  letter-spacing: -.018em; color: var(--ck-ink) !important;
+  padding-bottom: 14px; margin-bottom: 4px;
+  border-bottom: 1px solid var(--ck-rule);
+}
+.rp-head sup { font-size: .75rem; font-weight: 600; color: var(--ck-faint); font-variant-numeric: tabular-nums; }
+
+/* ── The line (In Common With) ──────────────────────────────────────────
+   Rows on hairlines. No card, no radius, no shadow — the rule between two
+   items is the only separation a list of chosen things needs. */
+.rp-line {
+  display: grid !important;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  padding: 24px 0 !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ck-soft) !important;
+  border-radius: 0 !important;
+  background: none !important;
+  box-shadow: none !important;
+}
+/* NOTE — cart.html's own skin carries a blanket
+     .cart-layout, .cart-layout * { border-radius: 0 !important }
+   so EVERY radius inside the cart needs !important or it silently flattens.
+   That reset is why the thumbnail rendered square while the qty pill and the
+   summary panel (which already carried !important) came out round. */
+.rp-thumb {
+  width: 92px; height: 92px;
+  border-radius: 8px !important; overflow: hidden;
+  background: var(--ck-paper);
+  display: block; flex: none;
+}
+.rp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rp-body { display: flex; flex-direction: column; gap: 14px; }
+.rp-row1 { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+.rp-name {
+  font-size: .9375rem !important; font-weight: 700 !important;
+  line-height: 1.35; letter-spacing: -.012em; color: var(--ck-ink) !important; margin: 0 !important;
+}
+.rp-name a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.rp-lineprice {
+  font-size: .9375rem !important; font-weight: 700; color: var(--ck-ink) !important;
+  font-variant-numeric: tabular-nums; flex: none;
+}
+.rp-meta { font-size: .75rem !important; color: var(--ck-faint) !important; margin-top: 5px !important; }
+.rp-meta .soft { color: var(--ck-faint); }
+.rp-unit { font-size: .75rem !important; color: var(--ck-ink-2) !important; margin-top: 4px; font-variant-numeric: tabular-nums; }
+.rp-ctl { display: flex; align-items: center; gap: 14px; }
+
+/* ── The stepper (MANA) — one pill, real hit areas ─────────────────────── */
+.rp-qty {
+  display: inline-flex !important; align-items: center;
+  border: 1px solid var(--ck-rule) !important;
+  border-radius: 100px !important;
+  overflow: hidden;
+  background: #fff !important;
+  height: 36px;
+}
+.rp-qty button {
+  width: 34px; height: 100%;
+  display: grid; place-items: center;
+  font-size: 1rem; font-weight: 600; color: var(--ck-ink-2);
+  background: none; border: 0; cursor: pointer;
+  transition: background 140ms ease, color 140ms ease;
+}
+.rp-qty button:hover { background: var(--ck-soft); color: var(--ck-navy); }
+.rp-qty input {
+  width: 46px; height: 100%;
+  border: 0 !important; background: none !important;
+  text-align: center;
+  font-size: .8125rem; font-weight: 700; color: var(--ck-ink);
+  font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+.rp-qty input::-webkit-outer-spin-button, .rp-qty input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.rp-qty input:focus { outline: 2px solid var(--ck-navy); outline-offset: -2px; border-radius: 4px !important; }
+
+/* PayPal: remove is quiet text, never a button competing with checkout. */
+.rp-x {
+  font-size: .75rem !important; color: var(--ck-faint) !important;
+  background: none !important; border: 0 !important; padding: 4px !important;
+  display: inline-flex; align-items: center; gap: 5px;
+}
+.rp-x:hover { color: #B0392F !important; }
+.rp-x svg { width: 10px; height: 10px; }
+
+@media (max-width: 560px) {
+  .rp-line { grid-template-columns: 68px minmax(0, 1fr); gap: 14px; }
+  .rp-thumb { width: 68px; height: 68px; }
+  .rp-row1 { flex-direction: column; gap: 4px; }
+}
+
+/* ── The summary (Swap) ─────────────────────────────────────────────────
+   A distinct panel. Subtotal, shipping and taxes are quiet; the total is not.
+   The reassurance sits directly under the button, where the hesitation is. */
+.order-summary {
+  background: var(--ck-paper) !important;
+  border: 1px solid var(--ck-rule) !important;
+  border-radius: 12px !important;
+  padding: 24px !important;
+  position: sticky; top: 96px;
+  box-shadow: none !important;
+}
+@media (max-width: 1023px) { .order-summary { position: static; } }
+.order-summary-title {
+  font-size: .625rem !important; font-weight: 700 !important;
+  letter-spacing: .16em !important; text-transform: uppercase;
+  color: var(--ck-faint) !important; margin-bottom: 16px !important;
+}
+.order-line {
+  display: flex; justify-content: space-between; gap: 12px;
+  padding: 7px 0;
+  font-size: .8125rem; color: var(--ck-ink-2);
+}
+.order-line strong { font-weight: 600; color: var(--ck-ink); font-variant-numeric: tabular-nums; }
+.order-line.rp-green strong, .order-line .rp-green { color: #059669 !important; }
+/* The total is the only large number in the panel. */
+.order-line.order-total, #summary-total {
+  font-size: 1.25rem !important; font-weight: 700 !important;
+  color: var(--ck-ink) !important; font-variant-numeric: tabular-nums;
+}
+.rp-box { border-bottom: 1px solid var(--ck-rule); padding-bottom: 12px; margin-bottom: 12px; }
+.rp-fine { display: block; font-size: .6875rem; line-height: 1.55; color: var(--ck-faint); margin-top: 10px; }
+#checkout-btn {
+  width: 100%; min-height: 46px;
+  border-radius: 8px !important;
+  background: var(--ck-navy) !important; color: #fff !important;
+  font-size: .9375rem !important; font-weight: 700 !important;
+}
+#checkout-btn:hover:not(:disabled) { background: var(--ck-deep) !important; }
+.rp-acc summary {
+  font-size: .75rem; color: var(--ck-ink-2); cursor: pointer;
+  padding: 10px 0; display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid var(--ck-rule);
+}
+.rp-acc-bd { font-size: .6875rem; line-height: 1.6; color: var(--ck-faint); padding-bottom: 10px; }
+.rp-acc-bd p { margin: 0 0 6px; }
+.rp-acc-bd strong { color: var(--ck-ink-2); letter-spacing: .08em; font-size: .625rem; }
+
+/* ── Empty cart (mymind: a designed moment, not an apology) ────────────── */
+.rp-empty { padding: 48px 0 32px; text-align: center; border-bottom: 1px solid var(--ck-soft); }
+.rp-empty a {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: .875rem; font-weight: 700; color: var(--ck-navy);
+}
+.rp-empty a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.rp-pop { padding-top: 28px; }
+.rp-pop h4 {
+  font-size: .625rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ck-faint); margin: 0 0 16px;
+}
+.rp-pop-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.rp-pop-row a { display: block; }
+.rp-pop-row img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px !important; background: var(--ck-paper); }
+.rp-pop-row span { display: block; margin-top: 8px; font-size: .75rem; line-height: 1.4; color: var(--ck-ink-2); }
+.rp-pop-row a:hover span { color: var(--ck-navy); }
+@media (max-width: 560px) { .rp-pop-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ════════════════════════════════════════════════════════════════════════
+   SAVED ITEMS
+   ════════════════════════════════════════════════════════════════════════ */
+
+.fav-page-wrap { max-width: 1120px; margin: 0 auto; padding: 0 clamp(20px, 5vw, 24px); }
+
+/* Webflow's count strip, on the same rule as the shop and the cart. */
+.fav-hero {
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; flex-wrap: wrap;
+  padding-bottom: 14px; margin-bottom: 28px;
+  border-bottom: 1px solid var(--ck-rule);
+}
+.fav-hero-eyebrow {
+  font-size: .625rem !important; font-weight: 700 !important;
+  letter-spacing: .16em !important; text-transform: uppercase; color: var(--ck-faint) !important;
+  margin-bottom: 8px;
+}
+.fav-hero-title {
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem) !important;
+  line-height: 1.1; letter-spacing: -.022em; font-weight: 700 !important;
+  color: var(--ck-ink) !important; margin: 0 !important;
+}
+.fav-count-tag {
+  font-size: .75rem !important; font-weight: 600; color: var(--ck-faint) !important;
+  vertical-align: super; margin-left: 6px; font-variant-numeric: tabular-nums;
+  background: none !important; padding: 0 !important; border: 0 !important;
+}
+.fav-hero-link { font-size: .8125rem !important; font-weight: 700; color: var(--ck-navy) !important; }
+.fav-hero-link:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── The card (David) ───────────────────────────────────────────────────
+   The one place on this site where a real box is right: each saved kit is a
+   discrete thing the visitor deliberately kept, and a rule under the image
+   separates the object from its facts the way David's grid does. */
+.fav-grid {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 24px !important;
+}
+@media (max-width: 960px) { .fav-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media (max-width: 560px) { .fav-grid { grid-template-columns: minmax(0, 1fr) !important; } }
+
+.fav-card {
+  border: 1px solid var(--ck-rule) !important;
+  border-radius: 10px !important;
+  overflow: hidden;
+  background: #fff !important;
+  box-shadow: none !important;
+  display: flex; flex-direction: column;
+  transition: border-color 160ms ease;
+}
+.fav-card:hover { border-color: var(--ck-navy) !important; transform: none !important; }
+.fav-card-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--ck-paper);
+  border-bottom: 1px solid var(--ck-rule);
+}
+.fav-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* UGLYCASH puts the status on the image. Here it is the tier. */
+.fav-card-tier-badge {
+  position: absolute; top: 10px; left: 10px;
+  background: rgba(255, 255, 255, .94) !important; color: var(--ck-navy) !important;
+  font-size: .5625rem !important; font-weight: 700 !important;
+  letter-spacing: .12em; text-transform: uppercase;
+  padding: 4px 8px !important; border-radius: 100px !important;
+}
+.fav-card-remove {
+  position: absolute; top: 8px; right: 8px;
+  width: 28px; height: 28px; display: grid; place-items: center;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, .94) !important;
+  color: var(--ck-faint) !important;
+  box-shadow: 0 1px 3px rgba(12, 24, 64, .14);
+}
+.fav-card-remove:hover { color: #B0392F !important; }
+
+.fav-card-body { padding: 16px !important; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.fav-card-cat {
+  font-size: .5625rem !important; font-weight: 700 !important;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ck-faint) !important;
+}
+.fav-card-name {
+  font-size: .9375rem !important; font-weight: 700 !important;
+  line-height: 1.32; letter-spacing: -.012em; color: var(--ck-ink) !important;
+}
+.fav-card-price { font-size: .75rem !important; color: var(--ck-ink-2) !important; font-variant-numeric: tabular-nums; }
+.fav-card-price strong { font-weight: 700; color: var(--ck-ink); }
+.fav-card-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 14px; }
+/* Dollar Shave: the action carries its own price context. */
+.fav-btn-cart {
+  flex: 1; min-height: 38px;
+  border-radius: 8px !important;
+  background: var(--ck-navy) !important; color: #fff !important;
+  font-size: .8125rem !important; font-weight: 700 !important;
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+.fav-btn-cart:hover { background: var(--ck-deep) !important; }
+.fav-btn-view {
+  width: 38px; min-height: 38px;
+  border: 1px solid var(--ck-rule) !important;
+  border-radius: 8px !important;
+  display: grid; place-items: center;
+  color: var(--ck-ink-2) !important;
+  background: #fff !important;
+}
+.fav-btn-view:hover { border-color: var(--ck-navy) !important; color: var(--ck-navy) !important; }
+
+/* ── Empty state (mymind) ───────────────────────────────────────────────
+   mymind's empty screens sell the feature instead of apologising for being
+   blank. This one says what saving is FOR — building a list before a
+   procurement conversation — rather than "no saved kits yet". */
+.fav-empty {
+  padding: clamp(56px, 9vw, 96px) 0;
+  text-align: center;
+  border: 1px dashed var(--ck-rule) !important;
+  border-radius: 12px;
+  background: none !important;
+}
+.fav-empty-icon { color: var(--ck-faint) !important; margin-bottom: 18px; }
+.fav-empty-title {
+  font-size: 1.25rem !important; font-weight: 700 !important;
+  letter-spacing: -.022em; color: var(--ck-ink) !important; margin-bottom: 10px !important;
+}
+.fav-empty-desc {
+  font-size: .9375rem !important; line-height: 1.65; color: var(--ck-ink-2) !important;
+  max-width: 44ch; margin: 0 auto 24px !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .order-summary, .blog-sidebar { position: static; }
+  .fav-card, .rp-qty button { transition: none !important; }
+}
