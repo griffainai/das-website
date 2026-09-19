@@ -327,13 +327,6 @@
      so it paints before styles.css. Full splash once per visit, quick fade after.
      5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
      ============================================================================ -->
-<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
-  <div class="das-grain" aria-hidden="true"></div>
-  <div class="das-splash-inner">
-    <img class="das-splash-mark" src="/images/logo-white.png" alt="Driver Appreciation Solutions" width="728" height="259">
-    <span class="das-splash-sub">Driver Appreciation Solutions</span>
-  </div>
-</div>
 <style>
   /* SPLASH — redesigned 2026-09-19 to the Off Duty Not Driving treatment (Jayden: "do the same kind of
      sub-splash screen that we do have for the Off Duty Not Driving site"). Black, stark, high contrast:
@@ -370,6 +363,13 @@
     #das-splash .das-grain{animation:none}
   }
 </style>
+<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
+  <div class="das-grain" aria-hidden="true"></div>
+  <div class="das-splash-inner">
+    <img class="das-splash-mark" src="/images/logo-white.png" alt="Driver Appreciation Solutions" width="728" height="259">
+    <span class="das-splash-sub">Driver Appreciation Solutions</span>
+  </div>
+</div>
 <script>
   (function(){
     var el=document.getElementById('das-splash'); if(!el) return;
