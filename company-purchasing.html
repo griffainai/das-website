@@ -511,7 +511,6 @@
   <script src="/js/tracking.js?v=3" defer></script>
   <link rel="stylesheet" href="css/das-widget.css?v=3">
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
-  <link rel="stylesheet" href="/css/daw-ticker.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -584,9 +583,12 @@
 <!-- ══════════════════════════════════════════════════════
      ANNOUNCEMENT BAR
 ══════════════════════════════════════════════════════ -->
-<!-- DAW ticker A/B (Red Alert vs Stars & Stripes) — js/daw-ticker.js renders the assigned variant -->
-<div class="daw-tk" data-daw-ticker role="region" aria-label="Driver Appreciation Week announcement"></div>
-<script src="/js/daw-ticker.js?v=1"></script>
+<!-- DRIVER APPRECIATION WEEK TICKER - PARKED 2026-09-19. Jayden: "the week's over and we will bring
+     that back up in a couple of months probably January". The Red Alert vs Stars & Stripes A/B is therefore
+     PAUSED, not concluded: GA4 still needed a GTM trigger before a winner could be called, so neither variant
+     has won and the test must restart clean. css/daw-ticker.css and js/daw-ticker.js are left in place.
+     TO RESTORE: re-add the daw-ticker stylesheet link in the head, and in the body the daw-tk region div
+     plus the daw-ticker.js script. The exact three lines are in git at 4070b30 for this file. -->
 
 <!-- ══════════════════════════════════════════════════════
      NAV — white / fully opaque on dark page
