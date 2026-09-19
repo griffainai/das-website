@@ -363,6 +363,7 @@
     @media (max-width: 960px) { .featured-post { grid-template-columns: 1fr; } .featured-img-wrap { min-height: 260px; } .insight-strip-inner { grid-template-columns: 1fr 1fr; } .newsletter-inner { grid-template-columns: 1fr; } }
     @media (max-width: 640px) { .article-grid { grid-template-columns: 1fr; } .featured-content { padding: 28px 24px; } .blog-stats { gap: 20px; } .insight-item { padding: 24px 20px; } .blog-sidebar { grid-template-columns: 1fr; } }
   </style>
+  <link rel="stylesheet" href="/css/das-ideas.css?v=1">
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
   <script src="/js/tracking.js?v=3" defer></script>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
@@ -564,7 +565,7 @@
 
       <!-- ══ Main column ══ -->
       <div>
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px">
+        <div class="id-index-head">
           <h2 style="font-size:1.125rem;font-weight:700;color:#111827">All Articles</h2>
           <span id="article-count" style="font-size:0.875rem;color:#9CA3AF">5 articles</span>
         </div>
@@ -682,7 +683,7 @@
       </a>
 
       <!-- Card 6: Empty state placeholder for future article -->
-      <div class="article-card" data-cats="safety retention planning onboarding" style="cursor:default;opacity:0.55">
+      <div class="article-card" data-cats="safety retention planning onboarding" data-placeholder style="cursor:default;opacity:0.55">
         <div class="card-img-wrap" style="background:#F3F4F6;display:flex;align-items:center;justify-content:center">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:40px;height:40px;color:#9CA3AF"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25"/></svg>
         </div>
@@ -709,124 +710,12 @@
       </div><!-- /main column -->
 
       <!-- ══ Linear-style Sidebar ══ -->
-      <aside class="blog-sidebar">
-
-        <!-- Widget 1: DAW Countdown -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">
-            <div class="sidebar-card-header-icon sch-green">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            </div>
-            <span class="sidebar-card-header-title">Driver Appreciation Week 2026</span>
-          </div>
-          <div class="sidebar-daw">
-            <div class="sidebar-daw-date">
-              <span class="sidebar-daw-dot"></span>
-              Sep 13 – 19, 2026
-            </div>
-            <div class="sidebar-daw-title">Driver Appreciation Week</div>
-            <div class="sidebar-daw-timer">
-              <div class="sidebar-daw-unit">
-                <span class="sidebar-daw-num" id="sdaw-days">--</span>
-                <span class="sidebar-daw-label">Days</span>
-              </div>
-              <div class="sidebar-daw-unit">
-                <span class="sidebar-daw-num" id="sdaw-hours">--</span>
-                <span class="sidebar-daw-label">Hrs</span>
-              </div>
-              <div class="sidebar-daw-unit">
-                <span class="sidebar-daw-num" id="sdaw-min">--</span>
-                <span class="sidebar-daw-label">Min</span>
-              </div>
-              <div class="sidebar-daw-unit">
-                <span class="sidebar-daw-num" id="sdaw-sec">--</span>
-                <span class="sidebar-daw-label">Sec</span>
-              </div>
-            </div>
-            <a href="shop.html" class="sidebar-daw-cta">
-              Shop DAW kits
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
-            </a>
-          </div>
-        </div>
-
-        <!-- Widget 2: Recognition Calendar (Linear style) -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">
-            <div class="sidebar-card-header-icon sch-navy">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>
-            </div>
-            <span class="sidebar-card-header-title">Recognition Calendar</span>
-          </div>
-          <div class="sidebar-cal-list">
-            <div class="sidebar-cal-item">
-              <div class="sidebar-cal-dot scd-active"></div>
-              <div class="sidebar-cal-info">
-                <div class="sidebar-cal-name">Driver Appreciation Week</div>
-                <div class="sidebar-cal-when">Sep 13–19, 2026 · This week</div>
-              </div>
-              <span class="sidebar-cal-badge scbadge-live">Live</span>
-            </div>
-            <div class="sidebar-cal-item">
-              <div class="sidebar-cal-dot scd-soon"></div>
-              <div class="sidebar-cal-info">
-                <div class="sidebar-cal-name">Q3 Safety Review</div>
-                <div class="sidebar-cal-when">Jul–Sep 2026</div>
-              </div>
-              <span class="sidebar-cal-badge scbadge-soon">Q3</span>
-            </div>
-            <div class="sidebar-cal-item">
-              <div class="sidebar-cal-dot scd-planned"></div>
-              <div class="sidebar-cal-info">
-                <div class="sidebar-cal-name">Year-End Holiday Kits</div>
-                <div class="sidebar-cal-when">Nov–Dec 2026</div>
-              </div>
-              <span class="sidebar-cal-badge scbadge-q4">Q4</span>
-            </div>
-            <div class="sidebar-cal-item">
-              <div class="sidebar-cal-dot scd-planned"></div>
-              <div class="sidebar-cal-info">
-                <div class="sidebar-cal-name">Q1 Onboarding Push</div>
-                <div class="sidebar-cal-when">Jan 2027</div>
-              </div>
-              <span class="sidebar-cal-badge scbadge-q4">Q1</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Widget 3: Quick Guides -->
-        <div class="sidebar-card">
-          <div class="sidebar-card-header">
-            <div class="sidebar-card-header-icon sch-amber">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z"/></svg>
-            </div>
-            <span class="sidebar-card-header-title">Quick Guides</span>
-          </div>
-          <div class="sidebar-guides-list">
-            <a href="blog/fleet-operators-guide-appreciation-week.html" class="sidebar-guide-item">
-              <span style="flex:1">How to Plan Driver Appreciation Week 2026</span>
-              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-            </a>
-            <a href="blog/roi-of-recognition.html" class="sidebar-guide-item">
-              <span style="flex:1">Recognition ROI Analysis</span>
-              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-            </a>
-            <a href="blog/cost-of-driver-turnover.html" class="sidebar-guide-item">
-              <span style="flex:1">True Cost of Turnover</span>
-              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-            </a>
-            <a href="blog/year-round-recognition-calendar.html" class="sidebar-guide-item">
-              <span style="flex:1">Year-Round Calendar Template</span>
-              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-            </a>
-            <a href="contact.html" class="sidebar-guide-item">
-              <span style="flex:1">Get a Custom Quote</span>
-              <span class="sgi-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
-            </a>
-          </div>
-        </div>
-
-      </aside><!-- /sidebar -->
+      <!-- The rail is rendered by js/das-ideas.js from the articles actually on
+           the page, so its counts cannot drift from the grid. The Driver
+           Appreciation Week countdown that used to head this sidebar is parked
+           with the two DAW banners — it was still reading "This week · Live" on
+           the day the week ended. -->
+      <aside class="blog-sidebar" id="ideas-rail" aria-label="Browse insights"></aside>
 
     </div><!-- /blog-layout -->
   </div>
@@ -1102,5 +991,6 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="js/das-sprite.js?v=1" defer></script>
 <script src="/js/das-nav.js?v=2"></script>
+<script src="/js/das-ideas.js?v=1"></script>
 </body>
 </html>
