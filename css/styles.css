@@ -503,6 +503,12 @@ ul { list-style: none; }
    BUTTONS
    ========================================= */
 .btn {
+  /* Jayden 2026-09-19: "the cta font can be changed but we will get to the core site" — so the buttons
+     move to DAS's own body face now, and the rest of the site's Inter→Chivo migration stays parked.
+     Chivo is the body/UI face in BRAND-KIT.md; Inter is on that file's banned list. Scoped to .btn only,
+     with a system fallback so the few pages that do not yet load Chivo degrade cleanly rather than
+     swapping to a different face mid-page. */
+  font-family: 'Chivo', Helvetica, Arial, 'Noto Sans', sans-serif;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -517,10 +523,16 @@ ul { list-style: none; }
   border: 2px solid transparent;
   text-decoration: none;
 }
-/* CTA SYSTEM — adopted from Off Duty Not Driving, 2026-09-19 (Jayden: "use the same design style system
-   that the [Off Duty Not Driving] site has for their CTAs"). Source of truth over there is
-   odndr-web/lib/marketing-chrome.ts: a sentence-case pill, navy #0E1B2E at rest, #2F6BFF on hover, and a
-   small arrow on actions that navigate. No scale-bounce — Off Duty's buttons change colour, they do not grow.
+/* CTA SYSTEM — Off Duty Not Driving's button BEHAVIOUR, in DAS's own colour. 2026-09-19.
+   Jayden picked the hybrid: DAS keeps its identity (Anton + Chivo, the navy family, brass, the prism, its own
+   illustrations) and borrows only how Off Duty's buttons *behave* — a sentence-case pill, a colour change
+   rather than a scale-bounce, and a small arrow on actions that navigate.
+
+   ⚠️ Colours come from DAS's OWN navy family, per BRAND-KIT.md: "Do not invent new colorways", and
+   "ODNDR is Oswald + Roboto … the two brands are deliberately different. Do not cross them."
+   An earlier pass today shipped Off Duty's #0E1B2E / #2F6BFF here; neither is in the DAS family, and both
+   were reverted. Rest #1A2E6E (var --gold), hover #2E4FA8 — 12.65:1 and 7.50:1 on white, both AA.
+   (#4E8BE8 was the other hover candidate and was rejected: 3.40:1 with white text fails AA.)
 
    ONE system, with a hierarchy inside it. Marketing CTAs get the arrow; commerce buttons (Add to Cart and
    friends, tagged [data-add-to-cart]) take the same shape, type and colour but NO arrow — the arrow promises
@@ -530,17 +542,17 @@ ul { list-style: none; }
    Typeface is left as the site's Inter rather than pulling Off Duty's Manrope onto 40 static pages for the
    sake of the buttons; the two are close, and the pill, the colour and the behaviour carry the system. */
 .btn-primary {
-  background: #0E1B2E;
+  background: var(--gold);
   color: #FFFFFF;
-  border-color: #0E1B2E;
+  border-color: var(--gold);
 }
 .btn-primary:hover {
-  background: #2F6BFF;
-  border-color: #2F6BFF;
+  background: #2E4FA8;
+  border-color: #2E4FA8;
   color: #FFFFFF;
 }
 .btn-primary:active { opacity: 0.9; }
-.btn-primary:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
+.btn-primary:focus-visible { outline: 2px solid #4E8BE8; outline-offset: 3px; }
 /* the arrow, on actions that go somewhere — never on Add to Cart */
 .btn-primary:not([data-add-to-cart])::after {
   content: "\2192";
@@ -550,22 +562,22 @@ ul { list-style: none; }
 .btn-primary:not([data-add-to-cart]):hover::after { transform: translateX(3px); }
 .btn-secondary {
   background: #FFFFFF;
-  color: #0E1B2E;
-  border-color: #E2E8F0;
+  color: var(--gold);
+  border-color: var(--gold-border-strong);
 }
 .btn-secondary:hover {
-  background: #F4F8FE;
-  border-color: #5C9BEA;
-  color: #0E1B2E;
+  background: var(--gold-tint);
+  border-color: #4E8BE8;
+  color: var(--gold);
 }
-.btn-secondary:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
+.btn-secondary:focus-visible { outline: 2px solid #4E8BE8; outline-offset: 3px; }
 .btn-ghost {
   background: transparent;
-  color: #0E1B2E;
-  border-color: #E2E8F0;
+  color: var(--gold);
+  border-color: var(--gold-border-strong);
 }
-.btn-ghost:hover { background: #F4F8FE; border-color: #5C9BEA; color: #0E1B2E; }
-.btn-ghost:focus-visible { outline: 2px solid #7FB0FF; outline-offset: 3px; }
+.btn-ghost:hover { background: var(--gold-tint); border-color: #4E8BE8; color: var(--gold); }
+.btn-ghost:focus-visible { outline: 2px solid #4E8BE8; outline-offset: 3px; }
 .btn-lg { padding: 14px 32px; font-size: 1rem; }
 .btn-sm { padding: 8px 18px; font-size: 0.875rem; }
 .btn-full { width: 100%; justify-content: center; }
