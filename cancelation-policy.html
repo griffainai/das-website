@@ -16,6 +16,8 @@
   <link rel="apple-touch-icon" href="/images/favicon-180.png"><text y='.9em' font-size='90'>🚛</text></svg>">
 <script src="/js/tracking.js?v=3" defer></script>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
+  <link rel="stylesheet" href="/css/das-nav.css?v=2">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -85,29 +87,48 @@
 </script>
 
 
-<nav class="nav">
-  <div class="container">
-    <div class="nav-inner">
-      <a href="index.html" class="nav-logo">
-        <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
+<!-- ============================================================================
+     TOP NAV — a 1:1 port of the Off Duty Not Driving marketing nav (Jayden
+     2026-09-19: "same top nav design ... the way their menu looks when it pops
+     out the photos ... same font and aesthetic just change the logo").
+     Styles: /css/das-nav.css   Behaviour: /js/das-nav.js
+     Selectors keep their .odn-* names so the two navs stay diffable.
+     DAS keeps its own actions (Cart, Sign In) — it is a shop, Off Duty is not.
+     ============================================================================ -->
+<div class="odn-root">
+  <div class="odn-wrap" id="odn-wrap">
+    <header class="odn-pill">
+      <a href="index.html" class="odn-logo" aria-label="Driver Appreciation Solutions — Home">
+        <img src="/images/logo.png" alt="Driver Appreciation Solutions" />
       </a>
-      <div class="nav-links">
-        <a href="index.html"  class="nav-link">Home</a>
-        <a href="shop.html"   class="nav-link">Shop</a>
-        <a href="about.html"  class="nav-link">About</a>
-        <a href="ideas.html"  class="nav-link">Insights &amp; Ideas</a>
-                <a href="surveys.html" class="nav-link">Surveys</a>
-        <a href="contact.html" class="nav-link">Contact</a>
+      <nav class="odn-links" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="shop.html">Shop</a><a href="about.html">About</a><a href="ideas.html">Insights &amp; Ideas</a><a href="surveys.html">Surveys</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="odn-actions">
+        <a href="cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span>Cart</span></a>
+        <a href="login.html" class="odn-cta">Sign in</a>
+        <button class="odn-burger" id="odn-burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
-      <div class="nav-actions">
-        <a href="cart.html" class="nav-cart-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
-          <span class="nav-cart-label">Cart</span> <span class="cart-badge">0</span>
-        </a>
+    </header>
+  </div>
+  <div class="odn-scrim" id="odn-scrim"></div>
+  <div class="odn-drop" id="odn-drop" role="dialog" aria-label="Menu">
+    <div class="odn-d4">
+      <div class="odn-g">
+        <div class="odn-hero"><span class="odn-ph" data-bg="/images/wk-group-lifestyle.jpg" aria-hidden="true"></span><div class="odn-tx"><small>For fleets</small><h5>Recognition your drivers actually feel.</h5><a class="odn-btn" href="shop.html">Shop appreciation kits <span aria-hidden="true">→</span></a></div></div>
+        <a class="odn-tile" href="shop.html"><span class="odn-ph" data-bg="/images/pde-kit-01.jpg" aria-hidden="true"></span><b>Shop</b><span class="odn-d">Kits, awards and gear</span></a><a class="odn-tile" href="about.html"><span class="odn-ph" data-bg="/images/wk-driver-lifestyle.jpg" aria-hidden="true"></span><b>About</b><span class="odn-d">Who we are</span></a><a class="odn-tile" href="ideas.html"><span class="odn-ph" data-bg="/images/pde-kit-03.jpg" aria-hidden="true"></span><b>Insights &amp; Ideas</b><span class="odn-d">Research and playbooks</span></a><a class="odn-tile" href="contact.html"><span class="odn-ph" data-bg="/images/pde-kit-02.jpg" aria-hidden="true"></span><b>Contact</b><span class="odn-d">Talk to the fleet team</span></a>
       </div>
+      <div class="odn-foot"><div class="odn-rows"><a href="login.html">Sign in<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="surveys.html">Surveys<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="customer-service.html">Customer service<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div></div>
+    </div>
+    <div class="odn-d1">
+      <div class="odn-lbl">Overview</div>
+      <div class="odn-tiles"><a class="odn-tile" href="index.html"><span class="odn-ph" data-bg="/images/wk-group-lifestyle.jpg" aria-hidden="true"></span><b>Home</b><span class="odn-d">Driver appreciation, made simple</span></a><a class="odn-tile" href="shop.html"><span class="odn-ph" data-bg="/images/pde-kit-01.jpg" aria-hidden="true"></span><b>Shop</b><span class="odn-d">Kits, awards and gear</span></a><a class="odn-tile" href="about.html"><span class="odn-ph" data-bg="/images/wk-driver-lifestyle.jpg" aria-hidden="true"></span><b>About</b><span class="odn-d">Who we are</span></a><a class="odn-tile" href="ideas.html"><span class="odn-ph" data-bg="/images/pde-kit-03.jpg" aria-hidden="true"></span><b>Insights &amp; Ideas</b><span class="odn-d">Research and playbooks</span></a></div>
+      <div class="odn-rows"><a href="contact.html">Contact<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="surveys.html">Surveys<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="login.html">Sign in<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="cart.html">Cart<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div>
+      <a class="odn-btn odn-btn-block" href="shop.html">Shop appreciation kits <span aria-hidden="true">→</span></a>
+      <div class="odn-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
     </div>
   </div>
-</nav>
+</div>
 
 <main id="main" tabindex="-1">
 
@@ -215,5 +236,6 @@
 <script src="js/cart.js?v=6"></script>
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="js/das-sprite.js?v=1" defer></script>
+<script src="/js/das-nav.js?v=2"></script>
 </body>
 </html>
