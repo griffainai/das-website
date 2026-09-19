@@ -204,6 +204,19 @@
       foot.appendChild(fb);
     }
     // Shop / search: a discreet line right above the product grid, by the category filters.
+    // The shop's pill filter bar was replaced by the faceted rail (das-shop.js),
+    // which exposes #plan-code-slot for exactly this. Without the slot this entry
+    // point vanished silently — and it is the ONLY way a visitor unlocks pricing.
+    var slot = document.getElementById('plan-code-slot');
+    if (slot && !document.getElementById('plan-code-link-shop')) {
+      var sw = document.createElement('div');
+      sw.className = 'plan-code-bar';
+      var ss = codeTrigger('Have a planning code? Unlock program pricing →');
+      ss.id = 'plan-code-link-shop';
+      sw.appendChild(ss);
+      slot.appendChild(sw);
+      return;
+    }
     var firstFilter = document.querySelector('.filter-btn');
     if (firstFilter && !document.getElementById('plan-code-link-shop')) {
       var bar = firstFilter.parentElement;

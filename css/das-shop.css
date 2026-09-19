@@ -1,0 +1,428 @@
+/* ============================================================================
+   DAS SHOP — enterprise catalogue layout
+   ----------------------------------------------------------------------------
+   Traced 1:1 from five references (Jayden's doctrine 2026-09-19: half top
+   tech/AI, half top ecommerce doing real volume — page COMPOSITION, not
+   product grids):
+
+     ECOM   In Common With  the rule-and-count header ("All Products^118"),
+                            the left category tree with a bullet on the active
+                            row, and the "View: S M L" density switch.
+     ECOM   SSENSE          the left rail as PLAIN TYPE — no boxes, no chips.
+                            Uppercase micro-labels, tight leading, the photo
+                            carries the card.
+     ECOM   Klarna          counted facet rows (name left, count right,
+                            tabular), collapsible groups, "Show all N".
+     ECOM   SIGMA           FILTER(n) / SORT affordances and the facet header
+                            that spans the grid on narrow viewports.
+     TECH   Slack Store     the save-heart on the tile and the sort control
+                            sitting on the header rule.
+
+   COLOUR LANDMINE: this codebase's vars are INVERTED (--black is #FFFFFF,
+   --gold is #1A2E6E navy). Everything here is EXPLICIT HEX so it cannot be
+   misread. Navy family per BRAND-KIT.md:
+     #060E24 · #0C1840 · #16264F · #1A2E6E · #2E4FA8 · #3A5FC0 · #4E8BE8 · #9CC4F5
+   ========================================================================== */
+
+.shop2 {
+  --s2-ink:        #0F172A;
+  --s2-ink-2:      #374151;
+  --s2-muted:      #6B7280;
+  --s2-faint:      #8A91A4;
+  --s2-navy:       #1A2E6E;
+  --s2-navy-deep:  #0C1840;
+  --s2-rule:       rgba(26, 46, 110, .14);
+  --s2-rule-soft:  rgba(26, 46, 110, .08);
+  --s2-tint:       rgba(26, 46, 110, .05);
+  --s2-rail:       236px;
+  --s2-gutter:     56px;
+  --s2-cols:       4;
+  --s2-gap:        24px;
+}
+
+/* ── The two-column frame ────────────────────────────────────────────────
+   In Common With: a fixed left rail of plain type, the grid taking the rest,
+   both hanging off one hairline rule that runs the full content width. */
+.shop2-frame {
+  display: grid;
+  grid-template-columns: var(--s2-rail) minmax(0, 1fr);
+  column-gap: var(--s2-gutter);
+  align-items: start;
+}
+
+/* ── Header rule + count ────────────────────────────────────────────────── */
+.shop2-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--s2-rule);
+  margin-bottom: 28px;
+}
+.shop2-title {
+  font-size: clamp(1.5rem, 2.4vw, 1.875rem);
+  line-height: 1.1;
+  letter-spacing: -.022em;
+  font-weight: 700;
+  color: var(--s2-ink);
+  margin: 0;
+}
+/* the superscript count — In Common With sets it as a true superior figure */
+.shop2-count {
+  font-size: .75rem;
+  font-weight: 600;
+  vertical-align: super;
+  margin-left: 6px;
+  color: var(--s2-faint);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+.shop2-tools { display: flex; align-items: center; gap: 22px; }
+
+/* Sort + density sit ON the rule, as plain type with a caret (SSENSE/Slack) */
+.shop2-ctl { display: flex; align-items: center; gap: 8px; }
+.shop2-ctl-label {
+  font-size: .6875rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 600;
+  color: var(--s2-faint);
+}
+.shop2-sort {
+  appearance: none;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 600;
+  color: var(--s2-ink);
+  padding: 2px 18px 2px 0;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+.shop2-density { display: flex; gap: 2px; }
+.shop2-density button {
+  width: 24px; height: 24px;
+  font-size: .6875rem;
+  font-weight: 700;
+  color: var(--s2-faint);
+  border-radius: 4px;
+  line-height: 1;
+}
+.shop2-density button[aria-pressed="true"] { color: var(--s2-navy); background: var(--s2-tint); }
+
+/* ── Left rail — plain type, no boxes (SSENSE) ──────────────────────────── */
+.shop2-rail { position: sticky; top: 96px; }
+@media (max-width: 1023px) { .shop2-rail { position: static; } }
+
+.shop2-group + .shop2-group { margin-top: 26px; padding-top: 22px; border-top: 1px solid var(--s2-rule-soft); }
+.shop2-group-head {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%;
+  font-size: .6875rem;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  font-weight: 700;
+  color: var(--s2-faint);
+  margin-bottom: 12px;
+  text-align: left;
+}
+.shop2-group-head svg { transition: transform 180ms ease; flex: none; }
+.shop2-group[data-collapsed="true"] .shop2-group-head svg { transform: rotate(-90deg); }
+.shop2-group[data-collapsed="true"] .shop2-rows { display: none; }
+
+.shop2-rows { display: flex; flex-direction: column; }
+/* A facet row: name left, live count right. Klarna's anatomy exactly. */
+.shop2-row {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  padding: 5px 0;
+  font-size: .8125rem;
+  line-height: 1.35;
+  color: var(--s2-ink-2);
+  text-align: left;
+  border-radius: 3px;
+  transition: color 140ms ease;
+}
+.shop2-row:hover { color: var(--s2-navy); }
+.shop2-row-n { font-variant-numeric: tabular-nums; font-size: .6875rem; color: var(--s2-faint); flex: none; }
+/* the active bullet — In Common With marks the current node with a dot, not a fill */
+.shop2-row[aria-pressed="true"] { color: var(--s2-navy); font-weight: 700; }
+.shop2-row[aria-pressed="true"] .shop2-row-name::before {
+  content: "\2022"; margin-right: 6px; color: var(--s2-navy);
+}
+.shop2-row[aria-pressed="true"] .shop2-row-n { color: var(--s2-navy); }
+/* a facet row that would return nothing is shown, dimmed, and inert — a count
+   of 0 is information (Klarna keeps the row; it tells you the axis exists) */
+.shop2-row[data-empty="true"] { color: #B6BCC9; pointer-events: none; }
+.shop2-row[data-empty="true"] .shop2-row-n { color: #C9CEDA; }
+
+.shop2-more {
+  margin-top: 6px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--s2-navy);
+  text-align: left;
+}
+.shop2-clear {
+  margin-top: 20px;
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--s2-navy);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Rail search (Klarna puts a find-box inside the big groups) */
+.shop2-find {
+  position: relative;
+  margin-bottom: 14px;
+}
+.shop2-find input {
+  width: 100%;
+  border: 1px solid var(--s2-rule);
+  border-radius: 6px;
+  padding: 8px 10px 8px 30px;
+  font-size: .8125rem;
+  color: var(--s2-ink);
+  background: #fff;
+}
+.shop2-find input:focus { outline: 2px solid var(--s2-navy); outline-offset: 1px; border-color: transparent; }
+.shop2-find svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--s2-faint); }
+
+/* ── Applied-facet chips (SIGMA's FILTER(n) made literal) ────────────────── */
+.shop2-applied { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px; }
+.shop2-applied:empty { display: none; }
+.shop2-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 10px;
+  border: 1px solid var(--s2-rule);
+  border-radius: 100px;
+  font-size: .75rem;
+  font-weight: 600;
+  color: var(--s2-navy);
+  background: #fff;
+}
+.shop2-chip svg { opacity: .55; }
+.shop2-chip:hover { border-color: var(--s2-navy); }
+.shop2-chip:hover svg { opacity: 1; }
+
+/* ── The results region ─────────────────────────────────────────────────── */
+/* The grid is driven by --s2-cols so the density switch is one custom-property
+   change rather than three sets of media queries fighting each other. */
+.shop2-results [data-category-section] { margin-bottom: 56px; }
+.shop2-results .product-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--s2-cols), minmax(0, 1fr));
+  gap: var(--s2-gap);
+}
+.shop2[data-density="s"] { --s2-cols: 5; --s2-gap: 16px; }
+.shop2[data-density="m"] { --s2-cols: 4; --s2-gap: 24px; }
+.shop2[data-density="l"] { --s2-cols: 3; --s2-gap: 32px; }
+
+@media (max-width: 1439px) {
+  .shop2[data-density="s"] { --s2-cols: 4; }
+  .shop2[data-density="m"] { --s2-cols: 3; }
+  .shop2[data-density="l"] { --s2-cols: 2; }
+}
+@media (max-width: 1023px) {
+  .shop2-frame { grid-template-columns: minmax(0, 1fr); }
+  .shop2 { --s2-cols: 2 !important; --s2-gap: 18px; }
+  .shop2-rail {
+    grid-row: 2;
+    margin-bottom: 28px;
+    max-height: 0; overflow: hidden;
+    transition: max-height 260ms ease;
+  }
+  .shop2-rail[data-open="true"] { max-height: 2400px; }
+  .shop2-results { grid-row: 3; }
+}
+@media (max-width: 560px) {
+  .shop2 { --s2-cols: 1 !important; }
+  .shop2-head { align-items: flex-start; }
+}
+
+/* the mobile "Filters (n)" toggle — hidden on desktop where the rail is always up */
+.shop2-railtoggle {
+  display: none;
+  align-items: center; gap: 8px;
+  padding: 9px 14px;
+  border: 1px solid var(--s2-rule);
+  border-radius: 100px;
+  font-size: .8125rem; font-weight: 700; color: var(--s2-navy);
+}
+@media (max-width: 1023px) { .shop2-railtoggle { display: inline-flex; } }
+
+/* ── Section headings inside the results ────────────────────────────────── */
+.shop2-results .shop2-sec {
+  display: flex; align-items: baseline; gap: 14px;
+  margin-bottom: 20px;
+}
+.shop2-results .shop2-sec h2 {
+  font-size: 1.0625rem; font-weight: 700; letter-spacing: -.01em; color: var(--s2-ink);
+}
+.shop2-results .shop2-sec-rule { flex: 1; height: 1px; background: var(--s2-rule-soft); }
+.shop2-results .shop2-sec-n { font-size: .6875rem; color: var(--s2-faint); font-variant-numeric: tabular-nums; }
+
+/* ── Empty state ────────────────────────────────────────────────────────── */
+.shop2-empty {
+  padding: 72px 0;
+  text-align: center;
+  border-top: 1px solid var(--s2-rule-soft);
+}
+.shop2-empty h3 { font-size: 1.125rem; font-weight: 700; color: var(--s2-ink); margin-bottom: 8px; }
+.shop2-empty p { font-size: .9375rem; color: var(--s2-muted); max-width: 420px; margin: 0 auto 20px; }
+
+/* ── Save heart on the tile (Slack Store) ───────────────────────────────── */
+.product-card { position: relative; }
+.shop2-save {
+  position: absolute; top: 10px; right: 10px; z-index: 3;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, .92);
+  box-shadow: 0 1px 3px rgba(12, 24, 64, .16);
+  color: var(--s2-navy);
+  opacity: 0;
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.product-card:hover .shop2-save,
+.shop2-save:focus-visible,
+.shop2-save[aria-pressed="true"] { opacity: 1; }
+.shop2-save:hover { transform: scale(1.08); }
+.shop2-save[aria-pressed="true"] svg { fill: var(--s2-navy); }
+@media (hover: none) { .shop2-save { opacity: 1; } }
+
+/* ============================================================================
+   THE SHOP ASSISTANT DOCK
+   ----------------------------------------------------------------------------
+   Jayden: "we need an AI that's helping on the shop so that they can talk to
+   the AI to also help them shop, kind of like what's on Off Duty Not Driving."
+
+   This is a SHELL on the existing Scout brain — POST /api/chat, which already
+   sits behind api/_ai-guard.js (kill switch, spend ceiling, rate ceiling,
+   meter: workspace principle 16b). No new endpoint, no second guard wall, and
+   the Vercel 12-function cap is untouched.
+   ========================================================================== */
+.sa-open {
+  position: fixed; right: 22px; bottom: 22px; z-index: 70;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 18px 12px 14px;
+  border-radius: 100px;
+  background: var(--s2-navy-deep, #0C1840);
+  color: #fff;
+  font-size: .875rem; font-weight: 700;
+  box-shadow: 0 12px 28px rgba(12, 24, 64, .28), 0 2px 6px rgba(12, 24, 64, .18);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.sa-open:hover { transform: translateY(-1px); box-shadow: 0 16px 34px rgba(12, 24, 64, .34); }
+.sa-open[hidden] { display: none; }
+
+.sa-panel {
+  position: fixed; right: 22px; bottom: 22px; z-index: 71;
+  width: min(408px, calc(100vw - 32px));
+  height: min(620px, calc(100vh - 44px));
+  display: none;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 32px 70px rgba(12, 24, 64, .30), 0 4px 12px rgba(12, 24, 64, .16);
+}
+.sa-panel[data-open="true"] { display: flex; }
+
+.sa-head {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 16px 14px;
+  background: var(--s2-navy-deep, #0C1840);
+  color: #fff;
+}
+.sa-head b { font-size: .9375rem; font-weight: 700; display: block; line-height: 1.2; }
+.sa-head small { font-size: .75rem; color: rgba(255, 255, 255, .62); }
+.sa-dot { width: 7px; height: 7px; border-radius: 100px; background: #4ADE80; flex: none; }
+.sa-x { margin-left: auto; color: rgba(255, 255, 255, .7); padding: 4px; border-radius: 6px; }
+.sa-x:hover { color: #fff; background: rgba(255, 255, 255, .12); }
+
+.sa-log { flex: 1; overflow-y: auto; padding: 18px 16px; display: flex; flex-direction: column; gap: 14px; }
+.sa-msg { max-width: 86%; font-size: .875rem; line-height: 1.55; }
+.sa-msg.me {
+  align-self: flex-end;
+  background: var(--s2-navy, #1A2E6E); color: #fff;
+  padding: 10px 14px; border-radius: 14px 14px 4px 14px;
+}
+.sa-msg.bot { align-self: flex-start; color: var(--s2-ink, #0F172A); }
+.sa-msg.bot strong { font-weight: 700; }
+.sa-msg.bot em { font-style: italic; }
+
+/* the action strip — when the model names a category, the page applies the
+   facet itself. Deterministic: the model suggests, the DOM decides. */
+.sa-acts { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.sa-act {
+  padding: 7px 12px;
+  border: 1px solid var(--s2-rule, rgba(26,46,110,.14));
+  border-radius: 100px;
+  font-size: .75rem; font-weight: 700; color: var(--s2-navy, #1A2E6E);
+  background: #fff;
+}
+.sa-act:hover { background: var(--s2-tint, rgba(26,46,110,.05)); border-color: var(--s2-navy, #1A2E6E); }
+
+.sa-foot { border-top: 1px solid var(--s2-rule-soft, rgba(26,46,110,.08)); padding: 12px; }
+.sa-form { display: flex; gap: 8px; align-items: flex-end; }
+.sa-form textarea {
+  flex: 1; resize: none;
+  border: 1px solid var(--s2-rule, rgba(26,46,110,.14));
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: .875rem; line-height: 1.4;
+  max-height: 120px;
+  color: var(--s2-ink, #0F172A);
+}
+.sa-form textarea:focus { outline: 2px solid var(--s2-navy, #1A2E6E); outline-offset: 1px; border-color: transparent; }
+.sa-send {
+  width: 38px; height: 38px; flex: none;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: var(--s2-navy, #1A2E6E); color: #fff;
+}
+.sa-send:disabled { opacity: .4; }
+.sa-note { font-size: .6875rem; color: var(--s2-faint, #8A91A4); margin-top: 8px; text-align: center; }
+
+.sa-typing { display: inline-flex; gap: 3px; align-items: center; }
+.sa-typing i { width: 5px; height: 5px; border-radius: 100px; background: #9CA3AF; animation: sa-b 1.1s infinite; }
+.sa-typing i:nth-child(2) { animation-delay: .18s; }
+.sa-typing i:nth-child(3) { animation-delay: .36s; }
+@keyframes sa-b { 0%, 60%, 100% { opacity: .3; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-3px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .sa-open, .sa-save, .shop2-group-head svg, .shop2-rail { transition: none; }
+  .sa-typing i { animation: none; opacity: .6; }
+}
+
+/* The site already ships a floating Scout widget. Two chat bubbles in one
+   corner is a bug, so on the shop the page-level assistant wins and the
+   global dock stands down. */
+.shop2-page #das-dock, .shop2-page #dwPanel { display: none !important; }
+
+/* The same find-box, reused on the header rule rather than inside the rail. */
+.shop2-find--head { margin-bottom: 0; width: 232px; }
+.shop2-find--head input { border-radius: 100px; padding-top: 7px; padding-bottom: 7px; }
+@media (max-width: 720px) { .shop2-find--head { width: 100%; } .shop2-tools { width: 100%; flex-wrap: wrap; gap: 14px; } }
+/* Sort and the density switch are desktop affordances; on a phone the rail
+   toggle is the whole control surface and three more chips is clutter. */
+@media (max-width: 720px) { .shop2-ctl--view { display: none; } }
+
+/* pricing-gate.js's unlock line, now anchored in the rail. */
+.shop2-rail .plan-code-bar { margin-top: 18px; font-size: .75rem; }
+
+/* Quote-only programmes are navigation, not facets — a row that jumps to the
+   section rather than one that filters. No count, because there is nothing to
+   count; a chevron, because it goes somewhere. */
+.shop2-row--link { text-decoration: none; }
+.shop2-row--link svg { flex: none; opacity: .45; }
+.shop2-row--link:hover svg { opacity: 1; }

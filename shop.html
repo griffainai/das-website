@@ -99,9 +99,10 @@
   <link rel="stylesheet" href="css/das-widget.css?v=3">
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
   <link rel="stylesheet" href="/css/das-nav.css?v=2">
+  <link rel="stylesheet" href="/css/das-shop.css?v=1">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
-<body>
+<body class="shop2-page">
 <a class="skip-link" href="#main">Skip to main content</a>
 <!-- ============================================================================
      DAS branded load screen (treatment A "polish"). Paints an opaque branded
@@ -258,32 +259,61 @@
 <section class="section das-field-host" style="background:var(--black)"><div class="das-field" aria-hidden="true"><span class="fm" style="left:4%;top:14%;--h:130px;--r:-6deg;--o:0.06"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:96%;top:78%;--h:165px;--r:5deg;--o:0.055"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:92%;top:18%;--h:100px;--r:9deg;--o:0.055"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:8%;top:82%;--h:110px;--r:-8deg;--o:0.05"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:48%;top:-6%;--h:95px;--r:7deg;--o:0.045"><svg class="das-ill das-ill-sign" aria-hidden="true"><use href="#das-sign"></use></svg></span><span class="fm" style="left:80%;top:44%;--h:85px;--r:-10deg;--o:0.05"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span><span class="fm" style="left:26%;top:92%;--h:80px;--r:11deg;--o:0.045"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:2%;top:48%;--h:105px;--r:-5deg;--o:0.045"><svg class="das-ill das-ill-driver" aria-hidden="true"><use href="#das-driver"></use></svg></span></div>
   <div class="container">
 
-    <!-- Product search -->
-    <div class="shop-search">
-      <svg class="shop-search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.6 5.6a7.5 7.5 0 0011.05 11.05z"/></svg>
-      <input id="shop-search-input" type="search" class="shop-search-input" placeholder="Search products — e.g. “safe miles”, “lapel pin”, “kit”…" aria-label="Search products" autocomplete="off">
-      <button type="button" id="shop-search-clear" class="shop-search-clear" aria-label="Clear search" style="display:none">&times;</button>
-    </div>
+    <!-- ══════════════════════════════════════════════════════════════════
+         THE CATALOGUE FRAME
+         Traced from five references (Jayden's doctrine 2026-09-19 — half top
+         tech/AI, half top ecommerce doing real volume, taken for page
+         COMPOSITION rather than product grids):
+           In Common With  the rule-and-count header, the left category tree,
+                           the "View: S M L" density switch
+           SSENSE          the rail as PLAIN TYPE — no chips, no boxes
+           Klarna          counted facet rows, name left / count right
+           SIGMA           the FILTER(n) / SORT affordances
+           Slack Store     the save-heart on the tile, sort sitting on the rule
+         Styles css/das-shop.css · behaviour js/das-shop.js.
 
-    <!-- Filter Bar -->
-    <div class="shop-filter-bar">
-      <span class="shop-filter-bar-label">Filter:</span>
-      <!-- E96: ordered by the driver-recognition journey. Slugs unchanged (links safe); milepacks relabeled "Safe Miles Programs". -->
-      <button type="button" class="filter-btn active" data-filter="all">All Products</button>
-      <button type="button" class="filter-btn" data-filter="appreciation">Driver Appreciation Kits</button>
-      <button type="button" class="filter-btn" data-filter="onboarding">Onboarding Solutions</button>
-      <button type="button" class="filter-btn" data-filter="safety">Safety Recognition</button>
-      <button type="button" class="filter-btn" data-filter="safedriver">Safe Driver Awards</button>
-      <button type="button" class="filter-btn" data-filter="milestone">Service Milestone Awards</button>
-      <button type="button" class="filter-btn" data-filter="milepacks">Safe Miles Programs</button>
-      <button type="button" class="filter-btn" data-filter="medals">Medals</button>
-      <button type="button" class="filter-btn" data-filter="retirement">Retirement Recognition</button>
-      <button type="button" class="filter-btn" data-filter="birthday">Birthday Recognition</button>
-      <button type="button" class="filter-btn" data-filter="holiday">Holiday &amp; Seasonal</button>
-    </div>
+         The rail is BUILT BY THE ENGINE from the products actually present in
+         this page, so a count can never disagree with the grid beside it. The
+         old pill bar this replaces could only show or hide one whole category
+         at a time; these facets combine.
+         ══════════════════════════════════════════════════════════════════ -->
+    <div class="shop2" data-density="m">
+      <div class="shop2-frame">
 
-    <!-- No-results message (shown by search when nothing matches) -->
-    <p id="shop-no-results" class="shop-no-results" style="display:none">No products match your search. <button type="button" id="shop-no-results-clear" class="shop-search-reset">Clear search</button> or browse the categories above.</p>
+        <div class="shop2-head" id="shop2-head">
+          <h2 class="shop2-title"><span id="shop2-title-text">All Products</span><span class="shop2-count" id="shop2-count">0</span></h2>
+          <div class="shop2-tools">
+            <div class="shop2-find shop2-find--head">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 105.6 5.6a7.5 7.5 0 0011.05 11.05z"/></svg>
+              <input id="shop2-search" type="search" placeholder="Search the catalogue" aria-label="Search products" autocomplete="off">
+            </div>
+            <button type="button" class="shop2-railtoggle" id="shop2-railtoggle" aria-expanded="false" aria-controls="shop2-rail">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" d="M3 6h18M6 12h12M10 18h4"/></svg>Filters
+            </button>
+            <div class="shop2-ctl">
+              <span class="shop2-ctl-label">Sort</span>
+              <select class="shop2-sort" id="shop2-sort" aria-label="Sort products">
+                <option value="featured">Featured</option>
+                <option value="price-asc">Price: low to high</option>
+                <option value="price-desc">Price: high to low</option>
+                <option value="name">Name</option>
+              </select>
+            </div>
+            <div class="shop2-ctl shop2-ctl--view">
+              <span class="shop2-ctl-label">View</span>
+              <div class="shop2-density" role="group" aria-label="Grid density">
+                <button type="button" data-density="s" aria-pressed="false" title="Small">S</button>
+                <button type="button" data-density="m" aria-pressed="true" title="Medium">M</button>
+                <button type="button" data-density="l" aria-pressed="false" title="Large">L</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="shop2-rail" id="shop2-rail" aria-label="Filter products"></aside>
+
+        <div class="shop2-results" id="shop2-results">
+          <div class="shop2-applied" id="shop2-applied"></div>
 
     <!-- APPRECIATION KITS -->
     <div class="mb-xl" data-category-section="appreciation">
@@ -2941,6 +2971,16 @@
 
     </div>
 
+          <div class="shop2-empty" id="shop2-empty" style="display:none">
+            <h3>Nothing matches those filters</h3>
+            <p>Try widening the price band or dropping a filter &mdash; or tell Scout what you&rsquo;re recognising and it will narrow the catalogue for you.</p>
+            <button type="button" class="btn btn-secondary" id="shop2-empty-clear">Clear all filters</button>
+          </div>
+        </div><!-- /.shop2-results -->
+      </div><!-- /.shop2-frame -->
+    </div><!-- /.shop2 -->
+
+
 
     <!-- ════════ OVERALL DRIVER APPRECIATION SOLUTIONS SUMMARY — shown ONLY on the
          "All Products" view (applyShopFilter), AFTER the full product gallery. On a
@@ -2981,6 +3021,48 @@
 
 <!-- FOOTER -->
 </main>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     THE SHOP ASSISTANT
+     Jayden 2026-09-19: "we need an AI that's helping on the shop so that they
+     can talk to the AI to also help them shop, kind of like what's on Off Duty
+     Not Driving."
+
+     This is a SHELL on the Scout brain that already exists — POST /api/chat,
+     already behind api/_ai-guard.js (kill switch · spend ceiling · rate
+     ceiling · meter; workspace principle 16b). No new serverless function:
+     DAS is near the Vercel 12-route cap, and a second guard wall would be a
+     second thing to get wrong.
+
+     Behaviour in js/das-shop.js. The model answers in prose; where it names a
+     real DAS programme the PAGE turns that into a button that drives the facet
+     engine, so navigation stays deterministic and costs nothing per turn.
+     ════════════════════════════════════════════════════════════════════════ -->
+<button type="button" class="sa-open" id="sa-open" aria-haspopup="dialog" aria-controls="sa-panel">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.4 8.4 0 01-9 8.4 9 9 0 01-3.6-.7L3 21l1.9-5A8.3 8.3 0 013 11.5 8.4 8.4 0 0112 3a8.4 8.4 0 019 8.5z"/></svg>
+  Help me choose
+</button>
+
+<div class="sa-panel" id="sa-panel" role="dialog" aria-modal="false" aria-labelledby="sa-title" data-open="false">
+  <div class="sa-head">
+    <span class="sa-dot" aria-hidden="true"></span>
+    <span><b id="sa-title">Scout</b><small>Recognition advisor</small></span>
+    <button type="button" class="sa-x" id="sa-x" aria-label="Close the assistant">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </div>
+  <div class="sa-log" id="sa-log" role="log" aria-live="polite"></div>
+  <div class="sa-foot">
+    <form class="sa-form" id="sa-form">
+      <textarea id="sa-input" rows="1" placeholder="How many drivers, and what are you recognising?" aria-label="Message Scout"></textarea>
+      <button type="submit" class="sa-send" id="sa-send" aria-label="Send">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 12h15M13 6l6 6-6 6"/></svg>
+      </button>
+    </form>
+    <p class="sa-note">Scout can be wrong about specifics &mdash; confirm quantities and lead times on a quote.</p>
+  </div>
+</div>
+
 
 <footer class="footer">
   <div class="container">
@@ -3657,168 +3739,6 @@
 })();
 </script>
 <script src="js/cart.js?v=6"></script>
-<script>
-// Filter logic — show/hide whole category sections only. The Milestone section keeps its own
-// Career/Safe track toggle (selectTrack); the filter never merges the two medal tracks.
-let currentFilter = 'all';
-let currentSearch = '';
-
-// Fuzzy search: map vague/everyday terms to what we actually stock, so "food"→food jar,
-// "badge"→lapel pin/medal, "cup/drink"→bottle/tumbler, "bag"→tote/cooler, "kits"→kits, etc.
-const SEARCH_SYNONYMS = {
-  food:['food jar','jar','soup','meal'], jar:['food jar'], meal:['food jar','lunch'],
-  drink:['bottle','tumbler','rambler','water','drinkware'], drinkware:['bottle','tumbler','rambler'],
-  cup:['bottle','tumbler','rambler','mug'], bottle:['rambler','tumbler','water bottle','drinkware'],
-  tumbler:['rambler','bottle'], water:['bottle','rambler','tumbler'], rambler:['bottle','tumbler'], yeti:['rambler','roadie','camino','tumbler','cooler','tote','bottle'],
-  bag:['tote','cooler','lunch bag','backpack','carryall','luggage','travel'], tote:['carryall','camino','bag'],
-  cooler:['roadie','cooler','lunch bag'], lunch:['lunch bag','food jar'], carryall:['camino','tote'],
-  backpack:['pack leader','backpack','tote'], pack:['pack leader','backpack'],
-  badge:['lapel pin','pin','medal','patch'], pin:['lapel pin','badge'], lapel:['lapel pin','pin'],
-  medal:['medal','award','medallion','milestone'], medallion:['medal','coin'], coin:['medallion','medal'],
-  award:['medal','milestone','recognition','award'], trophy:['medal','award'], patch:['patch','embroidered'],
-  shirt:['t-shirt','tee','apparel'], tee:['t-shirt','shirt'], apparel:['t-shirt','shirt','hat','cap'], hat:['cap'], cap:['hat'],
-  tag:['luggage tag','road bag tag','luggage'], luggage:['luggage tag','tote','bag'], keychain:['keychain','key'], key:['keychain'],
-  kit:['kit','recognition kit','essentials','travel','self-care','mile pack'], gift:['kit','gift','appreciation'], set:['kit','set','award'],
-  safety:['safe miles','safe service miles','safe driver','safety recognition'], safe:['safe miles','safe service miles'],
-  milestone:['milestone','service miles','mile','anniversary','tenure'], mile:['miles','milestone','service miles'], miles:['mile','milestone'],
-  anniversary:['milestone','tenure'], tenure:['milestone','anniversary','years of service'], service:['service miles','milestone'],
-  onboarding:['onboarding','welcome','new driver','new hire'], welcome:['onboarding','welcome kit'], new:['onboarding','new driver'],
-  holiday:['holiday','seasonal'], seasonal:['holiday'], travel:['travel kit','self-care','shower'], shower:['self-care','travel'],
-  soap:['dr squatch','soap','self-care'], towel:['towel','self-care'], wipes:['dude wipes','self-care'],
-  steam:['steam cleaner'], pressure:['pressure washer'], coffee:['coffee maker'],
-  premium:['executive','premium'], executive:['executive collection','premium'], million:['1 million','2 million','3 million','milestone'],
-};
-function searchTermsFor(q) {
-  const terms = new Set();
-  if (q) terms.add(q);                                  // full query (strongest)
-  q.split(/\s+/).filter(Boolean).forEach(t => {
-    terms.add(t);
-    const singular = (t.length > 3 && t.endsWith('s')) ? t.slice(0, -1) : null;
-    if (singular) terms.add(singular);
-    [t, singular].filter(Boolean).forEach(k => (SEARCH_SYNONYMS[k] || []).forEach(s => terms.add(s)));
-  });
-  return Array.from(terms).filter(Boolean);
-}
-
-function hasVisibleCard(c) {
-  return Array.prototype.some.call(c.querySelectorAll('.product-card, .mrk-flagship'), el => el.style.display !== 'none');
-}
-
-// Unified shop view. A text SEARCH (card-level, across every section) takes precedence;
-// otherwise the category FILTER (section-level) drives the view. Search and category are
-// mutually exclusive — picking a category clears the search, and searching spans all categories.
-function applyShop() {
-  // Reset any card / sub-block / section-child visibility a previous search or Medals view may have set.
-  document.querySelectorAll('.product-card, .mrk-flagship, .msm-block, [data-category-section] > *').forEach(el => el.style.display = '');
-  const q = currentSearch.trim().toLowerCase();
-  const noRes = document.getElementById('shop-no-results');
-
-  if (q) {
-    // SEARCH MODE — match each product card (+ the flagship kit) on name, category, and body text.
-    document.querySelectorAll('[data-category-section]').forEach(s => s.style.display = '');
-    document.querySelectorAll('.shop-service-detail').forEach(el => el.style.display = 'none');
-    const overallS = document.getElementById('shop-overall-detail'); if (overallS) overallS.style.display = 'none';
-    let any = false;
-    const terms = searchTermsFor(q);   // full query + tokens + synonyms (fuzzy, keyword-aware)
-    document.querySelectorAll('.product-card, .mrk-flagship').forEach(el => {
-      const hay = ((el.getAttribute('data-product-name') || '') + ' ' +
-                   (el.getAttribute('data-product-category') || '') + ' ' + el.textContent).toLowerCase();
-      const match = terms.some(t => hay.indexOf(t) !== -1);
-      el.style.display = match ? '' : 'none';
-      if (match) any = true;
-    });
-    // Collapse sub-blocks, then whole sections, that ended up with no visible cards (hides stray headers).
-    document.querySelectorAll('.msm-block').forEach(c => { if (!hasVisibleCard(c)) c.style.display = 'none'; });
-    document.querySelectorAll('[data-category-section]').forEach(c => { if (!hasVisibleCard(c)) c.style.display = 'none'; });
-    if (noRes) noRes.style.display = any ? 'none' : '';
-  } else if (currentFilter === 'medals') {
-    // MEDALS MODE — one entry point, but the two tracks stay SEPARATE: show only the medal blocks
-    // (Career Mileage Medals + Safe Service Miles Medals), each in its own labeled sub-section,
-    // and hide everything else in those sections (kits, accessories, exec, flagship, program copy).
-    document.querySelectorAll('[data-category-section]').forEach(section => {
-      const medalBlock = section.querySelector('[data-medals-block]');
-      if (medalBlock) {
-        section.style.display = '';
-        Array.prototype.forEach.call(section.children, function (ch) {
-          ch.style.display = (ch === medalBlock || ch.contains(medalBlock)) ? '' : 'none';
-        });
-      } else {
-        section.style.display = 'none';
-      }
-    });
-    document.querySelectorAll('.shop-service-detail').forEach(el => el.style.display = 'none');
-    const overallM = document.getElementById('shop-overall-detail'); if (overallM) overallM.style.display = 'none';
-    if (noRes) noRes.style.display = 'none';
-  } else {
-    // CATEGORY MODE — original section-level show/hide + per-program detail copy.
-    document.querySelectorAll('[data-category-section]').forEach(section => {
-      section.style.display = (currentFilter === 'all' || section.dataset.categorySection === currentFilter) ? '' : 'none';
-    });
-    document.querySelectorAll('.shop-service-detail').forEach(el => {
-      const cat = el.id.replace('service-detail-', '');
-      el.style.display = (currentFilter !== 'all' && cat === currentFilter) ? '' : 'none';
-    });
-    const overall = document.getElementById('shop-overall-detail');
-    if (overall) overall.style.display = (currentFilter === 'all') ? '' : 'none';
-    if (noRes) noRes.style.display = 'none';
-  }
-}
-
-// Category filter buttons — selecting one clears any active search.
-function applyShopFilter(filter) {
-  currentFilter = filter;
-  currentSearch = '';
-  const si = document.getElementById('shop-search-input');
-  const sc = document.getElementById('shop-search-clear');
-  if (si) si.value = '';
-  if (sc) sc.style.display = 'none';
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === filter));
-  // The page title follows the filter - 'All Products' over a filtered grid read
-  // as a miscommunication (Jayden, 2026-08-27).
-  const activeBtn = document.querySelector('.filter-btn.active');
-  const titleEl = document.getElementById('shop-page-title');
-  if (titleEl && activeBtn) titleEl.textContent = activeBtn.textContent;
-  applyShop();
-}
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => applyShopFilter(btn.dataset.filter));
-});
-
-// Product search — filters cards live as the user types, across every category.
-(function () {
-  const input = document.getElementById('shop-search-input');
-  const clearBtn = document.getElementById('shop-search-clear');
-  if (!input) return;
-  function clearSearch() { input.value = ''; currentSearch = ''; if (clearBtn) clearBtn.style.display = 'none'; applyShop(); input.focus(); }
-  input.addEventListener('input', () => {
-    currentSearch = input.value;
-    if (clearBtn) clearBtn.style.display = input.value ? 'flex' : 'none';
-    applyShop();
-  });
-  if (clearBtn) clearBtn.addEventListener('click', clearSearch);
-  const noResClear = document.getElementById('shop-no-results-clear');
-  if (noResClear) noResClear.addEventListener('click', clearSearch);
-})();
-// Mile Packs is the 2nd category in the "All Products" scroll order (after Driver
-// Appreciation Kits). Reorder the section node once on load; filtered views show a
-// single section so DOM order is irrelevant there.
-(function () {
-  const sections = document.querySelectorAll('[data-category-section]');
-  const first = sections[0];
-  const milepacks = document.querySelector('[data-category-section="milepacks"]');
-  if (first && milepacks && first.parentNode && first !== milepacks) {
-    first.parentNode.insertBefore(milepacks, first.nextSibling);
-  }
-})();
-// On load: honor ?category= if it maps to a real filter, otherwise default to "All Products".
-// E96: slug aliases so renamed/external links never break (Safe Miles Programs kept the `milepacks` slug).
-const CATEGORY_ALIASES = { 'safe-miles-programs': 'milepacks', 'mile-packs': 'milepacks', 'safemiles': 'milepacks' };
-const urlParams = new URLSearchParams(window.location.search);
-let catParam = urlParams.get('category');
-if (catParam && CATEGORY_ALIASES[catParam]) catParam = CATEGORY_ALIASES[catParam];
-const validCat = catParam && document.querySelector(`.filter-btn[data-filter="${catParam}"]`);
-applyShopFilter(validCat ? catParam : 'all');
-</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="js/auth.js?v=2"></script>
 <script src="js/pricing-gate.js?v=5"></script>
@@ -3828,5 +3748,6 @@ applyShopFilter(validCat ? catParam : 'all');
 <script src="js/quote.js?v=5" defer></script>
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="/js/das-nav.js?v=2"></script>
+<script src="/js/das-shop.js?v=1" defer></script>
 </body>
 </html>
