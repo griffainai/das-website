@@ -1,0 +1,260 @@
+/* ============================================================================
+   DAS CONTACT — the navy slash
+   ----------------------------------------------------------------------------
+   Loaded AFTER the page's own inline <style> so it wins on equal specificity.
+
+   Jayden 2026-09-19: "redesign that header to have the same background as we
+   have on our sign-in page (the off-duty one) ... the navy slash background
+   and stuff we have on off duty and retention."
+
+   THE GROUND IS A LITERAL TRACE of retention-opportunity
+   components/drive/drive.module.css — itself the ODNDR sign-in frame, itself
+   Stripe's. Copied exactly:
+     .guide  dashed verticals at 14.3% · 32.2% · 50% · 67.8% · 85.7%
+     .band   clip-path: polygon(0 0, 100% 0, 100% 14%, 0 49%)
+     .card   radius 4px, 0 15px 35px 0 rgba(60,66,87,.08),
+                          0 5px 15px 0 rgba(0,0,0,.12)
+     tokens  ink #1A1F36 · label #3C4257 · muted #697386 · hairline #E3E8EE
+
+   THE ONE DELIBERATE DEPARTURE: the gradient is rebuilt from DAS's OWN navy
+   family per BRAND-KIT.md, not Off Duty's. Stop-for-stop, same positions,
+   same 100deg, DAS hues:
+       #0A1628 0%   -> #060E24 0%
+       #0E1B2E 22%  -> #0C1840 22%
+       #1B3F6B 45%  -> #16264F 45%
+       #215387 62%  -> #1A2E6E 62%
+       #5C9BEA 82%  -> #4E8BE8 82%
+       #A9CBF5 100% -> #9CC4F5 100%
+   Copying Off Duty's blues onto DAS would be the off-brand mistake made
+   earlier in this programme (#0E1B2E / #2F6BFF shipped and had to be pulled).
+
+   Composition over that ground, traced from four contact pages:
+     ECOM  Fiasco          THE DIRECTORY. Named contacts grouped by PURPOSE —
+                           general, new business, purchasing — beside the form
+                           rather than buried under it. A fleet buyer wants to
+                           know who they are reaching.
+     ECOM  In Common With  the contact TABLE: label left, value right, hairline
+                           between every row. And the form on the RIGHT.
+     TECH  Melius          the form as a single card against the ground.
+     TECH  Farm Minerals   the oversized headline sitting ON the ground with
+                           the direct details in small caps beneath it.
+   ========================================================================== */
+
+.dc {
+  --dc-ink:      #1A1F36;
+  --dc-label:    #3C4257;
+  --dc-muted:    #697386;
+  --dc-hair:     #E3E8EE;
+  --dc-navy:     #1A2E6E;
+  --dc-navy-dk:  #16264F;
+}
+
+/* ── The ground ─────────────────────────────────────────────────────────── */
+.dc-ground { position: relative; isolation: isolate; overflow: clip; background: #fff; }
+.dc-stage { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.dc-guide { position: absolute; top: 0; bottom: 0; border-left: 1px dashed var(--dc-hair); }
+/* The band is held to ONE VIEWPORT so the slash keeps Off Duty's angle. Its
+   clip-path is in percentages of its own box — letting it span this whole
+   scrolling page would flatten 14%/49% into a shallow wedge and the trace
+   would stop being a trace. */
+.dc-band {
+  position: absolute; top: 0; left: 0; right: 0; height: 100dvh;
+  clip-path: polygon(0 0, 100% 0, 100% 14%, 0 49%);
+  background: linear-gradient(100deg, #060E24 0%, #0C1840 22%, #16264F 45%, #1A2E6E 62%, #4E8BE8 82%, #9CC4F5 100%);
+}
+.dc-ground > *:not(.dc-stage) { position: relative; z-index: 1; }
+
+/* ── The headline, ON the ground (Farm Minerals) ────────────────────────── */
+.contact-hero { background: none !important; padding: clamp(56px, 9vw, 104px) 0 clamp(40px, 6vw, 64px) !important; }
+.contact-hero .container { max-width: 1120px; }
+.ch-eyebrow {
+  color: rgba(255, 255, 255, .78) !important;
+  font-size: .6875rem !important; font-weight: 700 !important;
+  letter-spacing: .16em !important; text-transform: uppercase;
+  margin-bottom: 18px !important;
+}
+.ch-title {
+  color: #fff !important;
+  font-size: clamp(2.25rem, 5.4vw, 4rem) !important;
+  line-height: 1.02 !important; letter-spacing: -.035em !important; font-weight: 700 !important;
+  margin: 0 0 20px !important; text-wrap: balance;
+}
+.ch-title span { color: #9CC4F5 !important; }
+.ch-subtitle {
+  color: rgba(255, 255, 255, .82) !important;
+  font-size: 1.0625rem !important; line-height: 1.6 !important;
+  max-width: 48ch; margin: 0 !important;
+}
+
+/* Farm Minerals sets the direct details in small caps under the headline —
+   the fastest path for someone who does not want a form at all. */
+.dc-direct { display: flex; flex-wrap: wrap; gap: 8px 36px; margin-top: 32px; }
+.dc-direct a, .dc-direct span { display: block; }
+.dc-direct dt {
+  font-size: .625rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .62); margin-bottom: 5px;
+}
+.dc-direct dd { margin: 0; font-size: .9375rem; font-weight: 600; color: #fff; }
+.dc-direct dd a { color: #fff; }
+.dc-direct dd a:hover { color: #9CC4F5; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── The body grid — directory LEFT, form RIGHT ──────────────────────────
+   Fiasco, In Common With and Melius all put the form on the right. The old
+   layout had it left; order flips it without touching the markup, so the
+   form's own DOM, ids and submit handler are untouched. */
+.contact-main { background: none !important; padding-bottom: clamp(56px, 8vw, 96px) !important; }
+.contact-grid {
+  max-width: 1120px !important;
+  grid-template-columns: 340px minmax(0, 1fr) !important;
+  gap: 56px !important;
+  align-items: start;
+}
+.contact-grid > *:first-child { order: 2; }   /* the form column */
+.info-panel { order: 1; }
+@media (max-width: 1023px) {
+  .contact-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 36px !important; }
+  .contact-grid > *:first-child { order: 1; } /* on a phone the form comes first */
+  .info-panel { order: 2; }
+}
+
+/* ── The form, as one card (Melius / the Off Duty card) ─────────────────── */
+.contact-grid > *:first-child {
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 15px 35px 0 rgba(60, 66, 87, .08), 0 5px 15px 0 rgba(0, 0, 0, .12);
+  padding: clamp(28px, 4vw, 48px);
+}
+.form-section-head { margin-bottom: 28px; }
+.form-eyebrow {
+  font-size: .625rem !important; font-weight: 700 !important;
+  letter-spacing: .16em !important; text-transform: uppercase; color: var(--dc-muted) !important;
+}
+.form-section-title {
+  font-size: clamp(1.25rem, 2.2vw, 1.625rem) !important;
+  line-height: 1.2 !important; letter-spacing: -.022em !important; font-weight: 700 !important;
+  color: var(--dc-ink) !important; margin: 10px 0 8px !important;
+}
+.form-section-sub { font-size: .875rem !important; line-height: 1.6; color: var(--dc-muted) !important; }
+
+/* The frame's input ring — 1:1 from drive.module.css .opt */
+.cf-input, .cf-select {
+  border: 0 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 0 0 1px rgba(60, 66, 87, .16), 0 1px 1px rgba(0, 0, 0, .12) !important;
+  background: #fff !important;
+  color: var(--dc-ink) !important;
+  font-size: .9375rem !important;
+  padding: 11px 14px !important;
+  transition: box-shadow .15s !important;
+}
+.cf-input:hover, .cf-select:hover { box-shadow: 0 0 0 1px rgba(60, 66, 87, .32), 0 1px 1px rgba(0, 0, 0, .12) !important; }
+.cf-input:focus, .cf-select:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px var(--dc-navy) !important;
+}
+.cf-label { font-size: .8125rem !important; font-weight: 600 !important; color: var(--dc-label) !important; }
+.cf-req { color: var(--dc-navy) !important; }
+.cf-submit {
+  border-radius: 6px !important;
+  background: var(--dc-navy) !important;
+  color: #fff !important;
+  font-size: 1rem !important; font-weight: 600 !important;
+  min-height: 44px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .12), 0 2px 5px rgba(60, 66, 87, .08) !important;
+}
+.cf-submit:hover { background: var(--dc-navy-dk) !important; }
+.cf-fu {
+  border-radius: 6px !important;
+  border: 0 !important;
+  box-shadow: 0 0 0 1px rgba(60, 66, 87, .16), 0 1px 1px rgba(0, 0, 0, .12) !important;
+  background: #fff !important;
+  color: var(--dc-ink) !important;
+}
+.cf-fu.is-active { box-shadow: 0 0 0 2px var(--dc-navy) !important; background: #F5F9FF !important; color: var(--dc-navy) !important; }
+
+/* ── The directory (Fiasco + In Common With) ────────────────────────────── */
+.info-panel { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; }
+.dc-dir-group + .dc-dir-group { margin-top: 30px; padding-top: 26px; border-top: 1px solid var(--dc-hair); }
+.dc-dir-head {
+  display: block;
+  font-size: .625rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--dc-muted); margin-bottom: 14px;
+}
+/* In Common With's table: label left, value right, a hairline under each row */
+.dc-tbl { display: flex; flex-direction: column; }
+.dc-tbl-row {
+  display: grid; grid-template-columns: 116px minmax(0, 1fr); gap: 14px;
+  padding: 10px 0; border-bottom: 1px solid var(--dc-hair);
+  font-size: .8125rem; line-height: 1.5;
+}
+.dc-tbl-row:last-child { border-bottom: 0; }
+.dc-tbl-k { color: var(--dc-muted); }
+.dc-tbl-v { color: var(--dc-ink); font-weight: 500; }
+.dc-tbl-v a { color: var(--dc-navy); font-weight: 600; }
+.dc-tbl-v a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.dc-tbl-v small { display: block; margin-top: 3px; font-size: .6875rem; color: var(--dc-muted); font-weight: 400; }
+
+/* Fiasco's "what happens next" — a numbered sequence, ordinals earned */
+.dc-steps { display: flex; flex-direction: column; counter-reset: dcstep; }
+.dc-step { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; padding: 12px 0; border-top: 1px solid var(--dc-hair); }
+.dc-step:first-child { border-top: 0; padding-top: 0; }
+.dc-step-n {
+  font-size: .625rem; font-weight: 700; color: var(--dc-muted);
+  font-variant-numeric: tabular-nums; letter-spacing: .08em; padding-top: 2px;
+}
+.dc-step b { display: block; font-size: .8125rem; font-weight: 700; color: var(--dc-ink); margin-bottom: 3px; }
+.dc-step p { margin: 0; font-size: .75rem; line-height: 1.55; color: var(--dc-muted); }
+
+@media (prefers-reduced-motion: reduce) { .cf-input, .cf-select { transition: none !important; } }
+
+/* ── The headline on the dark band ──────────────────────────────────────
+   .ch-title is Anton with a VERTICAL NAVY GRADIENT painted through
+   background-clip:text, which sets -webkit-text-fill-color:transparent. That
+   wins over `color`, so setting color:#fff above did nothing and the headline
+   computed as rgba(0,0,0,0) — navy-on-navy, i.e. invisible, which is exactly
+   the failure this page's own brand notes warn about for dark sections.
+   The gradient device and the Anton face are kept; only the ramp is inverted
+   to the light end of the DAS navy family. */
+.dc .ch-title {
+  background: linear-gradient(180deg, #FFFFFF 0%, #E8F0FC 52%, #9CC4F5 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+/* The second line was navy-on-navy for the same reason. */
+.dc .ch-title span {
+  -webkit-text-fill-color: #9CC4F5 !important;
+  background: none !important;
+  color: #9CC4F5 !important;
+}
+
+/* Farm Minerals sets the headline hard left against the ground, and the
+   directory below rails left too — a centred hero over a left-falling slash
+   fights both. */
+.dc .contact-hero, .dc .contact-hero .container { text-align: left !important; }
+.dc .ch-title { margin-left: 0 !important; margin-right: 0 !important; max-width: 16ch !important; }
+.dc .ch-subtitle { margin-left: 0 !important; margin-right: 0 !important; }
+@media (max-width: 720px) { .dc .ch-title { max-width: none !important; } }
+
+/* ── Align the content to the guides ────────────────────────────────────
+   In the Off Duty frame the logo, the footer links and the card all hang off
+   calc(14.3% + 8px) — the first dashed guide. That alignment is what makes
+   the guides read as a grid the page obeys rather than as decoration behind
+   it. Content therefore spans guide 1 to guide 5 (14.3% -> 85.7%). */
+@media (min-width: 1024px) {
+  .dc .contact-hero .container,
+  .dc .contact-grid {
+    width: 71.4% !important;
+    max-width: none !important;
+    margin-left: 14.3% !important;
+    margin-right: 14.3% !important;
+    padding-left: 8px !important;
+    padding-right: 0 !important;
+  }
+}
+/* Below the guide breakpoint the guides are too close together to align to,
+   so the content falls back to ordinary page gutters. */
+@media (max-width: 1023px) {
+  .dc .dc-stage { display: none; }
+}

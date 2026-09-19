@@ -532,6 +532,7 @@
       .ch-title { font-size: 1.875rem; }
     }
   </style>
+  <link rel="stylesheet" href="/css/das-contact.css?v=1">
   <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
   <script src="/js/tracking.js?v=3" defer></script>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
@@ -683,11 +684,46 @@
 <!-- ══════════════════════════════════════════════════════
      CONTACT HERO
 ══════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════════════════
+     THE NAVY SLASH — a literal trace of the Off Duty / Retention sign-in
+     frame (retention-opportunity components/drive/drive.module.css, itself
+     the ODNDR sign-in, itself Stripe's). Dashed guides at the same five
+     percentages; the band on the same clip-path polygon.
+     The ONE departure is deliberate: the gradient is rebuilt stop-for-stop
+     from DAS' OWN navy family per BRAND-KIT.md. Copying Off Duty's blues
+     onto DAS is the off-brand mistake already made once in this programme.
+     Styles: css/das-contact.css
+     ════════════════════════════════════════════════════════════════ -->
+<div class="dc">
+<div class="dc-ground">
+  <div class="dc-stage" aria-hidden="true">
+    <span class="dc-guide" style="left:14.3%"></span><span class="dc-guide" style="left:32.2%"></span><span class="dc-guide" style="left:50%"></span><span class="dc-guide" style="left:67.8%"></span><span class="dc-guide" style="left:85.7%"></span>
+    <div class="dc-band"></div>
+  </div>
 <div class="contact-hero" data-hero-word="FLEET">
   <div class="container">
     <div class="ch-eyebrow">Fleet Recognition Programs</div>
     <h1 class="ch-title">Let's Build Your<br><span>Fleet Program.</span></h1>
     <p class="ch-subtitle">Tell us about your drivers and recognition goals. A fleet specialist will respond within one business day with a custom program recommendation tailored to your operation.</p>
+    <!-- Farm Minerals sets the direct details in small caps beneath the
+         headline. It is the fastest path for a buyer who does not want a form
+         at all — and on this page that buyer is a VP of Safety with a
+         deadline. Every value here already existed in the old info panel. -->
+    <dl class="dc-direct">
+      <div>
+        <dt>Call the fleet team</dt>
+        <dd><a href="tel:3026810995">302.681.0995</a></dd>
+      </div>
+      <div>
+        <dt>Email</dt>
+        <dd><a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a></dd>
+      </div>
+      <div>
+        <dt>Hours</dt>
+        <dd>Mon&ndash;Fri, 9&ndash;5 CT</dd>
+      </div>
+    </dl>
+
   </div>
 </div>
 
@@ -866,127 +902,91 @@
     <!-- ══════════════════════════════════════════════
          RIGHT — INFO PANEL
     ══════════════════════════════════════════════ -->
+    <!-- ══════════════════════════════════════════════════════════════════
+         THE DIRECTORY (Fiasco + In Common With)
+         Fiasco groups contacts by PURPOSE — general, new business, press —
+         so a visitor knows who they are actually reaching. In Common With
+         sets the same information as a TABLE: label left, value right, a
+         hairline under every row, no card.
+
+         This replaces the Google-Business-Profile-style business card that
+         sat here. That card was a good pattern for a local home-care site
+         and the wrong one for a fleet procurement page: a buyer wants the
+         purchasing terms and the escalation path, not an opening-hours
+         widget. Every value below already existed on this page — nothing
+         here is new, and nothing claimed that was not claimed before.
+         ══════════════════════════════════════════════════════════════════ -->
     <div class="info-panel">
 
-      <!-- THE BUSINESS CARD (2026-08-27) — the heart-to-home-care gbp layout,
-           DAS-mapped. No rating row: DAS publishes no review score, and a card
-           may only claim what the business can stand behind. -->
-      <aside class="gbp-business-card">
-        <div class="gbp-business-header">
-          <div class="gbp-business-header-top">
-            <div>
-              <div class="gbp-business-name">Driver Appreciation Solutions</div>
-              <div class="gbp-business-category">Fleet Recognition &amp; Driver Appreciation</div>
-            </div>
-            <span class="gbp-business-verified">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/><path d="M9 12l2 2 4-4" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              Verified
-            </span>
+      <div class="dc-dir-group">
+        <span class="dc-dir-head">Who you&rsquo;ll reach</span>
+        <div class="dc-tbl">
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Fleet programs</span>
+            <span class="dc-tbl-v"><a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a><small>Program scoping, product fit, volume pricing</small></span>
           </div>
-          <div class="gbp-business-actions">
-            <a href="tel:3026810995" class="gbp-business-action">
-              <span class="gbp-business-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
-              Call
-            </a>
-            <a href="mailto:info@driverappreciationsolutions.com" class="gbp-business-action">
-              <span class="gbp-business-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-              Email
-            </a>
-            <button type="button" class="gbp-business-action" onclick="document.getElementById('contact-form').scrollIntoView({behavior:'smooth',block:'start'})">
-              <span class="gbp-business-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg></span>
-              Quote
-            </button>
-            <a href="shop.html" class="gbp-business-action">
-              <span class="gbp-business-action-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 3h1.4l2 10.2h11.3l2-7.6a58 58 0 00-15.9-1.8"/><circle cx="8" cy="19" r="1.4"/><circle cx="17.5" cy="19" r="1.4"/></svg></span>
-              Shop
-            </a>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Purchasing</span>
+            <span class="dc-tbl-v"><a href="company-purchasing.html">Buy for my company &rarr;</a><small>Quotes, POs, Net-30, vendor setup</small></span>
+          </div>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Existing order</span>
+            <span class="dc-tbl-v"><a href="customer-service.html">Customer service &rarr;</a><small>Artwork, delivery, returns</small></span>
+          </div>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">By phone</span>
+            <span class="dc-tbl-v"><a href="tel:3026810995">302.681.0995</a><small>Mon&ndash;Fri, 9:00&ndash;5:00 CT</small></span>
           </div>
         </div>
-        <div class="gbp-business-body">
-          <div class="gbp-business-row">
-            <svg class="gbp-business-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-            <div class="gbp-business-row-content">
-              <div class="gbp-business-row-primary">Serving commercial fleets nationwide</div>
-              <div class="gbp-business-row-secondary">Terminal delivery &middot; multi-location coordination for enterprise fleets</div>
-            </div>
+      </div>
+
+      <div class="dc-dir-group">
+        <span class="dc-dir-head">Terms &amp; coverage</span>
+        <div class="dc-tbl">
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Coverage</span>
+            <span class="dc-tbl-v">Commercial fleets nationwide<small>Terminal delivery &middot; multi-location coordination for enterprise fleets</small></span>
           </div>
-          <div class="gbp-business-row">
-            <svg class="gbp-business-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <div class="gbp-business-row-content">
-              <div class="gbp-business-row-status open"><span style="width:6px;height:6px;background:#16a34a;border-radius:50%;display:inline-block"></span>Fleet team available Mon&ndash;Fri</div>
-              <ul class="gbp-business-hours-list">
-                <li class="today"><span class="day">Mon &ndash; Fri</span><span class="hours">9:00 AM &ndash; 5:00 PM CT</span></li>
-                <li><span class="day">Sat &ndash; Sun</span><span class="hours">Email anytime &middot; next business day</span></li>
-              </ul>
-            </div>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Payment</span>
+            <span class="dc-tbl-v">Net-30 for approved carriers<small>Purchase orders &amp; vendor setup supported</small></span>
           </div>
-          <div class="gbp-business-row">
-            <svg class="gbp-business-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <div class="gbp-business-row-content">
-              <div class="gbp-business-row-primary"><a href="tel:3026810995">302.681.0995</a></div>
-              <div class="gbp-business-row-secondary">Mon&ndash;Fri, 9 AM&ndash;5 PM CT</div>
-            </div>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Response</span>
+            <span class="dc-tbl-v">Within 1 business day<small>Enterprise quotes same day</small></span>
           </div>
-          <div class="gbp-business-row">
-            <svg class="gbp-business-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            <div class="gbp-business-row-content">
-              <div class="gbp-business-row-primary"><a href="mailto:info@driverappreciationsolutions.com">info@driverappreciationsolutions.com</a></div>
-              <div class="gbp-business-row-secondary">Responds within 1 business day &middot; enterprise quotes same day</div>
-            </div>
-          </div>
-          <div class="gbp-business-row">
-            <svg class="gbp-business-row-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <div class="gbp-business-row-content">
-              <div class="gbp-business-row-primary">Net-30 for approved carriers</div>
-              <div class="gbp-business-row-secondary">Purchase orders &amp; vendor setup supported</div>
-            </div>
+          <div class="dc-tbl-row">
+            <span class="dc-tbl-k">Minimum</span>
+            <span class="dc-tbl-v">10 units per product<small>Awards available from 1</small></span>
           </div>
         </div>
-      </aside>
+      </div>
 
-      <div class="ip-next">
-        <div class="ip-next-title">What happens next</div>
-        <div class="ip-next-steps">
-
-          <div class="ip-next-step">
-            <div class="ip-step-track">
-              <div class="ip-step-num">1</div>
-              <div class="ip-step-line"></div>
-            </div>
-            <div class="ip-step-body">
-              <div class="ip-step-head">We review your request</div>
-              <div class="ip-step-desc">Matched to the right program for your fleet size and recognition goals.</div>
-            </div>
+      <div class="dc-dir-group">
+        <span class="dc-dir-head">What happens next</span>
+        <div class="dc-steps">
+          <div class="dc-step">
+            <span class="dc-step-n">01</span>
+            <div><b>We review your request</b><p>Matched to the right program for your fleet size and recognition goals.</p></div>
           </div>
-
-          <div class="ip-next-step">
-            <div class="ip-step-track">
-              <div class="ip-step-num">2</div>
-              <div class="ip-step-line"></div>
-            </div>
-            <div class="ip-step-body">
-              <div class="ip-step-head">A specialist reaches out</div>
-              <div class="ip-step-desc">By email or phone — whichever you prefer.</div>
-            </div>
+          <div class="dc-step">
+            <span class="dc-step-n">02</span>
+            <div><b>A specialist reaches out</b><p>By email or phone &mdash; whichever you prefer.</p></div>
           </div>
-
-          <div class="ip-next-step">
-            <div class="ip-step-track">
-              <div class="ip-step-num">3</div>
-            </div>
-            <div class="ip-step-body">
-              <div class="ip-step-head">You receive a custom quote</div>
-              <div class="ip-step-desc">Product recommendations, fleet branding options, and volume pricing.</div>
-            </div>
+          <div class="dc-step">
+            <span class="dc-step-n">03</span>
+            <div><b>You receive a custom quote</b><p>Product recommendations, fleet branding options, and volume pricing.</p></div>
           </div>
-
         </div>
-      </div><!-- /ip-next -->
+      </div>
 
     </div><!-- /info-panel -->
 
+
   </div><!-- /contact-grid -->
 </div><!-- /contact-main -->
+  </div><!-- /.dc-ground -->
+</div><!-- /.dc -->
 
 <!-- ══════════════════════════════════════════════════════
      TRUST BAR
