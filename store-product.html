@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=1">
+<link rel="stylesheet" href="/css/das-store.css?v=2">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 </head>
 
@@ -29,8 +29,8 @@
     </a>
     <div class="right">
       <a class="item hide" href="contact.html">Contact</a>
-      <a class="item" href="favorites.html">Saved<span class="count" data-wish-count>0</span></a>
-      <button class="item" data-open-bag>Bag<span class="count" data-bag-count>0</span></button>
+      <a class="item" href="store-saved.html">Saved<span class="count" data-wish-count>0</span></a>
+      <a class="item" href="store-cart.html">Bag<span class="count" data-bag-count>0</span></a>
     </div>
   </div>
 </header>
@@ -40,12 +40,22 @@
      an n/N counter; a 472px information column right. Rendered by
      js/das-pdp.js from /store-catalog.json.
      ════════════════════════════════════════════════════════════════════════ -->
-<main id="pdp" class="st-pdp" tabindex="-1">
-  <div class="gal" id="pdp-gal"></div>
-  <div class="buy st-ui" id="pdp-buy"></div>
+<main id="pdp" class="st-pdp2" tabindex="-1">
+  <!-- The gallery is a stacked column of EVERY photograph, scrolling past a buy
+       box pinned beside it — the behaviour both existing stores actually run.
+       Click any frame to zoom. -->
+  <div class="pd-gal" id="pd-gal"></div>
+  <div class="pd-buy st-ui" id="pd-buy"></div>
 </main>
 
-<div id="pdp-also"></div>
+<!-- Sells the PROGRAMME rather than the piece — one kit is a gesture, a
+     calendar of them is what moves retention. -->
+<section class="pd-band st-ui" id="pd-band"></section>
+
+<div id="pd-also"></div>
+
+<!-- Sticky mobile buy bar: on a phone the add button otherwise scrolls away. -->
+<div class="pd-bar" id="pd-bar"></div>
 
 <footer class="st-sec st-ui" style="padding-top:clamp(48px,6vw,72px)">
   <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
@@ -103,6 +113,6 @@
 <script src="/lib/catalog.js?v=1"></script>
 <script src="/js/cart.js?v=6"></script>
 <script src="/js/das-pdp.js?v=1" defer></script>
-<script src="/js/das-store.js?v=1" defer></script>
+<script src="/js/das-store.js?v=2" defer></script>
 </body>
 </html>

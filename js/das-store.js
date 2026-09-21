@@ -249,6 +249,11 @@
         CAT.shots[g.src.split('/').pop().replace('.webp', '')] = g;
       });
     });
+      /* This script also runs on the PDP, where the shop grid does not exist.
+       Without this guard render() dereferences a null #st-grid, throws, and
+       takes paintBag() down with it — so the bag counter in the header would
+       silently read 0 on every product page. */
+    if (!gridEl) { paintBag(); return; }
     var q = new URLSearchParams(location.search).get('c');
     if (q && CAT.programs.some(function (g) { return g.slug === q; })) state.program = q;
     chips(); collections(); render(); paintBag();
