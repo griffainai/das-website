@@ -1148,6 +1148,10 @@
       // SMS opt-in proof (10DLC): whether the box was checked + the exact language shown.
       smsConsent: !!(smsBox && smsBox.checked),
       smsConsentText: 'By submitting this form and providing my mobile number, I agree that Driver Appreciation Solutions may text me in response to my inquiry — quotes, order and proof updates, and answers to my questions. Not marketing; messages are sent in reply to my request. Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help. Consent to texts is not a condition of purchase.',
+      // What the visitor was actually looking at. Without this a Request Pricing
+      // click arrives as a bare enquiry and the specialist has to ask what it was
+      // about — see the smart-capture block near the top of this script.
+      context: (window.__dasQuoteContext || null),
     };
 
     fetch('/api/contact', {
@@ -1208,5 +1212,107 @@
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="js/das-sprite.js?v=1" defer></script>
 <script src="/js/das-nav.js?v=2"></script>
+<!-- ════════════════════════════════════════════════════════════════════════
+     QUOTE SMART-CAPTURE
+     Jayden 2026-09-21 — the store's Request Pricing path sends buyers here
+     carrying what they were looking at:
+         contact.html?intent=pricing&product=<id>&name=<name>
+         contact.html?intent=pricing&shortlist=<id,id,id>&count=<n>
+     Until this block existed the form READ NONE OF IT (the one URLSearchParams
+     in this page builds a query on submit, it never parses one), so a Request
+     Pricing click arrived as a bare enquiry and the specialist had to ask what
+     it was about. That is the leak at the end of the funnel — 40 of 54 products
+     are gated, so this is the majority path, not an edge case.
+
+     Mirrors the pattern company-purchasing.html already uses.
+     ════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  var form = document.getElementById('contact-form');
+  if (!form) return;
+  var p = new URLSearchParams(window.location.search);
+  if (p.get('intent') !== 'pricing' && !p.get('product') && !p.get('shortlist')) return;
+
+  var ctx = {
+    intent: p.get('intent') || 'pricing',
+    productId: p.get('product') || '',
+    productName: p.get('name') || '',
+    shortlist: (p.get('shortlist') || '').split(',').filter(Boolean),
+    sourcePage: document.referrer || '',
+    cart: [], cartTotal: 0
+  };
+  try {
+    var c = JSON.parse(localStorage.getItem('das_cart_v1') || '[]');
+    if (Array.isArray(c) && c.length) {
+      ctx.cart = c.map(function (i) { return { id: i.id, name: i.name, qty: i.qty, price: i.price }; });
+      ctx.cartTotal = Math.round(c.reduce(function (s, i) { return s + (+i.price || 0) * (+i.qty || 0); }, 0) * 100) / 100;
+    }
+  } catch (e) {}
+
+  /* Resolve shortlist ids to names so the email is readable. The catalogue is
+     already a static JSON file, so this costs one cached request. */
+  function names(ids, done) {
+    if (!ids.length) return done([]);
+    fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (d) {
+      done(ids.map(function (id) {
+        var m = d.products.filter(function (x) { return x.id === id; })[0];
+        return m ? m.name : id;
+      }));
+    }).catch(function () { done(ids); });
+  }
+
+  function banner(lines) {
+    var el = document.createElement('div');
+    el.id = 'cr-context';
+    el.style.cssText = 'background:#F4F7FD;border-left:3px solid #1A2E6E;padding:14px 16px;margin:0 0 20px;font-size:.85rem;line-height:1.55;color:#16264F';
+    el.innerHTML = '<strong style="display:block;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#1A2E6E;margin-bottom:6px">Attached to your request</strong>' +
+      lines.map(function (l) { return '<div>' + l.replace(/[&<>]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }) + '</div>'; }).join('');
+    form.parentNode.insertBefore(el, form);
+  }
+
+  function prefill(text) {
+    var msg = form.querySelector('[name="message"]');
+    if (msg && !msg.value.trim()) msg.value = text;
+    /* The select is preselected ONLY from the product's real programme, never by
+       keyword. Guessing matched "Safety Recognition Program" for an appreciation
+       kit purely on the word "program" — and a mislabelled enquiry is worse for
+       the specialist than an unlabelled one, so no confident match leaves it alone. */
+    if (!ctx.programSlug) return;
+    var inq = form.querySelector('[name="inquiry_type"]');
+    if (!inq) return;
+    for (var i = 1; i < inq.options.length; i++) {
+      var o = inq.options[i];
+      if (o.disabled || !o.value) continue;
+      if (o.value === ctx.programSlug) { inq.selectedIndex = i; return; }
+    }
+  }
+
+  if (ctx.shortlist.length) {
+    names(ctx.shortlist, function (ns) {
+      ctx.shortlistNames = ns;
+      banner([ns.length + ' saved ' + (ns.length === 1 ? 'kit' : 'kits') + ':'].concat(ns.map(function (n) { return '• ' + n; })));
+      prefill('Please send pricing on the ' + ns.length + ' ' + (ns.length === 1 ? 'kit' : 'kits') + ' saved to my shortlist.');
+      window.__dasQuoteContext = ctx;
+    });
+  } else if (ctx.productName || ctx.productId) {
+    var label = ctx.productName || ctx.productId;
+    banner([label]);
+    /* Resolve the product so the programme select is set from what it ACTUALLY
+       is. The banner and the message do not wait on this — if the catalogue
+       request fails the visitor still sees their product attached. */
+    fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (d) {
+      var m = d.products.filter(function (x) { return x.id === ctx.productId; })[0];
+      if (m) { ctx.programSlug = m.program; ctx.programLabel = m.programLabel; }
+      prefill('Please send pricing on the ' + label + '.');
+      window.__dasQuoteContext = ctx;
+    }).catch(function () {
+      prefill('Please send pricing on the ' + label + '.');
+      window.__dasQuoteContext = ctx;
+    });
+  } else {
+    window.__dasQuoteContext = ctx;
+  }
+})();
+</script>
 </body>
 </html>
