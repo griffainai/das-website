@@ -181,9 +181,27 @@
 
   function addToBag() {
     if (!window.Cart || P.gated) return;
-    Cart.add({ id: P.id, name: P.name, price: P.price, image: P.shot.src, category: P.programLabel, minQty: P.minQty },
-      qty || P.minQty || 10);
+    var n = qty || P.minQty || 10;
+    Cart.add({ id: P.id, name: P.name, price: P.price, image: P.shot.src, category: P.programLabel, minQty: P.minQty }, n);
     if (window.showToast) showToast('Added to your bag', 'success');
+    track('addToCart', { sku: P.id, name: P.name, price: P.price, qty: n });
+  }
+
+  /* Analytics goes through the site's existing window.dasTrack (js/tracking.js),
+     which already fans out to GA4, Google Ads and the Meta pixel. A second
+     analytics layer would double-count every event. Guarded because
+     tracking.js is deferred and a click can land before it parses. */
+  function track(fn, payload) {
+    try { if (window.dasTrack && window.dasTrack[fn]) window.dasTrack[fn](payload); } catch (e) {}
+  }
+  /** Store-specific events GA4 picks up off the dataLayer. The quote path is the
+      primary conversion here — 40 of 54 products are gated — so it has to be
+      measurable separately from add-to-cart or the funnel reads as mostly failure. */
+  function push(event, data) {
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, data || {}));
+    } catch (e) {}
   }
 
   document.addEventListener('click', function (e) {
@@ -210,6 +228,17 @@
     }
     qty = P.minQty || 10;
     paint();
+    track('viewItem', { sku: P.id, name: P.name, price: P.gated ? 0 : P.price, category: P.programLabel });
+    push('view_product', { product_id: P.id, programme: P.program, gated: !!P.gated });
+
+    /* A click on Request Pricing is the conversion on 74% of this catalogue.
+       It is recorded as a lead so it lands beside real leads in GA4 and Ads
+       rather than disappearing as an outbound click. */
+    var req = document.querySelector('.st-req .st-cta');
+    if (req) req.addEventListener('click', function () {
+      track('lead', {});
+      push('request_pricing', { product_id: P.id, programme: P.program, source: 'pdp' });
+    });
   }).catch(function () {
     root.innerHTML = '<div style="padding:60px 24px"><p class="st-ui" style="color:var(--st-muted)">' +
       'The catalogue could not be loaded. <a href="shop.html" style="text-decoration:underline">Browse the full shop</a>.</p></div>';

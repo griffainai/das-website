@@ -259,6 +259,14 @@
       if (e.target.closest && e.target.closest('#sv-quote')) {
         var favs = window.Favorites ? Favorites.load() : [];
         var ids = favs.map(function (f) { return f.productId; }).join(',');
+        /* The shortlist quote is the primary conversion on this page, so it is
+           recorded as a lead through the site's existing dasTrack — the same
+           pipe real leads use — rather than being lost as a page navigation. */
+        try { if (window.dasTrack && window.dasTrack.lead) window.dasTrack.lead({}); } catch (er) {}
+        try {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({ event: 'request_pricing', source: 'shortlist', items: favs.length });
+        } catch (er) {}
         location.href = 'contact.html?intent=pricing&shortlist=' + encodeURIComponent(ids) +
           '&count=' + favs.length;
       }

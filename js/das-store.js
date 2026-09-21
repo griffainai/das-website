@@ -31,6 +31,19 @@
   };
   var money = function (n) { return '$' + Number(n).toFixed(2); };
 
+  /* Analytics rides the site's existing window.dasTrack (js/tracking.js), which
+     already fans out to GA4, Google Ads and the Meta pixel. A second layer would
+     double-count. Guarded: tracking.js is deferred and a click can beat it. */
+  function track(fn, payload) {
+    try { if (window.dasTrack && window.dasTrack[fn]) window.dasTrack[fn](payload); } catch (e) {}
+  }
+  function push(event, data) {
+    try {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(Object.assign({ event: event }, data || {}));
+    } catch (e) {}
+  }
+
   /* Quantities, not garment sizes. Same control, same place as the reference's
      size grid — a fleet buyer picks a unit count, never a Medium. The first
      option is always the product's real minimum. */
@@ -192,6 +205,9 @@
     if (chip) {
       e.preventDefault();
       state.program = chip.dataset.f || chip.dataset.jump;
+      /* Which occasion actually drives demand is the second-most useful number
+         on this store, so a tile click and a chip click are recorded separately. */
+      push(chip.dataset.jump ? 'collection_tile' : 'filter_programme', { programme: state.program });
       render();
       var h = document.getElementById('st-shop');
       if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -207,9 +223,11 @@
     if (add) {
       var p = CAT.products.filter(function (x) { return x.id === add.dataset.add; })[0];
       if (p && window.Cart) {
-        Cart.add({ id: p.id, name: p.name, price: p.price, image: p.shot.src, category: p.programLabel, minQty: p.minQty },
-          parseInt(add.dataset.qty, 10));
+        var n = parseInt(add.dataset.qty, 10);
+        Cart.add({ id: p.id, name: p.name, price: p.price, image: p.shot.src, category: p.programLabel, minQty: p.minQty }, n);
         add.closest('.st-card').setAttribute('data-open', 'false');
+        track('addToCart', { sku: p.id, name: p.name, price: p.price, qty: n });
+        push('quick_add', { product_id: p.id, programme: p.program, qty: n });
         paintBag(); openBag(true);
       }
       return;
