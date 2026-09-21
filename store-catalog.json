@@ -1,0 +1,1474 @@
+{
+ "built": "2026-09-21",
+ "frame": {
+  "w": 1400,
+  "h": 1120
+ },
+ "gate": 110,
+ "programs": [
+  {
+   "slug": "appreciation",
+   "label": "Driver Appreciation Kits",
+   "count": 13
+  },
+  {
+   "slug": "milepacks",
+   "label": "Safe Miles Programs",
+   "count": 7
+  },
+  {
+   "slug": "onboarding",
+   "label": "Onboarding Solutions",
+   "count": 5
+  },
+  {
+   "slug": "safety",
+   "label": "Safety Recognition",
+   "count": 20
+  },
+  {
+   "slug": "milestone",
+   "label": "Service Milestone Awards",
+   "count": 8
+  },
+  {
+   "slug": "holiday",
+   "label": "Holiday & Seasonal",
+   "count": 1
+  }
+ ],
+ "products": [
+  {
+   "id": "professional-driver-kit",
+   "slug": "professional-driver-kit",
+   "name": "The Professional Driver™ Kit",
+   "price": 299,
+   "program": "appreciation",
+   "img": "/images/pak-professional-driver-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "A practical appreciation kit focused on the everyday essentials professional drivers use on and off the road.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-professional-driver-kit-heroA.webp",
+    "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-professional-driver-kit-heroA.webp",
+     "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "command-center-kit",
+   "slug": "command-center-kit",
+   "name": "The Command Center™ Kit",
+   "price": 499,
+   "program": "appreciation",
+   "img": "/images/pak-command-center-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "Built for communication, productivity, and professionalism. The Command Center™ Kit supports drivers who spend their days coordinating deliveries, communicating with dispatch, and representing the company on the road.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-command-center-kit-heroA.webp",
+    "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-command-center-kit-heroA.webp",
+     "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "working-hands-kit",
+   "slug": "working-hands-kit",
+   "name": "The Working Hands™ Kit",
+   "price": 249,
+   "program": "appreciation",
+   "img": "/images/pak-working-hands-kit-heroC.webp",
+   "badge": "Premium Kit",
+   "blurb": "A recognition kit focused on the hardworking hands that keep freight moving.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-working-hands-kit-heroC.webp",
+    "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-working-hands-kit-heroC.webp",
+     "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "highway-guardian-kit",
+   "slug": "highway-guardian-kit",
+   "name": "The Highway Guardian™ Kit",
+   "price": 299,
+   "program": "appreciation",
+   "img": "/images/pak-highway-guardian-kit-heroC.webp",
+   "badge": "Premium Kit",
+   "blurb": "Designed for drivers who prioritize safety, awareness, and preparedness.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-highway-guardian-kit-heroC.webp",
+    "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-highway-guardian-kit-heroC.webp",
+     "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "dot-ready-kit",
+   "slug": "dot-ready-kit",
+   "name": "The DOT Ready™ Kit",
+   "price": 299,
+   "program": "appreciation",
+   "img": "/images/pak-dot-ready-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "Built for drivers who take pride in being prepared for every inspection and every mile.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-dot-ready-kit-heroA.webp",
+    "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-dot-ready-kit-heroA.webp",
+     "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "clear-vision-kit",
+   "slug": "clear-vision-kit",
+   "name": "The Clear Vision™ Kit",
+   "price": 249,
+   "program": "appreciation",
+   "img": "/images/pak-clear-vision-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "Designed for professional drivers who spend long hours behind the windshield. The Clear Vision™ Kit helps reduce glare, improve comfort, and keep attention focused on the road ahead.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-clear-vision-kit-heroA.webp",
+    "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-clear-vision-kit-heroA.webp",
+     "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "recharge-kit",
+   "slug": "recharge-kit",
+   "name": "The Recharge™ Kit",
+   "price": 299,
+   "program": "appreciation",
+   "img": "/images/pak-recharge-kit-hero.webp",
+   "badge": "Premium Kit",
+   "blurb": "A wellness-focused appreciation experience designed to help drivers recover, recharge, and reset.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-recharge-kit-hero.webp",
+    "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-recharge-kit-hero.webp",
+     "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "das-001",
+   "slug": "das-001",
+   "name": "Driver Appreciation Kit",
+   "price": 249,
+   "program": "appreciation",
+   "img": "/images/das-da-kit-1.webp",
+   "badge": "Appreciation Kits",
+   "blurb": "The signature kit. Curated recognition merchandise for Driver Appreciation Week — branded items, personalized card, and premium packaging.",
+   "tier": "Standard",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/das-da-kit-1.webp",
+    "srcset": "/images/store/das-da-kit-1@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/das-da-kit-1.webp",
+     "srcset": "/images/store/das-da-kit-1@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "das-006",
+   "slug": "das-006",
+   "name": "Professional Driver Essentials Kit™",
+   "price": 99,
+   "program": "appreciation",
+   "img": "/images/pde-kit-01.jpg",
+   "badge": "Driver Essentials",
+   "blurb": "A premium recognition, safety, and onboarding kit — tire pressure gauge, tire tread depth gauge, branded keychain, custom insert, and branded presentation packaging. Optional fleet branding.",
+   "tier": "Custom-branded",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pde-kit-01.webp",
+    "srcset": "/images/store/pde-kit-01@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pde-kit-01.webp",
+     "srcset": "/images/store/pde-kit-01@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": false
+  },
+  {
+   "id": "das-007",
+   "slug": "das-007",
+   "name": "Welcome Driver Appreciation Kit",
+   "price": 229,
+   "program": "appreciation",
+   "img": "/images/wk-driver-lifestyle.jpg",
+   "badge": "Welcome Kit",
+   "blurb": "Make new drivers feel valued from day one — a premium branded onboarding kit (mug, tee, bag, hat &amp; welcome pamphlet) customized with your logo, colors &amp; messaging via a DAS rep.",
+   "tier": "Custom-branded",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/wk-driver-lifestyle.webp",
+    "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/wk-driver-lifestyle.webp",
+     "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "das-008",
+   "slug": "das-008",
+   "name": "Driver Road Warrior Backpack™",
+   "price": 149,
+   "program": "appreciation",
+   "img": "/images/rwb-angle.webp",
+   "badge": "Premium Gift",
+   "blurb": "Built for the road, appreciated for years. A premium custom-logo backpack drivers use every day — the high-value Driver Appreciation Week, onboarding &amp; retention gift that keeps making an impression.",
+   "tier": "Custom-logo",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/rwb-angle.webp",
+    "srcset": "/images/store/rwb-angle@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/rwb-angle.webp",
+     "srcset": "/images/store/rwb-angle@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "das-010",
+   "slug": "das-010",
+   "name": "Professional Driver Road Warrior Duffel™",
+   "price": 159,
+   "program": "appreciation",
+   "img": "/images/road-warrior-duffel-hero-v2.webp",
+   "badge": "Premium Gift",
+   "blurb": "Built for the 34-hour reset and life on the road. A spacious, durable custom-logo duffel drivers use every week — a high-value Driver Appreciation Week, onboarding &amp; retention gift.",
+   "tier": "Custom-logo",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/road-warrior-duffel-hero-v2.webp",
+    "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/road-warrior-duffel-hero-v2.webp",
+     "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "das-009",
+   "slug": "das-009",
+   "name": "Professional Driver Self-Care Kit™",
+   "price": 149,
+   "program": "appreciation",
+   "img": "/images/travel-kit-hero-v2.jpg",
+   "badge": "Driver Wellness",
+   "blurb": "Your drivers take care of your freight — this kit helps them take care of themselves. A custom-logo wellness bag plus self-care essentials (Dr. Squatch soap, Dude Wipes, body towel, loofah, Q-Tips) that keep drivers refreshed mile after mile.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/travel-kit-hero-v2.webp",
+    "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/travel-kit-hero-v2.webp",
+     "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Driver Appreciation Kits",
+   "gated": true
+  },
+  {
+   "id": "ssm-lapel-pin",
+   "slug": "ssm-lapel-pin",
+   "name": "Safe Service Miles Lapel Pin",
+   "price": 14.99,
+   "program": "safety",
+   "img": "/images/milestone-kit-lapel-hat.jpg",
+   "badge": "Safe Recognition",
+   "blurb": "A professional recognition pin worn on uniforms, jackets, hats, and safety apparel — a daily, visible symbol of safety excellence.",
+   "tier": "",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/milestone-kit-lapel-hat.webp",
+    "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/milestone-kit-lapel-hat.webp",
+     "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Safety Recognition",
+   "gated": false
+  },
+  {
+   "id": "ssm-luggage-tag",
+   "slug": "ssm-luggage-tag",
+   "name": "Safe Service Miles Luggage Tag",
+   "price": 79.99,
+   "program": "safety",
+   "img": "/images/ssm-luggage-tag-card-v2.webp",
+   "badge": "Safe Recognition",
+   "blurb": "A premium driver ID tag for road bags and travel gear — durable, professional, and a daily reminder of verified safe-driving achievement.",
+   "tier": "",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/ssm-luggage-tag-card-v2.webp",
+    "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/ssm-luggage-tag-card-v2.webp",
+     "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Safety Recognition",
+   "gated": false
+  },
+  {
+   "id": "road-ready-kit",
+   "slug": "road-ready-kit",
+   "name": "The Road Ready™ Kit",
+   "price": 299,
+   "program": "onboarding",
+   "img": "/images/pak-road-ready-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "Designed for drivers who believe preparation is part of professionalism. The Road Ready™ Kit provides the essential tools drivers use to monitor equipment, improve safety, and stay prepared throughout the workday.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-road-ready-kit-heroA.webp",
+    "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-road-ready-kit-heroA.webp",
+     "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Onboarding Solutions",
+   "gated": true
+  },
+  {
+   "id": "safety-first-kit",
+   "slug": "safety-first-kit",
+   "name": "The Safety First™ Kit",
+   "price": 299,
+   "program": "onboarding",
+   "img": "/images/pak-safety-first-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "A visible reminder that safety is more than a policy — it is a commitment.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-safety-first-kit-heroA.webp",
+    "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-safety-first-kit-heroA.webp",
+     "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Onboarding Solutions",
+   "gated": true
+  },
+  {
+   "id": "pride-in-your-ride-kit",
+   "slug": "pride-in-your-ride-kit",
+   "name": "The Pride in Your Ride™ Kit",
+   "price": 249,
+   "program": "onboarding",
+   "img": "/images/pak-pride-in-your-ride-kit-heroB.webp",
+   "badge": "Premium Kit",
+   "blurb": "For drivers who take pride in maintaining a clean, organized, and professional workspace.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-pride-in-your-ride-kit-heroB.webp",
+    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-pride-in-your-ride-kit-heroB.webp",
+     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Onboarding Solutions",
+   "gated": true
+  },
+  {
+   "id": "long-haul-hydration-kit",
+   "slug": "long-haul-hydration-kit",
+   "name": "The Long Haul Hydration™ Kit",
+   "price": 199,
+   "program": "onboarding",
+   "img": "/images/pak-long-haul-hydration-kit-heroA.webp",
+   "badge": "Premium Kit",
+   "blurb": "Hydration and comfort for the professionals who spend their days on the road.",
+   "tier": "Custom-logo",
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/pak-long-haul-hydration-kit-heroA.webp",
+    "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-long-haul-hydration-kit-heroA.webp",
+     "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Onboarding Solutions",
+   "gated": true
+  },
+  {
+   "id": "das-003",
+   "slug": "das-003",
+   "name": "Premium Onboarding Pack",
+   "price": 59.99,
+   "program": "onboarding",
+   "img": "/images/pak-premium-onboarding-hero.webp",
+   "badge": "Onboarding",
+   "blurb": "Welcome new drivers the right way from day one. Sets cultural tone and makes the first impression that drives long-term retention.",
+   "tier": "Standard",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/pak-premium-onboarding-hero.webp",
+    "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/pak-premium-onboarding-hero.webp",
+     "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Onboarding Solutions",
+   "gated": false
+  },
+  {
+   "id": "das-011",
+   "slug": "das-011",
+   "name": "Professional Driver Seat Back Organizer™",
+   "price": 149,
+   "program": "holiday",
+   "img": "/images/seat-back-organizer-hero.webp",
+   "badge": "In-Cab Organization",
+   "blurb": "A custom-branded seat-back caddy that keeps logbooks, paperwork, electronics, and essentials within reach — a practical, daily-use gift drivers actually keep.",
+   "tier": "Custom-logo",
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/seat-back-organizer-hero.webp",
+    "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x"
+   },
+   "gallery": [
+    {
+     "src": "/images/store/seat-back-organizer-hero.webp",
+     "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x"
+    }
+   ],
+   "programLabel": "Holiday & Seasonal",
+   "gated": true
+  },
+  {
+   "id": "msm-c-250k",
+   "slug": "msm-c-250k",
+   "name": "250,000 Service Miles",
+   "price": 29.99,
+   "program": "milestone",
+   "img": "/images/milestone-c-250k.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/milestone-c-250k.webp",
+     "srcset": "/images/store/milestone-c-250k@2x.webp 2x"
+    }
+   ],
+   "badge": "Placeholder Award — Final Item Coming Soon",
+   "blurb": "An early-career recognition award honoring meaningful professional mileage achievement. Physical item coming soon.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/milestone-c-250k.webp",
+    "srcset": "/images/store/milestone-c-250k@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": false
+  },
+  {
+   "id": "msm-s-250k",
+   "slug": "msm-s-250k",
+   "name": "250,000 Safe Service Miles",
+   "price": 649,
+   "program": "safety",
+   "img": "/images/safe-250k-3item-v2.webp",
+   "gallery": [
+    {
+     "src": "/images/store/safe-250k-3item-v2.webp",
+     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-250k-combo.webp",
+     "srcset": "/images/store/safe-250k-combo@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-250k-patch.webp",
+     "srcset": "/images/store/safe-250k-patch@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-250k-hat.webp",
+     "srcset": "/images/store/safe-250k-hat@2x.webp 2x"
+    }
+   ],
+   "badge": "Recognition Kit Available",
+   "blurb": "The 250,000 Safe Service Miles Recognition Kit celebrates one of the most important milestones in a professional driver’s career. Reaching 250,000 consecutive safe miles without a ",
+   "included": [
+    "1 Custom 250,000 Safe Service Miles Recognition Award",
+    "10 Embroidered Uniform Patches (outfits up to 5 shirts)",
+    "2 Matching Lapel Pins",
+    "Professional recognition presentation"
+   ],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/safe-250k-3item-v2.webp",
+    "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-500k",
+   "slug": "msm-c-500k",
+   "name": "500,000 Service Miles",
+   "price": 39.99,
+   "program": "milestone",
+   "img": "/images/milestone-c-500k.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/milestone-c-500k.webp",
+     "srcset": "/images/store/milestone-c-500k@2x.webp 2x"
+    }
+   ],
+   "badge": "Placeholder Award — Final Item Coming Soon",
+   "blurb": "A major career milestone recognizing sustained service and professional dedication. Physical item coming soon.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/milestone-c-500k.webp",
+    "srcset": "/images/store/milestone-c-500k@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": false
+  },
+  {
+   "id": "msm-s-500k",
+   "slug": "msm-s-500k",
+   "name": "500,000 Safe Service Miles",
+   "price": 749,
+   "program": "safety",
+   "img": "/images/safe-500k-3item.webp",
+   "gallery": [
+    {
+     "src": "/images/store/safe-500k-3item.webp",
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-500k-combo.webp",
+     "srcset": "/images/store/safe-500k-combo@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-500k-hat.webp",
+     "srcset": "/images/store/safe-500k-hat@2x.webp 2x"
+    }
+   ],
+   "badge": "Recognition Kit Available",
+   "blurb": "Half a million miles. Zero preventable accidents. The 500,000 Safe Service Miles Recognition Kit honors professional drivers who have achieved a remarkable milestone — 500,000 cons",
+   "included": [
+    "1 Custom 500,000 Safe Service Miles Recognition Award",
+    "10 Embroidered Uniform Patches (outfits up to 5 shirts)",
+    "2 Matching Lapel Pins",
+    "Professional recognition presentation"
+   ],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/safe-500k-3item.webp",
+    "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-1m",
+   "slug": "msm-c-1m",
+   "name": "1 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/medal-c-1m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-c-1m-v1.webp",
+     "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 1 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-c-1m-v1.webp",
+    "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-1m",
+   "slug": "msm-s-1m",
+   "name": "1 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-1m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-1m-v1.webp",
+     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 1 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-1m-v1.webp",
+    "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-2m",
+   "slug": "msm-c-2m",
+   "name": "2 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/medal-c-2m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-c-2m-v1.webp",
+     "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 2 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-c-2m-v1.webp",
+    "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-2m",
+   "slug": "msm-s-2m",
+   "name": "2 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-2m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-2m-v1.webp",
+     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 2 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-2m-v1.webp",
+    "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-3m",
+   "slug": "msm-c-3m",
+   "name": "3 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/medal-c-3m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-c-3m-v1.webp",
+     "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 3 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-c-3m-v1.webp",
+    "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-3m",
+   "slug": "msm-s-3m",
+   "name": "3 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-3m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-3m-v1.webp",
+     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 3 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-3m-v1.webp",
+    "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-4m",
+   "slug": "msm-c-4m",
+   "name": "4 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/medal-c-4m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-c-4m-v1.webp",
+     "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 4 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-c-4m-v1.webp",
+    "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-4m",
+   "slug": "msm-s-4m",
+   "name": "4 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-4m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-4m-v1.webp",
+     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 4 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-4m-v1.webp",
+    "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-5m",
+   "slug": "msm-c-5m",
+   "name": "5 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/5-million-mile-medal.webp",
+   "gallery": [
+    {
+     "src": "/images/store/5-million-mile-medal.webp",
+     "srcset": "/images/store/5-million-mile-medal@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 5 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/5-million-mile-medal.webp",
+    "srcset": "/images/store/5-million-mile-medal@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-5m",
+   "slug": "msm-s-5m",
+   "name": "5 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-5m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-5m-v1.webp",
+     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 5 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-5m-v1.webp",
+    "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-c-6m",
+   "slug": "msm-c-6m",
+   "name": "6 Million Service Miles Medal",
+   "price": 249,
+   "program": "milestone",
+   "img": "/images/medal-c-6m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-c-6m-v1.webp",
+     "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium medal honoring the professional achievement of reaching 6 million career service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-c-6m-v1.webp",
+    "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x"
+   },
+   "programLabel": "Service Milestone Awards",
+   "gated": true
+  },
+  {
+   "id": "msm-s-6m",
+   "slug": "msm-s-6m",
+   "name": "6 Million Safe Service Miles Medal",
+   "price": 249,
+   "program": "safety",
+   "img": "/images/medal-s-6m-v1.webp",
+   "gallery": [
+    {
+     "src": "/images/store/medal-s-6m-v1.webp",
+     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Medal Available",
+   "blurb": "A premium safety-distinction medal honoring 6 million verified safe service miles.",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/medal-s-6m-v1.webp",
+    "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-250k-exec",
+   "slug": "msm-s-250k-exec",
+   "name": "250,000 Safe Service Miles — Executive Collection",
+   "price": 799,
+   "program": "safety",
+   "img": "/images/exec-bottle-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-bottle-card.webp",
+     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-250k-3item-v2.webp",
+     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "An elevated drinkware upgrade designed to give professional drivers a premium everyday recognition gift they can take on the road. You receive EVERYTHING in the 250,000 Safe Servic",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-bottle-card.webp",
+    "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-500k-exec-bottle",
+   "slug": "msm-s-500k-exec-bottle",
+   "name": "500,000 Safe Service Miles — Executive Collection · 32 oz Water Bottle",
+   "price": 899,
+   "program": "safety",
+   "img": "/images/exec-bottle-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-bottle-card.webp",
+     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-500k-3item.webp",
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "An elevated drinkware upgrade designed to give professional drivers a premium everyday recognition gift they can take on the road. The cost-neutral entry into the Executive Collect",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-bottle-card.webp",
+    "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-500k-exec-foodjar",
+   "slug": "msm-s-500k-exec-foodjar",
+   "name": "500,000 Safe Service Miles — Executive Collection · Insulated Food Jar",
+   "price": 0,
+   "program": "safety",
+   "img": "/images/exec-foodjar-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-foodjar-card.webp",
+     "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-500k-3item.webp",
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "A practical premium upgrade designed for professional drivers who need reliable meal storage on the road. The YETI Insulated Food Jar gives companies a useful executive recognition",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-foodjar-card.webp",
+    "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": false
+  },
+  {
+   "id": "msm-s-500k-exec-lunchbag",
+   "slug": "msm-s-500k-exec-lunchbag",
+   "name": "500,000 Safe Service Miles — Executive Collection · Lunch Bag",
+   "price": 899,
+   "program": "safety",
+   "img": "/images/exec-lunchbag-v3.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-lunchbag-v3.webp",
+     "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/safe-500k-3item.webp",
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "A premium recognition upgrade that combines everyday practicality with executive-level presentation. Built for professional drivers who appreciate quality gear both on and off duty",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-lunchbag-v3.webp",
+    "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-1m-exec",
+   "slug": "msm-s-1m-exec",
+   "name": "1 Million Safe Service Miles — Executive Collection",
+   "price": 929,
+   "program": "safety",
+   "img": "/images/exec-tote-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-tote-card.webp",
+     "srcset": "/images/store/exec-tote-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-1m-v1.webp",
+     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "A premium carryall upgrade designed for professional drivers who have reached the elite achievement of 1 Million Safe Miles. Practical, durable, and executive in presentation, this",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-tote-card.webp",
+    "srcset": "/images/store/exec-tote-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-2m-exec",
+   "slug": "msm-s-2m-exec",
+   "name": "2 Million Safe Service Miles — Executive Collection",
+   "price": 949,
+   "program": "safety",
+   "img": "/images/exec-cooler-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-cooler-card.webp",
+     "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-2m-v1.webp",
+     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "A premium cooler upgrade designed to honor professional drivers who achieve elite Safe Service Miles milestones with a practical, high-value gift built for life on the road. You re",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-cooler-card.webp",
+    "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-3m-exec",
+   "slug": "msm-s-3m-exec",
+   "name": "3 Million Safe Service Miles — Executive Collection",
+   "price": 999,
+   "program": "safety",
+   "img": "/images/exec-packleader-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-packleader-card.webp",
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/exec-packleader-2.webp",
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-3m-v1.webp",
+     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "Reserved for the transportation industry’s most accomplished professional drivers, The Pack Leader Executive Collection combines premium drinkware and executive travel gear into a ",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-packleader-card.webp",
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-4m-exec",
+   "slug": "msm-s-4m-exec",
+   "name": "4 Million Safe Service Miles — Executive Collection",
+   "price": 999,
+   "program": "safety",
+   "img": "/images/exec-packleader-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-packleader-card.webp",
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/exec-packleader-2.webp",
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-4m-v1.webp",
+     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "Reserved for the transportation industry’s most accomplished professional drivers, The Pack Leader Executive Collection combines premium drinkware and executive travel gear into a ",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-packleader-card.webp",
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-5m-exec",
+   "slug": "msm-s-5m-exec",
+   "name": "5 Million Safe Service Miles — Executive Collection",
+   "price": 999,
+   "program": "safety",
+   "img": "/images/exec-packleader-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-packleader-card.webp",
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/exec-packleader-2.webp",
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-5m-v1.webp",
+     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "Reserved for the transportation industry’s most accomplished professional drivers, The Pack Leader Executive Collection combines premium drinkware and executive travel gear into a ",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-packleader-card.webp",
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "msm-s-6m-exec",
+   "slug": "msm-s-6m-exec",
+   "name": "6 Million Safe Service Miles — Executive Collection",
+   "price": 999,
+   "program": "safety",
+   "img": "/images/exec-packleader-card.webp",
+   "gallery": [
+    {
+     "src": "/images/store/exec-packleader-card.webp",
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/exec-packleader-2.webp",
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/medal-s-6m-v1.webp",
+     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+    }
+   ],
+   "badge": "Executive Collection",
+   "blurb": "Reserved for the transportation industry’s most accomplished professional drivers, The Pack Leader Executive Collection combines premium drinkware and executive travel gear into a ",
+   "included": [],
+   "minQty": 1,
+   "shot": {
+    "src": "/images/store/exec-packleader-card.webp",
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+   },
+   "programLabel": "Safety Recognition",
+   "gated": true
+  },
+  {
+   "id": "mp-02",
+   "slug": "mp-02",
+   "name": "Hydration & Hustle Kit",
+   "price": 69.99,
+   "program": "milepacks",
+   "img": "/images/mp-02-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-02-1.webp",
+     "srcset": "/images/store/mp-02-1@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/mp-02-2.webp",
+     "srcset": "/images/store/mp-02-2@2x.webp 2x"
+    }
+   ],
+   "badge": "Premium",
+   "blurb": "Electrolyte hydration and performance replenishment for the long grind.",
+   "included": [
+    "Electrolyte hydration mixes",
+    "Coconut water",
+    "Performance replenishment items",
+    "Premium snacks",
+    "Branded recognition card"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-02-1.webp",
+    "srcset": "/images/store/mp-02-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-03",
+   "slug": "mp-03",
+   "name": "The Rookie Welcome Kit",
+   "price": 69.99,
+   "program": "milepacks",
+   "img": "/images/mp-03-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-03-1.webp",
+     "srcset": "/images/store/mp-03-1@2x.webp 2x"
+    }
+   ],
+   "badge": "Premium",
+   "blurb": "A premium first impression that sets the tone from day one.",
+   "included": [
+    "Welcome road-essentials set",
+    "Branded apparel item",
+    "On-the-road snacks",
+    "Personalized welcome card",
+    "Branded presentation packaging"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-03-1.webp",
+    "srcset": "/images/store/mp-03-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-04",
+   "slug": "mp-04",
+   "name": "The Cab Comfort Kit",
+   "price": 89.99,
+   "program": "milepacks",
+   "img": "/images/mp-04-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-04-1.webp",
+     "srcset": "/images/store/mp-04-1@2x.webp 2x"
+    },
+    {
+     "src": "/images/store/mp-04-2.webp",
+     "srcset": "/images/store/mp-04-2@2x.webp 2x"
+    }
+   ],
+   "badge": "Signature",
+   "blurb": "Personal care and comfort touches that elevate a long shift.",
+   "included": [
+    "Personal-care essentials",
+    "Comfort & relaxation items",
+    "Premium beverage selection",
+    "Cab-friendly accessories",
+    "Branded presentation packaging"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-04-1.webp",
+    "srcset": "/images/store/mp-04-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-05",
+   "slug": "mp-05",
+   "name": "The Long Haul Snack Pack",
+   "price": 49.99,
+   "program": "milepacks",
+   "img": "/images/mp-05-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-05-1.webp",
+     "srcset": "/images/store/mp-05-1@2x.webp 2x"
+    }
+   ],
+   "badge": "Essential",
+   "blurb": "A premium variety built for the overnight and cross-country runs.",
+   "included": [
+    "Premium snack variety",
+    "Sustained-energy bars",
+    "Savory & sweet selection",
+    "Trail mix",
+    "Branded recognition card"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-05-1.webp",
+    "srcset": "/images/store/mp-05-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-06",
+   "slug": "mp-06",
+   "name": "The Safety Star Pack",
+   "price": 89.99,
+   "program": "milepacks",
+   "img": "/images/mp-06-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-06-1.webp",
+     "srcset": "/images/store/mp-06-1@2x.webp 2x"
+    }
+   ],
+   "badge": "Signature",
+   "blurb": "A premium reward that puts weight behind your safety culture.",
+   "included": [
+    "Safety achievement award",
+    "Recognition pin",
+    "Premium branded item",
+    "Personalized safety-record certificate",
+    "Branded presentation packaging"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-06-1.webp",
+    "srcset": "/images/store/mp-06-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-07",
+   "slug": "mp-07",
+   "name": "Midnight Munch Pack",
+   "price": 69.99,
+   "program": "milepacks",
+   "img": "/images/mp-07-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-07-1.webp",
+     "srcset": "/images/store/mp-07-1@2x.webp 2x"
+    }
+   ],
+   "badge": "Premium",
+   "blurb": "Energy-forward, bold late-night fuel built for the night shift.",
+   "included": [
+    "Energy drinks & shots",
+    "Bold savory snacks",
+    "Protein & jerky",
+    "Late-night sweet selection",
+    "Branded recognition card"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-07-1.webp",
+    "srcset": "/images/store/mp-07-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  },
+  {
+   "id": "mp-08",
+   "slug": "mp-08",
+   "name": "Freightliner Breakroom Bundle",
+   "price": 49.99,
+   "program": "milepacks",
+   "img": "/images/mp-08-1.jpg",
+   "gallery": [
+    {
+     "src": "/images/store/mp-08-1.webp",
+     "srcset": "/images/store/mp-08-1@2x.webp 2x"
+    }
+   ],
+   "badge": "Essential",
+   "blurb": "A generously stocked community tray that feeds the whole crew.",
+   "included": [
+    "21-piece premium snack assortment",
+    "Shareable savory & sweet items",
+    "Variety packs",
+    "Breakroom-ready tray",
+    "Branded recognition card"
+   ],
+   "minQty": 10,
+   "shot": {
+    "src": "/images/store/mp-08-1.webp",
+    "srcset": "/images/store/mp-08-1@2x.webp 2x"
+   },
+   "programLabel": "Safe Miles Programs",
+   "gated": false
+  }
+ ]
+}

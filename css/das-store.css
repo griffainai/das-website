@@ -1,0 +1,297 @@
+/* ============================================================================
+   DAS STORE — the third instance of the `rp` store system
+   ----------------------------------------------------------------------------
+   Instance 1  shop.griffain.io       repo griffain-merch,  app/rp/*
+   Instance 2  Off Duty rewards shop  repo odndr-web,       app/store/rp/*
+   Instance 3  this                   das/web,              static HTML
+
+   The measured token sheet both existing stores run (represent-tokens.css —
+   computed styles read off a live DOM at 1280px) is carried across verbatim:
+   nav 46/63 · CTA 52 · buy column 472 · radius 0 · body 16/24 · UI 12/18 at
+   0.133333px tracking · micro 10/10 · chips 10/15 · header grid [1fr auto 1fr].
+
+   TWO DELIBERATE DIFFERENCES, both Jayden's 2026-09-21 brief:
+
+   1. THE FRAME IS 5:4 LANDSCAPE, NOT 4:5 PORTRAIT.
+      "i dont like the white border at all". The other two stores use a 0.806
+      portrait frame because they are shot as 4:5 apparel. DAS photography is
+      LANDSCAPE — measured across 51 files: 15x 1.25, 10x 1.5, 10x square,
+      8x 1.333, 2x 1.778 and only 4x 0.806. A portrait frame is what produced
+      the bars. Every photo is now normalised to 1400x1120 by
+      scripts/build-store-images.mjs and the frame fills with `cover`, so
+      nothing letterboxes anywhere.
+
+   2. NAVY. "add the navy colors in there thats on the signing page to keep our
+      aesthetic". The ground stays white — that is what makes it the same store
+      as the other two — and DAS navy carries every CTA, the hero slash, the
+      PDP rails and the footer. Family per BRAND-KIT.md:
+      #060E24 · #0C1840 · #16264F · #1A2E6E · #2E4FA8 · #3A5FC0 · #4E8BE8 · #9CC4F5
+      (the sign-in page's literal #0E1B2E is Off Duty's blue — it was pulled
+      from DAS once already this programme as off-brand. One token to change
+      here if that specific hex is wanted.)
+
+   TYPEFACE: the other two run STKBureau and both carry an open gate to license
+   it. This is a client's commercial storefront, so it runs DAS's own licensed
+   Chivo at the same sizes and the same 0.133333px tracking. Swap --st-font and
+   every metric holds.
+
+   ⚠ COLOUR LANDMINE: this codebase's vars are INVERTED (--black is #FFFFFF,
+   --gold is #1A2E6E navy). Nothing below uses them; every value is explicit.
+   ========================================================================== */
+
+:root{
+  --st-font:'Chivo','Helvetica Neue',Helvetica,Arial,sans-serif;
+  --st-serif:'Instrument Serif',Georgia,serif;
+
+  --st-ink:#000;
+  --st-muted:rgb(115,115,115);
+  --st-chip-off:rgb(156,163,175);
+  --st-sale:#ae0200;
+  --st-white:#fff;
+  --st-hair:rgba(0,0,0,.10);
+  --st-hair-soft:rgba(0,0,0,.07);
+  --st-ph:#F4F5F8;
+
+  /* DAS navy family — BRAND-KIT.md */
+  --st-navy-900:#060E24;
+  --st-navy-800:#0C1840;
+  --st-navy-700:#16264F;
+  --st-navy:#1A2E6E;
+  --st-navy-500:#2E4FA8;
+  --st-navy-400:#3A5FC0;
+  --st-navy-300:#4E8BE8;
+  --st-navy-200:#9CC4F5;
+
+  --st-body:16px;  --st-body-lh:24px;
+  --st-ui:12px;    --st-ui-lh:18px;  --st-ui-ls:0.133333px;
+  --st-micro:10px; --st-micro-lh:10px;
+  --st-chip:10px;  --st-chip-lh:15px;
+
+  --st-nav-h:46px;
+  --st-cta-h:52px;
+  --st-buycol:472px;
+  --st-radius:0px;
+  /* the frame — 5:4, the modal ratio of this catalogue */
+  --st-frame:1400 / 1120;
+}
+@media(max-width:1023px){ :root{ --st-nav-h:63px; } }
+
+/* ── reset, scoped so the rest of the site is untouched ─────────────────── */
+.st, .st *, .st *::before, .st *::after{ box-sizing:border-box; border-radius:var(--st-radius); }
+.st{
+  font-family:var(--st-font); color:var(--st-ink); background:var(--st-white);
+  font-size:var(--st-body); line-height:var(--st-body-lh);
+  -webkit-font-smoothing:antialiased;
+}
+.st img{ display:block; max-width:100%; }
+.st a{ color:inherit; text-decoration:none; }
+.st button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; }
+.st ul{ list-style:none; margin:0; padding:0; }
+.st h1,.st h2,.st h3,.st h4{ font-weight:500; margin:0; }
+.st p{ margin:0; }
+.st-ui{ font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
+.st-micro{ font-size:var(--st-micro); line-height:var(--st-micro-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
+
+/* ── HEADER ──────────────────────────────────────────────────────────────
+   Their 3-column grid. The centre mark is ours; the right rail carries DAS's
+   own actions (Saved / Bag) in place of the reference's country selector. */
+.st-hd{
+  position:sticky; top:0; z-index:40; width:100%; background:#fff;
+  border-bottom:1px solid var(--st-hair); white-space:nowrap;
+}
+.st-hd .bar{ display:grid; grid-template-columns:1fr auto 1fr; gap:4px; align-items:center; padding:0 24px; height:var(--st-nav-h); }
+.st-hd nav{ display:flex; align-items:center; height:100%; }
+.st-hd .item{ position:relative; display:flex; align-items:center; justify-content:center; height:100%; padding:12px; user-select:none; }
+/* their underline: 44 x 1, centred, transparent until hover */
+.st-hd .item::after{
+  content:""; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
+  height:1px; width:44px; background:transparent; transition:background-color .3s linear;
+}
+.st-hd .item:hover::after,.st-hd .item[aria-current]::after{ background:currentColor; }
+.st-hd .mark img{ height:22px; width:auto; }
+.st-hd .right{ display:flex; align-items:center; justify-content:flex-end; height:100%; }
+.st-hd .count{ font-size:var(--st-micro); line-height:var(--st-micro-lh); vertical-align:super; margin-left:3px; color:var(--st-navy); }
+@media(max-width:1023px){ .st-hd .hide{ display:none; } }
+
+/* ── CTA — 52px, square, navy ────────────────────────────────────────── */
+.st-cta{
+  display:inline-flex; align-items:center; justify-content:center;
+  height:var(--st-cta-h); padding:0 32px;
+  background:var(--st-navy); color:#fff;
+  font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
+  text-transform:uppercase; font-weight:500; transition:background-color .18s;
+}
+.st-cta:hover{ background:var(--st-navy-800); }
+.st-cta[disabled]{ opacity:.45; cursor:default; }
+.st-cta--ghost{ background:transparent; color:var(--st-navy); box-shadow:inset 0 0 0 1px var(--st-navy); }
+.st-cta--ghost:hover{ background:var(--st-navy); color:#fff; }
+.st-cta--light{ background:#fff; color:var(--st-navy); }
+.st-cta--light:hover{ background:var(--st-navy-200); color:var(--st-navy-900); }
+.st-cta--block{ width:100%; }
+
+/* ── HERO — the navy slash, DAS's own device ───────────────────────────── */
+.st-hero{ position:relative; overflow:hidden; background:var(--st-navy-900); color:#fff; }
+.st-hero .shot{ position:absolute; inset:0; }
+.st-hero .shot img{ width:100%; height:100%; object-fit:cover; opacity:.5; }
+.st-hero .slash{
+  position:absolute; inset:0;
+  clip-path:polygon(0 0,100% 0,100% 26%,0 74%);
+  background:linear-gradient(100deg,#060E24 0%,#0C1840 22%,#16264F 45%,#1A2E6E 62%,#2E4FA8 82%,#4E8BE8 100%);
+  opacity:.94;
+}
+.st-hero .guides{ position:absolute; inset:0; pointer-events:none; }
+.st-hero .guides span{ position:absolute; top:0; bottom:0; border-left:1px dashed rgba(255,255,255,.12); }
+.st-hero .in{ position:relative; z-index:2; padding:clamp(72px,11vw,132px) 24px clamp(40px,6vw,58px); }
+.st-hero .corner{ display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; color:rgba(255,255,255,.62); margin-bottom:24px; }
+.st-hero h1{
+  font-size:clamp(30px,6.4vw,76px); line-height:.94; letter-spacing:-.02em;
+  text-transform:uppercase; margin-bottom:16px; text-wrap:balance; max-width:18ch;
+}
+.st-hero h1 em{ font-style:normal; color:var(--st-navy-200); }
+.st-hero .stand{ font-size:14px; line-height:22px; color:rgba(255,255,255,.78); max-width:52ch; margin-bottom:24px; }
+.st-hero .ctas{ display:flex; gap:8px; flex-wrap:wrap; }
+
+/* ── COLLECTION TILES — label on the photograph ────────────────────────── */
+.st-coll{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--st-hair); }
+.st-coll a{ position:relative; display:block; aspect-ratio:var(--st-frame); overflow:hidden; background:var(--st-ph); }
+.st-coll img{ width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
+.st-coll a:hover img{ transform:scale(1.035); }
+.st-coll .lab{ position:absolute; left:0; right:0; bottom:0; padding:18px; color:#fff;
+  background:linear-gradient(180deg,transparent,rgba(6,14,36,.82)); }
+.st-coll .lab b{ display:block; font-size:clamp(14px,1.5vw,19px); line-height:1.1; text-transform:uppercase; font-weight:500; }
+.st-coll .lab span{ display:block; margin-top:4px; color:rgba(255,255,255,.7); }
+@media(max-width:820px){ .st-coll{ grid-template-columns:repeat(2,1fr); } }
+@media(max-width:520px){ .st-coll{ grid-template-columns:1fr; } }
+
+/* ── SECTION + FILTER ROW ───────────────────────────────────────────────── */
+.st-sec{ padding:clamp(36px,5vw,56px) 24px 0; }
+.st-sec .head{ display:flex; align-items:baseline; gap:10px; margin-bottom:16px; }
+.st-sec .head sup{ font-size:var(--st-micro); color:var(--st-muted); }
+.st-sec .head .r{ margin-left:auto; display:flex; gap:14px; color:var(--st-muted); }
+.st-sec .head .r button:hover,.st-sec .head .r button[aria-pressed="true"]{ color:var(--st-navy); }
+.st-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+.st-chips button{ box-shadow:inset 0 0 0 1px var(--st-hair); padding:9px 14px; transition:box-shadow .15s,background-color .15s; }
+.st-chips button:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
+.st-chips button[aria-pressed="true"]{ background:var(--st-navy); color:#fff; box-shadow:inset 0 0 0 1px var(--st-navy); }
+
+/* ── PRODUCT CARD ────────────────────────────────────────────────────────
+   The frame fills. No contain, no bars — see note 1 at the top of this file. */
+.st-grid{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--st-hair); }
+.st-grid[data-view="2"]{ grid-template-columns:repeat(2,1fr); }
+.st-grid[data-view="3"]{ grid-template-columns:repeat(3,1fr); }
+@media(max-width:1023px){ .st-grid,.st-grid[data-view="3"],.st-grid[data-view="4"]{ grid-template-columns:repeat(2,1fr); } }
+.st-card{ position:relative; padding:14px; border-right:1px solid var(--st-hair); border-bottom:1px solid var(--st-hair); }
+/* display:block is load-bearing — .frame is an <a>, and aspect-ratio does not
+   apply to an inline box, so the frame silently sized itself to the image and
+   came out square instead of 5:4. */
+.st-card .frame{ display:block; position:relative; aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; }
+.st-card .frame img{ width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
+.st-card:hover .frame img{ transform:scale(1.03); }
+.st-card .badge{ position:absolute; top:10px; left:10px; z-index:2; background:rgba(255,255,255,.94); color:var(--st-navy); padding:3px 8px; }
+.st-card .fav{
+  position:absolute; top:8px; right:8px; z-index:2; width:30px; height:30px;
+  display:grid; place-items:center; background:rgba(255,255,255,.94); color:var(--st-navy);
+  opacity:0; transition:opacity .18s;
+}
+.st-card:hover .fav,.st-card .fav.fav-active,.st-card .fav:focus-visible{ opacity:1; }
+.st-card .fav.fav-active svg{ fill:currentColor; }
+@media(hover:none){ .st-card .fav{ opacity:1; } }
+.st-card .plus{
+  position:absolute; right:8px; bottom:8px; z-index:2; width:34px; height:34px;
+  display:grid; place-items:center; background:#fff; box-shadow:inset 0 0 0 1px var(--st-hair); font-size:17px; line-height:1;
+}
+.st-card .plus:hover{ background:var(--st-navy); color:#fff; box-shadow:none; }
+/* The quantity grid the "+" reveals. INERT until opened — an always-on overlay
+   swallows the tap that should open the product, which is the bug the merch
+   build shipped once and had to fix after a click-through. */
+.st-card .qtys{
+  position:absolute; left:14px; right:14px; bottom:14px; z-index:3;
+  display:grid; grid-template-columns:repeat(4,1fr); gap:4px;
+  opacity:0; pointer-events:none; transition:opacity .2s ease;
+}
+.st-card[data-open="true"] .qtys{ opacity:1; pointer-events:auto; }
+.st-card .qtys button{ height:40px; background:#fff; box-shadow:inset 0 0 0 1px var(--st-hair);
+  font-size:var(--st-chip); line-height:var(--st-chip-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
+.st-card .qtys button:hover{ background:var(--st-navy); color:#fff; box-shadow:none; }
+.st-card .foot{ padding-top:12px; }
+.st-card .foot .t{ font-weight:500; white-space:normal; }
+.st-card .foot .c{ color:var(--st-muted); }
+.st-card .foot .p{ margin-top:2px; }
+.st-card .foot .p .gate{ color:var(--st-navy); }
+
+/* ── PDP — sticky gallery + 472px buy column ───────────────────────────── */
+.st-pdp{ display:grid; grid-template-columns:minmax(0,1fr) var(--st-buycol); align-items:start; }
+@media(max-width:1023px){ .st-pdp{ grid-template-columns:minmax(0,1fr); } }
+.st-pdp .gal{ position:sticky; top:var(--st-nav-h); }
+@media(max-width:1023px){ .st-pdp .gal{ position:static; } }
+.st-pdp .gal .main{ position:relative; aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; }
+.st-pdp .gal .main img{ width:100%; height:100%; object-fit:cover; }
+.st-pdp .gal .n{ position:absolute; right:14px; bottom:14px; background:rgba(255,255,255,.92); padding:4px 9px; }
+.st-pdp .gal .rail{ display:grid; grid-auto-flow:column; grid-auto-columns:96px; gap:6px; padding:6px; overflow-x:auto; }
+.st-pdp .gal .rail button{ aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; box-shadow:inset 0 0 0 1px transparent; }
+.st-pdp .gal .rail button img{ width:100%; height:100%; object-fit:cover; }
+.st-pdp .gal .rail button[aria-pressed="true"]{ box-shadow:inset 0 0 0 2px var(--st-navy); }
+.st-pdp .buy{ padding:clamp(24px,3vw,40px); border-left:1px solid var(--st-hair); min-height:100%; }
+@media(max-width:1023px){ .st-pdp .buy{ border-left:0; border-top:1px solid var(--st-hair); } }
+.st-pdp .buy .cat{ color:var(--st-muted); margin-bottom:8px; }
+.st-pdp .buy h1{ font-size:22px; line-height:28px; letter-spacing:-.01em; text-transform:uppercase; margin-bottom:8px; }
+.st-pdp .buy .price{ font-size:var(--st-ui); letter-spacing:var(--st-ui-ls); margin-bottom:20px; }
+.st-pdp .buy .lbl{ display:flex; align-items:baseline; justify-content:space-between; margin:22px 0 8px; }
+.st-pdp .buy .lbl a{ color:var(--st-muted); text-decoration:underline; text-underline-offset:3px; }
+/* 7-column quantity selector, their sizeSelector geometry */
+.st-pdp .qty{ display:grid; grid-template-columns:repeat(4,1fr); gap:4px; }
+.st-pdp .qty button{ height:44px; box-shadow:inset 0 0 0 1px var(--st-hair);
+  font-size:var(--st-chip); line-height:var(--st-chip-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
+.st-pdp .qty button:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
+.st-pdp .qty button[aria-pressed="true"]{ background:var(--st-navy); color:#fff; box-shadow:none; }
+.st-pdp .usp{ margin-top:22px; border-top:1px solid var(--st-hair-soft); }
+.st-pdp .usp div{ display:flex; gap:10px; align-items:center; padding:11px 0; border-bottom:1px solid var(--st-hair-soft); color:var(--st-muted); }
+.st-pdp .usp svg{ flex:none; color:var(--st-navy); }
+.st-pdp details{ border-bottom:1px solid var(--st-hair-soft); }
+.st-pdp summary{ display:flex; justify-content:space-between; align-items:center; padding:15px 0; cursor:pointer; list-style:none; }
+.st-pdp summary::-webkit-details-marker{ display:none; }
+.st-pdp summary::after{ content:"+"; font-size:15px; color:var(--st-muted); }
+.st-pdp details[open] summary::after{ content:"\2212"; }
+.st-pdp .bd{ padding-bottom:16px; font-size:13px; line-height:21px; color:var(--st-muted); text-transform:none; letter-spacing:0; }
+.st-pdp .bd ul{ padding-left:0; }
+.st-pdp .bd li{ position:relative; padding-left:16px; margin-bottom:5px; }
+.st-pdp .bd li::before{ content:""; position:absolute; left:0; top:9px; width:5px; height:1px; background:var(--st-navy); }
+
+/* ── REQUEST PRICING — the gated path ───────────────────────────────────
+   DAS gates anything over $110 (js/pricing-gate.js). On a gated product the
+   buy column shows this instead of a price and an Add button, so the page
+   never advertises a number the visitor is not cleared to see. */
+.st-req{ background:var(--st-navy-900); color:#fff; padding:20px; margin-bottom:20px; }
+.st-req b{ display:block; font-size:15px; line-height:21px; text-transform:none; letter-spacing:0; margin-bottom:6px; }
+.st-req p{ color:rgba(255,255,255,.72); font-size:13px; line-height:20px; text-transform:none; letter-spacing:0; margin-bottom:14px; }
+.st-req .st-cta{ background:#fff; color:var(--st-navy-900); }
+.st-req .st-cta:hover{ background:var(--st-navy-200); }
+
+/* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
+.st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
+.st-scrim[data-open="true"]{ opacity:1; pointer-events:auto; }
+.st-drawer{
+  position:fixed; top:0; right:0; bottom:0; width:min(440px,100%); background:#fff; z-index:61;
+  transform:translateX(100%); transition:transform .34s cubic-bezier(.2,.8,.2,1);
+  display:flex; flex-direction:column;
+}
+.st-drawer[data-open="true"]{ transform:none; }
+.st-drawer .dh{ display:flex; align-items:center; padding:0 20px; height:var(--st-nav-h); border-bottom:1px solid var(--st-hair); }
+.st-drawer .dh button{ margin-left:auto; font-size:18px; }
+.st-drawer .tier{ padding:14px 20px; border-bottom:1px solid var(--st-hair); }
+.st-drawer .tier p{ margin-bottom:8px; }
+.st-drawer .tier .track{ height:2px; background:var(--st-hair); }
+.st-drawer .tier .track i{ display:block; height:100%; background:var(--st-navy); transition:width .3s; }
+.st-drawer .lines{ flex:1; overflow-y:auto; padding:0 20px; }
+.st-drawer .line{ display:grid; grid-template-columns:110px minmax(0,1fr); gap:14px; padding:18px 0; border-bottom:1px solid var(--st-hair-soft); }
+.st-drawer .line .ph{ width:110px; height:138px; background:var(--st-ph); overflow:hidden; }
+.st-drawer .line .ph img{ width:100%; height:100%; object-fit:cover; }
+.st-drawer .line .c{ color:var(--st-muted); }
+.st-drawer .line .rm{ color:var(--st-muted); text-decoration:underline; text-underline-offset:3px; margin-top:6px; }
+.st-drawer .line .rm:hover{ color:var(--st-sale); }
+.st-drawer .sub{ padding:16px 20px; border-top:1px solid var(--st-hair); }
+.st-drawer .sub .row{ display:flex; justify-content:space-between; margin-bottom:4px; }
+.st-drawer .sub .note{ color:var(--st-muted); margin:6px 0 12px; }
+.st-drawer .empty{ padding:40px 20px; color:var(--st-muted); }
+
+@media(prefers-reduced-motion:reduce){ .st *{ transition:none!important; } }
