@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Your bag — Driver Appreciation Solutions</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="/css/das-store.css?v=2">
+<link rel="icon" type="image/png" href="/images/favicon-mark.png">
+</head>
+
+<body class="st">
+<a class="skip-link" href="#sc-page">Skip to your bag</a>
+
+<header class="st-hd st-ui">
+  <div class="bar">
+    <nav aria-label="Store">
+      <a class="item" href="store.html">Shop all</a>
+      <a class="item hide" href="store.html?c=appreciation">Kits</a>
+      <a class="item hide" href="store.html?c=safety">Safety</a>
+      <a class="item hide" href="store.html?c=milestone">Milestones</a>
+    </nav>
+    <a class="mark" href="index.html" aria-label="Driver Appreciation Solutions — home">
+      <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="148" height="36">
+    </a>
+    <div class="right">
+      <a class="item hide" href="contact.html">Contact</a>
+      <a class="item" href="store-saved.html">Saved<span class="count" data-wish-count>0</span></a>
+      <a class="item" href="store-cart.html" aria-current="page">Bag<span class="count" data-bag-count>0</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="sc-page" tabindex="-1">
+  <div class="sc-wrap">
+    <div>
+      <div class="sc-head st-ui"><h1 id="sc-title">Your bag</h1></div>
+      <div id="sc-lines"></div>
+      <div id="sc-also"></div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════════════
+         SUMMARY — the total is the only large figure, the freight bar sits
+         above it, and the reassurance sits directly under the button where
+         the hesitation actually happens.
+         ══════════════════════════════════════════════════════════════════ -->
+    <aside class="sc-sum st-ui" id="sc-summary">
+      <h2>Order summary</h2>
+      <div class="freight">
+        <p id="sc-freight">$1500.00 from free freight</p>
+        <div class="track"><i id="sc-bar" style="width:0%"></i></div>
+      </div>
+      <div class="row"><span>Units</span><span id="sc-units">0 units</span></div>
+      <div class="row"><span>Subtotal</span><span id="sc-sub">$0.00</span></div>
+      <div class="row"><span>Freight</span><span>At checkout</span></div>
+      <div class="row"><span>Tax</span><span>At checkout</span></div>
+      <div class="row total"><span>Total</span><strong id="sc-total">$0.00</strong></div>
+
+      <button class="st-cta st-cta--block" id="sc-checkout" style="margin-top:16px" onclick="goToCheckout()" disabled>Secure checkout</button>
+
+      <!-- 40 of 54 pieces are gated, so a card is not the only door out of
+           this page. The quote path sits beside checkout, never under it. -->
+      <a class="alt" href="contact.html?intent=pricing">Request a quote or pay by PO instead</a>
+
+      <div class="reassure">
+        <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg><span>Net-30 for approved carriers &middot; POs accepted</span></div>
+        <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg><span>Artwork proofed and approved before anything is produced</span></div>
+        <div><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20 6L9 17l-5-5"/></svg><span>30 days on unopened product &middot; customised pieces are final sale</span></div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer class="st-sec st-ui" style="padding-top:clamp(40px,5vw,64px)">
+  <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:28px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;color:rgba(0,0,0,.45)">
+    <span>&copy; 2026 Driver Appreciation Solutions</span>
+    <span><a href="tel:3026810995">302.681.0995</a></span>
+    <span>Minimum 10 units per product</span>
+  </div>
+</footer>
+
+<script src="/lib/catalog.js?v=1"></script>
+<script src="/js/cart.js?v=6"></script>
+<script src="/js/das-store-pages.js?v=1" defer></script>
+</body>
+</html>
