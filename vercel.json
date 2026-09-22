@@ -27,62 +27,62 @@
     },
     {
       "source": "/solution-appreciation",
-      "destination": "/shop?category=appreciation",
+      "destination": "/store?c=appreciation",
       "permanent": true
     },
     {
       "source": "/solution-appreciation.html",
-      "destination": "/shop?category=appreciation",
+      "destination": "/store?c=appreciation",
       "permanent": true
     },
     {
       "source": "/solution-safety",
-      "destination": "/shop?category=safety",
+      "destination": "/store?c=safety",
       "permanent": true
     },
     {
       "source": "/solution-safety.html",
-      "destination": "/shop?category=safety",
+      "destination": "/store?c=safety",
       "permanent": true
     },
     {
       "source": "/solution-onboarding",
-      "destination": "/shop?category=onboarding",
+      "destination": "/store?c=onboarding",
       "permanent": true
     },
     {
       "source": "/solution-onboarding.html",
-      "destination": "/shop?category=onboarding",
+      "destination": "/store?c=onboarding",
       "permanent": true
     },
     {
       "source": "/solution-milestone",
-      "destination": "/shop?category=milestone",
+      "destination": "/store?c=milestone",
       "permanent": true
     },
     {
       "source": "/solution-milestone.html",
-      "destination": "/shop?category=milestone",
+      "destination": "/store?c=milestone",
       "permanent": true
     },
     {
       "source": "/solution-holiday",
-      "destination": "/shop?category=holiday",
+      "destination": "/store?c=holiday",
       "permanent": true
     },
     {
       "source": "/solution-holiday.html",
-      "destination": "/shop?category=holiday",
+      "destination": "/store?c=holiday",
       "permanent": true
     },
     {
       "source": "/solution-enterprise",
-      "destination": "/shop?category=milepacks",
+      "destination": "/store?c=milepacks",
       "permanent": true
     },
     {
       "source": "/solution-enterprise.html",
-      "destination": "/shop?category=milepacks",
+      "destination": "/store?c=milepacks",
       "permanent": true
     },
     {
@@ -124,6 +124,16 @@
       "source": "/surveys.html",
       "destination": "https://retentionopportunity.com/assessment?from=das",
       "permanent": false
+    },
+    {
+      "source": "/shop",
+      "destination": "/store",
+      "permanent": true
+    },
+    {
+      "source": "/shop.html",
+      "destination": "/store",
+      "permanent": true
     }
   ],
   "rewrites": [

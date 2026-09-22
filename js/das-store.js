@@ -71,20 +71,38 @@
       ' data-product-category="' + esc(p.programLabel) + '"' +
       ' data-product-image="' + esc(p.shot.src) + '"' +
       ' data-product-min-qty="' + esc(p.minQty) + '">' +
-        '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '" aria-label="' + esc(p.name) + '">' +
-          (p.badge ? '<span class="badge st-micro">' + esc(p.badge) + '</span>' : '') +
-          '<img src="' + esc(p.shot.src) + '" srcset="' + esc(p.shot.srcset) + '" alt="' + esc(p.name) + '"' +
-            (i < 8 ? '' : ' loading="lazy"') + ' width="700" height="560">' +
-        '</a>' +
-        '<button class="fav' + (saved ? ' fav-active' : '') + '" data-save-to-fav aria-label="Save ' + esc(p.name) + ' for later">' + heart(saved) + '</button>' +
-        (p.gated ? '' : '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">+</button>') +
-        (p.gated ? '' :
-          '<div class="qtys">' + qtys(p).map(function (q) {
-            return '<button data-add="' + esc(p.id) + '" data-qty="' + q + '">' + q + '</button>';
-          }).join('') + '</div>') +
+        /* The photograph and everything that sits ON it. Their structure: a bare
+           relative block, no border and no padding — the card's only inset is on
+           the text beneath. */
+        '<div class="shot">' +
+          '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '" aria-label="' + esc(p.name) + '">' +
+            (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') +
+            '<img src="' + esc(p.shot.src) + '" srcset="' + esc(p.shot.srcset) + '" alt="' + esc(p.name) + '"' +
+              (i < 8 ? '' : ' loading="lazy"') + ' width="700" height="560">' +
+          '</a>' +
+          '<button class="fav' + (saved ? ' fav-active' : '') + '" data-save-to-fav aria-label="Save ' + esc(p.name) + ' for later">' + heart(saved) + '</button>' +
+          /* a bare 12x12 plus glyph, not a bordered box */
+          (p.gated ? '' :
+            '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
+            '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+            '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
+          /* the variant bar: full width across the bottom of the photograph */
+          (p.gated ? '' :
+            '<div class="qtys">' +
+              '<button class="close" type="button" aria-label="Close">' +
+              '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+              '<line x1="1" y1="1" x2="11" y2="11" stroke="currentColor"/><line x1="11" y1="1" x2="1" y2="11" stroke="currentColor"/></svg></button>' +
+              '<div class="row">' + qtys(p).map(function (q) {
+                return '<button class="q" data-add="' + esc(p.id) + '" data-qty="' + q + '" aria-label="Add ' + q + ' units">' + q + '</button>';
+              }).join('') + '</div>' +
+            '</div>') +
+        '</div>' +
+        /* stacked on mobile, title-left / price-right on desktop */
         '<div class="foot">' +
-          '<div class="t">' + esc(p.name) + '</div>' +
-          '<div class="c">' + esc(p.programLabel) + '</div>' +
+          '<div class="grp">' +
+            '<a class="t" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' + esc(p.name) + '</a>' +
+            '<span class="c">' + esc(p.programLabel) + '</span>' +
+          '</div>' +
           '<div class="p">' + (p.gated
             ? '<span class="gate">Request pricing</span>'
             : money(p.price)) + '</div>' +
@@ -219,6 +237,10 @@
       c.setAttribute('data-open', c.getAttribute('data-open') === 'true' ? 'false' : 'true');
       return;
     }
+    /* The variant bar covers the bottom of the photograph while open, so it
+       needs its own way out — on touch there is no hover to dismiss it. */
+    var close = e.target.closest && e.target.closest('.st-card .qtys .close');
+    if (close) { close.closest('.st-card').setAttribute('data-open', 'false'); return; }
     var add = e.target.closest && e.target.closest('[data-add]');
     if (add) {
       var p = CAT.products.filter(function (x) { return x.id === add.dataset.add; })[0];
@@ -272,7 +294,14 @@
        takes paintBag() down with it — so the bag counter in the header would
        silently read 0 on every product page. */
     if (!gridEl) { paintBag(); return; }
-    var q = new URLSearchParams(location.search).get('c');
+    /* `c` is this store's param. `category` is the OLD shop's, and it is still
+       carried by inbound links, the /solution-* redirects and anything anyone
+       has ever shared — /shop now 301s here, so those arrive with it. The old
+       slug aliases come across too, for the same reason they existed there. */
+    var sp = new URLSearchParams(location.search);
+    var ALIAS = { 'safe-miles-programs': 'milepacks', 'mile-packs': 'milepacks', 'safemiles': 'milepacks' };
+    var q = sp.get('c') || sp.get('category');
+    if (q && ALIAS[q]) q = ALIAS[q];
     if (q && CAT.programs.some(function (g) { return g.slug === q; })) state.program = q;
     chips(); collections(); render(); paintBag();
     document.querySelectorAll('[data-wish-count]').forEach(function (e) {

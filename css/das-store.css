@@ -113,20 +113,25 @@
 .st-hd .count{ font-size:var(--st-micro); line-height:var(--st-micro-lh); vertical-align:super; margin-left:3px; color:var(--st-navy); }
 @media(max-width:1023px){ .st-hd .hide{ display:none; } }
 
-/* ── CTA — 52px, square, navy ────────────────────────────────────────── */
-.st-cta{
+/* ── CTA — 52px, square, navy ──────────────────────────────────────────
+   Every rule here is prefixed .st DELIBERATELY. The reset .st a{color:inherit}
+   is specificity 0-1-1 (class + element) and beats a bare .st-cta--light at
+   0-1-0, so the CTAs were inheriting their parent colour instead of their own —
+   white text on a white button over the navy hero. It looked correct everywhere
+   else only because the inherited colour happened to be dark. */
+.st .st-cta{
   display:inline-flex; align-items:center; justify-content:center;
   height:var(--st-cta-h); padding:0 32px;
   background:var(--st-navy); color:#fff;
   font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
   text-transform:uppercase; font-weight:500; transition:background-color .18s;
 }
-.st-cta:hover{ background:var(--st-navy-800); }
-.st-cta[disabled]{ opacity:.45; cursor:default; }
-.st-cta--ghost{ background:transparent; color:var(--st-navy); box-shadow:inset 0 0 0 1px var(--st-navy); }
-.st-cta--ghost:hover{ background:var(--st-navy); color:#fff; }
-.st-cta--light{ background:#fff; color:var(--st-navy); }
-.st-cta--light:hover{ background:var(--st-navy-200); color:var(--st-navy-900); }
+.st .st-cta:hover{ background:var(--st-navy-800); }
+.st .st-cta[disabled]{ opacity:.45; cursor:default; }
+.st .st-cta--ghost{ background:transparent; color:var(--st-navy); box-shadow:inset 0 0 0 1px var(--st-navy); }
+.st .st-cta--ghost:hover{ background:var(--st-navy); color:#fff; }
+.st .st-cta--light{ background:#fff; color:var(--st-navy); }
+.st .st-cta--light:hover{ background:var(--st-navy-200); color:var(--st-navy-900); }
 .st-cta--block{ width:100%; }
 
 /* ── HERO — the navy slash, DAS's own device ───────────────────────────── */
@@ -175,48 +180,97 @@
 .st-chips button[aria-pressed="true"]{ background:var(--st-navy); color:#fff; box-shadow:inset 0 0 0 1px var(--st-navy); }
 
 /* ── PRODUCT CARD ────────────────────────────────────────────────────────
-   The frame fills. No contain, no bars — see note 1 at the top of this file. */
-.st-grid{ display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--st-hair); }
+   Rebuilt 2026-09-22 to match the merch store's card 1:1 (Jayden: "the preview
+   of the product not designed 1-1 ... needs to look like griffain.io on mobile").
+
+   What was wrong with the first pass, measured against
+   odndr-web/app/store/rp/ProductCard.tsx:
+
+     · MY CARD HAD A BORDER AND 14px OF PADDING. Theirs has neither — the card
+       is a bare flex column, the photograph runs full-bleed to its edges, and
+       only the text beneath carries a small side inset. The hairline grid I
+       drew is not in the reference at all.
+     · MY FOOTER STACKED EVERYTHING. Theirs is `flex-col` on mobile and
+       `lg:flex-row lg:justify-between` on desktop — title and category on the
+       left, price pushed to the right edge on one line.
+     · MY "+" WAS A BORDERED 34px BOX. Theirs is a bare 12x12 plus glyph with
+       p-10px, no border, no fill, sitting on the photograph.
+     · MY QUANTITY GRID WAS A 4-COLUMN BLOCK. Theirs is a full-width bar across
+       the bottom of the image on a translucent light ground, with the chips in
+       a horizontally scrolling row and a close control.
+
+   Kept from my version deliberately: the 5:4 frame and `cover`. Theirs is
+   0.806 portrait with `contain`, which works because their catalogue is shot
+   4:5 — ours is landscape, and contain in a portrait frame is exactly the
+   white border he asked to remove.
+   ────────────────────────────────────────────────────────────────────────── */
+.st-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0 2px; }
 .st-grid[data-view="2"]{ grid-template-columns:repeat(2,1fr); }
 .st-grid[data-view="3"]{ grid-template-columns:repeat(3,1fr); }
 @media(max-width:1023px){ .st-grid,.st-grid[data-view="3"],.st-grid[data-view="4"]{ grid-template-columns:repeat(2,1fr); } }
-.st-card{ position:relative; padding:14px; border-right:1px solid var(--st-hair); border-bottom:1px solid var(--st-hair); }
-/* display:block is load-bearing — .frame is an <a>, and aspect-ratio does not
-   apply to an inline box, so the frame silently sized itself to the image and
-   came out square instead of 5:4. */
+
+.st-card{ display:flex; flex-direction:column; width:100%; position:relative; margin-bottom:28px; }
+.st-card .shot{ position:relative; overflow:hidden; }
 .st-card .frame{ display:block; position:relative; aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; }
 .st-card .frame img{ width:100%; height:100%; object-fit:cover; transition:transform .5s cubic-bezier(.2,.8,.2,1); }
 .st-card:hover .frame img{ transform:scale(1.03); }
-.st-card .badge{ position:absolute; top:10px; left:10px; z-index:2; background:rgba(255,255,255,.94); color:var(--st-navy); padding:3px 8px; }
+
+/* their badge: 10px/16px, 15px in from the top-left of the photograph */
+.st-card .badge{
+  position:absolute; top:15px; left:15px; z-index:10;
+  font-size:10px; line-height:16px; letter-spacing:var(--st-ui-ls); text-transform:capitalize;
+  background:rgba(255,255,255,.94); color:var(--st-navy); padding:2px 8px;
+}
 .st-card .fav{
-  position:absolute; top:8px; right:8px; z-index:2; width:30px; height:30px;
-  display:grid; place-items:center; background:rgba(255,255,255,.94); color:var(--st-navy);
-  opacity:0; transition:opacity .18s;
+  position:absolute; top:10px; right:10px; z-index:12; width:30px; height:30px;
+  display:grid; place-items:center; color:var(--st-navy);
+  background:rgba(255,255,255,.9); opacity:0; transition:opacity .18s;
 }
 .st-card:hover .fav,.st-card .fav.fav-active,.st-card .fav:focus-visible{ opacity:1; }
 .st-card .fav.fav-active svg{ fill:currentColor; }
 @media(hover:none){ .st-card .fav{ opacity:1; } }
+
+/* their "+": a bare glyph on the photograph, bottom-right. No box, no border. */
 .st-card .plus{
-  position:absolute; right:8px; bottom:8px; z-index:2; width:34px; height:34px;
-  display:grid; place-items:center; background:#fff; box-shadow:inset 0 0 0 1px var(--st-hair); font-size:17px; line-height:1;
+  position:absolute; bottom:0; right:0; z-index:20;
+  padding:10px; color:var(--st-ink); line-height:0;
 }
-.st-card .plus:hover{ background:var(--st-navy); color:#fff; box-shadow:none; }
-/* The quantity grid the "+" reveals. INERT until opened — an always-on overlay
-   swallows the tap that should open the product, which is the bug the merch
-   build shipped once and had to fix after a click-through. */
+@media(min-width:1024px){ .st-card .plus{ padding:15px 13px; } }
+.st-card .plus:hover{ opacity:.7; }
+
+/* their variant bar: full width across the bottom of the image, translucent
+   light ground, chips in a horizontal scroller, close control on the right */
 .st-card .qtys{
-  position:absolute; left:14px; right:14px; bottom:14px; z-index:3;
-  display:grid; grid-template-columns:repeat(4,1fr); gap:4px;
-  opacity:0; pointer-events:none; transition:opacity .2s ease;
+  position:absolute; left:0; right:0; bottom:0; z-index:20;
+  display:flex; flex-direction:row-reverse; justify-content:center; align-items:center;
+  padding:12px; background:rgba(244,244,245,.9);
+  opacity:0; pointer-events:none; transition:opacity .3s ease;
 }
 .st-card[data-open="true"] .qtys{ opacity:1; pointer-events:auto; }
-.st-card .qtys button{ height:40px; background:#fff; box-shadow:inset 0 0 0 1px var(--st-hair);
-  font-size:var(--st-chip); line-height:var(--st-chip-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
-.st-card .qtys button:hover{ background:var(--st-navy); color:#fff; box-shadow:none; }
-.st-card .foot{ padding-top:12px; }
-.st-card .foot .t{ font-weight:500; white-space:normal; }
-.st-card .foot .c{ color:var(--st-muted); }
-.st-card .foot .p{ margin-top:2px; }
+.st-card .qtys .close{ padding:16px; margin-right:-12px; color:var(--st-muted); line-height:0; }
+.st-card .qtys .row{ display:flex; gap:2px; overflow-x:auto; padding:1px; scrollbar-width:none; }
+.st-card .qtys .row::-webkit-scrollbar{ display:none; }
+.st-card .qtys button.q{
+  flex:none; width:40px; height:40px; display:flex; align-items:center; justify-content:center;
+  outline:1px solid #CACACA; outline-offset:-1px; background:transparent;
+  font-size:10px; line-height:15px; color:var(--st-ink); user-select:none;
+}
+.st-card .qtys button.q:hover{ background:var(--st-ink); color:#fff; }
+
+/* their footer: stacked on mobile, title-left / price-right on desktop */
+.st-card .foot{
+  display:flex; flex-direction:column; gap:4px;
+  padding:16px 10px 0;
+  font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
+}
+@media(min-width:1024px){
+  .st-card .foot{ flex-direction:row; justify-content:space-between; gap:16px; padding:16px 14px 0; }
+}
+.st-card .foot .grp{ display:flex; flex-direction:column; gap:4px; min-width:0; }
+.st-card .foot .t{ font-weight:500; color:var(--st-ink); }
+.st-card .foot .t:hover{ text-decoration:underline; text-underline-offset:3px; }
+.st-card .foot .c{ color:var(--st-muted); font-weight:500; text-transform:capitalize; }
+.st-card .foot .p{ font-weight:400; text-transform:uppercase; white-space:nowrap; }
 .st-card .foot .p .gate{ color:var(--st-navy); }
 
 /* ── PDP — sticky gallery + 472px buy column ───────────────────────────── */
@@ -264,8 +318,8 @@
 .st-req{ background:var(--st-navy-900); color:#fff; padding:20px; margin-bottom:20px; }
 .st-req b{ display:block; font-size:15px; line-height:21px; text-transform:none; letter-spacing:0; margin-bottom:6px; }
 .st-req p{ color:rgba(255,255,255,.72); font-size:13px; line-height:20px; text-transform:none; letter-spacing:0; margin-bottom:14px; }
-.st-req .st-cta{ background:#fff; color:var(--st-navy-900); }
-.st-req .st-cta:hover{ background:var(--st-navy-200); }
+.st-req .st .st-cta{ background:#fff; color:var(--st-navy-900); }
+.st-req .st .st-cta:hover{ background:var(--st-navy-200); }
 
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
@@ -383,9 +437,9 @@
 .pd-buy .blurb{ font-size:14px; line-height:22px; color:var(--st-muted); text-transform:none; letter-spacing:0; margin:14px 0 22px; }
 
 /* programme chip — replaces the reference's fit chips */
-.pd-prog{ display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
+.st .pd-prog{ display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
   box-shadow:inset 0 0 0 1px var(--st-hair); padding:7px 12px; color:var(--st-navy); }
-.pd-prog:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
+.st .pd-prog:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
 
 .pd-lbl{ display:flex; align-items:baseline; justify-content:space-between; margin:20px 0 8px; }
 .pd-lbl a{ color:var(--st-muted); text-decoration:underline; text-underline-offset:3px; }
@@ -423,7 +477,7 @@
 .pd-bar .n{ flex:1; min-width:0; }
 .pd-bar .n b{ display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .pd-bar .n span{ color:var(--st-muted); }
-.pd-bar .st-cta{ flex:none; padding:0 20px; height:46px; }
+.pd-bar .st .st-cta{ flex:none; padding:0 20px; height:46px; }
 
 /* programme band under the fold */
 .pd-band{ background:var(--st-navy-900); color:#fff; padding:clamp(34px,5vw,60px) 24px; margin-top:0; }
@@ -432,3 +486,15 @@
 .pd-band .k{ color:var(--st-navy-200); margin-bottom:10px; }
 .pd-band h2{ font-size:clamp(20px,2.8vw,32px); line-height:1.06; text-transform:uppercase; margin-bottom:10px; }
 .pd-band p{ font-size:14px; line-height:22px; color:rgba(255,255,255,.72); max-width:58ch; text-transform:none; letter-spacing:0; }
+
+/* ── Skip link ───────────────────────────────────────────────────────────
+   The store pages do not load styles.css, which is where the site's
+   .skip-link lives — so the link rendered as visible body text at the top of
+   every store page. Off-screen until focused, which is the point of it. */
+.st .skip-link{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--st-navy); color:#fff; padding:12px 18px;
+  font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
+  text-transform:uppercase;
+}
+.st .skip-link:focus{ left:0; }
