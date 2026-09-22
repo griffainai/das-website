@@ -93,6 +93,27 @@ function runModule(file, globalName) {
  *  The Executive Collection is a premium upgrade ON safety, never on career. */
 const TRACK = { career: 'milestone', safe: 'safety', exec: 'safety' }
 
+/** The Executive Collection is a premium upgrade ON a Safe Service Miles medal —
+ *  never on a career one. Each exec entry names the safe medal it upgrades via
+ *  executive.baseId, and the old PDP cross-linked the two in both directions.
+ *  Carrying the relationship here lets the new PDP do the same without
+ *  re-deriving it. */
+function execLinks() {
+  const out = { upgradesFor: {}, baseOf: {} }
+  for (const m of runModule('js/milestones.js', 'DAS_MILESTONES')) {
+    if (m.track !== 'exec' || !m.executive || !m.executive.baseId) continue
+    const base = m.executive.baseId
+    out.baseOf[m.id] = base
+    ;(out.upgradesFor[base] = out.upgradesFor[base] || []).push({
+      id: m.id,
+      gift: m.executive.short || m.executive.gift || '',
+      upgrade: m.executive.upgrade || null,
+      comingSoon: !!m.executive.comingSoon || !!m.comingSoon,
+    })
+  }
+  return out
+}
+
 function fromMilestones() {
   return runModule('js/milestones.js', 'DAS_MILESTONES').map((m) => ({
     id: m.id,
@@ -165,10 +186,22 @@ const comingSoon = new Set(
     .map((m) => m.id)
 )
 
+const links = execLinks()
+const byId = Object.fromEntries(all.map((p) => [p.id, p]))
+
 all.forEach((p) => {
   if (MILESTONE_SELECT.has(p.id)) { p.milestoneSelect = true; p.kitConfig = true }
   if (SAFE_MILES.has(p.id)) p.safeMiles = true
   if (comingSoon.has(p.id)) p.comingSoon = true
+
+  /* A Safe Miles medal points UP at its Executive upgrades; an Executive piece
+     points BACK at the standard medal it upgrades. Only links to products that
+     actually made it into the store are kept — a cross-link to something with
+     no photography would be a dead end. */
+  const ups = (links.upgradesFor[p.id] || []).filter((u) => byId[u.id])
+  if (ups.length) p.execUpgrades = ups
+  const base = links.baseOf[p.id]
+  if (base && byId[base]) p.execBase = { id: base, name: byId[base].name }
 })
 
 const counts = {}

@@ -608,7 +608,15 @@
     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-250k-exec",
+     "gift": "32 oz Water Bottle",
+     "upgrade": 150,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-500k",
@@ -669,7 +677,27 @@
     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-500k-exec-bottle",
+     "gift": "32 oz Water Bottle",
+     "upgrade": 150,
+     "comingSoon": false
+    },
+    {
+     "id": "msm-s-500k-exec-foodjar",
+     "gift": "Insulated Food Jar",
+     "upgrade": null,
+     "comingSoon": true
+    },
+    {
+     "id": "msm-s-500k-exec-lunchbag",
+     "gift": "Lunch Bag",
+     "upgrade": 150,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-1m",
@@ -717,7 +745,15 @@
     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-1m-exec",
+     "gift": "Camino® 35 Tote",
+     "upgrade": 680,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-2m",
@@ -765,7 +801,15 @@
     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-2m-exec",
+     "gift": "Roadie® 15 Cooler",
+     "upgrade": 700,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-3m",
@@ -813,7 +857,15 @@
     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-3m-exec",
+     "gift": "Pack Leader Collection",
+     "upgrade": 750,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-4m",
@@ -861,7 +913,15 @@
     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-4m-exec",
+     "gift": "Pack Leader Collection",
+     "upgrade": 750,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-5m",
@@ -909,7 +969,15 @@
     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-5m-exec",
+     "gift": "Pack Leader Collection",
+     "upgrade": 750,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-c-6m",
@@ -957,7 +1025,15 @@
     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execUpgrades": [
+    {
+     "id": "msm-s-6m-exec",
+     "gift": "Pack Leader Collection",
+     "upgrade": 750,
+     "comingSoon": false
+    }
+   ]
   },
   {
    "id": "msm-s-250k-exec",
@@ -985,7 +1061,11 @@
     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-250k",
+    "name": "250,000 Safe Service Miles"
+   }
   },
   {
    "id": "msm-s-500k-exec-bottle",
@@ -1013,7 +1093,11 @@
     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-500k",
+    "name": "500,000 Safe Service Miles"
+   }
   },
   {
    "id": "msm-s-500k-exec-foodjar",
@@ -1042,7 +1126,11 @@
    },
    "programLabel": "Safety Recognition",
    "gated": false,
-   "comingSoon": true
+   "comingSoon": true,
+   "execBase": {
+    "id": "msm-s-500k",
+    "name": "500,000 Safe Service Miles"
+   }
   },
   {
    "id": "msm-s-500k-exec-lunchbag",
@@ -1070,7 +1158,11 @@
     "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-500k",
+    "name": "500,000 Safe Service Miles"
+   }
   },
   {
    "id": "msm-s-1m-exec",
@@ -1098,7 +1190,11 @@
     "srcset": "/images/store/exec-tote-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-1m",
+    "name": "1 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "msm-s-2m-exec",
@@ -1126,7 +1222,11 @@
     "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-2m",
+    "name": "2 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "msm-s-3m-exec",
@@ -1158,7 +1258,11 @@
     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-3m",
+    "name": "3 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "msm-s-4m-exec",
@@ -1190,7 +1294,11 @@
     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-4m",
+    "name": "4 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "msm-s-5m-exec",
@@ -1222,7 +1330,11 @@
     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-5m",
+    "name": "5 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "msm-s-6m-exec",
@@ -1254,7 +1366,11 @@
     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": true
+   "gated": true,
+   "execBase": {
+    "id": "msm-s-6m",
+    "name": "6 Million Safe Service Miles Medal"
+   }
   },
   {
    "id": "mp-02",

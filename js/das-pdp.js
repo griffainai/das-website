@@ -105,6 +105,25 @@
       'See the whole ' + esc(P.programLabel) + ' programme' +
       '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
 
+    /* ── The Executive Collection cross-link, both directions ──────────────
+       The last thing the old /product PDP did that this one did not. The
+       Executive Collection is a premium upgrade ON a Safe Service Miles medal
+       and NEVER on a career one — the catalogue builder only ever attaches
+       these to safe/exec pieces, so the Career/Safety separation holds. */
+    if (P.execUpgrades && P.execUpgrades.length) {
+      h += '<div class="pd-exec"><span class="k st-ui">Executive Collection available</span>' +
+        P.execUpgrades.map(function (u) {
+          return '<a class="row st-ui" href="store-product.html?id=' + encodeURIComponent(u.id) + '">' +
+            '<span>' + esc(u.gift || 'Executive upgrade') + '</span>' +
+            '<span class="up">' + (u.comingSoon ? 'Coming soon' : (u.upgrade ? '+$' + u.upgrade : 'View')) + '</span></a>';
+        }).join('') + '</div>';
+    }
+    if (P.execBase) {
+      h += '<a class="pd-prog st-ui" href="store-product.html?id=' + encodeURIComponent(P.execBase.id) + '">' +
+        'Standard award without the executive gift' +
+        '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
+    }
+
     /* The three questions asked before quantity, answered before the control. */
     h += '<div class="pd-logi st-ui">' +
       '<div><b>' + (P.minQty || 10) + ' units</b><span>Minimum order</span></div>' +

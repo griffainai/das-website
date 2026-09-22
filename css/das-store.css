@@ -527,3 +527,16 @@
   text-transform:uppercase; color:var(--st-ink); background:rgba(255,255,255,.92);
 }
 .st-card .choose:hover{ background:var(--st-navy); color:#fff; }
+
+/* ── Executive Collection cross-link ─────────────────────────────────────
+   A premium upgrade ON a Safe Service Miles medal, never on a career one.
+   Brass-free on purpose: the upgrade is an upsell, not an earned metal. */
+.pd-exec{ margin:18px 0; box-shadow:inset 0 0 0 1px var(--st-hair); }
+.pd-exec .k{ display:block; padding:11px 14px 9px; color:var(--st-muted); }
+.pd-exec .row{
+  display:flex; align-items:baseline; justify-content:space-between; gap:12px;
+  padding:11px 14px; border-top:1px solid var(--st-hair-soft); color:var(--st-ink);
+}
+.pd-exec .row:hover{ background:var(--st-navy); color:#fff; }
+.pd-exec .row .up{ flex:none; color:var(--st-navy); font-weight:500; }
+.pd-exec .row:hover .up{ color:#fff; }
