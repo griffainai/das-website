@@ -36,7 +36,7 @@
   var FREE_FREIGHT = 1500;
 
   var CAT = null;
-  var catalogReady = fetch('/store-catalog.json')
+  var catalogReady = fetch('/store-catalog.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
     .then(function (d) { CAT = d; })
     .catch(function () { CAT = { products: [] }; });

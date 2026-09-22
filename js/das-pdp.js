@@ -41,6 +41,32 @@
   var id = new URLSearchParams(location.search).get('id');
   var P = null, CAT = null, qty = null;
 
+  /* ── MILESTONE + KIT CONFIG, ported from product.html ────────────────────
+     These keys are a SERVER CONTRACT, not display strings.
+     api/create-checkout.js validates item.milestone against MS_LABELS and
+     returns 400 "Please select a milestone level" when it is missing or
+     unknown, then bakes the label into the Stripe line-item name so the level
+     reaches the order record, the confirmation email and fulfilment. Change a
+     key here and orders start failing at checkout.
+
+     Kit config is flat-priced — it never moves the price, it rides along to
+     fulfilment. 'standard' is the default and is deliberately NOT sent
+     (create-checkout ignores it), so only a real upgrade appears on the line. */
+  var MS_MILES = [
+    { key: '250k', n: '250,000' }, { key: '500k', n: '500,000' }, { key: '1m', n: '1 Million' },
+    { key: '2m', n: '2 Million' }, { key: '3m', n: '3 Million' }, { key: '4m', n: '4 Million' },
+    { key: '5m', n: '5 Million' }, { key: '6m', n: '6 Million' }
+  ];
+  var KIT_CONFIG = [
+    { key: 'standard',         label: 'Standard kit — medal, 2 lapel pins, t-shirt, keychain & road bag tag' },
+    { key: 'custom-tag',       label: 'Customized driver luggage tag (name & milestone engraved)' },
+    { key: 'tag-medal-insert', label: 'Luggage tag with engraved medal insert' },
+    { key: 'one-pin',          label: 'Single premium lapel pin' },
+    { key: 'two-pins',         label: 'Two premium lapel pins (matched set)' }
+  ];
+  /** product.html defaults the level to 1M rather than the first option. */
+  var msChoice = '1m', kitChoice = 'standard';
+
   function qtys(p) {
     var min = p.minQty || 10;
     var out = [min];
@@ -67,7 +93,10 @@
     h += '<div class="eyebrow st-ui">' + esc(P.programLabel) + '</div>';
     h += '<h1>' + esc(P.name) + '</h1>';
 
-    if (!P.gated) {
+    /* No price on a gated piece, and none on a comingSoon one either — that one
+       is under the gate at $108.99 so it would otherwise print a figure for
+       something the server will not sell. */
+    if (!P.gated && !P.comingSoon) {
       h += '<div class="price st-ui">' + money(P.price) + ' <small>per unit</small></div>';
     }
     if (P.blurb) h += '<p class="blurb">' + esc(P.blurb) + '</p>';
@@ -90,7 +119,35 @@
         '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
           '&amp;name=' + encodeURIComponent(P.name) + '">Request pricing</a>' +
         '</div>';
+    } else if (P.comingSoon) {
+      /* Deliberately absent from lib/catalog.js, so Catalog.resolve() returns
+         "unknown" and the server refuses it. Presenting it as buyable would
+         send the buyer to a checkout that rejects them. */
+      h += '<div class="st-req">' +
+        '<b>Pricing coming soon</b>' +
+        '<p>This option is not released for purchase yet. Tell us the fleet size and the occasion and the team will confirm pricing and availability.</p>' +
+        '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
+          '&amp;name=' + encodeURIComponent(P.name) + '">Notify me / request pricing</a>' +
+        '</div>';
     } else {
+      /* Milestone level comes BEFORE quantity — it is the variant decision, and
+         the server will not accept the line without it. */
+      if (P.milestoneSelect) {
+        var unit = P.safeMiles ? ' Safe Miles' : ' Miles';
+        h += '<div class="pd-lbl st-ui"><span>Milestone level</span></div>' +
+          '<select class="pd-select" id="pd-milestone" aria-label="Milestone level">' +
+          MS_MILES.map(function (m) {
+            return '<option value="' + m.key + '"' + (m.key === msChoice ? ' selected' : '') + '>' +
+              m.n + unit + '</option>';
+          }).join('') + '</select>';
+        h += '<div class="pd-lbl st-ui"><span>Build your kit</span></div>' +
+          '<select class="pd-select" id="pd-kitconfig" aria-label="Kit configuration">' +
+          KIT_CONFIG.map(function (k) {
+            return '<option value="' + k.key + '"' + (k.key === kitChoice ? ' selected' : '') + '>' +
+              esc(k.label) + '</option>';
+          }).join('') + '</select>';
+        h += '<p class="pd-note">Images are representative. The award is customised to the milestone level you choose, at no extra cost.</p>';
+      }
       h += '<div class="pd-lbl st-ui"><span>Quantity</span><a href="contact.html?intent=pricing">Need a different volume?</a></div>';
       h += '<div class="pd-qty st-ui">' + qtys(P).map(function (q) {
         return '<button data-qty="' + q + '" aria-pressed="' + (q === qty) + '">' + q +
@@ -157,9 +214,12 @@
   function bar() {
     var el = document.getElementById('pd-bar');
     if (!el) return;
+    var quoteOnly = P.gated || P.comingSoon;
     el.innerHTML = '<span class="n st-ui"><b>' + esc(P.name) + '</b>' +
-      '<span>' + (P.gated ? 'Priced to your fleet' : money(P.price) + ' per unit') + '</span></span>' +
-      (P.gated
+      '<span>' + (P.comingSoon ? 'Pricing coming soon'
+        : P.gated ? 'Priced to your fleet'
+        : money(P.price) + ' per unit') + '</span></span>' +
+      (quoteOnly
         ? '<a class="st-cta" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) + '">Request pricing</a>'
         : '<button class="st-cta" id="pd-add-bar">Add to bag</button>');
   }
@@ -180,11 +240,34 @@
   }
 
   function addToBag() {
-    if (!window.Cart || P.gated) return;
+    if (!window.Cart || P.gated || P.comingSoon) return;
     var n = qty || P.minQty || 10;
-    Cart.add({ id: P.id, name: P.name, price: P.price, image: P.shot.src, category: P.programLabel, minQty: P.minQty }, n);
+    var item = { id: P.id, name: P.name, price: P.price, image: P.shot.src, category: P.programLabel, minQty: P.minQty };
+
+    if (P.milestoneSelect) {
+      /* The server rejects the whole order without this, so refuse locally
+         rather than let the buyer reach a 400 at checkout. */
+      var sel = document.getElementById('pd-milestone');
+      var key = sel ? sel.value : msChoice;
+      var m = MS_MILES.filter(function (x) { return x.key === key; })[0];
+      if (!m) { if (window.showToast) showToast('Choose a milestone level first', 'info'); return; }
+      item.milestone = m.key;
+      item.milestoneLabel = m.n + (P.safeMiles ? ' Safe Miles' : ' Miles');
+
+      /* 'standard' is the default build and is NOT sent — create-checkout
+         ignores it, and an unchanged default on the line is noise. */
+      var kc = document.getElementById('pd-kitconfig');
+      var ck = kc ? kc.value : kitChoice;
+      if (ck && ck !== 'standard') {
+        var k = KIT_CONFIG.filter(function (x) { return x.key === ck; })[0];
+        if (k) { item.kitConfig = k.key; item.kitConfigLabel = k.label; }
+      }
+    }
+
+    Cart.add(item, n);
     if (window.showToast) showToast('Added to your bag', 'success');
     track('addToCart', { sku: P.id, name: P.name, price: P.price, qty: n });
+    push('add_to_cart_detail', { product_id: P.id, milestone: item.milestone || null, kit_config: item.kitConfig || null });
   }
 
   /* Analytics goes through the site's existing window.dasTrack (js/tracking.js),
@@ -218,7 +301,16 @@
     if (e.target.closest && (e.target.closest('#pd-add') || e.target.closest('#pd-add-bar'))) addToBag();
   });
 
-  fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (data) {
+  /* Hold the chosen level and build in module state — paint() re-renders the
+     whole buy column (a zoom or a quantity change does it), and a selection
+     that lived only in the DOM would silently reset to 1M/standard. */
+  document.addEventListener('change', function (e) {
+    if (!e.target.id) return;
+    if (e.target.id === 'pd-milestone') msChoice = e.target.value;
+    if (e.target.id === 'pd-kitconfig') kitChoice = e.target.value;
+  });
+
+  fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
     CAT = data;
     P = data.products.filter(function (p) { return p.id === id || p.slug === id; })[0];
     if (!P) {

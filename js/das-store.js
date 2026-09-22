@@ -82,12 +82,20 @@
           '</a>' +
           '<button class="fav' + (saved ? ' fav-active' : '') + '" data-save-to-fav aria-label="Save ' + esc(p.name) + ' for later">' + heart(saved) + '</button>' +
           /* a bare 12x12 plus glyph, not a bordered box */
-          (p.gated ? '' :
-            '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
-            '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
-            '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
+          /* A milestone kit cannot be quick-added: api/create-checkout.js rejects
+             400 "Please select a milestone level"
+           when the line has no level, so a "+" here would put a buyer into a
+           bag that fails at checkout. Those route to the product page instead.
+           comingSoon pieces are not purchasable at all (Catalog.resolve returns
+           "unknown" and the server refuses them). */
+        (p.gated || p.comingSoon ? '' :
+          p.milestoneSelect
+            ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
+            : '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
+              '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+              '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
           /* the variant bar: full width across the bottom of the photograph */
-          (p.gated ? '' :
+          (p.gated || p.comingSoon || p.milestoneSelect ? '' :
             '<div class="qtys">' +
               '<button class="close" type="button" aria-label="Close">' +
               '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
@@ -103,9 +111,11 @@
             '<a class="t" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' + esc(p.name) + '</a>' +
             '<span class="c">' + esc(p.programLabel) + '</span>' +
           '</div>' +
-          '<div class="p">' + (p.gated
-            ? '<span class="gate">Request pricing</span>'
-            : money(p.price)) + '</div>' +
+          '<div class="p">' + (p.comingSoon
+            ? '<span class="gate">Pricing coming soon</span>'
+            : p.gated
+              ? '<span class="gate">Request pricing</span>'
+              : money(p.price)) + '</div>' +
         '</div>' +
       '</article>';
   }
@@ -278,7 +288,7 @@
   });
 
   /* ── boot ───────────────────────────────────────────────────────────────── */
-  fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (data) {
+  fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
     CAT = data;
     /* a lookup of every shot by file key, so a collection hero can be chosen by name */
     CAT.shots = {};

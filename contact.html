@@ -1253,7 +1253,7 @@
      already a static JSON file, so this costs one cached request. */
   function names(ids, done) {
     if (!ids.length) return done([]);
-    fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (d) {
+    fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
       done(ids.map(function (id) {
         var m = d.products.filter(function (x) { return x.id === id; })[0];
         return m ? m.name : id;
@@ -1300,7 +1300,7 @@
     /* Resolve the product so the programme select is set from what it ACTUALLY
        is. The banner and the message do not wait on this — if the catalogue
        request fails the visitor still sees their product attached. */
-    fetch('/store-catalog.json').then(function (r) { return r.json(); }).then(function (d) {
+    fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
       var m = d.products.filter(function (x) { return x.id === ctx.productId; })[0];
       if (m) { ctx.programSlug = m.program; ctx.programLabel = m.programLabel; }
       prefill('Please send pricing on the ' + label + '.');

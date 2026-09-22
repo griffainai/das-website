@@ -141,6 +141,36 @@ const all = [...fromShop(), ...fromMilestones(), ...fromMilePacks()]
 const GATE = 110
 all.forEach((p) => { p.gated = p.price > GATE })
 
+/* ── Flags the checkout ACTUALLY enforces ───────────────────────────────────
+   api/create-checkout.js rejects a milestoneSelect product outright when
+   item.milestone is missing or not in MS_LABELS:
+       400 "Please select a milestone level for <name>."
+   So a product carrying this flag cannot be added to a bag without a level, and
+   the store has to know which ones they are. ssm-luggage-tag is one of them, it
+   is UNGATED at $79.99, and the first store shipped it as a plain add — every
+   such order would have failed at checkout.
+
+   comingSoon products are deliberately absent from lib/catalog.js so
+   Catalog.resolve() returns "unknown" and the server refuses them. The store
+   must not present them as buyable either. */
+const catalogSrc = readFileSync(join(ROOT, 'lib/catalog.js'), 'utf8')
+const flagged = (flag) =>
+  new Set([...catalogSrc.matchAll(new RegExp(`'([^']+)':\\s*\\{[^}]*${flag}:\\s*true`, 'g'))].map((m) => m[1]))
+const MILESTONE_SELECT = flagged('milestoneSelect')
+const SAFE_MILES = flagged('safeMiles')
+
+const comingSoon = new Set(
+  runModule('js/milestones.js', 'DAS_MILESTONES')
+    .filter((m) => m.comingSoon || (m.executive && m.executive.comingSoon))
+    .map((m) => m.id)
+)
+
+all.forEach((p) => {
+  if (MILESTONE_SELECT.has(p.id)) { p.milestoneSelect = true; p.kitConfig = true }
+  if (SAFE_MILES.has(p.id)) p.safeMiles = true
+  if (comingSoon.has(p.id)) p.comingSoon = true
+})
+
 const counts = {}
 all.forEach((p) => { counts[p.program] = (counts[p.program] || 0) + 1 })
 

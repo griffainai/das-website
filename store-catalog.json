@@ -1,5 +1,5 @@
 {
- "built": "2026-09-21",
+ "built": "2026-09-22",
  "frame": {
   "w": 1400,
   "h": 1120
@@ -396,7 +396,10 @@
     }
    ],
    "programLabel": "Safety Recognition",
-   "gated": false
+   "gated": false,
+   "milestoneSelect": true,
+   "kitConfig": true,
+   "safeMiles": true
   },
   {
    "id": "road-ready-kit",
@@ -1038,7 +1041,8 @@
     "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
    },
    "programLabel": "Safety Recognition",
-   "gated": false
+   "gated": false,
+   "comingSoon": true
   },
   {
    "id": "msm-s-500k-exec-lunchbag",
