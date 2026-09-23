@@ -24,9 +24,14 @@
 const DEFS = require('../js/survey-defs.js');
 const { brandShell, esc, NAVY, BRASS, MUTED, HAIR, INK, UI_FONT, HEAD_FONT } = require('../lib/email-brand');
 
-/* Same four addresses the company-purchasing pathway routes to. */
+/* Same four addresses the company-purchasing pathway routes to — keep the two
+   lists identical. 2026-09-23: ssshafeek@driverappreciationsolutions.com does
+   not exist (porkbun forwarding, no rule for the alias, "554 Relay access
+   denied" on record twice) and was swapped for the address Shaq named himself,
+   ssshafeek@offdutynotdrivingrewards.com. Reasoning in full at the RECIPIENTS
+   constant in api/contact.js. */
 const DEFAULT_TO =
-  'ssshafeek@driverappreciationsolutions.com,info@driverappreciationsolutions.com,shaqisvictory@gmail.com,afaust@offdutynotdrivingrewards.com';
+  'ssshafeek@offdutynotdrivingrewards.com,info@driverappreciationsolutions.com,shaqisvictory@gmail.com,afaust@offdutynotdrivingrewards.com';
 
 /* A missing env var must not lock the rep out mid-meeting. The consequence of a
    leaked code is that someone fills in a discovery questionnaire — reliability

@@ -254,9 +254,27 @@ async function handleCompanyPurchasing(req, res) {
     return res.status(400).json({ error: 'Please enter a valid work email address.' });
   }
 
-  // Lead recipients for company-purchasing requests (per spec). Overridable via env.
+  /* Lead recipients for company-purchasing requests. Overridable via env.
+     COMPANY_PURCHASING_TO is NOT set in production, so this default is what
+     actually runs — it is the live routing table, not a placeholder.
+
+     2026-09-23: ssshafeek@driverappreciationsolutions.com was removed. That
+     mailbox does not exist. driverappreciationsolutions.com's MX is
+     fwd1/fwd2.porkbun.com — forwarding, not mailboxes — and with no forward
+     rule for that alias the relay refuses outright:
+         554 5.7.1 <ssshafeek@driverappreciationsolutions.com>: Relay access denied
+     Two separate bounces on record (2026-08-22, 2026-09-21), each naming that
+     address and no other. Replaced with the address Shaq actually reads, which
+     he named himself on 2026-09-22: "two emails:
+     ssshafeek@offdutynotdrivingrewards.com, shaqisvictory@gmail.com". That
+     domain's MX is mx.stackmail.com — real mailboxes — and 19 threads have
+     delivered to it without a bounce.
+
+     The other three are left alone: shaqisvictory@ is proven to deliver, and
+     info@ / afaust@ have never appeared in a bounce. Note info@ sits on the
+     same forwarding domain, so it is unproven rather than known-good. */
   const RECIPIENTS = (process.env.COMPANY_PURCHASING_TO ||
-    'ssshafeek@driverappreciationsolutions.com,info@driverappreciationsolutions.com,shaqisvictory@gmail.com,afaust@offdutynotdrivingrewards.com')
+    'ssshafeek@offdutynotdrivingrewards.com,info@driverappreciationsolutions.com,shaqisvictory@gmail.com,afaust@offdutynotdrivingrewards.com')
     .split(',').map(s => s.trim()).filter(Boolean);
   const RESEND_API_KEY = process.env.RESEND_API_KEY;
   const FROM_ADDRESS   = process.env.FROM_EMAIL || 'noreply@driverappreciationsolutions.com';
