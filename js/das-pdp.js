@@ -75,33 +75,90 @@
   }
 
   /* ── the stacked gallery ─────────────────────────────────────────────── */
-  /* THE GALLERY USES THE UNCROPPED DERIVATIVE, NOT THE GRID ONE.
-     The card grid needs every frame identical or the cards do not line up, so
-     it cover-crops to 5:4. A product page shows ONE product and owes nothing to
-     a grid — cropping it there just throws the product away. Four kit shots are
-     1122x1402 portrait and were losing 36% of the kit to that crop, which is
-     what Jayden was looking at when he said the photo "isnt sized properly".
+  /* THE GALLERY IS A 1:1 PORT OF shop.griffain.io's PDP SWIPER.
+     Jayden 2026-09-23: "why is there so much white space can we just do a
+     identical copy of what the griffain io and match how their sizing and pdp
+     looks exactly".
 
-     So each figure carries the photograph's OWN pixel dimensions on the <img>.
-     That gives the browser the real intrinsic ratio, which with height:auto in
-     CSS reserves the correct box before load (no layout shift) and lets
-     max-height cap it against the viewport — the replaced-element sizing
-     algorithm recomputes width to keep the ratio, so a tall shot gets narrower
-     instead of taller. No crop, no letterbox bars, fits one screen. */
+     The white space was mine. Trying to avoid a crop, I sized the figure by
+     height against the fold, which made a portrait shot 731px wide inside a
+     1397px column — two 333px gutters of nothing. He is right that that is
+     worse than the problem it solved.
+
+     MEASURED off the live reference at 1900x1000
+     (shop.griffain.io/p/employees-hoodie?c=cement):
+         gallery column   950px  == exactly 50% of the viewport
+         gallery frame    950 x 1188, object-fit: cover, ground #f7f7f7
+         image width      calc(100% + 1px)   (their rule, kills the seam)
+         buy column       472px, sticky, min-height 100dvh, mx-auto in its half
+         counter chip     12px at .54 opacity, white ground, 27px in, 28px up
+         dots             3px tall; active 16px black, rest 6px at 30%
+     Horizontal snap scroller, one photograph per slide, arrows at 20px.
+
+     THE ONE DEVIATION, AND WHY. Their frame is 4:5 PORTRAIT because Represent
+     shoots 4:5 apparel. DAS does not: of 54 primary shots, 50 are landscape or
+     square and only 4 are portrait. Cover-fitting a 1.5 landscape kit photo
+     into a 4:5 frame crops 47% of its WIDTH — half the kit gone on nearly
+     every product. So the structure is copied exactly and the frame ratio is
+     DAS's own modal 1.25, which is also what the card grid uses, so the store
+     stays internally consistent. One token, --st-pdp-frame, if he wants literal
+     4:5 anyway. Either way the photograph FILLS the frame: zero white space. */
   function gallery() {
     var g = (P.gallery && P.gallery.length) ? P.gallery : [P.shot];
-    return g.map(function (s, i) {
-      var v = s.pdp || s;                        // pdp is absent only if images were never rebuilt
-      var w = v.w || 1400, h = v.h || 1120;
-      // --rnum is what lets the CSS cap the figure's HEIGHT against the fold and
-      // derive the width from it, instead of the other way round.
-      return '<figure data-zoom="false" data-i="' + i + '" style="--rnum:' + (w / h).toFixed(4) + '">' +
+    var slides = g.map(function (s, i) {
+      var v = s.pdp || s;                        // uncropped variant; falls back if images predate it
+      return '<figure class="pd-slide" data-i="' + i + '">' +
         '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" alt="' + esc(P.name) +
-          (i ? ' — view ' + (i + 1) : '') + '" width="' + w + '" height="' + h + '"' +
+          (i ? ' — view ' + (i + 1) : '') + '" width="' + (v.w || 1400) + '" height="' + (v.h || 1120) + '"' +
           (i ? ' loading="lazy"' : ' fetchpriority="high"') + '>' +
-        '<figcaption>' + (i + 1) + ' / ' + g.length + '</figcaption>' +
       '</figure>';
     }).join('');
+
+    var dots = g.map(function (_, k) {
+      return '<button type="button" class="pd-dot' + (k ? '' : ' on') + '" data-go="' + k + '" aria-label="Photo ' + (k + 1) + '"></button>';
+    }).join('');
+
+    /* Arrows and the counter only earn their place when there is more than one
+       photograph. Most of this catalogue has exactly one, and a dead arrow on a
+       single-photo product is furniture. */
+    var multi = g.length > 1;
+    return '<div class="pd-track" id="pd-track">' + slides + '</div>' +
+      (multi
+        ? '<button type="button" class="pd-arw pd-prev" data-step="-1" aria-label="Previous slide">' +
+            '<svg width="7" height="13" viewBox="0 0 7 13" fill="none"><path d="M6 1 1 6.5 6 12" stroke="currentColor"/></svg></button>' +
+          '<button type="button" class="pd-arw pd-next" data-step="1" aria-label="Next slide">' +
+            '<svg width="7" height="13" viewBox="0 0 7 13" fill="none"><path d="m1 1 5 5.5L1 12" stroke="currentColor"/></svg></button>'
+        : '') +
+      '<div class="pd-gbar">' +
+        (multi
+          ? '<div class="pd-count st-ui"><span id="pd-cur">1</span>/<span>' + g.length + '</span></div>' +
+            '<div class="pd-dots">' + dots + '</div>'
+          : '') +
+        '<button type="button" class="pd-zoom" aria-label="Open product gallery">' +
+          '<svg width="32" height="32" viewBox="0 0 32 32" fill="none">' +
+          '<path d="M6 12V6h6M26 12V6h-6M6 20v6h6M26 20v6h-6" stroke="currentColor"/></svg></button>' +
+      '</div>';
+  }
+
+  /* Keep the counter and dots honest about where the scroller actually is.
+     Driving them off the scroll position rather than off the click means a
+     finger swipe updates them too — the reference behaves the same way, and a
+     counter that only moves when you use the arrows is a lie on a phone. */
+  function wireGallery() {
+    var tr = document.getElementById('pd-track');
+    if (!tr || tr.children.length < 2) return;
+    var cur = document.getElementById('pd-cur');
+    var dots = document.querySelectorAll('.pd-dot');
+    var tick;
+    tr.addEventListener('scroll', function () {
+      if (tick) return;                                  // one update per frame, not per scroll event
+      tick = requestAnimationFrame(function () {
+        tick = 0;
+        var i = Math.round(tr.scrollLeft / (tr.clientWidth || 1));
+        if (cur) cur.textContent = String(i + 1);
+        for (var k = 0; k < dots.length; k++) dots[k].classList.toggle('on', k === i);
+      });
+    }, { passive: true });
   }
 
   /* ── the buy column ──────────────────────────────────────────────────── */
@@ -262,6 +319,7 @@
 
   function paint() {
     document.getElementById('pd-gal').innerHTML = gallery();
+    wireGallery();
     document.getElementById('pd-buy').innerHTML = buy();
     var b = document.getElementById('pd-band'); if (b) b.innerHTML = band();
     var also = document.getElementById('pd-also'); if (also) also.innerHTML = alsoIn();
@@ -324,8 +382,29 @@
   }
 
   document.addEventListener('click', function (e) {
-    var fig = e.target.closest && e.target.closest('.pd-gal figure');
-    if (fig) { fig.setAttribute('data-zoom', fig.getAttribute('data-zoom') === 'true' ? 'false' : 'true'); return; }
+    /* Gallery controls, matching the reference's swiper: arrows step, dots jump,
+       the zoom control toggles a full-bleed scale on the current slide. The
+       track is a native scroll-snap scroller, so navigation is just scrollTo —
+       no slide index to keep in sync with a transform, and a swipe on a phone
+       and a click on the arrow end up in exactly the same place. */
+    var arw = e.target.closest && e.target.closest('.pd-arw');
+    var dot = e.target.closest && e.target.closest('[data-go]');
+    if (arw || dot) {
+      var tr = document.getElementById('pd-track');
+      if (!tr) return;
+      var per = tr.clientWidth || 1;
+      var at = Math.round(tr.scrollLeft / per);
+      var n = dot ? parseInt(dot.dataset.go, 10) : at + parseInt(arw.dataset.step, 10);
+      var last = tr.children.length - 1;
+      if (n < 0) n = last; else if (n > last) n = 0;      // wrap, as theirs does
+      tr.scrollTo({ left: n * per, behavior: 'smooth' });
+      return;
+    }
+    if (e.target.closest && e.target.closest('.pd-zoom')) {
+      var gw = document.getElementById('pd-gal');
+      if (gw) gw.setAttribute('data-zoom', gw.getAttribute('data-zoom') === 'true' ? 'false' : 'true');
+      return;
+    }
     var q = e.target.closest && e.target.closest('[data-qty]');
     if (q) {
       qty = parseInt(q.dataset.qty, 10);

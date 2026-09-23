@@ -82,6 +82,13 @@
   font-family:var(--st-font); color:var(--st-ink); background:var(--st-white);
   font-size:var(--st-body); line-height:var(--st-body-lh);
   -webkit-font-smoothing:antialiased;
+  /* The store pages do not load styles.css, so the UA's default body margin:8px
+     was never reset — measured 2026-09-23 while matching the PDP to the
+     reference: every store page sat 8px in from the viewport and 16px narrower
+     than it should be, which is also why the 472px buy column would not centre
+     in its half (224px one side, 254px the other). Full-bleed is the whole
+     point of this layout. */
+  margin:0;
 }
 .st img{ display:block; max-width:100%; }
 .st a{ color:inherit; text-decoration:none; }
@@ -417,60 +424,100 @@
    that scrolls past a buy box pinned beside it. On a catalogue where a kit has
    four or five shots, that difference is most of the page.
    ════════════════════════════════════════════════════════════════════════ */
-.st-pdp2{ display:grid; grid-template-columns:minmax(0,1fr) var(--st-buycol); align-items:start; }
+/* TWO EQUAL HALVES, measured off the reference: at a 1900px viewport its
+   gallery column is 950px — exactly 50% — and the 472px buy column sits
+   CENTRED in the other half (239px of margin either side), not flush against
+   the gallery. My first pass gave the gallery `1fr` and pinned the buy column
+   hard right, which is why the two never matched. */
+.st-pdp2{ display:grid; grid-template-columns:1fr 1fr; align-items:start; }
 @media(max-width:1023px){ .st-pdp2{ grid-template-columns:minmax(0,1fr); } }
 
 /* the stacked gallery */
-/* GALLERY SIZING — the photo keeps its own ratio and fits one screen.
-   Jayden 2026-09-23: "on desktop this pdp photo is way to big and isnt sized
-   properly where it fits on one page."
+/* ── THE GALLERY — 1:1 PORT OF shop.griffain.io's PDP ────────────────────
+   Jayden 2026-09-23: "why is there so much white space can we just do a
+   identical copy of what the griffain io".
 
-   The first pass forced every gallery figure into the grid's 5:4 frame with
-   object-fit:cover. Two faults: on a wide desktop the figure grew with the
-   column and ran past the fold, and any portrait shot lost a third of the
-   product to the crop.
+   The white space was mine. Avoiding a crop, I sized the figure by height
+   against the fold, so a portrait shot sat 731px wide in a 1397px column with
+   two 333px gutters of nothing. He is right that that is worse than the
+   problem it solved. The reference never has gutters because its image FILLS
+   the frame with object-fit:cover.
 
-   The fix that did NOT work, recorded so it is not tried again: img{width:100%;
-   height:auto; max-height:CAP}. The replaced-element min/max algorithm only
-   recomputes the opposite dimension when that dimension is auto — with a
-   SPECIFIED width:100% it clamps the height and leaves the width alone, which
-   renders the photograph squashed (measured 1.528 against a natural 0.800).
-   Distortion is worse than the crop it was meant to replace.
+   MEASURED off the live page at 1900x1000, and reproduced below verbatim:
+       gallery column  950px  == exactly 50% of the viewport
+       frame           950 x 1188, cover, ground #f7f7f7
+       image width     calc(100% + 1px)  <- their rule; kills the snap seam
+       buy column      472px, sticky, min-height 100dvh, centred in its half
+       counter         12px at .54 opacity on white, 27px in, 28px up
+       dots            3px tall, active 16px solid, rest 6px at 30%
+       arrows          20px in, white at 80%, round, soft shadow
 
-   What works: size the FIGURE by height, and let the image fill it.
-   Each figure carries its photograph's ratio as a unitless --rnum (set inline by
-   gallery() in das-pdp.js), so its width can be expressed as
-       min(100%, cap * ratio)
-   which is the width at which the height is exactly the cap. Height then falls
-   out of aspect-ratio, so the box is always the photograph's own shape: never
-   cropped, never letterboxed, never distorted, and never taller than the fold.
-   The figure carries no background for the same reason — nothing shows through,
-   so nothing reads as the white border he asked to be rid of. */
-.pd-gal{ display:grid; gap:2px; }
-.pd-gal figure{
-  margin:0; position:relative; overflow:hidden;
-  aspect-ratio:var(--rnum,1.25); width:100%; margin-inline:auto;
+   THE ONE DEVIATION: --st-pdp-frame. Theirs is 4:5 PORTRAIT because Represent
+   shoots 4:5 apparel. Of DAS's 54 primary shots, 50 are landscape or square
+   and 4 are portrait — cover-fitting a 1.5 landscape kit photo into 4:5 crops
+   47% of its WIDTH. So the frame is DAS's own modal 1.25, matching the card
+   grid. Change this one token to 4/5 for a literal copy; either value fills
+   the frame completely, which is the part that was actually wrong. */
+:root{ --st-pdp-frame:1.25; }
+
+.st-pdp2 .pd-gal{
+  position:relative; background:#f7f7f7;
+  aspect-ratio:var(--st-pdp-frame); overflow:hidden;
 }
-.pd-gal img{ display:block; width:100%; height:100%;
+.pd-track{
+  display:flex; height:100%; overflow-x:auto; overflow-y:hidden;
+  scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none;
+}
+.pd-track::-webkit-scrollbar{ display:none; }
+.pd-slide{ flex:0 0 100%; width:100%; height:100%; margin:0; scroll-snap-align:start; }
+/* calc(100% + 1px) is the reference's own value — at fractional column widths a
+   flat 100% leaves a hairline of the #f7f7f7 ground showing at the snap edge. */
+.pd-slide img{ display:block; width:calc(100% + 1px); height:100%; object-fit:cover; max-width:none;
   transition:transform .6s cubic-bezier(.2,.8,.2,1); }
-@media(min-width:1024px){
-  /* svh, not vh: the cap has to survive browser chrome that resizes. On mobile
-     the gallery is a swipe carousel at 88% column width, so it takes no cap. */
-  .pd-gal figure{ width:min(100%, calc((100svh - var(--st-nav-h) - 40px) * var(--rnum,1.25))); }
+.pd-gal[data-zoom="true"] .pd-slide img{ transform:scale(1.55); cursor:zoom-out; }
+
+.pd-arw{
+  position:absolute; top:50%; transform:translateY(-50%); z-index:2;
+  padding:12px; color:#000; line-height:0;
+  background:rgba(255,255,255,.8); border-radius:999px;
+  box-shadow:0 1px 4px rgba(0,0,0,.15);
 }
-.pd-gal figure[data-zoom="true"] img{ transform:scale(1.55); cursor:zoom-out; }
-.pd-gal figure{ cursor:zoom-in; }
-.pd-gal figcaption{
-  position:absolute; left:14px; bottom:14px; z-index:2;
-  background:rgba(255,255,255,.92); color:var(--st-ink); padding:4px 9px;
-  font-size:var(--st-micro); line-height:var(--st-micro-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase;
-}
-@media(max-width:1023px){ .pd-gal{ grid-auto-flow:column; grid-auto-columns:88%; overflow-x:auto; scroll-snap-type:x mandatory; }
-  .pd-gal figure{ scroll-snap-align:center; } }
+.pd-arw:hover{ opacity:.75; }
+.pd-prev{ left:8px; } .pd-next{ right:8px; }
+@media(min-width:1024px){ .pd-prev{ left:20px; } .pd-next{ right:20px; } }
+
+/* NOT .pd-bar — that class already belongs to the sticky add-to-cart bar
+   (position:fixed; display:none until mobile). Naming this one the same made
+   the whole control strip — counter, dots and zoom — display:none on desktop,
+   i.e. invisible to every user while still clickable from script. Caught only
+   because the dots measured 0x0. */
+.pd-gbar{ position:absolute; left:0; right:0; bottom:0; z-index:10;
+  display:flex; align-items:center; justify-content:flex-start; gap:6px; margin-bottom:4px; }
+@media(min-width:1024px){ .pd-gbar{ bottom:28px; margin-bottom:0; } }
+.pd-count{ display:flex; align-items:center; gap:2px; margin-left:12px;
+  padding:4px 8px; background:#fff; color:#000; opacity:.54;
+  font-size:12px; font-variant-numeric:tabular-nums; letter-spacing:0; }
+@media(min-width:1024px){ .pd-count{ margin-left:27px; } }
+.pd-dots{ display:flex; align-items:center; gap:5px; padding:4px 8px; background:#fff; }
+.pd-dot{ display:block; height:3px; width:6px; border-radius:999px; background:rgba(0,0,0,.3); transition:all .2s; }
+.pd-dot.on{ width:16px; background:#000; }
+.pd-zoom{ margin-left:auto; padding:12px; color:#000; line-height:0; }
+@media(min-width:1024px){ .pd-zoom{ padding:16px; padding-right:28px; } }
+
 
 /* the pinned buy column */
-.pd-buy{ position:sticky; top:var(--st-nav-h); padding:clamp(28px,3vw,44px); border-left:1px solid var(--st-hair); }
-@media(max-width:1023px){ .pd-buy{ position:static; border-left:0; border-top:1px solid var(--st-hair); } }
+/* 472px, centred in its half, sticky, and min-height:100dvh — all four are
+   the reference's own measured values. The border-left is gone: theirs has no
+   rule between the halves, the photograph's own edge is the divider. */
+.pd-buy{
+  position:sticky; top:var(--st-nav-h);
+  width:100%; max-width:var(--st-buycol); margin-inline:auto;
+  min-height:100dvh; padding:32px 0 33px;
+}
+@media(max-width:1023px){
+  .pd-buy{ position:static; min-height:0; max-width:none; padding:28px 15px 33px;
+    border-top:1px solid var(--st-hair); }
+}
 .pd-buy .eyebrow{ color:var(--st-muted); margin-bottom:10px; }
 .pd-buy h1{ font-size:clamp(22px,2.3vw,30px); line-height:1.06; letter-spacing:-.015em; text-transform:uppercase; margin-bottom:10px; }
 .pd-buy .price{ font-size:16px; letter-spacing:var(--st-ui-ls); margin-bottom:4px; }
@@ -521,6 +568,20 @@
 .pd-bar .st .st-cta{ flex:none; padding:0 20px; height:46px; }
 
 /* program band under the fold */
+/* SECTION HEADS UNDER THE PRODUCT — the reference's scale.
+   Jayden 2026-09-23: "and everything under it aswell the different products
+   collections etc the same look". Measured on shop.griffain.io, its
+   "The Kit — Employees" and related-product heads are 12px/16px, weight 700,
+   uppercase, 0.133333px tracking — the same UI type as everything else in the
+   system, not a display size. DAS's related row was rendering at 18px/500,
+   which read as a page heading competing with the product title rather than a
+   quiet label above a row. */
+#pd-also .head h2{
+  font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
+  font-weight:700; text-transform:uppercase;
+}
+#pd-also .head sup{ font-size:8px; }
+
 .pd-band{ background:var(--st-navy-900); color:#fff; padding:clamp(34px,5vw,60px) 24px; margin-top:0; }
 .pd-band .in{ max-width:1400px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:26px; align-items:center; }
 @media(max-width:820px){ .pd-band .in{ grid-template-columns:minmax(0,1fr); } }
