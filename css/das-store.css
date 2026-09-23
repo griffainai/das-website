@@ -27,7 +27,7 @@
       PDP rails and the footer. Family per BRAND-KIT.md:
       #060E24 · #0C1840 · #16264F · #1A2E6E · #2E4FA8 · #3A5FC0 · #4E8BE8 · #9CC4F5
       (the sign-in page's literal #0E1B2E is Off Duty's blue — it was pulled
-      from DAS once already this programme as off-brand. One token to change
+      from DAS once already this program as off-brand. One token to change
       here if that specific hex is wanted.)
 
    TYPEFACE: the other two run STKBureau and both carry an open gate to license
@@ -93,7 +93,7 @@
 .st-micro{ font-size:var(--st-micro); line-height:var(--st-micro-lh); letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
 
 /* ── HEADER ──────────────────────────────────────────────────────────────
-   Their 3-column grid. The centre mark is ours; the right rail carries DAS's
+   Their 3-column grid. The center mark is ours; the right rail carries DAS's
    own actions (Saved / Bag) in place of the reference's country selector. */
 .st-hd{
   position:sticky; top:0; z-index:40; width:100%; background:#fff;
@@ -108,7 +108,14 @@
   height:1px; width:44px; background:transparent; transition:background-color .3s linear;
 }
 .st-hd .item:hover::after,.st-hd .item[aria-current]::after{ background:currentColor; }
-.st-hd .mark img{ height:22px; width:auto; }
+/* THE MARK. Jayden 2026-09-23: "the logo in the top is just way to small."
+   It was 22px, which on a 728x259 lockup (ratio 2.81) renders only 62px wide —
+   the reference stores set a pure WORDMARK at that height, and a wordmark at
+   22px is a confident 200px wide. This lockup is nearly three times shorter, so
+   the same number reads as a thumbnail. Sized against the bar instead: 32 of
+   46px desktop, 38 of 63px mobile, which keeps 7px of air top and bottom. */
+.st-hd .mark img{ height:32px; width:auto; }
+@media(max-width:1023px){ .st-hd .mark img{ height:38px; } }
 .st-hd .right{ display:flex; align-items:center; justify-content:flex-end; height:100%; }
 .st-hd .count{ font-size:var(--st-micro); line-height:var(--st-micro-lh); vertical-align:super; margin-left:3px; color:var(--st-navy); }
 @media(max-width:1023px){ .st-hd .hide{ display:none; } }
@@ -116,9 +123,9 @@
 /* ── CTA — 52px, square, navy ──────────────────────────────────────────
    Every rule here is prefixed .st DELIBERATELY. The reset .st a{color:inherit}
    is specificity 0-1-1 (class + element) and beats a bare .st-cta--light at
-   0-1-0, so the CTAs were inheriting their parent colour instead of their own —
+   0-1-0, so the CTAs were inheriting their parent color instead of their own —
    white text on a white button over the navy hero. It looked correct everywhere
-   else only because the inherited colour happened to be dark. */
+   else only because the inherited color happened to be dark. */
 .st .st-cta{
   display:inline-flex; align-items:center; justify-content:center;
   height:var(--st-cta-h); padding:0 32px;
@@ -414,9 +421,43 @@
 @media(max-width:1023px){ .st-pdp2{ grid-template-columns:minmax(0,1fr); } }
 
 /* the stacked gallery */
-.pd-gal{ display:grid; gap:2px; background:var(--st-hair-soft); }
-.pd-gal figure{ margin:0; position:relative; aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; }
-.pd-gal img{ width:100%; height:100%; object-fit:cover; transition:transform .6s cubic-bezier(.2,.8,.2,1); }
+/* GALLERY SIZING — the photo keeps its own ratio and fits one screen.
+   Jayden 2026-09-23: "on desktop this pdp photo is way to big and isnt sized
+   properly where it fits on one page."
+
+   The first pass forced every gallery figure into the grid's 5:4 frame with
+   object-fit:cover. Two faults: on a wide desktop the figure grew with the
+   column and ran past the fold, and any portrait shot lost a third of the
+   product to the crop.
+
+   The fix that did NOT work, recorded so it is not tried again: img{width:100%;
+   height:auto; max-height:CAP}. The replaced-element min/max algorithm only
+   recomputes the opposite dimension when that dimension is auto — with a
+   SPECIFIED width:100% it clamps the height and leaves the width alone, which
+   renders the photograph squashed (measured 1.528 against a natural 0.800).
+   Distortion is worse than the crop it was meant to replace.
+
+   What works: size the FIGURE by height, and let the image fill it.
+   Each figure carries its photograph's ratio as a unitless --rnum (set inline by
+   gallery() in das-pdp.js), so its width can be expressed as
+       min(100%, cap * ratio)
+   which is the width at which the height is exactly the cap. Height then falls
+   out of aspect-ratio, so the box is always the photograph's own shape: never
+   cropped, never letterboxed, never distorted, and never taller than the fold.
+   The figure carries no background for the same reason — nothing shows through,
+   so nothing reads as the white border he asked to be rid of. */
+.pd-gal{ display:grid; gap:2px; }
+.pd-gal figure{
+  margin:0; position:relative; overflow:hidden;
+  aspect-ratio:var(--rnum,1.25); width:100%; margin-inline:auto;
+}
+.pd-gal img{ display:block; width:100%; height:100%;
+  transition:transform .6s cubic-bezier(.2,.8,.2,1); }
+@media(min-width:1024px){
+  /* svh, not vh: the cap has to survive browser chrome that resizes. On mobile
+     the gallery is a swipe carousel at 88% column width, so it takes no cap. */
+  .pd-gal figure{ width:min(100%, calc((100svh - var(--st-nav-h) - 40px) * var(--rnum,1.25))); }
+}
 .pd-gal figure[data-zoom="true"] img{ transform:scale(1.55); cursor:zoom-out; }
 .pd-gal figure{ cursor:zoom-in; }
 .pd-gal figcaption{
@@ -436,7 +477,7 @@
 .pd-buy .price small{ color:var(--st-muted); font-size:var(--st-ui); }
 .pd-buy .blurb{ font-size:14px; line-height:22px; color:var(--st-muted); text-transform:none; letter-spacing:0; margin:14px 0 22px; }
 
-/* programme chip — replaces the reference's fit chips */
+/* program chip — replaces the reference's fit chips */
 .st .pd-prog{ display:inline-flex; align-items:center; gap:8px; margin-bottom:18px;
   box-shadow:inset 0 0 0 1px var(--st-hair); padding:7px 12px; color:var(--st-navy); }
 .st .pd-prog:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
@@ -479,7 +520,7 @@
 .pd-bar .n span{ color:var(--st-muted); }
 .pd-bar .st .st-cta{ flex:none; padding:0 20px; height:46px; }
 
-/* programme band under the fold */
+/* program band under the fold */
 .pd-band{ background:var(--st-navy-900); color:#fff; padding:clamp(34px,5vw,60px) 24px; margin-top:0; }
 .pd-band .in{ max-width:1400px; margin:0 auto; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:26px; align-items:center; }
 @media(max-width:820px){ .pd-band .in{ grid-template-columns:minmax(0,1fr); } }

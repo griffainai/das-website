@@ -235,7 +235,7 @@
       state.program = chip.dataset.f || chip.dataset.jump;
       /* Which occasion actually drives demand is the second-most useful number
          on this store, so a tile click and a chip click are recorded separately. */
-      push(chip.dataset.jump ? 'collection_tile' : 'filter_programme', { programme: state.program });
+      push(chip.dataset.jump ? 'collection_tile' : 'filter_program', { program: state.program });
       render();
       var h = document.getElementById('st-shop');
       if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -259,7 +259,7 @@
         Cart.add({ id: p.id, name: p.name, price: p.price, image: p.shot.src, category: p.programLabel, minQty: p.minQty }, n);
         add.closest('.st-card').setAttribute('data-open', 'false');
         track('addToCart', { sku: p.id, name: p.name, price: p.price, qty: n });
-        push('quick_add', { product_id: p.id, programme: p.program, qty: n });
+        push('quick_add', { product_id: p.id, program: p.program, qty: n });
         paintBag(); openBag(true);
       }
       return;

@@ -15,8 +15,8 @@
                                    A buyer who can see the gap closes it.
      2. NEXT-TIER PROMPT           names the exact dollar gap and offers the
                                    one add that closes it, priced honestly.
-     3. COMPLETE THE PROGRAMME     kits from the same programme, because a
-                                   recognition programme is bought as a set.
+     3. COMPLETE THE PROGRAM     kits from the same program, because a
+                                   recognition program is bought as a set.
      4. QUOTE ESCAPE HATCH         40 of 54 pieces are gated. A cart that only
                                    offers a card is a dead end for most of
                                    this catalogue, so Request a quote / PO sits
@@ -74,19 +74,19 @@
     }
 
     /* Mechanic 2 + 3: the honest next-add. Picks the cheapest piece from a
-       programme already in the bag that would close the freight gap; falls back
-       to the nearest piece in the same programme. Never invents a discount. */
+       program already in the bag that would close the freight gap; falls back
+       to the nearest piece in the same program. Never invents a discount. */
     function nextAdd(items, total) {
       if (!CAT || !CAT.products.length) return '';
       var gap = FREE_FREIGHT - total;
-      var programmes = {};
-      items.forEach(function (l) { programmes[l.category] = true; });
+      var programs = {};
+      items.forEach(function (l) { programs[l.category] = true; });
       var pool = CAT.products.filter(function (p) {
         return !p.gated && !items.some(function (l) { return l.id === p.id; });
       });
       if (!pool.length) return '';
 
-      var same = pool.filter(function (p) { return programmes[p.programLabel]; });
+      var same = pool.filter(function (p) { return programs[p.programLabel]; });
       var list = (same.length ? same : pool).slice();
 
       if (gap > 0) {
@@ -106,7 +106,7 @@
       return '';
     }
 
-    /* Mechanic 3: complete the programme. */
+    /* Mechanic 3: complete the program. */
     function completeSet(items) {
       if (!CAT || !CAT.products.length || !items.length) return '';
       var have = {};
@@ -116,7 +116,7 @@
       var picks = CAT.products.filter(function (p) { return progs[p.programLabel] && !have[p.id]; }).slice(0, 4);
       if (!picks.length) return '';
       return '<section class="st-sec" style="padding-left:0;padding-right:0">' +
-        '<div class="head st-ui"><h2>Complete the programme</h2><sup>' + picks.length + '</sup></div>' +
+        '<div class="head st-ui"><h2>Complete the program</h2><sup>' + picks.length + '</sup></div>' +
         '<div class="st-grid" data-view="4">' + picks.map(function (p) {
           return '<article class="st-card st-ui">' +
             '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
@@ -131,9 +131,9 @@
       var pop = CAT && CAT.products ? CAT.products.filter(function (p) { return !p.gated; }).slice(0, 4) : [];
       return '<div class="sc-empty">' +
         '<p class="st-ui" style="color:var(--st-muted);margin-bottom:6px">Your bag is empty</p>' +
-        '<h2 style="font-size:clamp(20px,2.6vw,30px);text-transform:uppercase;margin-bottom:12px">Start with a programme, not a product.</h2>' +
+        '<h2 style="font-size:clamp(20px,2.6vw,30px);text-transform:uppercase;margin-bottom:12px">Start with a program, not a product.</h2>' +
         '<p style="font-size:14px;line-height:22px;color:var(--st-muted);max-width:52ch;margin-bottom:20px">' +
-        'Most fleets run one recognition programme a quarter. Pick the occasion and the kit follows.</p>' +
+        'Most fleets run one recognition program a quarter. Pick the occasion and the kit follows.</p>' +
         '<a class="st-cta" href="store.html">Browse the collection</a>' +
         (pop.length ? '<div class="head st-ui" style="margin-top:46px"><h2>Ready to order</h2></div>' +
           '<div class="st-grid" data-view="4">' + pop.map(function (p) {

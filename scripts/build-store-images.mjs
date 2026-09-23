@@ -67,6 +67,21 @@ const OUT = join(ROOT, 'images', 'store')
 export const FRAME = { w: 1400, h: 1120 }
 const HALF = { w: 700, h: 560 }
 
+/** THE PDP DERIVATIVE — NO CROP AT ALL.
+ *  A grid needs one ratio so the cards line up; a product page shows ONE
+ *  product and needs no such thing. Jayden 2026-09-23: "on desktop this pdp
+ *  photo is way to big and isnt sized properly where it fits on one page" —
+ *  and the shot he was looking at (pak-professional-driver-kit-heroA, 1122x1402)
+ *  is PORTRAIT, so the 5:4 grid frame was cutting 36% of the kit away before
+ *  it ever got too tall.
+ *  So the PDP gets its own derivative: fitted INSIDE a box, never cropped,
+ *  keeping the photograph's own ratio. The manifest records the resulting
+ *  pixel size so the page can set aspect-ratio per image and reserve the
+ *  correct box — no letterbox bars, because the frame takes the image's shape
+ *  rather than the reverse. Height is then capped in CSS against the viewport. */
+const PDP = { w: 1600, h: 1600 }
+const PDP_HALF = { w: 800, h: 800 }
+
 mkdirSync(OUT, { recursive: true })
 
 /** Every image referenced by the store catalogue, plus the collection heroes. */
@@ -108,8 +123,11 @@ for (const rel of files) {
   const name = basename(rel, extname(rel))
   const big = join(OUT, `${name}@2x.webp`)
   const small = join(OUT, `${name}.webp`)
+  const pdpBig = join(OUT, `${name}-pdp@2x.webp`)
+  const pdpSmall = join(OUT, `${name}-pdp.webp`)
 
-  if (existsSync(big) && existsSync(small) && statSync(big).mtimeMs > statSync(src).mtimeMs) { skipped++; continue }
+  if (existsSync(big) && existsSync(small) && existsSync(pdpBig) && existsSync(pdpSmall) &&
+      statSync(big).mtimeMs > statSync(src).mtimeMs && statSync(pdpBig).mtimeMs > statSync(src).mtimeMs) { skipped++; continue }
 
   try {
     // `cover` + centre. position:'attention' was tried and rejected: it chases the
@@ -119,6 +137,11 @@ for (const rel of files) {
       .webp({ quality: 86, effort: 5 }).toFile(big)
     await sharp(src).resize(HALF.w, HALF.h, { fit: 'cover', position: 'centre' })
       .webp({ quality: 84, effort: 5 }).toFile(small)
+    // and the uncropped pair for the product page
+    await sharp(src).resize(PDP.w, PDP.h, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 88, effort: 5 }).toFile(pdpBig)
+    await sharp(src).resize(PDP_HALF.w, PDP_HALF.h, { fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 86, effort: 5 }).toFile(pdpSmall)
     made++
   } catch (e) { failed.push(`${rel} (${e.message.slice(0, 50)})`) }
 }
@@ -130,8 +153,20 @@ if (failed.length) { console.log('FAILED:'); failed.forEach(f => console.log('  
 // guessing, and so a missing derivative is a visible error rather than a broken img.
 const manifest = {}
 for (const f of readdirSync(OUT)) {
-  if (!f.endsWith('.webp') || f.includes('@2x')) continue
-  manifest[basename(f, '.webp')] = { src: `/images/store/${f}`, srcset: `/images/store/${basename(f, '.webp')}@2x.webp 2x` }
+  if (!f.endsWith('.webp') || f.includes('@2x') || f.endsWith('-pdp.webp')) continue
+  const name = basename(f, '.webp')
+  const entry = { src: `/images/store/${f}`, srcset: `/images/store/${name}@2x.webp 2x` }
+  // The uncropped variant, WITH its real dimensions. Measuring here rather than
+  // at build time means a skipped rebuild still reports the truth.
+  if (existsSync(join(OUT, `${name}-pdp.webp`))) {
+    const m = await sharp(join(OUT, `${name}-pdp@2x.webp`)).metadata()
+    entry.pdp = {
+      src: `/images/store/${name}-pdp.webp`,
+      srcset: `/images/store/${name}-pdp@2x.webp 2x`,
+      w: m.width, h: m.height,
+    }
+  }
+  manifest[name] = entry
 }
-writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, images: manifest }, null, 1))
+writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpBox: PDP, images: manifest }, null, 1))
 console.log(`manifest: ${Object.keys(manifest).length} entries -> images/store/manifest.json`)

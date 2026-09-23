@@ -3,242 +3,600 @@
   "w": 1400,
   "h": 1120
  },
+ "pdpBox": {
+  "w": 1600,
+  "h": 1600
+ },
  "images": {
   "pak-professional-driver-kit-heroA": {
    "src": "/images/store/pak-professional-driver-kit-heroA.webp",
-   "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-professional-driver-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-professional-driver-kit-heroA-pdp@2x.webp 2x",
+    "w": 1122,
+    "h": 1402
+   }
   },
   "pak-command-center-kit-heroA": {
    "src": "/images/store/pak-command-center-kit-heroA.webp",
-   "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-command-center-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-command-center-kit-heroA-pdp@2x.webp 2x",
+    "w": 1122,
+    "h": 1402
+   }
   },
   "pak-working-hands-kit-heroC": {
    "src": "/images/store/pak-working-hands-kit-heroC.webp",
-   "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x"
+   "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-working-hands-kit-heroC-pdp.webp",
+    "srcset": "/images/store/pak-working-hands-kit-heroC-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "pak-highway-guardian-kit-heroC": {
    "src": "/images/store/pak-highway-guardian-kit-heroC.webp",
-   "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x"
+   "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-highway-guardian-kit-heroC-pdp.webp",
+    "srcset": "/images/store/pak-highway-guardian-kit-heroC-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "pak-dot-ready-kit-heroA": {
    "src": "/images/store/pak-dot-ready-kit-heroA.webp",
-   "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-dot-ready-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-dot-ready-kit-heroA-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "pak-clear-vision-kit-heroA": {
    "src": "/images/store/pak-clear-vision-kit-heroA.webp",
-   "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-clear-vision-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-clear-vision-kit-heroA-pdp@2x.webp 2x",
+    "w": 1122,
+    "h": 1402
+   }
   },
   "pak-recharge-kit-hero": {
    "src": "/images/store/pak-recharge-kit-hero.webp",
-   "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x"
+   "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-recharge-kit-hero-pdp.webp",
+    "srcset": "/images/store/pak-recharge-kit-hero-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "das-da-kit-1": {
    "src": "/images/store/das-da-kit-1.webp",
-   "srcset": "/images/store/das-da-kit-1@2x.webp 2x"
+   "srcset": "/images/store/das-da-kit-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/das-da-kit-1-pdp.webp",
+    "srcset": "/images/store/das-da-kit-1-pdp@2x.webp 2x",
+    "w": 1122,
+    "h": 1402
+   }
   },
   "pde-kit-01": {
    "src": "/images/store/pde-kit-01.webp",
-   "srcset": "/images/store/pde-kit-01@2x.webp 2x"
+   "srcset": "/images/store/pde-kit-01@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pde-kit-01-pdp.webp",
+    "srcset": "/images/store/pde-kit-01-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "wk-driver-lifestyle": {
    "src": "/images/store/wk-driver-lifestyle.webp",
-   "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x"
+   "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/wk-driver-lifestyle-pdp.webp",
+    "srcset": "/images/store/wk-driver-lifestyle-pdp@2x.webp 2x",
+    "w": 1600,
+    "h": 1600
+   }
   },
   "rwb-angle": {
    "src": "/images/store/rwb-angle.webp",
-   "srcset": "/images/store/rwb-angle@2x.webp 2x"
+   "srcset": "/images/store/rwb-angle@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/rwb-angle-pdp.webp",
+    "srcset": "/images/store/rwb-angle-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "road-warrior-duffel-hero-v2": {
    "src": "/images/store/road-warrior-duffel-hero-v2.webp",
-   "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x"
+   "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/road-warrior-duffel-hero-v2-pdp.webp",
+    "srcset": "/images/store/road-warrior-duffel-hero-v2-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "travel-kit-hero-v2": {
    "src": "/images/store/travel-kit-hero-v2.webp",
-   "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x"
+   "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/travel-kit-hero-v2-pdp.webp",
+    "srcset": "/images/store/travel-kit-hero-v2-pdp@2x.webp 2x",
+    "w": 1400,
+    "h": 1050
+   }
   },
   "milestone-kit-medal": {
    "src": "/images/store/milestone-kit-medal.webp",
-   "srcset": "/images/store/milestone-kit-medal@2x.webp 2x"
+   "srcset": "/images/store/milestone-kit-medal@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/milestone-kit-medal-pdp.webp",
+    "srcset": "/images/store/milestone-kit-medal-pdp@2x.webp 2x",
+    "w": 1200,
+    "h": 960
+   }
   },
   "milestone-kit-lapel-hat": {
    "src": "/images/store/milestone-kit-lapel-hat.webp",
-   "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x"
+   "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/milestone-kit-lapel-hat-pdp.webp",
+    "srcset": "/images/store/milestone-kit-lapel-hat-pdp@2x.webp 2x",
+    "w": 1400,
+    "h": 1050
+   }
   },
   "ssm-luggage-tag-card-v2": {
    "src": "/images/store/ssm-luggage-tag-card-v2.webp",
-   "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x"
+   "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/ssm-luggage-tag-card-v2-pdp.webp",
+    "srcset": "/images/store/ssm-luggage-tag-card-v2-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "pak-road-ready-kit-heroA": {
    "src": "/images/store/pak-road-ready-kit-heroA.webp",
-   "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-road-ready-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-road-ready-kit-heroA-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "pak-safety-first-kit-heroA": {
    "src": "/images/store/pak-safety-first-kit-heroA.webp",
-   "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-safety-first-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-safety-first-kit-heroA-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "pak-pride-in-your-ride-kit-heroB": {
    "src": "/images/store/pak-pride-in-your-ride-kit-heroB.webp",
-   "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x"
+   "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp.webp",
+    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "pak-long-haul-hydration-kit-heroA": {
    "src": "/images/store/pak-long-haul-hydration-kit-heroA.webp",
-   "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x"
+   "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-long-haul-hydration-kit-heroA-pdp.webp",
+    "srcset": "/images/store/pak-long-haul-hydration-kit-heroA-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "seat-back-organizer-hero": {
    "src": "/images/store/seat-back-organizer-hero.webp",
-   "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x"
+   "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/seat-back-organizer-hero-pdp.webp",
+    "srcset": "/images/store/seat-back-organizer-hero-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "pak-premium-onboarding-hero": {
    "src": "/images/store/pak-premium-onboarding-hero.webp",
-   "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x"
+   "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-premium-onboarding-hero-pdp.webp",
+    "srcset": "/images/store/pak-premium-onboarding-hero-pdp@2x.webp 2x",
+    "w": 1200,
+    "h": 896
+   }
   },
   "safe-250k-3item-v2": {
    "src": "/images/store/safe-250k-3item-v2.webp",
-   "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+   "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-250k-3item-v2-pdp.webp",
+    "srcset": "/images/store/safe-250k-3item-v2-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "safe-250k-combo": {
    "src": "/images/store/safe-250k-combo.webp",
-   "srcset": "/images/store/safe-250k-combo@2x.webp 2x"
+   "srcset": "/images/store/safe-250k-combo@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-250k-combo-pdp.webp",
+    "srcset": "/images/store/safe-250k-combo-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "safe-250k-patch": {
    "src": "/images/store/safe-250k-patch.webp",
-   "srcset": "/images/store/safe-250k-patch@2x.webp 2x"
+   "srcset": "/images/store/safe-250k-patch@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-250k-patch-pdp.webp",
+    "srcset": "/images/store/safe-250k-patch-pdp@2x.webp 2x",
+    "w": 1451,
+    "h": 1084
+   }
   },
   "safe-250k-hat": {
    "src": "/images/store/safe-250k-hat.webp",
-   "srcset": "/images/store/safe-250k-hat@2x.webp 2x"
+   "srcset": "/images/store/safe-250k-hat@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-250k-hat-pdp.webp",
+    "srcset": "/images/store/safe-250k-hat-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "safe-500k-3item": {
    "src": "/images/store/safe-500k-3item.webp",
-   "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+   "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-500k-3item-pdp.webp",
+    "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "safe-500k-combo": {
    "src": "/images/store/safe-500k-combo.webp",
-   "srcset": "/images/store/safe-500k-combo@2x.webp 2x"
+   "srcset": "/images/store/safe-500k-combo@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-500k-combo-pdp.webp",
+    "srcset": "/images/store/safe-500k-combo-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "safe-500k-hat": {
    "src": "/images/store/safe-500k-hat.webp",
-   "srcset": "/images/store/safe-500k-hat@2x.webp 2x"
+   "srcset": "/images/store/safe-500k-hat@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/safe-500k-hat-pdp.webp",
+    "srcset": "/images/store/safe-500k-hat-pdp@2x.webp 2x",
+    "w": 1448,
+    "h": 1086
+   }
   },
   "medal-c-1m-v1": {
    "src": "/images/store/medal-c-1m-v1.webp",
-   "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-1m-v1-pdp.webp",
+    "srcset": "/images/store/medal-c-1m-v1-pdp@2x.webp 2x",
+    "w": 1500,
+    "h": 1000
+   }
   },
   "medal-c-2m-v1": {
    "src": "/images/store/medal-c-2m-v1.webp",
-   "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-2m-v1-pdp.webp",
+    "srcset": "/images/store/medal-c-2m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "medal-c-3m-v1": {
    "src": "/images/store/medal-c-3m-v1.webp",
-   "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-3m-v1-pdp.webp",
+    "srcset": "/images/store/medal-c-3m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "medal-c-4m-v1": {
    "src": "/images/store/medal-c-4m-v1.webp",
-   "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-4m-v1-pdp.webp",
+    "srcset": "/images/store/medal-c-4m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "5-million-mile-medal": {
    "src": "/images/store/5-million-mile-medal.webp",
-   "srcset": "/images/store/5-million-mile-medal@2x.webp 2x"
+   "srcset": "/images/store/5-million-mile-medal@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/5-million-mile-medal-pdp.webp",
+    "srcset": "/images/store/5-million-mile-medal-pdp@2x.webp 2x",
+    "w": 1100,
+    "h": 880
+   }
   },
   "medal-c-6m-v1": {
    "src": "/images/store/medal-c-6m-v1.webp",
-   "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-6m-v1-pdp.webp",
+    "srcset": "/images/store/medal-c-6m-v1-pdp@2x.webp 2x",
+    "w": 1100,
+    "h": 880
+   }
   },
   "medal-s-1m-v1": {
    "src": "/images/store/medal-s-1m-v1.webp",
-   "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-1m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-1m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "medal-s-2m-v1": {
    "src": "/images/store/medal-s-2m-v1.webp",
-   "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-2m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-2m-v1-pdp@2x.webp 2x",
+    "w": 1409,
+    "h": 1116
+   }
   },
   "medal-s-3m-v1": {
    "src": "/images/store/medal-s-3m-v1.webp",
-   "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-3m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-3m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "medal-s-4m-v1": {
    "src": "/images/store/medal-s-4m-v1.webp",
-   "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-4m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-4m-v1-pdp@2x.webp 2x",
+    "w": 1402,
+    "h": 1122
+   }
   },
   "medal-s-5m-v1": {
    "src": "/images/store/medal-s-5m-v1.webp",
-   "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-5m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-5m-v1-pdp@2x.webp 2x",
+    "w": 1100,
+    "h": 880
+   }
   },
   "medal-s-6m-v1": {
    "src": "/images/store/medal-s-6m-v1.webp",
-   "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+   "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-s-6m-v1-pdp.webp",
+    "srcset": "/images/store/medal-s-6m-v1-pdp@2x.webp 2x",
+    "w": 1100,
+    "h": 880
+   }
   },
   "exec-bottle-card": {
    "src": "/images/store/exec-bottle-card.webp",
-   "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+   "srcset": "/images/store/exec-bottle-card@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-bottle-card-pdp.webp",
+    "srcset": "/images/store/exec-bottle-card-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "exec-foodjar-card": {
    "src": "/images/store/exec-foodjar-card.webp",
-   "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
+   "srcset": "/images/store/exec-foodjar-card@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-foodjar-card-pdp.webp",
+    "srcset": "/images/store/exec-foodjar-card-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "exec-lunchbag-v3": {
    "src": "/images/store/exec-lunchbag-v3.webp",
-   "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
+   "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-lunchbag-v3-pdp.webp",
+    "srcset": "/images/store/exec-lunchbag-v3-pdp@2x.webp 2x",
+    "w": 1200,
+    "h": 896
+   }
   },
   "exec-tote-card": {
    "src": "/images/store/exec-tote-card.webp",
-   "srcset": "/images/store/exec-tote-card@2x.webp 2x"
+   "srcset": "/images/store/exec-tote-card@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-tote-card-pdp.webp",
+    "srcset": "/images/store/exec-tote-card-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "exec-cooler-card": {
    "src": "/images/store/exec-cooler-card.webp",
-   "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
+   "srcset": "/images/store/exec-cooler-card@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-cooler-card-pdp.webp",
+    "srcset": "/images/store/exec-cooler-card-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "exec-packleader-card": {
    "src": "/images/store/exec-packleader-card.webp",
-   "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+   "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-packleader-card-pdp.webp",
+    "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+    "w": 1536,
+    "h": 1024
+   }
   },
   "exec-packleader-2": {
    "src": "/images/store/exec-packleader-2.webp",
-   "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+   "srcset": "/images/store/exec-packleader-2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/exec-packleader-2-pdp.webp",
+    "srcset": "/images/store/exec-packleader-2-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-02-1": {
    "src": "/images/store/mp-02-1.webp",
-   "srcset": "/images/store/mp-02-1@2x.webp 2x"
+   "srcset": "/images/store/mp-02-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-02-1-pdp.webp",
+    "srcset": "/images/store/mp-02-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-02-2": {
    "src": "/images/store/mp-02-2.webp",
-   "srcset": "/images/store/mp-02-2@2x.webp 2x"
+   "srcset": "/images/store/mp-02-2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-02-2-pdp.webp",
+    "srcset": "/images/store/mp-02-2-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-03-1": {
    "src": "/images/store/mp-03-1.webp",
-   "srcset": "/images/store/mp-03-1@2x.webp 2x"
+   "srcset": "/images/store/mp-03-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-03-1-pdp.webp",
+    "srcset": "/images/store/mp-03-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-04-1": {
    "src": "/images/store/mp-04-1.webp",
-   "srcset": "/images/store/mp-04-1@2x.webp 2x"
+   "srcset": "/images/store/mp-04-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-04-1-pdp.webp",
+    "srcset": "/images/store/mp-04-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-04-2": {
    "src": "/images/store/mp-04-2.webp",
-   "srcset": "/images/store/mp-04-2@2x.webp 2x"
+   "srcset": "/images/store/mp-04-2@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-04-2-pdp.webp",
+    "srcset": "/images/store/mp-04-2-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-05-1": {
    "src": "/images/store/mp-05-1.webp",
-   "srcset": "/images/store/mp-05-1@2x.webp 2x"
+   "srcset": "/images/store/mp-05-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-05-1-pdp.webp",
+    "srcset": "/images/store/mp-05-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-06-1": {
    "src": "/images/store/mp-06-1.webp",
-   "srcset": "/images/store/mp-06-1@2x.webp 2x"
+   "srcset": "/images/store/mp-06-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-06-1-pdp.webp",
+    "srcset": "/images/store/mp-06-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-07-1": {
    "src": "/images/store/mp-07-1.webp",
-   "srcset": "/images/store/mp-07-1@2x.webp 2x"
+   "srcset": "/images/store/mp-07-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-07-1-pdp.webp",
+    "srcset": "/images/store/mp-07-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "mp-08-1": {
    "src": "/images/store/mp-08-1.webp",
-   "srcset": "/images/store/mp-08-1@2x.webp 2x"
+   "srcset": "/images/store/mp-08-1@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/mp-08-1-pdp.webp",
+    "srcset": "/images/store/mp-08-1-pdp@2x.webp 2x",
+    "w": 1254,
+    "h": 1254
+   }
   },
   "milestone-c-250k": {
    "src": "/images/store/milestone-c-250k.webp",
-   "srcset": "/images/store/milestone-c-250k@2x.webp 2x"
+   "srcset": "/images/store/milestone-c-250k@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/milestone-c-250k-pdp.webp",
+    "srcset": "/images/store/milestone-c-250k-pdp@2x.webp 2x",
+    "w": 1200,
+    "h": 675
+   }
   },
   "milestone-c-500k": {
    "src": "/images/store/milestone-c-500k.webp",
-   "srcset": "/images/store/milestone-c-500k@2x.webp 2x"
+   "srcset": "/images/store/milestone-c-500k@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/milestone-c-500k-pdp.webp",
+    "srcset": "/images/store/milestone-c-500k-pdp@2x.webp 2x",
+    "w": 1200,
+    "h": 675
+   }
   }
  }
 }

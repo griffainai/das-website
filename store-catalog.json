@@ -1,5 +1,5 @@
 {
- "built": "2026-09-22",
+ "built": "2026-09-23",
  "frame": {
   "w": 1400,
   "h": 1120
@@ -51,12 +51,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-professional-driver-kit-heroA.webp",
-    "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-professional-driver-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-professional-driver-kit-heroA-pdp@2x.webp 2x",
+     "w": 1122,
+     "h": 1402
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-professional-driver-kit-heroA.webp",
-     "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-professional-driver-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-professional-driver-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-professional-driver-kit-heroA-pdp@2x.webp 2x",
+      "w": 1122,
+      "h": 1402
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -75,12 +87,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-command-center-kit-heroA.webp",
-    "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-command-center-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-command-center-kit-heroA-pdp@2x.webp 2x",
+     "w": 1122,
+     "h": 1402
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-command-center-kit-heroA.webp",
-     "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-command-center-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-command-center-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-command-center-kit-heroA-pdp@2x.webp 2x",
+      "w": 1122,
+      "h": 1402
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -99,12 +123,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-working-hands-kit-heroC.webp",
-    "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x"
+    "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-working-hands-kit-heroC-pdp.webp",
+     "srcset": "/images/store/pak-working-hands-kit-heroC-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-working-hands-kit-heroC.webp",
-     "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x"
+     "srcset": "/images/store/pak-working-hands-kit-heroC@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-working-hands-kit-heroC-pdp.webp",
+      "srcset": "/images/store/pak-working-hands-kit-heroC-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -123,12 +159,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-highway-guardian-kit-heroC.webp",
-    "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x"
+    "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-highway-guardian-kit-heroC-pdp.webp",
+     "srcset": "/images/store/pak-highway-guardian-kit-heroC-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-highway-guardian-kit-heroC.webp",
-     "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x"
+     "srcset": "/images/store/pak-highway-guardian-kit-heroC@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-highway-guardian-kit-heroC-pdp.webp",
+      "srcset": "/images/store/pak-highway-guardian-kit-heroC-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -147,12 +195,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-dot-ready-kit-heroA.webp",
-    "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-dot-ready-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-dot-ready-kit-heroA-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-dot-ready-kit-heroA.webp",
-     "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-dot-ready-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-dot-ready-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-dot-ready-kit-heroA-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -171,12 +231,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-clear-vision-kit-heroA.webp",
-    "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-clear-vision-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-clear-vision-kit-heroA-pdp@2x.webp 2x",
+     "w": 1122,
+     "h": 1402
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-clear-vision-kit-heroA.webp",
-     "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-clear-vision-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-clear-vision-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-clear-vision-kit-heroA-pdp@2x.webp 2x",
+      "w": 1122,
+      "h": 1402
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -195,12 +267,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-recharge-kit-hero.webp",
-    "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x"
+    "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-recharge-kit-hero-pdp.webp",
+     "srcset": "/images/store/pak-recharge-kit-hero-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-recharge-kit-hero.webp",
-     "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x"
+     "srcset": "/images/store/pak-recharge-kit-hero@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-recharge-kit-hero-pdp.webp",
+      "srcset": "/images/store/pak-recharge-kit-hero-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -219,12 +303,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/das-da-kit-1.webp",
-    "srcset": "/images/store/das-da-kit-1@2x.webp 2x"
+    "srcset": "/images/store/das-da-kit-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/das-da-kit-1-pdp.webp",
+     "srcset": "/images/store/das-da-kit-1-pdp@2x.webp 2x",
+     "w": 1122,
+     "h": 1402
+    }
    },
    "gallery": [
     {
      "src": "/images/store/das-da-kit-1.webp",
-     "srcset": "/images/store/das-da-kit-1@2x.webp 2x"
+     "srcset": "/images/store/das-da-kit-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/das-da-kit-1-pdp.webp",
+      "srcset": "/images/store/das-da-kit-1-pdp@2x.webp 2x",
+      "w": 1122,
+      "h": 1402
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -243,12 +339,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pde-kit-01.webp",
-    "srcset": "/images/store/pde-kit-01@2x.webp 2x"
+    "srcset": "/images/store/pde-kit-01@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pde-kit-01-pdp.webp",
+     "srcset": "/images/store/pde-kit-01-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pde-kit-01.webp",
-     "srcset": "/images/store/pde-kit-01@2x.webp 2x"
+     "srcset": "/images/store/pde-kit-01@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pde-kit-01-pdp.webp",
+      "srcset": "/images/store/pde-kit-01-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -267,12 +375,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/wk-driver-lifestyle.webp",
-    "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x"
+    "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/wk-driver-lifestyle-pdp.webp",
+     "srcset": "/images/store/wk-driver-lifestyle-pdp@2x.webp 2x",
+     "w": 1600,
+     "h": 1600
+    }
    },
    "gallery": [
     {
      "src": "/images/store/wk-driver-lifestyle.webp",
-     "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x"
+     "srcset": "/images/store/wk-driver-lifestyle@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/wk-driver-lifestyle-pdp.webp",
+      "srcset": "/images/store/wk-driver-lifestyle-pdp@2x.webp 2x",
+      "w": 1600,
+      "h": 1600
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -291,12 +411,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/rwb-angle.webp",
-    "srcset": "/images/store/rwb-angle@2x.webp 2x"
+    "srcset": "/images/store/rwb-angle@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/rwb-angle-pdp.webp",
+     "srcset": "/images/store/rwb-angle-pdp@2x.webp 2x",
+     "w": 1448,
+     "h": 1086
+    }
    },
    "gallery": [
     {
      "src": "/images/store/rwb-angle.webp",
-     "srcset": "/images/store/rwb-angle@2x.webp 2x"
+     "srcset": "/images/store/rwb-angle@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/rwb-angle-pdp.webp",
+      "srcset": "/images/store/rwb-angle-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -315,12 +447,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/road-warrior-duffel-hero-v2.webp",
-    "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x"
+    "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/road-warrior-duffel-hero-v2-pdp.webp",
+     "srcset": "/images/store/road-warrior-duffel-hero-v2-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "gallery": [
     {
      "src": "/images/store/road-warrior-duffel-hero-v2.webp",
-     "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x"
+     "srcset": "/images/store/road-warrior-duffel-hero-v2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/road-warrior-duffel-hero-v2-pdp.webp",
+      "srcset": "/images/store/road-warrior-duffel-hero-v2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -339,12 +483,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/travel-kit-hero-v2.webp",
-    "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x"
+    "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/travel-kit-hero-v2-pdp.webp",
+     "srcset": "/images/store/travel-kit-hero-v2-pdp@2x.webp 2x",
+     "w": 1400,
+     "h": 1050
+    }
    },
    "gallery": [
     {
      "src": "/images/store/travel-kit-hero-v2.webp",
-     "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x"
+     "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/travel-kit-hero-v2-pdp.webp",
+      "srcset": "/images/store/travel-kit-hero-v2-pdp@2x.webp 2x",
+      "w": 1400,
+      "h": 1050
+     }
     }
    ],
    "programLabel": "Driver Appreciation Kits",
@@ -363,12 +519,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/milestone-kit-lapel-hat.webp",
-    "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x"
+    "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/milestone-kit-lapel-hat-pdp.webp",
+     "srcset": "/images/store/milestone-kit-lapel-hat-pdp@2x.webp 2x",
+     "w": 1400,
+     "h": 1050
+    }
    },
    "gallery": [
     {
      "src": "/images/store/milestone-kit-lapel-hat.webp",
-     "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x"
+     "srcset": "/images/store/milestone-kit-lapel-hat@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/milestone-kit-lapel-hat-pdp.webp",
+      "srcset": "/images/store/milestone-kit-lapel-hat-pdp@2x.webp 2x",
+      "w": 1400,
+      "h": 1050
+     }
     }
    ],
    "programLabel": "Safety Recognition",
@@ -387,12 +555,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/ssm-luggage-tag-card-v2.webp",
-    "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x"
+    "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/ssm-luggage-tag-card-v2-pdp.webp",
+     "srcset": "/images/store/ssm-luggage-tag-card-v2-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "gallery": [
     {
      "src": "/images/store/ssm-luggage-tag-card-v2.webp",
-     "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x"
+     "srcset": "/images/store/ssm-luggage-tag-card-v2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/ssm-luggage-tag-card-v2-pdp.webp",
+      "srcset": "/images/store/ssm-luggage-tag-card-v2-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     }
    ],
    "programLabel": "Safety Recognition",
@@ -414,12 +594,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-road-ready-kit-heroA.webp",
-    "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-road-ready-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-road-ready-kit-heroA-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-road-ready-kit-heroA.webp",
-     "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-road-ready-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-road-ready-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-road-ready-kit-heroA-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "programLabel": "Onboarding Solutions",
@@ -438,12 +630,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-safety-first-kit-heroA.webp",
-    "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-safety-first-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-safety-first-kit-heroA-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-safety-first-kit-heroA.webp",
-     "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-safety-first-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-safety-first-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-safety-first-kit-heroA-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "programLabel": "Onboarding Solutions",
@@ -462,12 +666,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-pride-in-your-ride-kit-heroB.webp",
-    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x"
+    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp.webp",
+     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp@2x.webp 2x",
+     "w": 1448,
+     "h": 1086
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-pride-in-your-ride-kit-heroB.webp",
-     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x"
+     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp.webp",
+      "srcset": "/images/store/pak-pride-in-your-ride-kit-heroB-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "programLabel": "Onboarding Solutions",
@@ -486,12 +702,24 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/pak-long-haul-hydration-kit-heroA.webp",
-    "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x"
+    "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-long-haul-hydration-kit-heroA-pdp.webp",
+     "srcset": "/images/store/pak-long-haul-hydration-kit-heroA-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-long-haul-hydration-kit-heroA.webp",
-     "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x"
+     "srcset": "/images/store/pak-long-haul-hydration-kit-heroA@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-long-haul-hydration-kit-heroA-pdp.webp",
+      "srcset": "/images/store/pak-long-haul-hydration-kit-heroA-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "programLabel": "Onboarding Solutions",
@@ -510,12 +738,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/pak-premium-onboarding-hero.webp",
-    "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x"
+    "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/pak-premium-onboarding-hero-pdp.webp",
+     "srcset": "/images/store/pak-premium-onboarding-hero-pdp@2x.webp 2x",
+     "w": 1200,
+     "h": 896
+    }
    },
    "gallery": [
     {
      "src": "/images/store/pak-premium-onboarding-hero.webp",
-     "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x"
+     "srcset": "/images/store/pak-premium-onboarding-hero@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/pak-premium-onboarding-hero-pdp.webp",
+      "srcset": "/images/store/pak-premium-onboarding-hero-pdp@2x.webp 2x",
+      "w": 1200,
+      "h": 896
+     }
     }
    ],
    "programLabel": "Onboarding Solutions",
@@ -534,12 +774,24 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/seat-back-organizer-hero.webp",
-    "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x"
+    "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/seat-back-organizer-hero-pdp.webp",
+     "srcset": "/images/store/seat-back-organizer-hero-pdp@2x.webp 2x",
+     "w": 1448,
+     "h": 1086
+    }
    },
    "gallery": [
     {
      "src": "/images/store/seat-back-organizer-hero.webp",
-     "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x"
+     "srcset": "/images/store/seat-back-organizer-hero@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/seat-back-organizer-hero-pdp.webp",
+      "srcset": "/images/store/seat-back-organizer-hero-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "programLabel": "Holiday & Seasonal",
@@ -555,7 +807,13 @@
    "gallery": [
     {
      "src": "/images/store/milestone-c-250k.webp",
-     "srcset": "/images/store/milestone-c-250k@2x.webp 2x"
+     "srcset": "/images/store/milestone-c-250k@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/milestone-c-250k-pdp.webp",
+      "srcset": "/images/store/milestone-c-250k-pdp@2x.webp 2x",
+      "w": 1200,
+      "h": 675
+     }
     }
    ],
    "badge": "Placeholder Award — Final Item Coming Soon",
@@ -564,7 +822,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/milestone-c-250k.webp",
-    "srcset": "/images/store/milestone-c-250k@2x.webp 2x"
+    "srcset": "/images/store/milestone-c-250k@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/milestone-c-250k-pdp.webp",
+     "srcset": "/images/store/milestone-c-250k-pdp@2x.webp 2x",
+     "w": 1200,
+     "h": 675
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": false
@@ -579,19 +843,43 @@
    "gallery": [
     {
      "src": "/images/store/safe-250k-3item-v2.webp",
-     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-250k-3item-v2-pdp.webp",
+      "srcset": "/images/store/safe-250k-3item-v2-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     },
     {
      "src": "/images/store/safe-250k-combo.webp",
-     "srcset": "/images/store/safe-250k-combo@2x.webp 2x"
+     "srcset": "/images/store/safe-250k-combo@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-250k-combo-pdp.webp",
+      "srcset": "/images/store/safe-250k-combo-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     },
     {
      "src": "/images/store/safe-250k-patch.webp",
-     "srcset": "/images/store/safe-250k-patch@2x.webp 2x"
+     "srcset": "/images/store/safe-250k-patch@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-250k-patch-pdp.webp",
+      "srcset": "/images/store/safe-250k-patch-pdp@2x.webp 2x",
+      "w": 1451,
+      "h": 1084
+     }
     },
     {
      "src": "/images/store/safe-250k-hat.webp",
-     "srcset": "/images/store/safe-250k-hat@2x.webp 2x"
+     "srcset": "/images/store/safe-250k-hat@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-250k-hat-pdp.webp",
+      "srcset": "/images/store/safe-250k-hat-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Recognition Kit Available",
@@ -605,7 +893,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/safe-250k-3item-v2.webp",
-    "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+    "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/safe-250k-3item-v2-pdp.webp",
+     "srcset": "/images/store/safe-250k-3item-v2-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -628,7 +922,13 @@
    "gallery": [
     {
      "src": "/images/store/milestone-c-500k.webp",
-     "srcset": "/images/store/milestone-c-500k@2x.webp 2x"
+     "srcset": "/images/store/milestone-c-500k@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/milestone-c-500k-pdp.webp",
+      "srcset": "/images/store/milestone-c-500k-pdp@2x.webp 2x",
+      "w": 1200,
+      "h": 675
+     }
     }
    ],
    "badge": "Placeholder Award — Final Item Coming Soon",
@@ -637,7 +937,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/milestone-c-500k.webp",
-    "srcset": "/images/store/milestone-c-500k@2x.webp 2x"
+    "srcset": "/images/store/milestone-c-500k@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/milestone-c-500k-pdp.webp",
+     "srcset": "/images/store/milestone-c-500k-pdp@2x.webp 2x",
+     "w": 1200,
+     "h": 675
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": false
@@ -652,15 +958,33 @@
    "gallery": [
     {
      "src": "/images/store/safe-500k-3item.webp",
-     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-3item-pdp.webp",
+      "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     },
     {
      "src": "/images/store/safe-500k-combo.webp",
-     "srcset": "/images/store/safe-500k-combo@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-combo@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-combo-pdp.webp",
+      "srcset": "/images/store/safe-500k-combo-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     },
     {
      "src": "/images/store/safe-500k-hat.webp",
-     "srcset": "/images/store/safe-500k-hat@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-hat@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-hat-pdp.webp",
+      "srcset": "/images/store/safe-500k-hat-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "badge": "Recognition Kit Available",
@@ -674,7 +998,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/safe-500k-3item.webp",
-    "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+    "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/safe-500k-3item-pdp.webp",
+     "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+     "w": 1448,
+     "h": 1086
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -709,7 +1039,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-c-1m-v1.webp",
-     "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-c-1m-v1-pdp.webp",
+      "srcset": "/images/store/medal-c-1m-v1-pdp@2x.webp 2x",
+      "w": 1500,
+      "h": 1000
+     }
     }
    ],
    "badge": "Medal Available",
@@ -718,7 +1054,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-c-1m-v1.webp",
-    "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-c-1m-v1-pdp.webp",
+     "srcset": "/images/store/medal-c-1m-v1-pdp@2x.webp 2x",
+     "w": 1500,
+     "h": 1000
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -733,7 +1075,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-1m-v1.webp",
-     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-1m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-1m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -742,7 +1090,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-1m-v1.webp",
-    "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-1m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-1m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -765,7 +1119,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-c-2m-v1.webp",
-     "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-c-2m-v1-pdp.webp",
+      "srcset": "/images/store/medal-c-2m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -774,7 +1134,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-c-2m-v1.webp",
-    "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-c-2m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-c-2m-v1-pdp.webp",
+     "srcset": "/images/store/medal-c-2m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -789,7 +1155,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-2m-v1.webp",
-     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-2m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-2m-v1-pdp@2x.webp 2x",
+      "w": 1409,
+      "h": 1116
+     }
     }
    ],
    "badge": "Medal Available",
@@ -798,7 +1170,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-2m-v1.webp",
-    "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-2m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-2m-v1-pdp@2x.webp 2x",
+     "w": 1409,
+     "h": 1116
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -821,7 +1199,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-c-3m-v1.webp",
-     "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-c-3m-v1-pdp.webp",
+      "srcset": "/images/store/medal-c-3m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -830,7 +1214,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-c-3m-v1.webp",
-    "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-c-3m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-c-3m-v1-pdp.webp",
+     "srcset": "/images/store/medal-c-3m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -845,7 +1235,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-3m-v1.webp",
-     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-3m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-3m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -854,7 +1250,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-3m-v1.webp",
-    "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-3m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-3m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -877,7 +1279,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-c-4m-v1.webp",
-     "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-c-4m-v1-pdp.webp",
+      "srcset": "/images/store/medal-c-4m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -886,7 +1294,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-c-4m-v1.webp",
-    "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-c-4m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-c-4m-v1-pdp.webp",
+     "srcset": "/images/store/medal-c-4m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -901,7 +1315,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-4m-v1.webp",
-     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-4m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-4m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Medal Available",
@@ -910,7 +1330,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-4m-v1.webp",
-    "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-4m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-4m-v1-pdp@2x.webp 2x",
+     "w": 1402,
+     "h": 1122
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -933,7 +1359,13 @@
    "gallery": [
     {
      "src": "/images/store/5-million-mile-medal.webp",
-     "srcset": "/images/store/5-million-mile-medal@2x.webp 2x"
+     "srcset": "/images/store/5-million-mile-medal@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/5-million-mile-medal-pdp.webp",
+      "srcset": "/images/store/5-million-mile-medal-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Medal Available",
@@ -942,7 +1374,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/5-million-mile-medal.webp",
-    "srcset": "/images/store/5-million-mile-medal@2x.webp 2x"
+    "srcset": "/images/store/5-million-mile-medal@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/5-million-mile-medal-pdp.webp",
+     "srcset": "/images/store/5-million-mile-medal-pdp@2x.webp 2x",
+     "w": 1100,
+     "h": 880
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -957,7 +1395,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-5m-v1.webp",
-     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-5m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-5m-v1-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Medal Available",
@@ -966,7 +1410,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-5m-v1.webp",
-    "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-5m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-5m-v1-pdp@2x.webp 2x",
+     "w": 1100,
+     "h": 880
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -989,7 +1439,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-c-6m-v1.webp",
-     "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-c-6m-v1-pdp.webp",
+      "srcset": "/images/store/medal-c-6m-v1-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Medal Available",
@@ -998,7 +1454,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-c-6m-v1.webp",
-    "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-c-6m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-c-6m-v1-pdp.webp",
+     "srcset": "/images/store/medal-c-6m-v1-pdp@2x.webp 2x",
+     "w": 1100,
+     "h": 880
+    }
    },
    "programLabel": "Service Milestone Awards",
    "gated": true
@@ -1013,7 +1475,13 @@
    "gallery": [
     {
      "src": "/images/store/medal-s-6m-v1.webp",
-     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-6m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-6m-v1-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Medal Available",
@@ -1022,7 +1490,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/medal-s-6m-v1.webp",
-    "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+    "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/medal-s-6m-v1-pdp.webp",
+     "srcset": "/images/store/medal-s-6m-v1-pdp@2x.webp 2x",
+     "w": 1100,
+     "h": 880
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1045,11 +1519,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-bottle-card.webp",
-     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+     "srcset": "/images/store/exec-bottle-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-bottle-card-pdp.webp",
+      "srcset": "/images/store/exec-bottle-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/safe-250k-3item-v2.webp",
-     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x"
+     "srcset": "/images/store/safe-250k-3item-v2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-250k-3item-v2-pdp.webp",
+      "srcset": "/images/store/safe-250k-3item-v2-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1058,7 +1544,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-bottle-card.webp",
-    "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+    "srcset": "/images/store/exec-bottle-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-bottle-card-pdp.webp",
+     "srcset": "/images/store/exec-bottle-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1077,11 +1569,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-bottle-card.webp",
-     "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+     "srcset": "/images/store/exec-bottle-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-bottle-card-pdp.webp",
+      "srcset": "/images/store/exec-bottle-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/safe-500k-3item.webp",
-     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-3item-pdp.webp",
+      "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1090,7 +1594,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-bottle-card.webp",
-    "srcset": "/images/store/exec-bottle-card@2x.webp 2x"
+    "srcset": "/images/store/exec-bottle-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-bottle-card-pdp.webp",
+     "srcset": "/images/store/exec-bottle-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1109,11 +1619,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-foodjar-card.webp",
-     "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
+     "srcset": "/images/store/exec-foodjar-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-foodjar-card-pdp.webp",
+      "srcset": "/images/store/exec-foodjar-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/safe-500k-3item.webp",
-     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-3item-pdp.webp",
+      "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1122,7 +1644,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-foodjar-card.webp",
-    "srcset": "/images/store/exec-foodjar-card@2x.webp 2x"
+    "srcset": "/images/store/exec-foodjar-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-foodjar-card-pdp.webp",
+     "srcset": "/images/store/exec-foodjar-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": false,
@@ -1142,11 +1670,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-lunchbag-v3.webp",
-     "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
+     "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-lunchbag-v3-pdp.webp",
+      "srcset": "/images/store/exec-lunchbag-v3-pdp@2x.webp 2x",
+      "w": 1200,
+      "h": 896
+     }
     },
     {
      "src": "/images/store/safe-500k-3item.webp",
-     "srcset": "/images/store/safe-500k-3item@2x.webp 2x"
+     "srcset": "/images/store/safe-500k-3item@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/safe-500k-3item-pdp.webp",
+      "srcset": "/images/store/safe-500k-3item-pdp@2x.webp 2x",
+      "w": 1448,
+      "h": 1086
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1155,7 +1695,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-lunchbag-v3.webp",
-    "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x"
+    "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-lunchbag-v3-pdp.webp",
+     "srcset": "/images/store/exec-lunchbag-v3-pdp@2x.webp 2x",
+     "w": 1200,
+     "h": 896
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1174,11 +1720,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-tote-card.webp",
-     "srcset": "/images/store/exec-tote-card@2x.webp 2x"
+     "srcset": "/images/store/exec-tote-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-tote-card-pdp.webp",
+      "srcset": "/images/store/exec-tote-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/medal-s-1m-v1.webp",
-     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-1m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-1m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-1m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1187,7 +1745,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-tote-card.webp",
-    "srcset": "/images/store/exec-tote-card@2x.webp 2x"
+    "srcset": "/images/store/exec-tote-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-tote-card-pdp.webp",
+     "srcset": "/images/store/exec-tote-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1206,11 +1770,23 @@
    "gallery": [
     {
      "src": "/images/store/exec-cooler-card.webp",
-     "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
+     "srcset": "/images/store/exec-cooler-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-cooler-card-pdp.webp",
+      "srcset": "/images/store/exec-cooler-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/medal-s-2m-v1.webp",
-     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-2m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-2m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-2m-v1-pdp@2x.webp 2x",
+      "w": 1409,
+      "h": 1116
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1219,7 +1795,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-cooler-card.webp",
-    "srcset": "/images/store/exec-cooler-card@2x.webp 2x"
+    "srcset": "/images/store/exec-cooler-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-cooler-card-pdp.webp",
+     "srcset": "/images/store/exec-cooler-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1238,15 +1820,33 @@
    "gallery": [
     {
      "src": "/images/store/exec-packleader-card.webp",
-     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-card-pdp.webp",
+      "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/exec-packleader-2.webp",
-     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-2-pdp.webp",
+      "srcset": "/images/store/exec-packleader-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/medal-s-3m-v1.webp",
-     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-3m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-3m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-3m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1255,7 +1855,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-packleader-card.webp",
-    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-packleader-card-pdp.webp",
+     "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1274,15 +1880,33 @@
    "gallery": [
     {
      "src": "/images/store/exec-packleader-card.webp",
-     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-card-pdp.webp",
+      "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/exec-packleader-2.webp",
-     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-2-pdp.webp",
+      "srcset": "/images/store/exec-packleader-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/medal-s-4m-v1.webp",
-     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-4m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-4m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-4m-v1-pdp@2x.webp 2x",
+      "w": 1402,
+      "h": 1122
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1291,7 +1915,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-packleader-card.webp",
-    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-packleader-card-pdp.webp",
+     "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1310,15 +1940,33 @@
    "gallery": [
     {
      "src": "/images/store/exec-packleader-card.webp",
-     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-card-pdp.webp",
+      "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/exec-packleader-2.webp",
-     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-2-pdp.webp",
+      "srcset": "/images/store/exec-packleader-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/medal-s-5m-v1.webp",
-     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-5m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-5m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-5m-v1-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1327,7 +1975,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-packleader-card.webp",
-    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-packleader-card-pdp.webp",
+     "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1346,15 +2000,33 @@
    "gallery": [
     {
      "src": "/images/store/exec-packleader-card.webp",
-     "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-card-pdp.webp",
+      "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+      "w": 1536,
+      "h": 1024
+     }
     },
     {
      "src": "/images/store/exec-packleader-2.webp",
-     "srcset": "/images/store/exec-packleader-2@2x.webp 2x"
+     "srcset": "/images/store/exec-packleader-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/exec-packleader-2-pdp.webp",
+      "srcset": "/images/store/exec-packleader-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/medal-s-6m-v1.webp",
-     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x"
+     "srcset": "/images/store/medal-s-6m-v1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/medal-s-6m-v1-pdp.webp",
+      "srcset": "/images/store/medal-s-6m-v1-pdp@2x.webp 2x",
+      "w": 1100,
+      "h": 880
+     }
     }
    ],
    "badge": "Executive Collection",
@@ -1363,7 +2035,13 @@
    "minQty": 1,
    "shot": {
     "src": "/images/store/exec-packleader-card.webp",
-    "srcset": "/images/store/exec-packleader-card@2x.webp 2x"
+    "srcset": "/images/store/exec-packleader-card@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/exec-packleader-card-pdp.webp",
+     "srcset": "/images/store/exec-packleader-card-pdp@2x.webp 2x",
+     "w": 1536,
+     "h": 1024
+    }
    },
    "programLabel": "Safety Recognition",
    "gated": true,
@@ -1382,11 +2060,23 @@
    "gallery": [
     {
      "src": "/images/store/mp-02-1.webp",
-     "srcset": "/images/store/mp-02-1@2x.webp 2x"
+     "srcset": "/images/store/mp-02-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-02-1-pdp.webp",
+      "srcset": "/images/store/mp-02-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/mp-02-2.webp",
-     "srcset": "/images/store/mp-02-2@2x.webp 2x"
+     "srcset": "/images/store/mp-02-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-02-2-pdp.webp",
+      "srcset": "/images/store/mp-02-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Premium",
@@ -1401,7 +2091,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-02-1.webp",
-    "srcset": "/images/store/mp-02-1@2x.webp 2x"
+    "srcset": "/images/store/mp-02-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-02-1-pdp.webp",
+     "srcset": "/images/store/mp-02-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1416,7 +2112,13 @@
    "gallery": [
     {
      "src": "/images/store/mp-03-1.webp",
-     "srcset": "/images/store/mp-03-1@2x.webp 2x"
+     "srcset": "/images/store/mp-03-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-03-1-pdp.webp",
+      "srcset": "/images/store/mp-03-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Premium",
@@ -1431,7 +2133,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-03-1.webp",
-    "srcset": "/images/store/mp-03-1@2x.webp 2x"
+    "srcset": "/images/store/mp-03-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-03-1-pdp.webp",
+     "srcset": "/images/store/mp-03-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1446,11 +2154,23 @@
    "gallery": [
     {
      "src": "/images/store/mp-04-1.webp",
-     "srcset": "/images/store/mp-04-1@2x.webp 2x"
+     "srcset": "/images/store/mp-04-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-04-1-pdp.webp",
+      "srcset": "/images/store/mp-04-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     },
     {
      "src": "/images/store/mp-04-2.webp",
-     "srcset": "/images/store/mp-04-2@2x.webp 2x"
+     "srcset": "/images/store/mp-04-2@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-04-2-pdp.webp",
+      "srcset": "/images/store/mp-04-2-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Signature",
@@ -1465,7 +2185,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-04-1.webp",
-    "srcset": "/images/store/mp-04-1@2x.webp 2x"
+    "srcset": "/images/store/mp-04-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-04-1-pdp.webp",
+     "srcset": "/images/store/mp-04-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1480,7 +2206,13 @@
    "gallery": [
     {
      "src": "/images/store/mp-05-1.webp",
-     "srcset": "/images/store/mp-05-1@2x.webp 2x"
+     "srcset": "/images/store/mp-05-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-05-1-pdp.webp",
+      "srcset": "/images/store/mp-05-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Essential",
@@ -1495,7 +2227,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-05-1.webp",
-    "srcset": "/images/store/mp-05-1@2x.webp 2x"
+    "srcset": "/images/store/mp-05-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-05-1-pdp.webp",
+     "srcset": "/images/store/mp-05-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1510,7 +2248,13 @@
    "gallery": [
     {
      "src": "/images/store/mp-06-1.webp",
-     "srcset": "/images/store/mp-06-1@2x.webp 2x"
+     "srcset": "/images/store/mp-06-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-06-1-pdp.webp",
+      "srcset": "/images/store/mp-06-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Signature",
@@ -1525,7 +2269,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-06-1.webp",
-    "srcset": "/images/store/mp-06-1@2x.webp 2x"
+    "srcset": "/images/store/mp-06-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-06-1-pdp.webp",
+     "srcset": "/images/store/mp-06-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1540,7 +2290,13 @@
    "gallery": [
     {
      "src": "/images/store/mp-07-1.webp",
-     "srcset": "/images/store/mp-07-1@2x.webp 2x"
+     "srcset": "/images/store/mp-07-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-07-1-pdp.webp",
+      "srcset": "/images/store/mp-07-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Premium",
@@ -1555,7 +2311,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-07-1.webp",
-    "srcset": "/images/store/mp-07-1@2x.webp 2x"
+    "srcset": "/images/store/mp-07-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-07-1-pdp.webp",
+     "srcset": "/images/store/mp-07-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false
@@ -1570,7 +2332,13 @@
    "gallery": [
     {
      "src": "/images/store/mp-08-1.webp",
-     "srcset": "/images/store/mp-08-1@2x.webp 2x"
+     "srcset": "/images/store/mp-08-1@2x.webp 2x",
+     "pdp": {
+      "src": "/images/store/mp-08-1-pdp.webp",
+      "srcset": "/images/store/mp-08-1-pdp@2x.webp 2x",
+      "w": 1254,
+      "h": 1254
+     }
     }
    ],
    "badge": "Essential",
@@ -1585,7 +2353,13 @@
    "minQty": 10,
    "shot": {
     "src": "/images/store/mp-08-1.webp",
-    "srcset": "/images/store/mp-08-1@2x.webp 2x"
+    "srcset": "/images/store/mp-08-1@2x.webp 2x",
+    "pdp": {
+     "src": "/images/store/mp-08-1-pdp.webp",
+     "srcset": "/images/store/mp-08-1-pdp@2x.webp 2x",
+     "w": 1254,
+     "h": 1254
+    }
    },
    "programLabel": "Safe Miles Programs",
    "gated": false

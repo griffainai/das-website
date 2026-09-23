@@ -16,7 +16,7 @@
        BEFORE quantity: minimum, lead time, what branding costs
      · quantity tiles that carry their own line total, so the number the buyer
        is deciding about is on the control they are deciding with
-     · a programme band under the fold that sells the PROGRAMME, not the piece
+     · a program band under the fold that sells the PROGRAM, not the piece
 
    THE GATED PATH IS STILL FIRST-CLASS. 40 of 54 pieces are over the $110 gate,
    so Request Pricing replaces price, quantity and add entirely on those — the
@@ -75,12 +75,29 @@
   }
 
   /* ── the stacked gallery ─────────────────────────────────────────────── */
+  /* THE GALLERY USES THE UNCROPPED DERIVATIVE, NOT THE GRID ONE.
+     The card grid needs every frame identical or the cards do not line up, so
+     it cover-crops to 5:4. A product page shows ONE product and owes nothing to
+     a grid — cropping it there just throws the product away. Four kit shots are
+     1122x1402 portrait and were losing 36% of the kit to that crop, which is
+     what Jayden was looking at when he said the photo "isnt sized properly".
+
+     So each figure carries the photograph's OWN pixel dimensions on the <img>.
+     That gives the browser the real intrinsic ratio, which with height:auto in
+     CSS reserves the correct box before load (no layout shift) and lets
+     max-height cap it against the viewport — the replaced-element sizing
+     algorithm recomputes width to keep the ratio, so a tall shot gets narrower
+     instead of taller. No crop, no letterbox bars, fits one screen. */
   function gallery() {
     var g = (P.gallery && P.gallery.length) ? P.gallery : [P.shot];
     return g.map(function (s, i) {
-      return '<figure data-zoom="false" data-i="' + i + '">' +
-        '<img src="' + esc(s.src) + '" srcset="' + esc(s.srcset) + '" alt="' + esc(P.name) +
-          (i ? ' — view ' + (i + 1) : '') + '" width="700" height="560"' +
+      var v = s.pdp || s;                        // pdp is absent only if images were never rebuilt
+      var w = v.w || 1400, h = v.h || 1120;
+      // --rnum is what lets the CSS cap the figure's HEIGHT against the fold and
+      // derive the width from it, instead of the other way round.
+      return '<figure data-zoom="false" data-i="' + i + '" style="--rnum:' + (w / h).toFixed(4) + '">' +
+        '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" alt="' + esc(P.name) +
+          (i ? ' — view ' + (i + 1) : '') + '" width="' + w + '" height="' + h + '"' +
           (i ? ' loading="lazy"' : ' fetchpriority="high"') + '>' +
         '<figcaption>' + (i + 1) + ' / ' + g.length + '</figcaption>' +
       '</figure>';
@@ -102,7 +119,7 @@
     if (P.blurb) h += '<p class="blurb">' + esc(P.blurb) + '</p>';
 
     h += '<a class="pd-prog st-ui" href="store.html?c=' + esc(P.program) + '">' +
-      'See the whole ' + esc(P.programLabel) + ' programme' +
+      'See the whole ' + esc(P.programLabel) + ' program' +
       '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
 
     /* ── The Executive Collection cross-link, both directions ──────────────
@@ -128,13 +145,13 @@
     h += '<div class="pd-logi st-ui">' +
       '<div><b>' + (P.minQty || 10) + ' units</b><span>Minimum order</span></div>' +
       '<div><b>5&ndash;7 days</b><span>After artwork approval</span></div>' +
-      '<div><b>Included</b><span>Logo &amp; personalisation</span></div>' +
+      '<div><b>Included</b><span>Logo &amp; personalization</span></div>' +
       '</div>';
 
     if (P.gated) {
       h += '<div class="st-req">' +
         '<b>Priced to your fleet</b>' +
-        '<p>This programme is quoted on driver count, customisation and timeline. A specialist replies in writing within one business day &mdash; a real number, not a range.</p>' +
+        '<p>This program is quoted on driver count, customization and timeline. A specialist replies in writing within one business day &mdash; a real number, not a range.</p>' +
         '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
           '&amp;name=' + encodeURIComponent(P.name) + '">Request pricing</a>' +
         '</div>';
@@ -165,7 +182,7 @@
             return '<option value="' + k.key + '"' + (k.key === kitChoice ? ' selected' : '') + '>' +
               esc(k.label) + '</option>';
           }).join('') + '</select>';
-        h += '<p class="pd-note">Images are representative. The award is customised to the milestone level you choose, at no extra cost.</p>';
+        h += '<p class="pd-note">Images are representative. The award is customized to the milestone level you choose, at no extra cost.</p>';
       }
       h += '<div class="pd-lbl st-ui"><span>Quantity</span><a href="contact.html?intent=pricing">Need a different volume?</a></div>';
       h += '<div class="pd-qty st-ui">' + qtys(P).map(function (q) {
@@ -179,7 +196,7 @@
     h += '<button class="st-cta st-cta--ghost st-cta--block" style="margin-top:8px" data-save-to-fav>Save for later</button>';
 
     h += '<div class="pd-usp st-ui">' +
-      '<div>' + TICK + '<span>Your logo, driver names and colours included &mdash; no setup or artwork fee</span></div>' +
+      '<div>' + TICK + '<span>Your logo, driver names and colors included &mdash; no setup or artwork fee</span></div>' +
       '<div>' + TICK + '<span>Artwork proofed and approved before anything is produced</span></div>' +
       '<div>' + TICK + '<span>Net-30 for approved carriers &middot; purchase orders accepted</span></div>' +
       '</div>';
@@ -193,13 +210,13 @@
       'production once you approve it. Driver names and a custom message are included at every tier.' +
       '</div></details>';
     h += '<details><summary class="st-ui">Shipping &amp; returns</summary><div class="bd">' +
-      'Standard orders ship on your programme timeline once artwork is approved; express processing is available ' +
-      'for time-sensitive programmes including Driver Appreciation Week. 30 days on unopened product &mdash; ' +
-      'customised and personalised pieces are final sale.' +
+      'Standard orders ship on your program timeline once artwork is approved; express processing is available ' +
+      'for time-sensitive programs including Driver Appreciation Week. 30 days on unopened product &mdash; ' +
+      'customized and personalized pieces are final sale.' +
       '</div></details>';
     h += '<details><summary class="st-ui">Ordering for a large fleet</summary><div class="bd">' +
       'Volume pricing unlocks at 100+ drivers on the same SKUs and the same quality. Multi-terminal delivery and ' +
-      'annual programme scheduling are coordinated by the fleet team. ' +
+      'annual program scheduling are coordinated by the fleet team. ' +
       '<a href="company-purchasing.html" style="color:var(--st-navy);text-decoration:underline">Buy for my company</a>.' +
       '</div></details>';
     return h;
@@ -208,10 +225,10 @@
   function band() {
     return '<div class="in">' +
       '<div><p class="k st-ui">' + esc(P.programLabel) + '</p>' +
-      '<h2>A programme beats a parcel.</h2>' +
+      '<h2>A program beats a parcel.</h2>' +
       '<p>One kit is a nice gesture. A calendar of them is what moves retention &mdash; and the fleet team builds the ' +
       'calendar around your driver count, your budget and the dates that already matter to your operation.</p></div>' +
-      '<a class="st-cta st-cta--light" href="contact.html?intent=pricing">Build the programme</a>' +
+      '<a class="st-cta st-cta--light" href="contact.html?intent=pricing">Build the program</a>' +
       '</div>';
   }
 
@@ -340,7 +357,7 @@
     qty = P.minQty || 10;
     paint();
     track('viewItem', { sku: P.id, name: P.name, price: P.gated ? 0 : P.price, category: P.programLabel });
-    push('view_product', { product_id: P.id, programme: P.program, gated: !!P.gated });
+    push('view_product', { product_id: P.id, program: P.program, gated: !!P.gated });
 
     /* A click on Request Pricing is the conversion on 74% of this catalogue.
        It is recorded as a lead so it lands beside real leads in GA4 and Ads
@@ -348,7 +365,7 @@
     var req = document.querySelector('.st-req .st-cta');
     if (req) req.addEventListener('click', function () {
       track('lead', {});
-      push('request_pricing', { product_id: P.id, programme: P.program, source: 'pdp' });
+      push('request_pricing', { product_id: P.id, program: P.program, source: 'pdp' });
     });
   }).catch(function () {
     root.innerHTML = '<div style="padding:60px 24px"><p class="st-ui" style="color:var(--st-muted)">' +
