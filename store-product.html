@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=15">
+<link rel="stylesheet" href="/css/das-store.css?v=17">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 </head>
 
@@ -48,11 +48,15 @@
   <div class="pd-buy st-ui" id="pd-buy"></div>
 </main>
 
+<!-- The rows first — complete the kit, you may also like, recently viewed —
+     then the band LAST. The band was above them until 2026-09-23 and measured
+     at top 1280 with the rows running to 4493 beneath it, so the page's closing
+     statement was sitting in its middle. A closing band has to close. -->
+<div id="pd-also"></div>
+
 <!-- Sells the PROGRAM rather than the piece — one kit is a gesture, a
      calendar of them is what moves retention. -->
 <section class="pd-band st-ui" id="pd-band"></section>
-
-<div id="pd-also"></div>
 
 <!-- Sticky mobile buy bar: on a phone the add button otherwise scrolls away. -->
 <div class="pd-bar" id="pd-bar"></div>
@@ -113,7 +117,7 @@
 <script src="/js/tracking.js?v=3" defer></script>
 <script src="/lib/catalog.js?v=1"></script>
 <script src="/js/cart.js?v=6"></script>
-<script src="/js/das-pdp.js?v=11" defer></script>
-<script src="/js/das-store.js?v=6" defer></script>
+<script src="/js/das-pdp.js?v=12" defer></script>
+<script src="/js/das-store.js?v=7" defer></script>
 </body>
 </html>

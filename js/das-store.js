@@ -31,6 +31,22 @@
   };
   var money = function (n) { return '$' + Number(n).toFixed(2); };
 
+  /* CARD IMAGE — the composed 4:5 derivative, not the 5:4 cover one.
+     The grid frame is portrait now (one ratio site-wide, matching the
+     reference), and the cover derivative is landscape, so using it here would
+     crop 47% off a landscape kit shot — the exact thing the composed frames
+     were built to avoid. `pdp` is already 4:5, already filled, already
+     ladder-sized; `sizes` is what lets the browser pick the right rung for a
+     ~380px card instead of assuming the full viewport. */
+  function cardImg(p, eager) {
+    var v = (p.shot && p.shot.pdp) || p.shot || {};
+    return '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '"' +
+      (v.sizes ? ' sizes="(min-width:1024px) 20vw, 50vw"' : '') +
+      ' alt="' + esc(p.name) + '" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"' +
+      (eager ? '' : ' loading="lazy"') + '>';
+  }
+
+
   /* Analytics rides the site's existing window.dasTrack (js/tracking.js), which
      already fans out to GA4, Google Ads and the Meta pixel. A second layer would
      double-count. Guarded: tracking.js is deferred and a click can beat it. */
@@ -77,8 +93,7 @@
         '<div class="shot">' +
           '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '" aria-label="' + esc(p.name) + '">' +
             (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') +
-            '<img src="' + esc(p.shot.src) + '" srcset="' + esc(p.shot.srcset) + '" alt="' + esc(p.name) + '"' +
-              (i < 8 ? '' : ' loading="lazy"') + ' width="700" height="560">' +
+            cardImg(p, i < 8) +
           '</a>' +
           '<button class="fav' + (saved ? ' fav-active' : '') + '" data-save-to-fav aria-label="Save ' + esc(p.name) + ' for later">' + heart(saved) + '</button>' +
           /* a bare 12x12 plus glyph, not a bordered box */

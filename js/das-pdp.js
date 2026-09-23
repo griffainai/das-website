@@ -289,30 +289,136 @@
     return h;
   }
 
+  /* THE CLOSING BAND — the reference's First Edition panel, on DAS's own photo.
+     Theirs is a full-bleed photograph on one side with a quiet editorial column
+     on the other: a small uppercase eyebrow, a two-line display line, one line
+     of copy, one full-width CTA. Same structure, using the forest band already
+     on the shop page and the CTA Jayden named. */
   function band() {
-    return '<div class="in">' +
-      '<div><p class="k st-ui">' + esc(P.programLabel) + '</p>' +
-      '<h2>A program beats a parcel.</h2>' +
-      '<p>One kit is a nice gesture. A calendar of them is what moves retention &mdash; and the fleet team builds the ' +
-      'calendar around your driver count, your budget and the dates that already matter to your operation.</p></div>' +
-      '<a class="st-cta st-cta--light" href="contact.html?intent=pricing">Build the program</a>' +
+    return '<div class="fb-media">' +
+        '<img src="images/band-forest-1200.jpg" srcset="images/band-forest-1200.jpg 1200w, images/band-forest-2400.jpg 2400w" ' +
+          'sizes="(min-width:1024px) 50vw, 100vw" alt="" loading="lazy">' +
+      '</div>' +
+      '<div class="fb-copy">' +
+        '<p class="k st-micro">' + esc(P.programLabel) + ' &middot; built to your fleet</p>' +
+        '<h2>A program beats<br>a parcel.</h2>' +
+        '<p class="fb-lede">One kit is a gesture. A calendar of them is what moves retention &mdash; built around your ' +
+        'driver count, your budget and the dates that already matter to your operation.</p>' +
+        '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
+          '&amp;name=' + encodeURIComponent(P.name) + '">Build the program</a>' +
       '</div>';
   }
 
-  function alsoIn() {
-    var others = CAT.products.filter(function (x) { return x.program === P.program && x.id !== P.id; }).slice(0, 4);
-    if (!others.length) return '';
-    return '<section class="st-sec"><div class="head st-ui"><h2>More in ' + esc(P.programLabel) + '</h2>' +
-      '<sup>' + others.length + '</sup></div><div class="st-grid" data-view="4">' +
-      others.map(function (p) {
-        return '<article class="st-card st-ui">' +
-          '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
-          '<img src="' + esc(p.shot.src) + '" srcset="' + esc(p.shot.srcset) + '" alt="' + esc(p.name) + '" loading="lazy" width="700" height="560"></a>' +
-          '<div class="foot"><div class="t">' + esc(p.name) + '</div>' +
-          '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
-          '</article>';
-      }).join('') + '</div></section>';
+  /* ── ROWS UNDER THE PRODUCT ──────────────────────────────────────────────
+     The reference runs three things below the fold: the kit this piece is sold
+     WITH, "You May Also Like" behind Suggested / category tabs, and a
+     recently-viewed trail. All three use the same card, and every heading is
+     12px/16px weight 700 uppercase — measured off the live page. */
+  function card(p) {
+    var v = (p.shot && p.shot.pdp) || p.shot || {};
+    return '<article class="st-card st-ui">' +
+      '<div class="shot"><a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
+        '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" sizes="(min-width:1024px) 20vw, 50vw" ' +
+        'alt="' + esc(p.name) + '" loading="lazy" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a></div>' +
+      '<div class="foot"><div class="grp"><div class="t">' + esc(p.name) + '</div>' +
+        '<div class="c">' + esc(p.programLabel) + '</div></div>' +
+        '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
+      '</article>';
   }
+
+  function row(title, list, id) {
+    if (!list.length) return '';
+    return '<section class="st-sec pd-row"' + (id ? ' id="' + id + '"' : '') + '>' +
+      '<div class="pd-rowhead"><h2>' + esc(title) + '</h2></div>' +
+      '<div class="st-grid" data-view="5">' + list.map(card).join('') + '</div></section>';
+  }
+
+  /** THE KIT: what this product is bought WITH. The Executive upgrade when the
+   *  piece has one — that is DAS's real "complete the set" — otherwise the
+   *  nearest pieces from the same program. Career and Safety cannot mix here:
+   *  the pool is filtered on `program`, which the catalogue derives from
+   *  `track`, never from the display category. */
+  function theKit() {
+    var pool = [], seen = {};
+    function push(x) { if (x && x.id !== P.id && !seen[x.id]) { seen[x.id] = 1; pool.push(x); } }
+    function byId(id) { return CAT.products.filter(function (y) { return y.id === id; })[0]; }
+    (P.execUpgrades || []).forEach(function (u) { push(byId(u.id)); });
+    if (P.execBase) push(byId(P.execBase.id));
+    CAT.products.forEach(function (x) { if (pool.length < 5 && x.program === P.program) push(x); });
+    return row('Complete the ' + P.programLabel + ' kit', pool.slice(0, 5));
+  }
+
+  /** YOU MAY ALSO LIKE, behind tabs. Theirs read Suggested / T-Shirts /
+   *  Hoodies; ours are Suggested plus the two largest programs that are NOT
+   *  this product's own, so every tab offers somewhere new to go. */
+  function alsoIn() {
+    var byProg = {};
+    CAT.products.forEach(function (x) { (byProg[x.program] = byProg[x.program] || []).push(x); });
+    var others = Object.keys(byProg)
+      .filter(function (k) { return k !== P.program; })
+      .sort(function (a, b) { return byProg[b].length - byProg[a].length; })
+      .slice(0, 2);
+
+    var suggested = CAT.products.filter(function (x) {
+      return x.id !== P.id && (x.program === P.program || Math.abs((x.price || 0) - (P.price || 0)) < 60);
+    }).slice(0, 10);
+
+    var tabs = [{ k: 'suggested', label: 'Suggested', list: suggested }];
+    others.forEach(function (k) {
+      tabs.push({
+        k: k,
+        label: (byProg[k][0] || {}).programLabel || k,
+        list: byProg[k].filter(function (x) { return x.id !== P.id; }).slice(0, 10)
+      });
+    });
+    if (!tabs.some(function (t) { return t.list.length; })) return '';
+
+    return '<section class="st-sec pd-also">' +
+      '<div class="pd-rowhead pd-rowhead--center"><h2>You may also like</h2></div>' +
+      '<div class="pd-tabs st-ui" role="tablist">' +
+        tabs.map(function (t, i) {
+          return '<button type="button" role="tab" class="pd-tab' + (i ? '' : ' on') + '" data-tab="' + esc(t.k) + '"' +
+            ' aria-selected="' + (i ? 'false' : 'true') + '">' + esc(t.label) + '</button>';
+        }).join('') +
+      '</div>' +
+      tabs.map(function (t, i) {
+        return '<div class="pd-pane" data-pane="' + esc(t.k) + '"' + (i ? ' hidden' : '') + '>' +
+          '<div class="st-grid" data-view="5">' + t.list.slice(0, 5).map(card).join('') + '</div>' +
+          (t.list.length > 5
+            ? '<div class="st-grid pd-rest" data-view="5" hidden>' + t.list.slice(5).map(card).join('') + '</div>' +
+              '<div class="pd-more"><button type="button" class="pd-loadmore st-ui">Load more</button></div>'
+            : '') +
+        '</div>';
+      }).join('') +
+    '</section>';
+  }
+
+  /* RECENTLY VIEWED — a per-visitor trail, newest first, this product removed.
+     localStorage because it is a convenience for one browser and nothing should
+     depend on it; every read and write is wrapped, because a private window
+     THROWS on access rather than returning null. */
+  var RV_KEY = 'das_recent_v1';
+  function recentIds() {
+    try { return JSON.parse(localStorage.getItem(RV_KEY) || '[]'); } catch (e) { return []; }
+  }
+  function rememberView(id) {
+    try {
+      var list = recentIds().filter(function (x) { return x !== id; });
+      list.unshift(id);
+      localStorage.setItem(RV_KEY, JSON.stringify(list.slice(0, 12)));
+    } catch (e) { /* private window — the trail is optional, never load-bearing */ }
+  }
+  function recentlyViewed() {
+    var list = [];
+    recentIds().forEach(function (id) {
+      if (id === P.id) return;
+      var x = CAT.products.filter(function (y) { return y.id === id; })[0];
+      if (x) list.push(x);
+    });
+    return row('Recently viewed', list.slice(0, 5), 'pd-recent');
+  }
+
+
 
   function bar() {
     var el = document.getElementById('pd-bar');
@@ -332,7 +438,9 @@
     wireGallery();
     document.getElementById('pd-buy').innerHTML = buy();
     var b = document.getElementById('pd-band'); if (b) b.innerHTML = band();
-    var also = document.getElementById('pd-also'); if (also) also.innerHTML = alsoIn();
+    var also = document.getElementById('pd-also');
+    if (also) also.innerHTML = theKit() + alsoIn() + recentlyViewed();
+    rememberView(P.id);
     bar();
     document.title = P.name + ' — Driver Appreciation Solutions';
     root.setAttribute('data-product-id', P.id);
@@ -410,6 +518,33 @@
       tr.scrollTo({ left: n * per, behavior: 'smooth' });
       return;
     }
+    /* You-may-also-like tabs, and the Load more that reveals the second five.
+       Panes are toggled with the `hidden` attribute rather than a class so a
+       hidden pane is out of the accessibility tree too, not merely invisible. */
+    var tab = e.target.closest && e.target.closest('.pd-tab');
+    if (tab) {
+      var sec = tab.closest('.pd-also');
+      sec.querySelectorAll('.pd-tab').forEach(function (t) {
+        var on = t === tab;
+        t.classList.toggle('on', on);
+        t.setAttribute('aria-selected', String(on));
+      });
+      sec.querySelectorAll('.pd-pane').forEach(function (pane) {
+        pane.hidden = pane.getAttribute('data-pane') !== tab.dataset.tab;
+      });
+      push('also_tab', { tab: tab.dataset.tab, product_id: P.id });
+      return;
+    }
+    var more = e.target.closest && e.target.closest('.pd-loadmore');
+    if (more) {
+      var pane = more.closest('.pd-pane');
+      var rest = pane && pane.querySelector('.pd-rest');
+      if (rest) rest.hidden = false;
+      more.parentElement.remove();
+      push('also_load_more', { product_id: P.id });
+      return;
+    }
+
     if (e.target.closest && e.target.closest('.pd-zoom')) {
       var gw = document.getElementById('pd-gal');
       if (gw) gw.setAttribute('data-zoom', gw.getAttribute('data-zoom') === 'true' ? 'false' : 'true');
