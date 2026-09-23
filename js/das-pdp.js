@@ -95,14 +95,18 @@
          dots             3px tall; active 16px black, rest 6px at 30%
      Horizontal snap scroller, one photograph per slide, arrows at 20px.
 
-     THE ONE DEVIATION, AND WHY. Their frame is 4:5 PORTRAIT because Represent
-     shoots 4:5 apparel. DAS does not: of 54 primary shots, 50 are landscape or
-     square and only 4 are portrait. Cover-fitting a 1.5 landscape kit photo
-     into a 4:5 frame crops 47% of its WIDTH — half the kit gone on nearly
-     every product. So the structure is copied exactly and the frame ratio is
-     DAS's own modal 1.25, which is also what the card grid uses, so the store
-     stays internally consistent. One token, --st-pdp-frame, if he wants literal
-     4:5 anyway. Either way the photograph FILLS the frame: zero white space. */
+     THE FRAME IS 4:5, LIKE THEIRS — corrected 2026-09-23 (this comment used to
+     say 1.25 and was left stale for a pass; do not trust a comment over the
+     token). A 1.25 frame left the gallery 754px tall against a 1244px buy
+     column: 490px of blank white under every photograph, because their gallery
+     is TALLER than their buy column and mine was shorter.
+
+     A straight cover-crop into 4:5 would still take 47% of the width off a
+     landscape kit shot, and 50 of 54 primaries are landscape or square. So the
+     derivatives are COMPOSED onto a 4:5 canvas instead — the photograph's own
+     blurred, dimmed copy fills the frame and the product sits whole and
+     centred on top. Filled, uncropped, and the same portrait shape the cards
+     use. The token is --st-pdp-frame. */
   function gallery() {
     var g = (P.gallery && P.gallery.length) ? P.gallery : [P.shot];
     var slides = g.map(function (s, i) {
@@ -272,7 +276,7 @@
       h += '<details open><summary class="st-ui">What&rsquo;s included</summary><div class="bd"><ul>' +
         P.included.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul></div></details>';
     }
-    h += '<details><summary class="st-ui">Customisation &amp; artwork</summary><div class="bd">' +
+    h += '<details><summary class="st-ui">Customization &amp; artwork</summary><div class="bd">' +
       'Send a logo at any resolution. The fleet team prepares the artwork, sends a proof, and only moves to ' +
       'production once you approve it. Driver names and a custom message are included at every tier.' +
       '</div></details>';
