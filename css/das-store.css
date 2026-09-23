@@ -67,14 +67,14 @@
   --st-micro:10px; --st-micro-lh:10px;
   --st-chip:10px;  --st-chip-lh:15px;
 
-  --st-nav-h:46px;
+  --st-nav-h:112px;   /* grew with the 3x mark; see .st-hd .mark img */
   --st-cta-h:52px;
   --st-buycol:472px;
   --st-radius:0px;
   /* the frame — 5:4, the modal ratio of this catalogue */
   --st-frame:1400 / 1120;
 }
-@media(max-width:1023px){ :root{ --st-nav-h:63px; } }
+@media(max-width:1023px){ :root{ --st-nav-h:84px; } }
 
 /* ── reset, scoped so the rest of the site is untouched ─────────────────── */
 .st, .st *, .st *::before, .st *::after{ box-sizing:border-box; border-radius:var(--st-radius); }
@@ -120,9 +120,16 @@
    the reference stores set a pure WORDMARK at that height, and a wordmark at
    22px is a confident 200px wide. This lockup is nearly three times shorter, so
    the same number reads as a thumbnail. Sized against the bar instead: 32 of
-   46px desktop, 38 of 63px mobile, which keeps 7px of air top and bottom. */
-.st-hd .mark img{ height:32px; width:auto; }
-@media(max-width:1023px){ .st-hd .mark img{ height:38px; } }
+   46px desktop, 38 of 63px mobile, which keeps 7px of air top and bottom.
+
+   2026-09-23, again: "this logo needs to be 3x as big". 32 -> 96px, exactly 3x,
+   which at 2.81:1 renders 270px wide. A 96px mark cannot live in a 46px bar, so
+   --st-nav-h grows with it to 112px (96 + 8 above and below). That token also
+   drives the sticky offsets and the gallery's height, so the rest of the page
+   follows on its own. Mobile takes a large bump rather than a literal 3x — 114px
+   of logo on a 375px phone would be most of the screen — so 64px in an 84px bar. */
+.st-hd .mark img{ height:96px; width:auto; }
+@media(max-width:1023px){ .st-hd .mark img{ height:64px; } }
 .st-hd .right{ display:flex; align-items:center; justify-content:flex-end; height:100%; }
 .st-hd .count{ font-size:var(--st-micro); line-height:var(--st-micro-lh); vertical-align:super; margin-left:3px; color:var(--st-navy); }
 @media(max-width:1023px){ .st-hd .hide{ display:none; } }

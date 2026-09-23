@@ -107,8 +107,13 @@
     var g = (P.gallery && P.gallery.length) ? P.gallery : [P.shot];
     var slides = g.map(function (s, i) {
       var v = s.pdp || s;                        // uncropped variant; falls back if images predate it
+      /* `sizes` is what makes the srcset ladder work at all. Without it the
+         browser assumes 100vw and picks by that, which on this layout — where
+         the gallery is 50vw on desktop and 100vw on mobile — hands a desktop
+         1x screen the wrong rung. The builder emits the matching descriptor. */
+      var sizes = v.sizes ? ' sizes="' + esc(v.sizes) + '"' : '';
       return '<figure class="pd-slide" data-i="' + i + '">' +
-        '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" alt="' + esc(P.name) +
+        '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '"' + sizes + ' alt="' + esc(P.name) +
           (i ? ' — view ' + (i + 1) : '') + '" width="' + (v.w || 1400) + '" height="' + (v.h || 1120) + '"' +
           (i ? ' loading="lazy"' : ' fetchpriority="high"') + '>' +
       '</figure>';

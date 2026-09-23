@@ -95,20 +95,65 @@ const HALF = { w: 700, h: 560 }
    bars — the fill is the photograph's own colour, so it reads as depth rather
    than as padding. A portrait source fills it exactly and never sees the
    backdrop at all. */
-const PDP = { w: 1120, h: 1400 }
-const PDP_HALF = { w: 560, h: 700 }
+/* ── PDP FRAME: 4:5, FILLED, AND ACTUALLY SHARP ──────────────────────────
+   Jayden 2026-09-23: "the photos dont render correctly at all you need to make
+   sure every photo is still very quality and clean with the new sizing."
 
-async function pdpFrame(src, W, H, quality) {
+   Two separate faults, both mine, both measured:
+
+   1. THE DEFAULT FILE WAS A THIRD OF THE DISPLAY SIZE. The pair shipped as
+      560x700 (src) and 1120x1400 (@2x) while the gallery renders at 943 CSS px
+      wide. A 1x screen therefore took the 560px file and stretched it 1.68x.
+      That is the blur. A 1x/2x pair only works when the 1x file IS the display
+      size; this one was picked before the frame went full-height.
+
+   2. THE PRODUCT ITSELF WAS BEING UPSCALED. fit:'inside' ran with
+      withoutEnlargement:FALSE, so a 1122x1402 source was blown up to fill a
+      larger canvas — resampled detail presented as product photography.
+
+   The fix for both is to let the SOURCE decide the ceiling. For a 4:5 canvas of
+   width W the subject is limited by width on a landscape source and by height
+   on a portrait one, so the largest honest canvas is:
+        cap = ratio > 0.8 ? sourceWidth : 0.8 * sourceHeight
+   Everything at or below that is real detail; anything above is invention. Each
+   photograph then gets a proper responsive ladder up to its own cap and the
+   browser picks by `sizes`, instead of one guessed pair.
+
+   The BACKDROP may be upscaled freely — it is blurred to 36px, so resampling it
+   is invisible. Only the subject is held to the cap. */
+const PDP_RATIO = 0.8
+const LADDER = [560, 840, 1120, 1400, 1680, 2100]
+
+/** The widest 4:5 canvas this source can fill without enlarging the product. */
+async function pdpCap(src) {
+  const m = await sharp(src).metadata()
+  const r = m.width / m.height
+  return Math.max(320, Math.floor(r > PDP_RATIO ? m.width : PDP_RATIO * m.height))
+}
+
+/** The ladder for one photograph: every rung it can serve honestly, plus its
+ *  own cap as the top rung when that sits between rungs. */
+function pdpWidths(cap) {
+  const top = Math.min(LADDER[LADDER.length - 1], cap)
+  const w = LADDER.filter((x) => x <= top)
+  if (!w.length) w.push(top)
+  else if (w[w.length - 1] < top - 40) w.push(top)
+  return w
+}
+
+async function pdpFrame(src, W, quality) {
+  const H = Math.round(W / PDP_RATIO)
   const backdrop = await sharp(src)
     .resize(W, H, { fit: 'cover', position: 'centre' })
     .blur(36).modulate({ brightness: 0.78, saturation: 0.9 })
     .toBuffer()
+  // withoutEnlargement: the product is never resampled up past its own pixels.
   const subject = await sharp(src)
-    .resize(W, H, { fit: 'inside', withoutEnlargement: false })
+    .resize(W, H, { fit: 'inside', withoutEnlargement: true })
     .toBuffer()
   return sharp(backdrop)
     .composite([{ input: subject, gravity: 'centre' }])
-    .webp({ quality, effort: 5 }).toBuffer()
+    .webp({ quality, effort: 6 }).toBuffer()
 }
 
 /* CONTENT-HASHED FILENAMES, and why they are not optional.
@@ -168,18 +213,24 @@ for (const rel of files) {
   try {
     // The PDP pair is always recomposed — it is cheap, and its filename depends
     // on the bytes, so there is nothing to compare a timestamp against.
-    const pBig = await pdpFrame(src, PDP.w, PDP.h, 88)
-    const pSmall = await pdpFrame(src, PDP_HALF.w, PDP_HALF.h, 86)
-    const h = hash8(pBig)
+    const cap = await pdpCap(src)
+    const widths = pdpWidths(cap)
+    const built = []
+    for (const W of widths) built.push({ W, buf: await pdpFrame(src, W, W <= 1120 ? 90 : 86) })
+    const h = hash8(built[built.length - 1].buf)
     for (const f of readdirSync(OUT)) {
-      if (f.startsWith(`${name}-pdp`) && !f.includes(`-pdp-${h}`)) rmSync(join(OUT, f))
+      if (f.startsWith(`${name}-pdp`) && !f.includes(`-pdp-${h}-`)) rmSync(join(OUT, f))
     }
-    writeFileSync(join(OUT, `${name}-pdp-${h}@2x.webp`), pBig)
-    writeFileSync(join(OUT, `${name}-pdp-${h}.webp`), pSmall)
+    for (const b of built) writeFileSync(join(OUT, `${name}-pdp-${h}-${b.W}.webp`), b.buf)
+    // The default src is the rung closest to the real desktop display width, so
+    // a 1x screen is never handed a file it has to stretch.
+    const top = built[built.length - 1].W
+    const def = built.reduce((a, b) => (Math.abs(b.W - 1120) < Math.abs(a.W - 1120) ? b : a)).W
     pdpOut[name] = {
-      src: `/images/store/${name}-pdp-${h}.webp`,
-      srcset: `/images/store/${name}-pdp-${h}@2x.webp 2x`,
-      w: PDP.w, h: PDP.h,
+      src: `/images/store/${name}-pdp-${h}-${def}.webp`,
+      srcset: built.map((b) => `/images/store/${name}-pdp-${h}-${b.W}.webp ${b.W}w`).join(', '),
+      sizes: '(min-width:1024px) 50vw, 100vw',
+      w: top, h: Math.round(top / PDP_RATIO), cap,
     }
     if (coverFresh) { skipped++; continue }
 
@@ -212,5 +263,5 @@ for (const f of readdirSync(OUT)) {
   if (pdpOut[name]) entry.pdp = pdpOut[name]
   manifest[name] = entry
 }
-writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpBox: PDP, images: manifest }, null, 1))
+writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpRatio: PDP_RATIO, pdpLadder: LADDER, images: manifest }, null, 1))
 console.log(`manifest: ${Object.keys(manifest).length} entries -> images/store/manifest.json`)
