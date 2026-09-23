@@ -44,9 +44,10 @@
    Run:  node scripts/build-store-images.mjs
    ========================================================================== */
 import { createRequire } from 'node:module'
-import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, readdirSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, existsSync, statSync, readdirSync, rmSync } from 'node:fs'
 import { join, basename, extname } from 'node:path'
 import vm from 'node:vm'
+import { createHash } from 'node:crypto'
 
 // sharp is not a dependency of this static site; borrow the one already installed
 // next door rather than adding a build dependency to a site that has no build.
@@ -79,8 +80,47 @@ const HALF = { w: 700, h: 560 }
  *  pixel size so the page can set aspect-ratio per image and reserve the
  *  correct box — no letterbox bars, because the frame takes the image's shape
  *  rather than the reverse. Height is then capped in CSS against the viewport. */
-const PDP = { w: 1600, h: 1600 }
-const PDP_HALF = { w: 800, h: 800 }
+/* 2026-09-23, second pass. The "inside a box" version left the gallery 754px
+   tall against a 1244px buy column — 490px of blank white under the photograph,
+   which is the white space Jayden was still looking at. The reference's gallery
+   is 950x1188 at the same viewport: TALLER than its buy column, so nothing is
+   ever blank. Its frame is 4:5 because Represent shoots 4:5.
+
+   DAS does not — 50 of 54 primaries are landscape or square — so a straight
+   cover-crop into 4:5 would throw away 47% of a landscape kit photo. Instead
+   each PDP derivative is COMPOSED onto a 4:5 canvas:
+       backdrop  the same photograph, cover-filled, heavily blurred and dimmed
+       subject   the same photograph, fitted INSIDE, nothing cropped, centred
+   The frame is filled edge to edge, the product is whole, and there are no flat
+   bars — the fill is the photograph's own colour, so it reads as depth rather
+   than as padding. A portrait source fills it exactly and never sees the
+   backdrop at all. */
+const PDP = { w: 1120, h: 1400 }
+const PDP_HALF = { w: 560, h: 700 }
+
+async function pdpFrame(src, W, H, quality) {
+  const backdrop = await sharp(src)
+    .resize(W, H, { fit: 'cover', position: 'centre' })
+    .blur(36).modulate({ brightness: 0.78, saturation: 0.9 })
+    .toBuffer()
+  const subject = await sharp(src)
+    .resize(W, H, { fit: 'inside', withoutEnlargement: false })
+    .toBuffer()
+  return sharp(backdrop)
+    .composite([{ input: subject, gravity: 'centre' }])
+    .webp({ quality, effort: 5 }).toBuffer()
+}
+
+/* CONTENT-HASHED FILENAMES, and why they are not optional.
+   vercel.json serves /images/(.*) as `public, max-age=31536000, immutable`.
+   The first PDP derivatives shipped as <name>-pdp.webp; this pass changed what
+   those files CONTAIN while keeping the same names, so every visitor who had
+   opened a product page already would have kept the old image for a YEAR and
+   never seen the fix. `immutable` is a promise that a URL's bytes never change
+   — so the URL has to change when the bytes do. The hash makes that true by
+   construction rather than by remembering to bump something. */
+const pdpOut = {}
+function hash8(buf) { return createHash('sha1').update(buf).digest('hex').slice(0, 8) }
 
 mkdirSync(OUT, { recursive: true })
 
@@ -123,13 +163,26 @@ for (const rel of files) {
   const name = basename(rel, extname(rel))
   const big = join(OUT, `${name}@2x.webp`)
   const small = join(OUT, `${name}.webp`)
-  const pdpBig = join(OUT, `${name}-pdp@2x.webp`)
-  const pdpSmall = join(OUT, `${name}-pdp.webp`)
-
-  if (existsSync(big) && existsSync(small) && existsSync(pdpBig) && existsSync(pdpSmall) &&
-      statSync(big).mtimeMs > statSync(src).mtimeMs && statSync(pdpBig).mtimeMs > statSync(src).mtimeMs) { skipped++; continue }
+  const coverFresh = existsSync(big) && existsSync(small) && statSync(big).mtimeMs > statSync(src).mtimeMs
 
   try {
+    // The PDP pair is always recomposed — it is cheap, and its filename depends
+    // on the bytes, so there is nothing to compare a timestamp against.
+    const pBig = await pdpFrame(src, PDP.w, PDP.h, 88)
+    const pSmall = await pdpFrame(src, PDP_HALF.w, PDP_HALF.h, 86)
+    const h = hash8(pBig)
+    for (const f of readdirSync(OUT)) {
+      if (f.startsWith(`${name}-pdp`) && !f.includes(`-pdp-${h}`)) rmSync(join(OUT, f))
+    }
+    writeFileSync(join(OUT, `${name}-pdp-${h}@2x.webp`), pBig)
+    writeFileSync(join(OUT, `${name}-pdp-${h}.webp`), pSmall)
+    pdpOut[name] = {
+      src: `/images/store/${name}-pdp-${h}.webp`,
+      srcset: `/images/store/${name}-pdp-${h}@2x.webp 2x`,
+      w: PDP.w, h: PDP.h,
+    }
+    if (coverFresh) { skipped++; continue }
+
     // `cover` + centre. position:'attention' was tried and rejected: it chases the
     // highest-entropy region, which on a kit photo is the printed logo, and it
     // slid several crops off the product entirely.
@@ -137,11 +190,6 @@ for (const rel of files) {
       .webp({ quality: 86, effort: 5 }).toFile(big)
     await sharp(src).resize(HALF.w, HALF.h, { fit: 'cover', position: 'centre' })
       .webp({ quality: 84, effort: 5 }).toFile(small)
-    // and the uncropped pair for the product page
-    await sharp(src).resize(PDP.w, PDP.h, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 88, effort: 5 }).toFile(pdpBig)
-    await sharp(src).resize(PDP_HALF.w, PDP_HALF.h, { fit: 'inside', withoutEnlargement: true })
-      .webp({ quality: 86, effort: 5 }).toFile(pdpSmall)
     made++
   } catch (e) { failed.push(`${rel} (${e.message.slice(0, 50)})`) }
 }
@@ -153,19 +201,15 @@ if (failed.length) { console.log('FAILED:'); failed.forEach(f => console.log('  
 // guessing, and so a missing derivative is a visible error rather than a broken img.
 const manifest = {}
 for (const f of readdirSync(OUT)) {
-  if (!f.endsWith('.webp') || f.includes('@2x') || f.endsWith('-pdp.webp')) continue
+  /* `includes('-pdp')`, not `endsWith('-pdp.webp')` — the PDP derivatives now
+     carry a content hash (<name>-pdp-<h>.webp), so the old suffix test stopped
+     matching them and they were being registered as 59 extra BASE products.
+     The manifest reported 118 entries for a 59-photograph catalogue, which is
+     the tell. */
+  if (!f.endsWith('.webp') || f.includes('@2x') || f.includes('-pdp')) continue
   const name = basename(f, '.webp')
   const entry = { src: `/images/store/${f}`, srcset: `/images/store/${name}@2x.webp 2x` }
-  // The uncropped variant, WITH its real dimensions. Measuring here rather than
-  // at build time means a skipped rebuild still reports the truth.
-  if (existsSync(join(OUT, `${name}-pdp.webp`))) {
-    const m = await sharp(join(OUT, `${name}-pdp@2x.webp`)).metadata()
-    entry.pdp = {
-      src: `/images/store/${name}-pdp.webp`,
-      srcset: `/images/store/${name}-pdp@2x.webp 2x`,
-      w: m.width, h: m.height,
-    }
-  }
+  if (pdpOut[name]) entry.pdp = pdpOut[name]
   manifest[name] = entry
 }
 writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpBox: PDP, images: manifest }, null, 1))

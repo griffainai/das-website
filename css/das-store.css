@@ -329,11 +329,26 @@
    DAS gates anything over $110 (js/pricing-gate.js). On a gated product the
    buy column shows this instead of a price and an Add button, so the page
    never advertises a number the visitor is not cleared to see. */
-.st-req{ background:var(--st-navy-900); color:#fff; padding:20px; margin-bottom:20px; }
-.st-req b{ display:block; font-size:15px; line-height:21px; text-transform:none; letter-spacing:0; margin-bottom:6px; }
-.st-req p{ color:rgba(255,255,255,.72); font-size:13px; line-height:20px; text-transform:none; letter-spacing:0; margin-bottom:14px; }
-.st-req .st .st-cta{ background:#fff; color:var(--st-navy-900); }
-.st-req .st .st-cta:hover{ background:var(--st-navy-200); }
+/* REQUEST PRICING — the reference's buy block, not a panel.
+   Jayden 2026-09-23: "the request pricing thing needs to look identical to the
+   griffain pdp". It was a filled navy card with its own padding sitting inside
+   the buy column — a box within a box. The reference has no such object: its
+   whole column is bare, a 12px bold label, then the control, then a full-width
+   52px button flush to the column edges, with hairline rules doing the
+   separating. Measured off shop.griffain.io:
+       label     12px bold, sentence case, 18px below the block above
+       note      10px, muted, 12px under the label
+       button    100% x 52px, uppercase 12px at 0.133333px, my-4
+       second    52px ghost with a 1px border, mb-3
+   So the panel is gone and the parts sit in the column flow like theirs. */
+.st-req{ margin:18px 0 0; }
+.st-req b{ display:block; font-size:12px; line-height:18px; letter-spacing:var(--st-ui-ls);
+  font-weight:700; text-transform:none; color:var(--st-ink); margin-bottom:6px; }
+.st-req p{ font-size:10px; line-height:16px; color:var(--st-muted);
+  text-transform:none; letter-spacing:0; margin-bottom:16px; }
+.st-req .st-cta{ width:100%; }
+/* the hairline that replaces the panel's edge */
+.st-req::before{ content:""; display:block; height:1px; background:var(--st-hair); margin-bottom:18px; }
 
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
@@ -458,7 +473,7 @@
    47% of its WIDTH. So the frame is DAS's own modal 1.25, matching the card
    grid. Change this one token to 4/5 for a literal copy; either value fills
    the frame completely, which is the part that was actually wrong. */
-:root{ --st-pdp-frame:1.25; }
+:root{ --st-pdp-frame:0.8; }
 
 .st-pdp2 .pd-gal{
   position:relative; background:#f7f7f7;
