@@ -43,6 +43,20 @@ function shot(src) {
   return MANIFEST.images[key] || null
 }
 
+/** A hard .slice(180) cut mid-WORD, and the PDP printed the stump: "Reaching
+ *  250,000 consecutive safe miles without a". Cut at the last sentence that
+ *  fits; failing that the last word, with an ellipsis so the truncation reads
+ *  as deliberate rather than as a bug. */
+function trim(text, max = 180) {
+  const t = String(text || '').trim()
+  if (t.length <= max) return t
+  const head = t.slice(0, max)
+  const stop = Math.max(head.lastIndexOf('. '), head.lastIndexOf('! '), head.lastIndexOf('? '))
+  if (stop > max * 0.55) return head.slice(0, stop + 1)
+  const space = head.lastIndexOf(' ')
+  return (space > 0 ? head.slice(0, space) : head).replace(/[,;:]$/, '') + '…'
+}
+
 const PROGRAMS = {
   appreciation: 'Driver Appreciation Kits',
   milepacks:    'Safe Miles Programs',
@@ -124,7 +138,7 @@ function fromMilestones() {
     img: (m.images && m.images[0]) || m.image || (m.photos && m.photos[0]) || '',
     gallery: (m.images || m.photos || []).slice(0, 6),
     badge: m.status || '',
-    blurb: (m.description || '').slice(0, 180),
+    blurb: trim(m.description),
     included: m.included || [],
     minQty: m.minQty || 1,
   }))

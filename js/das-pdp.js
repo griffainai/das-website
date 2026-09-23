@@ -164,15 +164,20 @@
   /* ── the buy column ──────────────────────────────────────────────────── */
   function buy() {
     var h = '';
-    h += '<div class="eyebrow st-ui">' + esc(P.programLabel) + '</div>';
-    h += '<h1>' + esc(P.name) + '</h1>';
+    /* Title left, price right, on ONE line — the reference's own arrangement,
+       and the reason its column reads as quiet. The category drops to a small
+       muted line underneath rather than shouting above the title.
 
-    /* No price on a gated piece, and none on a comingSoon one either — that one
+       No price on a gated piece, and none on a comingSoon one either — that one
        is under the gate at $108.99 so it would otherwise print a figure for
-       something the server will not sell. */
-    if (!P.gated && !P.comingSoon) {
-      h += '<div class="price st-ui">' + money(P.price) + ' <small>per unit</small></div>';
-    }
+       something the server will not sell. The slot still gets filled, because
+       an empty right edge on that line makes the row look broken rather than
+       deliberate. */
+    var priceSlot = (!P.gated && !P.comingSoon)
+      ? '<div class="price st-ui">' + money(P.price) + ' <small>/unit</small></div>'
+      : '<div class="price st-ui"><small>' + (P.comingSoon ? 'Coming soon' : 'Quoted') + '</small></div>';
+    h += '<div class="head"><h1>' + esc(P.name) + '</h1>' + priceSlot + '</div>';
+    h += '<div class="eyebrow st-micro">' + esc(P.programLabel) + '</div>';
     if (P.blurb) h += '<p class="blurb">' + esc(P.blurb) + '</p>';
 
     h += '<a class="pd-prog st-ui" href="store.html?c=' + esc(P.program) + '">' +
