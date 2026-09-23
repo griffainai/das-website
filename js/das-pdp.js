@@ -295,9 +295,22 @@
      of copy, one full-width CTA. Same structure, using the forest band already
      on the shop page and the CTA Jayden named. */
   function band() {
+    /* NOT loading="lazy", and NOT a relative path.
+       Verified on production 2026-09-23: with loading="lazy" this image never
+       loaded at all — naturalWidth 0 and an empty currentSrc even after
+       scrollIntoView put it 190px from the top — so the closing panel rendered
+       as an empty half. It is absolutely positioned inside an overflow:hidden
+       box with no intrinsic dimensions, which is exactly the shape Chrome's
+       lazy heuristic fails to resolve. There is one of these per page and it is
+       hero-scale, so deferring it bought nothing anyway.
+       Absolute paths because cleanUrls serves this page as /store-product with
+       no extension; a relative path happens to resolve today but would break
+       the moment the page moves into a subdirectory. */
     return '<div class="fb-media">' +
-        '<img src="images/band-forest-1200.jpg" srcset="images/band-forest-1200.jpg 1200w, images/band-forest-2400.jpg 2400w" ' +
-          'sizes="(min-width:1024px) 50vw, 100vw" alt="" loading="lazy">' +
+        '<img src="/images/band-forest-1200.jpg" ' +
+          'srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" ' +
+          'sizes="(min-width:1024px) 50vw, 100vw" alt="" decoding="async" ' +
+          'width="1200" height="509">' +
       '</div>' +
       '<div class="fb-copy">' +
         '<p class="k st-micro">' + esc(P.programLabel) + ' &middot; built to your fleet</p>' +
