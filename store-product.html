@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=21">
+<link rel="stylesheet" href="/css/das-store.css?v=23">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 </head>
 
@@ -63,9 +63,6 @@
 <div class="pd-bar" id="pd-bar"></div>
 
 <footer class="st-sec st-ui" style="padding-top:clamp(48px,6vw,72px)">
-    <a href="index.html" class="ft-mark" aria-label="Driver Appreciation Solutions — home">
-      <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="728" height="259">
-    </a>
   <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
     <div>
       <h4 style="margin-bottom:12px">Driver Appreciation Solutions</h4>
@@ -111,7 +108,7 @@
   <div class="sub st-ui">
     <div class="row"><span>Subtotal</span><strong id="st-subtotal">$0.00</strong></div>
     <p class="note">Freight and tax calculated at checkout. Customization is coordinated after purchase.</p>
-    <button class="st-cta st-cta--block" id="st-checkout" onclick="goToCheckout()" disabled>Secure checkout</button>
+    <a class="st-cta st-cta--block" id="st-viewbag" href="store-cart.html">View full bag</a>
     <p class="note" style="text-align:center;margin:10px 0 0">
       <a href="contact.html?intent=pricing" style="text-decoration:underline">Need a quote or a PO instead?</a>
     </p>
@@ -123,6 +120,6 @@
 <script src="/js/cart.js?v=7"></script>
 <script src="/js/das-pdp.js?v=15" defer></script>
 <script src="/js/store-heroes.js?v=1"></script>
-<script src="/js/das-store.js?v=11" defer></script>
+<script src="/js/das-store.js?v=12" defer></script>
 </body>
 </html>

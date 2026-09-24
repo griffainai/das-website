@@ -462,12 +462,11 @@
   .st-row .st-card{ flex:0 0 68vw; }
 }
 
-/* The mark in the footer. Jayden 2026-09-24: "the footer needs to have our
-   logo." Sized between the header's 56px and the body type so it closes the
-   page without competing with it. */
-.ft-mark{ display:inline-block; padding-bottom:26px; }
-.ft-mark img{ height:44px; width:auto; }
-@media(max-width:640px){ .ft-mark img{ height:38px; } }
+/* NO MARK IN THE FOOTER. One was added on request and removed the same day:
+   the first footer column heading already reads DRIVER APPRECIATION SOLUTIONS,
+   so the logo above it repeated the name and simply made the footer taller.
+   "Just replace the logo with the Driver Appreciation Solutions text under it,
+   and keep it that same size as it was before." */
 
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
@@ -668,8 +667,17 @@
    What I had built instead: a 30px uppercase title and three bordered boxes
    stacked down the column, each one competing for the same attention the photo
    wants. That is a SaaS product page, not this. Flattened to their system. */
-.pd-buy .head{ display:flex; align-items:flex-start; justify-content:space-between; gap:16px; }
-.pd-buy h1{ font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);
+.pd-buy .head{ display:flex; align-items:baseline; justify-content:space-between; gap:20px; }
+/* THE PRODUCT NAME — 3x, on Jayden's call. It was 12px because that is what
+   the reference does, and the reference can afford it: shop.griffain.io sells
+   six garments a visitor already came for, so the photograph is the headline.
+   DAS sells 54 pieces across six programs to a buyer who arrived from a
+   category, and the name is doing real work — "250,000 Safe Service Miles —
+   Executive Collection" is information, not a label. 12 -> 36px, same face,
+   line-height pulled in and tracking tightened so it reads as a heading rather
+   than enlarged UI text. The price stays 12px and right-aligned, which now
+   reads as a caption to the title instead of competing with it. */
+.pd-buy h1{ font-size:clamp(26px,2.6vw,36px); line-height:1.04; letter-spacing:-.015em;
   font-weight:500; text-transform:none; }
 .pd-buy .eyebrow{ color:var(--st-muted); font-size:var(--st-micro); line-height:16px; margin-top:6px; }
 .pd-buy .price{ font-size:var(--st-ui); line-height:var(--st-ui-lh); letter-spacing:var(--st-ui-ls);

@@ -26,7 +26,12 @@
   .odn-pill{max-width:none;margin:0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;height:64px;padding:0 3.6vw;background:transparent;border-radius:0;box-shadow:none}
   .odn-wrap.odn-scrolled .odn-pill{box-shadow:none}
   .odn-logo{display:flex;align-items:center;flex-shrink:0}
-  .odn-logo img{height:30px;width:auto;display:block}
+  /* THE MARK. 30px on a 728x259 lockup (ratio 2.81) renders 84px wide, which
+   reads as a thumbnail beside a 48px CTA pill. This is a STACKED lockup —
+   an icon beside three lines of type — so its legibility floor is set by
+   those three lines, not the block: at 48px each line lands near 9px, which
+   holds against the 15px nav text. 48 of the 64px bar leaves 8px of air. */
+  .odn-logo img{height:48px;width:auto;display:block}
   .odn-links{display:flex;align-items:center;gap:22px}
   .odn-links a{color:#3B4A60!important;font-family:'Manrope',system-ui,sans-serif;font-size:14px;font-weight:500;text-decoration:none;padding:6px 0;background:none;transition:color .15s}
   .odn-links a:hover{color:#0E1B2E!important}
@@ -35,7 +40,21 @@
   .odn-login{color:#475569!important;font-size:14.5px;font-weight:500;text-decoration:none;padding:9px 15px;border-radius:999px;transition:color .15s,background .15s}
   .odn-login:hover{color:#0E1B2E!important;background:#F1F5F9}
   
-  .odn-cta{font-family:'Manrope',system-ui,sans-serif;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 24px;border-radius:999px;background:#0E1B2E;color:#fff!important;font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1;text-transform:none;text-decoration:none;white-space:nowrap;transition:background-color .15s}
+  /* #0E1B2E is OFF DUTY's blue and had been pulled from DAS once already as
+   off-brand; it was still sitting on the one button in the header. DAS navy
+   is #1A2E6E (BRAND-KIT.md). */
+  .odn-cta{font-family:'Manrope',system-ui,sans-serif;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 24px;border-radius:999px;background:#1A2E6E;color:#fff!important;font-size:15px;font-weight:500;letter-spacing:-.01em;line-height:1;text-transform:none;text-decoration:none;white-space:nowrap;transition:background-color .15s}
+  /* THE CART HAD NO COUNT AT ALL. The store pages carry [data-bag-count] and
+     the main site carried nothing, so the header could never say what was in
+     the bag — "fix the error saying that there's zero in the bag and not
+     showing the real number". cart.js already announces every change to
+     [data-bag-count]; this just gives the main nav somewhere to put it. Hidden
+     at zero rather than showing a 0, which reads as broken. */
+  .odn-cart{position:relative;display:inline-flex;align-items:center}
+  .odn-cart-n{position:absolute;top:-6px;right:-10px;min-width:18px;height:18px;padding:0 5px;
+    display:none;align-items:center;justify-content:center;border-radius:999px;
+    background:#1A2E6E;color:#fff;font-size:11px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
+  .odn-cart-n[data-has]{display:inline-flex}
   .odn-cta::after{content:'→';display:inline-block;transition:transform .15s}
   .odn-cta:hover::after{transform:translateX(3px)}
   .odn-cta:focus-visible{outline:2px solid #2F6BFF;outline-offset:3px}
@@ -111,7 +130,7 @@
     .odn-d1 .odn-rows{margin-top:14px}
     .odn-d1 .odn-legal{margin-top:14px}
     .odn-pill{display:flex;justify-content:space-between;height:60px;padding:0 10px 0 18px}
-    .odn-logo img{height:34px}
+    .odn-logo img{height:40px}
     
     .odn-tabbar{display:none}
 

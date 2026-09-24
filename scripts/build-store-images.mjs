@@ -149,7 +149,7 @@ async function pdpCap(src) {
      cropped. 22 of 54 products ended up with a top rung below the 943px display
      width and would have been stretched up to 1.39x on the product page. Two
      functions answering the same question must ask it the same way. */
-  const padded = (top.flat && bot.flat) || (1 - PDP_RATIO / r) > 0.28
+  const padded = true   // never crop — see pdpFrame
   return Math.max(320, Math.floor(padded ? m.width : PDP_RATIO * m.height))
 }
 
@@ -229,8 +229,14 @@ async function pdpFrame(src, W, quality) {
        far better than severed typography, and at this ratio a crop removes a
        third of the image. 28% is the line: below it a crop takes background,
        above it a crop takes content. */
-    const cropShare = 1 - PDP_RATIO / r
-    if ((top.flat && bot.flat) || cropShare > 0.28) {
+    /* 2026-09-24: "Stop cropping all of the photos." So we stop. Every
+       landscape source is PADDED with its own sampled edge colour, none is
+       cropped, and the only thing that can now take a pixel off a product is a
+       portrait source taller than 4:5 — of which this catalogue has none.
+       The honest trade is stated plainly: padding shows as bands wherever the
+       source is far from 4:5, and the only real fix is photography at 4:5.
+       PHOTO-SHOT-LIST.md carries the spec. */
+    if (true) {
       const need = Math.round(m.width / PDP_RATIO) - m.height      // total height to add
       const half = Math.round(need / 2)
       /* TWO SEPARATE PASSES, not two chained .extend() calls. Chaining them on

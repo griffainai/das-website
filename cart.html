@@ -123,7 +123,7 @@
 </style>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
   <link rel="stylesheet" href="/css/das-cart.css?v=1">
-  <link rel="stylesheet" href="/css/das-nav.css?v=2">
+  <link rel="stylesheet" href="/css/das-nav.css?v=9">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -217,7 +217,7 @@
         <a href="index.html">Home</a><a href="store.html">Shop</a><a href="about.html">About</a><a href="ideas.html">Insights &amp; Ideas</a><a href="surveys.html">Surveys</a><a href="contact.html">Contact</a>
       </nav>
       <div class="odn-actions">
-        <a href="cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span>Cart</span></a>
+        <a href="cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
         <a href="login.html" class="odn-cta">Sign in</a>
         <button class="odn-burger" id="odn-burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
@@ -245,7 +245,7 @@
 <div class="mobile-overlay"></div>
 <div class="mobile-drawer">
   <div class="mobile-drawer-header">
-    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:28px">
+    <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:40px">
     <button class="mobile-close-btn" aria-label="Close menu">✕</button>
   </div>
   <a href="index.html"  class="mobile-nav-link">Home</a>
@@ -395,7 +395,7 @@
 
 <script src="/lib/recognition-pricing.js?v=1"></script>
 <script src="/lib/catalog.js?v=1"></script>
-<script src="js/cart.js?v=6"></script>
+<script src="js/cart.js?v=7"></script>
 <script>
 function renderCart() {
   const items = Cart.get();

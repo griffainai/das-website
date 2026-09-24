@@ -199,7 +199,13 @@ const Cart = {
       el.textContent = count;
       el.classList.toggle('visible', count > 0);
     });
-    document.querySelectorAll('[data-bag-count]').forEach(el => { el.textContent = units; });
+    document.querySelectorAll('[data-bag-count]').forEach(el => {
+      el.textContent = units;
+      /* a visible 0 reads as broken; absence reads as empty */
+      if (el.classList.contains('odn-cart-n')) {
+        if (units > 0) el.setAttribute('data-has', ''); else el.removeAttribute('data-has');
+      }
+    });
     try { document.dispatchEvent(new CustomEvent('cart:change', { detail: { count, units } })); }
     catch (e) { /* older browsers — the badge above already updated */ }
   },

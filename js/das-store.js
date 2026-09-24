@@ -246,9 +246,14 @@
           '</a>'
         : '';
 
-      /* The row shows the programme's first six. "See all N" carries the rest,
-         because a row that scrolls forever is a grid wearing a disguise. */
-      var six = g.list.slice(0, 6);
+      /* THE ROW CARRIES THE WHOLE COLLECTION. Jayden 2026-09-24: "if they don't
+         want to see all, they should be able to scroll. We should really show
+         all the products in that cat collection, but if we do see all, then it
+         takes us to that page." So the rail holds every piece in the programme
+         and scrolls; "See all N" is the escape to the collection page for
+         anyone who would rather have a grid. Lazy loading keeps the cost flat —
+         only the cards actually scrolled into view fetch an image. */
+      var six = g.list;
       return '<section class="st-prog" id="prog-' + esc(g.slug) + '">' +
         banner +
         '<div class="st-rowhead st-ui">' +
