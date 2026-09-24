@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=27">
+<link rel="stylesheet" href="/css/das-store.css?v=33">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 <link rel="apple-touch-icon" href="/images/favicon-180.png">
 <link rel="preload" as="image" href="/images/band-forest-1200.jpg" imagesrcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" fetchpriority="high">
@@ -26,21 +26,26 @@
 <header class="st-hd st-ui">
   <div class="bar">
     <nav aria-label="Store">
-      <a class="item home" href="index.html">Home</a>
-      <a class="item" href="?c=all">Shop all</a>
-      <a class="item hide" href="?c=appreciation">Kits</a>
-      <a class="item hide" href="?c=safety">Safety</a>
-      <a class="item hide" href="?c=milestone">Milestones</a>
+      <a class="item home" href="/index.html"><svg class="gl" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M9.5 3.5 5 8l4.5 4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="lbl">Home</span></a>
+      <a class="item shopall" href="/store.html?c=all">Shop all</a>
+      <a class="item hide" href="/store.html?c=appreciation">Kits</a>
+      <a class="item hide" href="/store.html?c=safety">Safety</a>
+      <a class="item hide" href="/store.html?c=milestone">Milestones</a>
     </nav>
-    <a class="mark" href="index.html" aria-label="Driver Appreciation Solutions — home">
+    <a class="mark" href="/index.html" aria-label="Driver Appreciation Solutions — home">
       <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="728" height="259">
     </a>
     <div class="right">
-      <a class="item hide" href="contact.html">Contact</a>
-      <a class="item" href="store-saved.html">Saved<span class="count" data-wish-count>0</span></a>
-      <button class="item" data-open-bag>Bag<span class="count" data-bag-count>0</span></button>
+      <a class="item hide" href="/contact.html">Contact</a>
+      <a class="item ico" href="/store-saved.html" aria-label="Saved kits"><svg class="gl" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 15.5S2.2 11.3 2.2 6.8A3.6 3.6 0 0 1 9 5a3.6 3.6 0 0 1 6.8 1.8c0 4.5-6.8 8.7-6.8 8.7Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg><span class="count" data-wish-count>0</span></a>
+      <button class="item ico" data-open-bag aria-label="Open the bag"><svg class="gl" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3.6 5.6h10.8l.9 10.1H2.7L3.6 5.6Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6.3 7.4V4.7a2.7 2.7 0 0 1 5.4 0v2.7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg><span class="count" data-bag-count>0</span></button>
     </div>
   </div>
+  <!-- THE SEARCH BELONGS IN THE NAV, not buried in the filter stack. It is the
+       fastest route to any of 54 pieces, it is the same on every store page,
+       and moving it out of the filter row is most of why that row was eating a
+       third of a phone screen. -->
+  <div class="hdsearch"><div class="st-search" id="st-search"></div></div>
 </header>
 
 <!-- ════════════════════════════════════════════════════════════════════════
@@ -105,7 +110,6 @@
   <div class="head st-ui">
     <h2 id="st-shop-title">Shop all</h2><sup id="st-count">&mdash;</sup>
   </div>
-  <div class="st-search" id="st-search"></div>
   <div class="st-chips" id="st-chips"></div>
   <div class="st-grid" data-view="4" id="st-grid"></div>
 </section>
@@ -137,37 +141,69 @@
 <!-- ════════════════════════════════════════════════════════════════════════
      FOOTER
      ════════════════════════════════════════════════════════════════════════ -->
-<footer class="st-sec st-ui" style="padding-top:clamp(48px,6vw,72px)">
-  <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px" id="st-foot">
-    <div>
-      <h4 style="margin-bottom:12px">Driver Appreciation Solutions</h4>
-      <ul style="line-height:26px;color:rgba(0,0,0,.62)">
-        <li><a href="about.html">About</a></li>
-        <li><a href="ideas.html">Insights &amp; ideas</a></li>
-        <li><a href="company-purchasing.html">Buy for my company</a></li>
-        <li><a href="customer-service.html">Customer service</a></li>
-      </ul>
+<footer class="st-foot st-ui">
+  <div class="ft-in">
+    <a href="index.html" class="ft-mark" aria-label="Driver Appreciation Solutions — home">
+      <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="728" height="259">
+    </a>
+    <div class="ft-cols">
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="/collections/appreciation">Driver appreciation kits</a></li>
+          <li><a href="/collections/safety">Safety recognition</a></li>
+          <li><a href="/collections/milestone">Service milestones</a></li>
+          <li><a href="/collections/milepacks">Safe miles programs</a></li>
+          <li><a href="/collections/onboarding">Onboarding solutions</a></li>
+          <li><a href="/collections/holiday">Holiday &amp; seasonal</a></li>
+          <li><a href="store.html">Full catalogue</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="million-mile-driver-awards.html">Million-mile awards</a></li>
+          <li><a href="fleet-driver-retention-gifts.html">Driver retention gifts</a></li>
+          <li><a href="safe-driver-award-programs.html">Safe driver programs</a></li>
+          <li><a href="driver-appreciation-week.html">Driver Appreciation Week</a></li>
+          <li><a href="new-driver-welcome-kit.html">New driver welcome kits</a></li>
+          <li><a href="publications.html">Driver newsletter builder</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="ideas.html">Insights &amp; ideas</a></li>
+          <li><a href="surveys.html">Driver surveys</a></li>
+          <li><a href="company-purchasing.html">Buy for my company</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html?intent=pricing">Request a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="customer-service.html">Customer service</a></li>
+          <li><a href="return-policy.html">Return policy</a></li>
+          <li><a href="refund-policy.html">Refund &amp; disputes</a></li>
+          <li><a href="cancelation-policy.html">Cancellation policy</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Terms of supply</h4>
+        <ul class="ft-plain">
+          <li>Minimum 10 units per product</li>
+          <li>Net-30 for approved carriers</li>
+          <li><a href="tel:3026810995">302.681.0995</a></li>
+          <li><a href="mailto:info@driverappreciationsolutions.com">Email the fleet team</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h4 style="margin-bottom:12px">Shop</h4>
-      <ul style="line-height:26px;color:rgba(0,0,0,.62)">
-        <li><a href="?c=appreciation">Driver appreciation kits</a></li>
-        <li><a href="?c=safety">Safety recognition</a></li>
-        <li><a href="?c=milestone">Service milestones</a></li>
-        <li><a href="?c=milepacks">Safe miles programs</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 style="margin-bottom:12px">Terms</h4>
-      <ul style="line-height:26px;color:rgba(0,0,0,.62)">
-        <li>Minimum 10 units per product</li>
-        <li>Net-30 for approved carriers</li>
-        <li><a href="tel:3026810995">302.681.0995</a></li>
-        <li><a href="mailto:info@driverappreciationsolutions.com">Email the fleet team</a></li>
-      </ul>
-    </div>
+    <p class="ft-legal">&copy; 2026 Driver Appreciation Solutions</p>
   </div>
-  <p style="padding:28px 0;color:rgba(0,0,0,.45)">&copy; 2026 Driver Appreciation Solutions</p>
 </footer>
 
 <!-- ════════════════════════════════════════════════════════════════════════
@@ -200,7 +236,7 @@
 <script src="/lib/catalog.js?v=1"></script>
 <script src="/js/cart.js?v=7"></script>
 <script src="/js/store-heroes.js?v=1"></script>
-<script src="/js/das-store-search.js?v=1" defer></script>
-<script src="/js/das-store.js?v=16" defer></script>
+<script src="/js/das-store-search.js?v=2" defer></script>
+<script src="/js/das-store.js?v=19" defer></script>
 </body>
 </html>

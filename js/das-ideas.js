@@ -80,7 +80,7 @@
       '<a class="idr-link" href="blog/year-round-recognition-calendar.html">Year-round calendar template</a>' +
     '</div>' +
     '<div class="idr-group"><span class="idr-head">Plan a program</span>' +
-      '<a class="idr-cta" href="contact.html">Get a custom quote' +
+      '<a class="idr-cta" href="/contact.html">Get a custom quote' +
       '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>' +
     '</div>';
 

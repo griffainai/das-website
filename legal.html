@@ -16,7 +16,7 @@
   <link rel="apple-touch-icon" href="/images/favicon-180.png"><text y='.9em' font-size='90'>🚛</text></svg>">
 <script src="/js/tracking.js?v=3" defer></script>
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
-  <link rel="stylesheet" href="/css/das-nav.css?v=9">
+  <link rel="stylesheet" href="/css/das-nav.css?v=11">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -61,11 +61,11 @@
     background:#fff;transition:opacity .5s cubic-bezier(.4,0,.2,1),visibility linear .5s}
   #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
   #das-splash .dsl{position:relative;display:flex;align-items:center;width:min(86vw,780px);
-    transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    aspect-ratio:728/259;transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #das-splash.das-done .dsl{transform:scale(1.03)}
 
   /* the mark: their fly-in, to the millisecond */
-  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:20.9%;opacity:0;
+  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:26.92%;opacity:0;
     transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
     animation:dasMark 1.7s linear .08s 1 both}
   #das-splash .dsm .bnd{position:absolute;inset:0;opacity:0;
@@ -75,7 +75,7 @@
   #das-splash .dsm img{display:block;width:100%;height:auto}
 
   /* the wordmark: their wipe */
-  #das-splash .dsw{position:relative;flex:0 0 auto;width:78%;margin-left:1.1%;overflow:hidden;
+  #das-splash .dsw{position:relative;flex:0 0 auto;width:68.96%;margin-left:2.2%;overflow:hidden;
     clip-path:inset(0 100% 0 0);will-change:clip-path;
     animation:dasWipe .56s cubic-bezier(.33,0,.2,1) 1.68s 1 both}
   #das-splash .dsw img{display:block;width:100%;height:auto}
@@ -129,7 +129,7 @@
     var quick=false;
     try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
     if(quick) el.classList.add('das-quick');
-    var MIN= quick ? 700 : 1900, t0=Date.now();
+    var MIN= quick ? 420 : 2300, t0=Date.now();
     function hide(){ if(!el) return; el.classList.add('das-done');
       setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
     function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
@@ -156,7 +156,7 @@
         <a href="index.html">Home</a><a href="store.html">Shop</a><a href="about.html">About</a><a href="ideas.html">Insights &amp; Ideas</a><a href="surveys.html">Surveys</a><a href="contact.html">Contact</a>
       </nav>
       <div class="odn-actions">
-        <a href="store-cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
+        <a href="store-cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 11.5a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4L5.5 8Z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
         <a href="login.html" class="odn-cta">Sign in</a>
         <button class="odn-burger" id="odn-burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>

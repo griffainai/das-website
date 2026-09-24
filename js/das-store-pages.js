@@ -62,12 +62,12 @@
     function line(l, i) {
       var v = lineShot(l);
       return '<div class="sc-line">' +
-        '<a class="ph" href="store-product.html?id=' + encodeURIComponent(l.id) + '">' +
+        '<a class="ph" href="/store-product.html?id=' + encodeURIComponent(l.id) + '">' +
           '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
           ' sizes="140px" alt="" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a>' +
         '<div class="m st-ui">' +
           '<div class="top">' +
-            '<a class="t" href="store-product.html?id=' + encodeURIComponent(l.id) + '">' + esc(l.name) + '</a>' +
+            '<a class="t" href="/store-product.html?id=' + encodeURIComponent(l.id) + '">' + esc(l.name) + '</a>' +
             '<span class="lp">' + money(l.price * l.qty) + '</span>' +
           '</div>' +
           '<div class="c">' + esc(l.category || '') + '</div>' +
@@ -148,7 +148,7 @@
         ' data-product-category="' + esc(p.programLabel || p.category || '') + '"' +
         ' data-product-image="' + esc(v.src || '') + '">' +
       '<div class="shot">' +
-        '<a class="frame" href="store-product.html?id=' + encodeURIComponent(id) + '" aria-label="' + esc(p.name) + '">' +
+        '<a class="frame" href="/store-product.html?id=' + encodeURIComponent(id) + '" aria-label="' + esc(p.name) + '">' +
           '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
           ' sizes="(min-width:1024px) 22vw, 50vw" alt="' + esc(p.name) + '"' +
           ' width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"' +
@@ -180,7 +180,7 @@
         '<h2 style="font-size:clamp(20px,2.6vw,30px);text-transform:uppercase;margin-bottom:12px">Start with a program, not a product.</h2>' +
         '<p style="font-size:14px;line-height:22px;color:var(--st-muted);max-width:52ch;margin-bottom:20px">' +
         'Most fleets run one recognition program a quarter. Pick the occasion and the kit follows.</p>' +
-        '<a class="st-cta" href="store.html">Browse the collection</a>' +
+        '<a class="st-cta" href="/store.html">Browse the collection</a>' +
         (pop.length ? '<div class="head st-ui" style="margin-top:46px"><h2>Ready to order</h2></div>' +
           '<div class="st-grid" data-view="4">' + pop.map(function (p) {
             return pcard(p);
@@ -270,7 +270,7 @@
           '<p style="font-size:14px;line-height:22px;color:var(--st-muted);max-width:52ch;margin-bottom:20px">' +
           'Save any kit with the heart on the collection and it lands here &mdash; so you can put a shortlist in front of ' +
           'purchasing before you commit to a quantity.</p>' +
-          '<a class="st-cta" href="store.html">Browse the collection</a></div>';
+          '<a class="st-cta" href="/store.html">Browse the collection</a></div>';
         var act = document.getElementById('sv-actions'); if (act) act.style.display = 'none';
         return;
       }
@@ -304,7 +304,7 @@
           window.dataLayer = window.dataLayer || [];
           window.dataLayer.push({ event: 'request_pricing', source: 'shortlist', items: favs.length });
         } catch (er) {}
-        location.href = 'contact.html?intent=pricing&shortlist=' + encodeURIComponent(ids) +
+        location.href = '/contact.html?intent=pricing&shortlist=' + encodeURIComponent(ids) +
           '&count=' + favs.length;
       }
     });

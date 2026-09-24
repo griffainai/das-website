@@ -68,6 +68,8 @@
   --st-chip:10px;  --st-chip-lh:15px;
 
   --st-nav-h:80px;    /* sized to the mark; see .st-hd .mark img */
+  --st-hd-search:53px;              /* the search row + its hairline */
+  --st-hd-h:calc(var(--st-nav-h) + var(--st-hd-search));
   --st-cta-h:52px;
   --st-buycol:472px;
   --st-radius:0px;
@@ -83,6 +85,7 @@
   --st-coll-frame:3 / 2;   /* banners, not products — see .st-coll */
 }
 @media(max-width:1023px){ :root{ --st-nav-h:72px; } }
+@media(max-width:767px){ :root{ --st-nav-h:72px; } }
 
 /* ── reset, scoped so the rest of the site is untouched ─────────────────── */
 .st, .st *, .st *::before, .st *::after{ box-sizing:border-box; border-radius:var(--st-radius); }
@@ -143,11 +146,66 @@
    12px nav beside it. That is the correct size: the mark reads as confidently
    as the navigation and no louder, and the bar settles at 80px with 12px of air
    — tall enough to feel considered, short enough to stay out of the way. */
-.st-hd .mark img{ height:56px; width:auto; }
-@media(max-width:1023px){ .st-hd .mark img{ height:48px; } }
-.st-hd .right{ display:flex; align-items:center; justify-content:flex-end; height:100%; }
+/* The lockup is 728x259, so at 56px tall it wants 157px wide -- but a global
+   img{max-width:100%} capped it at whatever the grid column happened to be and
+   the fixed height held, which squeezes the artwork horizontally. That is the
+   literal reason it read as "scrunched" on a phone: not crowded, DISTORTED.
+   max-width:none lets the aspect ratio win; line-height:0 stops the whitespace
+   either side of the <img> from adding two line boxes to the anchor's height,
+   which was making a 64px mark occupy 107px of a 72px bar. */
+/* A flex box with an explicit height, not a block that inherits one. As a
+   block the anchor came out 112px tall around a 60px image and, being centred
+   in a 72px bar, hung 20px above it -- the mark was clipped along its top edge
+   and the anchor's white ground overlapped the search row beneath. A flex row
+   with height:100% cannot do either. */
+.st-hd .mark{ display:flex; align-items:center; justify-content:center;
+  height:100%; line-height:0; justify-self:center; }
+.st-hd .mark img{ height:56px; width:auto; max-width:none; display:block; }
+.st-hd .right{ display:flex; align-items:center; justify-content:flex-end; height:100%; gap:2px; }
+
+/* ── ICONS, NOT CAPTIONS ────────────────────────────────────────────────
+   "BAG 0" and "SAVED 0" as words cost ~150px of a 375px bar, which is what
+   crushed the mark between them. A glyph says the same thing in 34. */
+.st-hd .item.ico{ width:38px; padding:0; }
+.st-hd .item.ico .gl{ display:block; }
+.st-hd .item.ico::after{ display:none; }
+.st-hd .item.ico .count{
+  position:absolute; top:calc(50% - 15px); right:2px; margin:0; vertical-align:baseline;
+  font-size:10px; line-height:1; font-weight:700; color:var(--st-navy);
+}
+.st-hd .item.ico .count:not([data-has]){ color:var(--st-muted); font-weight:500; }
 .st-hd .count{ font-size:var(--st-micro); line-height:var(--st-micro-lh); vertical-align:super; margin-left:3px; color:var(--st-navy); }
+.st-hd .home{ gap:5px; }
+.st-hd .home .gl{ flex:0 0 auto; }
 @media(max-width:1023px){ .st-hd .hide{ display:none; } }
+
+/* ── THE SEARCH ROW ─────────────────────────────────────────────────────
+   Part of the sticky header on every store page. Slim on purpose: it is a
+   doorway, not a section. */
+.st-hd .hdsearch{ border-top:1px solid var(--st-hair); padding:0 24px;
+  height:var(--st-hd-search); display:flex; align-items:center; }
+.st-hd .hdsearch .st-search{ max-width:620px; margin:0 auto; }
+
+/* ── MOBILE: GIVE THE MARK ROOM ─────────────────────────────────────────
+   Jayden: "the logo on the mobile page is very scrunched. Make it full size
+   and let it breathe." It was sharing a 375px bar with four text links, so the
+   1fr/auto/1fr grid gave the centre column whatever the words left over --
+   about 90px for a lockup that needs 180. The words became glyphs, Home became
+   a chevron, and the mark got the middle of the bar back. */
+@media(max-width:767px){
+  /* Fixed side columns: 56 for the back chevron, 88 for two glyphs. The mark
+     then owns a known 199px and sits in the middle of the bar rather than in
+     the middle of whatever the links left behind. */
+  .st-hd .bar{ grid-template-columns:88px 1fr 88px; padding:0 12px; height:72px; gap:0; }
+  .st-hd .mark img{ height:60px; }
+  .st-hd .item{ padding:10px 8px; }
+  .st-hd .home{ padding-left:0; }
+  .st-hd .home .lbl{ display:none; }
+  .st-hd .hdsearch{ padding:0 14px; }
+}
+@media(max-width:480px){
+  .st-hd .shopall{ display:none; }
+}
 
 /* ── CTA — 52px, square, navy ──────────────────────────────────────────
    Every rule here is prefixed .st DELIBERATELY. The reset .st a{color:inherit}
@@ -217,7 +275,32 @@
 .st-sec .head sup{ font-size:var(--st-micro); color:var(--st-muted); }
 .st-sec .head .r{ margin-left:auto; display:flex; gap:14px; color:var(--st-muted); }
 .st-sec .head .r button:hover,.st-sec .head .r button[aria-pressed="true"]{ color:var(--st-navy); }
+/* ── THE FILTER RAIL ────────────────────────────────────────────────────
+   On a phone these wrapped into a 330px vertical stack -- 40% of the screen
+   spent on a control, before a single product. Seven chips on one scrolling
+   line is the same control in 42px. It keeps flex-wrap on desktop, where
+   there is width to wrap into. */
 .st-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:20px; }
+@media(max-width:767px){
+  .st-chips{
+    flex-wrap:nowrap; overflow-x:auto; scroll-snap-type:x proximity;
+    margin:0 -20px 16px; padding:0 20px 8px; scrollbar-width:none;
+  }
+  .st-chips::-webkit-scrollbar{ display:none; }
+  .st-chips button{ flex:0 0 auto; scroll-snap-align:start; padding:8px 12px; }
+}
+/* A COLLECTION PAGE IS ALREADY FILTERED. Jayden: "why are they scrolling
+   through filters when they click the Safe Miles program and on the Safe Miles
+   program page?" -- because the page reused the shop's own chip rail. It has a
+   breadcrumb back to Shop all; it does not need a category switcher above the
+   collection it is showing.
+
+   The body flag is st-cpage, NOT st-coll: .st-coll is already the class on the
+   collection-tile grid, and `.st-coll a` there sets display:block, a 3/2
+   aspect-ratio and overflow:hidden. Putting st-coll on <body> applied all of
+   that to EVERY anchor on the page -- the header mark became a 108x72 clipped
+   box, and every breadcrumb and product link grew a grey tile behind it. */
+.st-cpage #st-chips{ display:none; }
 .st-chips button{ box-shadow:inset 0 0 0 1px var(--st-hair); padding:9px 14px; transition:box-shadow .15s,background-color .15s; }
 .st-chips button:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
 .st-chips button[aria-pressed="true"]{ background:var(--st-navy); color:#fff; box-shadow:inset 0 0 0 1px var(--st-navy); }
@@ -338,7 +421,7 @@
 /* ── PDP — sticky gallery + 472px buy column ───────────────────────────── */
 .st-pdp{ display:grid; grid-template-columns:minmax(0,1fr) var(--st-buycol); align-items:start; }
 @media(max-width:1023px){ .st-pdp{ grid-template-columns:minmax(0,1fr); } }
-.st-pdp .gal{ position:sticky; top:var(--st-nav-h); }
+.st-pdp .gal{ position:sticky; top:var(--st-hd-h); }
 @media(max-width:1023px){ .st-pdp .gal{ position:static; } }
 .st-pdp .gal .main{ position:relative; aspect-ratio:var(--st-frame); background:var(--st-ph); overflow:hidden; }
 .st-pdp .gal .main img{ width:100%; height:100%; object-fit:cover; }
@@ -454,8 +537,17 @@
 .st-rowhead a:hover{ color:var(--st-ink); }
 
 .st-row{ display:flex; gap:1px; overflow-x:auto; scroll-snap-type:x mandatory;
-  scrollbar-width:none; -ms-overflow-style:none; padding:0 24px; }
-.st-row::-webkit-scrollbar{ display:none; }
+  padding:0 24px 14px; }
+/* A HIDDEN SCROLLBAR IS WHY NOBODY KNEW IT SCROLLED. The reference hides its
+   bar, but it also never shows a row that runs off the edge without an arrow.
+   Ours does, and "there's no scroller on mobile and desktop" was the result.
+   A 4px rail is a real, draggable scroller on desktop and a position readout
+   on a phone, and it costs the row 14px. */
+.st-row::-webkit-scrollbar{ height:4px; }
+.st-row::-webkit-scrollbar-track{ background:rgba(0,0,0,.06); border-radius:99px; }
+.st-row::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.28); border-radius:99px; }
+.st-row::-webkit-scrollbar-thumb:hover{ background:rgba(0,0,0,.45); }
+.st-row{ scrollbar-width:thin; scrollbar-color:rgba(0,0,0,.28) rgba(0,0,0,.06); }
 .st-row .st-card{ flex:0 0 clamp(210px,19vw,356px); scroll-snap-align:start; margin-bottom:0; }
 @media(max-width:640px){
   .st-row{ padding:0; }
@@ -482,6 +574,23 @@
 .cl-hero[data-placeholder="true"] .cl-copy{ background:none; }
 .cl-hero[data-placeholder="true"] h1,.cl-hero[data-placeholder="true"] .k,
 .cl-hero[data-placeholder="true"] .n{ display:none; }
+/* ...but only where the whole 2400x820 placeholder is visible. On a phone it is
+   cover-cropped to roughly its middle third, so the title baked into it arrives
+   as "S PROGRAMS". Below 768 the drawn placeholder is dropped for a plain navy
+   panel and the real copy comes back -- which is also exactly what happens when
+   the real photograph lands, so nothing here has to change again. */
+@media(max-width:767px){
+  .cl-hero[data-placeholder="true"]{ background:var(--st-navy); }
+  .cl-hero[data-placeholder="true"] img{ display:none; }
+  .cl-hero[data-placeholder="true"] h1,.cl-hero[data-placeholder="true"] .k,
+  .cl-hero[data-placeholder="true"] .n{ display:block; }
+  /* With no photograph to show there is nothing to hold 240px open -- the band
+     sized itself for an image it is not displaying. Let the type set the height
+     until the real shot lands, at which point the clamp takes over again. */
+  .cl-hero[data-placeholder="true"]{ height:auto; }
+  .cl-hero{ height:clamp(180px,42vw,240px); }
+  .cl-hero .cl-copy{ padding:24px 20px 26px; }
+}
 .cl-hero h1{ font-size:clamp(26px,3.4vw,46px); line-height:1.02; letter-spacing:-.02em;
   text-transform:uppercase; font-weight:500; }
 .cl-hero .k{ color:var(--st-navy-200); margin-bottom:10px; }
@@ -491,26 +600,89 @@
 .cl-crumb a{ text-decoration:underline; text-underline-offset:3px; }
 .cl-crumb a:hover{ color:var(--st-ink); }
 
-/* ── THE SEARCH ──────────────────────────────────────────────────────────
-   Sits above the chips because it answers a bigger question than they do.
-   Deliberately quiet: one hairline box, the reference's UI type, and a
-   plain-English readback under it so the buyer can see what was understood
-   rather than guess why the grid changed. */
-.st-search{ padding:0 24px 12px; }
-.ss-box{ display:flex; align-items:center; gap:10px; max-width:560px;
-  box-shadow:inset 0 0 0 1px var(--st-hair); padding:0 14px; height:46px; color:var(--st-muted); }
-.ss-box:focus-within{ box-shadow:inset 0 0 0 1px var(--st-ink); color:var(--st-ink); }
-.ss-box input{ flex:1; min-width:0; height:100%; border:0; outline:0; background:none;
-  font:inherit; font-size:var(--st-ui); letter-spacing:var(--st-ui-ls); color:var(--st-ink); }
+/* ── THE SEARCH ────────────────────────────────────────────
+   It lives in the header now, on every store page. A suggest panel rather than
+   a filter: the empty state teaches the vocabulary, typing lands on real
+   destinations, and the last row always offers the conversation a lookup
+   cannot have. The spark is the only ornament and it earns its place — it is
+   the one signal that this field answers questions rather than matching
+   strings. */
+.st-search{ position:relative; width:100%; }
+.ss-box{
+  display:flex; align-items:center; gap:9px; width:100%; height:38px; padding:0 12px;
+  box-shadow:inset 0 0 0 1px var(--st-hair); background:#fff; color:var(--st-muted);
+  transition:box-shadow .15s;
+}
+.ss-box:focus-within{ box-shadow:inset 0 0 0 1px var(--st-navy); color:var(--st-navy); }
+.ss-spark{ flex:0 0 auto; display:block; line-height:0; color:var(--st-navy); }
+.ss-box input{
+  flex:1; min-width:0; height:100%; border:0; outline:0; background:none; font:inherit;
+  font-size:var(--st-ui); letter-spacing:var(--st-ui-ls); color:var(--st-ink);
+}
 .ss-box input::placeholder{ color:var(--st-chip-off); text-transform:none; letter-spacing:0; }
 .ss-box input::-webkit-search-cancel-button{ display:none; }
 .ss-clear{ font-size:18px; line-height:1; color:var(--st-muted); padding:0 2px; }
 .ss-clear:hover{ color:var(--st-ink); }
-.ss-out{ max-width:560px; padding-top:10px; }
-.ss-read{ color:var(--st-ink); }
-.ss-hint,.ss-none{ color:var(--st-muted); text-transform:none; letter-spacing:0;
-  font-size:var(--st-ui); line-height:18px; margin-top:4px; }
-.ss-none a{ text-decoration:underline; text-underline-offset:3px; color:var(--st-navy); }
+
+/* the panel */
+.ss-panel{ display:none; }
+.ss-open .ss-panel{
+  display:block; position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:60;
+  background:#fff; box-shadow:0 1px 0 var(--st-hair), 0 18px 44px rgba(16,24,40,.13);
+  max-height:min(70vh,520px); overflow-y:auto; overscroll-behavior:contain;
+}
+.ss-head{
+  display:flex; align-items:center; gap:8px; padding:11px 14px; color:var(--st-muted);
+  border-bottom:1px solid var(--st-hair); text-transform:none; letter-spacing:0;
+}
+.ss-ai{
+  flex:0 0 auto; background:var(--st-navy); color:#fff; padding:2px 6px;
+  font-size:10px; line-height:14px; letter-spacing:var(--st-ui-ls); text-transform:uppercase; font-weight:700;
+}
+.ss-seeds{ display:flex; flex-wrap:wrap; gap:6px; padding:12px 14px 14px; }
+.ss-seed{
+  box-shadow:inset 0 0 0 1px var(--st-hair); padding:7px 11px; text-align:left;
+  color:var(--st-ink); text-transform:none; letter-spacing:0; transition:box-shadow .15s;
+}
+.ss-seed:hover{ box-shadow:inset 0 0 0 1px var(--st-navy); }
+
+.ss-row{
+  display:flex; align-items:center; gap:12px; padding:9px 14px;
+  border-bottom:1px solid var(--st-hair); color:var(--st-ink);
+}
+.ss-row:last-child{ border-bottom:0; }
+.ss-row:hover,.ss-row.on{ background:var(--st-ph); }
+.ss-row .th{
+  flex:0 0 40px; width:40px; height:50px; display:grid; place-items:center;
+  background:var(--st-ph); color:var(--st-muted); overflow:hidden;
+}
+.ss-row .th img{ width:100%; height:100%; object-fit:cover; display:block; }
+.ss-row .tx{ flex:1; min-width:0; display:block; }
+.ss-row .nm{ display:block; text-transform:none; letter-spacing:0; font-size:13px; line-height:18px;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ss-row .mt{ display:block; color:var(--st-muted); font-size:10px; line-height:15px;
+  letter-spacing:var(--st-ui-ls); text-transform:uppercase; }
+.ss-row .pr{ flex:0 0 auto; color:var(--st-muted); font-size:11px; }
+
+.ss-ask{
+  display:flex; align-items:center; gap:9px; width:100%; padding:12px 14px;
+  border-top:1px solid var(--st-hair); background:var(--st-ph); text-align:left;
+  color:var(--st-ink); transition:background-color .15s;
+}
+.ss-ask:hover{ background:#eef1f6; }
+.ss-ask .q{ flex:1; min-width:0; color:var(--st-muted); text-transform:none; letter-spacing:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.ss-ask .go{ flex:0 0 auto; color:var(--st-navy); }
+.ss-none{ padding:14px; color:var(--st-muted); text-transform:none; letter-spacing:0;
+  font-size:var(--st-ui); line-height:18px; margin:0; }
+.ss-none b{ color:var(--st-ink); font-weight:500; }
+
+/* On a phone the panel is the screen: it drops out of the header and fills the
+   width, because an 8-row list inside a 38px field is a list nobody can read. */
+@media(max-width:767px){
+  .ss-open .ss-panel{ position:fixed; left:0; right:0; top:var(--st-hd-h);
+    max-height:calc(100vh - var(--st-hd-h)); box-shadow:0 14px 34px rgba(16,24,40,.16); }
+}
 
 /* The bag and saved pages get the same opening as a collection page. They were
    the only two store pages that began straight into content with no statement
@@ -536,6 +708,42 @@
 .st-card .plus{ opacity:0; transition:opacity .18s; }
 .st-card:hover .plus,.st-card .plus:focus-visible{ opacity:1; }
 @media(hover:none){ .st-card .choose,.st-card .plus{ opacity:1; } }
+
+/* ── THE FOOTER, ONE OF THEM, EVERYWHERE ─────────────────────────────────
+   The homepage carried a navy footer and the store a light one, with different
+   links in each. Jayden: "use this footer for the home page and all the other
+   footers ... but add all the pages and categories the other ones has". So the
+   light one wins, the mark comes back above it, and it carries the union of
+   both link sets — shop by collection, the program landing pages, company,
+   support, and the standing terms. */
+.st-foot{ padding:clamp(40px,5vw,72px) 24px clamp(24px,3vw,40px); border-top:1px solid var(--st-hair); }
+.st-foot .ft-in{ max-width:1700px; margin:0 auto; }
+.st-foot .ft-mark{ display:inline-block; margin-bottom:clamp(24px,3vw,40px); }
+.st-foot .ft-mark img{ height:44px; width:auto; }
+.st-foot .ft-cols{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(20px,3vw,44px); }
+.st-foot h4{ font-size:var(--st-ui); line-height:16px; letter-spacing:var(--st-ui-ls);
+  font-weight:700; text-transform:uppercase; margin-bottom:14px; }
+.st-foot ul{ display:flex; flex-direction:column; gap:9px; }
+.st-foot li,.st-foot a{ font-size:var(--st-ui); line-height:18px; letter-spacing:var(--st-ui-ls);
+  color:var(--st-muted); text-transform:uppercase; }
+.st-foot a:hover{ color:var(--st-ink); text-decoration:underline; text-underline-offset:3px; }
+.st-foot .ft-legal{ margin-top:clamp(28px,3.4vw,48px); padding-top:20px;
+  border-top:1px solid var(--st-hair); color:var(--st-chip-off); }
+@media(max-width:1023px){ .st-foot .ft-cols{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:30px; } }
+@media(max-width:560px){ .st-foot .ft-cols{ grid-template-columns:1fr; } .st-foot .ft-mark img{ height:38px; } }
+
+/* ── ROW SCROLL CONTROLS ─────────────────────────────────────────────────
+   The rows were always overflow-x:auto, but with the scrollbar hidden there
+   was nothing to say so and a mouse cannot scroll sideways at all. Arrows sit
+   over the ends, appear only when the row overflows, and hide at each end. */
+.st-rowwrap{ position:relative; }
+.rw-arw{ position:absolute; top:calc(50% - 46px); transform:translateY(-50%); z-index:6;
+  width:38px; height:38px; display:grid; place-items:center; color:var(--st-ink);
+  background:rgba(255,255,255,.94); border-radius:999px; box-shadow:0 1px 6px rgba(0,0,0,.16); }
+.rw-arw:hover{ background:#fff; }
+.rw-arw[hidden]{ display:none; }
+.rw-prev{ left:10px; } .rw-next{ right:10px; }
+@media(max-width:640px){ .rw-arw{ display:none; } }   /* a finger already scrolls */
 
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
@@ -598,7 +806,7 @@
 .sc-nudge b{ text-transform:uppercase; letter-spacing:var(--st-ui-ls); font-size:var(--st-ui); }
 
 /* summary rail */
-.sc-sum{ position:sticky; top:calc(var(--st-nav-h) + 20px); box-shadow:inset 0 0 0 1px var(--st-hair); padding:22px; }
+.sc-sum{ position:sticky; top:calc(var(--st-hd-h) + 20px); box-shadow:inset 0 0 0 1px var(--st-hair); padding:22px; }
 @media(max-width:1023px){ .sc-sum{ position:static; } }
 .sc-sum h2{ font-size:var(--st-ui); letter-spacing:var(--st-ui-ls); text-transform:uppercase; color:var(--st-muted); margin-bottom:16px; }
 .sc-sum .row{ display:flex; justify-content:space-between; padding:6px 0; }
@@ -712,7 +920,7 @@
    the reference's own measured values. The border-left is gone: theirs has no
    rule between the halves, the photograph's own edge is the divider. */
 .pd-buy{
-  position:sticky; top:var(--st-nav-h);
+  position:sticky; top:var(--st-hd-h);
   width:100%; max-width:var(--st-buycol); margin-inline:auto;
   min-height:100dvh; padding:32px 0 33px;
 }

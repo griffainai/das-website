@@ -25,13 +25,13 @@
     window.addEventListener('resize',function(){if(isOpen())place();});
   }
   // Active link. Off Duty's hrefs are root-absolute ("/about-us") so it compared whole paths.
-  // DAS is a static site with RELATIVE hrefs ("shop.html", and "../shop.html" from /blog/), so a
-  // whole-path compare never matches. Compare the file name instead, with "" and "index.html"
+  // DAS is a static site with RELATIVE hrefs ("/shop.html", and "../shop.html" from /blog/), so a
+  // whole-path compare never matches. Compare the file name instead, with "" and "/index.html"
   // both meaning home.
   function leaf(u){
     u = (u || '').split('?')[0].split('#')[0].replace(/\/$/, '');
     u = u.slice(u.lastIndexOf('/') + 1);
-    return (u === '' || u === 'index.html') ? 'index.html' : u;
+    return (u === '' || u === '/index.html') ? '/index.html' : u;
   }
   var path = leaf(window.location.pathname);
   Array.prototype.slice.call(document.querySelectorAll('.odn-links a,.odn-tab')).forEach(function(a){

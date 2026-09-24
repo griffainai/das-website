@@ -199,12 +199,15 @@ const Cart = {
       el.textContent = count;
       el.classList.toggle('visible', count > 0);
     });
-    document.querySelectorAll('[data-bag-count]').forEach(el => {
-      el.textContent = units;
-      /* a visible 0 reads as broken; absence reads as empty */
-      if (el.classList.contains('odn-cart-n')) {
-        if (units > 0) el.setAttribute('data-has', ''); else el.removeAttribute('data-has');
-      }
+    document.querySelectorAll('[data-bag-count],[data-wish-count]').forEach(el => {
+      const n = el.hasAttribute('data-wish-count')
+        ? (window.Favorites && Favorites.get ? Favorites.get().length : Number(el.textContent) || 0)
+        : units;
+      el.textContent = n;
+      /* a visible 0 reads as broken; a quiet one reads as empty. Every badge
+         carries the flag now, not just the main-site one -- the store header's
+         counts were styled for it and never got it. */
+      if (n > 0) el.setAttribute('data-has', ''); else el.removeAttribute('data-has');
     });
     try { document.dispatchEvent(new CustomEvent('cart:change', { detail: { count, units } })); }
     catch (e) { /* older browsers — the badge above already updated */ }

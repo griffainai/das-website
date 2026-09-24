@@ -234,7 +234,7 @@
       '<input type="email" required placeholder="Email address" aria-label="Email address">' +
       '<button type="submit" class="cta">Get on the list</button>' +
       '<button type="button" class="no">No thanks</button>' +
-      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
+      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else if (which === 'p2') inner =
       '<div class="card fb" style="background:#0C1840"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
@@ -248,7 +248,7 @@
       '<label class="lt"><input type="radio" name="pref" value="both"> Both</label></div>' +
       '<input type="email" required placeholder="Email address" aria-label="Email address">' +
       '<button type="submit" class="cta wh">Continue</button>' +
-      '<p class="fine lt">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
+      '<p class="fine lt">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else if (which === 'p3') inner =
       '<div class="card pt"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
@@ -260,7 +260,7 @@
       '<input type="email" required placeholder="Email address" aria-label="Email address">' +
       '<button type="submit" class="cta">Subscribe</button>' +
       '<button type="button" class="no">No thanks</button>' +
-      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy</a>.</p>' + '</form></div>';
+      '<p class="fine">By signing up you agree to receive recurring marketing emails from Driver Appreciation Solutions. Unsubscribe anytime. View <a href="/terms.html">Terms</a> and <a href="/privacy.html">Privacy</a>.</p>' + '</form></div>';
 
     else inner = /* p5 exit intent — cart has items */
       '<div class="card sp" style="background:#0C1840;color:#fff"><button type="button" class="x lt" aria-label="Close">&#10005;</button>' +
@@ -268,7 +268,7 @@
       '<form class="frm" novalidate><span class="eb lt">' + cartCount() + ' kit line' + (cartCount() === 1 ? '' : 's') + ' saved</span>' +
       '<h2 class="lt">Your kits are<br>still in the cart</h2>' +
       '<p class="bd lt">Checkout takes two minutes &mdash; or email yourself the reminder and come back before the Driver Appreciation Week deadline.</p>' +
-      '<a class="cta wh" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="cart.html">Review my cart</a>' +
+      '<a class="cta wh" style="display:flex;align-items:center;justify-content:center;text-decoration:none" href="/cart.html">Review my cart</a>' +
       '<input type="email" placeholder="Or email me the reminder" aria-label="Email address">' +
       '<button type="submit" class="cta" style="background:rgba(255,255,255,.15);box-shadow:none">Remind me</button>' +
       '<button type="button" class="no lt">Keep shopping</button></form></div>';

@@ -95,7 +95,7 @@
            relative block, no border and no padding — the card's only inset is on
            the text beneath. */
         '<div class="shot">' +
-          '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '" aria-label="' + esc(p.name) + '">' +
+          '<a class="frame" href="/store-product.html?id=' + encodeURIComponent(p.id) + '" aria-label="' + esc(p.name) + '">' +
             (p.badge ? '<span class="badge">' + esc(p.badge) + '</span>' : '') +
             cardImg(p, i < 8) +
           '</a>' +
@@ -115,10 +115,10 @@
            offering nothing. */
         (p.comingSoon ? '' :
           p.gated
-            ? '<a class="choose" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
+            ? '<a class="choose" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
               '&amp;name=' + encodeURIComponent(p.name) + '">Request pricing</a>'
             : p.milestoneSelect
-              ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
+              ? '<a class="choose" href="/store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
               : '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
                 '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
                 '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
@@ -136,7 +136,7 @@
         /* stacked on mobile, title-left / price-right on desktop */
         '<div class="foot">' +
           '<div class="grp">' +
-            '<a class="t" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' + esc(p.name) + '</a>' +
+            '<a class="t" href="/store-product.html?id=' + encodeURIComponent(p.id) + '">' + esc(p.name) + '</a>' +
             '<span class="c">' + esc(p.programLabel) + '</span>' +
           '</div>' +
           '<div class="p">' + (p.comingSoon
@@ -229,6 +229,61 @@
     }).filter(function (g) { return g.shot; });
   }
 
+  /* Arrows show only when there is somewhere to go, and update as the row
+     moves — an arrow that does nothing is worse than no arrow. */
+  function wireRows() {
+    document.querySelectorAll('.st-rowwrap').forEach(function (wrap) {
+      var row = wrap.querySelector('.st-row');
+      var prev = wrap.querySelector('.rw-prev');
+      var next = wrap.querySelector('.rw-next');
+      if (!row || !prev || !next) return;
+
+      function sync() {
+        var over = row.scrollWidth > row.clientWidth + 4;
+        /* AT REST THE ROW IS NOT AT ZERO. It carries 24px of side padding, so
+           its resting scrollLeft is 24 and a "< 8" test called that scrolled --
+           the back arrow sat there on first paint pointing at nothing. The
+           first card's own offset is the only honest floor. */
+        var first = row.querySelector('.st-card');
+        var rest = first ? first.getBoundingClientRect().left - row.getBoundingClientRect().left + row.scrollLeft : 0;
+        prev.hidden = !over || row.scrollLeft <= rest + 4;
+        next.hidden = !over || row.scrollLeft > row.scrollWidth - row.clientWidth - 8;
+      }
+      /* SCROLL TO A SNAP POINT, NEVER BETWEEN TWO. The row is
+         scroll-snap-type:x mandatory, so a scrollBy() of an arbitrary distance
+         is snapped back to the nearest card the moment the animation settles --
+         which, for a page-sized jump, was the card it started on. The arrow
+         appeared dead: clicked, animated, returned to 24. Landing on a card's
+         exact offset keeps the snap and the arrow agreeing. */
+      function step(dir) {
+        var cards = [].slice.call(row.querySelectorAll('.st-card'));
+        if (!cards.length) return;
+        var rl = row.getBoundingClientRect().left;
+        var at = cards.map(function (c) { return c.getBoundingClientRect().left - rl + row.scrollLeft; });
+
+        var cur = 0;
+        for (var i = 0; i < at.length; i++) if (at[i] <= row.scrollLeft + 4) cur = i;
+
+        var per = Math.max(1, Math.floor(row.clientWidth / (cards[0].getBoundingClientRect().width + 1)));
+        var want = Math.min(at.length - 1, Math.max(0, cur + dir * per));
+        row.scrollTo({ left: at[want], behavior: 'smooth' });
+      }
+      prev.addEventListener('click', function () { step(-1); });
+      next.addEventListener('click', function () { step(1); });
+
+      var t;
+      row.addEventListener('scroll', function () {
+        if (t) return;
+        t = requestAnimationFrame(function () { t = 0; sync(); });
+      }, { passive: true });
+      window.addEventListener('resize', sync);
+      /* images change the width as they load, so re-check once settled */
+      sync();
+      setTimeout(sync, 400);
+      setTimeout(sync, 1400);
+    });
+  }
+
   /* THE COLLECTION HERO — only on /collections/<slug>. The banner the home
      rhythm uses, with the programme's name, its count and one line on what it
      is for, so a collection page announces itself instead of opening on a
@@ -300,7 +355,18 @@
           '<h2>' + esc(g.label) + '</h2>' +
           '<a href="/collections/' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '">See all ' + g.count + '</a>' +
         '</div>' +
-        '<div class="st-row">' + six.map(card).join('') + '</div>' +
+        /* A SCROLLER NOBODY CAN SEE IS NOT A SCROLLER. The row has always been
+           overflow-x:auto, but with no scrollbar and no arrows there was
+           nothing to say so, and a mouse cannot scroll sideways at all —
+           "there's no scroller on mobile and desktop". Arrows appear only when
+           the row actually overflows, and are hidden at the ends. */
+        '<div class="st-rowwrap">' +
+          '<button type="button" class="rw-arw rw-prev" data-row="-1" aria-label="Scroll ' + esc(g.label) + ' left" hidden>' +
+            '<svg width="8" height="14" viewBox="0 0 7 13" fill="none"><path d="M6 1 1 6.5 6 12" stroke="currentColor" stroke-width="1.5"/></svg></button>' +
+          '<div class="st-row">' + six.map(card).join('') + '</div>' +
+          '<button type="button" class="rw-arw rw-next" data-row="1" aria-label="Scroll ' + esc(g.label) + ' right" hidden>' +
+            '<svg width="8" height="14" viewBox="0 0 7 13" fill="none"><path d="m1 1 5 5.5L1 12" stroke="currentColor" stroke-width="1.5"/></svg></button>' +
+        '</div>' +
       '</section>';
     }).join('');
   }
@@ -512,6 +578,9 @@
     chips();
     index();
     if (!filtered) home();
+    /* AFTER home(), not before — the rows do not exist until it renders them,
+       so wiring first found nothing and every arrow stayed hidden. */
+    wireRows();
     render();
     paintBag();
     document.querySelectorAll('[data-wish-count]').forEach(function (e) {
@@ -519,6 +588,6 @@
     });
   }).catch(function () {
     gridEl.innerHTML = '<p class="st-ui" style="padding:40px 0;color:#737373">The catalogue could not be loaded. ' +
-      '<a href="shop.html" style="text-decoration:underline">Browse the full shop</a>.</p>';
+      '<a href="/shop.html" style="text-decoration:underline">Browse the full shop</a>.</p>';
   });
 })();

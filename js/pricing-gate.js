@@ -10,7 +10,7 @@
   'use strict';
   var THRESHOLD = 110;
   var LS_KEY = 'das_pricing_unlocked_v1';
-  var CONSULT = 'company-purchasing.html?product=' +
+  var CONSULT = '/company-purchasing.html?product=' +
     encodeURIComponent('Program Planning Consultation') + '&category=' + encodeURIComponent('Program Planning');
   var PLAN_LABEL = 'Let’s Plan Your Program';
 
@@ -74,9 +74,9 @@
     var qtyL = card.querySelector('.qty-label'); if (qtyL) qtyL.style.display = 'none';
     // "Learn More" → the product's OWN detail page (image + full details), NOT straight to the
     // quote form. The PDP then carries the path to request pricing.
-    var pdpLink = card.querySelector('a[href*="product.html"], a[href*="product?id="]');
+    var pdpLink = card.querySelector('a[href*="/product.html"], a[href*="product?id="]');
     var pid = card.getAttribute('data-product-id');
-    var pdpHref = (pdpLink && pdpLink.getAttribute('href')) || (pid ? 'product.html?id=' + encodeURIComponent(pid) : CONSULT);
+    var pdpHref = (pdpLink && pdpLink.getAttribute('href')) || (pid ? '/product.html?id=' + encodeURIComponent(pid) : CONSULT);
     var actions = card.querySelector('.product-card-actions');
     if (actions) { actions.innerHTML = ''; actions.appendChild(learnMoreBtn(pdpHref, 'Learn More')); }
   }
@@ -95,7 +95,7 @@
     if (row) {
       var pid = card.getAttribute('data-product-id');
       row.innerHTML = '<span class="plan-cta-label">' + PLAN_LABEL + '</span>';
-      row.appendChild(learnMoreBtn(pid ? 'product.html?id=' + encodeURIComponent(pid) : CONSULT, 'Learn More'));
+      row.appendChild(learnMoreBtn(pid ? '/product.html?id=' + encodeURIComponent(pid) : CONSULT, 'Learn More'));
       row.style.cssText = 'display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap';
     }
   }

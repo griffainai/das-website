@@ -313,11 +313,11 @@
     background:#fff;transition:opacity .5s cubic-bezier(.4,0,.2,1),visibility linear .5s}
   #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
   #das-splash .dsl{position:relative;display:flex;align-items:center;width:min(86vw,780px);
-    transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    aspect-ratio:728/259;transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #das-splash.das-done .dsl{transform:scale(1.03)}
 
   /* the mark: their fly-in, to the millisecond */
-  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:20.9%;opacity:0;
+  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:26.92%;opacity:0;
     transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
     animation:dasMark 1.7s linear .08s 1 both}
   #das-splash .dsm .bnd{position:absolute;inset:0;opacity:0;
@@ -327,7 +327,7 @@
   #das-splash .dsm img{display:block;width:100%;height:auto}
 
   /* the wordmark: their wipe */
-  #das-splash .dsw{position:relative;flex:0 0 auto;width:78%;margin-left:1.1%;overflow:hidden;
+  #das-splash .dsw{position:relative;flex:0 0 auto;width:68.96%;margin-left:2.2%;overflow:hidden;
     clip-path:inset(0 100% 0 0);will-change:clip-path;
     animation:dasWipe .56s cubic-bezier(.33,0,.2,1) 1.68s 1 both}
   #das-splash .dsw img{display:block;width:100%;height:auto}
@@ -381,7 +381,7 @@
     var quick=false;
     try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
     if(quick) el.classList.add('das-quick');
-    var MIN= quick ? 700 : 1900, t0=Date.now();
+    var MIN= quick ? 420 : 2300, t0=Date.now();
     function hide(){ if(!el) return; el.classList.add('das-done');
       setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
     function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }

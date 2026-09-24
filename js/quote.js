@@ -20,7 +20,7 @@
     if (!l.length) { if (pill) pill.parentNode.removeChild(pill); if (window.DASDock) window.DASDock.el().dataset.quote = '0'; return; }
     if (!pill) {
       pill = document.createElement('a'); pill.id = 'das-quote-pill';
-      pill.href = 'company-purchasing.html?quote=1';
+      pill.href = '/company-purchasing.html?quote=1';
       pill.setAttribute('aria-label', 'Review your quote request');
       /* the chat widget's ring, worn as a pill (Jayden, 2026-08-27): white body,
          2px gradient border from the same family as the launcher orb */

@@ -202,7 +202,7 @@
     }
     if (P.blurb) h += '<p class="blurb">' + esc(P.blurb) + '</p>';
 
-    h += '<a class="pd-prog st-ui" href="store.html?c=' + esc(P.program) + '">' +
+    h += '<a class="pd-prog st-ui" href="/store.html?c=' + esc(P.program) + '">' +
       'See the whole ' + esc(P.programLabel) + ' program' +
       '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
 
@@ -214,13 +214,13 @@
     if (P.execUpgrades && P.execUpgrades.length) {
       h += '<div class="pd-exec"><span class="k st-ui">Executive Collection available</span>' +
         P.execUpgrades.map(function (u) {
-          return '<a class="row st-ui" href="store-product.html?id=' + encodeURIComponent(u.id) + '">' +
+          return '<a class="row st-ui" href="/store-product.html?id=' + encodeURIComponent(u.id) + '">' +
             '<span>' + esc(u.gift || 'Executive upgrade') + '</span>' +
             '<span class="up">' + (u.comingSoon ? 'Coming soon' : (u.upgrade ? '+$' + u.upgrade : 'View')) + '</span></a>';
         }).join('') + '</div>';
     }
     if (P.execBase) {
-      h += '<a class="pd-prog st-ui" href="store-product.html?id=' + encodeURIComponent(P.execBase.id) + '">' +
+      h += '<a class="pd-prog st-ui" href="/store-product.html?id=' + encodeURIComponent(P.execBase.id) + '">' +
         'Standard award without the executive gift' +
         '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" aria-hidden="true"><path stroke-linecap="round" d="M5 12h14M13 6l6 6-6 6"/></svg></a>';
     }
@@ -236,7 +236,7 @@
       h += '<div class="st-req">' +
         '<b>Priced to your fleet</b>' +
         '<p>This program is quoted on driver count, customization and timeline. A specialist replies in writing within one business day &mdash; a real number, not a range.</p>' +
-        '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
+        '<a class="st-cta st-cta--block" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
           '&amp;name=' + encodeURIComponent(P.name) + '">Request pricing</a>' +
         '</div>';
     } else if (P.comingSoon) {
@@ -246,7 +246,7 @@
       h += '<div class="st-req">' +
         '<b>Pricing coming soon</b>' +
         '<p>This option is not released for purchase yet. Tell us the fleet size and the occasion and the team will confirm pricing and availability.</p>' +
-        '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
+        '<a class="st-cta st-cta--block" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
           '&amp;name=' + encodeURIComponent(P.name) + '">Notify me / request pricing</a>' +
         '</div>';
     } else {
@@ -268,7 +268,7 @@
           }).join('') + '</select>';
         h += '<p class="pd-note">Images are representative. The award is customized to the milestone level you choose, at no extra cost.</p>';
       }
-      h += '<div class="pd-lbl st-ui"><span>Quantity</span><a href="contact.html?intent=pricing">Need a different volume?</a></div>';
+      h += '<div class="pd-lbl st-ui"><span>Quantity</span><a href="/contact.html?intent=pricing">Need a different volume?</a></div>';
       h += '<div class="pd-qty st-ui">' + qtys(P).map(function (q) {
         return '<button data-qty="' + q + '" aria-pressed="' + (q === qty) + '">' + q +
           '<small>' + money(P.price * q) + '</small></button>';
@@ -301,7 +301,7 @@
     h += '<details><summary class="st-ui">Ordering for a large fleet</summary><div class="bd">' +
       'Volume pricing unlocks at 100+ drivers on the same SKUs and the same quality. Multi-terminal delivery and ' +
       'annual program scheduling are coordinated by the fleet team. ' +
-      '<a href="company-purchasing.html" style="color:var(--st-navy);text-decoration:underline">Buy for my company</a>.' +
+      '<a href="/company-purchasing.html" style="color:var(--st-navy);text-decoration:underline">Buy for my company</a>.' +
       '</div></details>';
     return h;
   }
@@ -334,7 +334,7 @@
         '<h2>A program beats<br>a parcel.</h2>' +
         '<p class="fb-lede">One kit is a gesture. A calendar of them is what moves retention &mdash; built around your ' +
         'driver count, your budget and the dates that already matter to your operation.</p>' +
-        '<a class="st-cta st-cta--block" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
+        '<a class="st-cta st-cta--block" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) +
           '&amp;name=' + encodeURIComponent(P.name) + '">Build the program</a>' +
       '</div>';
   }
@@ -347,7 +347,7 @@
   function card(p) {
     var v = (p.shot && p.shot.pdp) || p.shot || {};
     return '<article class="st-card st-ui">' +
-      '<div class="shot"><a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
+      '<div class="shot"><a class="frame" href="/store-product.html?id=' + encodeURIComponent(p.id) + '">' +
         '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" sizes="(min-width:1024px) 20vw, 50vw" ' +
         'alt="' + esc(p.name) + '" loading="lazy" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a>' +
         /* The rows under the product had no action on hover at all — a buyer
@@ -356,10 +356,10 @@
            piece's minimum order, which is the only quantity it can be sold in. */
         (p.comingSoon ? '' :
           p.gated
-            ? '<a class="choose" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
+            ? '<a class="choose" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
               '&amp;name=' + encodeURIComponent(p.name) + '">Request pricing</a>'
             : p.milestoneSelect
-              ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
+              ? '<a class="choose" href="/store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
               : '<button class="plus" data-quick="' + esc(p.id) + '" aria-label="Add ' + esc(p.name) + ' to the bag">' +
                 '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
                 '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
@@ -473,7 +473,7 @@
         : P.gated ? 'Priced to your fleet'
         : money(P.price) + ' per unit') + '</span></span>' +
       (quoteOnly
-        ? '<a class="st-cta" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) + '">Request pricing</a>'
+        ? '<a class="st-cta" href="/contact.html?intent=pricing&amp;product=' + encodeURIComponent(P.id) + '">Request pricing</a>'
         : '<button class="st-cta" id="pd-add-bar">Add to bag</button>');
   }
 
@@ -636,7 +636,7 @@
     P = data.products.filter(function (p) { return p.id === id || p.slug === id; })[0];
     if (!P) {
       root.innerHTML = '<div style="padding:60px 24px"><p class="st-ui" style="color:var(--st-muted)">' +
-        'That product is not in the store. <a href="store.html" style="text-decoration:underline">Browse the collection</a>.</p></div>';
+        'That product is not in the store. <a href="/store.html" style="text-decoration:underline">Browse the collection</a>.</p></div>';
       return;
     }
     qty = P.minQty || 10;
@@ -654,6 +654,6 @@
     });
   }).catch(function () {
     root.innerHTML = '<div style="padding:60px 24px"><p class="st-ui" style="color:var(--st-muted)">' +
-      'The catalogue could not be loaded. <a href="shop.html" style="text-decoration:underline">Browse the full shop</a>.</p></div>';
+      'The catalogue could not be loaded. <a href="/shop.html" style="text-decoration:underline">Browse the full shop</a>.</p></div>';
   });
 })();

@@ -193,7 +193,7 @@
 <script src="/js/tracking.js?v=3" defer></script>
   <link rel="stylesheet" href="css/das-widget.css?v=3">
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
-  <link rel="stylesheet" href="/css/das-nav.css?v=9">
+  <link rel="stylesheet" href="/css/das-nav.css?v=11">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -238,11 +238,11 @@
     background:#fff;transition:opacity .5s cubic-bezier(.4,0,.2,1),visibility linear .5s}
   #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
   #das-splash .dsl{position:relative;display:flex;align-items:center;width:min(86vw,780px);
-    transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+    aspect-ratio:728/259;transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
   #das-splash.das-done .dsl{transform:scale(1.03)}
 
   /* the mark: their fly-in, to the millisecond */
-  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:20.9%;opacity:0;
+  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:26.92%;opacity:0;
     transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
     animation:dasMark 1.7s linear .08s 1 both}
   #das-splash .dsm .bnd{position:absolute;inset:0;opacity:0;
@@ -252,7 +252,7 @@
   #das-splash .dsm img{display:block;width:100%;height:auto}
 
   /* the wordmark: their wipe */
-  #das-splash .dsw{position:relative;flex:0 0 auto;width:78%;margin-left:1.1%;overflow:hidden;
+  #das-splash .dsw{position:relative;flex:0 0 auto;width:68.96%;margin-left:2.2%;overflow:hidden;
     clip-path:inset(0 100% 0 0);will-change:clip-path;
     animation:dasWipe .56s cubic-bezier(.33,0,.2,1) 1.68s 1 both}
   #das-splash .dsw img{display:block;width:100%;height:auto}
@@ -306,7 +306,7 @@
     var quick=false;
     try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
     if(quick) el.classList.add('das-quick');
-    var MIN= quick ? 700 : 1900, t0=Date.now();
+    var MIN= quick ? 420 : 2300, t0=Date.now();
     function hide(){ if(!el) return; el.classList.add('das-done');
       setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
     function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
@@ -339,7 +339,7 @@
         <a href="index.html">Home</a><a href="store.html">Shop</a><a href="about.html">About</a><a href="ideas.html">Insights &amp; Ideas</a><a href="surveys.html">Surveys</a><a href="contact.html">Contact</a>
       </nav>
       <div class="odn-actions">
-        <a href="store-cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 3h2l2.4 12.3a2 2 0 0 0 2 1.7h7.7a2 2 0 0 0 2-1.6L21 8H6"/><circle cx="10" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
+        <a href="store-cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 11.5a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4L5.5 8Z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
         <a href="login.html" class="odn-cta">Sign in</a>
         <button class="odn-burger" id="odn-burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
@@ -607,68 +607,70 @@
 <!-- ── FOOTER ─────────────────────────────────────────────────── -->
 </main>
 
-<footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
+<footer class="st-foot st-ui">
+  <div class="ft-in">
+    <a href="index.html" class="ft-mark" aria-label="Driver Appreciation Solutions — home">
+      <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="728" height="259">
+    </a>
+    <div class="ft-cols">
       <div>
-        <a href="index.html" class="footer-brand">
-          <img src="images/logo.png" alt="Driver Appreciation Solutions" class="nav-logo-img">
-        </a>
-        <p class="footer-brand-desc">The fleet recognition standard. Curated appreciation kits, onboarding packs, milestone awards, and the Driver Newsletter Builder — built for trucking.</p>
-        <div class="footer-social">
-          <a href="#" class="footer-social-link" aria-label="LinkedIn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          </a>
-          <a href="#" class="footer-social-link" aria-label="Facebook">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-          </a>
-        </div>
-      </div>
-      <div>
-        <div class="footer-col-title">Portal Features</div>
-        <ul class="footer-links">
-          <li><a href="publications.html" class="footer-link">Driver Newsletter Builder</a></li>
-          <li><a href="login.html"        class="footer-link">Fleet Portal Login</a></li>
-          <li><a href="signup.html"       class="footer-link">Create Account</a></li>
-          <li><a href="contact.html"      class="footer-link">Request a Demo</a></li>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="/collections/appreciation">Driver appreciation kits</a></li>
+          <li><a href="/collections/safety">Safety recognition</a></li>
+          <li><a href="/collections/milestone">Service milestones</a></li>
+          <li><a href="/collections/milepacks">Safe miles programs</a></li>
+          <li><a href="/collections/onboarding">Onboarding solutions</a></li>
+          <li><a href="/collections/holiday">Holiday &amp; seasonal</a></li>
+          <li><a href="store.html">Full catalogue</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Products</div>
-        <ul class="footer-links">
-          <li><a href="shop.html?category=appreciation" class="footer-link">Appreciation Kits</a></li>
-          <li><a href="shop.html?category=onboarding"   class="footer-link">Onboarding Solutions</a></li>
-          <li><a href="shop.html?category=milestone"    class="footer-link">Milestone Gifts</a></li>
-          <li><a href="shop.html"                       class="footer-link">Full Catalog</a>
-              <a href="million-mile-driver-awards.html" class="footer-link">Million-Mile Awards</a>
-              <a href="fleet-driver-retention-gifts.html" class="footer-link">Driver Retention Gifts</a>
-              <a href="safe-driver-award-programs.html" class="footer-link">Safe Driver Programs</a></li>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="million-mile-driver-awards.html">Million-mile awards</a></li>
+          <li><a href="fleet-driver-retention-gifts.html">Driver retention gifts</a></li>
+          <li><a href="safe-driver-award-programs.html">Safe driver programs</a></li>
+          <li><a href="driver-appreciation-week.html">Driver Appreciation Week</a></li>
+          <li><a href="new-driver-welcome-kit.html">New driver welcome kits</a></li>
+          <li><a href="publications.html">Driver newsletter builder</a></li>
         </ul>
       </div>
       <div>
-        <div class="footer-col-title">Company</div>
-        <ul class="footer-links">
-          <li><a href="about.html"   class="footer-link">About Us</a></li>
-          <li><a href="ideas.html"   class="footer-link">Driver Ideas Blog</a></li>
-          <li><a href="contact.html" class="footer-link">Contact</a></li>
-          <li><a href="surveys.html" class="footer-link">Driver Surveys</a></li>
-          <li><a href="customer-service.html" class="footer-link">Customer Service</a></li>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="ideas.html">Insights &amp; ideas</a></li>
+          <li><a href="surveys.html">Driver surveys</a></li>
+          <li><a href="company-purchasing.html">Buy for my company</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html?intent=pricing">Request a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="customer-service.html">Customer service</a></li>
+          <li><a href="return-policy.html">Return policy</a></li>
+          <li><a href="refund-policy.html">Refund &amp; disputes</a></li>
+          <li><a href="cancelation-policy.html">Cancellation policy</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Terms of supply</h4>
+        <ul class="ft-plain">
+          <li>Minimum 10 units per product</li>
+          <li>Net-30 for approved carriers</li>
+          <li><a href="tel:3026810995">302.681.0995</a></li>
+          <li><a href="mailto:info@driverappreciationsolutions.com">Email the fleet team</a></li>
         </ul>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copyright">© 2026 DRIVER APPRECIATION SOLUTIONS INC. All rights reserved.</p>
-      <div class="footer-legal"><a href="privacy.html" class="footer-legal-link">Privacy Policy</a>
-        <a href="terms.html"             class="footer-legal-link">Terms &amp; Conditions</a>
-        <a href="return-policy.html"     class="footer-legal-link">Return Policy</a>
-        <a href="refund-policy.html"     class="footer-legal-link">Refund Policy</a>
-        <a href="legal.html"             class="footer-legal-link">Legal / Export</a>
-      </div>
-    </div>
+    <p class="ft-legal">&copy; 2026 Driver Appreciation Solutions</p>
   </div>
-
-      <a class="fbot-credit" href="https://griffain.io" target="_blank" rel="noopener" aria-label="Website by GRIFFAIN"><svg viewBox="0 0 512 512" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"><path d="M70 200 C 130 130, 190 130, 256 200 S 382 270, 442 200"/><path d="M70 320 C 130 250, 190 250, 256 320 S 382 390, 442 320"/></g></svg>Powered by GRIFFAIN</a>
-    </footer>
+</footer>
 
 <script src="js/cart.js?v=7"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>

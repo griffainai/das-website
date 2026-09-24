@@ -50,10 +50,17 @@
      showing the real number". cart.js already announces every change to
      [data-bag-count]; this just gives the main nav somewhere to put it. Hidden
      at zero rather than showing a 0, which reads as broken. */
-  .odn-cart{position:relative;display:inline-flex;align-items:center}
-  .odn-cart-n{position:absolute;top:-6px;right:-10px;min-width:18px;height:18px;padding:0 5px;
+  /* THE BAG. It was a trolley glyph with a "Cart" caption under it; the caption
+     went and the icon had no size of its own, so what remained on screen was a
+     bare count pill and no icon at all. Explicit size, and the badge pulled
+     down to a quiet corner marker rather than the loudest thing in the header. */
+  .odn-cart{position:relative;display:inline-flex;align-items:center;justify-content:center;
+    width:40px;height:40px;color:#0E1B2E}
+  .odn-cart svg{width:22px;height:22px;display:block}
+  .odn-cart:hover{opacity:.7}
+  .odn-cart-n{position:absolute;top:1px;right:0;min-width:17px;height:17px;padding:0 4px;
     display:none;align-items:center;justify-content:center;border-radius:999px;
-    background:#1A2E6E;color:#fff;font-size:11px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
+    background:#1A2E6E;color:#fff;font-size:10px;line-height:1;font-weight:600;font-variant-numeric:tabular-nums}
   .odn-cart-n[data-has]{display:inline-flex}
   .odn-cta::after{content:'→';display:inline-block;transition:transform .15s}
   .odn-cta:hover::after{transform:translateX(3px)}
