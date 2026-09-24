@@ -1,0 +1,145 @@
+/* ============================================================================
+   DAS FORMS — the shared layer for Contact and Company Purchasing
+   ----------------------------------------------------------------------------
+   Jayden 2026-09-24: "We haven't completely done the contact page and the
+   corporate purchasing page. Both of these pages need to be redesigned fully."
+
+   WHAT THE PAGES ACTUALLY MEASURE AT 375x812, before this file:
+
+     contact.html              9 visible controls   form 1160px
+                               855px of page before the form starts
+                               4 controls under 16px
+     company-purchasing.html  23 visible controls   form 2191px
+                               855px before the form starts
+                               8 controls under 16px
+                               whole page 5329px — 6.5 phone screens
+
+   Those numbers are the brief. A 2191px form on a 812px screen is not a form,
+   it is an endurance test, and a procurement manager on a phone abandons it.
+   Neither page needed its visual language rebuilt — the navy slash hero, the
+   direct-contact list and the success states are right. What needed rebuilding
+   is what the form DOES on a phone.
+
+   FOUR CHANGES, EACH TIED TO A MEASUREMENT
+
+   1. Controls are 16px and 50px tall. 16px because below it Safari zooms the
+      page on focus and never zooms back (see the auto-zoom guard in
+      styles.css); 50px because a 44px target is the floor, not the goal, and
+      these are being tapped by someone in a yard.
+
+   2. The form starts 400px sooner. 855px of hero before the first field means
+      a phone user scrolls a full screen before the page does anything. The
+      hero keeps its type and its slash and loses the padding it was using to
+      look generous on a desktop.
+
+   3. The submit sticks. In a form two to three screens tall, the button that
+      ends it should never be somewhere you have to go and find.
+
+   4. Company Purchasing reveals its billing block instead of always showing
+      it. Eleven fields for everyone, the other twelve for the people whose
+      purchasing need actually implies them. Nothing is removed from the DOM,
+      so the submit handler and the API contract are untouched.
+   ========================================================================== */
+
+/* ── the controls ──────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* !important, matched at class specificity, and in the later sheet.
+     das-contact.css sets `.cf-input, .cf-select { font-size:.9375rem
+     !important }`. An important CLASS rule beats the important ELEMENT rule in
+     the auto-zoom guard, so contact's selects and textarea stayed at 15px and
+     kept triggering Safari's zoom. Same specificity, same weight, loaded after
+     — that is what it takes to win here, and the reason is worth more than the
+     purity. */
+  .cf-input,
+  .cf-select,
+  .cf-textarea,
+  #contact-form input:not([type="checkbox"]):not([type="radio"]),
+  #contact-form select,
+  #company-form input:not([type="checkbox"]):not([type="radio"]),
+  #company-form select {
+    min-height: 50px;
+    font-size: 16px !important;
+    padding: 13px 14px;
+  }
+  #contact-form textarea,
+  #company-form textarea { font-size: 16px !important; padding: 13px 14px; min-height: 120px; }
+
+  /* A checkbox you can actually hit. 16px was the box itself, which on a
+     phone is a target a third of the recommended size. */
+  #contact-form input[type="checkbox"],
+  #company-form input[type="checkbox"] { width: 22px; height: 22px; }
+  .cp-check { min-height: 48px; display: flex; align-items: center; gap: 10px; }
+
+  .cf-label { font-size: 13px; margin-bottom: 7px; }
+  .cf-row { gap: 16px; }
+  .cf-row, .cf-row-full { margin-bottom: 16px; }
+
+  /* the follow-up chooser — three taps, not three words */
+  .cf-fu { min-height: 48px; font-size: 14px; }
+}
+
+/* ── start the form sooner ─────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .contact-hero { padding: 30px 0 26px !important; }
+  .ch-title { font-size: 1.75rem; line-height: 1.12; }
+  .ch-subtitle { font-size: .95rem; line-height: 1.55; margin-top: 12px; }
+  /* Three stacked label-over-value pairs cost 159px of a 812px screen before
+     the form. On one line each -- label left, the tappable value right -- they
+     cost about 100 and read like a contact card instead of a list. */
+  .dc-direct { margin-top: 16px; gap: 0; display: block; }
+  .dc-direct > div {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 14px;
+    padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.14);
+  }
+  .dc-direct > div:last-child { border-bottom: 0; }
+  .dc-direct dt { margin: 0; white-space: nowrap; }
+  .dc-direct dd { margin: 0; text-align: right; min-width: 0; overflow-wrap: anywhere; }
+  .form-section-head { margin-bottom: 18px; }
+  .form-section-title { font-size: 1.4rem; line-height: 1.18; }
+  .form-section-sub { font-size: .9rem; margin-top: 8px; }
+  .contact-main { padding-top: 26px; }
+}
+
+/* ── the submit stays reachable ────────────────────────────────────────── */
+@media (max-width: 767px) {
+  /* Sticky rather than fixed: it stays in the document flow, so it cannot
+     cover the field below it, and it stops sticking once the form ends. */
+  #contact-form .cf-submit,
+  #company-form .cf-submit {
+    position: sticky;
+    bottom: 12px;
+    z-index: 20;
+    min-height: 54px;
+    box-shadow: 0 6px 22px rgba(16, 38, 79, .26);
+  }
+}
+
+/* ── Company Purchasing: reveal, don't wall ────────────────────────────── */
+/* Hidden by default and shown by js/das-forms.js when the purchasing need
+   implies it. [hidden] alone is not enough — anything that sets `display`
+   beats the UA rule — so the class carries display:none itself. */
+.cp-reveal { display: none; }
+.cp-reveal.is-open { display: block; }
+
+.cp-reveal-note {
+  display: flex; align-items: flex-start; gap: 9px;
+  margin: 2px 0 18px; padding: 12px 14px;
+  background: #F7F9FC; border: 1px solid #E2E8F0; border-radius: 10px;
+  font-size: .84rem; line-height: 1.5; color: #475569;
+}
+.cp-reveal-note strong { color: #16264F; }
+.cp-reveal-note svg { flex: 0 0 auto; margin-top: 2px; color: #1A2E6E; }
+
+/* the block that appears, marked so it reads as an answer to what was ticked */
+.cp-reveal > .cp-reveal-in {
+  border-left: 2px solid #1A2E6E;
+  padding-left: 16px;
+  margin-bottom: 4px;
+}
+@media (max-width: 767px) {
+  .cp-reveal > .cp-reveal-in { padding-left: 12px; }
+}
+.cp-reveal-head {
+  font-size: .72rem; font-weight: 700; letter-spacing: .09em;
+  text-transform: uppercase; color: #1A2E6E; margin-bottom: 14px;
+}

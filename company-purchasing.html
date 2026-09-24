@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Oswald:wght@500;600&family=Anton&family=Chivo:wght@400;700&display=swap">
   <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="/css/das-forms.css?v=3">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <link rel="manifest" href="/manifest.json">
   <link rel="icon" type="image/png" href="/images/favicon-mark.png">
@@ -839,8 +840,10 @@
           </div>
         </div>
 
-        <!-- Optional details -->
-        <p class="cf-label" style="margin:26px 0 2px;color:#64748B;font-weight:700;font-size:0.75rem;letter-spacing:.06em;text-transform:uppercase">Optional details</p>
+        <!-- ══════════════════════════════════════════════════════════════
+             SCHEDULING — asked of everyone, because every order has a date.
+             ══════════════════════════════════════════════════════════════ -->
+        <p class="cf-label" style="margin:26px 0 2px;color:#64748B;font-weight:700;font-size:0.75rem;letter-spacing:.06em;text-transform:uppercase">Timing</p>
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="target-date">Target Delivery Date</label>
@@ -851,22 +854,47 @@
             <input class="cf-input" type="text" id="num-drivers" name="num_drivers" placeholder="e.g. 120">
           </div>
         </div>
-        <div class="cf-row">
-          <div class="cf-group">
-            <label class="cf-label" for="billing-contact">Billing Contact</label>
-            <input class="cf-input" type="text" id="billing-contact" name="billing_contact" placeholder="Accounts Payable contact">
+
+        <!-- ══════════════════════════════════════════════════════════════
+             BILLING — SHOWN, NOT ALWAYS PRESENT.
+             This page measured 23 visible controls and a 2191px form on a
+             375px screen: nearly three screens of fields before the button
+             that ends it. Accounts Payable details only matter to the buyers
+             whose purchasing need implies them, so they appear when one of
+             PO / Net 30 / Vendor setup / Invoice billing is ticked, and stay
+             out of everyone else's way.
+
+             Nothing is removed from the DOM. The fields keep their ids and
+             their name attributes, so the submit handler and the API contract
+             are exactly as they were; an unticked block simply posts empty
+             strings, which is what it posted before when nobody filled it in.
+             Wired by js/das-forms.js.
+             ══════════════════════════════════════════════════════════════ -->
+        <div class="cp-reveal" id="cp-billing" data-reveal-for="Purchase Order Required,Net 30 Terms Requested,Vendor Setup Required,Invoice Billing Required">
+          <div class="cp-reveal-in">
+            <p class="cp-reveal-head">Accounts payable</p>
+            <div class="cf-row">
+              <div class="cf-group">
+                <label class="cf-label" for="billing-contact">Billing Contact</label>
+                <input class="cf-input" type="text" id="billing-contact" name="billing_contact" placeholder="Accounts Payable contact">
+              </div>
+              <div class="cf-group">
+                <label class="cf-label" for="billing-email">Billing Contact Email</label>
+                <input class="cf-input" type="email" id="billing-email" name="billing_contact_email" placeholder="ap@acmefreight.com">
+              </div>
+            </div>
+            <div class="cf-row">
+              <div class="cf-group">
+                <label class="cf-label" for="shipping-state">Shipping State</label>
+                <input class="cf-input" type="text" id="shipping-state" name="shipping_state" placeholder="TX">
+              </div>
+              <div class="cf-group"></div>
+            </div>
+            <p class="cp-reveal-note">
+              <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="6.6" stroke="currentColor" stroke-width="1.3"/><path d="M8 7.3v3.4M8 5.1v.9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+              <span><strong>Net 30 is available to approved carriers.</strong> Send these and a W-9 plus your vendor packet come back with the quote, so procurement has everything in one reply.</span>
+            </p>
           </div>
-          <div class="cf-group">
-            <label class="cf-label" for="billing-email">Billing Contact Email</label>
-            <input class="cf-input" type="email" id="billing-email" name="billing_contact_email" placeholder="ap@acmefreight.com">
-          </div>
-        </div>
-        <div class="cf-row">
-          <div class="cf-group">
-            <label class="cf-label" for="shipping-state">Shipping State</label>
-            <input class="cf-input" type="text" id="shipping-state" name="shipping_state" placeholder="TX">
-          </div>
-          <div class="cf-group"></div>
         </div>
 
         <div class="cf-row-full">
@@ -1298,5 +1326,6 @@
 <script src="js/quote.js?v=5" defer></script>
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="/js/das-nav.js?v=2"></script>
+<script src="/js/das-forms.js?v=1" defer></script>
 </body>
 </html>
