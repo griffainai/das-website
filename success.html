@@ -90,6 +90,8 @@
      so it paints before styles.css. Full splash once per visit, quick fade after.
      5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
      ============================================================================ -->
+<link rel="preload" as="image" href="/images/logo-mark@3x.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/images/logo-word@3x.webp" fetchpriority="high">
 <style>
   /* ══ SUB-SPLASH — the Off Duty treatment, choreography matched ══════════
      First attempt was navy with a white knockout — the inverse of the
@@ -130,11 +132,18 @@
   #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:26.92%;opacity:0;
     transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
     animation:dasMark 1.7s linear .08s 1 both}
+  /* One decode, fourteen paints. The mark is a background on every band and
+     the bands are empty spans, so the browser fetches and decodes the artwork
+     once instead of instantiating fourteen <img> elements of the same file --
+     which is what made the first frame stutter. aspect-ratio gives .dsm its
+     height without an image in the flow. Assets are 3x webp: the source art is
+     728x259 raster, so this is the ceiling until a vector original exists. */
+  #das-splash .dsm{aspect-ratio:196/251}
   #das-splash .dsm .bnd{position:absolute;inset:0;opacity:0;
+    background:url(/images/logo-mark@3x.webp) center/100% 100% no-repeat;
     animation:dasDraw .36s cubic-bezier(.4,0,.2,1) 1 both;
     animation-delay:calc(.34s + var(--d) * 26ms)}
-  #das-splash .dsm .bnd:first-child{position:relative}
-  #das-splash .dsm img{display:block;width:100%;height:auto}
+  #das-splash .dsw img{display:block;width:100%;height:auto}
 
   /* the wordmark: their wipe */
   #das-splash .dsw{position:relative;flex:0 0 auto;width:68.96%;margin-left:2.2%;overflow:hidden;
@@ -167,22 +176,22 @@
 <div id="das-splash" role="presentation" aria-hidden="true">
   <div class="dsl">
     <span class="dsm">
-      <span class="bnd" style="--d:0;clip-path:inset(0.0000% 0 92.8571% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:1;clip-path:inset(7.1429% 0 85.7143% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:2;clip-path:inset(14.2857% 0 78.5714% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:3;clip-path:inset(21.4286% 0 71.4286% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:4;clip-path:inset(28.5714% 0 64.2857% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:5;clip-path:inset(35.7143% 0 57.1429% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:6;clip-path:inset(42.8571% 0 50.0000% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:7;clip-path:inset(50.0000% 0 42.8571% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:8;clip-path:inset(57.1429% 0 35.7143% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:9;clip-path:inset(64.2857% 0 28.5714% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:10;clip-path:inset(71.4286% 0 21.4286% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:11;clip-path:inset(78.5714% 0 14.2857% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:12;clip-path:inset(85.7143% 0 7.1429% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
-      <span class="bnd" style="--d:13;clip-path:inset(92.8571% 0 0.0000% 0)"><img src="/images/logo-mark.png" alt="" width="196" height="251"></span>
+      <span class="bnd" style="--d:0;clip-path:inset(0.0000% 0 92.8571% 0)"></span>
+      <span class="bnd" style="--d:1;clip-path:inset(7.1429% 0 85.7143% 0)"></span>
+      <span class="bnd" style="--d:2;clip-path:inset(14.2857% 0 78.5714% 0)"></span>
+      <span class="bnd" style="--d:3;clip-path:inset(21.4286% 0 71.4286% 0)"></span>
+      <span class="bnd" style="--d:4;clip-path:inset(28.5714% 0 64.2857% 0)"></span>
+      <span class="bnd" style="--d:5;clip-path:inset(35.7143% 0 57.1429% 0)"></span>
+      <span class="bnd" style="--d:6;clip-path:inset(42.8571% 0 50.0000% 0)"></span>
+      <span class="bnd" style="--d:7;clip-path:inset(50.0000% 0 42.8571% 0)"></span>
+      <span class="bnd" style="--d:8;clip-path:inset(57.1429% 0 35.7143% 0)"></span>
+      <span class="bnd" style="--d:9;clip-path:inset(64.2857% 0 28.5714% 0)"></span>
+      <span class="bnd" style="--d:10;clip-path:inset(71.4286% 0 21.4286% 0)"></span>
+      <span class="bnd" style="--d:11;clip-path:inset(78.5714% 0 14.2857% 0)"></span>
+      <span class="bnd" style="--d:12;clip-path:inset(85.7143% 0 7.1429% 0)"></span>
+      <span class="bnd" style="--d:13;clip-path:inset(92.8571% 0 0.0000% 0)"></span>
     </span>
-    <span class="dsw"><img src="/images/logo-word.png" alt="" width="502" height="157"></span>
+    <span class="dsw"><img src="/images/logo-word@3x.webp" alt="" width="1280" height="400" decoding="sync" fetchpriority="high"></span>
   </div>
 </div>
 <script>

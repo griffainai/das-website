@@ -1,0 +1,44 @@
+{
+  "appreciation": {
+    "label": "Driver Appreciation Kits",
+    "sub": "Driver Appreciation Week",
+    "desktop": "/images/store/px-appreciation-6fa97f43-desktop.webp",
+    "mobile": "/images/store/px-appreciation-6fa97f43-mobile.webp",
+    "placeholder": true
+  },
+  "milepacks": {
+    "label": "Safe Miles Programs",
+    "sub": "Quarterly recognition",
+    "desktop": "/images/store/px-milepacks-f7bd1124-desktop.webp",
+    "mobile": "/images/store/px-milepacks-f7bd1124-mobile.webp",
+    "placeholder": true
+  },
+  "onboarding": {
+    "label": "Onboarding Solutions",
+    "sub": "Day one, done right",
+    "desktop": "/images/store/px-onboarding-f2fa4cc3-desktop.webp",
+    "mobile": "/images/store/px-onboarding-f2fa4cc3-mobile.webp",
+    "placeholder": true
+  },
+  "safety": {
+    "label": "Safety Recognition",
+    "sub": "Safe miles, earned",
+    "desktop": "/images/store/px-safety-fd685862-desktop.webp",
+    "mobile": "/images/store/px-safety-fd685862-mobile.webp",
+    "placeholder": true
+  },
+  "milestone": {
+    "label": "Service Milestone Awards",
+    "sub": "250K to 6 million",
+    "desktop": "/images/store/px-milestone-773158ef-desktop.webp",
+    "mobile": "/images/store/px-milestone-773158ef-mobile.webp",
+    "placeholder": true
+  },
+  "holiday": {
+    "label": "Holiday & Seasonal",
+    "sub": "The family sees this one",
+    "desktop": "/images/store/px-holiday-9d493bcd-desktop.webp",
+    "mobile": "/images/store/px-holiday-9d493bcd-mobile.webp",
+    "placeholder": true
+  }
+}

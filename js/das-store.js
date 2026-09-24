@@ -371,6 +371,139 @@
     }).join('');
   }
 
+  /* -- SHOP BY PROGRAM: the full-bleed parallax -------------------------
+     A 1:1 rebuild of the section at the bottom of shop.griffain.io
+     (id="shopify-section-parallax"). Every number below was read off theirs:
+
+       media    one panel per collection, height 100vh, object-fit:cover,
+                a desktop <source> at 1920x1080 and a mobile <img> at 1920x2364
+       content  sticky at top:40vh with a matching margin-top:40vh, 79px of
+                vertical padding, 44px between its three blocks, centred, caps
+       eyebrow  11/15, weight 500
+       titles   30px (32 at lg), weight 700, tracking -1.5px, leading none;
+                resting opacity .3, hover .5, active 1, 300ms
+       CTA      a 12x9 arrow then the program name, 11/15
+
+     Both columns occupy the SAME grid cell, so the row is as tall as the media
+     (N x 100vh) and the content stays pinned through all of it. That is the
+     whole mechanism -- there is no scroll library on their page and there is
+     none on ours.
+
+     Every panel is a placeholder until the photographs exist; see
+     PHOTO-SHOT-LIST-PARALLAX.md for the two crops each program needs. */
+  function parallax() {
+    var el = document.getElementById('st-parallax');
+    if (!el || !PARALLAX) return;
+    var gs = groups().filter(function (g) { return PARALLAX[g.slug]; });
+    if (gs.length < 2) return;
+
+    var first = gs[0].slug;
+
+    var media = gs.map(function (g) {
+      var m = PARALLAX[g.slug];
+      return '<div class="px-panel" id="px-' + esc(g.slug) + '" aria-label="' + esc(g.label) + '">' +
+        '<a href="/collections/' + esc(g.slug) + '" tabindex="-1" aria-hidden="true">' +
+          '<picture>' +
+            '<source media="(min-width:1024px)" srcset="' + esc(m.desktop) + '" width="1920" height="1080">' +
+            '<img src="' + esc(m.mobile) + '" width="1920" height="2364" loading="lazy" alt="">' +
+          '</picture>' +
+        '</a></div>';
+    }).join('');
+
+    var list = gs.map(function (g, i) {
+      return '<h3><button type="button" data-px="' + esc(g.slug) + '"' +
+        (i === 0 ? ' aria-current="true"' : '') + '>' + esc(g.label) + '</button></h3>';
+    }).join('');
+
+    el.innerHTML =
+      '<section class="st-px" data-active="' + esc(first) + '">' +
+        '<div class="px-media">' + media + '</div>' +
+        '<div class="px-content">' +
+          '<div class="px-in st-ui">' +
+            '<h2 class="px-eyebrow">Shop by program</h2>' +
+            '<div class="px-list">' + list + '</div>' +
+            '<div class="px-foot">' +
+              '<a class="px-go" data-px-cta href="/collections/' + esc(first) + '">' +
+                '<svg width="12" height="9" viewBox="0 0 12 9" fill="none" aria-hidden="true">' +
+                  '<path d="M1 4.5h10" stroke="currentColor"/><path d="M7.5 1 11 4.5" stroke="currentColor"/>' +
+                  '<path d="M7.5 8 11 4.5" stroke="currentColor"/></svg>' +
+                '<span>Shop ' + esc(gs[0].label) + '</span>' +
+              '</a>' +
+            '</div>' +
+          '</div>' +
+        '</div>' +
+      '</section>';
+
+    wireParallax(el, gs);
+  }
+
+  /* The active program is whichever panel is crossing the line the sticky type
+     sits on. Read on scroll rather than observed, because an IntersectionObserver
+     on 100vh panels fires on thresholds, not on a line, and the type would swap
+     a third of a screen early. */
+  function wireParallax(el, gs) {
+    var sec = el.querySelector('.st-px');
+    var panels = [].slice.call(el.querySelectorAll('.px-panel'));
+    var buttons = [].slice.call(el.querySelectorAll('[data-px]'));
+    var cta = el.querySelector('[data-px-cta]');
+    var ctaText = cta && cta.querySelector('span');
+    var current = null;
+
+    function sync() {
+      var line = window.innerHeight * 0.45;          /* where the sticky type sits */
+      var hit = null;
+      for (var i = 0; i < panels.length; i++) {
+        var r = panels[i].getBoundingClientRect();
+        if (r.top <= line && r.bottom > line) { hit = panels[i]; break; }
+      }
+      if (!hit) {
+        /* above the first panel or below the last -- hold the nearest end */
+        var firstR = panels[0].getBoundingClientRect();
+        hit = firstR.top > line ? panels[0] : panels[panels.length - 1];
+      }
+      var slug = hit.id.replace(/^px-/, '');
+      if (slug === current) return;
+      current = slug;
+      sec.setAttribute('data-active', slug);
+      buttons.forEach(function (b) {
+        if (b.dataset.px === slug) b.setAttribute('aria-current', 'true');
+        else b.removeAttribute('aria-current');
+      });
+      var g = gs.filter(function (x) { return x.slug === slug; })[0];
+      if (cta && g) {
+        cta.setAttribute('href', '/collections/' + g.slug);
+        if (ctaText) ctaText.textContent = 'Shop ' + g.label;
+      }
+    }
+
+    /* Throttled on the clock, not on a frame. sync() reads six rects and sets
+       one attribute; that is cheaper than the rAF bookkeeping around it, and a
+       frame callback is throttled to nothing whenever the document is not
+       visible -- which silently makes the whole section look broken. */
+    var last = 0;
+    function onScroll() {
+      var now = Date.now();
+      if (now - last < 60) return;
+      last = now;
+      sync();
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+
+    /* clicking a name scrolls to its panel, exactly as theirs does */
+    buttons.forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = document.getElementById('px-' + b.dataset.px);
+        if (!t) return;
+        var y = t.getBoundingClientRect().top + window.scrollY - window.innerHeight * 0.4;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        push('parallax_jump', { program: b.dataset.px });
+      });
+    });
+
+    sync();
+  }
+
   /* NOTE: the rows use the SAME card() declared above — deliberately not a
      second, simpler one. A duplicate here would hoist over the real card and
      silently drop its data-product-* attributes, which js/cart.js reads to
@@ -495,6 +628,7 @@
 
   /* ── boot ───────────────────────────────────────────────────────────────── */
   var BANNERS = null;
+  var PARALLAX = null;
   Promise.all([
     fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }),
     /* The banners are optional: if the manifest is missing the rhythm still
@@ -502,9 +636,12 @@
        failing on a file that only affects decoration. */
     fetch('/images/store/banner-manifest.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    fetch('/images/store/parallax-manifest.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
   ]).then(function (both) {
     var data = both[0];
     BANNERS = (both[1] && both[1].banners) || null;
+    PARALLAX = both[2] || null;
     CAT = data;
     /* A lookup of every shot by file key, so a collection hero can be chosen by
        name. SEEDED FROM THE CATALOGUE, not rebuilt: this used to start empty
@@ -578,6 +715,7 @@
     chips();
     index();
     if (!filtered) home();
+    if (!filtered) parallax();
     /* AFTER home(), not before — the rows do not exist until it renders them,
        so wiring first found nothing and every arrow stayed hidden. */
     wireRows();
