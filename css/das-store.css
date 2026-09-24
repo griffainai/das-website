@@ -468,6 +468,29 @@
    "Just replace the logo with the Driver Appreciation Solutions text under it,
    and keep it that same size as it was before." */
 
+/* ── A COLLECTION PAGE ───────────────────────────────────────────────────
+   Its own address, its own title, its own opening statement — "each category
+   needs to have its own page ... it's like a mall". The hero reuses the home
+   rhythm's banner so a collection looks like the place the home page promised,
+   rather than a grid that happens to be filtered. */
+.cl-hero{ position:relative; display:grid; place-items:end start; overflow:hidden;
+  background:var(--st-navy-900); height:clamp(240px,26vw,420px); }
+.cl-hero img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.cl-hero .cl-copy{ position:relative; padding:clamp(20px,3vw,44px); color:#fff;
+  width:100%; background:linear-gradient(to top, rgba(6,14,36,.86), rgba(6,14,36,0)); }
+/* a placeholder banner carries its own type, so it takes no overlay */
+.cl-hero[data-placeholder="true"] .cl-copy{ background:none; }
+.cl-hero[data-placeholder="true"] h1,.cl-hero[data-placeholder="true"] .k,
+.cl-hero[data-placeholder="true"] .n{ display:none; }
+.cl-hero h1{ font-size:clamp(26px,3.4vw,46px); line-height:1.02; letter-spacing:-.02em;
+  text-transform:uppercase; font-weight:500; }
+.cl-hero .k{ color:var(--st-navy-200); margin-bottom:10px; }
+.cl-hero .n{ margin-top:8px; color:rgba(255,255,255,.72); }
+
+.cl-crumb{ display:flex; align-items:center; gap:10px; padding:16px 24px 0; color:var(--st-muted); }
+.cl-crumb a{ text-decoration:underline; text-underline-offset:3px; }
+.cl-crumb a:hover{ color:var(--st-ink); }
+
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
 .st-scrim[data-open="true"]{ opacity:1; pointer-events:auto; }

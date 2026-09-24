@@ -180,7 +180,7 @@
 
     el.innerHTML =
       '<div class="ix-list">' + gs.map(function (g, i) {
-        return '<a class="ix-row" href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '" data-i="' + i + '"' +
+        return '<a class="ix-row" href="/collections/' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '" data-i="' + i + '"' +
           (i ? '' : ' aria-current="true"') + '>' +
           '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
           '<span class="t">' + esc(g.label) + '</span>' +
@@ -215,6 +215,32 @@
     }).filter(function (g) { return g.shot; });
   }
 
+  /* THE COLLECTION HERO — only on /collections/<slug>. The banner the home
+     rhythm uses, with the programme's name, its count and one line on what it
+     is for, so a collection page announces itself instead of opening on a
+     bare grid. */
+  function collectionHero() {
+    var el = document.getElementById('cl-hero');
+    if (!el) return;
+    var g = groups().filter(function (x) { return x.slug === state.program; })[0];
+    if (!g) { el.remove(); return; }
+
+    var b = (BANNERS && BANNERS[g.slug]) || null;
+    el.innerHTML =
+      (b ? '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw" alt="" ' +
+           'width="' + b.w + '" height="' + b.h + '">' : '') +
+      '<div class="cl-copy">' +
+        '<p class="k st-micro">' + esc(g.sub || 'Collection') + '</p>' +
+        '<h1>' + esc(g.label) + '</h1>' +
+        '<p class="n st-ui">' + g.count + ' ' + (g.count === 1 ? 'piece' : 'pieces') + '</p>' +
+      '</div>';
+    if (b && b.kind === 'placeholder') el.setAttribute('data-placeholder', 'true');
+
+    var crumb = document.getElementById('cl-crumb-now');
+    if (crumb) crumb.textContent = g.label;
+    document.title = g.label + ' — Driver Appreciation Solutions';
+  }
+
   /* ── THE HOME RHYTHM ─────────────────────────────────────────────────────
      Jayden 2026-09-24: "why does it just scrojll down on all the products not
      categorized and not looking like the 1-1 siiite i asked u to copy".
@@ -237,7 +263,7 @@
     el.innerHTML = gs.map(function (g) {
       var b = (BANNERS && BANNERS[g.slug]) || null;
       var banner = b
-        ? '<a class="st-banner" href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '"' +
+        ? '<a class="st-banner" href="/collections/' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '"' +
             (b.kind === 'placeholder' ? ' data-placeholder="true"' : '') + '>' +
             '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw" alt="' + esc(g.label) +
             '" width="' + b.w + '" height="' + b.h + '" loading="lazy">' +
@@ -258,7 +284,7 @@
         banner +
         '<div class="st-rowhead st-ui">' +
           '<h2>' + esc(g.label) + '</h2>' +
-          '<a href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '">See all ' + g.count + '</a>' +
+          '<a href="/collections/' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '">See all ' + g.count + '</a>' +
         '</div>' +
         '<div class="st-row">' + six.map(card).join('') + '</div>' +
       '</section>';
@@ -414,7 +440,11 @@
     var ALIAS = { 'safe-miles-programs': 'milepacks', 'mile-packs': 'milepacks', 'safemiles': 'milepacks' };
     var q = sp.get('c') || sp.get('category');
     if (q && ALIAS[q]) q = ALIAS[q];
-    if (q && CAT.programs.some(function (g) { return g.slug === q; })) state.program = q;
+    /* /collections/<slug> is a real page now, so the slug can arrive in the
+       PATH as well as the query. Both resolve to the same state. */
+    var pathSlug = (location.pathname.match(/\/collections\/([a-z0-9-]+)/i) || [])[1];
+    var want = pathSlug || q;
+    if (want && CAT.programs.some(function (g) { return g.slug === want; })) state.program = want;
     /* A filtered view genuinely IS one list, so ?c=<programme> keeps the grid.
        With no filter the home shows the rhythm instead. */
     var filtered = state.program !== 'all';
@@ -428,6 +458,17 @@
     /* Repaint on every cart change, not just at load. cart.js now fires
        cart:change from its single announcement point. */
     document.addEventListener('cart:change', paintBag);
+
+    /* Name the list. The grid heading is static markup ("Shop all" on the
+       store, "Collection" on a collection page), so it has to be told what it
+       is actually showing — otherwise a filtered view lies about itself. */
+    var titleEl = document.getElementById('st-shop-title');
+    if (titleEl) {
+      var tg = CAT.programs.filter(function (x) { return x.slug === state.program; })[0];
+      titleEl.textContent = tg ? tg.label : 'Shop all';
+    }
+
+    collectionHero();
 
     chips();
     index();

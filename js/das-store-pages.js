@@ -49,10 +49,22 @@
     var linesEl = document.getElementById('sc-lines');
     var sumEl   = document.getElementById('sc-summary');
 
+    /* The line thumbnail takes the 4:5 derivative from the catalogue when the
+       product is still there. The cart stores whatever image it was given at
+       add-time, which is the LANDSCAPE cover one, so a bag line was showing a
+       different crop of the product than the card the buyer clicked. */
+    function lineShot(l) {
+      var p = CAT && CAT.products ? CAT.products.filter(function (x) { return x.id === l.id; })[0] : null;
+      var v = p && p.shot && (p.shot.pdp || p.shot);
+      return v || { src: l.image || '', srcset: '', w: 1120, h: 1400 };
+    }
+
     function line(l, i) {
+      var v = lineShot(l);
       return '<div class="sc-line">' +
         '<a class="ph" href="store-product.html?id=' + encodeURIComponent(l.id) + '">' +
-          '<img src="' + esc(l.image || '') + '" alt="" width="700" height="560"></a>' +
+          '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
+          ' sizes="140px" alt="" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a>' +
         '<div class="m st-ui">' +
           '<div class="top">' +
             '<a class="t" href="store-product.html?id=' + encodeURIComponent(l.id) + '">' + esc(l.name) + '</a>' +
@@ -114,16 +126,50 @@
       var progs = {};
       items.forEach(function (l) { progs[l.category] = true; });
       var picks = CAT.products.filter(function (p) { return progs[p.programLabel] && !have[p.id]; }).slice(0, 4);
+
+  /* ONE CARD, THREE CALLERS. This file rendered .st-card markup in three
+     places with three different shapes — no .shot wrapper, a landscape
+     700x560 on the <img> against a 4:5 frame, and a favourite button on only
+     one of them. That is the same drift that has produced a bug every time it
+     has appeared today, and here it showed as cards measuring 242x303 beside
+     217x271 in what is meant to be one grid.
+
+     It also takes the 4:5 `pdp` derivative rather than the landscape cover
+     one, so these cards match the store and the product page instead of being
+     squeezed. */
+  function pcard(p, opts) {
+    opts = opts || {};
+    var v = (p.shot && p.shot.pdp) || p.shot || {};
+    var id = p.id || opts.id;
+    return '<article class="st-card st-ui"' +
+        ' data-product-id="' + esc(id) + '"' +
+        ' data-product-name="' + esc(p.name) + '"' +
+        ' data-product-price="' + esc(p.price) + '"' +
+        ' data-product-category="' + esc(p.programLabel || p.category || '') + '"' +
+        ' data-product-image="' + esc(v.src || '') + '">' +
+      '<div class="shot">' +
+        '<a class="frame" href="store-product.html?id=' + encodeURIComponent(id) + '" aria-label="' + esc(p.name) + '">' +
+          '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
+          ' sizes="(min-width:1024px) 22vw, 50vw" alt="' + esc(p.name) + '"' +
+          ' width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"' +
+          (opts.eager ? '' : ' loading="lazy"') + '></a>' +
+        (opts.fav
+          ? '<button class="fav fav-active" data-save-to-fav aria-label="Remove ' + esc(p.name) + ' from saved">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' +
+            '<path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.7 1.1-1a5.5 5.5 0 000-7.8z"/></svg></button>'
+          : '') +
+      '</div>' +
+      '<div class="foot"><div class="grp"><div class="t">' + esc(p.name) + '</div>' +
+        (p.programLabel ? '<div class="c">' + esc(p.programLabel) + '</div>' : '') + '</div>' +
+        '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
+    '</article>';
+  }
+
       if (!picks.length) return '';
       return '<section class="st-sec" style="padding-left:0;padding-right:0">' +
         '<div class="head st-ui"><h2>Complete the program</h2><sup>' + picks.length + '</sup></div>' +
         '<div class="st-grid" data-view="4">' + picks.map(function (p) {
-          return '<article class="st-card st-ui">' +
-            '<a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
-            '<img src="' + esc(p.shot.src) + '" srcset="' + esc(p.shot.srcset) + '" alt="' + esc(p.name) + '" loading="lazy" width="700" height="560"></a>' +
-            '<div class="foot"><div class="t">' + esc(p.name) + '</div>' +
-            '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
-            '</article>';
+          return pcard(p);
         }).join('') + '</div></section>';
     }
 
@@ -137,9 +183,7 @@
         '<a class="st-cta" href="store.html">Browse the collection</a>' +
         (pop.length ? '<div class="head st-ui" style="margin-top:46px"><h2>Ready to order</h2></div>' +
           '<div class="st-grid" data-view="4">' + pop.map(function (p) {
-            return '<article class="st-card st-ui"><a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
-              '<img src="' + esc(p.shot.src) + '" alt="' + esc(p.name) + '" loading="lazy" width="700" height="560"></a>' +
-              '<div class="foot"><div class="t">' + esc(p.name) + '</div><div class="p">' + money(p.price) + '</div></div></article>';
+            return pcard(p);
           }).join('') + '</div>' : '') +
         '</div>';
     }
@@ -234,21 +278,14 @@
 
       gridEl.innerHTML = '<div class="st-grid" data-view="4">' + favs.map(function (f, i) {
         var p = CAT && CAT.products.filter(function (x) { return x.id === f.productId; })[0];
-        var img = (p && p.shot.src) || f.image || '';
-        var gated = p ? p.gated : (f.price > 110);
-        return '<article class="st-card st-ui" data-product-id="' + esc(f.productId) + '"' +
-            ' data-product-name="' + esc(f.name) + '" data-product-price="' + esc(f.price) + '"' +
-            ' data-product-category="' + esc(f.category || '') + '" data-product-image="' + esc(img) + '">' +
-          '<a class="frame" href="store-product.html?id=' + encodeURIComponent(f.productId) + '">' +
-            '<img src="' + esc(img) + '"' + (p ? ' srcset="' + esc(p.shot.srcset) + '"' : '') +
-            ' alt="' + esc(f.name) + '" loading="' + (i < 8 ? 'eager' : 'lazy') + '" width="700" height="560"></a>' +
-          '<button class="fav fav-active" data-save-to-fav aria-label="Remove ' + esc(f.name) + ' from saved">' +
-            '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' +
-            '<path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.7 1.1-1a5.5 5.5 0 000-7.8z"/></svg></button>' +
-          '<div class="foot"><div class="t">' + esc(f.name) + '</div>' +
-          '<div class="c">' + esc(f.category || '') + '</div>' +
-          '<div class="p">' + (gated ? '<span class="gate">Request pricing</span>' : money(f.price)) + '</div></div>' +
-        '</article>';
+        /* A saved item may outlive its product, so fall back to what the
+           favourite itself stored rather than rendering an empty frame. */
+        if (p) return pcard(p, { fav: true, eager: i < 8 });
+        return pcard({
+          id: f.productId, name: f.name, price: f.price,
+          programLabel: f.category || '', gated: f.price > 110,
+          shot: { src: f.image || '', srcset: '' }
+        }, { fav: true, eager: i < 8 });
       }).join('') + '</div>';
     }
 

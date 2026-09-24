@@ -3,9 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Product — Driver Appreciation Solutions</title>
+<title>Collection — Driver Appreciation Solutions</title>
 <meta name="description" content="Fleet-branded driver recognition. Every piece carries your carrier's logo, driver names and colors.">
-<meta name="robots" content="noindex">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
@@ -14,16 +13,16 @@
 </head>
 
 <body class="st">
-<a class="skip-link" href="#pdp">Skip to the product</a>
+<a class="skip-link" href="#st-shop">Skip to the products</a>
 
 <header class="st-hd st-ui">
   <div class="bar">
     <nav aria-label="Store">
       <a class="item home" href="index.html">Home</a>
       <a class="item" href="store.html">Shop all</a>
-      <a class="item hide" href="store.html?c=appreciation">Kits</a>
-      <a class="item hide" href="store.html?c=safety">Safety</a>
-      <a class="item hide" href="store.html?c=milestone">Milestones</a>
+      <a class="item hide" href="/collections/appreciation">Kits</a>
+      <a class="item hide" href="/collections/safety">Safety</a>
+      <a class="item hide" href="/collections/milestone">Milestones</a>
     </nav>
     <a class="mark" href="store.html" aria-label="Driver Appreciation Solutions — shop all">
       <img src="/images/logo.png" alt="Driver Appreciation Solutions" width="728" height="259">
@@ -37,30 +36,55 @@
 </header>
 
 <!-- ════════════════════════════════════════════════════════════════════════
-     PDP — the reference's buy-box. Sticky gallery left with a thumb rail and
-     an n/N counter; a 472px information column right. Rendered by
-     js/das-pdp.js from /store-catalog.json.
+     A COLLECTION, ON ITS OWN PAGE.
+
+     Jayden 2026-09-24: "each category needs to have its own page, just like how
+     Pinch Transport has its own page and how the Griffin site has its own page
+     for each collection ... it's like a mall: you click a button that says
+     'Shop All', and it goes on the page where it's just that product."
+
+     Until now a category was ?c=<slug> on the store URL — a filtered view, not
+     a place. It could not be linked, shared, titled or indexed as itself.
+
+     ONE TEMPLATE, REAL URLS. vercel.json rewrites /collections/<slug> to this
+     file, so every collection has an address of its own while the markup stays
+     in one place. Six static copies would drift the moment anything changed —
+     this session has already paid for that lesson twice.
+
+     Rendered by js/das-store.js, which reads the slug from the path as well as
+     the query so both /collections/safety and ?c=safety resolve.
      ════════════════════════════════════════════════════════════════════════ -->
-<main id="pdp" class="st-pdp2" tabindex="-1">
-  <!-- The gallery is a stacked column of EVERY photograph, scrolling past a buy
-       box pinned beside it — the behaviour both existing stores actually run.
-       Click any frame to zoom. -->
-  <div class="pd-gal" id="pd-gal"></div>
-  <div class="pd-buy st-ui" id="pd-buy"></div>
-</main>
+<section class="cl-hero" id="cl-hero"></section>
 
-<!-- The rows first — complete the kit, you may also like, recently viewed —
-     then the band LAST. The band was above them until 2026-09-23 and measured
-     at top 1280 with the rows running to 4493 beneath it, so the page's closing
-     statement was sitting in its middle. A closing band has to close. -->
-<div id="pd-also"></div>
+<nav class="cl-crumb st-ui" aria-label="Breadcrumb">
+  <a href="store.html">Shop all</a>
+  <span aria-hidden="true">/</span>
+  <span id="cl-crumb-now">Collection</span>
+</nav>
 
-<!-- Sells the PROGRAM rather than the piece — one kit is a gesture, a
-     calendar of them is what moves retention. -->
-<section class="pd-band st-ui" id="pd-band"></section>
+<section class="st-sec" id="st-shop">
+  <div class="head st-ui">
+    <h2 id="st-shop-title">Collection</h2><sup id="st-count">&mdash;</sup>
+  </div>
+  <div class="st-chips" id="st-chips"></div>
+  <div class="st-grid" data-view="4" id="st-grid"></div>
+</section>
 
-<!-- Sticky mobile buy bar: on a phone the add button otherwise scrolls away. -->
-<div class="pd-bar" id="pd-bar"></div>
+<!-- Every collection closes the same way the product page does. -->
+<section class="pd-band st-ui" style="margin-top:clamp(48px,6vw,80px)">
+  <div class="fb-media">
+    <img src="/images/band-forest-1200.jpg"
+         srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
+         sizes="(min-width:1024px) 50vw, 100vw" alt="" decoding="async" width="1200" height="509">
+  </div>
+  <div class="fb-copy">
+    <p class="k st-micro">Program pricing</p>
+    <h2>Most programs are<br>priced to your fleet.</h2>
+    <p class="fb-lede">Quoted on driver count, customization and timeline. Tell us the fleet size and the
+      occasion and a specialist replies in writing within one business day &mdash; a real number, not a range.</p>
+    <a class="st-cta st-cta--light st-cta--block" href="contact.html?intent=pricing">Request pricing</a>
+  </div>
+</section>
 
 <footer class="st-sec st-ui" style="padding-top:clamp(48px,6vw,72px)">
   <div style="border-top:1px solid rgba(0,0,0,.1);padding-top:32px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px">
@@ -75,11 +99,11 @@
     </div>
     <div>
       <h4 style="margin-bottom:12px">Shop</h4>
-      <ul style="line-height:26px;color:rgba(0,0,0,.62)">
-        <li><a href="store.html?c=appreciation">Driver appreciation kits</a></li>
-        <li><a href="store.html?c=safety">Safety recognition</a></li>
-        <li><a href="store.html?c=milestone">Service milestones</a></li>
-        <li><a href="store.html?c=milepacks">Safe miles programs</a></li>
+      <ul style="line-height:26px;color:rgba(0,0,0,.62)" id="st-foot-coll">
+        <li><a href="/collections/appreciation">Driver appreciation kits</a></li>
+        <li><a href="/collections/safety">Safety recognition</a></li>
+        <li><a href="/collections/milestone">Service milestones</a></li>
+        <li><a href="/collections/milepacks">Safe miles programs</a></li>
       </ul>
     </div>
     <div>
@@ -118,7 +142,6 @@
 <script src="/js/tracking.js?v=3" defer></script>
 <script src="/lib/catalog.js?v=1"></script>
 <script src="/js/cart.js?v=7"></script>
-<script src="/js/das-pdp.js?v=15" defer></script>
 <script src="/js/store-heroes.js?v=1"></script>
 <script src="/js/das-store.js?v=14" defer></script>
 </body>

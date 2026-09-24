@@ -138,6 +138,10 @@
   ],
   "rewrites": [
     {
+      "source": "/collections/:slug",
+      "destination": "/store-collection.html?c=:slug"
+    },
+    {
       "source": "/api/submit-quote",
       "destination": "/api/portal?action=submit-quote"
     },
