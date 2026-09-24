@@ -6,6 +6,30 @@
 
 const { getServiceClient, getUserFromToken } = require('./_supabase');
 
+/* THE ORDER-KILLING FIELD.
+   Stripe requires product images to be ABSOLUTE, publicly reachable URLs. The
+   cart stores what the catalogue gives it — "/images/store/<file>.webp" — and
+   this passed that straight through, so Stripe rejected the session and the
+   endpoint answered 500. Every checkout with an image in the bag failed, which
+   is every real checkout; the button looked dead, which is how it was reported.
+
+   Proven on production 2026-09-24 by isolating the single field:
+       without image          -> 200, live cs_live_ session
+       with a RELATIVE image  -> 500
+       with an ABSOLUTE image -> 200, live cs_live_ session
+
+   So: make it absolute where possible, and DROP it where not. An image is
+   decoration on a Stripe line item. It must never be why an order fails. */
+function absoluteImage(src) {
+  if (!src || typeof src !== 'string') return [];
+  if (/^https?:\/\//i.test(src)) return [src];
+  if (src.startsWith('/')) {
+    const base = (process.env.SITE_URL || 'https://www.driverappreciationsolutions.com').replace(/\/+$/, '');
+    return [base + src];
+  }
+  return [];
+}
+
 module.exports = async (req, res) => {
   const allowedOrigin = process.env.SITE_URL || 'https://www.driverappreciationsolutions.com';
   res.setHeader('Access-Control-Allow-Origin',  allowedOrigin);
@@ -251,7 +275,7 @@ module.exports = async (req, res) => {
         product_data: {
           name: item.name,
           description: `Fleet recognition · min. ${item.minQty} units`,
-          images: item.image ? [item.image] : [],
+          images: absoluteImage(item.image),
           metadata: {
             product_id: item.id,
             category:   item.category,
