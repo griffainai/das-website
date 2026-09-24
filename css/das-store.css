@@ -462,6 +462,13 @@
   .st-row .st-card{ flex:0 0 68vw; }
 }
 
+/* The mark in the footer. Jayden 2026-09-24: "the footer needs to have our
+   logo." Sized between the header's 56px and the body type so it closes the
+   page without competing with it. */
+.ft-mark{ display:inline-block; padding-bottom:26px; }
+.ft-mark img{ height:44px; width:auto; }
+@media(max-width:640px){ .ft-mark img{ height:38px; } }
+
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
 .st-scrim[data-open="true"]{ opacity:1; pointer-events:auto; }
