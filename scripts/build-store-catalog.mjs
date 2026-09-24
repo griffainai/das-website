@@ -173,9 +173,10 @@ function fromMilePacks() {
    plus siblings sharing its filename stem. Placeholders and site chrome are
    excluded by name — a `-soon` file is a "coming soon" card, not photography.
    A swap only sticks if the chosen file actually has a derivative. */
-const RATIOS = JSON.parse(readFileSync(join(ROOT, 'images/store/source-ratios.json'), 'utf8'))
-const BAD_SOURCE = /soon|placeholder|favicon|logo|icon|band-|email|og-|hero-bg/i
-const FRAME_R = 0.8
+/* The scores are COMPUTED BY THE IMAGE BUILDER and read here, rather than
+   recomputed. Recomputing is how these two drifted apart once before, and that
+   drift shipped 22 under-sized images. One source of truth. */
+const STATS = JSON.parse(readFileSync(join(ROOT, 'images/store/source-ratios.json'), 'utf8'))
 const stemOf = (b) => b.replace(/-(hero[A-Z]?|[0-9]+|v[0-9]+|alt|back|front)$/i, '')
 
 function bestShaped(imgPath) {
@@ -183,13 +184,12 @@ function bestShaped(imgPath) {
   const cur = basename(imgPath, extname(imgPath))
   const stem = stemOf(cur)
   let best = null
-  for (const f of Object.keys(RATIOS)) {
-    if (BAD_SOURCE.test(f)) continue
+  for (const f of Object.keys(STATS)) {
     const b = basename(f, extname(f))
     if (b !== cur && !b.startsWith(stem + '-') && b !== stem) continue
     if (!MANIFEST.images[b]) continue
-    const d = Math.abs(RATIOS[f] - FRAME_R)
-    if (!best || d < best.d) best = { f, d }
+    const st = STATS[f]
+    if (!best || st.score > best.st.score) best = { f, st }
   }
   return best ? '/images/' + best.f : imgPath
 }

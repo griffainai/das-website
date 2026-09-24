@@ -1874,15 +1874,15 @@
    "included": [],
    "minQty": 1,
    "shot": {
-    "src": "/images/store/exec-lunchbag.webp",
-    "srcset": "/images/store/exec-lunchbag@2x.webp 2x",
+    "src": "/images/store/exec-lunchbag-v3.webp",
+    "srcset": "/images/store/exec-lunchbag-v3@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/exec-lunchbag-pdp-72a507ae-676.webp",
-     "srcset": "/images/store/exec-lunchbag-pdp-72a507ae-560.webp 560w, /images/store/exec-lunchbag-pdp-72a507ae-676.webp 676w",
+     "src": "/images/store/exec-lunchbag-v3-pdp-e3c0ba01-1120.webp",
+     "srcset": "/images/store/exec-lunchbag-v3-pdp-e3c0ba01-560.webp 560w, /images/store/exec-lunchbag-v3-pdp-e3c0ba01-840.webp 840w, /images/store/exec-lunchbag-v3-pdp-e3c0ba01-1120.webp 1120w, /images/store/exec-lunchbag-v3-pdp-e3c0ba01-1200.webp 1200w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 676,
-     "h": 845,
-     "cap": 676
+     "w": 1200,
+     "h": 1500,
+     "cap": 1200
     }
    },
    "programLabel": "Safety Recognition",

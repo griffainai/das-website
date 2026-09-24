@@ -307,14 +307,49 @@ function catalogImages() {
    So for every referenced photograph, its siblings are measured here and the
    one closest to the 4:5 frame is added to the build. Placeholders and site
    chrome are excluded by name. */
+/* ── SCORING A CANDIDATE PHOTOGRAPH ──────────────────────────────────────
+   The first version of this picked whichever variant sat CLOSEST TO 4:5 and
+   ignored everything else. That is the wrong objective now that padding is
+   lossless: exec-lunchbag ended up on an 846x846 square (ratio 1.00, a near
+   miss) whose 4:5 crop caps at 676px — below the 943px the product page
+   renders at — while a 1200x896 variant of the same bag would have padded to a
+   full 1200px. Optimising for shape alone cost resolution.
+
+   The score balances the two things that actually matter:
+
+     cap           how many real pixels the finished 4:5 frame can hold
+     contentShare  how much of that frame is photograph rather than padding
+
+   A wide 16:9 scores badly not because of its shape but because most of the
+   frame would be flat colour. A small square scores badly because there are
+   not enough pixels. Highest product wins. */
+const BAD_SOURCE = /soon|placeholder|favicon|logo|icon|band-|email|og-|hero-bg/i
+
+function scoreCandidate(w, h) {
+  const r = w / h
+  if (r <= PDP_RATIO) return { r, cap: w, share: r / PDP_RATIO, score: w * (r / PDP_RATIO) }
+  const padded = (1 - PDP_RATIO / r) > 0.28
+  const cap = padded ? w : Math.floor(PDP_RATIO * h)
+  const share = padded ? PDP_RATIO / r : 1
+  return { r, cap, share, score: cap * share }
+}
+
+const stemOf = (b) => b.replace(/-(hero[A-Z]?|[0-9]+|v[0-9]+|alt|back|front)$/i, '')
+
+/** Measured once here and written to source-ratios.json, so the catalogue
+ *  builder chooses from the SAME numbers rather than recomputing them — the
+ *  two halves of this decision drifted apart once already and shipped 22
+ *  under-sized images. */
+const SOURCE_STATS = {}
+
 async function withBestSiblings(list) {
-  const BAD = /soon|placeholder|favicon|logo|icon|band-|email|og-|hero-bg/i
-  const all = readdirSync(SRC).filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f) && !BAD.test(f))
-  const ratio = {}
+  const all = readdirSync(SRC).filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f) && !BAD_SOURCE.test(f))
   for (const f of all) {
-    try { const m = await sharp(join(SRC, f)).metadata(); ratio[f] = m.width / m.height } catch { /* skip */ }
+    try {
+      const m = await sharp(join(SRC, f)).metadata()
+      SOURCE_STATS[f] = { w: m.width, h: m.height, ...scoreCandidate(m.width, m.height) }
+    } catch { /* unreadable */ }
   }
-  const stemOf = (b) => b.replace(/-(hero[A-Z]?|[0-9]+|v[0-9]+|alt|back|front)$/i, '')
   const out = new Set(list)
   let added = 0
   for (const rel of list) {
@@ -324,13 +359,13 @@ async function withBestSiblings(list) {
     for (const f of all) {
       const b = basename(f, extname(f))
       if (b !== cur && !b.startsWith(stem + '-') && b !== stem) continue
-      if (ratio[f] === undefined) continue
-      const d = Math.abs(ratio[f] - 0.8)
-      if (!best || d < best.d) best = { f, d }
+      const st = SOURCE_STATS[f]
+      if (!st) continue
+      if (!best || st.score > best.st.score) best = { f, st }
     }
     if (best && !out.has(best.f)) { out.add(best.f); added++ }
   }
-  console.log(`${added} better-shaped sibling photographs added to the build`)
+  console.log(`${added} better sibling photographs added to the build`)
   return [...out]
 }
 
@@ -402,13 +437,8 @@ for (const f of readdirSync(OUT)) {
 /* Every SOURCE photograph's aspect ratio. The catalogue builder uses this to
    choose, among the variants a product already owns, the one closest to the
    4:5 frame — cheaper and more reliable than re-opening 278 files there. */
-const srcRatios = {}
-for (const f of readdirSync(SRC)) {
-  if (!/\.(jpg|jpeg|png|webp)$/i.test(f)) continue
-  try { const m = await sharp(join(SRC, f)).metadata(); srcRatios[f] = +(m.width / m.height).toFixed(4) } catch { /* unreadable */ }
-}
-writeFileSync(join(OUT, 'source-ratios.json'), JSON.stringify(srcRatios, null, 1))
-console.log(`source ratios: ${Object.keys(srcRatios).length} -> images/store/source-ratios.json`)
+writeFileSync(join(OUT, 'source-ratios.json'), JSON.stringify(SOURCE_STATS, null, 1))
+console.log(`source stats: ${Object.keys(SOURCE_STATS).length} -> images/store/source-ratios.json`)
 
 writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpRatio: PDP_RATIO, pdpLadder: LADDER, images: manifest }, null, 1))
 console.log(`manifest: ${Object.keys(manifest).length} entries -> images/store/manifest.json`)

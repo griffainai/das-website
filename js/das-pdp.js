@@ -187,6 +187,19 @@
       : '<div class="price st-ui"><small>' + (P.comingSoon ? 'Coming soon' : 'Quoted') + '</small></div>';
     h += '<div class="head"><h1>' + esc(P.name) + '</h1>' + priceSlot + '</div>';
     h += '<div class="eyebrow st-micro">' + esc(P.programLabel) + '</div>';
+
+    /* PLACEHOLDER PHOTOGRAPHY, SAID OUT LOUD.
+       Two career medals ship with a graphic that literally reads "Placeholder
+       image — final coming soon" instead of a photograph, and the catalogue
+       already carries that on the card badge. The PDP did not repeat it, so on
+       the product page the placeholder filled the whole gallery with nothing
+       explaining why. A buyer should not have to infer that from a picture of
+       a caption. The real fix is photography; until it exists, the page says
+       what the image is. */
+    if (/placeholder/i.test(P.badge || '')) {
+      h += '<p class="pd-note pd-note--ph st-ui">Photography in progress &mdash; the image shown is a placeholder. ' +
+        'The award itself is produced to the same specification as the rest of the range.</p>';
+    }
     if (P.blurb) h += '<p class="blurb">' + esc(P.blurb) + '</p>';
 
     h += '<a class="pd-prog st-ui" href="store.html?c=' + esc(P.program) + '">' +

@@ -891,15 +891,7 @@
   },
   "exec-lunchbag": {
    "src": "/images/store/exec-lunchbag.webp",
-   "srcset": "/images/store/exec-lunchbag@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/exec-lunchbag-pdp-72a507ae-676.webp",
-    "srcset": "/images/store/exec-lunchbag-pdp-72a507ae-560.webp 560w, /images/store/exec-lunchbag-pdp-72a507ae-676.webp 676w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 676,
-    "h": 845,
-    "cap": 676
-   }
+   "srcset": "/images/store/exec-lunchbag@2x.webp 2x"
   }
  }
 }

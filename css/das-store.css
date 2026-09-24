@@ -371,6 +371,11 @@
        button    100% x 52px, uppercase 12px at 0.133333px, my-4
        second    52px ghost with a 1px border, mb-3
    So the panel is gone and the parts sit in the column flow like theirs. */
+/* the placeholder-photography note — quiet, but not hidden */
+.pd-note--ph{ margin:14px 0 0; padding:10px 12px; background:#f7f7f7;
+  color:var(--st-muted); text-transform:none; letter-spacing:0;
+  font-size:var(--st-ui); line-height:17px; }
+
 .st-req{ margin:18px 0 0; }
 .st-req b{ display:block; font-size:12px; line-height:18px; letter-spacing:var(--st-ui-ls);
   font-weight:700; text-transform:none; color:var(--st-ink); margin-bottom:6px; }
