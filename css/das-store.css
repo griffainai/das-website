@@ -80,6 +80,7 @@
      having the grid at 1.25 and the product page at 0.8 was the kind of
      inconsistency you only notice by looking at the two pages side by side. */
   --st-frame:4 / 5;
+  --st-coll-frame:3 / 2;   /* banners, not products — see .st-coll */
 }
 @media(max-width:1023px){ :root{ --st-nav-h:72px; } }
 
@@ -193,7 +194,14 @@
 
 /* ── COLLECTION TILES — label on the photograph ────────────────────────── */
 .st-coll{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--st-hair); }
-.st-coll a{ position:relative; display:block; aspect-ratio:var(--st-frame); overflow:hidden; background:var(--st-ph); }
+/* COLLECTION TILES ARE NOT PRODUCT CARDS.
+   They were on var(--st-frame), so when that token went 4:5 portrait for the
+   product cards these inherited it: measured 628x785 each — 78% of the screen
+   height per tile, a 1570px section for six navigational banners. They also
+   render the LANDSCAPE cover derivative (1.25), so a portrait frame was wrong
+   twice over. Their own token now, and 3:2 because these are banners to scan,
+   not products to study. */
+.st-coll a{ position:relative; display:block; aspect-ratio:var(--st-coll-frame); overflow:hidden; background:var(--st-ph); }
 .st-coll img{ width:100%; height:100%; object-fit:cover; transition:transform .7s cubic-bezier(.2,.8,.2,1); }
 .st-coll a:hover img{ transform:scale(1.035); }
 .st-coll .lab{ position:absolute; left:0; right:0; bottom:0; padding:18px; color:#fff;
@@ -240,6 +248,16 @@
    white border he asked to remove.
    ────────────────────────────────────────────────────────────────────────── */
 .st-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:0 2px; }
+/* MOBILE IS FULL-BLEED. The section carries 24px of side padding, which on a
+   375px phone left the two cards 163px wide with white gutters down both
+   sides and between them — Jayden: "i dont like this white space ... it looks
+   way too small and too blocky". Pulling the grid out to the viewport edge
+   gives 187px cards, 15% larger, and removes the gutters entirely. The text
+   under each card keeps its own inset so it still lines up with the section. */
+@media(max-width:640px){
+  .st-sec > .st-grid, .st-grid{ margin-inline:-24px; width:calc(100% + 48px); gap:0 1px; }
+  .st-card .foot{ padding-left:12px; padding-right:12px; }
+}
 .st-grid[data-view="2"]{ grid-template-columns:repeat(2,1fr); }
 .st-grid[data-view="5"]{ grid-template-columns:repeat(5,1fr); }
 /* `hidden` must actually hide. The UA sheet says [hidden]{display:none} at the
