@@ -420,6 +420,10 @@
     if (idxEl) idxEl.hidden = filtered;
     if (shopEl) shopEl.hidden = !filtered;
 
+    /* Repaint on every cart change, not just at load. cart.js now fires
+       cart:change from its single announcement point. */
+    document.addEventListener('cart:change', paintBag);
+
     chips();
     index();
     if (!filtered) home();

@@ -181,12 +181,27 @@ const Cart = {
   count()  { return this.get().length; },  // number of distinct products
   units()  { return this.get().reduce((s, i) => s + i.qty, 0); },
 
+  /* TWO BADGE SYSTEMS, AND THIS KNEW ABOUT ONE.
+     The main site marks its counter `.cart-badge`; the store pages
+     (store.html, store-product.html, store-cart.html, store-saved.html) mark
+     theirs `[data-bag-count]` and repaint it from paintBag() in das-store.js,
+     which only runs at page load. So on every store page an add updated the
+     cart and left the header reading 0 — "I can't even add anything to my bag".
+     The item WAS in the bag; nothing said so.
+
+     One place announces a change, so it announces it to everything: both
+     markers update, and a cart:change event lets the store repaint its drawer
+     and totals without this file needing to know they exist. */
   _updateBadge() {
     const count = this.count();
+    const units = this.get().reduce((s, i) => s + (i.qty || 0), 0);
     document.querySelectorAll('.cart-badge').forEach(el => {
       el.textContent = count;
       el.classList.toggle('visible', count > 0);
     });
+    document.querySelectorAll('[data-bag-count]').forEach(el => { el.textContent = units; });
+    try { document.dispatchEvent(new CustomEvent('cart:change', { detail: { count, units } })); }
+    catch (e) { /* older browsers — the badge above already updated */ }
   },
 };
 
