@@ -172,22 +172,12 @@
     /* One hero per collection, chosen not found — taking "the first product with
        a photo" pulled a COMING SOON placeholder onto Service Milestones, and a
        collection tile is the one image that has to carry. */
-    var HERO = {
-      appreciation: 'pak-command-center-kit-heroA',
-      safety:       'safe-250k-3item-v2',
-      milestone:    'medal-c-1m-v1',
-      onboarding:   'pak-premium-onboarding-hero',
-      milepacks:    'mp-04-1',
-      holiday:      'wk-group-lifestyle'
-    };
-    var SUB = {
-      appreciation: 'Driver Appreciation Week',
-      safety:       'Safe miles, earned',
-      milestone:    '250K to 6 million',
-      onboarding:   'Day one, done right',
-      milepacks:    'Quarterly recognition',
-      holiday:      'The family sees this one'
-    };
+    /* HERO and SUB live in js/store-heroes.js — one declaration, read here and
+       by scripts/build-store-images.mjs, which uses it to guarantee every named
+       hero actually HAS a derivative. They were inline here, which is why a
+       hero could be named and never built. */
+    var HERO = (window.DAS_STORE_HEROES) || {};
+    var SUB = (window.DAS_STORE_SUBS) || {};
     el.innerHTML = CAT.programs.filter(function (g) { return g.count; }).map(function (g) {
       var first = CAT.products.filter(function (p) { return p.program === g.slug; })[0];
       var key = HERO[g.slug];
@@ -305,8 +295,15 @@
   /* ── boot ───────────────────────────────────────────────────────────────── */
   fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
     CAT = data;
-    /* a lookup of every shot by file key, so a collection hero can be chosen by name */
-    CAT.shots = {};
+    /* A lookup of every shot by file key, so a collection hero can be chosen by
+       name. SEEDED FROM THE CATALOGUE, not rebuilt: this used to start empty
+       and take only product shots, so any hero that is not some product's
+       primary photo — medal-c-1m-v1, for one — never resolved, and every
+       collection tile silently fell back to "the first product in the
+       programme". For Service Milestone Awards that first product is the
+       250,000 placeholder, which is the exact outcome the HERO map exists to
+       prevent. */
+    CAT.shots = Object.assign({}, data.shots || {});
     CAT.products.forEach(function (p) {
       var k = p.shot.src.split('/').pop().replace('.webp', '');
       CAT.shots[k] = p.shot;

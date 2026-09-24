@@ -254,8 +254,18 @@ all.forEach((p) => {
 const counts = {}
 all.forEach((p) => { counts[p.program] = (counts[p.program] || 0) + 1 })
 
+/* EVERY derivative, keyed by file name. The store picks its six collection
+   heroes BY NAME (js/das-store.js, HERO) precisely so a collection tile is
+   never "the first product with a photo" — the comment there says that rule
+   exists because the fallback pulled a COMING SOON placeholder onto Service
+   Milestone Awards. It was doing exactly that in production anyway: the page
+   built its lookup only from PRODUCT shots, so a hero like medal-c-1m-v1,
+   which is not any product's primary photo, never resolved and every tile fell
+   through to the fallback. Publishing the whole index fixes it at the source
+   instead of duplicating the hero map into this file, where it would drift. */
 writeFileSync(join(ROOT, 'store-catalog.json'), JSON.stringify({
   built: new Date().toISOString().slice(0, 10),
+  shots: MANIFEST.images,
   frame: MANIFEST.frame,
   gate: GATE,
   programs: Object.entries(PROGRAMS).map(([slug, label]) => ({ slug, label, count: counts[slug] || 0 })),

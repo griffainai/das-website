@@ -293,6 +293,23 @@ function catalogImages() {
       for (const p of item.images || []) add(p)
     }
   }
+  /* THE COLLECTION HEROES, read from the one file that declares them.
+     A hero named there but never referenced by a product gets no derivative,
+     resolves to nothing, and the tile falls back to "the first product in the
+     programme" — which is the 250,000 placeholder for Service Milestone
+     Awards, the exact outcome the hero map exists to prevent. This happened to
+     wk-group-lifestyle. Run rather than parsed, as milestones.js is. */
+  const hctx = { window: {}, document: { addEventListener() {}, querySelector: () => null, querySelectorAll: () => [] }, console }
+  hctx.self = hctx.window
+  vm.createContext(hctx)
+  vm.runInContext(readFileSync(join(ROOT, 'js/store-heroes.js'), 'utf8'), hctx, { filename: 'js/store-heroes.js' })
+  const heroes = hctx.window.DAS_STORE_HEROES || {}
+  for (const base of Object.values(heroes)) {
+    const hit = readdirSync(SRC).find((f) => basename(f, extname(f)) === base && /\.(jpg|jpeg|png|webp)$/i.test(f))
+    if (hit) out.add(hit)
+    else console.warn(`  ! collection hero "${base}" has no source file in images/`)
+  }
+
   return [...out]
 }
 

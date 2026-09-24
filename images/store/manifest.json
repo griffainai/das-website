@@ -721,6 +721,18 @@
     "cap": 1200
    }
   },
+  "wk-group-lifestyle": {
+   "src": "/images/store/wk-group-lifestyle.webp",
+   "srcset": "/images/store/wk-group-lifestyle@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/wk-group-lifestyle-pdp-0ba426d2-1120.webp",
+    "srcset": "/images/store/wk-group-lifestyle-pdp-0ba426d2-560.webp 560w, /images/store/wk-group-lifestyle-pdp-0ba426d2-840.webp 840w, /images/store/wk-group-lifestyle-pdp-0ba426d2-1120.webp 1120w, /images/store/wk-group-lifestyle-pdp-0ba426d2-1400.webp 1400w, /images/store/wk-group-lifestyle-pdp-0ba426d2-1600.webp 1600w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 1600,
+    "h": 2000,
+    "cap": 1600
+   }
+  },
   "pak-working-hands-kit-heroA": {
    "src": "/images/store/pak-working-hands-kit-heroA.webp",
    "srcset": "/images/store/pak-working-hands-kit-heroA@2x.webp 2x",
