@@ -4,6 +4,26 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/cart",
+      "destination": "/store-cart",
+      "permanent": true
+    },
+    {
+      "source": "/cart.html",
+      "destination": "/store-cart",
+      "permanent": true
+    },
+    {
+      "source": "/favorites",
+      "destination": "/store-saved",
+      "permanent": true
+    },
+    {
+      "source": "/favorites.html",
+      "destination": "/store-saved",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
