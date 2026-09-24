@@ -139,7 +139,7 @@
   "rewrites": [
     {
       "source": "/collections/:slug",
-      "destination": "/store-collection.html?c=:slug"
+      "destination": "/store-collection?c=:slug"
     },
     {
       "source": "/api/submit-quote",
