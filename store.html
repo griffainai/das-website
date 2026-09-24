@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=19">
+<link rel="stylesheet" href="/css/das-store.css?v=20">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 <link rel="apple-touch-icon" href="/images/favicon-180.png">
 <link rel="preload" as="image" href="/images/band-forest-1200.jpg" imagesrcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" fetchpriority="high">
@@ -26,6 +26,7 @@
 <header class="st-hd st-ui">
   <div class="bar">
     <nav aria-label="Store">
+      <a class="item home" href="index.html">Home</a>
       <a class="item" href="?c=all">Shop all</a>
       <a class="item hide" href="?c=appreciation">Kits</a>
       <a class="item hide" href="?c=safety">Safety</a>
@@ -74,19 +75,35 @@
 </section>
 
 <!-- Collection tiles, label on the photograph -->
-<nav class="st-coll" id="st-coll" aria-label="Collections"></nav>
+<!-- THE INDEX — option D from /store-lab. Type leads and one photograph
+     follows the cursor, which reads fastest and survives the photography being
+     mid-reshoot. Rendered by js/das-store.js. -->
+<section class="st-index" id="st-index" aria-label="Programs"></section>
 
 <!-- ════════════════════════════════════════════════════════════════════════
      THE CATALOGUE
      ════════════════════════════════════════════════════════════════════════ -->
-<section class="st-sec" id="st-shop">
+<!-- ════════════════════════════════════════════════════════════════════════
+     THE HOME RHYTHM — banner, then that program's products, repeated.
+
+     Jayden 2026-09-24: "why does it just scrojll down on all the products not
+     categorized and not looking like the 1-1 siiite i asked u to copy".
+
+     He is right, and the reference says so plainly. shop.griffain.io's home is
+     ELEVEN sections alternating a full-bleed banner (1900x650) with a
+     horizontal product row (606px, cards 356x567) — never one long grid. This
+     page was a collections strip followed by all 54 products in a single
+     4-column grid, which is the opposite arrangement.
+
+     #st-home carries the rhythm and shows when no filter is set.
+     #st-shop carries the old grid and shows only for ?c=<program>, because a
+     filtered view genuinely IS one list.
+     ════════════════════════════════════════════════════════════════════════ -->
+<div id="st-home"></div>
+
+<section class="st-sec" id="st-shop" hidden>
   <div class="head st-ui">
-    <h2>Shop all</h2><sup id="st-count">&mdash;</sup>
-    <span class="r">
-      <button data-view="2">2</button>
-      <button data-view="3">3</button>
-      <button data-view="4" aria-pressed="true">4</button>
-    </span>
+    <h2 id="st-shop-title">Shop all</h2><sup id="st-count">&mdash;</sup>
   </div>
   <div class="st-chips" id="st-chips"></div>
   <div class="st-grid" data-view="4" id="st-grid"></div>
@@ -97,17 +114,22 @@
      dead end. DAS gates anything over $110, which is 40 of the 54 pieces, so
      this is the primary conversion on this page and not a fallback.
      ════════════════════════════════════════════════════════════════════════ -->
-<section class="st-sec">
-  <div style="background:#060E24;color:#fff;padding:clamp(32px,5vw,56px) clamp(24px,4vw,48px);display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;flex-wrap:wrap">
-    <div>
-      <p class="st-ui" style="color:#9CC4F5;margin-bottom:10px">Program pricing</p>
-      <h2 style="font-size:clamp(22px,3vw,34px);line-height:1.06;text-transform:uppercase;margin-bottom:10px">Most programs are priced to your fleet.</h2>
-      <p style="font-size:14px;line-height:22px;color:rgba(255,255,255,.72);max-width:56ch">
-        Kits and awards are quoted on driver count, customization and timeline. Tell us the fleet size and
-        the occasion and a specialist replies in writing within one business day &mdash; a real number, not a range.
-      </p>
-    </div>
-    <a class="st-cta st-cta--light" href="contact.html?intent=pricing">Request pricing</a>
+<!-- PRICING BAND — option A from /store-lab: split with the photograph, the
+     same structure the product page closes on, so the store ends the way a
+     product does. 40 of 54 pieces sit above the $110 gate, which makes this
+     the page's main conversion rather than a footnote. -->
+<section class="pd-band st-ui" style="margin-top:clamp(48px,6vw,80px)">
+  <div class="fb-media">
+    <img src="/images/band-forest-1200.jpg"
+         srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
+         sizes="(min-width:1024px) 50vw, 100vw" alt="" decoding="async" width="1200" height="509">
+  </div>
+  <div class="fb-copy">
+    <p class="k st-micro">Program pricing</p>
+    <h2>Most programs are<br>priced to your fleet.</h2>
+    <p class="fb-lede">Quoted on driver count, customization and timeline. Tell us the fleet size and the
+      occasion and a specialist replies in writing within one business day &mdash; a real number, not a range.</p>
+    <a class="st-cta st-cta--light st-cta--block" href="contact.html?intent=pricing">Request pricing</a>
   </div>
 </section>
 
@@ -177,6 +199,6 @@
 <script src="/lib/catalog.js?v=1"></script>
 <script src="/js/cart.js?v=6"></script>
 <script src="/js/store-heroes.js?v=1"></script>
-<script src="/js/das-store.js?v=8" defer></script>
+<script src="/js/das-store.js?v=10" defer></script>
 </body>
 </html>

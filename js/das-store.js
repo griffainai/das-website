@@ -166,29 +166,104 @@
       }).join('');
   }
 
-  function collections() {
-    var el = document.getElementById('st-coll');
+  /* ── THE INDEX — option D ────────────────────────────────────────────────
+     Jayden picked this from /store-lab: type leads, one photograph follows the
+     cursor. It reads fastest of the five, costs the least vertical space after
+     the scroll rail, and it is the only option that survives the photography
+     being mid-reshoot — which matters while all six programme banners are
+     placeholders. */
+  function index() {
+    var el = document.getElementById('st-index');
     if (!el) return;
-    /* One hero per collection, chosen not found — taking "the first product with
-       a photo" pulled a COMING SOON placeholder onto Service Milestones, and a
-       collection tile is the one image that has to carry. */
-    /* HERO and SUB live in js/store-heroes.js — one declaration, read here and
-       by scripts/build-store-images.mjs, which uses it to guarantee every named
-       hero actually HAS a derivative. They were inline here, which is why a
-       hero could be named and never built. */
-    var HERO = (window.DAS_STORE_HEROES) || {};
-    var SUB = (window.DAS_STORE_SUBS) || {};
-    el.innerHTML = CAT.programs.filter(function (g) { return g.count; }).map(function (g) {
-      var first = CAT.products.filter(function (p) { return p.program === g.slug; })[0];
+    var gs = groups();
+    if (!gs.length) return;
+
+    el.innerHTML =
+      '<div class="ix-list">' + gs.map(function (g, i) {
+        return '<a class="ix-row" href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '" data-i="' + i + '"' +
+          (i ? '' : ' aria-current="true"') + '>' +
+          '<span class="n">' + String(i + 1).padStart(2, '0') + '</span>' +
+          '<span class="t">' + esc(g.label) + '</span>' +
+          '<span class="c">' + g.count + '</span></a>';
+      }).join('') + '</div>' +
+      '<div class="ix-shot">' + gs.map(function (g, i) {
+        var v = (g.shot && g.shot.pdp) || g.shot;
+        return '<img class="' + (i ? '' : 'on') + '" data-i="' + i + '" src="' + esc(v.src) + '"' +
+          ' srcset="' + esc(v.srcset) + '" sizes="(min-width:1024px) 50vw, 100vw"' +
+          ' alt="' + esc(g.label) + '"' + (i ? ' loading="lazy"' : '') + '>';
+      }).join('') + '</div>';
+
+    var shots = el.querySelectorAll('.ix-shot img');
+    el.addEventListener('mouseover', function (e) {
+      var row = e.target.closest && e.target.closest('.ix-row');
+      if (!row) return;
+      el.querySelectorAll('.ix-row').forEach(function (r) { r.removeAttribute('aria-current'); });
+      row.setAttribute('aria-current', 'true');
+      shots.forEach(function (im) { im.classList.toggle('on', im.dataset.i === row.dataset.i); });
+    });
+  }
+
+  /** The six programmes that actually have products, with their hero shot. */
+  function groups() {
+    var HERO = window.DAS_STORE_HEROES || {};
+    var SUB = window.DAS_STORE_SUBS || {};
+    return CAT.programs.filter(function (g) { return g.count; }).map(function (g) {
+      var list = CAT.products.filter(function (p) { return p.program === g.slug; });
       var key = HERO[g.slug];
-      var s = (key && CAT.shots && CAT.shots[key]) || (first && first.shot);
-      if (!s) return '';
-      return '<a href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '">' +
-        '<img src="' + esc(s.src) + '" srcset="' + esc(s.srcset) + '" alt="' + esc(g.label) + '" width="700" height="560">' +
-        '<span class="lab st-ui"><b>' + esc(g.label) + '</b>' +
-        '<span>' + esc(SUB[g.slug] || (g.count + ' pieces')) + '</span></span></a>';
+      var shot = (key && CAT.shots && CAT.shots[key]) || (list[0] && list[0].shot);
+      return { slug: g.slug, label: g.label, count: g.count, sub: SUB[g.slug] || '', shot: shot, list: list };
+    }).filter(function (g) { return g.shot; });
+  }
+
+  /* ── THE HOME RHYTHM ─────────────────────────────────────────────────────
+     Jayden 2026-09-24: "why does it just scrojll down on all the products not
+     categorized and not looking like the 1-1 siiite i asked u to copy".
+
+     Measured on shop.griffain.io's home: ELEVEN sections alternating a
+     full-bleed banner (1900x650) with a horizontal product row (606px tall,
+     cards 356x567, gap 1px, heading 12px/16px weight 500) — never one long
+     grid. This page was a collections strip followed by all 54 products in a
+     single four-column grid, which is the opposite arrangement.
+
+     So: banner, that programme's products, repeat. The banners come from
+     images/store/banner-manifest.json, where all six are currently branded
+     PLACEHOLDERS naming the shot that is missing — no DAS photograph is
+     anywhere near 2.93:1. See PHOTO-SHOT-LIST.md. */
+  function home() {
+    var el = document.getElementById('st-home');
+    if (!el) return;
+    var gs = groups();
+
+    el.innerHTML = gs.map(function (g) {
+      var b = (BANNERS && BANNERS[g.slug]) || null;
+      var banner = b
+        ? '<a class="st-banner" href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '"' +
+            (b.kind === 'placeholder' ? ' data-placeholder="true"' : '') + '>' +
+            '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw" alt="' + esc(g.label) +
+            '" width="' + b.w + '" height="' + b.h + '" loading="lazy">' +
+            (b.kind === 'placeholder' ? '' :
+              '<span class="cap"><b>' + esc(g.label) + '</b><span>' + esc(g.sub) + '</span></span>') +
+          '</a>'
+        : '';
+
+      /* The row shows the programme's first six. "See all N" carries the rest,
+         because a row that scrolls forever is a grid wearing a disguise. */
+      var six = g.list.slice(0, 6);
+      return '<section class="st-prog" id="prog-' + esc(g.slug) + '">' +
+        banner +
+        '<div class="st-rowhead st-ui">' +
+          '<h2>' + esc(g.label) + '</h2>' +
+          '<a href="?c=' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '">See all ' + g.count + '</a>' +
+        '</div>' +
+        '<div class="st-row">' + six.map(card).join('') + '</div>' +
+      '</section>';
     }).join('');
   }
+
+  /* NOTE: the rows use the SAME card() declared above — deliberately not a
+     second, simpler one. A duplicate here would hoist over the real card and
+     silently drop its data-product-* attributes, which js/cart.js reads to
+     build a favourite, and its quick-add controls. */
 
   /* ── the bag ────────────────────────────────────────────────────────────── */
   var FREE_FREIGHT = 1500; // fleet orders — the threshold the cart page already states
@@ -293,7 +368,17 @@
   });
 
   /* ── boot ───────────────────────────────────────────────────────────────── */
-  fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
+  var BANNERS = null;
+  Promise.all([
+    fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }),
+    /* The banners are optional: if the manifest is missing the rhythm still
+       renders, just without its banner images, rather than the whole page
+       failing on a file that only affects decoration. */
+    fetch('/images/store/banner-manifest.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+  ]).then(function (both) {
+    var data = both[0];
+    BANNERS = (both[1] && both[1].banners) || null;
     CAT = data;
     /* A lookup of every shot by file key, so a collection hero can be chosen by
        name. SEEDED FROM THE CATALOGUE, not rebuilt: this used to start empty
@@ -325,7 +410,21 @@
     var q = sp.get('c') || sp.get('category');
     if (q && ALIAS[q]) q = ALIAS[q];
     if (q && CAT.programs.some(function (g) { return g.slug === q; })) state.program = q;
-    chips(); collections(); render(); paintBag();
+    /* A filtered view genuinely IS one list, so ?c=<programme> keeps the grid.
+       With no filter the home shows the rhythm instead. */
+    var filtered = state.program !== 'all';
+    var homeEl = document.getElementById('st-home');
+    var shopEl = document.getElementById('st-shop');
+    var idxEl = document.getElementById('st-index');
+    if (homeEl) homeEl.hidden = filtered;
+    if (idxEl) idxEl.hidden = filtered;
+    if (shopEl) shopEl.hidden = !filtered;
+
+    chips();
+    index();
+    if (!filtered) home();
+    render();
+    paintBag();
     document.querySelectorAll('[data-wish-count]').forEach(function (e) {
       e.textContent = window.Favorites ? Favorites.load().length : 0;
     });
