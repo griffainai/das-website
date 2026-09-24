@@ -491,6 +491,27 @@
 .cl-crumb a{ text-decoration:underline; text-underline-offset:3px; }
 .cl-crumb a:hover{ color:var(--st-ink); }
 
+/* ── THE SEARCH ──────────────────────────────────────────────────────────
+   Sits above the chips because it answers a bigger question than they do.
+   Deliberately quiet: one hairline box, the reference's UI type, and a
+   plain-English readback under it so the buyer can see what was understood
+   rather than guess why the grid changed. */
+.st-search{ padding:0 24px 12px; }
+.ss-box{ display:flex; align-items:center; gap:10px; max-width:560px;
+  box-shadow:inset 0 0 0 1px var(--st-hair); padding:0 14px; height:46px; color:var(--st-muted); }
+.ss-box:focus-within{ box-shadow:inset 0 0 0 1px var(--st-ink); color:var(--st-ink); }
+.ss-box input{ flex:1; min-width:0; height:100%; border:0; outline:0; background:none;
+  font:inherit; font-size:var(--st-ui); letter-spacing:var(--st-ui-ls); color:var(--st-ink); }
+.ss-box input::placeholder{ color:var(--st-chip-off); text-transform:none; letter-spacing:0; }
+.ss-box input::-webkit-search-cancel-button{ display:none; }
+.ss-clear{ font-size:18px; line-height:1; color:var(--st-muted); padding:0 2px; }
+.ss-clear:hover{ color:var(--st-ink); }
+.ss-out{ max-width:560px; padding-top:10px; }
+.ss-read{ color:var(--st-ink); }
+.ss-hint,.ss-none{ color:var(--st-muted); text-transform:none; letter-spacing:0;
+  font-size:var(--st-ui); line-height:18px; margin-top:4px; }
+.ss-none a{ text-decoration:underline; text-underline-offset:3px; color:var(--st-navy); }
+
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
 .st-scrim[data-open="true"]{ opacity:1; pointer-events:auto; }

@@ -23,6 +23,10 @@
 
   var CAT = null;
   var state = { program: 'all', view: '4' };
+  /* null = no search running. An empty ARRAY is a real result meaning "nothing
+     matched", and must not be mistaken for "no search" — that distinction is
+     the whole difference between an empty grid and the full catalogue. */
+  var searchResults = null;
 
   var esc = function (s) {
     return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) {
@@ -140,6 +144,7 @@
   var countEl = document.getElementById('st-count');
 
   function visible() {
+    if (searchResults) return searchResults;
     return state.program === 'all'
       ? CAT.products
       : CAT.products.filter(function (p) { return p.program === state.program; });
@@ -466,6 +471,16 @@
     if (titleEl) {
       var tg = CAT.programs.filter(function (x) { return x.slug === state.program; })[0];
       titleEl.textContent = tg ? tg.label : 'Shop all';
+    }
+
+    /* THE SEARCH drives the same render path as the chips, so a query and a
+       filter cannot disagree about what the grid is showing. Passing null
+       clears the override and the chips take back over. */
+    if (window.DASStoreSearch) {
+      window.DASStoreSearch.mount({
+        catalog: CAT,
+        onApply: function (list) { searchResults = list; render(); },
+      });
     }
 
     collectionHero();
