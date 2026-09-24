@@ -1,0 +1,52 @@
+/* ── THE FOOTER, ONE OF THEM, EVERYWHERE ─────────────────────────────────
+   The homepage carried a navy footer and the store a light one, with different
+   links in each. Jayden: "use this footer for the home page and all the other
+   footers ... but add all the pages and categories the other ones has". So the
+   light one wins, the mark comes back above it, and it carries the union of
+   both link sets — shop by collection, the program landing pages, company,
+   support, and the standing terms. */
+/* ============================================================================
+   THE SITE FOOTER — its own stylesheet, because the markup is on 35 pages
+   ----------------------------------------------------------------------------
+   This lived inside das-store.css, which only five pages load. The other
+   THIRTY carried the footer markup and none of its styling: no grid, no type
+   scale, and an unsized <img> rendering the lockup at its natural 728px. That
+   is the "why does the contact page have a fucking logo" and "the footer is
+   all messed up" Jayden hit -- the homepage, About, Insights, Contact,
+   Company Purchasing and every landing page were all showing the same
+   unstyled markup.
+
+   So it stands alone now and carries its own tokens rather than borrowing the
+   store's :root. Load it anywhere the footer appears.
+   ========================================================================== */
+.st-foot{
+  --st-ui: 12px;
+  --st-ui-lh: 18px;
+  --st-ui-ls: 0.133333px;
+  --st-hair: rgba(0,0,0,.10);
+  --st-ink: #000;
+  --st-muted: rgb(115,115,115);
+  --st-chip-off: rgb(156,163,175);
+ padding:clamp(40px,5vw,72px) 24px clamp(24px,3vw,40px); border-top:1px solid var(--st-hair); }
+.st-foot .ft-in{ max-width:1700px; margin:0 auto; }
+.st-foot .ft-mark{ display:inline-block; margin-bottom:clamp(24px,3vw,40px); }
+.st-foot .ft-mark img{ height:44px; width:auto; }
+.st-foot .ft-cols{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(20px,3vw,44px); }
+.st-foot h4{ font-size:var(--st-ui); line-height:16px; letter-spacing:var(--st-ui-ls);
+  font-weight:700; text-transform:uppercase; margin-bottom:14px; }
+.st-foot ul{ display:flex; flex-direction:column; gap:9px; }
+.st-foot li,.st-foot a{ font-size:var(--st-ui); line-height:18px; letter-spacing:var(--st-ui-ls);
+  color:var(--st-muted); text-transform:uppercase; }
+.st-foot a:hover{ color:var(--st-ink); text-decoration:underline; text-underline-offset:3px; }
+.st-foot .ft-legal{ margin-top:clamp(28px,3.4vw,48px); padding-top:20px;
+  border-top:1px solid var(--st-hair); color:var(--st-chip-off); }
+@media(max-width:1023px){ .st-foot .ft-cols{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:30px; } }
+@media(max-width:560px){ .st-foot .ft-cols{ grid-template-columns:1fr; } .st-foot .ft-mark img{ height:38px; } }
+
+/* .st-ui is defined in das-store.css; the footer element carries that class and
+   must still get its type on pages that never load the store. */
+.st-foot.st-ui, .st-foot .st-ui{
+  font-size: var(--st-ui); line-height: var(--st-ui-lh);
+  letter-spacing: var(--st-ui-ls); text-transform: uppercase;
+}
+.st-foot a{ text-decoration: none; }

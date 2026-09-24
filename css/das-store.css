@@ -715,29 +715,6 @@
 .st-card:hover .plus,.st-card .plus:focus-visible{ opacity:1; }
 @media(hover:none){ .st-card .choose,.st-card .plus{ opacity:1; } }
 
-/* ── THE FOOTER, ONE OF THEM, EVERYWHERE ─────────────────────────────────
-   The homepage carried a navy footer and the store a light one, with different
-   links in each. Jayden: "use this footer for the home page and all the other
-   footers ... but add all the pages and categories the other ones has". So the
-   light one wins, the mark comes back above it, and it carries the union of
-   both link sets — shop by collection, the program landing pages, company,
-   support, and the standing terms. */
-.st-foot{ padding:clamp(40px,5vw,72px) 24px clamp(24px,3vw,40px); border-top:1px solid var(--st-hair); }
-.st-foot .ft-in{ max-width:1700px; margin:0 auto; }
-.st-foot .ft-mark{ display:inline-block; margin-bottom:clamp(24px,3vw,40px); }
-.st-foot .ft-mark img{ height:44px; width:auto; }
-.st-foot .ft-cols{ display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:clamp(20px,3vw,44px); }
-.st-foot h4{ font-size:var(--st-ui); line-height:16px; letter-spacing:var(--st-ui-ls);
-  font-weight:700; text-transform:uppercase; margin-bottom:14px; }
-.st-foot ul{ display:flex; flex-direction:column; gap:9px; }
-.st-foot li,.st-foot a{ font-size:var(--st-ui); line-height:18px; letter-spacing:var(--st-ui-ls);
-  color:var(--st-muted); text-transform:uppercase; }
-.st-foot a:hover{ color:var(--st-ink); text-decoration:underline; text-underline-offset:3px; }
-.st-foot .ft-legal{ margin-top:clamp(28px,3.4vw,48px); padding-top:20px;
-  border-top:1px solid var(--st-hair); color:var(--st-chip-off); }
-@media(max-width:1023px){ .st-foot .ft-cols{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:30px; } }
-@media(max-width:560px){ .st-foot .ft-cols{ grid-template-columns:1fr; } .st-foot .ft-mark img{ height:38px; } }
-
 /* ── ROW SCROLL CONTROLS ─────────────────────────────────────────────────
    The rows were always overflow-x:auto, but with the scrollbar hidden there
    was nothing to say so and a mouse cannot scroll sideways at all. Arrows sit
