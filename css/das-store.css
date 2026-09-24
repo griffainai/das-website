@@ -521,6 +521,22 @@
   text-transform:uppercase; font-weight:500; }
 .pg-head p{ color:var(--st-muted); margin-top:8px; }
 
+/* The hover CTA on a preview. Every card offers an action now — "+" where the
+   piece can be added, "Request pricing" where its price is not public, "Choose
+   level" where the server needs a milestone first. Appears on hover on a
+   pointer device and is always visible on touch, where there is no hover. */
+.st-card .choose{
+  position:absolute; right:10px; bottom:10px; z-index:20;
+  background:rgba(255,255,255,.94); color:var(--st-navy);
+  font-size:var(--st-chip); line-height:var(--st-chip-lh); letter-spacing:var(--st-ui-ls);
+  text-transform:uppercase; padding:6px 10px; opacity:0; transition:opacity .18s;
+}
+.st-card:hover .choose,.st-card .choose:focus-visible{ opacity:1; }
+.st-card .choose:hover{ background:var(--st-navy); color:#fff; }
+.st-card .plus{ opacity:0; transition:opacity .18s; }
+.st-card:hover .plus,.st-card .plus:focus-visible{ opacity:1; }
+@media(hover:none){ .st-card .choose,.st-card .plus{ opacity:1; } }
+
 /* ── CART DRAWER — 440, free-freight tier bar, 110x138 lines ───────────── */
 .st-scrim{ position:fixed; inset:0; background:rgba(6,14,36,.45); opacity:0; pointer-events:none; transition:opacity .3s; z-index:60; }
 .st-scrim[data-open="true"]{ opacity:1; pointer-events:auto; }

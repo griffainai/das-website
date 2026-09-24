@@ -107,12 +107,21 @@
            bag that fails at checkout. Those route to the product page instead.
            comingSoon pieces are not purchasable at all (Catalog.resolve returns
            "unknown" and the server refuses them). */
-        (p.gated || p.comingSoon ? '' :
-          p.milestoneSelect
-            ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
-            : '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
-              '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
-              '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
+        /* EVERY preview now offers an action on hover, not only the 14
+           purchasable ones. A gated piece cannot be added to a bag — its price
+           is not public — so its hover CTA is the one that actually moves it
+           forward: request pricing, carrying the product so the form arrives
+           pre-filled. Offering a "+" that cannot work would be worse than
+           offering nothing. */
+        (p.comingSoon ? '' :
+          p.gated
+            ? '<a class="choose" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
+              '&amp;name=' + encodeURIComponent(p.name) + '">Request pricing</a>'
+            : p.milestoneSelect
+              ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
+              : '<button class="plus" aria-label="Choose a quantity of ' + esc(p.name) + '">' +
+                '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+                '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
           /* the variant bar: full width across the bottom of the photograph */
           (p.gated || p.comingSoon || p.milestoneSelect ? '' :
             '<div class="qtys">' +
@@ -345,13 +354,28 @@
 
   /* ── wiring ─────────────────────────────────────────────────────────────── */
   document.addEventListener('click', function (e) {
-    var chip = e.target.closest && e.target.closest('#st-chips button, [data-jump]');
+    /* A COLLECTION LINK IS A LINK. This used to catch [data-jump] as well and
+       call preventDefault() on it, so every banner, index row and "See all"
+       was swallowed and turned into an in-page filter — the collection pages
+       existed, the hrefs were correct, and clicking one never left the home
+       page. That is why the whole thing read as "not connected".
+
+       Now only the CHIPS are intercepted, because a chip genuinely filters the
+       list in place. Anything with an href navigates, and is recorded on the
+       way out without being stopped. */
+    var jump = e.target.closest && e.target.closest('[data-jump]');
+    if (jump && jump.getAttribute('href')) {
+      push('collection_tile', { program: jump.dataset.jump });
+      return;                                   // let the browser do its job
+    }
+
+    var chip = e.target.closest && e.target.closest('#st-chips button');
     if (chip) {
       e.preventDefault();
-      state.program = chip.dataset.f || chip.dataset.jump;
+      state.program = chip.dataset.f;
       /* Which occasion actually drives demand is the second-most useful number
          on this store, so a tile click and a chip click are recorded separately. */
-      push(chip.dataset.jump ? 'collection_tile' : 'filter_program', { program: state.program });
+      push('filter_program', { program: state.program });
       render();
       var h = document.getElementById('st-shop');
       if (h) h.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -349,7 +349,21 @@
     return '<article class="st-card st-ui">' +
       '<div class="shot"><a class="frame" href="store-product.html?id=' + encodeURIComponent(p.id) + '">' +
         '<img src="' + esc(v.src) + '" srcset="' + esc(v.srcset) + '" sizes="(min-width:1024px) 20vw, 50vw" ' +
-        'alt="' + esc(p.name) + '" loading="lazy" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a></div>' +
+        'alt="' + esc(p.name) + '" loading="lazy" width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"></a>' +
+        /* The rows under the product had no action on hover at all — a buyer
+           had to open each one to do anything with it. Same rules as the store
+           card: add what can be added, route what cannot. The "+" adds the
+           piece's minimum order, which is the only quantity it can be sold in. */
+        (p.comingSoon ? '' :
+          p.gated
+            ? '<a class="choose" href="contact.html?intent=pricing&amp;product=' + encodeURIComponent(p.id) +
+              '&amp;name=' + encodeURIComponent(p.name) + '">Request pricing</a>'
+            : p.milestoneSelect
+              ? '<a class="choose" href="store-product.html?id=' + encodeURIComponent(p.id) + '">Choose level</a>'
+              : '<button class="plus" data-quick="' + esc(p.id) + '" aria-label="Add ' + esc(p.name) + ' to the bag">' +
+                '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">' +
+                '<line x1="6" y1="0" x2="6" y2="12" stroke="currentColor"/><line x1="0" y1="6" x2="12" y2="6" stroke="currentColor"/></svg></button>') +
+      '</div>' +
       '<div class="foot"><div class="grp"><div class="t">' + esc(p.name) + '</div>' +
         '<div class="c">' + esc(p.programLabel) + '</div></div>' +
         '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
@@ -572,6 +586,23 @@
       if (rest) rest.hidden = false;
       more.parentElement.remove();
       push('also_load_more', { product_id: P.id });
+      return;
+    }
+
+    /* Quick-add from a row under the product. Adds the piece's minimum order,
+       because that is the only quantity it can be sold in, and reports it
+       plainly rather than silently. */
+    var quick = e.target.closest && e.target.closest('[data-quick]');
+    if (quick) {
+      e.preventDefault();
+      var qp = (CAT.products || []).filter(function (x) { return x.id === quick.dataset.quick; })[0];
+      if (qp && window.Cart) {
+        var n = qp.minQty || 10;
+        Cart.add({ id: qp.id, name: qp.name, price: qp.price, image: (qp.shot.pdp || qp.shot).src,
+                   category: qp.programLabel, minQty: qp.minQty }, n);
+        if (window.showToast) showToast('Added ' + n + ' \u00d7 ' + qp.name);
+        push('quick_add', { product_id: qp.id, qty: n, source: 'pdp_row' });
+      }
       return;
     }
 
