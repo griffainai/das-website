@@ -32,7 +32,7 @@
   <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
 
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
-  <link rel="stylesheet" href="css/styles.css?v=46">
+  <link rel="stylesheet" href="css/styles.css?v=48">
   <link rel="stylesheet" href="css/das-illustrations.css">
   <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
        The .sticky-header wrapper keeps the announcement bar + nav locked together
@@ -306,7 +306,7 @@
   <script src="/js/upsell-modal.js?v=1" defer></script>
   <link rel="stylesheet" href="css/das-widget.css?v=3">
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
-  <link rel="stylesheet" href="/css/das-nav.css?v=11">
+  <link rel="stylesheet" href="/css/das-nav.css?v=12">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
 </head>
 <body>
@@ -560,11 +560,19 @@
      HERO
      ============================================================ -->
 <section class="hero hero--photo">
+  <!-- A PORTRAIT CROP FOR A PORTRAIT BOX. The landscape original was being
+     cover-cropped into a near-full-screen phone hero, which kept about a
+     quarter of its width and then upscaled that. The mobile source is cut
+     3:4 with sharp's attention strategy, so the subject survives the crop.
+     Built by scripts/build-mobile-heroes.mjs. -->
+<picture>
+  <source media="(max-width:767px)" srcset="/images/mobile/home-hero-m760.webp 760w, /images/mobile/home-hero-m1100.webp 1100w, /images/mobile/home-hero-m1500.webp 1500w" sizes="160vw" width="760" height="1013">
   <img class="hero-bg" src="images/home-hero-1400.webp" width="1400" height="1050"
        srcset="images/home-hero-800.webp 900w, images/home-hero-1400.webp 1400w, images/home-hero-2600.webp 2600w"
        sizes="100vw"
        alt="A professional truck driver recognized by two fleet managers beside a Driver Appreciation Solutions kit, with a Freightliner truck and terminal in the background"
        fetchpriority="high" decoding="async">
+</picture>
   <div class="hero-overlay" aria-hidden="true"></div>
   <div class="container">
       <div class="hero-content">
@@ -1007,11 +1015,19 @@
            photograph used on the Off Duty Not Driving site. It is a wide 2400x1018 landscape,
            which suits a full-bleed band far better than the 4:3 hero crop did, and the dark
            canopy gives the white band copy something to sit on. -->
-      <img src="/images/band-forest-2400.jpg" width="2400" height="1018"
+      <!-- A PORTRAIT CROP FOR A PORTRAIT BOX. The landscape original was being
+     cover-cropped into a near-full-screen phone hero, which kept about a
+     quarter of its width and then upscaled that. The mobile source is cut
+     3:4 with sharp's attention strategy, so the subject survives the crop.
+     Built by scripts/build-mobile-heroes.mjs. -->
+<picture>
+  <source media="(max-width:767px)" srcset="/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w" sizes="160vw" width="760" height="1013">
+  <img src="/images/band-forest-2400.jpg" width="2400" height="1018"
            srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
            sizes="100vw"
            alt="An empty highway running through dense evergreen forest"
            loading="lazy">
+</picture>
     </picture>
     <div class="fw-scrim"></div>
     <div class="fw-bandin"><div class="container">

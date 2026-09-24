@@ -1,0 +1,44 @@
+{
+  "home-hero": {
+    "source": "home-hero-2600.webp (2600x1950, r1.33)",
+    "src": "/images/mobile/home-hero-m760.webp",
+    "srcset": "/images/mobile/home-hero-m760.webp 760w, /images/mobile/home-hero-m1100.webp 1100w, /images/mobile/home-hero-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  },
+  "das-hero": {
+    "source": "das-hero.jpg (1024x768, r1.33)",
+    "src": "/images/mobile/das-hero-m760.webp",
+    "srcset": "/images/mobile/das-hero-m760.webp 760w, /images/mobile/das-hero-m1100.webp 1100w, /images/mobile/das-hero-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  },
+  "first30-manager-driver": {
+    "source": "first30-manager-driver.webp (1536x1024, r1.50)",
+    "src": "/images/mobile/first30-manager-driver-m760.webp",
+    "srcset": "/images/mobile/first30-manager-driver-m760.webp 760w, /images/mobile/first30-manager-driver-m1100.webp 1100w, /images/mobile/first30-manager-driver-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  },
+  "pak-collection-hero": {
+    "source": "pak-collection-hero.webp (1402x1122, r1.25)",
+    "src": "/images/mobile/pak-collection-hero-m760.webp",
+    "srcset": "/images/mobile/pak-collection-hero-m760.webp 760w, /images/mobile/pak-collection-hero-m1100.webp 1100w, /images/mobile/pak-collection-hero-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  },
+  "medals-hero": {
+    "source": "medals-hero.webp (1387x1134, r1.22)",
+    "src": "/images/mobile/medals-hero-m760.webp",
+    "srcset": "/images/mobile/medals-hero-m760.webp 760w, /images/mobile/medals-hero-m1100.webp 1100w, /images/mobile/medals-hero-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  },
+  "band-forest": {
+    "source": "band-forest-2400.jpg (2400x1018, r2.36)",
+    "src": "/images/mobile/band-forest-m760.webp",
+    "srcset": "/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w",
+    "w": 760,
+    "h": 1013
+  }
+}

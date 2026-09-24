@@ -136,8 +136,18 @@
     .odn-tiles .odn-d{display:none}
     .odn-d1 .odn-rows{margin-top:14px}
     .odn-d1 .odn-legal{margin-top:14px}
-    .odn-pill{display:flex;justify-content:space-between;height:60px;padding:0 10px 0 18px}
-    .odn-logo img{height:40px}
+    /* THE MARK GETS THE ROOM IT NEEDS. Jayden, twice: "the logo is way too
+       small in the top left and the top nav" and "make it full size and let it
+       breathe." At 40px on a 728x259 lockup it rendered 112px wide -- a
+       thumbnail. The Sign-in CTA is already hidden below this width and the
+       menu and bag are glyphs, so the bar has room the mark was not using.
+       52px renders 146 wide in a 68px bar, which leaves 8px of air above and
+       below and still reads quieter than the page beneath it. max-width:none
+       matters: a global img{max-width:100%} otherwise squeezes the artwork
+       horizontally while the fixed height holds it, which distorts the mark
+       rather than scaling it. */
+    .odn-pill{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 12px 0 16px}
+    .odn-logo img{height:52px;max-width:none}
     
     .odn-tabbar{display:none}
 

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Instrument+Serif:ital@0;1&display=swap">
-<link rel="stylesheet" href="/css/das-store.css?v=34">
+<link rel="stylesheet" href="/css/das-store.css?v=36">
 <link rel="icon" type="image/png" href="/images/favicon-mark.png">
 <link rel="apple-touch-icon" href="/images/favicon-180.png">
 <link rel="preload" as="image" href="/images/band-forest-1200.jpg" imagesrcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" fetchpriority="high">
@@ -56,9 +56,17 @@
      ════════════════════════════════════════════════════════════════════════ -->
 <section class="st-hero">
   <div class="shot">
-    <img src="/images/band-forest-1200.jpg"
+    <!-- A PORTRAIT CROP FOR A PORTRAIT BOX. The landscape original was being
+     cover-cropped into a near-full-screen phone hero, which kept about a
+     quarter of its width and then upscaled that. The mobile source is cut
+     3:4 with sharp's attention strategy, so the subject survives the crop.
+     Built by scripts/build-mobile-heroes.mjs. -->
+<picture>
+  <source media="(max-width:767px)" srcset="/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w" sizes="160vw" width="760" height="1013">
+  <img src="/images/band-forest-1200.jpg"
          srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
          sizes="100vw" alt="" width="2400" height="1018" fetchpriority="high">
+</picture>
   </div>
   <div class="slash" aria-hidden="true"></div>
   <div class="guides" aria-hidden="true">

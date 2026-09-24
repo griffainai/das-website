@@ -324,10 +324,16 @@
        no extension; a relative path happens to resolve today but would break
        the moment the page moves into a subdirectory. */
     return '<div class="fb-media">' +
-        '<img src="/images/band-forest-1200.jpg" ' +
-          'srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" ' +
-          'sizes="(min-width:1024px) 50vw, 100vw" alt="" decoding="async" ' +
-          'width="1200" height="509">' +
+        /* The phone gets its own 3:4 crop. A 2.36 landscape cover-cropped into
+           a 375x569 box keeps a fifth of its width and then upscales it 2.2x —
+           see scripts/build-mobile-heroes.mjs. */
+        '<picture>' +
+          '<source media="(max-width:767px)" sizes="160vw" srcset="/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w">' +
+          '<img src="/images/band-forest-1200.jpg" ' +
+            'srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w" ' +
+            'sizes="(min-width:1024px) 50vw, 100vw" alt="" decoding="async" ' +
+            'width="1200" height="509">' +
+        '</picture>' +
       '</div>' +
       '<div class="fb-copy">' +
         '<p class="k st-micro">' + esc(P.programLabel) + ' &middot; built to your fleet</p>' +

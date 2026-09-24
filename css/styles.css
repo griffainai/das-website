@@ -5572,3 +5572,26 @@ main:focus { outline: none; }
   .das-field .fm:nth-child(3), .das-field .fm:nth-child(4) { display: block; }
   .das-field .fm { --h: 90px; }
 }
+
+/* ── iOS AUTO-ZOOM GUARD ─────────────────────────────────────────────────
+   Jayden 2026-09-24: "The screen can be zoomed in and zoomed out, so it's not
+   sticky."
+
+   This is not a sticky bug. Safari on iOS zooms the page in whenever a form
+   control smaller than 16px takes focus, and it does NOT zoom back out. The
+   store search field was 12px, the bag's quantity input 12px, and contact's
+   selects and textarea 15px -- so tapping any of them left the whole page
+   magnified, with the header apparently detached because a sticky element
+   pins to the layout viewport while a pinch-zoomed view scrolls the visual
+   one. One tap on the search box and the site looked broken.
+
+   16px is the threshold, not a preference, so this is set rather than
+   suggested. !important is deliberate: page-scoped rules set these sizes and
+   this has to beat all of them, and it is a platform-behaviour guard rather
+   than a design choice. Disabling zoom with user-scalable=no would "fix" it
+   by taking pinch-zoom away from everyone, which is an accessibility
+   regression and one Safari ignores anyway. */
+@media(max-width:767px){
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  select, textarea{ font-size:16px !important; }
+}
