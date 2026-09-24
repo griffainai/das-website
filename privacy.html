@@ -21,46 +21,65 @@
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
 <style>
-  /* SPLASH — redesigned 2026-09-19 to the Off Duty Not Driving treatment (Jayden: "do the same kind of
-     sub-splash screen that we do have for the Off Duty Not Driving site"). Black, stark, high contrast:
-     the mark resolves with a flicker, holds, then the sheet lifts. The DAS logo is dark navy, so it is
-     unreadable on black — images/logo-white.png is a white knockout derived from the logo's own alpha,
-     same silhouette. Self-contained and inline so it paints before styles.css. */
+  /* ══ SUB-SPLASH — the Off Duty Not Driving treatment, verbatim ══════════
+     Jayden asked for "the same color and animation as the odndr one but with
+     the das logo", twice. It had NOT been done: this was #0E1B2E navy with a
+     white knockout mark — the exact inverse of the reference — while its own
+     comment claimed it was "black, stark, high contrast". The comment described
+     an intention nobody had implemented.
+
+     Read off the live splash at offdutynotdrivingrewards.com (#odndr-splash):
+         ground     #FFFFFF, grid place-items center, padding 0 24px
+         lockup     width min(86vw, 780px)
+         mark       20.9% of the lockup; enters from translate3d(189%) scale .2,
+                    springs with cubic-bezier(.34,1.56,.64,1), holds, then
+                    slides home with cubic-bezier(.65,0,.35,1) over 1.7s
+         wordmark   78%, clip-path inset(0 100% 0 0) wiping open over .56s at
+                    1.68s on cubic-bezier(.33,0,.2,1)
+         exit       opacity .5s cubic-bezier(.4,0,.2,1), lockup scales to 1.03
+         quick      every animation dropped, one .3s fade
+     Same numbers here, on the DAS lockup.
+
+     The DAS logo ships as ONE image, so the mark and wordmark were cut out of
+     it (images/logo-mark.png 196x251, images/logo-word.png 502x157) — the
+     animation needs two pieces and there is a clean 23px gutter between them.
+
+     Self-contained and inline so it paints before styles.css. */
   html.das-splash-seen #das-splash{display:none!important}
-  #das-splash{position:fixed;inset:0;z-index:100000;background:#0E1B2E;display:flex;align-items:center;
-    justify-content:center;animation:dasLift 2s cubic-bezier(.7,0,.2,1) forwards;will-change:opacity,transform}
+  #das-splash{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:0 24px;
+    background:#fff;transition:opacity .5s cubic-bezier(.4,0,.2,1),visibility linear .5s}
   #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
-  #das-splash .das-splash-inner{display:flex;flex-direction:column;align-items:center;gap:14px;
-    animation:dasIn 1.5s cubic-bezier(.16,1,.3,1) forwards}
-  #das-splash .das-splash-mark{width:min(66vw,340px);height:auto;object-fit:contain;
-    animation:dasFlicker 1.7s steps(1,end) 1}
-  #das-splash .das-splash-sub{font:600 9px/1 -apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    letter-spacing:.42em;text-transform:uppercase;color:rgba(255,255,255,.42);opacity:0;
-    animation:dasSub 1.5s ease-out .45s forwards}
-  #das-splash .das-grain{position:absolute;inset:-50%;pointer-events:none;opacity:.05;
-    background-image:radial-gradient(rgba(255,255,255,.9) .5px,transparent .5px);
-    background-size:3px 3px;animation:dasDrift 1.1s steps(3,end) infinite}
-  /* second visit in a session: same look, just brisk */
-  #das-splash.das-quick{animation-duration:.9s}
-  #das-splash.das-quick .das-splash-inner{animation-duration:.5s}
-  #das-splash.das-quick .das-splash-mark{animation:none}
-  #das-splash.das-quick .das-splash-sub{animation-delay:.1s}
-  @keyframes dasIn{0%{opacity:0;transform:scale(.965);letter-spacing:.1em}55%{opacity:1}100%{opacity:1;transform:scale(1)}}
-  @keyframes dasSub{to{opacity:1}}
-  @keyframes dasLift{0%,72%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-14px);visibility:hidden}}
-  @keyframes dasFlicker{0%{opacity:0}6%{opacity:1}9%{opacity:.25}13%{opacity:1}17%{opacity:.55}21%{opacity:1}100%{opacity:1}}
-  @keyframes dasDrift{0%{transform:translate(0,0)}33%{transform:translate(-2px,1px)}66%{transform:translate(1px,-2px)}100%{transform:translate(0,0)}}
-  @media (prefers-reduced-motion: reduce){
-    #das-splash{animation:dasLift .5s linear forwards}
-    #das-splash .das-splash-inner,#das-splash .das-splash-mark,#das-splash .das-splash-sub{animation:none;opacity:1}
-    #das-splash .das-grain{animation:none}
+  #das-splash .dsl{position:relative;display:flex;align-items:center;width:min(86vw,780px);
+    transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #das-splash.das-done .dsl{transform:scale(1.03)}
+  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:20.9%;height:auto;opacity:0;
+    transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
+    animation:dasMark 1.7s linear .08s 1 both}
+  #das-splash .dsw{position:relative;flex:0 0 auto;width:78%;margin-left:1.1%;overflow:hidden;
+    clip-path:inset(0 100% 0 0);will-change:clip-path;
+    animation:dasWipe .56s cubic-bezier(.33,0,.2,1) 1.68s 1 both}
+  #das-splash .dsw img{display:block;width:100%;height:auto}
+  @keyframes dasMark{
+    0%{opacity:0;transform:translate3d(189%,0,0) scale(.2);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+    16%{opacity:1}
+    36%{opacity:1;transform:translate3d(189%,0,0) scale(1);animation-timing-function:linear}
+    58%{opacity:1;transform:translate3d(189%,0,0) scale(1);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+    100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+  }
+  @keyframes dasWipe{to{clip-path:inset(0 0 0 0)}}
+  /* second visit in a session: same look, no theatre */
+  #das-splash.das-quick .dsm,#das-splash.das-quick .dsw{animation:none;opacity:1;transform:none;clip-path:none;will-change:auto}
+  #das-splash.das-quick .dsl{animation:dasFade .3s ease 1 both}
+  @keyframes dasFade{0%{opacity:0;transform:scale(.985)}}
+  @media (prefers-reduced-motion:reduce){
+    #das-splash .dsm,#das-splash .dsw,#das-splash .dsl{
+      opacity:1!important;clip-path:none!important;animation:none!important;transform:none!important;transition:none!important}
   }
 </style>
-<div id="das-splash" role="status" aria-label="Loading Driver Appreciation Solutions">
-  <div class="das-grain" aria-hidden="true"></div>
-  <div class="das-splash-inner">
-    <img class="das-splash-mark" src="/images/logo-white.png" alt="Driver Appreciation Solutions" width="728" height="259">
-    <span class="das-splash-sub">Driver Appreciation Solutions</span>
+<div id="das-splash" role="presentation" aria-hidden="true">
+  <div class="dsl">
+    <img class="dsm" src="/images/logo-mark.png" alt="" width="196" height="251">
+    <span class="dsw"><img src="/images/logo-word.png" alt="" width="502" height="157"></span>
   </div>
 </div>
 <script>
