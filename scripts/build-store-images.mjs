@@ -124,11 +124,33 @@ const HALF = { w: 700, h: 560 }
 const PDP_RATIO = 0.8
 const LADDER = [560, 840, 1120, 1400, 1680, 2100]
 
-/** The widest 4:5 canvas this source can fill without enlarging the product. */
+/** The widest 4:5 canvas this source can fill without enlarging anything.
+ *  NOTE THE INVERSION vs the previous pass. When the frame was filled by
+ *  fitting the photo INSIDE it, a landscape source was limited by its WIDTH.
+ *  Now the frame is filled by COVER, so a landscape source is cropped on the
+ *  width and limited by its HEIGHT, and a portrait source is the other way
+ *  round. Leaving the old formula in place would have quietly reintroduced the
+ *  upscaling this file fixed one pass ago. */
 async function pdpCap(src) {
-  const m = await sharp(src).metadata()
+  const img = sharp(src)
+  const m = await img.metadata()
   const r = m.width / m.height
-  return Math.max(320, Math.floor(r > PDP_RATIO ? m.width : PDP_RATIO * m.height))
+  if (r <= PDP_RATIO) return Math.max(320, m.width)          // portrait: width limits
+  // A landscape source that will be PADDED keeps its full width; one that will
+  // be CROPPED is limited by its height. Ask the same question pdpFrame asks,
+  // so the ladder never promises pixels the frame will not contain.
+  const strip = Math.max(2, Math.round(m.height * 0.03))
+  const top = await edgeColour(img, { left: 0, top: 0, width: m.width, height: strip })
+  const bot = await edgeColour(img, { left: 0, top: m.height - strip, width: m.width, height: strip })
+  /* THE SAME TEST pdpFrame USES, including the severe-crop clause. These two
+     drifted apart for one pass: pdpFrame padded whenever the crop exceeded 28%,
+     but pdpCap decided on flat edges alone, so a padded photograph — which
+     keeps its FULL width — was handed a ladder computed as if it had been
+     cropped. 22 of 54 products ended up with a top rung below the 943px display
+     width and would have been stretched up to 1.39x on the product page. Two
+     functions answering the same question must ask it the same way. */
+  const padded = (top.flat && bot.flat) || (1 - PDP_RATIO / r) > 0.28
+  return Math.max(320, Math.floor(padded ? m.width : PDP_RATIO * m.height))
 }
 
 /** The ladder for one photograph: every rung it can serve honestly, plus its
@@ -141,18 +163,94 @@ function pdpWidths(cap) {
   return w
 }
 
+/* 2026-09-23, third pass. THE BLURRED BACKDROP IS GONE.
+   Jayden, looking at a live row of five: "get rid of all of these preview
+   photos that are cropped ... every photo needs to be sized like this."
+
+   The two he pointed at as correctly sized were the only two in that row with a
+   NATIVE 4:5 source, so they filled edge to edge. The other three were
+   landscape and showed the composed backdrop as blurred bands over 36-47% of
+   the frame height — a visible letterbox, and an inconsistent one, because it
+   only appeared on some cards. The backdrop was my way of avoiding a crop; in a
+   row of five it reads as a defect.
+
+   So every derivative is a plain cover crop now: every card fills, every card
+   matches. The cost is real and is printed by this build. The catalogue builder
+   first re-picks each product's photo to whichever of ITS OWN variants sits
+   closest to 4:5, so the crop is the smallest the existing photography allows. */
+/* ── CROP, OR PAD WITH THE PHOTO'S OWN EDGE COLOUR ────────────────────────
+   Found by building a contact sheet of the heaviest crops and LOOKING at it,
+   which no measurement would have surfaced: several of these files are not
+   photographs at all. They are composed marketing graphics with baked-in
+   headlines on a flat ground, and a centre crop cuts the words in half —
+   "ED BY / MITMENT." where the graphic reads BACKED BY COMMITMENT, and
+   "FOR / ONG HAUL." for BUILT FOR THE LONG HAUL. Shipping that would have put
+   mutilated typography on eight product cards.
+
+   The rule that separates the two cases is the EDGE. A studio graphic sits on
+   a flat ground, so its outer strips are near-uniform and the canvas can simply
+   be EXTENDED in that exact colour — invisible, and nothing is lost. A
+   photograph has busy edges, where padding would read as a band, but cropping
+   costs only background. So:
+
+       uniform edges  ->  extend to 4:5 in the sampled edge colour, no crop
+       busy edges     ->  cover-crop to 4:5, fills the frame
+
+   Either way the frame is filled edge to edge, which is what was asked for.
+   Top and bottom are sampled and extended independently, so a graphic with a
+   dark top and a lighter base keeps its gradient. */
+const EDGE_UNIFORM = 16          // per-channel stdev, 0-255, below which a strip is "flat"
+
+async function edgeColour(img, region) {
+  const st = await sharp(await img.clone().extract(region).toBuffer()).stats()
+  const ch = st.channels.slice(0, 3)
+  return {
+    rgb: { r: Math.round(ch[0].mean), g: Math.round(ch[1].mean), b: Math.round(ch[2].mean) },
+    flat: Math.max(...ch.map((c) => c.stdev)) < EDGE_UNIFORM,
+  }
+}
+
 async function pdpFrame(src, W, quality) {
   const H = Math.round(W / PDP_RATIO)
-  const backdrop = await sharp(src)
-    .resize(W, H, { fit: 'cover', position: 'centre' })
-    .blur(36).modulate({ brightness: 0.78, saturation: 0.9 })
-    .toBuffer()
-  // withoutEnlargement: the product is never resampled up past its own pixels.
-  const subject = await sharp(src)
-    .resize(W, H, { fit: 'inside', withoutEnlargement: true })
-    .toBuffer()
-  return sharp(backdrop)
-    .composite([{ input: subject, gravity: 'centre' }])
+  const img = sharp(src)
+  const m = await img.metadata()
+  const r = m.width / m.height
+
+  if (r > PDP_RATIO) {
+    // Landscape: filling 4:5 means either cropping the sides or adding height.
+    const strip = Math.max(2, Math.round(m.height * 0.03))
+    const top = await edgeColour(img, { left: 0, top: 0, width: m.width, height: strip })
+    const bot = await edgeColour(img, { left: 0, top: m.height - strip, width: m.width, height: strip })
+    /* PAD when the edges are flat (lossless), and ALSO when a crop would be
+       severe. Measured on the contact sheet: the flat-edge test alone still
+       cropped the YETI graphics, because their lower strip carries a SHOP NOW
+       button and fails flatness — so their headlines shipped as "UELED BY /
+       OMMITMENT." and "UILT FOR / HE LONG HAUL.". A slightly imperfect pad is
+       far better than severed typography, and at this ratio a crop removes a
+       third of the image. 28% is the line: below it a crop takes background,
+       above it a crop takes content. */
+    const cropShare = 1 - PDP_RATIO / r
+    if ((top.flat && bot.flat) || cropShare > 0.28) {
+      const need = Math.round(m.width / PDP_RATIO) - m.height      // total height to add
+      const half = Math.round(need / 2)
+      /* TWO SEPARATE PASSES, not two chained .extend() calls. Chaining them on
+         one pipeline silently applies only the LAST: the top padding was
+         dropped, the image came out 1536x1462 (ratio 1.05) instead of 4:5, and
+         the cover resize then cropped 24% off its LEFT — which is why
+         "FUELED BY COMMITMENT." shipped as "UELED BY OMMITMENT." while the
+         source file was perfectly intact. The bottom band looked like proof the
+         padding had worked, which is what made it convincing. */
+      let buf = await img.clone().extend({ top: half, bottom: 0, background: top.rgb }).toBuffer()
+      buf = await sharp(buf).extend({ top: 0, bottom: need - half, background: bot.rgb }).toBuffer()
+      const chk = await sharp(buf).metadata()
+      if (Math.abs(chk.width / chk.height - PDP_RATIO) > 0.01) {
+        throw new Error(`pad produced ${chk.width}x${chk.height} (r${(chk.width / chk.height).toFixed(3)}), expected ${PDP_RATIO}`)
+      }
+      return sharp(buf).resize(W, H, { fit: 'cover', position: 'centre' })
+        .webp({ quality, effort: 6 }).toBuffer()
+    }
+  }
+  return img.resize(W, H, { fit: 'cover', position: 'centre' })
     .webp({ quality, effort: 6 }).toBuffer()
 }
 
@@ -198,7 +296,45 @@ function catalogImages() {
   return [...out]
 }
 
-const files = catalogImages()
+/* ── ADD EACH PRODUCT'S BEST-SHAPED SIBLING ──────────────────────────────
+   catalogImages() returns only what the catalogue currently REFERENCES. That
+   is a chicken-and-egg problem for choosing a better photo: the catalogue
+   builder wants to swap working-hands from heroC (1.5 landscape, a 47% crop)
+   to heroA (1122x1402, no crop at all), but it may only choose a file that has
+   a derivative — and heroA had none, because nothing referenced it. The swap
+   silently did nothing.
+
+   So for every referenced photograph, its siblings are measured here and the
+   one closest to the 4:5 frame is added to the build. Placeholders and site
+   chrome are excluded by name. */
+async function withBestSiblings(list) {
+  const BAD = /soon|placeholder|favicon|logo|icon|band-|email|og-|hero-bg/i
+  const all = readdirSync(SRC).filter((f) => /\.(jpg|jpeg|png|webp)$/i.test(f) && !BAD.test(f))
+  const ratio = {}
+  for (const f of all) {
+    try { const m = await sharp(join(SRC, f)).metadata(); ratio[f] = m.width / m.height } catch { /* skip */ }
+  }
+  const stemOf = (b) => b.replace(/-(hero[A-Z]?|[0-9]+|v[0-9]+|alt|back|front)$/i, '')
+  const out = new Set(list)
+  let added = 0
+  for (const rel of list) {
+    const cur = basename(rel, extname(rel))
+    const stem = stemOf(cur)
+    let best = null
+    for (const f of all) {
+      const b = basename(f, extname(f))
+      if (b !== cur && !b.startsWith(stem + '-') && b !== stem) continue
+      if (ratio[f] === undefined) continue
+      const d = Math.abs(ratio[f] - 0.8)
+      if (!best || d < best.d) best = { f, d }
+    }
+    if (best && !out.has(best.f)) { out.add(best.f); added++ }
+  }
+  console.log(`${added} better-shaped sibling photographs added to the build`)
+  return [...out]
+}
+
+const files = await withBestSiblings(catalogImages())
 console.log(`${files.length} source photographs`)
 
 let made = 0, skipped = 0, failed = []
@@ -263,5 +399,16 @@ for (const f of readdirSync(OUT)) {
   if (pdpOut[name]) entry.pdp = pdpOut[name]
   manifest[name] = entry
 }
+/* Every SOURCE photograph's aspect ratio. The catalogue builder uses this to
+   choose, among the variants a product already owns, the one closest to the
+   4:5 frame — cheaper and more reliable than re-opening 278 files there. */
+const srcRatios = {}
+for (const f of readdirSync(SRC)) {
+  if (!/\.(jpg|jpeg|png|webp)$/i.test(f)) continue
+  try { const m = await sharp(join(SRC, f)).metadata(); srcRatios[f] = +(m.width / m.height).toFixed(4) } catch { /* unreadable */ }
+}
+writeFileSync(join(OUT, 'source-ratios.json'), JSON.stringify(srcRatios, null, 1))
+console.log(`source ratios: ${Object.keys(srcRatios).length} -> images/store/source-ratios.json`)
+
 writeFileSync(join(OUT, 'manifest.json'), JSON.stringify({ frame: FRAME, pdpRatio: PDP_RATIO, pdpLadder: LADDER, images: manifest }, null, 1))
 console.log(`manifest: ${Object.keys(manifest).length} entries -> images/store/manifest.json`)

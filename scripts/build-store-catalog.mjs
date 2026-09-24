@@ -161,11 +161,44 @@ function fromMilePacks() {
 }
 
 /* ── assemble ───────────────────────────────────────────────────────────── */
+/* ── PICK THE BEST-SHAPED PHOTO EACH PRODUCT ALREADY HAS ──────────────────
+   The frame is 4:5. Several products were using a 1.5 landscape variant while a
+   native 4:5 portrait of the SAME product sat unused in images/. working-hands
+   was the clearest case: the catalogue used heroC (1536x1024, a 47% crop) while
+   heroA (1122x1402) fills the frame with NO crop at all. Ten products improve
+   this way, four of them to zero crop — which is the cheapest quality win
+   available, because it costs nothing but choosing a different existing file.
+
+   Candidates are only files that already belong to the product: its own name
+   plus siblings sharing its filename stem. Placeholders and site chrome are
+   excluded by name — a `-soon` file is a "coming soon" card, not photography.
+   A swap only sticks if the chosen file actually has a derivative. */
+const RATIOS = JSON.parse(readFileSync(join(ROOT, 'images/store/source-ratios.json'), 'utf8'))
+const BAD_SOURCE = /soon|placeholder|favicon|logo|icon|band-|email|og-|hero-bg/i
+const FRAME_R = 0.8
+const stemOf = (b) => b.replace(/-(hero[A-Z]?|[0-9]+|v[0-9]+|alt|back|front)$/i, '')
+
+function bestShaped(imgPath) {
+  if (!imgPath) return imgPath
+  const cur = basename(imgPath, extname(imgPath))
+  const stem = stemOf(cur)
+  let best = null
+  for (const f of Object.keys(RATIOS)) {
+    if (BAD_SOURCE.test(f)) continue
+    const b = basename(f, extname(f))
+    if (b !== cur && !b.startsWith(stem + '-') && b !== stem) continue
+    if (!MANIFEST.images[b]) continue
+    const d = Math.abs(RATIOS[f] - FRAME_R)
+    if (!best || d < best.d) best = { f, d }
+  }
+  return best ? '/images/' + best.f : imgPath
+}
+
 const seen = new Set()
 const all = [...fromShop(), ...fromMilestones(), ...fromMilePacks()]
   .filter((p) => p.name && p.id && !seen.has(p.id) && seen.add(p.id) !== false)
   .map((p) => {
-    const s = shot(p.img)
+    const s = shot(bestShaped(p.img))
     const gallery = (p.gallery || []).map(shot).filter(Boolean)
     return s ? { ...p, shot: s, gallery: gallery.length ? gallery : [s], programLabel: PROGRAMS[p.program] || p.program } : null
   })
