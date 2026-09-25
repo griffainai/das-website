@@ -188,3 +188,62 @@ any resolution — so always ask for 4K.
 | **Total** | **16** | **640** of 24,000 |
 
 Full budget rules and the spend ledger: `IMAGE-GEN-BUDGET.md`.
+
+
+---
+
+# THE HEADERS — decided 2026-09-25
+
+Two treatments, chosen by Jayden after comparing real frames rather than
+descriptions.
+
+| Slot | Treatment | Why |
+|---|---|---|
+| **Collection banners + campaign headers** | **Bold ultra-wide** — product small and far right, one hard key, a long hard-edged shadow raking left, vast empty dark ground | It is arresting, and the empty left two thirds is where the type goes |
+| **PDP and product photography** | **Elevated product hero** — whole object, three-quarter, bone seamless into navy, controlled light | Somebody deciding to buy needs the object to read completely |
+
+## Products are PHOTOGRAPHED, never invented
+
+Jayden: *"use references of our real products... take the photo, copy it, put it
+in OpenArt, say use this exact product, one by one, pixel by pixel. Nothing
+should change. Use the same logos. We've done this before for ODNDR."*
+
+Every product frame is **image2image** with the real packshot passed by live URL
+from production, so the model sees what customers see. The prompt changes only
+the **light**, the **surface** and the **angle**, and forbids restyling,
+cleaning up, substituting or adding a single detail.
+
+This is not a stylistic preference. Scenery can be generated from nothing; a
+product cannot. A generated case is a case that does not exist, on a page where
+somebody is buying — the same class of problem as Scout naming a SKU we do not
+sell.
+
+**Verified on the Professional Driver Kit:** the case, the lid foam pattern, the
+tray cut-outs, the torch with its gold band, the latches, the handle and the
+navy "YOUR LOGO HERE" badge all carried through. Honest limit: it is a faithful
+RESTAGE, not a pixel-identical copy — small accessories can shift position. Fine
+where the product sits small in a banner; check it frame by frame anywhere the
+product is examined closely.
+
+## The ground must be DARK
+
+Measured on the first bold banner, generated on pale concrete:
+
+| | left third, where white type sits |
+|---|---|
+| pale concrete | mean luminance **176**, 10.7% blown — white type illegible |
+| dark charcoal-navy | mean luminance **22**, 0.0% blown — white type reads |
+
+So the bold banner is staged on a deep charcoal-navy ground, not the pale
+concrete of the first comparison. Same composition, same drama, legible type.
+
+## The reference photo per program
+
+| Program | Real packshot used as the reference |
+|---|---|
+| appreciation | The Professional Driver Kit |
+| milepacks | Hydration & Hustle Kit |
+| onboarding | The Road Ready Kit |
+| safety | Safe Service Miles Lapel Pin |
+| milestone | 250,000 Service Miles |
+| holiday | Professional Driver Seat Back Organizer |

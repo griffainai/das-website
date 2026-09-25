@@ -13,9 +13,9 @@ This file governs every OpenArt spend on DAS. Read it before generating.
 |---|---|
 | Account | griffainai@gmail.com, **Pro** |
 | Balance at 2026-09-24 | **24,000** |
-| Spent so far | **280** (1 test + 6 masters) |
+| Spent so far | **480** |
 | This shoot, budgeted | **480** production + 160 contingency = **640** |
-| Left for the rest of the month | **23,720** |
+| Left for the rest of the month | **23,520** |
 
 The whole DAS store shoot costs **2.7% of the month**. That is only true because
 of rule 1.
@@ -38,6 +38,21 @@ of it with `sharp`, which costs nothing.
 | Collection banner | 2400 × 820 | (separate master — different register) |
 
 **12 generations instead of 18. 480 credits instead of 720.**
+
+## Rule 1b — for PRODUCTS, use image2image against the real photograph
+
+Jayden 2026-09-25: *"use references of our real products... take the photo, copy
+it, put it in OpenArt, say use this exact product, one by one, pixel by pixel.
+Nothing should change. Use the same logos. We've done this before for ODNDR."*
+
+Scenery can be generated from nothing. **A product cannot.** A generated case is
+a case that does not exist, on a page where somebody is buying — the same class
+of problem as Scout naming a SKU we do not sell. So every product frame is
+image2image with the real packshot as a visual reference, and the prompt changes
+only the LIGHT, the SURFACE and the ANGLE.
+
+The reference is passed by live URL from the production site, so the model sees
+exactly what customers see.
 
 ## Rule 2 — always test one frame before a batch
 
@@ -86,6 +101,9 @@ generate video without asking Jayden first.
 |---|---|---|---|---|---|
 | 2026-09-24 | Test frame — appreciation, 16:9 golden hour | nano-banana-pro 4K | 1 | 40 | 23,960 |
 | 2026-09-24 | **6 portrait masters** — the parallax shoot, one per program | nano-banana-pro 4K 4:5 | 6 | 240 | **23,720** |
+| 2026-09-24 | Banner attempt, off-brief (fired before Jayden finished) | nano-banana-pro 4K 21:9 | 1 | 40 | 23,680 |
+| 2026-09-25 | Treatment comparison — bold / legible / bold-at-banner | nano-banana-pro 4K | 3 | 120 | 23,560 |
+| 2026-09-25 | image2image fidelity test — real Professional Driver Kit | nano-banana-pro 4K 21:9 | 1 | 40 | **23,520** |
 
 The six masters produced **twelve** live placements (desktop + mobile per
 program) at no extra credit cost, and are archived as q95 webp in

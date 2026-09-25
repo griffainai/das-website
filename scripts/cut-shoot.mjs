@@ -92,24 +92,48 @@ const manifest = {}
 let worst = 0
 
 for (const s of SHOTS) {
-  const src = join(MASTERS, `${s.slug}.png`)
+  const src = join(MASTERS, `${s.slug}.webp`)
   if (!existsSync(src)) { console.log(`${s.slug.padEnd(14)} SKIP — no master`); continue }
 
-  const m = await sharp(src).metadata()
+  /* TRIM ANY BAKED-IN WHITE BORDER FIRST.
+     The model sometimes renders the photograph inside a white print frame. It
+     did on three of the first six: Safe Miles came back with 379px of white
+     down the left and 375px down the right, Holiday ~50px all round. Cropping
+     a placement out of that leaves white edges on a full-bleed panel, which is
+     what Jayden saw. Walking in from each edge while the line is near-white
+     removes it whatever size it is, so this cannot ship again. */
+  const probe = await sharp(src).greyscale().raw().toBuffer({ resolveWithObject: true })
+  const PW = probe.info.width, PH = probe.info.height, PD = probe.data
+  const rowLum = (y) => { let t = 0; for (let x = 0; x < PW; x++) t += PD[y * PW + x]; return t / PW }
+  const colLum = (x) => { let t = 0; for (let y = 0; y < PH; y++) t += PD[y * PW + x]; return t / PH }
+  let bt = 0, bb = 0, bl = 0, br = 0
+  while (bt < PH * 0.2 && rowLum(bt) > 235) bt++
+  while (bb < PH * 0.2 && rowLum(PH - 1 - bb) > 235) bb++
+  while (bl < PW * 0.2 && colLum(bl) > 235) bl++
+  while (br < PW * 0.2 && colLum(PW - 1 - br) > 235) br++
+  /* two extra pixels, because the border's own edge is antialiased */
+  if (bt || bb || bl || br) { bt += 2; bb += 2; bl += 2; br += 2 }
+
+  const trimmed = (bt || bb || bl || br)
+    ? await sharp(src).extract({ left: bl, top: bt, width: PW - bl - br, height: PH - bt - bb }).png().toBuffer()
+    : src
+
+  const m = await sharp(trimmed).metadata()
   const W = m.width, H = m.height
+  if (bt || bb || bl || br) console.log(`${' '.repeat(15)}trimmed white border t${bt} b${bb} l${bl} r${br} -> ${W}x${H}`)
 
   /* DESKTOP — a 16:9 band, placed by `band` */
   const dh = Math.round(W * DESKTOP.h / DESKTOP.w)
   let top = Math.round(H * s.band - dh / 2)
   top = Math.max(0, Math.min(H - dh, top))
-  const dBuf = await sharp(src).extract({ left: 0, top, width: W, height: dh })
+  const dBuf = await sharp(trimmed).extract({ left: 0, top, width: W, height: dh })
     .resize(DESKTOP.w, DESKTOP.h).webp({ quality: 88, effort: 6 }).toBuffer()
 
   /* MOBILE — a 0.812 trim, placed by `pan` */
   const mw = Math.round(H * MOBILE.w / MOBILE.h)
   let left = Math.round(W * s.pan - mw / 2)
   left = Math.max(0, Math.min(W - mw, left))
-  const mBuf = await sharp(src).extract({ left, top: 0, width: Math.min(mw, W), height: H })
+  const mBuf = await sharp(trimmed).extract({ left, top: 0, width: Math.min(mw, W), height: H })
     .resize(MOBILE.w, MOBILE.h).webp({ quality: 88, effort: 6 }).toBuffer()
 
   const dT = await typeBand(dBuf, DESKTOP.w, DESKTOP.h)
