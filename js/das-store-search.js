@@ -294,6 +294,55 @@
     }).join(NEWLINE);
   }
 
+  /* ── THE UNGROUNDED-CLAIM GUARD ────────────────────────────────────────
+     On 2026-09-25 Scout told a live visitor about the "Professional Driver
+     Milestone Recognition Kit ($499)". No such product exists and no product
+     costs $499. The cause was mine: the landing-page call passed an EMPTY match
+     list, the prompt therefore said "(nothing matched)", and the model filled
+     the vacuum.
+
+     Two fixes, because either alone is insufficient. Grounding stops it
+     happening (below, groundedFor). This stops it REACHING A CUSTOMER if it
+     happens anyway, which is the part that matters on a page where people buy:
+     any answer that states a price we do not charge, or names a product-shaped
+     thing we do not sell, is discarded whole rather than shown.
+
+     Verified against the real failing string, not just written and trusted. */
+  function catalogueFacts() {
+    var prices = {}, names = [];
+    (CAT.products || []).forEach(function (p) {
+      if (p.price != null) { prices[String(Math.round(p.price))] = 1; prices[String(p.price)] = 1; }
+      names.push(norm(p.name));
+    });
+    (CAT.programs || []).forEach(function (g) { names.push(norm(g.label)); });
+    return { prices: prices, names: names };
+  }
+
+  function ungroundedReason(text) {
+    var facts = catalogueFacts();
+
+    var money = text.match(/\$\s?\d[\d,]*(?:\.\d+)?/g) || [];
+    for (var i = 0; i < money.length; i++) {
+      var n = money[i].replace(/[^0-9.]/g, '');
+      var whole = String(Math.round(parseFloat(n)));
+      if (!facts.prices[n] && !facts.prices[whole]) return 'states a price we do not charge: ' + money[i];
+    }
+
+    /* Capitalised multi-word phrases that look like a SKU. */
+    var claims = text.match(/(?:[A-Z][A-Za-z0-9''-]*\s+){1,6}(?:Kit|Kits|Medal|Medals|Award|Awards|Program|Programs|Collection|Package|Bundle)/g) || [];
+    for (var j = 0; j < claims.length; j++) {
+      var c = norm(claims[j]);
+      if (c.split(' ').length < 2) continue;
+      var ok = facts.names.some(function (nm) { return nm.indexOf(c) > -1 || c.indexOf(nm) > -1; });
+      if (!ok) return 'names a product we do not sell: ' + claims[j].trim();
+    }
+    return null;
+  }
+
+  /** Re-run the local index for a stored query, so a landing page can ground
+      Scout exactly as the search panel does. NEVER call Scout without this. */
+  function groundedFor(q) { return matched(parse(q)); }
+
   function askScout(q, list) {
     var key = q.toLowerCase();
     if (scoutCache[key]) { paintScout(scoutHTML('<p>' + esc(scoutCache[key]) + '</p>', false)); return; }
@@ -326,7 +375,8 @@
       'In ONE or TWO short sentences, under 40 words total, help them: say what ' +
       'to look at and why, or ask the single most useful question back. Plain ' +
       'English, no greeting, no bullet points, no markdown. Never invent a ' +
-      'product that is not listed above.';
+      'product that is not listed above, never state a price that is not listed ' +
+      'above, and never use markdown or asterisks.';
 
     fetch('/api/chat', {
       method: 'POST',
@@ -346,6 +396,14 @@
           .replace(/<[^>]*>/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
+        /* the prompt forbids markdown; the model uses it anyway */
+        out = out.replace(/\*\*/g, '').replace(/[`_]{1,2}/g, '');
+        var bad = ungroundedReason(out);
+        if (bad) {
+          if (window.console && console.warn) console.warn('[scout] answer discarded — ' + bad);
+          done(null);
+          return;
+        }
         if (out.length > 260) {
           var cut = out.slice(0, 260);
           var stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
@@ -479,7 +537,14 @@
     });
 
     if (!scoutCache[key]) {
-      askScoutRaw(note.q, [], function (answer) {
+      var ground = groundedFor(note.q);
+      if (!ground.length) {
+        /* Nothing real to talk about means nothing to say. Silence beats
+           invention on a page where somebody is deciding what to buy. */
+        var s0 = bar.querySelector('.say'); if (s0) s0.remove();
+        return;
+      }
+      askScoutRaw(note.q, ground, function (answer) {
         var live = document.querySelector('.ss-came');
         if (!live) return;
         if (answer) live.outerHTML = navBannerHTML(note, answer);
@@ -505,9 +570,7 @@
     if (q) {
       noteNav(q, label, (row.querySelector('.mt') || {}).textContent || '');
       clearTimeout(scoutTimer);
-      askScoutRaw(q, rows.filter(function (x) { return x.id; }).map(function (x) {
-        return { name: x.label, programLabel: x.meta, price: 0, gated: true, minQty: 10 };
-      }), function () {});
+      askScoutRaw(q, groundedFor(q), function () {});
     }
     location.href = href;
   }
