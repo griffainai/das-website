@@ -297,11 +297,23 @@
   function askScout(q, list) {
     var key = q.toLowerCase();
     if (scoutCache[key]) { paintScout(scoutHTML('<p>' + esc(scoutCache[key]) + '</p>', false)); return; }
-    if (q.length < 4) return;
-    if (scoutCalls >= SCOUT_MAX) return;
-
+    if (q.length < 4 || scoutCalls >= SCOUT_MAX) return;
     paintScout(scoutHTML('<p class="dots" aria-label="Scout is thinking">' +
       '<i></i><i></i><i></i></p>', true));
+    askScoutRaw(q, list, function (answer) {
+      if (!answer) { var slot = panel && panel.querySelector('.ss-scout'); if (slot) slot.remove(); return; }
+      if ((input.value || '').trim().toLowerCase() === key) {
+        paintScout(scoutHTML('<p>' + esc(answer) + '</p>', false));
+      }
+    });
+  }
+
+  /** The call itself. Separated so a page you LANDED on can ask too, with no
+      panel in the DOM to paint into. Abortable, capped, cached. */
+  function askScoutRaw(q, list, done) {
+    var key = q.toLowerCase();
+    if (scoutCache[key]) { done(scoutCache[key]); return; }
+    if (q.length < 4 || scoutCalls >= SCOUT_MAX) { done(null); return; }
 
     if (scoutAbort) { try { scoutAbort.abort(); } catch (e) {} }
     scoutAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
@@ -342,13 +354,12 @@
         if (!out) throw 0;
         scoutCache[key] = out;
         try { sessionStorage.setItem('das_scout_search_v1', JSON.stringify(scoutCache)); } catch (e) {}
-        if ((input.value || '').trim().toLowerCase() === key) paintScout(scoutHTML('<p>' + esc(out) + '</p>', false));
+        done(out);
       })
       .catch(function () {
         /* Scout is an enhancement. If it is down, rate-limited or killed at the
-           guard, the search still works -- just remove the line. */
-        var slot = panel && panel.querySelector('.ss-scout');
-        if (slot) slot.remove();
+           guard, everything else still works -- the line simply does not appear. */
+        done(null);
       });
   }
 
@@ -410,12 +421,95 @@
     location.href = '/contact.html?intent=pricing&q=' + encodeURIComponent(q);
   }
 
+  /* ── "SCOUT BROUGHT YOU HERE" ──────────────────────────────────────────
+     Jayden: "it brought me to the right page but it's supposed to let you know
+     the AI brought you here -- I just thought I got took to a random page."
+
+     Two separate failures behind that. Pressing Enter navigates immediately,
+     so the 650ms debounce never fired and Scout never spoke at all. And the
+     destination page said nothing, so a correct answer was indistinguishable
+     from a random jump.
+
+     So a jump now records why it happened, and the landing page says so. The
+     Scout call is also kicked off BEFORE leaving, un-debounced, and its answer
+     is cached under the query -- so by the time the next page paints it is
+     usually already there. If it is not, the landing page asks for it itself. */
+  var NAV_KEY = 'das_scout_nav_v1';
+
+  function noteNav(q, label, kind) {
+    try {
+      sessionStorage.setItem(NAV_KEY, JSON.stringify({
+        q: q, label: label, kind: kind, at: Date.now(),
+      }));
+    } catch (e) {}
+  }
+
+  function navBannerHTML(note, answer) {
+    return '<div class="ss-came" role="status">' +
+      '<span class="av" aria-hidden="true">' +
+        '<svg width="11" height="11" viewBox="0 0 16 16" fill="none">' +
+        '<path d="M8 1.4 9.3 5.3 13.2 6.6 9.3 7.9 8 11.8 6.7 7.9 2.8 6.6 6.7 5.3 8 1.4Z" fill="currentColor"/></svg>' +
+      '</span>' +
+      '<span class="tx">' +
+        '<b>Scout brought you here</b> for &ldquo;' + esc(note.q) + '&rdquo;' +
+        (answer ? '<span class="say">' + esc(answer) + '</span>'
+                : '<span class="say dots"><i></i><i></i><i></i></span>') +
+      '</span>' +
+      '<button type="button" class="ss-came-x" data-came-close aria-label="Dismiss">&times;</button>' +
+    '</div>';
+  }
+
+  function showNavBanner() {
+    var note;
+    try { note = JSON.parse(sessionStorage.getItem(NAV_KEY) || 'null'); } catch (e) { note = null; }
+    if (!note || !note.q) return;
+    /* One page only, and only if it just happened. */
+    try { sessionStorage.removeItem(NAV_KEY); } catch (e) {}
+    if (Date.now() - (note.at || 0) > 60000) return;
+
+    var hd = document.querySelector('.st-hd');
+    if (!hd) return;
+    var key = note.q.toLowerCase();
+    hd.insertAdjacentHTML('afterend', navBannerHTML(note, scoutCache[key] || null));
+
+    var bar = document.querySelector('.ss-came');
+    if (!bar) return;
+    bar.addEventListener('click', function (e) {
+      if (e.target.closest('[data-came-close]')) bar.remove();
+    });
+
+    if (!scoutCache[key]) {
+      askScoutRaw(note.q, [], function (answer) {
+        var live = document.querySelector('.ss-came');
+        if (!live) return;
+        if (answer) live.outerHTML = navBannerHTML(note, answer);
+        else { var say = live.querySelector('.say'); if (say) say.remove(); }
+      });
+    }
+  }
+
   function run() {
     var q = (input.value || '').trim();
     if (q === lastQ) return;
     lastQ = q;
     if (!q) { paintEmpty(); if (onApply) onApply(null); return; }
     paint(q);
+  }
+
+  /* Leaving the page is the LAST thing that happens: record why first, and
+     start Scout's answer so the next page usually has it already. */
+  function jumpTo(row) {
+    var q = (input.value || '').trim();
+    var label = (row.querySelector('.nm') || {}).textContent || '';
+    var href = row.getAttribute('href');
+    if (q) {
+      noteNav(q, label, (row.querySelector('.mt') || {}).textContent || '');
+      clearTimeout(scoutTimer);
+      askScoutRaw(q, rows.filter(function (x) { return x.id; }).map(function (x) {
+        return { name: x.label, programLabel: x.meta, price: 0, gated: true, minQty: 10 };
+      }), function () {});
+    }
+    location.href = href;
   }
 
   function mount(opts) {
@@ -458,7 +552,7 @@
       if (e.key === 'Enter') {
         var els = panel.querySelectorAll('.ss-row');
         var pick = els[cursor > -1 ? cursor : 0];
-        if (pick) { e.preventDefault(); location.href = pick.getAttribute('href'); }
+        if (pick) { e.preventDefault(); jumpTo(pick); }
         else if (input.value.trim()) { e.preventDefault(); ask(input.value.trim()); }
       }
     });
@@ -469,13 +563,17 @@
     panel.addEventListener('click', function (e) {
       var seed = e.target.closest && e.target.closest('[data-seed]');
       if (seed) { input.value = seed.dataset.seed; clear.hidden = false; lastQ = '\u0000'; run(); input.focus(); return; }
-      if (e.target.closest && e.target.closest('[data-ask]')) ask(input.value.trim());
+      if (e.target.closest && e.target.closest('[data-ask]')) { ask(input.value.trim()); return; }
+      var row = e.target.closest && e.target.closest('.ss-row');
+      if (row) { e.preventDefault(); jumpTo(row); }
     });
 
     document.addEventListener('click', function (e) { if (host && !host.contains(e.target)) close(); });
 
     var pre = new URLSearchParams(location.search).get('q');
     if (pre) { input.value = pre; clear.hidden = false; run(); }
+
+    showNavBanner();
   }
 
   window.DASStoreSearch = { mount: mount };
