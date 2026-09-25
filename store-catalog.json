@@ -1,5 +1,5 @@
 {
- "built": "2026-09-24",
+ "built": "2026-09-25",
  "shots": {
   "pak-professional-driver-kit-heroA": {
    "src": "/images/store/pak-professional-driver-kit-heroA.webp",
@@ -721,101 +721,285 @@
     "cap": 2000
    }
   },
-  "banner-appreciation-76c4fa0b": {
-   "src": "/images/store/banner-appreciation-76c4fa0b.webp",
-   "srcset": "/images/store/banner-appreciation-76c4fa0b@2x.webp 2x"
+  "banner-appreciation-d13f2d63": {
+   "src": "/images/store/banner-appreciation-d13f2d63.webp",
+   "srcset": "/images/store/banner-appreciation-d13f2d63@2x.webp 2x"
   },
-  "banner-appreciation-76c4fa0b-1200": {
-   "src": "/images/store/banner-appreciation-76c4fa0b-1200.webp",
-   "srcset": "/images/store/banner-appreciation-76c4fa0b-1200@2x.webp 2x"
+  "banner-appreciation-d13f2d63-1200": {
+   "src": "/images/store/banner-appreciation-d13f2d63-1200.webp",
+   "srcset": "/images/store/banner-appreciation-d13f2d63-1200@2x.webp 2x"
   },
-  "banner-safety-335c5bc0": {
-   "src": "/images/store/banner-safety-335c5bc0.webp",
-   "srcset": "/images/store/banner-safety-335c5bc0@2x.webp 2x"
+  "banner-safety-e246e4a9": {
+   "src": "/images/store/banner-safety-e246e4a9.webp",
+   "srcset": "/images/store/banner-safety-e246e4a9@2x.webp 2x"
   },
-  "banner-safety-335c5bc0-1200": {
-   "src": "/images/store/banner-safety-335c5bc0-1200.webp",
-   "srcset": "/images/store/banner-safety-335c5bc0-1200@2x.webp 2x"
+  "banner-safety-e246e4a9-1200": {
+   "src": "/images/store/banner-safety-e246e4a9-1200.webp",
+   "srcset": "/images/store/banner-safety-e246e4a9-1200@2x.webp 2x"
   },
-  "banner-milestone-9b78593c": {
-   "src": "/images/store/banner-milestone-9b78593c.webp",
-   "srcset": "/images/store/banner-milestone-9b78593c@2x.webp 2x"
+  "banner-milestone-ead882cf": {
+   "src": "/images/store/banner-milestone-ead882cf.webp",
+   "srcset": "/images/store/banner-milestone-ead882cf@2x.webp 2x"
   },
-  "banner-milestone-9b78593c-1200": {
-   "src": "/images/store/banner-milestone-9b78593c-1200.webp",
-   "srcset": "/images/store/banner-milestone-9b78593c-1200@2x.webp 2x"
+  "banner-milestone-ead882cf-1200": {
+   "src": "/images/store/banner-milestone-ead882cf-1200.webp",
+   "srcset": "/images/store/banner-milestone-ead882cf-1200@2x.webp 2x"
   },
-  "banner-onboarding-15bf6e50": {
-   "src": "/images/store/banner-onboarding-15bf6e50.webp",
-   "srcset": "/images/store/banner-onboarding-15bf6e50@2x.webp 2x"
+  "banner-onboarding-5f18936d": {
+   "src": "/images/store/banner-onboarding-5f18936d.webp",
+   "srcset": "/images/store/banner-onboarding-5f18936d@2x.webp 2x"
   },
-  "banner-onboarding-15bf6e50-1200": {
-   "src": "/images/store/banner-onboarding-15bf6e50-1200.webp",
-   "srcset": "/images/store/banner-onboarding-15bf6e50-1200@2x.webp 2x"
+  "banner-onboarding-5f18936d-1200": {
+   "src": "/images/store/banner-onboarding-5f18936d-1200.webp",
+   "srcset": "/images/store/banner-onboarding-5f18936d-1200@2x.webp 2x"
   },
-  "banner-milepacks-9896e42a": {
-   "src": "/images/store/banner-milepacks-9896e42a.webp",
-   "srcset": "/images/store/banner-milepacks-9896e42a@2x.webp 2x"
+  "banner-milepacks-21c679fa": {
+   "src": "/images/store/banner-milepacks-21c679fa.webp",
+   "srcset": "/images/store/banner-milepacks-21c679fa@2x.webp 2x"
   },
-  "banner-milepacks-9896e42a-1200": {
-   "src": "/images/store/banner-milepacks-9896e42a-1200.webp",
-   "srcset": "/images/store/banner-milepacks-9896e42a-1200@2x.webp 2x"
+  "banner-milepacks-21c679fa-1200": {
+   "src": "/images/store/banner-milepacks-21c679fa-1200.webp",
+   "srcset": "/images/store/banner-milepacks-21c679fa-1200@2x.webp 2x"
   },
-  "banner-holiday-20aca6a4": {
-   "src": "/images/store/banner-holiday-20aca6a4.webp",
-   "srcset": "/images/store/banner-holiday-20aca6a4@2x.webp 2x"
+  "banner-holiday-1a8facd9": {
+   "src": "/images/store/banner-holiday-1a8facd9.webp",
+   "srcset": "/images/store/banner-holiday-1a8facd9@2x.webp 2x"
   },
-  "banner-holiday-20aca6a4-1200": {
-   "src": "/images/store/banner-holiday-20aca6a4-1200.webp",
-   "srcset": "/images/store/banner-holiday-20aca6a4-1200@2x.webp 2x"
+  "banner-holiday-1a8facd9-1200": {
+   "src": "/images/store/banner-holiday-1a8facd9-1200.webp",
+   "srcset": "/images/store/banner-holiday-1a8facd9-1200@2x.webp 2x"
+  },
+  "px-appreciation-d2f9e41d-desktop": {
+   "src": "/images/store/px-appreciation-d2f9e41d-desktop.webp",
+   "srcset": "/images/store/px-appreciation-d2f9e41d-desktop@2x.webp 2x"
+  },
+  "px-appreciation-d2f9e41d-mobile": {
+   "src": "/images/store/px-appreciation-d2f9e41d-mobile.webp",
+   "srcset": "/images/store/px-appreciation-d2f9e41d-mobile@2x.webp 2x"
+  },
+  "px-milepacks-2503d493-desktop": {
+   "src": "/images/store/px-milepacks-2503d493-desktop.webp",
+   "srcset": "/images/store/px-milepacks-2503d493-desktop@2x.webp 2x"
+  },
+  "px-milepacks-2503d493-mobile": {
+   "src": "/images/store/px-milepacks-2503d493-mobile.webp",
+   "srcset": "/images/store/px-milepacks-2503d493-mobile@2x.webp 2x"
+  },
+  "px-onboarding-1394b991-desktop": {
+   "src": "/images/store/px-onboarding-1394b991-desktop.webp",
+   "srcset": "/images/store/px-onboarding-1394b991-desktop@2x.webp 2x"
+  },
+  "px-onboarding-1394b991-mobile": {
+   "src": "/images/store/px-onboarding-1394b991-mobile.webp",
+   "srcset": "/images/store/px-onboarding-1394b991-mobile@2x.webp 2x"
+  },
+  "px-safety-ca19d434-desktop": {
+   "src": "/images/store/px-safety-ca19d434-desktop.webp",
+   "srcset": "/images/store/px-safety-ca19d434-desktop@2x.webp 2x"
+  },
+  "px-safety-ca19d434-mobile": {
+   "src": "/images/store/px-safety-ca19d434-mobile.webp",
+   "srcset": "/images/store/px-safety-ca19d434-mobile@2x.webp 2x"
+  },
+  "px-milestone-a069e730-desktop": {
+   "src": "/images/store/px-milestone-a069e730-desktop.webp",
+   "srcset": "/images/store/px-milestone-a069e730-desktop@2x.webp 2x"
+  },
+  "px-milestone-a069e730-mobile": {
+   "src": "/images/store/px-milestone-a069e730-mobile.webp",
+   "srcset": "/images/store/px-milestone-a069e730-mobile@2x.webp 2x"
+  },
+  "px-holiday-bf2e6172-desktop": {
+   "src": "/images/store/px-holiday-bf2e6172-desktop.webp",
+   "srcset": "/images/store/px-holiday-bf2e6172-desktop@2x.webp 2x"
+  },
+  "px-holiday-bf2e6172-mobile": {
+   "src": "/images/store/px-holiday-bf2e6172-mobile.webp",
+   "srcset": "/images/store/px-holiday-bf2e6172-mobile@2x.webp 2x"
+  },
+  "banner-appreciation-d13f2d63-mobile": {
+   "src": "/images/store/banner-appreciation-d13f2d63-mobile.webp",
+   "srcset": "/images/store/banner-appreciation-d13f2d63-mobile@2x.webp 2x"
+  },
+  "banner-milepacks-21c679fa-mobile": {
+   "src": "/images/store/banner-milepacks-21c679fa-mobile.webp",
+   "srcset": "/images/store/banner-milepacks-21c679fa-mobile@2x.webp 2x"
+  },
+  "banner-onboarding-5f18936d-mobile": {
+   "src": "/images/store/banner-onboarding-5f18936d-mobile.webp",
+   "srcset": "/images/store/banner-onboarding-5f18936d-mobile@2x.webp 2x"
+  },
+  "banner-safety-e246e4a9-mobile": {
+   "src": "/images/store/banner-safety-e246e4a9-mobile.webp",
+   "srcset": "/images/store/banner-safety-e246e4a9-mobile@2x.webp 2x"
+  },
+  "banner-milestone-ead882cf-mobile": {
+   "src": "/images/store/banner-milestone-ead882cf-mobile.webp",
+   "srcset": "/images/store/banner-milestone-ead882cf-mobile@2x.webp 2x"
+  },
+  "banner-holiday-1a8facd9-mobile": {
+   "src": "/images/store/banner-holiday-1a8facd9-mobile.webp",
+   "srcset": "/images/store/banner-holiday-1a8facd9-mobile@2x.webp 2x"
+  },
+  "banner-appreciation-d13f2d63-hero": {
+   "src": "/images/store/banner-appreciation-d13f2d63-hero.webp",
+   "srcset": "/images/store/banner-appreciation-d13f2d63-hero@2x.webp 2x"
+  },
+  "banner-milepacks-21c679fa-hero": {
+   "src": "/images/store/banner-milepacks-21c679fa-hero.webp",
+   "srcset": "/images/store/banner-milepacks-21c679fa-hero@2x.webp 2x"
+  },
+  "banner-onboarding-5f18936d-hero": {
+   "src": "/images/store/banner-onboarding-5f18936d-hero.webp",
+   "srcset": "/images/store/banner-onboarding-5f18936d-hero@2x.webp 2x"
+  },
+  "banner-safety-e246e4a9-hero": {
+   "src": "/images/store/banner-safety-e246e4a9-hero.webp",
+   "srcset": "/images/store/banner-safety-e246e4a9-hero@2x.webp 2x"
+  },
+  "banner-milestone-ead882cf-hero": {
+   "src": "/images/store/banner-milestone-ead882cf-hero.webp",
+   "srcset": "/images/store/banner-milestone-ead882cf-hero@2x.webp 2x"
+  },
+  "banner-holiday-1a8facd9-hero": {
+   "src": "/images/store/banner-holiday-1a8facd9-hero.webp",
+   "srcset": "/images/store/banner-holiday-1a8facd9-hero@2x.webp 2x"
+  },
+  "pak-working-hands-kit-heroS": {
+   "src": "/images/store/pak-working-hands-kit-heroS.webp",
+   "srcset": "/images/store/pak-working-hands-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp",
+    "srcset": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-560.webp 560w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-840.webp 840w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp 1120w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1400.webp 1400w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1680.webp 1680w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-highway-guardian-kit-heroS": {
+   "src": "/images/store/pak-highway-guardian-kit-heroS.webp",
+   "srcset": "/images/store/pak-highway-guardian-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp",
+    "srcset": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-560.webp 560w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-840.webp 840w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp 1120w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1400.webp 1400w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1680.webp 1680w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-dot-ready-kit-heroS": {
+   "src": "/images/store/pak-dot-ready-kit-heroS.webp",
+   "srcset": "/images/store/pak-dot-ready-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp",
+    "srcset": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-560.webp 560w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-840.webp 840w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp 1120w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1400.webp 1400w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1680.webp 1680w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-recharge-kit-heroS": {
+   "src": "/images/store/pak-recharge-kit-heroS.webp",
+   "srcset": "/images/store/pak-recharge-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp",
+    "srcset": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-560.webp 560w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-840.webp 840w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp 1120w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1400.webp 1400w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1680.webp 1680w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "travel-kit-hero-heroS": {
+   "src": "/images/store/travel-kit-hero-heroS.webp",
+   "srcset": "/images/store/travel-kit-hero-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp",
+    "srcset": "/images/store/travel-kit-hero-heroS-pdp-35554998-560.webp 560w, /images/store/travel-kit-hero-heroS-pdp-35554998-840.webp 840w, /images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp 1120w, /images/store/travel-kit-hero-heroS-pdp-35554998-1400.webp 1400w, /images/store/travel-kit-hero-heroS-pdp-35554998-1680.webp 1680w, /images/store/travel-kit-hero-heroS-pdp-35554998-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-road-ready-kit-heroS": {
+   "src": "/images/store/pak-road-ready-kit-heroS.webp",
+   "srcset": "/images/store/pak-road-ready-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp",
+    "srcset": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-560.webp 560w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-840.webp 840w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp 1120w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1400.webp 1400w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1680.webp 1680w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-safety-first-kit-heroS": {
+   "src": "/images/store/pak-safety-first-kit-heroS.webp",
+   "srcset": "/images/store/pak-safety-first-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp",
+    "srcset": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-560.webp 560w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-840.webp 840w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp 1120w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1400.webp 1400w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1680.webp 1680w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "pak-pride-in-your-ride-kit-heroS": {
+   "src": "/images/store/pak-pride-in-your-ride-kit-heroS.webp",
+   "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp",
+    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1400.webp 1400w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1680.webp 1680w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "seat-back-organizer-heroS": {
+   "src": "/images/store/seat-back-organizer-heroS.webp",
+   "srcset": "/images/store/seat-back-organizer-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp",
+    "srcset": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-560.webp 560w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-840.webp 840w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp 1120w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1400.webp 1400w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1680.webp 1680w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
+  },
+  "medal-c-1m-heroS": {
+   "src": "/images/store/medal-c-1m-heroS.webp",
+   "srcset": "/images/store/medal-c-1m-heroS@2x.webp 2x",
+   "pdp": {
+    "src": "/images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1120.webp",
+    "srcset": "/images/store/medal-c-1m-heroS-pdp-eb4aeb2b-560.webp 560w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-840.webp 840w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1120.webp 1120w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1400.webp 1400w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1680.webp 1680w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-2100.webp 2100w",
+    "sizes": "(min-width:1024px) 50vw, 100vw",
+    "w": 2100,
+    "h": 2625,
+    "cap": 2100
+   }
   },
   "pak-working-hands-kit-heroA": {
    "src": "/images/store/pak-working-hands-kit-heroA.webp",
-   "srcset": "/images/store/pak-working-hands-kit-heroA@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp",
-    "srcset": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-560.webp 560w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-840.webp 840w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp 1120w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1120,
-    "h": 1400,
-    "cap": 1122
-   }
+   "srcset": "/images/store/pak-working-hands-kit-heroA@2x.webp 2x"
   },
   "pak-highway-guardian-kit-hero": {
    "src": "/images/store/pak-highway-guardian-kit-hero.webp",
-   "srcset": "/images/store/pak-highway-guardian-kit-hero@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp",
-    "srcset": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-560.webp 560w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-840.webp 840w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp 1120w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1254.webp 1254w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1254,
-    "h": 1568,
-    "cap": 1254
-   }
+   "srcset": "/images/store/pak-highway-guardian-kit-hero@2x.webp 2x"
   },
   "pak-dot-ready-kit-hero": {
    "src": "/images/store/pak-dot-ready-kit-hero.webp",
-   "srcset": "/images/store/pak-dot-ready-kit-hero@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp",
-    "srcset": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-560.webp 560w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-840.webp 840w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp 1120w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1254.webp 1254w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1254,
-    "h": 1568,
-    "cap": 1254
-   }
+   "srcset": "/images/store/pak-dot-ready-kit-hero@2x.webp 2x"
   },
   "pak-recharge-kit-2": {
    "src": "/images/store/pak-recharge-kit-2.webp",
-   "srcset": "/images/store/pak-recharge-kit-2@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp",
-    "srcset": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-560.webp 560w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-840.webp 840w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp 1120w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1254.webp 1254w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1254,
-    "h": 1568,
-    "cap": 1254
-   }
+   "srcset": "/images/store/pak-recharge-kit-2@2x.webp 2x"
   },
   "pde-kit-03": {
    "src": "/images/store/pde-kit-03.webp",
@@ -855,39 +1039,15 @@
   },
   "pak-road-ready-kit-case-2026": {
    "src": "/images/store/pak-road-ready-kit-case-2026.webp",
-   "srcset": "/images/store/pak-road-ready-kit-case-2026@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp",
-    "srcset": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-560.webp 560w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-840.webp 840w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp 1120w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1120,
-    "h": 1400,
-    "cap": 1122
-   }
+   "srcset": "/images/store/pak-road-ready-kit-case-2026@2x.webp 2x"
   },
   "pak-safety-first-kit-hero": {
    "src": "/images/store/pak-safety-first-kit-hero.webp",
-   "srcset": "/images/store/pak-safety-first-kit-hero@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp",
-    "srcset": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-560.webp 560w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-840.webp 840w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp 1120w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1254.webp 1254w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1254,
-    "h": 1568,
-    "cap": 1254
-   }
+   "srcset": "/images/store/pak-safety-first-kit-hero@2x.webp 2x"
   },
   "pak-pride-in-your-ride-kit-case-2026": {
    "src": "/images/store/pak-pride-in-your-ride-kit-case-2026.webp",
-   "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp",
-    "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1254.webp 1254w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1254,
-    "h": 1568,
-    "cap": 1254
-   }
+   "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026@2x.webp 2x"
   },
   "pak-long-haul-hydration-kit-hero": {
    "src": "/images/store/pak-long-haul-hydration-kit-hero.webp",
@@ -903,15 +1063,7 @@
   },
   "seat-back-organizer-1": {
    "src": "/images/store/seat-back-organizer-1.webp",
-   "srcset": "/images/store/seat-back-organizer-1@2x.webp 2x",
-   "pdp": {
-    "src": "/images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp",
-    "srcset": "/images/store/seat-back-organizer-1-pdp-406dd6ed-560.webp 560w, /images/store/seat-back-organizer-1-pdp-406dd6ed-840.webp 840w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp 1120w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1400.webp 1400w",
-    "sizes": "(min-width:1024px) 50vw, 100vw",
-    "w": 1400,
-    "h": 1750,
-    "cap": 1402
-   }
+   "srcset": "/images/store/seat-back-organizer-1@2x.webp 2x"
   },
   "pak-premium-onboarding-light": {
    "src": "/images/store/pak-premium-onboarding-light.webp",
@@ -1072,28 +1224,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-working-hands-kit-heroA.webp",
-    "srcset": "/images/store/pak-working-hands-kit-heroA@2x.webp 2x",
+    "src": "/images/store/pak-working-hands-kit-heroS.webp",
+    "srcset": "/images/store/pak-working-hands-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp",
-     "srcset": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-560.webp 560w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-840.webp 840w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp 1120w",
+     "src": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp",
+     "srcset": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-560.webp 560w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-840.webp 840w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp 1120w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1400.webp 1400w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1680.webp 1680w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1120,
-     "h": 1400,
-     "cap": 1122
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-working-hands-kit-heroA.webp",
-     "srcset": "/images/store/pak-working-hands-kit-heroA@2x.webp 2x",
+     "src": "/images/store/pak-working-hands-kit-heroS.webp",
+     "srcset": "/images/store/pak-working-hands-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp",
-      "srcset": "/images/store/pak-working-hands-kit-heroA-pdp-506ec46c-560.webp 560w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-840.webp 840w, /images/store/pak-working-hands-kit-heroA-pdp-506ec46c-1120.webp 1120w",
+      "src": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp",
+      "srcset": "/images/store/pak-working-hands-kit-heroS-pdp-94e58722-560.webp 560w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-840.webp 840w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1120.webp 1120w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1400.webp 1400w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-1680.webp 1680w, /images/store/pak-working-hands-kit-heroS-pdp-94e58722-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1120,
-      "h": 1400,
-      "cap": 1122
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1112,28 +1264,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-highway-guardian-kit-hero.webp",
-    "srcset": "/images/store/pak-highway-guardian-kit-hero@2x.webp 2x",
+    "src": "/images/store/pak-highway-guardian-kit-heroS.webp",
+    "srcset": "/images/store/pak-highway-guardian-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp",
-     "srcset": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-560.webp 560w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-840.webp 840w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp 1120w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1254.webp 1254w",
+     "src": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp",
+     "srcset": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-560.webp 560w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-840.webp 840w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp 1120w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1400.webp 1400w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1680.webp 1680w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1254,
-     "h": 1568,
-     "cap": 1254
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-highway-guardian-kit-hero.webp",
-     "srcset": "/images/store/pak-highway-guardian-kit-hero@2x.webp 2x",
+     "src": "/images/store/pak-highway-guardian-kit-heroS.webp",
+     "srcset": "/images/store/pak-highway-guardian-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp",
-      "srcset": "/images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-560.webp 560w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-840.webp 840w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1120.webp 1120w, /images/store/pak-highway-guardian-kit-hero-pdp-5c5f2962-1254.webp 1254w",
+      "src": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp",
+      "srcset": "/images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-560.webp 560w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-840.webp 840w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1120.webp 1120w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1400.webp 1400w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-1680.webp 1680w, /images/store/pak-highway-guardian-kit-heroS-pdp-49d3f120-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1254,
-      "h": 1568,
-      "cap": 1254
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1152,28 +1304,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-dot-ready-kit-hero.webp",
-    "srcset": "/images/store/pak-dot-ready-kit-hero@2x.webp 2x",
+    "src": "/images/store/pak-dot-ready-kit-heroS.webp",
+    "srcset": "/images/store/pak-dot-ready-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp",
-     "srcset": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-560.webp 560w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-840.webp 840w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp 1120w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1254.webp 1254w",
+     "src": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp",
+     "srcset": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-560.webp 560w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-840.webp 840w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp 1120w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1400.webp 1400w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1680.webp 1680w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1254,
-     "h": 1568,
-     "cap": 1254
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-dot-ready-kit-hero.webp",
-     "srcset": "/images/store/pak-dot-ready-kit-hero@2x.webp 2x",
+     "src": "/images/store/pak-dot-ready-kit-heroS.webp",
+     "srcset": "/images/store/pak-dot-ready-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp",
-      "srcset": "/images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-560.webp 560w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-840.webp 840w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1120.webp 1120w, /images/store/pak-dot-ready-kit-hero-pdp-184ebcd6-1254.webp 1254w",
+      "src": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp",
+      "srcset": "/images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-560.webp 560w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-840.webp 840w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1120.webp 1120w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1400.webp 1400w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-1680.webp 1680w, /images/store/pak-dot-ready-kit-heroS-pdp-8e878b36-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1254,
-      "h": 1568,
-      "cap": 1254
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1232,28 +1384,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-recharge-kit-2.webp",
-    "srcset": "/images/store/pak-recharge-kit-2@2x.webp 2x",
+    "src": "/images/store/pak-recharge-kit-heroS.webp",
+    "srcset": "/images/store/pak-recharge-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp",
-     "srcset": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-560.webp 560w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-840.webp 840w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp 1120w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1254.webp 1254w",
+     "src": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp",
+     "srcset": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-560.webp 560w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-840.webp 840w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp 1120w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1400.webp 1400w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1680.webp 1680w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1254,
-     "h": 1568,
-     "cap": 1254
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-recharge-kit-2.webp",
-     "srcset": "/images/store/pak-recharge-kit-2@2x.webp 2x",
+     "src": "/images/store/pak-recharge-kit-heroS.webp",
+     "srcset": "/images/store/pak-recharge-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp",
-      "srcset": "/images/store/pak-recharge-kit-2-pdp-b43b95b6-560.webp 560w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-840.webp 840w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1120.webp 1120w, /images/store/pak-recharge-kit-2-pdp-b43b95b6-1254.webp 1254w",
+      "src": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp",
+      "srcset": "/images/store/pak-recharge-kit-heroS-pdp-bfa3090a-560.webp 560w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-840.webp 840w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1120.webp 1120w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1400.webp 1400w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-1680.webp 1680w, /images/store/pak-recharge-kit-heroS-pdp-bfa3090a-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1254,
-      "h": 1568,
-      "cap": 1254
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1472,28 +1624,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/travel-kit-hero-v2.webp",
-    "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x",
+    "src": "/images/store/travel-kit-hero-heroS.webp",
+    "srcset": "/images/store/travel-kit-hero-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/travel-kit-hero-v2-pdp-46ac31e1-1120.webp",
-     "srcset": "/images/store/travel-kit-hero-v2-pdp-46ac31e1-560.webp 560w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-840.webp 840w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-1120.webp 1120w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-1400.webp 1400w",
+     "src": "/images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp",
+     "srcset": "/images/store/travel-kit-hero-heroS-pdp-35554998-560.webp 560w, /images/store/travel-kit-hero-heroS-pdp-35554998-840.webp 840w, /images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp 1120w, /images/store/travel-kit-hero-heroS-pdp-35554998-1400.webp 1400w, /images/store/travel-kit-hero-heroS-pdp-35554998-1680.webp 1680w, /images/store/travel-kit-hero-heroS-pdp-35554998-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1400,
-     "h": 1750,
-     "cap": 1400
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/travel-kit-hero-v2.webp",
-     "srcset": "/images/store/travel-kit-hero-v2@2x.webp 2x",
+     "src": "/images/store/travel-kit-hero-heroS.webp",
+     "srcset": "/images/store/travel-kit-hero-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/travel-kit-hero-v2-pdp-46ac31e1-1120.webp",
-      "srcset": "/images/store/travel-kit-hero-v2-pdp-46ac31e1-560.webp 560w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-840.webp 840w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-1120.webp 1120w, /images/store/travel-kit-hero-v2-pdp-46ac31e1-1400.webp 1400w",
+      "src": "/images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp",
+      "srcset": "/images/store/travel-kit-hero-heroS-pdp-35554998-560.webp 560w, /images/store/travel-kit-hero-heroS-pdp-35554998-840.webp 840w, /images/store/travel-kit-hero-heroS-pdp-35554998-1120.webp 1120w, /images/store/travel-kit-hero-heroS-pdp-35554998-1400.webp 1400w, /images/store/travel-kit-hero-heroS-pdp-35554998-1680.webp 1680w, /images/store/travel-kit-hero-heroS-pdp-35554998-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1400,
-      "h": 1750,
-      "cap": 1400
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1595,28 +1747,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-road-ready-kit-case-2026.webp",
-    "srcset": "/images/store/pak-road-ready-kit-case-2026@2x.webp 2x",
+    "src": "/images/store/pak-road-ready-kit-heroS.webp",
+    "srcset": "/images/store/pak-road-ready-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp",
-     "srcset": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-560.webp 560w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-840.webp 840w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp 1120w",
+     "src": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp",
+     "srcset": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-560.webp 560w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-840.webp 840w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp 1120w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1400.webp 1400w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1680.webp 1680w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1120,
-     "h": 1400,
-     "cap": 1122
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-road-ready-kit-case-2026.webp",
-     "srcset": "/images/store/pak-road-ready-kit-case-2026@2x.webp 2x",
+     "src": "/images/store/pak-road-ready-kit-heroS.webp",
+     "srcset": "/images/store/pak-road-ready-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp",
-      "srcset": "/images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-560.webp 560w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-840.webp 840w, /images/store/pak-road-ready-kit-case-2026-pdp-85bcd130-1120.webp 1120w",
+      "src": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp",
+      "srcset": "/images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-560.webp 560w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-840.webp 840w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1120.webp 1120w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1400.webp 1400w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-1680.webp 1680w, /images/store/pak-road-ready-kit-heroS-pdp-c48b8f76-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1120,
-      "h": 1400,
-      "cap": 1122
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1635,28 +1787,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-safety-first-kit-hero.webp",
-    "srcset": "/images/store/pak-safety-first-kit-hero@2x.webp 2x",
+    "src": "/images/store/pak-safety-first-kit-heroS.webp",
+    "srcset": "/images/store/pak-safety-first-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp",
-     "srcset": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-560.webp 560w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-840.webp 840w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp 1120w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1254.webp 1254w",
+     "src": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp",
+     "srcset": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-560.webp 560w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-840.webp 840w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp 1120w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1400.webp 1400w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1680.webp 1680w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1254,
-     "h": 1568,
-     "cap": 1254
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-safety-first-kit-hero.webp",
-     "srcset": "/images/store/pak-safety-first-kit-hero@2x.webp 2x",
+     "src": "/images/store/pak-safety-first-kit-heroS.webp",
+     "srcset": "/images/store/pak-safety-first-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp",
-      "srcset": "/images/store/pak-safety-first-kit-hero-pdp-d07597ae-560.webp 560w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-840.webp 840w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1120.webp 1120w, /images/store/pak-safety-first-kit-hero-pdp-d07597ae-1254.webp 1254w",
+      "src": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp",
+      "srcset": "/images/store/pak-safety-first-kit-heroS-pdp-48646f22-560.webp 560w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-840.webp 840w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1120.webp 1120w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1400.webp 1400w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-1680.webp 1680w, /images/store/pak-safety-first-kit-heroS-pdp-48646f22-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1254,
-      "h": 1568,
-      "cap": 1254
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1675,28 +1827,28 @@
    "tier": "Custom-logo",
    "minQty": 1,
    "shot": {
-    "src": "/images/store/pak-pride-in-your-ride-kit-case-2026.webp",
-    "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026@2x.webp 2x",
+    "src": "/images/store/pak-pride-in-your-ride-kit-heroS.webp",
+    "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp",
-     "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1254.webp 1254w",
+     "src": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp",
+     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1400.webp 1400w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1680.webp 1680w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1254,
-     "h": 1568,
-     "cap": 1254
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/pak-pride-in-your-ride-kit-case-2026.webp",
-     "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026@2x.webp 2x",
+     "src": "/images/store/pak-pride-in-your-ride-kit-heroS.webp",
+     "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp",
-      "srcset": "/images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-case-2026-pdp-be33788c-1254.webp 1254w",
+      "src": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp",
+      "srcset": "/images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-560.webp 560w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-840.webp 840w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1120.webp 1120w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1400.webp 1400w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-1680.webp 1680w, /images/store/pak-pride-in-your-ride-kit-heroS-pdp-1dd4e432-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1254,
-      "h": 1568,
-      "cap": 1254
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -1795,28 +1947,28 @@
    "tier": "Custom-logo",
    "minQty": 10,
    "shot": {
-    "src": "/images/store/seat-back-organizer-1.webp",
-    "srcset": "/images/store/seat-back-organizer-1@2x.webp 2x",
+    "src": "/images/store/seat-back-organizer-heroS.webp",
+    "srcset": "/images/store/seat-back-organizer-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp",
-     "srcset": "/images/store/seat-back-organizer-1-pdp-406dd6ed-560.webp 560w, /images/store/seat-back-organizer-1-pdp-406dd6ed-840.webp 840w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp 1120w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1400.webp 1400w",
+     "src": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp",
+     "srcset": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-560.webp 560w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-840.webp 840w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp 1120w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1400.webp 1400w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1680.webp 1680w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1400,
-     "h": 1750,
-     "cap": 1402
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "gallery": [
     {
-     "src": "/images/store/seat-back-organizer-1.webp",
-     "srcset": "/images/store/seat-back-organizer-1@2x.webp 2x",
+     "src": "/images/store/seat-back-organizer-heroS.webp",
+     "srcset": "/images/store/seat-back-organizer-heroS@2x.webp 2x",
      "pdp": {
-      "src": "/images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp",
-      "srcset": "/images/store/seat-back-organizer-1-pdp-406dd6ed-560.webp 560w, /images/store/seat-back-organizer-1-pdp-406dd6ed-840.webp 840w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1120.webp 1120w, /images/store/seat-back-organizer-1-pdp-406dd6ed-1400.webp 1400w",
+      "src": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp",
+      "srcset": "/images/store/seat-back-organizer-heroS-pdp-7f36636a-560.webp 560w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-840.webp 840w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1120.webp 1120w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1400.webp 1400w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-1680.webp 1680w, /images/store/seat-back-organizer-heroS-pdp-7f36636a-2100.webp 2100w",
       "sizes": "(min-width:1024px) 50vw, 100vw",
-      "w": 1400,
-      "h": 1750,
-      "cap": 1402
+      "w": 2100,
+      "h": 2625,
+      "cap": 2100
      }
     }
    ],
@@ -2107,15 +2259,15 @@
    "included": [],
    "minQty": 1,
    "shot": {
-    "src": "/images/store/medal-c-1m-v1.webp",
-    "srcset": "/images/store/medal-c-1m-v1@2x.webp 2x",
+    "src": "/images/store/medal-c-1m-heroS.webp",
+    "srcset": "/images/store/medal-c-1m-heroS@2x.webp 2x",
     "pdp": {
-     "src": "/images/store/medal-c-1m-v1-pdp-9c35a306-1120.webp",
-     "srcset": "/images/store/medal-c-1m-v1-pdp-9c35a306-560.webp 560w, /images/store/medal-c-1m-v1-pdp-9c35a306-840.webp 840w, /images/store/medal-c-1m-v1-pdp-9c35a306-1120.webp 1120w, /images/store/medal-c-1m-v1-pdp-9c35a306-1400.webp 1400w, /images/store/medal-c-1m-v1-pdp-9c35a306-1536.webp 1536w",
+     "src": "/images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1120.webp",
+     "srcset": "/images/store/medal-c-1m-heroS-pdp-eb4aeb2b-560.webp 560w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-840.webp 840w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1120.webp 1120w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1400.webp 1400w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-1680.webp 1680w, /images/store/medal-c-1m-heroS-pdp-eb4aeb2b-2100.webp 2100w",
      "sizes": "(min-width:1024px) 50vw, 100vw",
-     "w": 1536,
-     "h": 1920,
-     "cap": 1536
+     "w": 2100,
+     "h": 2625,
+     "cap": 2100
     }
    },
    "programLabel": "Service Milestone Awards",

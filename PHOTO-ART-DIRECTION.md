@@ -385,3 +385,72 @@ blank. `YOUR LOGO HERE` is not a defect on a product page — it is the product'
 selling point, stated in the one place a buyer is deciding whether their logo
 can go on it. The unfinished-mockup problem only applies to **campaign frames**,
 which are brand-building and must look finished.
+
+
+---
+
+# THE PDP ELEVATED PRODUCT HEROES — shot 2026-09-25
+
+Jayden's pick for this slot, from the treatment comparison: *"the elevated
+product hero kind of looks a little bit better for the actual PDPs and actual
+product photos."*
+
+Ten products, each an image2image restage of its own real packshot onto a
+seamless sweep — warm bone-white at the base falling to deep navy at the top,
+one soft key upper-left, cool fill right, tight contact shadow. Native 4:5, so
+nothing is padded.
+
+## What the shoot actually fixed
+
+Of 50 distinct product photographs in the store, **46 are landscape or square.**
+The PDP frame is 4:5 portrait, and `build-store-images.mjs` fills the gap by
+padding with the photo's own sampled edge colour. That is why a buyer sees tan,
+white, green and grey BANDS above and below almost every product — and on the
+milestone medal, a band of lawn.
+
+| | before | after |
+|---|---|---|
+| frame | 4:5 by padding a 1.25–1.78 photo | native 4:5, edge to edge |
+| resolution ceiling | 1,100–1,500px | **2,100px** (the top ladder rung) |
+| bands | tan / white / green / grey | none |
+
+## The install needs no catalogue edit
+
+`bestShaped()` in `build-store-catalog.mjs` already scores every file sharing a
+product's stem by `cap × share` — resolution times how much of the 4:5 frame
+the photo fills. A landscape source fills 0.53 and gets padded; a native 4:5
+source scores share = 1.0 and wins outright.
+
+So the entire install is a filename. `scripts/install-pdp-heroes.mjs` writes
+each master to `images/<stem>-heroS.webp` at 2100×2625, and the normal builders
+pick it up. Ten for ten, first run, no special case anywhere.
+
+## Three failures, all instructive
+
+1. **A reference URL with a guessed content hash** — `URL_ERROR-ERROR_NOT_FOUND`.
+   Read the path out of `store-catalog.json` (`p.shot.pdp.src`); never build one.
+   Note that a product's `img` and its actual PDP `src` often differ, because
+   `bestShaped()` may already have picked a different sibling.
+2. **`Content Policy Violation`** on a prompt saying a watermark "must NOT
+   appear" — asking a model to remove a watermark reads as exactly that. State
+   what the scene DOES contain: *"all four corners are plain empty sweep with
+   nothing in them."* Same frame, no violation.
+3. **A frame that kept its reference's lighting.** The working-hands packshot is
+   an amber spotlight pool on black; the restage reproduced it and broke the
+   set's consistency. Naming the unwanted look and then the wanted one fixed it
+   — the same positive-instruction lesson as the metal finish.
+
+## What is NOT in this shoot, and why
+
+⛔ **The Executive Collection.** Six SKUs at $799–999, and their PDP heroes are
+finished advertisements — headline, body copy, feature icons and a **SHOP NOW
+button** baked into the image. They genuinely need replacing.
+
+But every one of those products is **YETI** gear, and a generated YETI wordmark
+is a garbled third-party trademark on the most expensive pages in the store —
+the snack-brand problem, at four times the price. So they are fixed by
+**cropping the product out of the existing layouts**: free, removes the SHOP NOW
+button, and keeps the real product exactly as it was photographed.
+
+The general rule this settles: **where a product carries a third-party brand,
+do not generate it. Crop, or shoot it for real.**

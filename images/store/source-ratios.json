@@ -2062,5 +2062,85 @@
   "cap": 1920,
   "share": 0.5333333333333333,
   "score": 1024
+ },
+ "pak-dot-ready-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-road-ready-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-safety-first-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-recharge-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-working-hands-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-highway-guardian-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "pak-pride-in-your-ride-kit-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "medal-c-1m-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "seat-back-organizer-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
+ },
+ "travel-kit-hero-heroS.webp": {
+  "w": 2100,
+  "h": 2625,
+  "r": 0.8,
+  "cap": 2100,
+  "share": 1,
+  "score": 2100
  }
 }

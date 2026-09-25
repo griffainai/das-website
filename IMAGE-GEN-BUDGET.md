@@ -13,9 +13,9 @@ This file governs every OpenArt spend on DAS. Read it before generating.
 |---|---|
 | Account | griffainai@gmail.com, **Pro** |
 | Balance at 2026-09-24 | 24,000 |
-| **Balance MEASURED 2026-09-25** | **22,400** |
-| Spent to date | **1,600** |
-| Left for the rest of the month | **22,400** |
+| **Balance MEASURED 2026-09-25 (after the PDP shoot)** | **21,120** |
+| Spent to date | **2,880** |
+| Left for the rest of the month | **21,120** |
 
 The whole DAS store shoot cost **6.7% of the month**.
 
@@ -126,6 +126,9 @@ generate video without asking Jayden first.
 | 2026-09-25 | Reshoot — safety and milestone had bad references (a marketing layout and a "coming soon" card) | nano-banana-pro i2i 4K 21:9 | 2 | 160 | 22,920 |
 | 2026-09-25 | Reshoot — milestone medal came back bronze, the real one is gunmetal | nano-banana-pro i2i 4K 21:9 | 1 | 80 | 22,840 |
 | 2026-09-25 | **Reconciliation** — measured balance was 22,400, so ~440 credits are unattributed | — | — | 440 | **22,400** |
+| 2026-09-25 | Badge fix — blank plate on appreciation; milepacks closed box | nano-banana-pro i2i 4K 21:9 | 2 | 160 | 22,240 |
+| 2026-09-25 | **PDP elevated product heroes** — 2 treatment tests, 9 batch, 2 reshoots | nano-banana-pro i2i 4K 4:5 | 13 | 1,040 | 21,200 |
+| 2026-09-25 | Appreciation blank-plate reshoot (the gibberish badge) | nano-banana-pro i2i 4K 21:9 | 1 | 80 | **21,120** |
 
 The six masters produced **twelve** live placements (desktop + mobile per
 program) at no extra credit cost, and are archived as q95 webp in
@@ -151,11 +154,36 @@ and the 2× image2image rate that rule 3b now states.
 Measured balance **22,400**: roughly 280 more image2image frames at 4K, 560
 text2image, 1,490 on Wan 2.7 Image, or about 50 short videos.
 
+### The PDP shoot, costed against its estimate
+
+Quoted at ~10 frames / 800 credits. Delivered 10 heroes for **1,040** across 13
+frames: two treatment tests (the first framed the product too small and
+carried a misspelled badge), nine in the batch, and two reshoots — one that
+carried a DAS logo watermark through from its reference, one that kept the
+reference's amber spotlight instead of the studio sweep.
+
+Two further frames FAILED and appear not to have been charged; neither is in
+the ledger because the balance does not show them:
+
+- a reference URL whose content hash I guessed rather than read from the
+  catalogue — `URL_ERROR-ERROR_NOT_FOUND`. Read the path out of
+  `store-catalog.json`; never construct one.
+- `Content Policy Violation` on a prompt that said a watermark "must NOT
+  appear" — asking a model to remove a watermark reads as exactly that. Say what
+  the scene DOES contain instead: "all four corners are plain empty sweep."
+
 ### Still unshot, and what it would cost
 
 | Job | Frames | Credits |
 |---|---|---|
-| Elevated product hero treatment for the PDPs (Jayden's pick for that slot) | ~10 | 800 |
 | Store hero + PDP closing band — one forest photo is currently doing three jobs | 2 | 160 |
+| The remaining 44 PDPs still padded into 4:5 | ~30 | 2,400 |
+
+⛔ The **Executive Collection is deliberately NOT on this list.** Its six
+products are YETI gear, and a generated YETI wordmark is a garbled third-party
+trademark on the most expensive pages in the store ($799–999). Its current PDP
+heroes are finished ads — headline, body copy, feature icons and a **SHOP NOW
+button** — so they do need replacing, but by CROPPING the product out of those
+layouts, which costs nothing and keeps the real product exactly as photographed.
 
 Neither is authorised. Ask before firing.
