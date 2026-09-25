@@ -199,8 +199,20 @@ const all = [...fromShop(), ...fromMilestones(), ...fromMilePacks()]
   .filter((p) => p.name && p.id && !seen.has(p.id) && seen.add(p.id) !== false)
   .map((p) => {
     const s = shot(bestShaped(p.img))
-    const gallery = (p.gallery || []).map(shot).filter(Boolean)
-    return s ? { ...p, shot: s, gallery: gallery.length ? gallery : [s], programLabel: PROGRAMS[p.program] || p.program } : null
+    /* THE GALLERY MUST OPEN ON THE CHOSEN PHOTOGRAPH.
+       The PDP renders gallery[0], not `shot`. `p.gallery` is the raw list and
+       never went through bestShaped(), so a product with an explicit gallery
+       kept showing its OLD hero while `shot` pointed at the new one. Found
+       live on 2026-09-25: nine of ten new product heroes shipped and the tenth,
+       msm-c-1m, still served its grass-banded original -- the only one of the
+       ten with an explicit gallery.
+       Mapping the whole gallery through bestShaped() would be wrong: it scores
+       by stem, so every angle of one product would collapse to the same file
+       and a four-image gallery would become four copies. So put `shot` first
+       and keep the other angles behind it, minus any duplicate of itself. */
+    const rest = (p.gallery || []).map(shot).filter(Boolean)
+      .filter((g) => !s || g.pdp.src !== s.pdp.src)
+    return s ? { ...p, shot: s, gallery: [s, ...rest], programLabel: PROGRAMS[p.program] || p.program } : null
   })
   .filter(Boolean)
 
