@@ -1,0 +1,1291 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script>document.documentElement.classList.add('js');</script><!-- enables scroll-reveal; no-JS shows all content -->
+
+  <title>[PREVIEW: forest hero] Driver Appreciation Solutions — Fleet Recognition & Safety Programs</title>
+  <meta name="description" content="Curated driver appreciation kits, onboarding packs, and milestone awards for fleets committed to driver safety and wellbeing. Trusted by 500+ fleet accounts. Plan year-round recognition and Driver Appreciation Week 2027 early.">
+  <link rel="canonical" href="https://www.driverappreciationsolutions.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Driver Appreciation Solutions">
+  <meta property="og:title" content="Driver Appreciation Solutions — Fleet Recognition Programs">
+  <meta property="og:description" content="The fleet recognition standard. Professional kits for driver appreciation, onboarding, and milestones. Trusted by 500+ fleet accounts nationwide.">
+  <meta property="og:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.driverappreciationsolutions.com/">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Driver Appreciation Solutions — Fleet Recognition Programs">
+  <meta name="twitter:description" content="Driver recognition programs for fleets committed to safety and driver wellbeing. Start planning Driver Appreciation Week 2027.">
+  <meta name="twitter:image" content="https://www.driverappreciationsolutions.com/images/og-default.jpg">
+
+  <!-- Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Hero is now a CSS newsletter feature (no LCP image to preload) -->
+
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Anton&family=Chivo:wght@400;700&display=swap">
+<link rel="stylesheet" href="/css/das-footer.css?v=1">
+  <link rel="stylesheet" href="css/styles.css?v=48">
+  <link rel="stylesheet" href="css/das-illustrations.css">
+  <!-- Critical sticky-header rules inlined so they're never CDN-cached separately.
+       The .sticky-header wrapper keeps the announcement bar + nav locked together
+       as a single sticky unit while scrolling. -->
+  <link rel="preload" as="image" href="/images/logo-word.svg" fetchpriority="high">
+<style>
+    .sticky-header { position: sticky; top: 0; z-index: 101; }
+    .sticky-header .announcement-bar-enterprise { position: relative; }
+    .sticky-header .nav { position: relative; top: auto; z-index: auto; }
+    .ann-bar-countdown {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .ann-cd-unit {
+      display: inline-flex; align-items: baseline; gap: 2px;
+    }
+    .ann-cd-num {
+      font-size: 0.9375rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; line-height: 1;
+    }
+    .ann-cd-label {
+      font-size: 0.5rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.42); line-height: 1;
+    }
+    .ann-cd-sep {
+      width: 1px; height: 11px; background: rgba(255,255,255,0.22);
+      display: inline-block; align-self: center; flex-shrink: 0;
+    }
+    .ann-cd-prefix {
+      font-size: 0.6875rem; font-weight: 600; letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.55); text-transform: uppercase; margin-right: 2px;
+    }
+    /* Stats removed — no longer need the bottom gap on hero actions */
+    .hero-actions { margin-bottom: 0; }
+
+    /* ── FULL-BLEED PHOTO HERO (national brand-campaign feel) ──
+       Note: DAS CSS vars are inverted (--gold is navy), so on the dark photo we use
+       explicit light hex for all text — never the vars. */
+    /* E38: copy anchored to the BOTTOM so it sits over the dark tablecloth / lower frame —
+       clear of the three faces in the upper band (no text over any face). */
+    .hero--photo { min-height: clamp(580px, 78vh, 780px); padding: 0; display: flex; align-items: flex-end; background: #0A0A0A; }
+    .hero--photo::before { display: none; }            /* kill the old clip-path wedge */
+    /* Photo is 4:3; the wide hero only crops vertically, so bias toward the TOP to keep the
+       drivers' heads/faces in frame (the lower crop just trims the table/floor). */
+    .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 55% 26%; z-index: 0; }
+    /* E38: bottom scrim (for the bottom-anchored copy) + light left bias — keeps the faces
+       in the upper-middle band virtually un-darkened while giving the copy strong contrast. */
+    .hero-overlay { position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(180deg, rgba(0,0,0,.32) 0%, rgba(0,0,0,.05) 38%, rgba(0,0,0,.45) 70%, rgba(0,0,0,.80) 100%),
+                  linear-gradient(90deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.12) 45%, rgba(0,0,0,0) 70%); }
+    .hero--photo .container { position: relative; z-index: 2; padding-bottom: 58px; }
+    .hero--photo .hero-content { max-width: 650px; }
+    .hero--photo .hero-title { color: #fff; }
+    .hero--photo .hero-title em { color: #F0C463; }    /* gold accent, brightened for dark */
+    .hero--photo .hero-subtitle { color: rgba(255,255,255,.90); }
+    .hero--photo .hero-eyebrow { background: rgba(255,255,255,.12); border-color: rgba(255,255,255,.30); color: #fff; }
+    .hero--photo .hero-eyebrow-dot { background: #F0C463; }
+    .hero--photo .btn-secondary { color: #fff; border-color: rgba(255,255,255,.55); background: rgba(255,255,255,.08); }
+    .hero--photo .btn-secondary:hover { background: rgba(255,255,255,.16); }
+
+    /* ── FLAGSHIP — Professional Driver Milestone Recognition Kit (homepage feature) ── */
+    /* Compact horizontal featured banner: infographic left, copy right (not a giant full-width band). */
+    .mrk-flagship { display: grid; grid-template-columns: minmax(0,1.05fr) 1fr; align-items: center; max-width: 880px; margin: 0 auto 30px; text-decoration: none; color: inherit;
+      background: linear-gradient(135deg,#16264F,#0C1733); border: 1.5px solid rgba(200,168,75,.5); border-radius: 16px; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(12,23,51,.18); transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .mrk-flagship:hover { transform: translateY(-3px); box-shadow: 0 18px 44px rgba(12,23,51,.30); border-color: #C8A84B; }
+    /* Media panel at the infographic's exact 4:3 ratio → the whole graphic fills it, no border, no crop. */
+    .mrk-flagship-media { position: relative; background: transparent; aspect-ratio: 4 / 3; }
+    .mrk-flagship-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .mrk-flagship-tag { position: absolute; top: 14px; left: 14px; background: linear-gradient(135deg,#C8A84B,#9A7B2E); color: #16264F; font-size: .6875rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; padding: 5px 11px; border-radius: 6px; }
+    .mrk-flagship-body { padding: 28px 30px; display: flex; flex-direction: column; gap: 10px; justify-content: center; }
+    .mrk-flagship-badge { font-size: .6875rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: #D9BE72; }
+    .mrk-flagship-title { font-size: clamp(1.35rem,2.4vw,1.875rem); font-weight: 800; letter-spacing: -.02em; color: #fff; line-height: 1.15; margin: 0; }
+    .mrk-flagship-sub { font-size: .95rem; color: #B9C4E0; line-height: 1.55; max-width: 560px; margin: 0; }
+    .mrk-flagship-items { display: none; }  /* contents already shown in the infographic — keeps the banner compact */
+    .mrk-flagship-items span { display: inline-flex; align-items: center; gap: 7px; font-size: .8125rem; font-weight: 700; color: #E8EDFA; background: rgba(200,168,75,.12); border: 1px solid rgba(200,168,75,.35); border-radius: 999px; padding: 5px 13px; }
+    .mrk-flagship-items span::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #D9BE72; flex: 0 0 auto; }
+    .mrk-flagship-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 14px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.12); }
+    .mrk-flagship-price { font-size: 1.5rem; font-weight: 800; color: #fff; }
+    .mrk-flagship-price span { font-size: .8125rem; font-weight: 600; color: #8FA0CC; margin-left: 8px; }
+    .mrk-flagship-cta { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: .9375rem; color: #16264F; background: linear-gradient(135deg,#E8C766,#C8A84B); padding: 11px 20px; border-radius: 10px; }
+    .mrk-flagship-cta svg { width: 15px; height: 15px; }
+    @media (max-width: 760px) { .mrk-flagship { grid-template-columns: 1fr; } }
+    @media (max-width: 760px) {
+      /* On mobile the image fits full-height; the faces sit upper-center, so anchor the copy to
+         the BOTTOM (clear of faces) with a bottom-weighted gradient, and center the people. */
+      .hero--photo { align-items: flex-end; min-height: 86vh; }
+      .hero--photo .container { padding-bottom: 44px; }
+      .hero-bg { object-position: 56% 22%; }
+      .hero-overlay { background: linear-gradient(180deg, rgba(0,0,0,.12) 0%, rgba(0,0,0,.34) 42%, rgba(0,0,0,.84) 100%); }
+    }
+
+    /* ── DESKTOP HERO (≥761px): FULL-BLEED photo (all three people visible), headline moved to the
+       LEFT and vertically centered. The faces sit in the upper band, so mid-height left copy sits
+       BESIDE the group, not over any face. A left scrim carries the text and fades to clear by ~60%
+       so the people stay visible. Full viewport height (the hero fills the fold). Mobile unchanged. ── */
+    @media (min-width: 761px) {
+      .hero--photo { display: block; min-height: 100vh; }
+      .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%;
+        object-position: 50% 22%; animation: heroZoom 24s ease-in-out 1s infinite alternate; will-change: transform; }
+      .hero-overlay { position: absolute; inset: 0; z-index: 1;
+        background: linear-gradient(95deg, rgba(8,13,28,.88) 0%, rgba(8,13,28,.66) 26%, rgba(8,13,28,.22) 46%, rgba(8,13,28,0) 62%),
+                    linear-gradient(180deg, rgba(8,13,28,.28) 0%, rgba(8,13,28,0) 28%, rgba(8,13,28,0) 70%, rgba(8,13,28,.45) 100%); }
+      /* Full-width container (breaks out of the centered site gutter) so the headline can sit hard
+         to the LEFT edge, vertically centered, beside the group. */
+      .hero--photo .container { position: relative; z-index: 2; display: flex; flex-direction: column;
+        justify-content: center; align-items: flex-start; min-height: 100vh;
+        max-width: none; width: 100%; padding: 40px clamp(28px, 4vw, 72px); }
+      .hero--photo .hero-content { max-width: 520px; }
+      .hero--photo .hero-title { font-size: clamp(2.4rem, 4vw, 4.4rem); line-height: 1.04;
+        letter-spacing: -0.035em; text-wrap: balance; text-shadow: 0 2px 30px rgba(0,0,0,.45); }
+      .hero--photo .hero-subtitle { font-size: 1.12rem; max-width: 30rem; text-shadow: 0 1px 16px rgba(0,0,0,.4); }
+    }
+    @keyframes heroZoom { from { transform: scale(1); } to { transform: scale(1.075); } }
+    @media (prefers-reduced-motion: reduce) { .hero-bg { animation: none !important; } }
+
+    /* ── Scroll reveals — a light, cheap rise + fade (transform + opacity only: GPU-composited,
+       no blur, no persistent will-change, so scrolling stays smooth). Content shows immediately
+       when JS is off or reduced-motion is set (never gated behind a transition). ── */
+    [data-reveal] {
+      transform: translateY(22px);
+      transition: opacity .55s ease-out, transform .55s ease-out;
+    }
+    [data-reveal].is-revealed { opacity: 1; transform: none; }
+    html:not(.js) [data-reveal] { opacity: 1 !important; transform: none !important; }
+    @media (prefers-reduced-motion: reduce) {
+      [data-reveal] { transition: none; opacity: 1; transform: none; }
+    }
+
+    /* Branded service-card placeholders (navy/gold SVGs) — full vibrancy, no dimming, and skip the
+       white photo-blend gradient that was meant for stock photos (it washes out the gold label). */
+    .solution-card-img-wrap.branded img { filter: none !important; }
+    .solution-card-img-wrap.branded::after { display: none; }
+    /* Bigger service-card image area so products showcase fully, no zoom needed. */
+    .solutions-grid .solution-card-img-wrap { height: 240px; }
+    /* Medals card: the photo is near-square, so make its slot the photo's EXACT aspect ratio —
+       the image then fills edge-to-edge (cover) with zero letterbox bars and zero crop. */
+    .solution-card[href*="category=medals"] .solution-card-img-wrap {
+      height: auto !important; aspect-ratio: 1387 / 1134; background: #0f0b06;
+    }
+    .solution-card[href*="category=medals"] .solution-card-img-wrap img { object-fit: cover !important; }
+    /* Milestone card shows the same kit infographic as the flagship hero (E66) — match its 4:3 ratio so it fills with no border. */
+    .solution-card[href*="category=milestone"] .solution-card-img-wrap { height: auto !important; aspect-ratio: 1448 / 1086; background: #0A0A0A; }
+    .solution-card[href*="category=milestone"] .solution-card-img-wrap img { object-fit: cover !important; }
+
+    /* ── HERO FEATURED INSIGHT — replaces the hero photo with the featured Insights & Ideas article ── */
+    .hero-visual { border: 0; box-shadow: none; overflow: visible; aspect-ratio: auto; border-radius: 0; }
+    .hero-feature { display: block; text-decoration: none; color: inherit; position: relative; }
+    .hero-feature-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 0 0 12px 2px; }
+    .hero-feature-card { background: #fff; border: 1px solid rgba(200,168,75,.30); border-radius: 20px; overflow: hidden; box-shadow: 0 30px 72px rgba(12,24,64,.20); transition: transform .25s ease, box-shadow .25s ease; }
+    .hero-feature:hover .hero-feature-card { transform: translateY(-5px); box-shadow: 0 42px 92px rgba(12,24,64,.28); }
+    .hf-imgwrap { position: relative; aspect-ratio: 16/9; overflow: hidden; background: #0C1840; }
+    .hf-imgwrap img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .hero-feature:hover .hf-imgwrap img { transform: scale(1.045); }
+    .hf-imgwrap::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(12,24,64,.5), transparent 48%); }
+    .hf-badge { position: absolute; top: 16px; left: 16px; z-index: 1; background: #C8A84B; color: #0C1840; font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 12px; border-radius: 100px; box-shadow: 0 6px 16px rgba(200,168,75,.42); }
+    .hf-body { padding: 22px 24px 24px; }
+    .hf-meta { display: flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: #9A7B2E; margin-bottom: 12px; }
+    .hf-meta .hf-dot { width: 3px; height: 3px; border-radius: 50%; background: #C8A84B; }
+    .hf-meta .hf-muted { color: var(--text-muted); font-weight: 600; letter-spacing: .04em; }
+    .hf-title { font-size: 21px; font-weight: 800; line-height: 1.25; letter-spacing: -.01em; color: #0F172A; margin: 0 0 10px; }
+    .hf-excerpt { font-size: 13.5px; line-height: 1.6; color: #475569; margin: 0 0 18px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .hf-link { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 800; color: #1A2E6E; }
+    .hf-link svg { width: 16px; height: 16px; transition: transform .2s ease; }
+    .hero-feature:hover .hf-link svg { transform: translateX(4px); }
+  </style>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/images/favicon-mark.png">
+  <link rel="apple-touch-icon" href="/images/favicon-180.png">
+  <meta name="theme-color" content="#1A2E6E">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://driverappreciationsolutions.com/#organization",
+        "name": "Driver Appreciation Solutions",
+        "url": "https://driverappreciationsolutions.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://driverappreciationsolutions.com/images/logo.png"
+        },
+        "description": "Curated driver appreciation kits, onboarding packs, and milestone awards built for trucking fleets. Trusted by 500+ fleet accounts nationwide.",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "url": "https://driverappreciationsolutions.com/contact.html"
+        },
+        "sameAs": []
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://driverappreciationsolutions.com/#website",
+        "url": "https://driverappreciationsolutions.com/",
+        "name": "Driver Appreciation Solutions",
+        "description": "Fleet recognition programs for trucking companies — driver appreciation kits, onboarding packs, and milestone awards.",
+        "publisher": { "@id": "https://driverappreciationsolutions.com/#organization" },
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://driverappreciationsolutions.com/shop.html?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://driverappreciationsolutions.com/#webpage",
+        "url": "https://driverappreciationsolutions.com/",
+        "name": "Driver Appreciation Solutions — Fleet Recognition Programs",
+        "isPartOf": { "@id": "https://driverappreciationsolutions.com/#website" },
+        "about": { "@id": "https://driverappreciationsolutions.com/#organization" },
+        "description": "Curated driver appreciation kits, onboarding packs, and milestone awards built for trucking fleets."
+      }
+    ]
+  }
+  </script>
+
+  <!-- FAQ Schema — People Also Ask targeting -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "When is Driver Appreciation Week 2026?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "National Truck Driver Appreciation Week 2026 is September 13–19, 2026, as designated by the American Trucking Associations (ATA). It is observed annually during the third week of September to honor the 3.5 million professional truck drivers who keep America's supply chain moving."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do truck drivers want as gifts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Professional truck drivers value practical, high-quality recognition items they can use on the road and at home. Top categories include branded apparel (performance shirts, hats), premium consumables (protein bars, coffee), safety accessories (reflective gear, phone mounts), and keepsakes (engraved coins, milestone plaques). Fleet managers ordering for DAW or year-round programs typically choose curated kit bundles starting at $249 per driver."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do you celebrate Driver Appreciation Week at a trucking company?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Fleet operators celebrate Driver Appreciation Week (September 13–19, 2026) by distributing driver appreciation kits, hosting terminal events, and sending personalized recognition letters from fleet leadership. Best-practice programs combine a physical appreciation kit shipped directly to drivers with a handwritten or printed personal message. Kits should be ordered 6–8 weeks before DAW to guarantee on-time delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does it cost to replace a truck driver?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "According to the American Trucking Associations (ATA), replacing a commercial truck driver costs between $8,000 and $20,000 per driver — accounting for recruiting, screening, orientation, training, and the productivity gap during the 60–90 day ramp period. With the U.S. facing an 82,000-driver shortage in 2026 projected to reach 160,000 by 2031, retention is the most cost-effective fleet management strategy available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do driver appreciation gifts improve retention?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Structured driver recognition programs consistently show measurable retention improvement. Fleets with formal recognition programs experience 20–35% lower voluntary turnover versus fleets with no program. A full annual recognition program — onboarding kit, DAW appreciation kit, and service milestone award — costs a small fraction of the $8,000–$20,000 to replace a driver who leaves."
+        }
+      }
+    ]
+  }
+  </script>
+  <!-- DAS tracking pixels (GTM + Meta Pixel) — see js/tracking.js for activation -->
+  <script src="/js/tracking.js?v=3" defer></script>
+  <script src="/js/upsell-modal.js?v=1" defer></script>
+  <link rel="stylesheet" href="css/das-widget.css?v=3">
+<style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
+  <link rel="stylesheet" href="/css/das-nav.css?v=12">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+<!-- ============================================================================
+     DAS branded load screen (treatment A "polish"). Paints an opaque branded
+     overlay INSTANTLY so the unbranded white / broken-image flash never shows on
+     entry or navigation; fades out when the page is ready. Self-contained + inline
+     so it paints before styles.css. Full splash once per visit, quick fade after.
+     5s failsafe guarantees it never traps the page. prefers-reduced-motion aware.
+     ============================================================================ -->
+<style>
+  /* ══ SUB-SPLASH — the Off Duty treatment, choreography matched ══════════
+     First attempt was navy with a white knockout — the inverse of the
+     reference. Second was the right colour but the mark just SLID: their mark
+     is an inline SVG whose internal lines DRAW IN, and a PNG cannot stroke.
+     Static next to theirs, and fairly called terrible.
+
+     WHAT THEIRS ACTUALLY DOES (read off #odndr-splash):
+       .osm    fly-in — translate3d(189%) scale(.2), springs on
+               cubic-bezier(.34,1.56,.64,1), holds, slides home on
+               cubic-bezier(.65,0,.35,1), 1.7s linear .08s both
+       .oss path  the mark's HORIZONTAL LINES draw one after another —
+               stroke-dashoffset 1.1 -> 0, .36s cubic-bezier(.4,0,.2,1),
+               delay calc(.34s + var(--d) * 26ms)
+       .osw    wordmark wipes open, clip-path inset(0 100% 0 0) -> 0,
+               .56s cubic-bezier(.33,0,.2,1) at 1.68s
+
+     WHY BANDS. Their mark is a circle crossed by horizontal rules, so
+     "drawing" it means revealing those rules in sequence. The DAS mark is a
+     chevron shield — hand-tracing it to strokable SVG would produce a worse
+     mark than the real artwork. So the same artwork is layered 14 times, each
+     clipped to one horizontal band, each carrying THEIR stagger: .34s start,
+     26ms apart, .36s each, same easing. The mark builds top to bottom in
+     sequence instead of appearing at once, which is what the eye reads as
+     drawing. Every number above is theirs; only the mechanism differs, because
+     ours is raster and theirs is vector.
+
+     Self-contained and inline so it paints before styles.css. */
+  html.das-splash-seen #das-splash{display:none!important}
+  #das-splash{position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:0 24px;
+    background:#fff;transition:opacity .5s cubic-bezier(.4,0,.2,1),visibility linear .5s}
+  #das-splash.das-done{opacity:0;visibility:hidden;pointer-events:none}
+  #das-splash .dsl{position:relative;display:flex;align-items:center;width:min(86vw,780px);
+    aspect-ratio:728/259;transform:translateZ(0);transition:transform .5s cubic-bezier(.4,0,.2,1)}
+  #das-splash.das-done .dsl{transform:scale(1.03)}
+
+  /* the mark: their fly-in, to the millisecond */
+  #das-splash .dsm{position:relative;z-index:1;flex:0 0 auto;width:26.92%;opacity:0;
+    transform:translate3d(189%,0,0) scale(.2);will-change:transform,opacity;
+    animation:dasMark 1.7s linear .08s 1 both}
+  /* ── THE MARK IS A VECTOR NOW, SO IT DRAWS ────────────────────────────
+     Jayden asked why Off Duty's splash is so clean and ours was not. Theirs is
+     an inline SVG: resolution-independent, a couple of KB, and — the part that
+     actually matters — its geometry can be STROKE-DRAWN. Ours was a 728x259
+     PNG, and a raster can only be scaled. Fourteen clipped copies fading in
+     sequence was the closest a bitmap could get to drawing, and it read as the
+     imitation it was.
+
+     There was no DAS vector anywhere in the repo, so one was made: the mark is
+     flat two-colour geometry with straight edges, and the print PDF for the
+     Journal of Driver Recognition embeds it at 458x567. scripts/vectorize-mark.py
+     traces that into 533 vertices of real path data — 7.7KB, against 56KB for
+     the raster it replaces — and normalises it back to the lockup's true
+     198x253 proportions, because the PDF's copy is stretched 4.6% wide.
+
+     Now it genuinely draws. pathLength="1" lets the dash animate in units of
+     one without anybody measuring the path: silhouette first, navy inlays
+     after, then both fills come up underneath the line. Their stagger, their
+     easing, our artwork. */
+  #das-splash .dsm{aspect-ratio:192.90/247.26}
+  #das-splash .dsm svg{display:block;width:100%;height:auto;overflow:visible}
+  #das-splash .dsm path{
+    fill-opacity:0; stroke-width:1.4; stroke-linejoin:round; vector-effect:non-scaling-stroke;
+    stroke-dasharray:1; stroke-dashoffset:1;
+    animation:dasDraw .64s cubic-bezier(.4,0,.2,1) both, dasFill .36s ease both;
+  }
+  #das-splash .dsm .p1{ stroke:#96A0AF; fill:#96A0AF; animation-delay:.30s, .88s }
+  #das-splash .dsm .p2{ stroke:#1A2E5A; fill:#1A2E5A; animation-delay:.46s, 1.00s }
+  #das-splash .dsw img{display:block;width:100%;height:auto}
+
+  /* the wordmark: their wipe */
+  #das-splash .dsw{position:relative;flex:0 0 auto;width:68.96%;margin-left:2.2%;overflow:hidden;
+    clip-path:inset(0 100% 0 0);will-change:clip-path;
+    animation:dasWipe .56s cubic-bezier(.33,0,.2,1) 1.68s 1 both}
+  #das-splash .dsw img{display:block;width:100%;height:auto}
+
+  @keyframes dasMark{
+    0%{opacity:0;transform:translate3d(189%,0,0) scale(.2);animation-timing-function:cubic-bezier(.34,1.56,.64,1)}
+    16%{opacity:1}
+    36%{opacity:1;transform:translate3d(189%,0,0) scale(1);animation-timing-function:linear}
+    58%{opacity:1;transform:translate3d(189%,0,0) scale(1);animation-timing-function:cubic-bezier(.65,0,.35,1)}
+    100%{opacity:1;transform:translate3d(0,0,0) scale(1)}
+  }
+  @keyframes dasDraw{ to{stroke-dashoffset:0} }
+  @keyframes dasFill{ to{fill-opacity:1} }
+  @keyframes dasWipe{ to{clip-path:inset(0 0 0 0)} }
+
+  /* second visit in a session: same look, no theatre */
+  #das-splash.das-quick .dsm,#das-splash.das-quick .dsm path,#das-splash.das-quick .dsw{
+    animation:none;opacity:1;transform:none;clip-path:none;will-change:auto;
+    stroke-dashoffset:0;fill-opacity:1}
+  #das-splash.das-quick .dsl{animation:dasFade .3s ease 1 both}
+  @keyframes dasFade{0%{opacity:0;transform:scale(.985)}}
+
+  @media (prefers-reduced-motion:reduce){
+    #das-splash .dsm,#das-splash .dsm path,#das-splash .dsw,#das-splash .dsl{
+      opacity:1!important;clip-path:none!important;animation:none!important;
+      transform:none!important;transition:none!important;
+      stroke-dashoffset:0!important;fill-opacity:1!important}
+  }
+</style>
+<div id="das-splash" role="presentation" aria-hidden="true">
+  <div class="dsl">
+    <span class="dsm">
+      <svg viewBox="0 0 192.901 247.265" aria-hidden="true" focusable="false">
+        <path class="p1" pathLength="1" d="M170.829,170.429 L168.662,169.836 L165.371,167.571 L153.614,157.904 L153.148,156.404 L153.325,154.571 L156.772,147.071 L156.787,144.071 L148.287,135.737 L140.739,126.237 L123.662,99.821 L111.996,80.512 L110.663,79.265 L103.252,67.404 L100.489,61.904 L97.329,57.310 L96.315,56.571 L96.079,6.571 L96.251,2.737 L97.496,1.065 L113.829,22.579 L121.829,34.596 L132.379,48.737 L136.757,55.904 L136.852,57.071 L135.829,57.677 L122.662,57.536 L120.950,58.571 L121.996,61.940 L131.451,79.237 L135.323,85.404 L141.662,94.060 L142.662,96.117 L149.996,105.714 L165.329,122.526 L182.996,138.892 L182.834,142.237 L178.954,153.737 L173.350,166.237 L171.707,169.571 Z M185.496,130.935 L183.662,130.760 L177.996,125.346 L176.471,124.404 L168.988,117.071 L167.072,114.404 L169.597,89.237 L169.824,83.071 L169.419,80.571 L165.996,78.705 L161.829,77.587 L155.496,74.781 L142.496,70.309 L140.662,69.184 L137.537,68.404 L132.610,66.071 L132.996,65.121 L133.829,64.612 L148.329,64.588 L149.588,63.737 L149.377,61.571 L138.496,46.643 L137.283,44.404 L137.433,43.404 L142.829,44.934 L151.996,48.709 L153.662,49.871 L180.482,59.904 L182.162,60.976 L184.840,61.737 L186.329,62.854 L189.484,63.904 L192.393,65.904 L192.793,68.404 L192.901,80.737 L192.204,99.404 L190.329,112.098 L189.035,116.071 L188.241,122.071 L186.537,129.571 Z M25.329,203.091 L23.996,203.039 L23.261,201.904 L23.488,183.904 L24.079,179.571 L25.329,177.772 L46.162,161.654 L58.329,150.624 L66.947,141.404 L74.348,131.571 L80.084,120.737 L79.704,118.571 L65.996,121.206 L64.829,122.223 L64.329,121.709 L68.140,114.071 L73.496,105.060 L90.169,78.737 L92.399,76.404 L93.996,76.544 L95.224,77.904 L96.079,83.904 L96.412,137.237 L95.329,141.396 L94.319,141.904 L91.180,146.571 L87.400,150.904 L74.458,163.571 L51.996,182.684 Z M100.163,244.911 L98.496,244.960 L97.496,244.477 L96.580,243.071 L96.579,223.904 L97.496,218.756 L101.996,215.716 L119.288,201.404 L133.496,186.742 L135.329,187.196 L140.829,190.962 L149.783,198.404 L150.753,200.571 L148.996,203.048 L143.829,208.786 L130.614,221.904 L115.163,234.628 L104.756,242.237 Z"/>
+        <path class="p2" pathLength="1" d="M23.496,170.758 L21.996,170.730 L21.216,170.237 L17.407,163.237 L12.759,150.737 L11.500,148.571 L9.334,141.404 L9.395,139.071 L25.655,124.404 L39.329,109.758 L46.392,101.237 L59.220,82.571 L66.829,69.362 L72.135,58.571 L71.496,57.866 L69.829,57.538 L56.829,57.597 L55.837,56.737 L56.362,54.737 L93.046,3.237 L94.163,1.080 L95.496,0.091 L96.496,0.000 L97.451,0.904 L96.242,2.737 L96.079,6.571 L96.331,56.737 L88.329,68.289 L79.874,82.737 L72.496,94.358 L71.329,95.563 L65.276,105.904 L64.084,107.071 L63.163,109.358 L56.662,119.227 L53.925,124.404 L48.220,131.571 L35.823,143.904 L36.101,147.237 L40.425,155.571 L39.791,157.737 L33.162,163.636 Z M8.663,130.911 L6.829,130.612 L6.056,129.404 L5.329,125.091 L4.207,122.237 L2.256,110.571 L0.278,92.237 L0.000,74.737 L0.418,65.904 L3.663,63.838 L6.996,62.909 L8.506,61.737 L31.329,52.481 L38.996,49.862 L40.662,48.721 L45.496,46.722 L51.329,44.722 L53.996,44.617 L54.336,45.404 L53.864,46.737 L50.740,50.737 L44.496,60.765 L43.403,61.737 L43.154,63.904 L44.329,64.615 L58.663,64.598 L59.965,65.404 L60.171,66.237 L51.496,70.287 L42.329,73.133 L30.996,77.763 L27.662,78.641 L23.163,80.802 L22.678,83.071 L22.942,91.071 L24.619,106.571 L25.879,111.737 L25.846,113.404 L23.663,116.746 Z M168.496,203.479 L166.496,203.091 L151.829,191.855 L124.162,169.129 L110.361,156.404 L103.157,149.071 L96.996,141.897 L95.496,141.379 L96.413,137.237 L96.079,83.904 L95.263,77.904 L93.996,76.429 L92.746,76.071 L93.892,75.237 L95.301,71.071 L96.163,70.191 L97.329,70.632 L98.628,71.904 L105.199,83.404 L106.329,84.512 L110.663,91.873 L113.663,95.765 L123.829,112.581 L130.125,121.904 L129.662,122.634 L127.829,122.886 L124.996,121.507 L121.496,120.856 L118.329,119.587 L114.829,119.098 L113.069,119.571 L112.904,120.404 L114.605,124.237 L120.130,133.571 L126.003,141.404 L133.259,149.237 L156.162,169.258 L168.284,178.071 L169.271,180.571 L169.489,201.737 L169.188,202.904 Z M92.663,76.414 L92.652,76.404 L92.579,76.237 L92.663,76.133 L92.666,76.237 L92.673,76.404 Z M96.496,247.265 L94.329,246.838 L87.788,242.404 L77.350,234.737 L63.882,223.737 L54.829,215.012 L41.996,200.914 L41.776,199.737 L42.246,198.571 L46.586,195.571 L56.685,187.071 L59.163,186.119 L60.687,187.237 L64.130,191.737 L71.496,199.303 L81.635,208.404 L93.829,217.886 L96.163,219.096 L97.163,218.942 L96.579,223.904 L96.578,243.071 L97.496,244.498 L100.079,245.071 Z M97.329,218.910 L97.222,218.904 L97.329,218.846 L97.335,218.904 Z"/>
+      </svg>
+    </span>
+    <span class="dsw"><img src="/images/logo-word.svg" alt="" width="497" height="152" decoding="sync" fetchpriority="high"></span>
+  </div>
+</div>
+<script>
+  (function(){
+    var el=document.getElementById('das-splash'); if(!el) return;
+    var quick=false;
+    try{ quick=!!sessionStorage.getItem('das_splash_seen'); sessionStorage.setItem('das_splash_seen','1'); }catch(e){}
+    if(quick) el.classList.add('das-quick');
+    var MIN= quick ? 420 : 2300, t0=Date.now();
+    function hide(){ if(!el) return; el.classList.add('das-done');
+      setTimeout(function(){ if(el&&el.parentNode) el.parentNode.removeChild(el); el=null; },550); }
+    function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-t0))); }
+    if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+    setTimeout(hide, 5000);   // failsafe: never trap the page
+  })();
+</script>
+
+
+<!-- ============================================================
+     STICKY HEADER — announcement bar + nav scroll as one unit
+     ============================================================ -->
+<div class="sticky-header">
+
+<!-- ============================================================
+     ANNOUNCEMENT BAR — enterprise navy event stripe
+     ============================================================ -->
+<!-- DRIVER APPRECIATION WEEK TICKER - PARKED 2026-09-19. Jayden: "the week's over and we will bring
+     that back up in a couple of months probably January". The Red Alert vs Stars & Stripes A/B is therefore
+     PAUSED, not concluded: GA4 still needed a GTM trigger before a winner could be called, so neither variant
+     has won and the test must restart clean. css/daw-ticker.css and js/daw-ticker.js are left in place.
+     TO RESTORE: re-add the daw-ticker stylesheet link in the head, and in the body the daw-tk region div
+     plus the daw-ticker.js script. The exact three lines are in git at 4070b30 for this file. -->
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+<!-- ============================================================================
+     TOP NAV — a 1:1 port of the Off Duty Not Driving marketing nav (Jayden
+     2026-09-19: "same top nav design ... the way their menu looks when it pops
+     out the photos ... same font and aesthetic just change the logo").
+     Styles: /css/das-nav.css   Behaviour: /js/das-nav.js
+     Selectors keep their .odn-* names so the two navs stay diffable.
+     DAS keeps its own actions (Cart, Sign In) — it is a shop, Off Duty is not.
+     ============================================================================ -->
+<div class="odn-root">
+  <div class="odn-wrap" id="odn-wrap">
+    <header class="odn-pill">
+      <a href="index.html" class="odn-logo" aria-label="Driver Appreciation Solutions — Home">
+        <img src="/images/logo-lockup.svg" alt="Driver Appreciation Solutions" />
+      </a>
+      <nav class="odn-links" aria-label="Main navigation">
+        <a href="index.html">Home</a><a href="store.html">Shop</a><a href="about.html">About</a><a href="ideas.html">Insights &amp; Ideas</a><a href="surveys.html">Surveys</a><a href="contact.html">Contact</a>
+      </nav>
+      <div class="odn-actions">
+        <a href="store-cart.html" class="odn-cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5.5 8h13l-1 11.5a1.5 1.5 0 0 1-1.5 1.4H8a1.5 1.5 0 0 1-1.5-1.4L5.5 8Z"/><path d="M9 8V6.2a3 3 0 0 1 6 0V8"/></svg><span class="odn-cart-n" data-bag-count>0</span></a>
+        <a href="login.html" class="odn-cta">Sign in</a>
+        <button class="odn-burger" id="odn-burger" aria-label="Open menu" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </header>
+  </div>
+  <div class="odn-scrim" id="odn-scrim"></div>
+  <div class="odn-drop" id="odn-drop" role="dialog" aria-label="Menu">
+    <div class="odn-d4">
+      <div class="odn-g">
+        <div class="odn-hero"><span class="odn-ph" data-bg="/images/wk-group-lifestyle.jpg" aria-hidden="true"></span><div class="odn-tx"><small>For fleets</small><h5>Recognition your drivers actually feel.</h5><a class="odn-btn" href="shop.html">Shop appreciation kits <span aria-hidden="true">→</span></a></div></div>
+        <a class="odn-tile" href="shop.html"><span class="odn-ph" data-bg="/images/pde-kit-01.jpg" aria-hidden="true"></span><b>Shop</b><span class="odn-d">Kits, awards and gear</span></a><a class="odn-tile" href="about.html"><span class="odn-ph" data-bg="/images/wk-driver-lifestyle.jpg" aria-hidden="true"></span><b>About</b><span class="odn-d">Who we are</span></a><a class="odn-tile" href="ideas.html"><span class="odn-ph" data-bg="/images/pde-kit-03.jpg" aria-hidden="true"></span><b>Insights &amp; Ideas</b><span class="odn-d">Research and playbooks</span></a><a class="odn-tile" href="contact.html"><span class="odn-ph" data-bg="/images/pde-kit-02.jpg" aria-hidden="true"></span><b>Contact</b><span class="odn-d">Talk to the fleet team</span></a>
+      </div>
+      <div class="odn-foot"><div class="odn-rows"><a href="login.html">Sign in<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="surveys.html">Surveys<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="customer-service.html">Customer service<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div></div>
+    </div>
+    <div class="odn-d1">
+      <div class="odn-lbl">Overview</div>
+      <div class="odn-tiles"><a class="odn-tile" href="index.html"><span class="odn-ph" data-bg="/images/wk-group-lifestyle.jpg" aria-hidden="true"></span><b>Home</b><span class="odn-d">Driver appreciation, made simple</span></a><a class="odn-tile" href="shop.html"><span class="odn-ph" data-bg="/images/pde-kit-01.jpg" aria-hidden="true"></span><b>Shop</b><span class="odn-d">Kits, awards and gear</span></a><a class="odn-tile" href="about.html"><span class="odn-ph" data-bg="/images/wk-driver-lifestyle.jpg" aria-hidden="true"></span><b>About</b><span class="odn-d">Who we are</span></a><a class="odn-tile" href="ideas.html"><span class="odn-ph" data-bg="/images/pde-kit-03.jpg" aria-hidden="true"></span><b>Insights &amp; Ideas</b><span class="odn-d">Research and playbooks</span></a></div>
+      <div class="odn-rows"><a href="contact.html">Contact<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="surveys.html">Surveys<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="login.html">Sign in<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a><a href="store-cart.html">Cart<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></a></div>
+      <a class="odn-btn odn-btn-block" href="shop.html">Shop appreciation kits <span aria-hidden="true">→</span></a>
+      <div class="odn-legal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /.sticky-header -->
+
+<!-- Mobile Drawer -->
+<div class="mobile-overlay"></div>
+<div class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+  <!-- Drawer header -->
+  <div class="mobile-drawer-header">
+    <a href="index.html" class="mobile-drawer-logo">
+      <img src="/images/logo-lockup.svg" alt="Driver Appreciation Solutions" class="nav-logo-img" style="height:40px">
+    </a>
+    <button type="button" class="mobile-close-btn" aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <!-- Nav section label -->
+  <p class="mobile-drawer-section-label">Navigation</p>
+
+  <!-- Nav links -->
+  <a href="index.html" class="mobile-nav-link active">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+    Home
+  </a>
+  <a href="shop.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+    Shop
+  </a>
+  <a href="about.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/></svg>
+    About
+  </a>
+  <a href="ideas.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+    Insights &amp; Ideas
+  </a>
+  <a href="surveys.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
+    Surveys
+  </a>
+  <a href="contact.html" class="mobile-nav-link">
+    <svg class="mobile-nav-link-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+    Contact
+  </a>
+
+  <!-- Drawer footer CTAs -->
+  <div class="mobile-drawer-footer">
+    <a href="#" id="drawer-auth-btn" class="btn btn-primary btn-full" onclick="openSignInModal(); return false;">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>
+      Sign In
+    </a>
+    <a href="store-cart.html" class="btn btn-full mobile-drawer-cart-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width:16px;height:16px;flex-shrink:0"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+      View Cart
+    </a>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+
+<!-- ============================================================
+     HERO
+     ============================================================ -->
+<section class="hero hero--photo">
+  <!-- A PORTRAIT CROP FOR A PORTRAIT BOX. The landscape original was being
+     cover-cropped into a near-full-screen phone hero, which kept about a
+     quarter of its width and then upscaled that. The mobile source is cut
+     3:4 with sharp's attention strategy, so the subject survives the crop.
+     Built by scripts/build-mobile-heroes.mjs. -->
+<picture>
+  <source media="(max-width:767px)" srcset="/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w" sizes="160vw" width="760" height="1013">
+  <img class="hero-bg" src="/images/band-forest-2400.jpg" width="2400" height="1018"
+       style="object-position:50% 58%"
+       srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
+       sizes="100vw"
+       alt="An empty highway running through dense evergreen forest"
+       fetchpriority="high" decoding="async">
+</picture>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title" data-reveal data-reveal-delay="1">
+          Driver Appreciation<br>
+          <em>Made Simple</em><br>
+          for Fleets.
+        </h1>
+        <p class="hero-subtitle" data-reveal data-reveal-delay="2">
+          Curated driver appreciation kits, onboarding packs, and milestone awards — built for fleets that understand retention starts with recognition.
+        </p>
+        <div class="hero-actions" data-reveal data-reveal-delay="3">
+          <a href="shop.html" class="btn btn-primary btn-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M2.879 7.121A3 3 0 007.5 6.196a3 3 0 004.621 1.86 3 3 0 003.029 1.111 3 3 0 001.7-4.167L15.5 3H4.5l-1.621 4.121z"/><path fill-rule="evenodd" d="M2 13.5A2.5 2.5 0 004.5 16h11a2.5 2.5 0 002.5-2.5v-3a2 2 0 002-2v-1H2v1a2 2 0 002 2v3z" clip-rule="evenodd"/></svg>
+            Shop All Products
+          </a>
+          <a href="contact.html" class="btn btn-secondary btn-lg">Request a Quote</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SOLUTIONS — 6 GLASSMORPHISM CARDS
+     ============================================================ -->
+<section class="solutions-section">
+  <div class="container" style="position:relative;z-index:1">
+    <div class="section-header centered">
+      <span class="section-eyebrow">Our Solutions</span>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">Six ways we move the<br>retention needle.</h2>
+      <p class="section-desc" data-reveal data-reveal-delay="2">Every solution is built for trucking fleets specifically — not repurposed corporate gifting. Click any card to see what's included and what results to expect.</p>
+    </div>
+
+    <div class="solutions-grid">
+
+      <!-- Card 1: Driver Appreciation Kits -->
+      <a class="solution-card" href="shop.html?category=appreciation" aria-label="Driver Appreciation Kits — browse and order">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/das-welcome-daw-home.webp" alt="Driver Appreciation Kits — Driver Appreciation Week event" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-blue">Appreciation</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Driver Appreciation Kits</div>
+          <div class="solution-card-desc">Curated recognition kits for Driver Appreciation Week and year-round programs. Branded, personalized, and delivered at any fleet scale.</div>
+          <div class="solution-card-stat">From $249/unit · Min. 10 units · Fleet-scale programs</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Browse &amp; Order</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 2: Safety Recognition -->
+      <a class="solution-card" href="shop.html?category=safety" aria-label="Safety Recognition Programs — browse and order">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/das-safety-recognition-home.webp" alt="Safety Recognition Programs — branded recognition program" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-green">Safety</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Safety Recognition Programs</div>
+          <div class="solution-card-desc">Reward clean safety records, near-miss reporting, and DOT milestone achievements with tangible recognition that reinforces the behavior.</div>
+          <div class="solution-card-stat">23% fewer accidents · 31% fewer violations</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Browse &amp; Order</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 3: New Driver Onboarding -->
+      <a class="solution-card" href="shop.html?category=onboarding" aria-label="New Driver Onboarding — browse and order">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/svc-onboarding-photo.webp" alt="New Driver Onboarding — branded welcome program" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-navy">Onboarding</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">New Driver Onboarding</div>
+          <div class="solution-card-desc">Premium Day 1 welcome packages that communicate your company planned ahead. First impressions determine retention trajectories — set the right one.</div>
+          <div class="solution-card-stat">30% less 90-day turnover · From $59.99/unit</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Browse &amp; Order</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 4: Milestone Awards -->
+      <a class="solution-card" href="shop.html?category=milestone" aria-label="Service Milestone Awards — browse and order">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/mrk-hero-card.webp" alt="Professional Driver Milestone Recognition Kit — complete recognition package contents" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-amber">Milestone</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Service Milestone Awards</div>
+          <div class="solution-card-desc">Premium recognition for 1-, 3-, 5-, and 10-year service anniversaries. Heavy, tangible, professional — the kind drivers display in their cabs for years.</div>
+          <div class="solution-card-stat">Highest reorder rate in catalog · Recognition kits &amp; custom-engraved medals</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Browse &amp; Order</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card: Service & Safety Medals -->
+      <a class="solution-card" href="shop.html?category=medals" aria-label="Service and Safety Medals — view all recognition medals">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/medals-hero.webp" alt="Service and Safety recognition medals — 1 to 6 million mile achievement medals in a premium display case" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-amber">Medals</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Service &amp; Safety Medals</div>
+          <div class="solution-card-desc">Premium mileage achievement medals — career Service Mileage and verified Safe Service Miles, from 250K to 6 Million. Custom-engraved with your fleet's brand.</div>
+          <div class="solution-card-stat">Career &amp; Safe tracks · 250K–6M · Custom-engraved medals</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">View Medals</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card: Safe Driver Awards -->
+      <a class="solution-card" href="shop.html?category=safedriver" aria-label="Safe Driver Awards — annual safety recognition program">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/safedriver-truck.webp" alt="Fleet truck displaying the Safe Driver 2026 door decal — annual safety recognition" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-blue">Safe Driver</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Safe Driver Awards</div>
+          <div class="solution-card-desc">Annual safety recognition — the year is the achievement. Premium vehicle door decal and matching lapel pin, with a consecutive-year progression up to Executive Legacy.</div>
+          <div class="solution-card-stat">Annual program · Decal + lapel pin · 5/10/15/20-year tiers</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Explore Program</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card: Retirement Legacy Collection -->
+      <a class="solution-card" href="shop.html?category=retirement" aria-label="Retirement Recognition Programs — Professional Driver Retirement Legacy Collection">
+        <div class="solution-card-img-wrap branded" style="background:#0A0B0E">
+          <img src="/images/retirement-medal-front-v2.webp" alt="Professional Driver Retirement Legacy medal — gold and navy in a presentation box" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-amber">Retirement</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Retirement Legacy Collection</div>
+          <div class="solution-card-desc">The culmination of a career — not another award. A dignified, presentation-ready legacy package honoring drivers who gave decades to the road. Honoring a career; celebrating a legacy.</div>
+          <div class="solution-card-stat">7-piece legacy collection · Medal · Leadership letter · Presentation box</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Explore Program</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 5: Holiday & Seasonal -->
+      <!-- Card: Birthday Recognition Program -->
+      <a class="solution-card" href="shop.html?category=birthday" aria-label="Professional Driver Birthday Recognition Program — managed annual recognition">
+        <div class="solution-card-img-wrap branded" style="background:#0F1B3A">
+          <img src="/images/svc-birthday.svg" alt="Professional Driver Birthday Recognition Program — annual challenge coin emblem" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-amber">Birthday</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Birthday Recognition Program</div>
+          <div class="solution-card-desc">A managed annual program — one budget approval, year-round birthday recognition. DAS handles selection, personalization, and shipping for every driver, all year.</div>
+          <div class="solution-card-stat">$65/driver/year · shipping included · budget-capped · DAS-managed</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Explore Program</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <a class="solution-card" href="shop.html?category=holiday" aria-label="Holiday and Seasonal Programs — browse and order">
+        <div class="solution-card-img-wrap branded">
+          <img src="/images/holiday-trifecta-hero.webp" alt="Holiday & Seasonal Programs — enterprise driver gifts: seat back organizer, duffel bag, and backpack" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-red">Holiday</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Holiday & Seasonal Programs</div>
+          <div class="solution-card-desc">Year-end recognition that travels home with OTR drivers. Particularly effective when their families see the package — the impact extends beyond the driver.</div>
+          <div class="solution-card-stat">Especially effective for OTR fleets · From $54.99/unit</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Browse &amp; Order</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 6: Mile Packs -->
+      <a class="solution-card" href="shop.html?category=milepacks" aria-label="Safe Miles Programs — view the recognition kits">
+        <div class="solution-card-img-wrap">
+          <img src="/images/mp-05-1.jpg" alt="Safe Miles Programs — curated driver recognition kits" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-purple">New</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Safe Miles Programs</div>
+          <div class="solution-card-desc">Curated driver-recognition kits for every moment on the road — fuel, hydration, comfort, safety, and milestone packs. Three tiers, free shipping included.</div>
+          <div class="solution-card-stat">From $49.99 · Free shipping · Curated kits</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">View Safe Miles Programs</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+      <!-- Card 7: Women in Transportation Recognition Collection -->
+      <a class="solution-card" href="women-in-transportation.html" aria-label="Women in Transportation Recognition Collection — view the program">
+        <div class="solution-card-img-wrap">
+          <img src="/images/das-women-in-transportation-hero.webp" alt="Women in Transportation Recognition Collection — custom-branded cap, tumbler, and lapel pin" loading="lazy" onerror="this.style.display='none'">
+          <span class="solution-card-badge scb-purple">New</span>
+        </div>
+        <div class="solution-card-body">
+          <div class="solution-card-title">Women in Transportation™</div>
+          <div class="solution-card-desc">A professional recognition program celebrating the women who move the industry forward — custom-branded caps, tumblers, and lapel pins, in an optional Signature Purple palette.</div>
+          <div class="solution-card-stat">Program-based · Custom-branded · Consultation</div>
+          <div class="solution-card-cta">
+            <span class="solution-card-cta-text">Explore the Collection</span>
+            <span class="solution-card-cta-arrow"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg></span>
+          </div>
+        </div>
+      </a>
+
+    </div><!-- /solutions-grid -->
+
+  </div>
+</section>
+
+<!-- ============================================================
+     OUR EXPERTISE — 3 CARDS
+     ============================================================ -->
+<section class="tenx why2-sec"><div class="ill-field" aria-hidden="true"><span class="fm" style="left:-3%;top:10%;--h:170px;--r:-4deg;--o:0.06"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:93%;top:16%;--h:115px;--r:8deg;--o:0.06"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:5%;top:68%;--h:125px;--r:-7deg;--o:0.055"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:89%;top:70%;--h:110px;--r:6deg;--o:0.055"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:48%;top:-7%;--h:120px;--r:12deg;--o:0.04"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:20%;top:28%;--h:88px;--r:-12deg;--o:0.05"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span></div><div class="wrap">
+<div class="hd"><span class="eb">Our Expertise</span><h2 class="ttl">Built differently than<br>every other vendor.</h2>
+<p class="dsc">We exist at the intersection of trucking culture and recognition science &mdash; the combination that produces measurable results where generic gifting vendors don&rsquo;t.</p></div>
+<div class="whygrid"><article class="whycard"><div class="why-photo"><img src="/images/das-da-kit-1.webp" alt="" loading="lazy"></div><div class="why-body"><div class="mark"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></div><h3>Tailored Solutions</h3><p>Every product is curated for trucking professionals specifically &mdash; not repurposed from a generic corporate gifting catalog.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Industry-informed product selection</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Personalized recognition messaging</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>3 tiers: Standard, Premium, Enterprise</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Fleet-branded custom options available</span></li></ul></div></article><article class="whycard"><div class="why-photo"><img src="/images/home-hero-1400.webp" alt="" loading="lazy"></div><div class="why-body"><div class="mark"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></div><h3>Expert Guidance</h3><p>We&rsquo;re not a passive catalog. Bring us the recognition challenge &mdash; turnover, safety culture, first-90-day attrition &mdash; and we prescribe the program.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Dedicated account manager (100+ fleets)</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Program design consultation included</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Quote in 24 hours for enterprise orders</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>ROI benchmarks &amp; retention data provided</span></li></ul></div></article><article class="whycard"><div class="why-photo"><img src="/images/pak-collection-hero.webp" alt="" loading="lazy"></div><div class="why-body"><div class="mark"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></div><h3>Comprehensive Support</h3><p>From first order to annual re-order, we&rsquo;re in your corner &mdash; express processing, quality guarantees, white-glove fulfillment.</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Ships per your program timeline</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Express 48-hr processing available</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>100% quality satisfaction guarantee</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span>Net-30 terms for enterprise accounts</span></li></ul></div></article></div>
+</div></section>
+
+<!-- ============================================================
+     DRIVER NEWSLETTER — PORTAL FEATURE SPOTLIGHT
+     ============================================================ -->
+<section class="section nlp-sec">
+  <div class="nlp-prism" aria-hidden="true"></div>
+  <div class="container">
+    <div class="nlp-grid">
+
+      <!-- Left: copy -->
+      <div>
+        <span class="section-eyebrow" data-reveal>Fleet Portal Feature</span>
+        <h2 class="section-title" style="font-size:clamp(1.7rem,3.2vw,2.5rem)" data-reveal data-reveal-delay="1">Your fleet's own<br>driver newsletter.</h2>
+        <p class="nlp-lede">Physical kits make an impact on delivery day. A quarterly driver newsletter keeps that recognition alive all quarter &mdash; on bulletin boards, in the cab, shared with family.</p>
+        <ul class="nlp-list"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Driver Spotlight sections</b> &mdash; name, tenure, and personal recognition</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Safety awards, milestones, new hires</b> &mdash; 8 content modules to choose from</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Your brand, colors, and logo</b> &mdash; applied automatically throughout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>One shareable link</b> &mdash; email it, print it, or post it in your portal</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.75l6 6 9-13.5"/></svg><span><b>Free with every portal account</b> &mdash; no extra charge, no design team needed</span></li></ul>
+        <div class="nlp-ctas">
+          <a href="publications.html" class="nlp-btn nlp-btn-p">See a sample issue<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a>
+          <a href="signup.html" class="nlp-btn nlp-btn-s">Create free account</a>
+        </div>
+        <p class="nlp-foot">Free with every DAS fleet portal account.</p>
+      </div>
+
+      <!-- Right: the printed issue -->
+      <div class="nlp-stack">
+        <div class="nlp-sheet2" aria-hidden="true"></div>
+        <div class="nlp-sheet">
+          <div class="nlp-mast">
+            <div class="nlp-mast-name">Ridgeline<br>Driver Report</div>
+            <div class="nlp-mast-meta">Q3 2026<br>Issue No. 11<br>412 drivers</div>
+          </div>
+          <div class="nlp-body">
+            <div class="nlp-spot">
+              <img src="/images/das-safety-recognition-home.webp" alt="A driver receiving his million-mile recognition medals in front of the fleet" loading="lazy" width="1200" height="896">
+              <div class="nlp-spot-body">
+                <span class="nlp-kicker">Driver Spotlight</span>
+                <h4>Ray Delgado &mdash; 1,000,000 miles</h4>
+                <p>Nineteen years, zero preventables, and the guy every new hire asks to ride with. Ray took his million-mile medal at the Joliet terminal on August 6.</p>
+              </div>
+            </div>
+            <div>
+              <div class="nlp-blk"><h5>Safe miles this quarter</h5>
+                <div class="nlp-row"><span>Drivers at 100% safe</span><b>318</b></div>
+                <div class="nlp-row"><span>Preventables</span><b>4</b></div>
+                <div class="nlp-row"><span>Quarter over quarter</span><b>&minus;38%</b></div>
+              </div>
+              <div class="nlp-blk"><h5>Years of service</h5>
+                <div class="nlp-row"><span>M. Whitfield</span><b>15 yr</b></div>
+                <div class="nlp-row"><span>D. Okonkwo</span><b>10 yr</b></div>
+                <div class="nlp-row"><span>S. Barrera</span><b>5 yr</b></div>
+              </div>
+              <div class="nlp-blk"><h5>Welcome aboard</h5>
+                <div class="nlp-row"><span>New hires, Q3</span><b>27</b></div>
+              </div>
+            </div>
+          </div>
+          <div class="nlp-pfoot"><span>Ridgeline Carriers</span><span>Built with DAS Fleet Portal</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     HOW IT WORKS
+     ============================================================ -->
+<section class="tenx px-sec" id="how-it-works"><div class="hprism" aria-hidden="true"></div><div class="ill-field" aria-hidden="true"><span class="fm" style="left:-3%;top:8%;--h:180px;--r:-4deg;--o:0.075"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:92%;top:14%;--h:120px;--r:8deg;--o:0.07"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:6%;top:62%;--h:130px;--r:-7deg;--o:0.06"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:87%;top:58%;--h:115px;--r:6deg;--o:0.065"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:44%;top:-6%;--h:135px;--r:12deg;--o:0.045"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:18%;top:22%;--h:90px;--r:-12deg;--o:0.055"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:74%;top:84%;--h:105px;--r:-5deg;--o:0.05"><svg class="das-ill das-ill-sign" aria-hidden="true"><use href="#das-sign"></use></svg></span><span class="fm" style="left:30%;top:88%;--h:100px;--r:9deg;--o:0.05"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:63%;top:30%;--h:88px;--r:-9deg;--o:0.05"><svg class="das-ill das-ill-pin" aria-hidden="true"><use href="#das-pin"></use></svg></span><span class="fm" style="left:2%;top:34%;--h:95px;--r:5deg;--o:0.045"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span></div><div class="wrap"><div class="hd"><span class="eb">Process</span><h2 class="ttl">From first call to<br>first delivery &mdash; three steps.</h2><p class="dsc">Enterprise fleet buyers shouldn&rsquo;t have to figure it out. Tell us what you need and we handle the rest &mdash; from program design to white-glove delivery at any scale.</p></div><div class="road"><div class="dash" aria-hidden="true"></div><div class="stops"><div class="stop"><div class="marker">1</div><article class="stop-card"><div class="shot"><div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;background:repeating-linear-gradient(135deg,#EEF2F9 0 12px,#E6ECF6 12px 24px)"><div style="position:absolute;inset:9px;border:1.5px dashed rgba(26,46,110,.28);border-radius:9px"></div><div style="position:relative;z-index:1;max-width:90%"><div style="height:38px;margin:0 auto 8px;opacity:.5;color:#1A2E6E;display:flex;justify-content:center"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></div><span style="font-family:Inter,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#1A2E6E;background:rgba(255,255,255,.9);border-radius:99px;padding:5px 11px;display:inline-block;margin-bottom:8px">Photo coming soon</span><p style="font-family:Inter,sans-serif;font-size:11px;line-height:1.45;color:#5B6A8A">Your fleet ops team on one call with our program advisors.</p></div></div></div><div class="bd"><h3>Tell us your fleet</h3><p>Driver count, recognition goals, upcoming dates &mdash; Driver Appreciation Week, milestones, onboarding schedules. Five minutes of context is all we need.</p></div></article></div><div class="stop"><div class="marker">2</div><article class="stop-card"><div class="shot"><div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;background:repeating-linear-gradient(135deg,#EEF2F9 0 12px,#E6ECF6 12px 24px)"><div style="position:absolute;inset:9px;border:1.5px dashed rgba(26,46,110,.28);border-radius:9px"></div><div style="position:relative;z-index:1;max-width:90%"><div style="height:38px;margin:0 auto 8px;opacity:.5;color:#1A2E6E;display:flex;justify-content:center"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></div><span style="font-family:Inter,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#1A2E6E;background:rgba(255,255,255,.9);border-radius:99px;padding:5px 11px;display:inline-block;margin-bottom:8px">Photo coming soon</span><p style="font-family:Inter,sans-serif;font-size:11px;line-height:1.45;color:#5B6A8A">Kits assembled, engraved and packed by hand before shipment.</p></div></div></div><div class="bd"><h3>We build your program</h3><p>We prescribe the right products, tier, quantity and personalization. You approve. We handle branding, packaging and fulfillment logistics.</p></div></article></div><div class="stop"><div class="marker">3</div><article class="stop-card"><div class="shot"><div style="position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:16px;background:repeating-linear-gradient(135deg,#EEF2F9 0 12px,#E6ECF6 12px 24px)"><div style="position:absolute;inset:9px;border:1.5px dashed rgba(26,46,110,.28);border-radius:9px"></div><div style="position:relative;z-index:1;max-width:90%"><div style="height:38px;margin:0 auto 8px;opacity:.5;color:#1A2E6E;display:flex;justify-content:center"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></div><span style="font-family:Inter,sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.17em;text-transform:uppercase;color:#1A2E6E;background:rgba(255,255,255,.9);border-radius:99px;padding:5px 11px;display:inline-block;margin-bottom:8px">Photo coming soon</span><p style="font-family:Inter,sans-serif;font-size:11px;line-height:1.45;color:#5B6A8A">Handover at your terminal &mdash; branded kits into drivers’ hands.</p></div></div></div><div class="bd"><h3>Delivered on your timeline</h3><p>Kits arrive at your terminal &mdash; individually packaged, branded, ready to distribute. Enterprise fleets get coordinated multi-location delivery.</p></div></article></div></div></div><div class="closer"><div class="cta-panel"><div class="cta-mesh"></div><div class="cta-grain"></div><span class="cta-panel-eyebrow">Start here</span><h2 class="cta-panel-title">Tell us your fleet.<br>We handle the rest.</h2><p class="cta-panel-desc">Five minutes of context and a quote inside 24 hours. No catalogue to wade through and no minimum you have to guess at.</p><div class="cta-panel-acts"><a class="pill pill-white" href="contact.html">Start your program <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a><a class="pill pill-glass" href="shop.html">Browse the catalog</a></div><p class="cta-panel-foot">Ships from 10 units &middot; Net-30 for approved carriers</p></div></div></div></section>
+
+<!-- ============================================================
+     PRODUCT CATEGORIES
+     ============================================================ -->
+<section class="tenx pl-sec"><div class="hprism" aria-hidden="true"></div><div class="ill-field" aria-hidden="true"><span class="fm" style="left:-3%;top:8%;--h:180px;--r:-4deg;--o:0.075"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:92%;top:14%;--h:120px;--r:8deg;--o:0.07"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:6%;top:62%;--h:130px;--r:-7deg;--o:0.06"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:87%;top:58%;--h:115px;--r:6deg;--o:0.065"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:44%;top:-6%;--h:135px;--r:12deg;--o:0.045"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:18%;top:22%;--h:90px;--r:-12deg;--o:0.055"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:74%;top:84%;--h:105px;--r:-5deg;--o:0.05"><svg class="das-ill das-ill-sign" aria-hidden="true"><use href="#das-sign"></use></svg></span><span class="fm" style="left:30%;top:88%;--h:100px;--r:9deg;--o:0.05"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:63%;top:30%;--h:88px;--r:-9deg;--o:0.05"><svg class="das-ill das-ill-pin" aria-hidden="true"><use href="#das-pin"></use></svg></span><span class="fm" style="left:2%;top:34%;--h:95px;--r:5deg;--o:0.045"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span></div><div class="wrap"><div class="hd"><span class="eb">Product Lines</span><h2 class="ttl">Three programs.<br>Every recognition need covered.</h2><p class="dsc">One vendor across the whole driver lifecycle &mdash; day one, every anniversary, and the week the whole fleet gets celebrated.</p></div><div class="g3"><div class="cat"><a class="cat-cover" href="shop.html?category=appreciation" aria-label="Driver Appreciation Kits"><img src="/images/pak-collection-hero.webp" alt="Driver Appreciation Kits" loading="lazy"><span class="bg hot">Most Popular</span></a><div class="bd"><h3><a href="shop.html?category=appreciation">Driver Appreciation Kits</a></h3><p>Tailored kits built to honor trucking professionals during Driver Appreciation Week.</p><div class="covers"><span>Week kits</span><span>Year-round recognition</span><span>Branded merchandise</span><span>Presentation cases</span></div><div class="inside"><div class="lab">Inside this collection</div><div class="thumbs"><a class="thumb" href="product.html?id=das-001" aria-label="Driver Appreciation Kit"><img src="/images/das-da-kit-1.webp" alt="Driver Appreciation Kit" loading="lazy"><span>Driver Appreciation Kit</span></a><a class="thumb" href="product.html?id=dot-ready-kit" aria-label="The DOT Ready&trade; Kit"><img src="/images/pak-dot-ready-kit-heroA.webp" alt="The DOT Ready&trade; Kit" loading="lazy"><span>The DOT Ready&trade; Kit</span></a><a class="thumb" href="product.html?id=das-009" aria-label="Professional Driver Self-Care Kit&trade;"><img src="/images/travel-kit-hero-v2.jpg" alt="Professional Driver Self-Care Kit&trade;" loading="lazy"><span>Professional Driver Self-Care Kit&trade;</span></a></div><a class="go" href="shop.html?category=appreciation">Explore the collection<span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></span></a></div></div></div><div class="cat"><a class="cat-cover" href="shop.html?category=onboarding" aria-label="Onboarding Solutions"><img src="/images/pak-premium-onboarding-hero.webp" alt="Onboarding Solutions" loading="lazy"><span class="bg">New Driver Programs</span></a><div class="bd"><h3><a href="shop.html?category=onboarding">Onboarding Solutions</a></h3><p>Comprehensive kits for new driver onboarding &mdash; set the culture from day one.</p><div class="covers"><span>Day-one welcome kits</span><span>Branded essentials</span><span>First-90-day programs</span><span>Terminal delivery</span></div><div class="inside"><div class="lab">Inside this collection</div><div class="thumbs"><a class="thumb" href="product.html?id=das-003" aria-label="Premium Onboarding Pack"><img src="/images/svc-onboarding-photo.webp" alt="Premium Onboarding Pack" loading="lazy"><span>Premium Onboarding Pack</span></a><a class="thumb" href="product.html?id=das-007" aria-label="Welcome Driver Appreciation Kit"><img src="/images/welcome-driver-kit-v2.webp" alt="Welcome Driver Appreciation Kit" loading="lazy"><span>Welcome Driver Appreciation Kit</span></a><a class="thumb" href="product.html?id=das-006" aria-label="Professional Driver Essentials Kit&trade;"><img src="/images/pde-kit-01.jpg" alt="Professional Driver Essentials Kit&trade;" loading="lazy"><span>Professional Driver Essentials Kit&trade;</span></a></div><a class="go" href="shop.html?category=onboarding">Explore the collection<span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></span></a></div></div></div><div class="cat"><a class="cat-cover" href="shop.html?category=milestone" aria-label="Service Milestone Gifts"><img src="/images/medals-hero.webp" alt="Service Milestone Gifts" loading="lazy"><span class="bg">Retention Programs</span></a><div class="bd"><h3><a href="shop.html?category=milestone">Service Milestone Gifts</a></h3><p>Recognize and celebrate driver years-of-service milestones with premium awards.</p><div class="covers"><span>250K &ndash; 6M mile medals</span><span>Engraved presentation cases</span><span>Lapel pins</span><span>Retirement legacy</span></div><div class="inside"><div class="lab">Inside this collection</div><div class="thumbs"><a class="thumb" href="product.html?id=milestone-kit" aria-label="Professional Driver Milestone Recognition Kit"><img src="/images/5-million-mile-medal.webp" alt="Professional Driver Milestone Recognition Kit" loading="lazy"><span>Professional Driver Milestone Recognition Kit</span></a><a class="thumb" href="product.html?id=safe-miles-kit" aria-label="Safe Miles Recognition Kit"><img src="/images/milestone-kit-medal.jpg" alt="Safe Miles Recognition Kit" loading="lazy"><span>Safe Miles Recognition Kit</span></a><a class="thumb" href="product.html?id=ssm-lapel-pin" aria-label="Safe Service Miles Lapel Pin"><img src="/images/milestone-kit-lapel-hat.jpg" alt="Safe Service Miles Lapel Pin" loading="lazy"><span>Safe Service Miles Lapel Pin</span></a></div><a class="go" href="shop.html?category=milestone">Explore the collection<span class="ar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></span></a></div></div></div></div><div class="closer"><a class="pill pill-blue" href="shop.html">Browse all products <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a><a class="pill pill-ghost" href="contact.html">Talk to a program advisor</a></div></div></section>
+
+<!-- ============================================================
+     FEATURED PRODUCTS
+     ============================================================ -->
+<section class="tenx ff-sec"><div class="hprism" aria-hidden="true"></div><div class="ill-field" aria-hidden="true"><span class="fm" style="left:-3%;top:8%;--h:180px;--r:-4deg;--o:0.075"><svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg></span><span class="fm" style="left:92%;top:14%;--h:120px;--r:8deg;--o:0.07"><svg class="das-ill das-ill-medal" aria-hidden="true"><use href="#das-medal"></use></svg></span><span class="fm" style="left:6%;top:62%;--h:130px;--r:-7deg;--o:0.06"><svg class="das-ill das-ill-kit" aria-hidden="true"><use href="#das-kit"></use></svg></span><span class="fm" style="left:87%;top:58%;--h:115px;--r:6deg;--o:0.065"><svg class="das-ill das-ill-clipboard" aria-hidden="true"><use href="#das-clipboard"></use></svg></span><span class="fm" style="left:44%;top:-6%;--h:135px;--r:12deg;--o:0.045"><svg class="das-ill das-ill-wheel" aria-hidden="true"><use href="#das-wheel"></use></svg></span><span class="fm" style="left:18%;top:22%;--h:90px;--r:-12deg;--o:0.055"><svg class="das-ill das-ill-mug" aria-hidden="true"><use href="#das-mug"></use></svg></span><span class="fm" style="left:74%;top:84%;--h:105px;--r:-5deg;--o:0.05"><svg class="das-ill das-ill-sign" aria-hidden="true"><use href="#das-sign"></use></svg></span><span class="fm" style="left:30%;top:88%;--h:100px;--r:9deg;--o:0.05"><svg class="das-ill das-ill-badge" aria-hidden="true"><use href="#das-badge"></use></svg></span><span class="fm" style="left:63%;top:30%;--h:88px;--r:-9deg;--o:0.05"><svg class="das-ill das-ill-pin" aria-hidden="true"><use href="#das-pin"></use></svg></span><span class="fm" style="left:2%;top:34%;--h:95px;--r:5deg;--o:0.045"><svg class="das-ill das-ill-clock" aria-hidden="true"><use href="#das-clock"></use></svg></span></div><div class="wrap"><div class="hd"><span class="eb">Featured Products</span><h2 class="ttl">Order 10 or 10,000 &mdash;<br>quality doesn&rsquo;t scale down.</h2><p class="dsc">One flagship programme and the two kits fleets reorder most, all at the same build quality whether you are recognising ten drivers or ten thousand.</p></div><div class="flag"><div class="ph"><img src="/images/mrk-hero-card.webp" alt="Professional Driver Milestone Recognition Kit" loading="lazy"></div><div><span class="kicker"><i></i>Flagship Recognition Kit</span><span class="k">The Complete Driver Recognition Package</span><h3>Professional Driver Milestone Recognition Kit</h3><p>One recognition program. Multiple recognition moments. Everything needed to celebrate a professional driver&rsquo;s achievement &mdash; in a single premium package, for any milestone from 250K to 6 Million miles.</p><div class="contents"><span class="lbl">What is in the kit</span><ul><li>Milestone Medal</li><li>Lapel Pins</li><li>Recognition T-Shirt</li><li>Keychain</li><li>Driver Road Bag Tag</li></ul></div><hr class="engrave"><div class="foot"><span class="pp"><b>$499</b><span>per kit &middot; complete package</span></span><a class="pill pill-blue" href="product.html?id=milestone-kit">Explore the recognition kit <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a></div></div></div><div class="two"><article class="pc" data-product-id="das-001" data-product-name="Driver Appreciation Kit" data-product-price="249" data-product-category="Appreciation Kits" data-product-image="/images/das-da-kit-1.webp" data-product-min-qty="10"><div class="pi"><a href="product.html?id=das-001" aria-label="View product"><img src="/images/das-da-kit-1.webp" alt="Driver Appreciation Kit" loading="lazy" style="aspect-ratio:1122/1402"></a></div><div class="pb"><div class="pcat">Appreciation Kits</div><h4><a href="product.html?id=das-001">Driver Appreciation Kit</a></h4><p>Curated recognition kits for Driver Appreciation Week. Branded merchandise, personalized card, premium packaging.</p><div class="qty">Quantity (min. 10)</div><div class="row"><span class="qty-control"><button type="button" class="qty-btn" data-dir="down" aria-label="Decrease">&minus;</button><input class="qty-input" type="number" value="10" min="10" data-step="10" aria-label="Quantity"><button type="button" class="qty-btn" data-dir="up" aria-label="Increase">+</button></span><span class="pr">$249<em>per unit</em></span><button type="button" class="pill pill-blue pill-sm" data-add-to-cart style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M2.5 3h1.4l2 10.2h11.3l2-7.6a58 58 0 00-15.9-1.8"/><circle cx="8" cy="19" r="1.4"/><circle cx="17.5" cy="19" r="1.4"/></svg>Add</button></div></div></article><article class="pc" data-product-id="das-003" data-product-name="Premium Onboarding Pack" data-product-price="59.99" data-product-category="Onboarding" data-product-image="/images/pak-premium-onboarding-hero.webp" data-product-min-qty="10"><div class="pi"><a href="product.html?id=das-003" aria-label="View product"><img src="/images/pak-premium-onboarding-hero.webp" alt="Premium Onboarding Pack" loading="lazy" style="aspect-ratio:1200/896"></a></div><div class="pb"><div class="pcat">Onboarding</div><h4><a href="product.html?id=das-003">Premium Onboarding Pack</a></h4><p>Welcome new drivers the right way from day one. Sets the cultural tone and makes a lasting first impression.</p><div class="qty">Quantity (min. 10)</div><div class="row"><span class="qty-control"><button type="button" class="qty-btn" data-dir="down" aria-label="Decrease">&minus;</button><input class="qty-input" type="number" value="10" min="10" data-step="10" aria-label="Quantity"><button type="button" class="qty-btn" data-dir="up" aria-label="Increase">+</button></span><span class="pr">$59.99<em>per unit</em></span><button type="button" class="pill pill-blue pill-sm" data-add-to-cart style="margin-left:auto"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M2.5 3h1.4l2 10.2h11.3l2-7.6a58 58 0 00-15.9-1.8"/><circle cx="8" cy="19" r="1.4"/><circle cx="17.5" cy="19" r="1.4"/></svg>Add</button></div></div></article></div></div></section>
+
+<!-- ============================================================
+     COUNTDOWN — ENTERPRISE NAVY
+     ============================================================ -->
+<section class="tenx daw2-sec"><div class="wrap">
+<div class="cta-panel cta-panel--prism"><div class="cta-mesh"></div><div class="cta-grain"></div>
+<span class="cta-panel-eyebrow">September 13&ndash;19, 2026</span>
+<h2 class="cta-panel-title">Driver Appreciation Week</h2>
+<div class="daw-timer" role="timer" aria-label="Countdown to Driver Appreciation Week">
+<div class="u"><b id="cd-days">--</b><span>Days</span></div><i>:</i>
+<div class="u"><b id="cd-hours">--</b><span>Hours</span></div><i>:</i>
+<div class="u"><b id="cd-minutes">--</b><span>Minutes</span></div><i>:</i>
+<div class="u"><b id="cd-seconds">--</b><span>Seconds</span></div>
+</div>
+<p class="cta-panel-desc">Driver Appreciation Week is here. Planning recognition for the rest of the year or for 2027? Fleet orders take three weeks of production plus shipping, so start early.</p>
+<div class="cta-panel-acts"><a class="pill pill-white" href="shop.html?category=appreciation">Shop appreciation kits <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px" aria-hidden="true"><path d="M13.5 4.5L21 12l-7.5 7.5M21 12H3"/></svg></a><a class="pill pill-glass" href="contact.html">Request a fleet quote</a></div>
+</div></div></section>
+
+<!-- ============================================================
+     ENTERPRISE TESTIMONIALS
+     ============================================================ -->
+<section class="testimonials-section tst-mq-sec">
+  <div class="container">
+    <div class="tst-mq-head">
+      <span class="section-eyebrow" data-reveal>Client Results</span>
+      <h2 class="section-title" style="margin-bottom:0" data-reveal data-reveal-delay="1">What fleet operators say.</h2>
+    </div>
+    <div class="tst-mq">
+      <div class="tst-mq-track">
+        <article class="tst-mq-card"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>We&rsquo;ve been ordering from Driver Appreciation Solutions for three years. Our retention metrics improved measurably after implementing their recognition kits across the fleet. Quality is consistently excellent &mdash; the ordering process is effortless at scale.</p><div class="tst-mq-metric">Measurable retention improvement</div><div class="tst-mq-foot"><div class="tst-mq-av">SC</div><div><div class="tst-mq-nm">Sarah Chen</div><div class="tst-mq-rl">Fleet Operations Manager</div></div></div></article><article class="tst-mq-card"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>The onboarding packs set exactly the right tone from day one. New drivers notice immediately when a company invests in making them feel valued. Turnover in the first 90 days dropped significantly after we started using them across our 120-driver fleet.</p><div class="tst-mq-metric">Significant 90-day turnover reduction</div><div class="tst-mq-foot"><div class="tst-mq-av">MJ</div><div><div class="tst-mq-nm">Marcus Johnson</div><div class="tst-mq-rl">Director of Driver Relations</div></div></div></article><article class="tst-mq-card"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>The milestone award boxes are something our long-tenured drivers display in their cabs &mdash; they talk about it with newer drivers. That cultural impact is hard to quantify. What I can quantify: our 5-year retention improved 18% the year we started this program.</p><div class="tst-mq-metric">+18% 5-year driver retention</div><div class="tst-mq-foot"><div class="tst-mq-av">LT</div><div><div class="tst-mq-nm">Linda Torres</div><div class="tst-mq-rl">HR Director</div></div></div></article><article class="tst-mq-card"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>Fast, professional, and genuinely built for trucking &mdash; not a generic corporate gift vendor who added &ldquo;driver&rdquo; to their catalog. The kits feel curated. Our drivers actually reach out to thank management after receiving them, which never happened before.</p><div class="tst-mq-metric">Drivers thank management unprompted</div><div class="tst-mq-foot"><div class="tst-mq-av">RW</div><div><div class="tst-mq-nm">Robert Walters</div><div class="tst-mq-rl">VP of Operations</div></div></div></article>
+        <article class="tst-mq-card" aria-hidden="true"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>We&rsquo;ve been ordering from Driver Appreciation Solutions for three years. Our retention metrics improved measurably after implementing their recognition kits across the fleet. Quality is consistently excellent &mdash; the ordering process is effortless at scale.</p><div class="tst-mq-metric">Measurable retention improvement</div><div class="tst-mq-foot"><div class="tst-mq-av">SC</div><div><div class="tst-mq-nm">Sarah Chen</div><div class="tst-mq-rl">Fleet Operations Manager</div></div></div></article><article class="tst-mq-card" aria-hidden="true"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>The onboarding packs set exactly the right tone from day one. New drivers notice immediately when a company invests in making them feel valued. Turnover in the first 90 days dropped significantly after we started using them across our 120-driver fleet.</p><div class="tst-mq-metric">Significant 90-day turnover reduction</div><div class="tst-mq-foot"><div class="tst-mq-av">MJ</div><div><div class="tst-mq-nm">Marcus Johnson</div><div class="tst-mq-rl">Director of Driver Relations</div></div></div></article><article class="tst-mq-card" aria-hidden="true"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>The milestone award boxes are something our long-tenured drivers display in their cabs &mdash; they talk about it with newer drivers. That cultural impact is hard to quantify. What I can quantify: our 5-year retention improved 18% the year we started this program.</p><div class="tst-mq-metric">+18% 5-year driver retention</div><div class="tst-mq-foot"><div class="tst-mq-av">LT</div><div><div class="tst-mq-nm">Linda Torres</div><div class="tst-mq-rl">HR Director</div></div></div></article><article class="tst-mq-card" aria-hidden="true"><span class="tst-mq-stars"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.6l-5.9 3.1 1.2-6.6L2.5 9.5l6.6-.9z"/></svg></span><p>Fast, professional, and genuinely built for trucking &mdash; not a generic corporate gift vendor who added &ldquo;driver&rdquo; to their catalog. The kits feel curated. Our drivers actually reach out to thank management after receiving them, which never happened before.</p><div class="tst-mq-metric">Drivers thank management unprompted</div><div class="tst-mq-foot"><div class="tst-mq-av">RW</div><div><div class="tst-mq-nm">Robert Walters</div><div class="tst-mq-rl">VP of Operations</div></div></div></article>
+      </div>
+    </div>
+    <p class="tst-mq-sub">Hover to pause.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     OUR STANDARD — brand motto (D6)
+     ============================================================ -->
+<section class="section" style="background:linear-gradient(160deg,#081230 0%,#1A2E6E 100%);border-top:1px solid rgba(200,168,75,.18);border-bottom:1px solid rgba(200,168,75,.18)">
+  <div class="container" style="max-width:820px;text-align:center">
+    <span class="section-eyebrow" style="color:#C8A14B">Our Standard</span>
+    <p style="font-size:clamp(1.5rem,3.4vw,2.35rem);line-height:1.34;color:#fff;font-weight:600;letter-spacing:-0.02em;margin:16px 0 0">We measure our success by a simple standard: <em style="color:#E8C766;font-style:italic;font-weight:600">did the driver feel valued?</em></p>
+    <p style="font-size:1.0625rem;color:#9FB0D8;margin:18px 0 0;line-height:1.6">If the answer is yes, we've accomplished our mission.</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FINAL CTA — enterprise dark navy
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SOLUTION DETAIL MODAL
+     ============================================================ -->
+
+
+<!-- ============================================================
+     SIGN-IN MODAL (triggered from nav "Sign In" button)
+     ============================================================ -->
+<div class="signin-modal-overlay" id="signin-modal" onclick="closeSignInModal(event)">
+  <div class="signin-modal-card" role="dialog" aria-modal="true" aria-label="Sign in or join us">
+    <button type="button" class="signin-modal-close" onclick="closeSignInModal(null)" aria-label="Close">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+    </button>
+
+    <!-- Logo mark -->
+    <div class="signin-modal-logo">
+      <img src="/images/logo-lockup.svg" alt="Driver Appreciation Solutions" style="height:36px;width:auto">
+    </div>
+
+    <h2 class="signin-modal-title">Sign in or join us</h2>
+    <p class="signin-modal-sub">If you don't have an account, we'll prompt you to create one.</p>
+
+    <!-- Continue (email) -->
+    <a href="login.html" class="signin-modal-continue">Continue</a>
+
+    <!-- OR divider -->
+    <div class="signin-modal-or"><span>OR</span></div>
+
+    <!-- Continue with Google -->
+    <button type="button" class="signin-modal-google" onclick="signInWithGoogle()">
+      <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.874 2.684-6.615z" fill="#4285F4"/>
+        <path d="M9 18c2.43 0 4.467-.806 5.956-2.18L12.048 13.56c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332C2.438 15.983 5.482 18 9 18z" fill="#34A853"/>
+        <path d="M3.964 10.71c-.18-.54-.282-1.117-.282-1.71s.102-1.17.282-1.71V4.958H.957C.347 6.173 0 7.548 0 9s.348 2.827.957 4.042L3.964 10.71z" fill="#FBBC05"/>
+        <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0 5.482 0 2.438 2.017.957 4.958L3.964 7.29C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+      </svg>
+      Continue with Google
+    </button>
+
+    <p class="signin-modal-legal">By continuing, you agree to our <a href="terms.html">Terms</a> and <a href="privacy.html">Privacy Policy</a>.</p>
+  </div>
+</div>
+
+<!-- ============================================================
+     HOW WE HELP FLEETS — enterprise split section
+     ============================================================ -->
+<section class="fw-sec">
+  <div class="fw-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="fw-head">
+      <span class="section-eyebrow" data-reveal>What Sets Us Apart</span>
+      <h2 class="section-title" data-reveal data-reveal-delay="1">How we help<br>fleets win.</h2>
+    </div>
+    <div class="fw-top">
+      <div class="fw-k">Return</div>
+      <div class="fw-big">10:1</div>
+      <div class="fw-tt">Average Program ROI</div>
+      <div class="fw-lede">
+        <p class="fw-dd">Recognition isn&rsquo;t a nice-to-have &mdash; it&rsquo;s an <b>operating lever</b>.
+        Fleets that invest in structured driver appreciation <b>run safer</b>, <b>retain more drivers</b>,
+        and <b>spend less on replacement</b>.</p>
+        <div class="fw-road">
+          <svg class="das-ill das-ill-road" aria-hidden="true"><use href="#das-road"></use></svg>
+          <svg class="das-ill das-ill-semi" aria-hidden="true"><use href="#das-semi"></use></svg>
+        </div>
+      </div>
+      <div class="fw-src"><span>For every $1 invested, fleets recover $10</span></div>
+    </div>
+  </div>
+  <div class="fw-band">
+    <picture>
+      <!-- Jayden 2026-09-19: this was home-hero-1400.webp - the SAME file as the page's own
+           top hero, so the page showed one photograph twice. Replaced with the forest-road
+           photograph used on the Off Duty Not Driving site. It is a wide 2400x1018 landscape,
+           which suits a full-bleed band far better than the 4:3 hero crop did, and the dark
+           canopy gives the white band copy something to sit on. -->
+      <!-- A PORTRAIT CROP FOR A PORTRAIT BOX. The landscape original was being
+     cover-cropped into a near-full-screen phone hero, which kept about a
+     quarter of its width and then upscaled that. The mobile source is cut
+     3:4 with sharp's attention strategy, so the subject survives the crop.
+     Built by scripts/build-mobile-heroes.mjs. -->
+<picture>
+  <source media="(max-width:767px)" srcset="/images/mobile/band-forest-m760.webp 760w, /images/mobile/band-forest-m1100.webp 1100w, /images/mobile/band-forest-m1500.webp 1500w" sizes="160vw" width="760" height="1013">
+  <img src="/images/band-forest-2400.jpg" width="2400" height="1018"
+           srcset="/images/band-forest-1200.jpg 1200w, /images/band-forest-2400.jpg 2400w"
+           sizes="100vw"
+           alt="An empty highway running through dense evergreen forest"
+           loading="lazy">
+</picture>
+    </picture>
+    <div class="fw-scrim"></div>
+    <div class="fw-bandin"><div class="container">
+      <div class="fw-bandtitle">And what it does across the fleet</div>
+      <div class="fw-rail"><div class="c"><div class="n">23%</div><h3>Fewer Preventable Accidents</h3><div class="fw-src on-photo"><span>Derived from Gallup, State of the Global Workplace</span></div></div><div class="c"><div class="n">30%</div><h3>Reduction in Early Turnover</h3><div class="fw-src on-photo"><span>Departure cost: ATRI turnover research</span></div></div><div class="c"><div class="n">$128K</div><h3>Annual Saving, 50-Driver Fleet</h3><div class="fw-src on-photo"><span>Calculated from turnover cost alone</span></div></div></div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BUYING FOR YOUR COMPANY? — corporate purchasing pathway
+     ============================================================ -->
+<section class="section-sm" style="border-top:1px solid var(--gold-border)">
+  <div class="container">
+    <div class="cta-panel cta-panel--deep"><div class="cta-mesh"></div><div class="cta-grain"></div><span class="cta-panel-eyebrow">Corporate Purchasing</span><h2 class="cta-panel-title">Buying for your company?</h2><p class="cta-panel-desc">Need a quote, purchase order, vendor setup, or Net 30 terms? We make corporate purchasing simple — whether you pay today or work through your company's process.</p><div class="cta-panel-acts"><a href="company-purchasing.html" class="pill pill-white">Buy for My Company <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a href="contact.html" class="pill pill-glass">Talk to Our Team</a></div></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+</main>
+
+<footer class="st-foot st-ui">
+  <div class="ft-in">
+    <a href="index.html" class="ft-mark" aria-label="Driver Appreciation Solutions — home">
+      <img src="/images/logo-lockup.svg" alt="Driver Appreciation Solutions" width="716" height="247">
+    </a>
+    <div class="ft-cols">
+      <div>
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="/collections/appreciation">Driver appreciation kits</a></li>
+          <li><a href="/collections/safety">Safety recognition</a></li>
+          <li><a href="/collections/milestone">Service milestones</a></li>
+          <li><a href="/collections/milepacks">Safe miles programs</a></li>
+          <li><a href="/collections/onboarding">Onboarding solutions</a></li>
+          <li><a href="/collections/holiday">Holiday &amp; seasonal</a></li>
+          <li><a href="store.html">Full catalogue</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Programs</h4>
+        <ul>
+          <li><a href="million-mile-driver-awards.html">Million-mile awards</a></li>
+          <li><a href="fleet-driver-retention-gifts.html">Driver retention gifts</a></li>
+          <li><a href="safe-driver-award-programs.html">Safe driver programs</a></li>
+          <li><a href="driver-appreciation-week.html">Driver Appreciation Week</a></li>
+          <li><a href="new-driver-welcome-kit.html">New driver welcome kits</a></li>
+          <li><a href="publications.html">Driver newsletter builder</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About us</a></li>
+          <li><a href="ideas.html">Insights &amp; ideas</a></li>
+          <li><a href="surveys.html">Driver surveys</a></li>
+          <li><a href="company-purchasing.html">Buy for my company</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact.html?intent=pricing">Request a quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Support</h4>
+        <ul>
+          <li><a href="customer-service.html">Customer service</a></li>
+          <li><a href="return-policy.html">Return policy</a></li>
+          <li><a href="refund-policy.html">Refund &amp; disputes</a></li>
+          <li><a href="cancelation-policy.html">Cancellation policy</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+          <li><a href="terms.html">Terms</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Terms of supply</h4>
+        <ul class="ft-plain">
+          <li>Minimum 10 units per product</li>
+          <li>Net-30 for approved carriers</li>
+          <li><a href="tel:3026810995">302.681.0995</a></li>
+          <li><a href="mailto:info@driverappreciationsolutions.com">Email the fleet team</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="ft-legal">&copy; 2026 Driver Appreciation Solutions</p>
+  </div>
+</footer>
+
+<!-- SCROLL TO TOP -->
+
+<script src="js/countdown.js?v=2"></script>
+<!-- Single source of truth for storefront prices: lib/catalog.js → store-pricing.js syncs the cards. -->
+<script src="/lib/catalog.js?v=1"></script>
+<script src="/js/store-pricing.js?v=1"></script>
+<script src="js/cart.js?v=7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="js/auth.js?v=2"></script>
+<script src="js/pricing-gate.js?v=5"></script>
+<!-- Scout AI chat widget — self-contained, no dependencies -->
+<script src="js/das-sprite.js?v=1" defer></script>
+<script src="js/das-dock.js?v=2" defer></script>
+<script src="js/das-widget.js?v=4" defer></script>
+<script>
+  // ── Sign-in modal ──────────────────────────────────────────
+  function openSignInModal() {
+    // If already signed in, go to account
+    onAuthReady(user => {
+      if (user) { window.location.href = 'account.html'; return; }
+      document.getElementById('signin-modal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  }
+  function closeSignInModal(e) {
+    if (e && e.target !== document.getElementById('signin-modal')) return;
+    document.getElementById('signin-modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // ── Helpful button interaction ─────────────────────────────
+  document.querySelectorAll('.google-helpful-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      if (this.dataset.voted) return;
+      const num = parseInt(this.textContent.trim()) + 1;
+      this.querySelector('svg').style.fill = 'var(--gold)';
+      this.querySelector('svg').style.stroke = 'none';
+      const text = this.childNodes[this.childNodes.length - 1];
+      if (text.nodeType === 3) text.textContent = ' ' + num;
+      this.dataset.voted = '1';
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSignInModal(null);
+  });
+</script>
+
+
+<!-- ── Scroll Reveal ── -->
+<script>
+(function() {
+  var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+  if (!els.length) return;
+  function reveal(el) { el.classList.add('is-revealed'); }
+  function inView(el) { var r = el.getBoundingClientRect(); return r.top < (window.innerHeight || 0) * 0.9 && r.bottom > 0; }
+  // 1) Reveal whatever is already on screen right now — the hero/above-the-fold never sits blank,
+  //    even if IntersectionObserver never fires (headless renderers, etc.).
+  els.forEach(function (el) { if (inView(el)) reveal(el); });
+  var rest = els.filter(function (el) { return !el.classList.contains('is-revealed'); });
+  // 2) IntersectionObserver reveals the rest as they scroll in.
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { reveal(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    rest.forEach(function (el) { io.observe(el); });
+  }
+  // 3) Scroll-listener fallback — scroll events fire even where IO doesn't, so a section can never
+  //    get stuck hidden once it enters the viewport. Self-removes when everything is revealed.
+  function onScroll() {
+    rest = rest.filter(function (el) { if (inView(el)) { reveal(el); return false; } return true; });
+    if (!rest.length) { window.removeEventListener('scroll', onScroll); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();
+</script>
+
+
+<!-- WebMCP — expose site tools to AI agents (https://webmachinelearning.github.io/webmcp/) -->
+<script>
+(function () {
+  if (!('modelContext' in navigator) || typeof navigator.modelContext.provideContext !== 'function') return;
+  navigator.modelContext.provideContext({
+    tools: [
+      {
+        name: 'search_products',
+        description: 'Search the Driver Appreciation Solutions product catalog by keyword (e.g., "DAW kit", "onboarding", "milestone award").',
+        inputSchema: {
+          type: 'object',
+          properties: { query: { type: 'string', description: 'Search keywords' } },
+          required: ['query']
+        },
+        execute: async ({ query }) => {
+          const url = '/shop.html?q=' + encodeURIComponent(query || '');
+          window.location.href = url;
+          return { ok: true, url };
+        }
+      },
+      {
+        name: 'open_solution',
+        description: 'Open a specific recognition-program solution page.',
+        inputSchema: {
+          type: 'object',
+          properties: {
+            solution: {
+              type: 'string',
+              enum: ['appreciation', 'onboarding', 'milestone', 'holiday', 'safety', 'enterprise'],
+              description: 'Which solution program to open'
+            }
+          },
+          required: ['solution']
+        },
+        execute: async ({ solution }) => {
+          const url = '/solution-' + solution + '.html';
+          window.location.href = url;
+          return { ok: true, url };
+        }
+      },
+      {
+        name: 'contact_sales',
+        description: 'Open the contact form to reach the Driver Appreciation Solutions sales team for custom-program quotes.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: async () => {
+          window.location.href = '/contact.html';
+          return { ok: true, url: '/contact.html' };
+        }
+      },
+      {
+        name: 'view_cart',
+        description: 'Open the shopping cart.',
+        inputSchema: { type: 'object', properties: {} },
+        execute: async () => {
+          window.location.href = '/cart.html';
+          return { ok: true, url: '/cart.html' };
+        }
+      }
+    ]
+  });
+})();
+</script>
+  <script src="js/quote.js?v=5" defer></script>
+
+<script>
+(function(){
+  var road = document.querySelector('.px-sec .road');
+  if (!road || !('IntersectionObserver' in window)) {
+    document.querySelectorAll('.px-sec .stop').forEach(function(s){s.classList.add('on');});
+    return;
+  }
+  var stops = Array.prototype.slice.call(document.querySelectorAll('.px-sec .stop'));
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){
+    if (e.isIntersecting) {
+      stops.forEach(function(s,n){setTimeout(function(){s.classList.add('on');}, n*380);});
+      io.disconnect();
+    }});}, {threshold:.25});
+  io.observe(road);
+})();
+</script>
+<script src="js/das-popups.js?v=5" defer></script>
+<script src="/js/das-nav.js?v=1"></script>
+</body>
+</html>

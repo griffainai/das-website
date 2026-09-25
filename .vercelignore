@@ -45,3 +45,6 @@ package-lock.json
 # OpenArt credits. Archived as q95 webp so a re-cut never costs credits
 # again, but outputDirectory:"." would otherwise serve all of it.
 images/shoot/
+
+# A look-only comparison page, never deployed (2026-09-25).
+hero-forest-preview.html

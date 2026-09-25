@@ -22,7 +22,8 @@
   var API_URL     = '/api/chat';
   var SUBMIT_URL  = '/api/submit-quote';
   var STORE_KEY   = 'das_scout_messages';
-  var PREVIEW_MS  = 9000;
+  /* PREVIEW_MS is gone with the auto-open (2026-09-25). A deliberate nudge
+     through window.DASWidget.preview() decides its own timing. */
 
   var WELCOME = "Hey — I'm Scout. I can size a recognition program for your fleet, " +
                 "check lead times, or put a quote together. How many drivers are you recognising?";
@@ -373,8 +374,21 @@
       if (e.target.classList.contains('dw-preview-x')) { hidePreview(); return; }
       toggle(true); go('thread');
     };
-    setTimeout(showPreview, PREVIEW_MS);
-    window.DASWidget = { open: function () { toggle(true); }, go: go, send: send };
+    /* NO AUTO-OPEN. Jayden 2026-09-25: "kill the auto-open."
+       Scout used to push its preview bubble onto the page PREVIEW_MS after
+       load, unbidden, and flag the launcher unread at the same time. Nobody
+       asked it to appear and it arrived over whatever the visitor was reading.
+       Scout now opens only when someone clicks the launcher.
+       showPreview() is deliberately left intact rather than deleted: it is
+       still reachable through window.DASWidget for a deliberate, event-driven
+       nudge later (exit intent, a stalled quote), which is a decision about
+       WHEN to interrupt someone — not something a timer should make on boot. */
+    window.DASWidget = {
+      open: function () { toggle(true); },
+      go: go,
+      send: send,
+      preview: showPreview,
+    };
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
