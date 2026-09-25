@@ -324,7 +324,21 @@
     })
       .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
       .then(function (text) {
-        var out = String(text || '').trim().slice(0, 320);
+        /* api/chat.js is the CHAT widget's endpoint, and its system prompt makes
+           Scout append a <suggested_replies> block for the widget's chips. In a
+           one-line search answer that markup leaked straight onto the page, and
+           a blind slice then cut the sentence mid-word. Strip the tags, then
+           trim to the last COMPLETE sentence that fits. */
+        var out = String(text || '')
+          .split('<suggested_replies>')[0]
+          .replace(/<[^>]*>/g, ' ')
+          .replace(/\s+/g, ' ')
+          .trim();
+        if (out.length > 260) {
+          var cut = out.slice(0, 260);
+          var stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
+          out = stop > 80 ? cut.slice(0, stop + 1) : cut.slice(0, cut.lastIndexOf(' ')) + '…';
+        }
         if (!out) throw 0;
         scoutCache[key] = out;
         try { sessionStorage.setItem('das_scout_search_v1', JSON.stringify(scoutCache)); } catch (e) {}
