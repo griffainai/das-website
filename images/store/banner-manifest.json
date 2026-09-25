@@ -13,12 +13,12 @@
  },
  "banners": {
   "appreciation": {
-   "src": "/images/store/banner-appreciation-2e82d806-1200.webp",
-   "srcset": "/images/store/banner-appreciation-2e82d806-1200.webp 1200w, /images/store/banner-appreciation-2e82d806.webp 2400w",
-   "mobile": "/images/store/banner-appreciation-2e82d806-mobile.webp",
+   "src": "/images/store/banner-appreciation-83a57236-1200.webp",
+   "srcset": "/images/store/banner-appreciation-83a57236-1200.webp 1200w, /images/store/banner-appreciation-83a57236.webp 2400w",
+   "mobile": "/images/store/banner-appreciation-83a57236-mobile.webp",
    "mobileW": 1080,
    "mobileH": 830,
-   "hero": "/images/store/banner-appreciation-2e82d806-hero.webp",
+   "hero": "/images/store/banner-appreciation-83a57236-hero.webp",
    "heroW": 1100,
    "heroH": 530,
    "w": 2400,
@@ -65,12 +65,12 @@
    "kind": "photo"
   },
   "milepacks": {
-   "src": "/images/store/banner-milepacks-4cb72b84-1200.webp",
-   "srcset": "/images/store/banner-milepacks-4cb72b84-1200.webp 1200w, /images/store/banner-milepacks-4cb72b84.webp 2400w",
-   "mobile": "/images/store/banner-milepacks-4cb72b84-mobile.webp",
+   "src": "/images/store/banner-milepacks-21c679fa-1200.webp",
+   "srcset": "/images/store/banner-milepacks-21c679fa-1200.webp 1200w, /images/store/banner-milepacks-21c679fa.webp 2400w",
+   "mobile": "/images/store/banner-milepacks-21c679fa-mobile.webp",
    "mobileW": 1080,
    "mobileH": 830,
-   "hero": "/images/store/banner-milepacks-4cb72b84-hero.webp",
+   "hero": "/images/store/banner-milepacks-21c679fa-hero.webp",
    "heroW": 1100,
    "heroH": 530,
    "w": 2400,
