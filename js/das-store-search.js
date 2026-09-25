@@ -13,21 +13,36 @@
      · It routes. On the shop it filters the grid; anywhere else it navigates.
      · It hands genuinely open questions to Scout at /api/chat.
 
-   THE MODEL QUESTION, ANSWERED HONESTLY. Matching 54 known products by name,
-   program, contents and price is a lookup: the data is right here, the answer
-   is exact, it costs nothing, it works offline, and it cannot invent a SKU that
-   does not exist. Rule #17 — a deterministic job is a script. What a model is
-   genuinely better at is the open question ("300 drivers, half hit 250k miles,
-   what should a year look like?"), and that goes to api/chat.js, which already
-   sits behind the guard wall: one chokepoint, kill switch, spend ceiling, rate
-   ceiling, meter. So the fast path is free and the smart path is metered, and
-   neither pretends to be the other.
+   TWO LAYERS, DELIBERATELY. Jayden 2026-09-24: "when they search it should
+   automatically give a scout response to help their search, on every search,
+   but make it a very cheap model."
+
+   LAYER 1, the index. Matching 54 known products by name, program, contents and
+   price is a lookup. It runs locally, costs nothing, returns in single-digit
+   milliseconds, works offline and cannot invent a SKU. It renders FIRST and
+   alone decides what is in the list.
+
+   LAYER 2, Scout. A short spoken answer underneath it — the thing a good shop
+   assistant says: what you probably want, and why. It calls api/chat.js on
+   claude-haiku-4-5, the cheapest model on the account and the same one Scout
+   already uses, and that endpoint carries the full guard wall: one chokepoint,
+   kill switch, spend ceiling, rate ceiling, meter (rule #16b).
+
+   WHAT KEEPS IT FROM BURNING MONEY, since it now fires on searches rather than
+   on a button:
+     · 650ms of silence after the last keystroke, not per keystroke
+     · a 4-character floor, so "sa" never calls
+     · a sessionStorage cache, so a repeated or retyped query is free
+     · one in-flight request, aborted the moment the query changes
+     · a hard cap of 30 calls per session, after which layer 1 carries on alone
+   The list never waits for it and never moves when it lands.
    ========================================================================== */
 (function () {
   'use strict';
 
   var input, panel, host, CAT = null, onApply = null, mounted = false;
-  var rows = [], cursor = -1, lastQ = '';
+  var rows = [], cursor = -1, lastQ = '', scoutTimer = null;
+  var NEWLINE = String.fromCharCode(10);   /* keeps this file free of escapes */
 
   var SEEDS = [
     'Safety awards under $50',
@@ -238,6 +253,91 @@
       '</a>';
   }
 
+  /* ── SCOUT, LAYER 2 ───────────────────────────────────────────────────── */
+  var scoutCache = {};
+  var scoutCalls = 0;
+  var SCOUT_MAX = 30;                 /* per session, then the index carries on alone */
+  var scoutAbort = null;
+
+  try {
+    var cached = sessionStorage.getItem('das_scout_search_v1');
+    if (cached) scoutCache = JSON.parse(cached) || {};
+  } catch (e) {}
+
+  function scoutHTML(body, thinking) {
+    return '<div class="ss-scout' + (thinking ? ' thinking' : '') + '">' +
+      '<span class="av" aria-hidden="true">' +
+        '<svg width="11" height="11" viewBox="0 0 16 16" fill="none">' +
+        '<path d="M8 1.4 9.3 5.3 13.2 6.6 9.3 7.9 8 11.8 6.7 7.9 2.8 6.6 6.7 5.3 8 1.4Z" fill="currentColor"/></svg>' +
+      '</span>' +
+      '<span><span class="who">Scout</span>' + body + '</span></div>';
+  }
+
+  function paintScout(html) {
+    if (!panel) return;
+    var slot = panel.querySelector('.ss-scout');
+    /* Replace in place so the results list never shifts under the cursor. */
+    if (slot) slot.outerHTML = html;
+    else {
+      var head = panel.querySelector('.ss-head');
+      if (head) head.insertAdjacentHTML('afterend', html);
+      else panel.insertAdjacentHTML('afterbegin', html);
+    }
+  }
+
+  /** A compact view of what the index already found, so Scout answers about
+      real stock and cannot invent a product. */
+  function contextFor(list) {
+    return list.slice(0, 8).map(function (p) {
+      return '- ' + p.name + ' (' + (p.programLabel || '') + ', ' +
+        (p.gated ? 'quoted' : '$' + p.price) + ', min ' + (p.minQty || 10) + ')';
+    }).join(NEWLINE);
+  }
+
+  function askScout(q, list) {
+    var key = q.toLowerCase();
+    if (scoutCache[key]) { paintScout(scoutHTML('<p>' + esc(scoutCache[key]) + '</p>', false)); return; }
+    if (q.length < 4) return;
+    if (scoutCalls >= SCOUT_MAX) return;
+
+    paintScout(scoutHTML('<p class="dots" aria-label="Scout is thinking">' +
+      '<i></i><i></i><i></i></p>', true));
+
+    if (scoutAbort) { try { scoutAbort.abort(); } catch (e) {} }
+    scoutAbort = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    scoutCalls++;
+
+    var prompt =
+      'A fleet buyer typed this into the shop search: "' + q + '".' + NEWLINE + NEWLINE +
+      'These are the catalogue matches already shown to them:' + NEWLINE +
+      (list.length ? contextFor(list) : '(nothing matched)') + NEWLINE + NEWLINE +
+      'In ONE or TWO short sentences, under 40 words total, help them: say what ' +
+      'to look at and why, or ask the single most useful question back. Plain ' +
+      'English, no greeting, no bullet points, no markdown. Never invent a ' +
+      'product that is not listed above.';
+
+    fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: [{ role: 'user', content: prompt }] }),
+      signal: scoutAbort ? scoutAbort.signal : undefined,
+    })
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (text) {
+        var out = String(text || '').trim().slice(0, 320);
+        if (!out) throw 0;
+        scoutCache[key] = out;
+        try { sessionStorage.setItem('das_scout_search_v1', JSON.stringify(scoutCache)); } catch (e) {}
+        if ((input.value || '').trim().toLowerCase() === key) paintScout(scoutHTML('<p>' + esc(out) + '</p>', false));
+      })
+      .catch(function () {
+        /* Scout is an enhancement. If it is down, rate-limited or killed at the
+           guard, the search still works -- just remove the line. */
+        var slot = panel && panel.querySelector('.ss-scout');
+        if (slot) slot.remove();
+      });
+  }
+
   function open() { host.classList.add('ss-open'); input.setAttribute('aria-expanded', 'true'); }
   function close() { host.classList.remove('ss-open'); input.setAttribute('aria-expanded', 'false'); cursor = -1; }
 
@@ -270,6 +370,9 @@
     cursor = -1;
     open();
     if (onApply) onApply(matched(r.Q));
+    /* The list is on screen already; Scout fills in underneath when it lands. */
+    clearTimeout(scoutTimer);
+    scoutTimer = setTimeout(function () { askScout(q, matched(r.Q)); }, 650);
   }
 
   function move(d) {
