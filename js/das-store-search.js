@@ -254,13 +254,16 @@
   }
 
   /* ── SCOUT, LAYER 2 ───────────────────────────────────────────────────── */
+  /* v2: everything cached before the ungrounded-claim guard existed is
+     abandoned rather than trusted. */
+  var CACHE_KEY = 'das_scout_search_v2';
   var scoutCache = {};
   var scoutCalls = 0;
   var SCOUT_MAX = 30;                 /* per session, then the index carries on alone */
   var scoutAbort = null;
 
   try {
-    var cached = sessionStorage.getItem('das_scout_search_v1');
+    var cached = sessionStorage.getItem(CACHE_KEY);
     if (cached) scoutCache = JSON.parse(cached) || {};
   } catch (e) {}
 
@@ -339,13 +342,35 @@
     return null;
   }
 
+  /** Clean it, then judge it. Every answer passes through here -- fresh from
+      the model AND read back from cache -- so there is exactly one place that
+      decides whether a sentence is allowed in front of a customer. */
+  function safeAnswer(raw) {
+    var out = String(raw || '')
+      .replace(/\*\*/g, '').replace(/[`_]{1,2}/g, '')
+      .replace(/\s+/g, ' ').trim();
+    if (!out) return null;
+    var bad = ungroundedReason(out);
+    if (bad) {
+      if (window.console && console.warn) console.warn('[scout] answer discarded - ' + bad);
+      return null;
+    }
+    if (out.length > 260) {
+      var cut = out.slice(0, 260);
+      var stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
+      out = stop > 80 ? cut.slice(0, stop + 1) : cut.slice(0, cut.lastIndexOf(' ')) + '…';
+    }
+    return out;
+  }
+
   /** Re-run the local index for a stored query, so a landing page can ground
       Scout exactly as the search panel does. NEVER call Scout without this. */
   function groundedFor(q) { return matched(parse(q)); }
 
   function askScout(q, list) {
     var key = q.toLowerCase();
-    if (scoutCache[key]) { paintScout(scoutHTML('<p>' + esc(scoutCache[key]) + '</p>', false)); return; }
+    var hit = scoutCache[key] && safeAnswer(scoutCache[key]);
+    if (hit) { paintScout(scoutHTML('<p>' + esc(hit) + '</p>', false)); return; }
     if (q.length < 4 || scoutCalls >= SCOUT_MAX) return;
     paintScout(scoutHTML('<p class="dots" aria-label="Scout is thinking">' +
       '<i></i><i></i><i></i></p>', true));
@@ -361,7 +386,18 @@
       panel in the DOM to paint into. Abortable, capped, cached. */
   function askScoutRaw(q, list, done) {
     var key = q.toLowerCase();
-    if (scoutCache[key]) { done(scoutCache[key]); return; }
+    if (scoutCache[key]) {
+      /* VALIDATE CACHE READS TOO. The guard used to run only on a fresh
+         response, so an answer cached before it existed -- or cached at all --
+         was served straight back with no check. That is how the invented
+         product kept reappearing after the guard shipped: askScoutRaw returned
+         the stored string and never looked at it. An answer must pass on the
+         way OUT, every time, whatever its age. */
+      var kept = safeAnswer(scoutCache[key]);
+      if (kept) { done(kept); return; }
+      delete scoutCache[key];
+      try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(scoutCache)); } catch (e) {}
+    }
     if (q.length < 4 || scoutCalls >= SCOUT_MAX) { done(null); return; }
 
     if (scoutAbort) { try { scoutAbort.abort(); } catch (e) {} }
@@ -396,22 +432,10 @@
           .replace(/<[^>]*>/g, ' ')
           .replace(/\s+/g, ' ')
           .trim();
-        /* the prompt forbids markdown; the model uses it anyway */
-        out = out.replace(/\*\*/g, '').replace(/[`_]{1,2}/g, '');
-        var bad = ungroundedReason(out);
-        if (bad) {
-          if (window.console && console.warn) console.warn('[scout] answer discarded — ' + bad);
-          done(null);
-          return;
-        }
-        if (out.length > 260) {
-          var cut = out.slice(0, 260);
-          var stop = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
-          out = stop > 80 ? cut.slice(0, stop + 1) : cut.slice(0, cut.lastIndexOf(' ')) + '…';
-        }
-        if (!out) throw 0;
+        out = safeAnswer(out);
+        if (!out) { done(null); return; }
         scoutCache[key] = out;
-        try { sessionStorage.setItem('das_scout_search_v1', JSON.stringify(scoutCache)); } catch (e) {}
+        try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(scoutCache)); } catch (e) {}
         done(out);
       })
       .catch(function () {
@@ -528,7 +552,7 @@
     var hd = document.querySelector('.st-hd');
     if (!hd) return;
     var key = note.q.toLowerCase();
-    hd.insertAdjacentHTML('afterend', navBannerHTML(note, scoutCache[key] || null));
+    hd.insertAdjacentHTML('afterend', navBannerHTML(note, (scoutCache[key] && safeAnswer(scoutCache[key])) || null));
 
     var bar = document.querySelector('.ss-came');
     if (!bar) return;
