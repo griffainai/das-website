@@ -317,3 +317,71 @@ in this art direction, empty concrete with the product cropped off the edge.
 The caption sits bottom-left over its own gradient. Cut with that gradient
 composited, the bottom-left corner of all eighteen placements measures **mean
 luminance 17–33 and 0.0% of pixels above 200**. White type reads on every one.
+
+
+---
+
+# NEVER ASK THE MODEL TO RENDER TEXT — 2026-09-25
+
+The hardest-won rule in this file, because I broke it myself within an hour of
+writing the reasoning for it.
+
+## What happened
+
+Jayden flagged two things on the banners and asked me to decide them.
+
+**Decision 1, the snack brands.** The milepacks banner reproduced third-party
+packaging. Zoomed to full size the marks were not merely present, they were
+**garbled**: KIND read `AZTA PROTEIIIA`, Jack Link's read `JACK LNKS /
+B..EE STEAK`, Grandma's carried a nonsense subtitle. A recognisable trademark
+rendered *wrong* is worse than showing it correctly and worse than leaving it
+out. Ruled: a generated frame never reproduces a third-party trademark. The
+real packshot on the PDP does that job, and does it accurately. Milepacks was
+reshot as the closed navy box.
+
+**Decision 2, the badge.** The appreciation banner's plate read `YOUR LOGO
+HERE`, which on a campaign frame beside fifty NorthStar-branded products read
+as an unfinished mockup. I replaced it by **instructing the model to write**
+"NorthStar / ALBANY TRANSPORTATION" on the plate.
+
+It came back `NorthStar` over a line of **gibberish**. The PDP test frame,
+given the same instruction, came back `NorthStar / ALBANY TRANEPORTATION`.
+
+Same defect. Same hour. I had just written the rule about garbled marks and
+then hand-fed the model the one input that guarantees them.
+
+## The distinction that matters
+
+**Reproducing text is not the same job as writing text.**
+
+- Text that already exists *photographically in the reference* is image
+  content. image2image carries it faithfully — every `NorthStar` on the other
+  five banners came through correct, because the model was copying pixels, not
+  spelling a word.
+- Text the prompt *asks for* is generated. The model is drawing letterforms it
+  has to infer, and it gets them wrong often enough that any frame containing
+  requested text must be read at full resolution before it ships.
+
+So: **never instruct a generation to add, replace or rewrite any text.** If a
+surface must not say what the reference says, ask for it **blank** — a smooth
+unmarked plate renders reliably, because there are no letterforms to get wrong.
+
+On this product a blank plate is also the more truthful image: an
+un-customised kit really does ship with an empty plate, and that plate is
+exactly where the fleet's logo goes.
+
+## Check it at full resolution, every time
+
+Both failures were invisible at review size. The banner badge is ~40px on a
+1440px screen; the misspelling only appeared at 1200px of crop. A frame that
+contains any lettering at all gets zoomed to 100% before it ships — the
+garbled snack brands were caught that way, and the two that were not caught
+were the two I did not zoom.
+
+## The PDP rule that follows
+
+On a **PDP**, leave the reference's plate exactly as the reference has it, or
+blank. `YOUR LOGO HERE` is not a defect on a product page — it is the product's
+selling point, stated in the one place a buyer is deciding whether their logo
+can go on it. The unfinished-mockup problem only applies to **campaign frames**,
+which are brand-building and must look finished.
