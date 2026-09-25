@@ -523,6 +523,11 @@
 .st-prog{ margin-top:clamp(40px,5vw,72px); }
 .st-banner{ position:relative; display:block; overflow:hidden; background:var(--st-navy-900);
   height:clamp(300px,34vw,650px); }
+/* A photo banner ships as <picture> so the phone gets its own crop, not a
+   narrower copy of the wide one — see bannerImg() in js/das-store.js. The
+   wrapper must not become a box: `.st-banner img{height:100%}` resolves
+   against .st-banner, and an inline <picture> in between breaks that. */
+.st-banner picture, .cl-hero picture{ display:contents; }
 .st-banner img{ width:100%; height:100%; object-fit:cover;
   transition:transform .7s cubic-bezier(.2,.8,.2,1); }
 .st-banner:hover img{ transform:scale(1.03); }

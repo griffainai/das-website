@@ -247,3 +247,73 @@ concrete of the first comparison. Same composition, same drama, legible type.
 | safety | Safe Service Miles Lapel Pin |
 | milestone | 250,000 Service Miles |
 | holiday | Professional Driver Seat Back Organizer |
+
+
+---
+
+# THE SIX COLLECTION BANNERS — shot 2026-09-25
+
+Jayden: *"I really like this one. You should do this photo shoot for each
+collection, but do the different products, etc."*
+
+Six image2image restages, one per programme, each against that programme's own
+real packshot passed by live production URL. One prompt template; only the
+light, the surface and the angle move.
+
+| Programme | Product photographed | Reference |
+|---|---|---|
+| appreciation | The Professional Driver Kit | `pak-professional-driver-kit-heroA-pdp` |
+| milepacks | Hydration & Hustle Kit | `mp-02-1-pdp` |
+| onboarding | The Road Ready Kit | `pak-road-ready-kit-case-2026-pdp` |
+| safety | **1 Million SAFE Service Miles Medal** | `medal-s-1m-v1-pdp` |
+| milestone | **6 Million Service Miles Medal** | `medal-c-6m-v1-pdp` |
+| holiday | Professional Driver Seat Back Organizer | `seat-back-organizer-1-pdp` |
+
+## Three frames were wrong, and the reference was the reason every time
+
+Worth writing down, because the failure was never the model.
+
+1. **safety** was shot against `milestone-kit-lapel-hat-pdp`, which is not a
+   packshot at all — it is a finished marketing layout with a driver's face,
+   body copy and a lapel pin in the corner. The model did the only sensible
+   thing and photographed the pin, and invented "1 MILLION MILES" on its face.
+   That put **career-mile language on the safety path**, which the Career /
+   Safety separation forbids outright.
+2. **milestone** was shot against `milestone-c-250k-pdp`, which is the
+   *"Placeholder image — final coming soon"* caption card. The banner came back
+   as a beautifully lit photograph of a placeholder. `PHOTO-SHOT-LIST.md` §3
+   says exactly this about that file; it was in the repo the whole time.
+3. **milestone again** came back **bronze**. The real 6 Million medal is dark
+   gunmetal. The prompt said "do not change the metal finish" and the model
+   changed it anyway — a negative instruction is weaker than a positive one, so
+   the fix was to *name the finish*: "dark gunmetal, near-black antiqued
+   nickel… NOT bronze, NOT copper, NOT gold."
+
+**The rule that falls out: look at the reference before you spend on it.** Open
+the packshot. Confirm it is a photograph of the product and not a layout, a
+caption card or a lifestyle scene. And check the result against the packshot
+side by side — the bronze medal passed every other test.
+
+## Three placements, three ratios, one photograph
+
+The slot's ratio changes with the viewport, and it is not one family:
+
+| Placement | Size | Slot | Ratio |
+|---|---|---|---|
+| desktop banner | 2400 x 820 | `.st-banner` at 1900px | 2.93 |
+| phone banner | 1080 x 830 | `.st-banner` at 375px | 1.30 |
+| phone collection hero | 1100 x 530 | `.cl-hero` at 375px | 2.08 |
+
+A single file cannot serve those. `srcset` cannot fix it either — w-descriptors
+choose by resolved width, and what has to change here is the **crop**. So the
+page uses `<picture>` with a media source, and `scripts/cut-banners.mjs` cuts
+all three out of the same master. Same object, same light, framed for the slot.
+
+Left as a wide file on a phone, every banner would have shown its middle 44% —
+in this art direction, empty concrete with the product cropped off the edge.
+
+## Measured, not asserted
+
+The caption sits bottom-left over its own gradient. Cut with that gradient
+composited, the bottom-left corner of all eighteen placements measures **mean
+luminance 17–33 and 0.0% of pixels above 200**. White type reads on every one.

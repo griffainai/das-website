@@ -3,48 +3,92 @@
   "w": 2400,
   "h": 820
  },
+ "mobileBanner": {
+  "w": 1080,
+  "h": 830
+ },
+ "heroBanner": {
+  "w": 1100,
+  "h": 530
+ },
  "banners": {
   "appreciation": {
-   "src": "/images/store/banner-appreciation-76c4fa0b-1200.webp",
-   "srcset": "/images/store/banner-appreciation-76c4fa0b-1200.webp 1200w, /images/store/banner-appreciation-76c4fa0b.webp 2400w",
+   "src": "/images/store/banner-appreciation-2e82d806-1200.webp",
+   "srcset": "/images/store/banner-appreciation-2e82d806-1200.webp 1200w, /images/store/banner-appreciation-2e82d806.webp 2400w",
+   "mobile": "/images/store/banner-appreciation-2e82d806-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-appreciation-2e82d806-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   },
   "safety": {
-   "src": "/images/store/banner-safety-335c5bc0-1200.webp",
-   "srcset": "/images/store/banner-safety-335c5bc0-1200.webp 1200w, /images/store/banner-safety-335c5bc0.webp 2400w",
+   "src": "/images/store/banner-safety-e246e4a9-1200.webp",
+   "srcset": "/images/store/banner-safety-e246e4a9-1200.webp 1200w, /images/store/banner-safety-e246e4a9.webp 2400w",
+   "mobile": "/images/store/banner-safety-e246e4a9-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-safety-e246e4a9-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   },
   "milestone": {
-   "src": "/images/store/banner-milestone-9b78593c-1200.webp",
-   "srcset": "/images/store/banner-milestone-9b78593c-1200.webp 1200w, /images/store/banner-milestone-9b78593c.webp 2400w",
+   "src": "/images/store/banner-milestone-ead882cf-1200.webp",
+   "srcset": "/images/store/banner-milestone-ead882cf-1200.webp 1200w, /images/store/banner-milestone-ead882cf.webp 2400w",
+   "mobile": "/images/store/banner-milestone-ead882cf-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-milestone-ead882cf-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   },
   "onboarding": {
-   "src": "/images/store/banner-onboarding-15bf6e50-1200.webp",
-   "srcset": "/images/store/banner-onboarding-15bf6e50-1200.webp 1200w, /images/store/banner-onboarding-15bf6e50.webp 2400w",
+   "src": "/images/store/banner-onboarding-5f18936d-1200.webp",
+   "srcset": "/images/store/banner-onboarding-5f18936d-1200.webp 1200w, /images/store/banner-onboarding-5f18936d.webp 2400w",
+   "mobile": "/images/store/banner-onboarding-5f18936d-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-onboarding-5f18936d-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   },
   "milepacks": {
-   "src": "/images/store/banner-milepacks-9896e42a-1200.webp",
-   "srcset": "/images/store/banner-milepacks-9896e42a-1200.webp 1200w, /images/store/banner-milepacks-9896e42a.webp 2400w",
+   "src": "/images/store/banner-milepacks-4cb72b84-1200.webp",
+   "srcset": "/images/store/banner-milepacks-4cb72b84-1200.webp 1200w, /images/store/banner-milepacks-4cb72b84.webp 2400w",
+   "mobile": "/images/store/banner-milepacks-4cb72b84-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-milepacks-4cb72b84-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   },
   "holiday": {
-   "src": "/images/store/banner-holiday-20aca6a4-1200.webp",
-   "srcset": "/images/store/banner-holiday-20aca6a4-1200.webp 1200w, /images/store/banner-holiday-20aca6a4.webp 2400w",
+   "src": "/images/store/banner-holiday-1a8facd9-1200.webp",
+   "srcset": "/images/store/banner-holiday-1a8facd9-1200.webp 1200w, /images/store/banner-holiday-1a8facd9.webp 2400w",
+   "mobile": "/images/store/banner-holiday-1a8facd9-mobile.webp",
+   "mobileW": 1080,
+   "mobileH": 830,
+   "hero": "/images/store/banner-holiday-1a8facd9-hero.webp",
+   "heroW": 1100,
+   "heroH": 530,
    "w": 2400,
    "h": 820,
-   "kind": "placeholder"
+   "kind": "photo"
   }
  }
 }

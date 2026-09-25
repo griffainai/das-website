@@ -12,13 +12,20 @@ This file governs every OpenArt spend on DAS. Read it before generating.
 | | |
 |---|---|
 | Account | griffainai@gmail.com, **Pro** |
-| Balance at 2026-09-24 | **24,000** |
-| Spent so far | **480** |
-| This shoot, budgeted | **480** production + 160 contingency = **640** |
-| Left for the rest of the month | **23,520** |
+| Balance at 2026-09-24 | 24,000 |
+| **Balance MEASURED 2026-09-25** | **22,400** |
+| Spent to date | **1,600** |
+| Left for the rest of the month | **22,400** |
 
-The whole DAS store shoot costs **2.7% of the month**. That is only true because
-of rule 1.
+The whole DAS store shoot cost **6.7% of the month**.
+
+> ⚠️ **The measured balance is the ground truth, not this table's arithmetic.**
+> On 2026-09-25 the ledger said 23,520 and `openart_account_get` said 22,400 —
+> a 1,120 gap. The cause is rule 3b below: **image2image is priced at 2× the
+> text2image rate**, and every frame in this shoot was logged at the cheaper
+> one. That accounts for most of the gap, not all of it; roughly 440 credits
+> are unattributed and are NOT being invented into a line item here. Check the
+> live balance before any batch — the doc drifts, the API does not.
 
 ---
 
@@ -63,6 +70,17 @@ The very first DAS test frame earned its cost immediately — it proved the sky
 was too bright for white type (17.7% of the type band above 200 luminance) and
 that a 16:9 master cannot yield a usable phone crop.
 
+## Rule 3b — image2image costs DOUBLE. Price it before you fire it.
+
+`nano-banana-pro` **text2image** is 40 credits flat at 1K/2K/4K.
+`nano-banana-pro` **image2image** at 4K 21:9 is **80**.
+
+Rule 1b makes every product frame image2image, so the whole product programme
+is priced at 2×. Twelve product frames is 960 credits, not 480. Call
+`openart_model_cost` with the exact config before a batch — the price moves
+with resolution, aspect and reference count, and the number in a doc is a guess
+about the past.
+
 ## Rule 3 — always ask for 4K on flat-priced models
 
 Nano Banana Pro bills **40 credits at 1K, 2K or 4K — the same**. Wan 2.7 Image
@@ -103,7 +121,11 @@ generate video without asking Jayden first.
 | 2026-09-24 | **6 portrait masters** — the parallax shoot, one per program | nano-banana-pro 4K 4:5 | 6 | 240 | **23,720** |
 | 2026-09-24 | Banner attempt, off-brief (fired before Jayden finished) | nano-banana-pro 4K 21:9 | 1 | 40 | 23,680 |
 | 2026-09-25 | Treatment comparison — bold / legible / bold-at-banner | nano-banana-pro 4K | 3 | 120 | 23,560 |
-| 2026-09-25 | image2image fidelity test — real Professional Driver Kit | nano-banana-pro 4K 21:9 | 1 | 40 | **23,520** |
+| 2026-09-25 | image2image fidelity test — real Professional Driver Kit | nano-banana-pro i2i 4K 21:9 | 1 | 80 | 23,480 |
+| 2026-09-25 | 5 collection banners — milepacks, onboarding, safety, milestone, holiday | nano-banana-pro i2i 4K 21:9 | 5 | 400 | 23,080 |
+| 2026-09-25 | Reshoot — safety and milestone had bad references (a marketing layout and a "coming soon" card) | nano-banana-pro i2i 4K 21:9 | 2 | 160 | 22,920 |
+| 2026-09-25 | Reshoot — milestone medal came back bronze, the real one is gunmetal | nano-banana-pro i2i 4K 21:9 | 1 | 80 | 22,840 |
+| 2026-09-25 | **Reconciliation** — measured balance was 22,400, so ~440 credits are unattributed | — | — | 440 | **22,400** |
 
 The six masters produced **twelve** live placements (desktop + mobile per
 program) at no extra credit cost, and are archived as q95 webp in
@@ -121,6 +143,19 @@ program) at no extra credit cost, and are archived as q95 webp in
 | Contingency — reshoots at ~4 frames | 4 | 160 |
 | **Total** | **16** | **640** |
 
-Against 24,000, that leaves **~23,320 for the rest of the month.** If nothing
-else is planned, that is roughly 580 more Nano Banana Pro frames, or 1,550 on
-Wan 2.7 Image, or about 50 short videos.
+**What it actually cost.** Twelve frames were budgeted at 480. The shoot
+delivered six parallax masters and six collection banners in **fifteen** frames
+for **1,600** — three reshoots (two wrong references, one wrong metal finish)
+and the 2× image2image rate that rule 3b now states.
+
+Measured balance **22,400**: roughly 280 more image2image frames at 4K, 560
+text2image, 1,490 on Wan 2.7 Image, or about 50 short videos.
+
+### Still unshot, and what it would cost
+
+| Job | Frames | Credits |
+|---|---|---|
+| Elevated product hero treatment for the PDPs (Jayden's pick for that slot) | ~10 | 800 |
+| Store hero + PDP closing band — one forest photo is currently doing three jobs | 2 | 160 |
+
+Neither is authorised. Ask before firing.

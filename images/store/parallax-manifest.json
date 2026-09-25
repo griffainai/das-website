@@ -2,43 +2,43 @@
   "appreciation": {
     "label": "Driver Appreciation Kits",
     "sub": "Driver Appreciation Week",
-    "desktop": "/images/store/px-appreciation-a764bb4b-desktop.webp",
-    "mobile": "/images/store/px-appreciation-a764bb4b-mobile.webp",
+    "desktop": "/images/store/px-appreciation-d2f9e41d-desktop.webp",
+    "mobile": "/images/store/px-appreciation-d2f9e41d-mobile.webp",
     "placeholder": false
   },
   "milepacks": {
     "label": "Safe Miles Programs",
     "sub": "Quarterly recognition",
-    "desktop": "/images/store/px-milepacks-227b3371-desktop.webp",
-    "mobile": "/images/store/px-milepacks-227b3371-mobile.webp",
+    "desktop": "/images/store/px-milepacks-2503d493-desktop.webp",
+    "mobile": "/images/store/px-milepacks-2503d493-mobile.webp",
     "placeholder": false
   },
   "onboarding": {
     "label": "Onboarding Solutions",
     "sub": "Day one, done right",
-    "desktop": "/images/store/px-onboarding-5525ff72-desktop.webp",
-    "mobile": "/images/store/px-onboarding-5525ff72-mobile.webp",
+    "desktop": "/images/store/px-onboarding-1394b991-desktop.webp",
+    "mobile": "/images/store/px-onboarding-1394b991-mobile.webp",
     "placeholder": false
   },
   "safety": {
     "label": "Safety Recognition",
     "sub": "Safe miles, earned",
-    "desktop": "/images/store/px-safety-ae0ed65a-desktop.webp",
-    "mobile": "/images/store/px-safety-ae0ed65a-mobile.webp",
+    "desktop": "/images/store/px-safety-ca19d434-desktop.webp",
+    "mobile": "/images/store/px-safety-ca19d434-mobile.webp",
     "placeholder": false
   },
   "milestone": {
     "label": "Service Milestone Awards",
     "sub": "250K to 6 million",
-    "desktop": "/images/store/px-milestone-aa93f1b3-desktop.webp",
-    "mobile": "/images/store/px-milestone-aa93f1b3-mobile.webp",
+    "desktop": "/images/store/px-milestone-a069e730-desktop.webp",
+    "mobile": "/images/store/px-milestone-a069e730-mobile.webp",
     "placeholder": false
   },
   "holiday": {
     "label": "Holiday & Seasonal",
     "sub": "The family sees this one",
-    "desktop": "/images/store/px-holiday-919279ce-desktop.webp",
-    "mobile": "/images/store/px-holiday-919279ce-mobile.webp",
+    "desktop": "/images/store/px-holiday-bf2e6172-desktop.webp",
+    "mobile": "/images/store/px-holiday-bf2e6172-mobile.webp",
     "placeholder": false
   }
 }

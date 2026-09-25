@@ -284,6 +284,37 @@
     });
   }
 
+  /* A BANNER IS TWO PHOTOGRAPHS OF ONE THING, NOT ONE PHOTOGRAPH TWICE.
+     .st-banner is height:clamp(300px,34vw,650px) with object-fit:cover, so its
+     aspect changes with the window: 2.94 at 1900px wide, 1.30 at 390px. The
+     2400x820 desktop cut covering a 1.30 box keeps only its middle 44% of
+     width — and in this art direction the product sits FAR RIGHT, so a phone
+     would have shown six banners of empty concrete with the product cropped
+     clean off the edge. srcset cannot fix that: w-descriptors choose by
+     resolved width, and what changes here is the CROP, not the resolution.
+     So <picture> with a media source, and scripts/cut-banners.mjs cuts a
+     right-anchored 1080x830 from the same master. Same object, same light,
+     framed for the slot it lands in. */
+  function bannerImg(b, alt, lazy, slot) {
+    var img = '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw"' +
+      ' alt="' + esc(alt || '') + '" width="' + b.w + '" height="' + b.h + '"' +
+      (lazy ? ' loading="lazy"' : '') + '>';
+    /* THE COLLECTION HERO IS A DIFFERENT SLOT, NOT A SMALLER ONE. On a phone
+       .st-banner is 375x300 (1.25) and .cl-hero is 375x180 (2.08). The phone
+       crop puts the product dead centre under the hero's title; the wide crop
+       loses 29% of its width there, which in this art direction IS the
+       product. So each takes the cut composed for it. */
+    var narrow = slot === 'hero'
+      ? { src: b.hero, w: b.heroW || 1100, h: b.heroH || 530 }
+      : { src: b.mobile, w: b.mobileW || 1080, h: b.mobileH || 830 };
+    if (!narrow.src) return img;
+    return '<picture>' +
+      '<source media="(max-width:767px)" srcset="' + esc(narrow.src) + '"' +
+        ' width="' + narrow.w + '" height="' + narrow.h + '">' +
+      img +
+    '</picture>';
+  }
+
   /* THE COLLECTION HERO — only on /collections/<slug>. The banner the home
      rhythm uses, with the programme's name, its count and one line on what it
      is for, so a collection page announces itself instead of opening on a
@@ -296,8 +327,7 @@
 
     var b = (BANNERS && BANNERS[g.slug]) || null;
     el.innerHTML =
-      (b ? '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw" alt="" ' +
-           'width="' + b.w + '" height="' + b.h + '">' : '') +
+      (b ? bannerImg(b, '', false, 'hero') : '') +
       '<div class="cl-copy">' +
         '<p class="k st-micro">' + esc(g.sub || 'Collection') + '</p>' +
         '<h1>' + esc(g.label) + '</h1>' +
@@ -334,8 +364,7 @@
       var banner = b
         ? '<a class="st-banner" href="/collections/' + esc(g.slug) + '" data-jump="' + esc(g.slug) + '"' +
             (b.kind === 'placeholder' ? ' data-placeholder="true"' : '') + '>' +
-            '<img src="' + esc(b.src) + '" srcset="' + esc(b.srcset) + '" sizes="100vw" alt="' + esc(g.label) +
-            '" width="' + b.w + '" height="' + b.h + '" loading="lazy">' +
+            bannerImg(b, g.label, true) +
             (b.kind === 'placeholder' ? '' :
               '<span class="cap"><b>' + esc(g.label) + '</b><span>' + esc(g.sub) + '</span></span>') +
           '</a>'
