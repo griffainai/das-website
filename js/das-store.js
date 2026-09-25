@@ -731,7 +731,29 @@
        PATH as well as the query. Both resolve to the same state. */
     var pathSlug = (location.pathname.match(/\/collections\/([a-z0-9-]+)/i) || [])[1];
     var want = pathSlug || q;
-    if (want && CAT.programs.some(function (g) { return g.slug === want; })) state.program = want;
+    var real = want && CAT.programs.some(function (g) { return g.slug === want; });
+
+    /* ONE PAGE PER COLLECTION, AND ONLY ONE.
+       Jayden 2026-09-25: "if I press Kits at the top it literally takes me to
+       this. We were supposed to have a page directly for each collection, but
+       it's not showing. It's showing the old filter, but we need to get rid of
+       that flow."
+       /collections/<slug> has been a real page for a while, but the nav still
+       pointed at /store?c=<slug>, which renders the store with its grid
+       filtered — a second, worse version of the same collection, with no hero,
+       no title and no URL anyone would share. The nav links are fixed; this
+       closes the flow itself, so every inbound ?c= link — old bookmarks, the
+       /shop 301, the legacy ?category= param and anything ever shared — lands
+       on the collection page instead of the filtered grid.
+       Only on the store page: /collections/<slug> is rewritten to
+       /store-collection?c=<slug>, which carries the same param and must not
+       bounce. `replace` so Back still leaves the store rather than trapping. */
+    if (real && pathSlug !== want && document.getElementById('st-home')) {
+      location.replace('/collections/' + want);
+      return;
+    }
+
+    if (real) state.program = want;
     /* A filtered view genuinely IS one list, so ?c=<programme> keeps the grid.
        With no filter the home shows the rhythm instead. */
     var filtered = state.program !== 'all';

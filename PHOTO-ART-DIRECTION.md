@@ -454,3 +454,67 @@ button, and keeps the real product exactly as it was photographed.
 
 The general rule this settles: **where a product carries a third-party brand,
 do not generate it. Crop, or shoot it for real.**
+
+
+---
+
+# THE COLLECTION-INDEX SHOOT — 2026-09-25
+
+The index band on the store home: six programmes listed left, one photograph
+right that swaps as you move down the list. Jayden: *"we need to redo these 6
+pictures in the correct size for each picture mobile and desktop and this needs
+to be a new type of photoshoot."*
+
+## It was never a photography problem until it was measured
+
+| viewport | slot | ratio |
+|---|---|---|
+| 1920 | 953 x 464 | **2.05** |
+| 1440 | 713 x 464 | **1.54** |
+| 1024 | 505 x 348 | **1.45** |
+| <=860 phone | full width, `aspect-ratio:3/2` | **1.50** |
+
+Every slot is LANDSCAPE. The band was being fed each programme's **product**
+rendition, which is **4:5 PORTRAIT**. `object-fit:cover` therefore kept as
+little as **39% of the picture's height** at 1920, which is why the home page
+showed a sliced desk. No choice of product photograph could have fixed that —
+the shape was wrong. After the reshoot the same slot crops **0% of height** at
+1440 and **0% in either direction** on a phone.
+
+## The brief, from the interview
+
+| | |
+|---|---|
+| **Register** | Bright and alive — deliberate CONTRAST to the dark product banners below. The page breathes in, then hits. |
+| **Subject** | The moment of recognition: a driver receiving, holding, opening or being given the thing. |
+| **Crop** | Medium — a person and their space, head to waist, environment readable. |
+| **Grade** | Cold morning, warm skin: blue-grey ambient, one low warm 3200K sun, visible breath. |
+
+Six scenes, each tied to what that programme actually sells — including the
+correction that row 02 "Safe Miles Programs" is the **mile-pack boxes**, not
+medals, so it is a box handed over in the yard rather than a pin.
+
+Composition rule that makes both cuts safe: everything essential inside the
+middle **70% of width** and **80% of height**. The 16:9 master then trims 13%
+of height for the 2.05 desktop cut and 16% of width for the 1.50 phone cut,
+and the 1.45 laptop slot crops back toward the middle.
+
+## NAME THE GARMENT; DO NOT FORBID THE LOGO
+
+The onboarding frame came back three times with a legible **Carhartt** label
+patch on the chest. The second attempt forbade it explicitly — *"NO label
+patch, NO logo tag, NO embroidered mark"* — and it appeared anyway, because
+"worn canvas work jacket" simply IS that brand in the model's distribution.
+
+What worked was changing the wardrobe: *"a PLAIN NAVY ZIP-FRONT FLEECE with a
+smooth unbroken chest and no pockets"* and *"a PLAIN HEATHER-GREY CREWNECK
+SWEATSHIRT."* No canvas, no patch.
+
+This is the third time in one day that a positive instruction beat a negative
+one — after the bronze-vs-gunmetal medal and the amber-spotlight lighting.
+**Describe what you want in the frame. Do not describe what you want removed.**
+
+Checked at full resolution on all six before cutting: the milestone driver's
+small leather tag is a generic illegible garment label, not a trademark, and
+the trucks behind the onboarding frame are far enough out of focus that no
+badge resolves.

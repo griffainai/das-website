@@ -1,0 +1,66 @@
+{
+ "desktop": {
+  "w": 2100,
+  "h": 1024
+ },
+ "mobile": {
+  "w": 1500,
+  "h": 1000
+ },
+ "shots": {
+  "appreciation": {
+   "src": "/images/store/ix-appreciation-6ab6d1fd-1050.webp",
+   "srcset": "/images/store/ix-appreciation-6ab6d1fd-1050.webp 1050w, /images/store/ix-appreciation-6ab6d1fd.webp 2100w",
+   "mobile": "/images/store/ix-appreciation-6ab6d1fd-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  },
+  "milepacks": {
+   "src": "/images/store/ix-milepacks-07639fef-1050.webp",
+   "srcset": "/images/store/ix-milepacks-07639fef-1050.webp 1050w, /images/store/ix-milepacks-07639fef.webp 2100w",
+   "mobile": "/images/store/ix-milepacks-07639fef-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  },
+  "onboarding": {
+   "src": "/images/store/ix-onboarding-cc30f80e-1050.webp",
+   "srcset": "/images/store/ix-onboarding-cc30f80e-1050.webp 1050w, /images/store/ix-onboarding-cc30f80e.webp 2100w",
+   "mobile": "/images/store/ix-onboarding-cc30f80e-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  },
+  "safety": {
+   "src": "/images/store/ix-safety-faccbe25-1050.webp",
+   "srcset": "/images/store/ix-safety-faccbe25-1050.webp 1050w, /images/store/ix-safety-faccbe25.webp 2100w",
+   "mobile": "/images/store/ix-safety-faccbe25-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  },
+  "milestone": {
+   "src": "/images/store/ix-milestone-6ed66c1e-1050.webp",
+   "srcset": "/images/store/ix-milestone-6ed66c1e-1050.webp 1050w, /images/store/ix-milestone-6ed66c1e.webp 2100w",
+   "mobile": "/images/store/ix-milestone-6ed66c1e-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  },
+  "holiday": {
+   "src": "/images/store/ix-holiday-42f329ef-1050.webp",
+   "srcset": "/images/store/ix-holiday-42f329ef-1050.webp 1050w, /images/store/ix-holiday-42f329ef.webp 2100w",
+   "mobile": "/images/store/ix-holiday-42f329ef-mobile.webp",
+   "mobileW": 1500,
+   "mobileH": 1000,
+   "w": 2100,
+   "h": 1024
+  }
+ }
+}
