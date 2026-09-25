@@ -231,12 +231,25 @@
 /* ── HERO — the navy slash, DAS's own device ───────────────────────────── */
 .st-hero{ position:relative; overflow:hidden; background:var(--st-navy-900); color:#fff; }
 .st-hero .shot{ position:absolute; inset:0; }
-.st-hero .shot img{ width:100%; height:100%; object-fit:cover; opacity:.5; }
+/* SHOW THE PHOTOGRAPH. Jayden 2026-09-25: "can u get rid of this strip and
+   just show the photo."
+   Two things were hiding it. The .slash was a navy wedge clipped diagonally
+   across the frame at 94% opacity, and the photograph underneath was ALSO
+   held at 50% opacity — so the hero was mostly gradient with a ghost of an
+   image behind it. Both are gone and the picture runs at full strength.
+   What replaces them is a scrim, not a panel: a left-weighted wash that is
+   opaque enough to carry white type where the type actually sits and fades to
+   nothing across the rest of the frame, so the road and the forest read. Same
+   approach as the collection banners, and measured the same way — see the
+   numbers in PHOTO-ART-DIRECTION.md. */
+.st-hero .shot img{ width:100%; height:100%; object-fit:cover; }
 .st-hero .slash{
   position:absolute; inset:0;
-  clip-path:polygon(0 0,100% 0,100% 26%,0 74%);
-  background:linear-gradient(100deg,#060E24 0%,#0C1840 22%,#16264F 45%,#1A2E6E 62%,#2E4FA8 82%,#4E8BE8 100%);
-  opacity:.94;
+  background:
+    linear-gradient(100deg, rgba(6,14,36,.92) 0%, rgba(6,14,36,.82) 26%,
+      rgba(8,18,44,.56) 48%, rgba(8,18,44,.22) 68%, rgba(8,18,44,0) 86%),
+    linear-gradient(180deg, rgba(6,14,36,.42) 0%, rgba(6,14,36,0) 34%,
+      rgba(6,14,36,0) 66%, rgba(6,14,36,.46) 100%);
 }
 .st-hero .guides{ position:absolute; inset:0; pointer-events:none; }
 .st-hero .guides span{ position:absolute; top:0; bottom:0; border-left:1px dashed rgba(255,255,255,.12); }
