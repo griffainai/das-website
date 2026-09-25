@@ -13,12 +13,12 @@
  },
  "banners": {
   "appreciation": {
-   "src": "/images/store/banner-appreciation-83a57236-1200.webp",
-   "srcset": "/images/store/banner-appreciation-83a57236-1200.webp 1200w, /images/store/banner-appreciation-83a57236.webp 2400w",
-   "mobile": "/images/store/banner-appreciation-83a57236-mobile.webp",
+   "src": "/images/store/banner-appreciation-d13f2d63-1200.webp",
+   "srcset": "/images/store/banner-appreciation-d13f2d63-1200.webp 1200w, /images/store/banner-appreciation-d13f2d63.webp 2400w",
+   "mobile": "/images/store/banner-appreciation-d13f2d63-mobile.webp",
    "mobileW": 1080,
    "mobileH": 830,
-   "hero": "/images/store/banner-appreciation-83a57236-hero.webp",
+   "hero": "/images/store/banner-appreciation-d13f2d63-hero.webp",
    "heroW": 1100,
    "heroH": 530,
    "w": 2400,

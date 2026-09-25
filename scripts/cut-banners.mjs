@@ -117,6 +117,7 @@ const prev = existsSync(join(OUT, 'banner-manifest.json'))
   ? JSON.parse(readFileSync(join(OUT, 'banner-manifest.json'), 'utf8')).banners || {}
   : {}
 const manifest = { ...prev }
+const keep = new Set()
 let worst = 0, cut = 0
 
 for (const s of SHOTS) {
@@ -158,9 +159,20 @@ for (const s of SHOTS) {
   worst = Math.max(worst, dT.hot, mT.hot, hT.hot)
 
   const h8 = hash8(Buffer.concat([dBuf, mBuf, hBuf]))
-  for (const f of readdirSync(OUT)) {
-    if (f.indexOf('banner-' + s.slug + '-') === 0 && f.indexOf('-' + h8) < 0) rmSync(join(OUT, f))
-  }
+  /* DELETING THE OLD FILES HERE IS WHAT BROKE PRODUCTION.
+     The stale-file sweep used to run at this point, before the manifest was
+     written at the end of the loop. On 2026-09-25 this script was piped through
+     `head -3`; node took EPIPE on the fourth console.log and died mid-run,
+     having already deleted the previous appreciation files and not yet written
+     the manifest. The deploy then shipped a manifest pointing at four files
+     that no longer existed, and the live banner 404'd.
+     So the sweep now happens AFTER the manifest is written, at the bottom of
+     this file. An interrupted run leaves extra files, which is harmless; it can
+     no longer leave missing ones. */
+  keep.add('banner-' + s.slug + '-' + h8 + '.webp')
+  keep.add('banner-' + s.slug + '-' + h8 + '-1200.webp')
+  keep.add('banner-' + s.slug + '-' + h8 + '-mobile.webp')
+  keep.add('banner-' + s.slug + '-' + h8 + '-hero.webp')
   writeFileSync(join(OUT, 'banner-' + s.slug + '-' + h8 + '.webp'), dBuf)
   writeFileSync(join(OUT, 'banner-' + s.slug + '-' + h8 + '-1200.webp'), dHalf)
   writeFileSync(join(OUT, 'banner-' + s.slug + '-' + h8 + '-mobile.webp'), mBuf)
@@ -189,6 +201,30 @@ for (const s of SHOTS) {
 
 writeFileSync(join(OUT, 'banner-manifest.json'),
   JSON.stringify({ banner: DESKTOP, mobileBanner: MOBILE, heroBanner: HERO, banners: manifest }, null, 1))
-const photo = Object.values(manifest).filter((b) => b.kind === 'photo').length
-console.log('\n' + cut + ' banners cut. ' + photo + ' of ' + Object.keys(manifest).length +
-  ' are photographs. Worst blown share in any caption band: ' + worst.toFixed(2) + '%')
+
+/* EVERY PATH THE MANIFEST NAMES MUST EXIST. This is the check that would have
+   caught the 404 above, so it runs here rather than in a separate script
+   somebody has to remember. A manifest that names a missing file is a broken
+   page, and it is silent -- the renderer just shows an empty banner. */
+const missing = []
+for (const [slug, b] of Object.entries(manifest)) {
+  const paths = [b.src, b.mobile, b.hero].filter(Boolean)
+    .concat((b.srcset || '').split(', ').filter(Boolean).map((s) => s.split(' ')[0]))
+  for (const p of paths) if (!existsSync(join(ROOT, p.replace(/^\//, '')))) missing.push(slug + ' -> ' + p)
+}
+if (missing.length) {
+  console.error('\nMANIFEST NAMES FILES THAT DO NOT EXIST:')
+  for (const m of missing) console.error('  ' + m)
+  console.error('Re-run this script to completion. Do NOT deploy.')
+  process.exitCode = 1
+} else {
+  /* Only now is it safe to drop superseded files. */
+  let swept = 0
+  for (const f of readdirSync(OUT)) {
+    if (f.indexOf('banner-') === 0 && f !== 'banner-manifest.json' && !keep.has(f)) { rmSync(join(OUT, f)); swept++ }
+  }
+  const photo = Object.values(manifest).filter((b) => b.kind === 'photo').length
+  console.log('\n' + cut + ' banners cut, ' + swept + ' superseded files swept. ' + photo + ' of ' +
+    Object.keys(manifest).length + ' are photographs. ' +
+    'All manifest paths resolve. Worst blown share in any caption band: ' + worst.toFixed(2) + '%')
+}
