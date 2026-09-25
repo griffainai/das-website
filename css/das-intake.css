@@ -1,147 +1,164 @@
 /* ============================================================================
-   THE INTAKE SURFACE — Retention Opportunity's intake design, on DAS
+   THE FORM CARD — copied from ODNDR's /contact, measured not eyeballed
    ----------------------------------------------------------------------------
-   Jayden 2026-09-25: the contact and quote pages "need to be redesigned very
-   deeply and they should have the retention opportunity design."
+   Jayden 2026-09-25: the DAS contact and quote pages "need to follow this exact
+   design" — https://offdutynotdrivingrewards.com/contact — and "lets keep them
+   the same across website just diff info and diff booking link".
 
-   "The RO design" is two different systems inside that repo, so this was asked
-   rather than guessed. He picked the INTAKE surface, not the hi-vis assessment
-   one — and it is the right half for this job twice over: it is the surface RO
-   uses for exactly this task (getting a serious answer out of a serious buyer),
-   and its accent #215387 is ALREADY DAS's navy, so nothing collides.
+   An earlier pass built these on Retention Opportunity's intake surface with a
+   stepped flow. Wrong target, and it is reverted. ODNDR's form is single-page:
+   twelve controls visible at once, one button. The only thing named "step" on
+   that page is a CSS-module class, `stripe-demo-module__step`, which is also
+   the clue to the whole aesthetic — it is Stripe's.
 
-   Tokens lifted from retention-opportunity/components/intake/intake.module.css:
+   EVERY NUMBER BELOW WAS READ OFF THE LIVE ODNDR PAGE with getComputedStyle,
+   not matched by eye:
 
-       ink      #1A1F36      the thing you read
-       accent   #215387      the thing you act on  (= DAS navy)
-       ground   #F7FAFC      the surface a field sits on
-       line     #E3E8EE      the edge of everything
-       muted    #697386      the thing you read second
+     row          display:grid · grid-template-columns:170px 322px · gap:16px
+                  align-items:start          <- label LEFT of the field, not above
+     card         padding 14px 16px 20px · radius 8px · white
+                  shadow rgba(50,50,93,.25) 0 50px 100px -20px
+     eyebrow      12.5px / 400 / #6B7688
+     headline     22px / 26.4px / 600 / #0A2540
+     sub          14px / #425466
+     label        15px / 500 / #0A2540 / no transform
+     field        36px tall · 15px · NO BORDER · radius 4px · bg #F6F9FC
+     button       34px · pill (radius 999px) · #215387 · 15px / 600
 
-   The restraint is the point. No gradients, no shadows doing decoration, one
-   accent used only for progress, focus and the primary action. It should read
-   as software a purchasing department already trusts.
+   The borderless #F6F9FC field on white is the signature of this design. Do not
+   give it a border to "fix" it — that is the look.
    ========================================================================== */
 
 .ix {
-  --ix-ink: #1A1F36;
-  --ix-accent: #215387;
-  --ix-accent-dark: #16406B;
-  --ix-ground: #F7FAFC;
-  --ix-line: #E3E8EE;
-  --ix-muted: #697386;
-  --ix-body: #3C4257;
+  --ix-ink: #0A2540;        /* Stripe navy — headings, labels, typed text */
+  --ix-body: #425466;       /* secondary copy */
+  --ix-muted: #6B7688;      /* eyebrow, hints */
+  --ix-field: #F6F9FC;      /* the field itself */
+  --ix-field-hover: #EEF3F9;
+  --ix-accent: #215387;     /* DAS navy — the button, the focus ring */
+  --ix-line: #E6EBF1;
   --ix-danger: #B42318;
-  --ix-r: 8px;
 }
 
-/* ── the progress header ──────────────────────────────────────────────────
-   RO shows where you are before it shows what it wants. On a 22-field form
-   that is the difference between answering and leaving. */
-.ix-progress { margin: 0 0 26px; }
-.ix-progress-head {
-  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
-  font-size: 13px; font-weight: 500; color: var(--ix-accent);
+/* ── the row: label left, field right ────────────────────────────────────
+   This is the part that makes it read as ODNDR rather than a generic form.
+   Below 640 it stacks, because 170px of label beside a field does not fit a
+   phone. */
+.ix .cf-row,
+.ix .cf-row-full { display: block; margin: 0; }
+.ix .cf-group {
+  /* gap and columns carry !important because the pages themselves hold
+     `#contact-form .cf-group { gap:0 }` — an ID selector, which outranks any
+     class. Theirs is not !important, so this wins on weight rather than by
+     escalating the selector war. */
+  /* ODNDR's label column is a fixed 170px in a 508px row — 34%. DAS's card is
+     narrower (about 403px), so a hard 170px leaves the field at 217px against
+     ODNDR's 322px and the row reads cramped. The clamp reproduces 170px exactly
+     at ODNDR's width and gives the field room back on a narrower card, which is
+     matching the design rather than the pixel. */
+  display: grid !important;
+  grid-template-columns: clamp(120px, 34%, 170px) minmax(0, 1fr) !important;
+  gap: 16px !important; align-items: start;
+  padding: 7px 0;
 }
-.ix-progress-head .ix-of { color: var(--ix-muted); font-variant-numeric: tabular-nums; }
-.ix-bar { margin-top: 8px; height: 6px; border-radius: 999px; background: var(--ix-line); overflow: hidden; }
-.ix-bar > i {
-  display: block; height: 100%; border-radius: 999px; width: 0;
-  background: var(--ix-accent); transition: width .24s cubic-bezier(.2,.8,.2,1);
+@media (max-width: 640px) {
+  .ix .cf-group { grid-template-columns: 1fr !important; gap: 6px !important; padding: 8px 0; }
 }
 
-/* ── a step ───────────────────────────────────────────────────────────────
-   Hidden with `hidden`, not display:none on a class, so the fields stay in
-   the DOM and the existing submit handler — which reads every value by
-   [name="..."] and posts to /api/contact — keeps working untouched. Breaking
-   lead capture to improve a form would be a bad trade. */
-.ix-step[hidden] { display: none; }
-.ix-steptitle {
-  margin: 0 0 4px; font-size: 20px; line-height: 1.25; font-weight: 600; color: var(--ix-ink);
+.ix .cf-label {
+  margin: 0; padding-top: 8px;
+  font-size: 15px !important; font-weight: 500 !important; line-height: 1.3;
+  color: var(--ix-ink) !important; text-transform: none; letter-spacing: normal;
 }
-.ix-stepsub { margin: 0 0 22px; font-size: 14px; line-height: 21px; color: var(--ix-muted); }
+@media (max-width: 640px) { .ix .cf-label { padding-top: 0; } }
+.ix .cf-req { color: var(--ix-muted) !important; font-weight: 500 !important; }
+
+/* WHY !important BELOW. das-contact.css styles .cf-input, .cf-label and
+   .cf-submit with !important on every property — border, radius, shadow,
+   background, colour, size, padding. That file is the DAS look this brief
+   replaces. Specificity decides between two !important rules, and `.ix .cf-*`
+   (0,2,0) beats `.cf-*` (0,1,0), so these win without touching that file — the
+   same trade das-forms.css already documents a few lines into itself. */
 
 /* ── fields ───────────────────────────────────────────────────────────────
-   One rule for every control on the page so a select never sits a pixel off
-   an input beside it. 16px on the control itself: below that iOS Safari zooms
-   on focus and never zooms back. */
+   Borderless on a tinted ground, exactly as ODNDR has them. 36px on desktop;
+   16px type and 44px height on a phone, because below 16px iOS Safari zooms on
+   focus and never zooms back, and 36px is under the touch-target minimum. */
 .ix .cf-input,
 .ix .cf-select,
 .ix .cf-textarea {
   width: 100%; box-sizing: border-box;
-  min-height: 46px; padding: 12px 14px;
-  font: 400 16px/1.4 inherit; color: var(--ix-ink);
-  background: #fff; border: 1px solid #D5DBE5; border-radius: var(--ix-r);
-  box-shadow: 0 1px 1px rgba(26,31,54,.04);
-  transition: border-color .15s, box-shadow .15s;
-  appearance: none; -webkit-appearance: none;
+  min-height: 36px; padding: 0 12px !important;
+  font: 400 15px/34px inherit; font-size: 15px !important; color: var(--ix-ink) !important;
+  background: var(--ix-field) !important; border: 0 !important; border-radius: 4px !important;
+  box-shadow: none !important; appearance: none; -webkit-appearance: none;
+  transition: background .12s, box-shadow .12s !important;
 }
-.ix .cf-textarea { min-height: 132px; resize: vertical; line-height: 1.55; }
-.ix .cf-input::placeholder, .ix .cf-textarea::placeholder { color: #9AA3B2; }
-.ix .cf-input:hover, .ix .cf-select:hover, .ix .cf-textarea:hover { border-color: #BFC8D6; }
+.ix .cf-textarea { padding: 10px 12px !important; line-height: 1.5; min-height: 64px; resize: vertical; }
+.ix .cf-input::placeholder,
+.ix .cf-textarea::placeholder { color: #8792A2; }
+.ix .cf-input:hover, .ix .cf-select:hover, .ix .cf-textarea:hover { background: var(--ix-field-hover) !important; box-shadow: none !important; }
 .ix .cf-input:focus, .ix .cf-select:focus, .ix .cf-textarea:focus {
-  outline: none; border-color: var(--ix-accent);
-  box-shadow: 0 0 0 3px rgba(33,83,135,.14);
+  outline: none !important; background: #fff !important;
+  box-shadow: 0 0 0 1px var(--ix-accent), 0 0 0 4px rgba(33,83,135,.12) !important;
 }
-.ix .cf-label {
-  display: block; margin: 0 0 6px;
-  font-size: 13px; font-weight: 600; letter-spacing: .01em; color: var(--ix-body);
+@media (max-width: 640px) {
+  .ix .cf-input, .ix .cf-select, .ix .cf-textarea { min-height: 44px; font-size: 16px !important; line-height: 42px; }
+  .ix .cf-textarea { line-height: 1.5; }
 }
-.ix .cf-req { color: var(--ix-accent); font-weight: 600; }
 
-/* A select needs its own arrow once appearance is stripped. */
 .ix .cf-select-wrap { position: relative; }
 .ix .cf-select-wrap::after {
-  content: ""; position: absolute; right: 15px; top: 50%; width: 9px; height: 9px;
-  border-right: 1.6px solid var(--ix-muted); border-bottom: 1.6px solid var(--ix-muted);
+  content: ""; position: absolute; right: 12px; top: 50%; width: 7px; height: 7px;
+  border-right: 1.5px solid var(--ix-muted); border-bottom: 1.5px solid var(--ix-muted);
   transform: translateY(-70%) rotate(45deg); pointer-events: none;
 }
-.ix .cf-select { padding-right: 38px; }
+.ix .cf-select { padding-right: 32px; }
 
-.ix .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
-.ix .cf-row-full { display: block; margin-bottom: 18px; }
-.ix .cf-group { min-width: 0; }
-@media (max-width: 640px) { .ix .cf-row { grid-template-columns: 1fr; } }
+/* ── the card's own header ───────────────────────────────────────────────── */
+.ix .ix-eyebrow {
+  margin: 0 0 4px; font-size: 12.5px; font-weight: 400; color: var(--ix-muted);
+  letter-spacing: normal; text-transform: none;
+}
+.ix .ix-head { margin: 0 0 4px; font-size: 22px; line-height: 26.4px; font-weight: 600; color: var(--ix-ink); }
+.ix .ix-sub { margin: 0 0 14px; font-size: 14px; line-height: 1.5; color: var(--ix-body); }
 
-/* A field the stepper has flagged. */
-.ix .is-invalid,
-.ix .is-invalid:focus { border-color: var(--ix-danger); box-shadow: 0 0 0 3px rgba(180,35,24,.12); }
+/* ── the submit: a pill, full width on the card ─────────────────────────── */
+.ix .cf-submit {
+  min-height: 40px; padding: 0 22px; width: 100%;
+  background: var(--ix-accent) !important; color: #fff !important; border: 0 !important;
+  border-radius: 999px !important; box-shadow: none !important;
+  font-size: 15px !important; font-weight: 600 !important; letter-spacing: normal; text-transform: none;
+  cursor: pointer; transition: background .15s;
+}
+.ix .cf-submit:hover { background: #1A4470 !important; }
+.ix .cf-submit:focus-visible { outline: 2px solid var(--ix-accent); outline-offset: 3px; }
+@media (max-width: 640px) { .ix .cf-submit { min-height: 48px; } }
+
+/* A field the page's own validation flagged. */
+.ix .is-invalid { box-shadow: 0 0 0 1px var(--ix-danger), 0 0 0 4px rgba(180,35,24,.10); background: #fff; }
 .ix-err { margin: 6px 0 0; font-size: 12.5px; line-height: 18px; color: var(--ix-danger); }
 
-/* ── navigation ───────────────────────────────────────────────────────── */
-.ix-nav {
-  display: flex; justify-content: space-between; align-items: center; gap: 12px;
-  margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--ix-line);
-}
-.ix-btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  min-height: 46px; padding: 0 22px; border-radius: var(--ix-r);
-  font: 600 15px/1 inherit; cursor: pointer; border: 1px solid transparent;
-  transition: background .15s, border-color .15s, color .15s;
-}
-.ix-btn-primary { background: var(--ix-accent); color: #fff; border-color: var(--ix-accent); }
-.ix-btn-primary:hover { background: var(--ix-accent-dark); border-color: var(--ix-accent-dark); }
-.ix-btn-ghost { background: #fff; color: var(--ix-body); border-color: #D5DBE5; }
-.ix-btn-ghost:hover { background: var(--ix-ground); border-color: #BFC8D6; }
-.ix-btn:focus-visible { outline: 2px solid var(--ix-accent); outline-offset: 2px; }
-.ix-nav .ix-spacer { margin-left: auto; }
+/* ── RESTORE THE LABELS ───────────────────────────────────────────────────
+   Both pages carried a rule visually hiding every .cf-label, commented
+   "ODNDR parity: placeholders carry the field names on this form". That was a
+   wrong reading of ODNDR. Measured on the live page, its labels are VISIBLE —
+   15px / 500 / #0A2540, sitting in a 170px column to the LEFT of the field —
+   and that label-left geometry is most of why the form reads the way it does.
+   Placeholders there hold example values ("Jane", "jane@fleet.com"), not the
+   field's name.
 
-/* The real submit keeps its own id and type so the page's existing handler
-   still fires; it only gets this skin. */
-.ix .cf-submit {
-  width: 100%; min-height: 50px; border-radius: var(--ix-r);
-  background: var(--ix-accent); color: #fff; border: 1px solid var(--ix-accent);
-  font-size: 15px; font-weight: 600; cursor: pointer;
+   The hiding rule is `#contact-form .cf-label:not(.cf-label-show)` — an ID
+   selector, but not !important, so this wins on weight. */
+.ix .cf-label:not(.cf-label-show) {
+  position: static !important;
+  width: auto !important; height: auto !important;
+  margin: 0 !important; padding: 8px 0 0 !important;
+  overflow: visible !important;
+  clip: auto !important; clip-path: none !important;
+  white-space: normal !important;
+  border: 0 !important;
 }
-.ix .cf-submit:hover { background: var(--ix-accent-dark); }
-
-/* ── the review line ──────────────────────────────────────────────────────
-   RO shows what it already has before it asks for the last thing. It costs
-   one row and it stops people re-opening earlier steps to check. */
-.ix-review {
-  margin: 0 0 20px; padding: 12px 14px; border-radius: var(--ix-r);
-  background: var(--ix-ground); box-shadow: inset 0 0 0 1px var(--ix-line);
-  font-size: 13px; line-height: 20px; color: var(--ix-body);
+@media (max-width: 640px) {
+  .ix .cf-label:not(.cf-label-show) { padding-top: 0 !important; }
 }
-.ix-review b { color: var(--ix-ink); font-weight: 600; }
-.ix-review:empty { display: none; }

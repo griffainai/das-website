@@ -24,8 +24,8 @@
   "hash": "052eb1ca3047"
  },
  "css/das-intake.css": {
-  "v": "1",
-  "hash": "1cb84e16ea0e"
+  "v": "2",
+  "hash": "72f5cb698928"
  },
  "css/das-nav.css": {
   "v": "12",
@@ -74,10 +74,6 @@
  "js/das-ideas.js": {
   "v": "1",
   "hash": "2434771d7762"
- },
- "js/das-intake.js": {
-  "v": "1",
-  "hash": "b9148f2d985a"
  },
  "js/das-nav.js": {
   "v": "2",
