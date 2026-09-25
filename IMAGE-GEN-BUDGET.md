@@ -13,9 +13,9 @@ This file governs every OpenArt spend on DAS. Read it before generating.
 |---|---|
 | Account | griffainai@gmail.com, **Pro** |
 | Balance at 2026-09-24 | **24,000** |
-| Spent so far | 40 (one test frame) |
+| Spent so far | **280** (1 test + 6 masters) |
 | This shoot, budgeted | **480** production + 160 contingency = **640** |
-| Left for the rest of the month | **~23,320** |
+| Left for the rest of the month | **23,720** |
 
 The whole DAS store shoot costs **2.7% of the month**. That is only true because
 of rule 1.
@@ -85,6 +85,12 @@ generate video without asking Jayden first.
 | Date | What | Model | Frames | Credits | Balance after |
 |---|---|---|---|---|---|
 | 2026-09-24 | Test frame — appreciation, 16:9 golden hour | nano-banana-pro 4K | 1 | 40 | 23,960 |
+| 2026-09-24 | **6 portrait masters** — the parallax shoot, one per program | nano-banana-pro 4K 4:5 | 6 | 240 | **23,720** |
+
+The six masters produced **twelve** live placements (desktop + mobile per
+program) at no extra credit cost, and are archived as q95 webp in
+`images/shoot/masters/` so any re-crop is free forever. Re-cutting is
+`node scripts/cut-shoot.mjs` — adjust `band` and `pan` per program and run it.
 
 ---
 

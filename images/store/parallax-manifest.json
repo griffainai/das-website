@@ -2,43 +2,43 @@
   "appreciation": {
     "label": "Driver Appreciation Kits",
     "sub": "Driver Appreciation Week",
-    "desktop": "/images/store/px-appreciation-6fa97f43-desktop.webp",
-    "mobile": "/images/store/px-appreciation-6fa97f43-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-appreciation-a764bb4b-desktop.webp",
+    "mobile": "/images/store/px-appreciation-a764bb4b-mobile.webp",
+    "placeholder": false
   },
   "milepacks": {
     "label": "Safe Miles Programs",
     "sub": "Quarterly recognition",
-    "desktop": "/images/store/px-milepacks-f7bd1124-desktop.webp",
-    "mobile": "/images/store/px-milepacks-f7bd1124-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-milepacks-227b3371-desktop.webp",
+    "mobile": "/images/store/px-milepacks-227b3371-mobile.webp",
+    "placeholder": false
   },
   "onboarding": {
     "label": "Onboarding Solutions",
     "sub": "Day one, done right",
-    "desktop": "/images/store/px-onboarding-f2fa4cc3-desktop.webp",
-    "mobile": "/images/store/px-onboarding-f2fa4cc3-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-onboarding-5525ff72-desktop.webp",
+    "mobile": "/images/store/px-onboarding-5525ff72-mobile.webp",
+    "placeholder": false
   },
   "safety": {
     "label": "Safety Recognition",
     "sub": "Safe miles, earned",
-    "desktop": "/images/store/px-safety-fd685862-desktop.webp",
-    "mobile": "/images/store/px-safety-fd685862-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-safety-ae0ed65a-desktop.webp",
+    "mobile": "/images/store/px-safety-ae0ed65a-mobile.webp",
+    "placeholder": false
   },
   "milestone": {
     "label": "Service Milestone Awards",
     "sub": "250K to 6 million",
-    "desktop": "/images/store/px-milestone-773158ef-desktop.webp",
-    "mobile": "/images/store/px-milestone-773158ef-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-milestone-aa93f1b3-desktop.webp",
+    "mobile": "/images/store/px-milestone-aa93f1b3-mobile.webp",
+    "placeholder": false
   },
   "holiday": {
     "label": "Holiday & Seasonal",
     "sub": "The family sees this one",
-    "desktop": "/images/store/px-holiday-9d493bcd-desktop.webp",
-    "mobile": "/images/store/px-holiday-9d493bcd-mobile.webp",
-    "placeholder": true
+    "desktop": "/images/store/px-holiday-919279ce-desktop.webp",
+    "mobile": "/images/store/px-holiday-919279ce-mobile.webp",
+    "placeholder": false
   }
 }

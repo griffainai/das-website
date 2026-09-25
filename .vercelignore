@@ -39,3 +39,9 @@ SEO-IMPLEMENTATION-BRIEF.html
 _v2c.png
 package.json
 package-lock.json
+
+# The photoshoot MASTERS never deploy. They are the 4K originals every
+# placement is cut from (scripts/cut-shoot.mjs) -- 6 frames that cost 240
+# OpenArt credits. Archived as q95 webp so a re-cut never costs credits
+# again, but outputDirectory:"." would otherwise serve all of it.
+images/shoot/
