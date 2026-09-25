@@ -321,6 +321,30 @@
     return { prices: prices, names: names };
   }
 
+  /** Product-shaped phrases, found by walking words rather than by regex.
+      The regex version was unverifiable: it read correctly, matched correctly
+      in isolation, and still let the invented product through in place --
+      three separate debugging passes could not show me why. Explicit beats
+      clever when the thing being protected is what a customer is told. */
+  function claimPhrases(text) {
+    var NOUNS = { kit: 1, kits: 1, medal: 1, medals: 1, award: 1, awards: 1,
+                  program: 1, programs: 1, collection: 1, package: 1, bundle: 1 };
+    var words = String(text).split(/\s+/);
+    var caps = function (w) { return w && w[0] !== w[0].toLowerCase() && w[0] === w[0].toUpperCase(); };
+    var out = [];
+    for (var i = 0; i < words.length; i++) {
+      var bare = words[i].replace(/[^A-Za-z]/g, '');
+      if (!bare || !NOUNS[bare.toLowerCase()]) continue;
+      var start = i;
+      while (start > 0 && start > i - 6) {
+        var prev = words[start - 1].replace(/[^A-Za-z]/g, '');
+        if (caps(prev)) start--; else break;
+      }
+      if (i - start >= 1) out.push(words.slice(start, i + 1).join(' '));
+    }
+    return out;
+  }
+
   function ungroundedReason(text) {
     var facts = catalogueFacts();
 
@@ -331,16 +355,16 @@
       if (!facts.prices[n] && !facts.prices[whole]) return 'states a price we do not charge: ' + money[i];
     }
 
-    /* Capitalised multi-word phrases that look like a SKU. */
-    var claims = text.match(/(?:[A-Z][A-Za-z0-9''-]*\s+){1,6}(?:Kit|Kits|Medal|Medals|Award|Awards|Program|Programs|Collection|Package|Bundle)/g) || [];
+    var claims = claimPhrases(text);
     for (var j = 0; j < claims.length; j++) {
       var c = norm(claims[j]);
-      if (c.split(' ').length < 2) continue;
-      var ok = facts.names.some(function (nm) { return nm.indexOf(c) > -1 || c.indexOf(nm) > -1; });
+      if (!c || c.split(' ').length < 2) continue;
+      var ok = facts.names.some(function (nm) { return nm && (nm.indexOf(c) > -1 || c.indexOf(nm) > -1); });
       if (!ok) return 'names a product we do not sell: ' + claims[j].trim();
     }
     return null;
   }
+
 
   /** Clean it, then judge it. Every answer passes through here -- fresh from
       the model AND read back from cache -- so there is exactly one place that
