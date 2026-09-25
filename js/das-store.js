@@ -200,11 +200,30 @@
           '<span class="t">' + esc(g.label) + '</span>' +
           '<span class="c">' + g.count + '</span></a>';
       }).join('') + '</div>' +
+      /* THIS SLOT IS LANDSCAPE. IT WAS BEING FED PORTRAIT PHOTOGRAPHS.
+         Measured live: the shot panel is 953x464 (2.05) at 1920, 713x464 (1.54)
+         at 1440, 505x348 (1.45) at 1024, and full-width 3:2 (1.50) on a phone.
+         Every one of those is landscape, and the product renditions handed to it
+         are 4:5 PORTRAIT — so object-fit:cover kept as little as 39% of a
+         picture's height and the home page showed a sliced desk. No choice of
+         product photograph could have fixed it; the SHAPE was wrong.
+         These are now their own shoot, cut to the two shapes that matter by
+         scripts/cut-index-shots.mjs. The product photographs stay where they
+         belong, on the cards and the product page. */
       '<div class="ix-shot">' + gs.map(function (g, i) {
-        var v = (g.shot && g.shot.pdp) || g.shot;
-        return '<img class="' + (i ? '' : 'on') + '" data-i="' + i + '" src="' + esc(v.src) + '"' +
-          ' srcset="' + esc(v.srcset) + '" sizes="(min-width:1024px) 50vw, 100vw"' +
+        var x = IXSHOTS && IXSHOTS[g.slug];
+        var v = x || (g.shot && g.shot.pdp) || g.shot;
+        var img = '<img class="' + (i ? '' : 'on') + '" data-i="' + i + '" src="' + esc(v.src) + '"' +
+          ' srcset="' + esc(v.srcset) + '" sizes="(min-width:861px) 50vw, 100vw"' +
           ' alt="' + esc(g.label) + '"' + (i ? ' loading="lazy"' : '') + '>';
+        /* 861px is the breakpoint where .st-index collapses to one column and
+           .ix-shot becomes a 3:2 band, which is a different CROP, not a smaller
+           one — so it takes a <picture> source, exactly as the banners do. */
+        if (!x || !x.mobile) return img;
+        return '<picture>' +
+          '<source media="(max-width:860px)" srcset="' + esc(x.mobile) + '"' +
+            ' width="' + (x.mobileW || 1500) + '" height="' + (x.mobileH || 1000) + '">' +
+          img + '</picture>';
       }).join('') + '</div>';
 
     var shots = el.querySelectorAll('.ix-shot img');
@@ -658,6 +677,7 @@
   /* ── boot ───────────────────────────────────────────────────────────────── */
   var BANNERS = null;
   var PARALLAX = null;
+  var IXSHOTS = null;
   Promise.all([
     fetch('/store-catalog.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }),
     /* The banners are optional: if the manifest is missing the rhythm still
@@ -667,10 +687,16 @@
       .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
     fetch('/images/store/parallax-manifest.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
+    /* The index band's own shoot. Optional like the rest: if it is missing the
+       band falls back to the product renditions it used before, which is wrong
+       shaped but not broken. */
+    fetch('/images/store/index-shots.json', { cache: 'no-cache' })
+      .then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; }),
   ]).then(function (both) {
     var data = both[0];
     BANNERS = (both[1] && both[1].banners) || null;
     PARALLAX = both[2] || null;
+    IXSHOTS = (both[3] && both[3].shots) || null;
     CAT = data;
     /* A lookup of every shot by file key, so a collection hero can be chosen by
        name. SEEDED FROM THE CATALOGUE, not rebuilt: this used to start empty

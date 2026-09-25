@@ -41,6 +41,51 @@
     .then(function (d) { CAT = d; })
     .catch(function () { CAT = { products: [] }; });
 
+  /* HOISTED OUT OF completeSet(), 2026-09-25. This block had been pasted into
+     the MIDDLE of completeSet: its declaration landed after that function’s
+     `var picks = ...` line and its closing brace split the function in two, so
+     pcard was scoped to completeSet and invisible to every sibling. The saved
+     page threw a ReferenceError in production and rendered zero cards while its
+     own counter read 1, and the cart’s empty state carried the same fault.
+     Three callers, two of which could not see it. It belongs here. */
+  /* ONE CARD, THREE CALLERS. This file rendered .st-card markup in three
+     places with three different shapes — no .shot wrapper, a landscape
+     700x560 on the <img> against a 4:5 frame, and a favourite button on only
+     one of them. That is the same drift that has produced a bug every time it
+     has appeared today, and here it showed as cards measuring 242x303 beside
+     217x271 in what is meant to be one grid.
+
+     It also takes the 4:5 `pdp` derivative rather than the landscape cover
+     one, so these cards match the store and the product page instead of being
+     squeezed. */
+  function pcard(p, opts) {
+    opts = opts || {};
+    var v = (p.shot && p.shot.pdp) || p.shot || {};
+    var id = p.id || opts.id;
+    return '<article class="st-card st-ui"' +
+        ' data-product-id="' + esc(id) + '"' +
+        ' data-product-name="' + esc(p.name) + '"' +
+        ' data-product-price="' + esc(p.price) + '"' +
+        ' data-product-category="' + esc(p.programLabel || p.category || '') + '"' +
+        ' data-product-image="' + esc(v.src || '') + '">' +
+      '<div class="shot">' +
+        '<a class="frame" href="/store-product.html?id=' + encodeURIComponent(id) + '" aria-label="' + esc(p.name) + '">' +
+          '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
+          ' sizes="(min-width:1024px) 22vw, 50vw" alt="' + esc(p.name) + '"' +
+          ' width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"' +
+          (opts.eager ? '' : ' loading="lazy"') + '></a>' +
+        (opts.fav
+          ? '<button class="fav fav-active" data-save-to-fav aria-label="Remove ' + esc(p.name) + ' from saved">' +
+            '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' +
+            '<path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.7 1.1-1a5.5 5.5 0 000-7.8z"/></svg></button>'
+          : '') +
+      '</div>' +
+      '<div class="foot"><div class="grp"><div class="t">' + esc(p.name) + '</div>' +
+        (p.programLabel ? '<div class="c">' + esc(p.programLabel) + '</div>' : '') + '</div>' +
+        '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
+    '</article>';
+  }
+
   /* ══════════════════════════════════════════════════════════════════════
      CART PAGE
      ══════════════════════════════════════════════════════════════════════ */
@@ -127,43 +172,6 @@
       items.forEach(function (l) { progs[l.category] = true; });
       var picks = CAT.products.filter(function (p) { return progs[p.programLabel] && !have[p.id]; }).slice(0, 4);
 
-  /* ONE CARD, THREE CALLERS. This file rendered .st-card markup in three
-     places with three different shapes — no .shot wrapper, a landscape
-     700x560 on the <img> against a 4:5 frame, and a favourite button on only
-     one of them. That is the same drift that has produced a bug every time it
-     has appeared today, and here it showed as cards measuring 242x303 beside
-     217x271 in what is meant to be one grid.
-
-     It also takes the 4:5 `pdp` derivative rather than the landscape cover
-     one, so these cards match the store and the product page instead of being
-     squeezed. */
-  function pcard(p, opts) {
-    opts = opts || {};
-    var v = (p.shot && p.shot.pdp) || p.shot || {};
-    var id = p.id || opts.id;
-    return '<article class="st-card st-ui"' +
-        ' data-product-id="' + esc(id) + '"' +
-        ' data-product-name="' + esc(p.name) + '"' +
-        ' data-product-price="' + esc(p.price) + '"' +
-        ' data-product-category="' + esc(p.programLabel || p.category || '') + '"' +
-        ' data-product-image="' + esc(v.src || '') + '">' +
-      '<div class="shot">' +
-        '<a class="frame" href="/store-product.html?id=' + encodeURIComponent(id) + '" aria-label="' + esc(p.name) + '">' +
-          '<img src="' + esc(v.src) + '"' + (v.srcset ? ' srcset="' + esc(v.srcset) + '"' : '') +
-          ' sizes="(min-width:1024px) 22vw, 50vw" alt="' + esc(p.name) + '"' +
-          ' width="' + (v.w || 1120) + '" height="' + (v.h || 1400) + '"' +
-          (opts.eager ? '' : ' loading="lazy"') + '></a>' +
-        (opts.fav
-          ? '<button class="fav fav-active" data-save-to-fav aria-label="Remove ' + esc(p.name) + ' from saved">' +
-            '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" aria-hidden="true">' +
-            '<path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1.1 1L12 21l7.7-7.7 1.1-1a5.5 5.5 0 000-7.8z"/></svg></button>'
-          : '') +
-      '</div>' +
-      '<div class="foot"><div class="grp"><div class="t">' + esc(p.name) + '</div>' +
-        (p.programLabel ? '<div class="c">' + esc(p.programLabel) + '</div>' : '') + '</div>' +
-        '<div class="p">' + (p.gated ? '<span class="gate">Request pricing</span>' : money(p.price)) + '</div></div>' +
-    '</article>';
-  }
 
       if (!picks.length) return '';
       return '<section class="st-sec" style="padding-left:0;padding-right:0">' +
