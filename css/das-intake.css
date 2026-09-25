@@ -1,0 +1,147 @@
+/* ============================================================================
+   THE INTAKE SURFACE — Retention Opportunity's intake design, on DAS
+   ----------------------------------------------------------------------------
+   Jayden 2026-09-25: the contact and quote pages "need to be redesigned very
+   deeply and they should have the retention opportunity design."
+
+   "The RO design" is two different systems inside that repo, so this was asked
+   rather than guessed. He picked the INTAKE surface, not the hi-vis assessment
+   one — and it is the right half for this job twice over: it is the surface RO
+   uses for exactly this task (getting a serious answer out of a serious buyer),
+   and its accent #215387 is ALREADY DAS's navy, so nothing collides.
+
+   Tokens lifted from retention-opportunity/components/intake/intake.module.css:
+
+       ink      #1A1F36      the thing you read
+       accent   #215387      the thing you act on  (= DAS navy)
+       ground   #F7FAFC      the surface a field sits on
+       line     #E3E8EE      the edge of everything
+       muted    #697386      the thing you read second
+
+   The restraint is the point. No gradients, no shadows doing decoration, one
+   accent used only for progress, focus and the primary action. It should read
+   as software a purchasing department already trusts.
+   ========================================================================== */
+
+.ix {
+  --ix-ink: #1A1F36;
+  --ix-accent: #215387;
+  --ix-accent-dark: #16406B;
+  --ix-ground: #F7FAFC;
+  --ix-line: #E3E8EE;
+  --ix-muted: #697386;
+  --ix-body: #3C4257;
+  --ix-danger: #B42318;
+  --ix-r: 8px;
+}
+
+/* ── the progress header ──────────────────────────────────────────────────
+   RO shows where you are before it shows what it wants. On a 22-field form
+   that is the difference between answering and leaving. */
+.ix-progress { margin: 0 0 26px; }
+.ix-progress-head {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  font-size: 13px; font-weight: 500; color: var(--ix-accent);
+}
+.ix-progress-head .ix-of { color: var(--ix-muted); font-variant-numeric: tabular-nums; }
+.ix-bar { margin-top: 8px; height: 6px; border-radius: 999px; background: var(--ix-line); overflow: hidden; }
+.ix-bar > i {
+  display: block; height: 100%; border-radius: 999px; width: 0;
+  background: var(--ix-accent); transition: width .24s cubic-bezier(.2,.8,.2,1);
+}
+
+/* ── a step ───────────────────────────────────────────────────────────────
+   Hidden with `hidden`, not display:none on a class, so the fields stay in
+   the DOM and the existing submit handler — which reads every value by
+   [name="..."] and posts to /api/contact — keeps working untouched. Breaking
+   lead capture to improve a form would be a bad trade. */
+.ix-step[hidden] { display: none; }
+.ix-steptitle {
+  margin: 0 0 4px; font-size: 20px; line-height: 1.25; font-weight: 600; color: var(--ix-ink);
+}
+.ix-stepsub { margin: 0 0 22px; font-size: 14px; line-height: 21px; color: var(--ix-muted); }
+
+/* ── fields ───────────────────────────────────────────────────────────────
+   One rule for every control on the page so a select never sits a pixel off
+   an input beside it. 16px on the control itself: below that iOS Safari zooms
+   on focus and never zooms back. */
+.ix .cf-input,
+.ix .cf-select,
+.ix .cf-textarea {
+  width: 100%; box-sizing: border-box;
+  min-height: 46px; padding: 12px 14px;
+  font: 400 16px/1.4 inherit; color: var(--ix-ink);
+  background: #fff; border: 1px solid #D5DBE5; border-radius: var(--ix-r);
+  box-shadow: 0 1px 1px rgba(26,31,54,.04);
+  transition: border-color .15s, box-shadow .15s;
+  appearance: none; -webkit-appearance: none;
+}
+.ix .cf-textarea { min-height: 132px; resize: vertical; line-height: 1.55; }
+.ix .cf-input::placeholder, .ix .cf-textarea::placeholder { color: #9AA3B2; }
+.ix .cf-input:hover, .ix .cf-select:hover, .ix .cf-textarea:hover { border-color: #BFC8D6; }
+.ix .cf-input:focus, .ix .cf-select:focus, .ix .cf-textarea:focus {
+  outline: none; border-color: var(--ix-accent);
+  box-shadow: 0 0 0 3px rgba(33,83,135,.14);
+}
+.ix .cf-label {
+  display: block; margin: 0 0 6px;
+  font-size: 13px; font-weight: 600; letter-spacing: .01em; color: var(--ix-body);
+}
+.ix .cf-req { color: var(--ix-accent); font-weight: 600; }
+
+/* A select needs its own arrow once appearance is stripped. */
+.ix .cf-select-wrap { position: relative; }
+.ix .cf-select-wrap::after {
+  content: ""; position: absolute; right: 15px; top: 50%; width: 9px; height: 9px;
+  border-right: 1.6px solid var(--ix-muted); border-bottom: 1.6px solid var(--ix-muted);
+  transform: translateY(-70%) rotate(45deg); pointer-events: none;
+}
+.ix .cf-select { padding-right: 38px; }
+
+.ix .cf-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 18px; }
+.ix .cf-row-full { display: block; margin-bottom: 18px; }
+.ix .cf-group { min-width: 0; }
+@media (max-width: 640px) { .ix .cf-row { grid-template-columns: 1fr; } }
+
+/* A field the stepper has flagged. */
+.ix .is-invalid,
+.ix .is-invalid:focus { border-color: var(--ix-danger); box-shadow: 0 0 0 3px rgba(180,35,24,.12); }
+.ix-err { margin: 6px 0 0; font-size: 12.5px; line-height: 18px; color: var(--ix-danger); }
+
+/* ── navigation ───────────────────────────────────────────────────────── */
+.ix-nav {
+  display: flex; justify-content: space-between; align-items: center; gap: 12px;
+  margin-top: 26px; padding-top: 20px; border-top: 1px solid var(--ix-line);
+}
+.ix-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 46px; padding: 0 22px; border-radius: var(--ix-r);
+  font: 600 15px/1 inherit; cursor: pointer; border: 1px solid transparent;
+  transition: background .15s, border-color .15s, color .15s;
+}
+.ix-btn-primary { background: var(--ix-accent); color: #fff; border-color: var(--ix-accent); }
+.ix-btn-primary:hover { background: var(--ix-accent-dark); border-color: var(--ix-accent-dark); }
+.ix-btn-ghost { background: #fff; color: var(--ix-body); border-color: #D5DBE5; }
+.ix-btn-ghost:hover { background: var(--ix-ground); border-color: #BFC8D6; }
+.ix-btn:focus-visible { outline: 2px solid var(--ix-accent); outline-offset: 2px; }
+.ix-nav .ix-spacer { margin-left: auto; }
+
+/* The real submit keeps its own id and type so the page's existing handler
+   still fires; it only gets this skin. */
+.ix .cf-submit {
+  width: 100%; min-height: 50px; border-radius: var(--ix-r);
+  background: var(--ix-accent); color: #fff; border: 1px solid var(--ix-accent);
+  font-size: 15px; font-weight: 600; cursor: pointer;
+}
+.ix .cf-submit:hover { background: var(--ix-accent-dark); }
+
+/* ── the review line ──────────────────────────────────────────────────────
+   RO shows what it already has before it asks for the last thing. It costs
+   one row and it stops people re-opening earlier steps to check. */
+.ix-review {
+  margin: 0 0 20px; padding: 12px 14px; border-radius: var(--ix-r);
+  background: var(--ix-ground); box-shadow: inset 0 0 0 1px var(--ix-line);
+  font-size: 13px; line-height: 20px; color: var(--ix-body);
+}
+.ix-review b { color: var(--ix-ink); font-weight: 600; }
+.ix-review:empty { display: none; }

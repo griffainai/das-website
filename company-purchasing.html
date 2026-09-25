@@ -516,6 +516,7 @@
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
   <link rel="stylesheet" href="/css/das-nav.css?v=12">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/das-intake.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -788,8 +789,20 @@
       <div id="cp-context" style="display:none;background:#F0F4FF;border:1px solid #C7D2FE;border-radius:10px;padding:14px 16px;margin-bottom:22px;font-size:0.875rem;color:#1A2E6E"></div>
 
       <!-- Company Purchasing form -->
-      <form id="company-form" novalidate>
+      <form id="company-form" class="ix" data-intake novalidate>
+        <div class="ix-progress">
+          <div class="ix-progress-head">
+            <span class="ix-progress-label"></span>
+            <span class="ix-of">Step 1 of 4</span>
+          </div>
+          <div class="ix-bar"><i></i></div>
+        </div>
 
+
+        <div class="ix-step" data-step-title="About you">
+          <h2 class="ix-steptitle">Who is asking?</h2>
+          <p class="ix-stepsub">Purchasing, safety, HR — whoever owns this, we reply to you directly.</p>
+        <!-- STEP: ABOUT YOU -->
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="first-name">First Name <span class="cf-req">*</span></label>
@@ -823,6 +836,11 @@
           </div>
         </div>
 
+        </div><!-- /ix-step -->
+        <div class="ix-step" data-step-title="What you are buying" hidden>
+          <h2 class="ix-steptitle">What should the quote cover?</h2>
+          <p class="ix-stepsub">Rough numbers are fine. We will confirm exact pricing before anything is produced.</p>
+        <!-- STEP: WHAT YOU ARE BUYING -->
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="product-interest">Product or Program of Interest <span class="cf-req">*</span></label>
@@ -854,6 +872,11 @@
              SCHEDULING — asked of everyone, because every order has a date.
              ══════════════════════════════════════════════════════════════ -->
         <p class="cf-label" style="margin:26px 0 2px;color:#64748B;font-weight:700;font-size:0.75rem;letter-spacing:.06em;text-transform:uppercase">Timing</p>
+        </div><!-- /ix-step -->
+        <div class="ix-step" data-step-title="Timing and billing" hidden>
+          <h2 class="ix-steptitle">When do you need it, and how do you buy?</h2>
+          <p class="ix-stepsub">Purchase orders, net-30 and vendor setup are all normal here — tell us which you need.</p>
+        <!-- STEP: TIMING AND BILLING -->
         <div class="cf-row">
           <div class="cf-group">
             <label class="cf-label" for="target-date">Target Delivery Date</label>
@@ -907,6 +930,12 @@
           </div>
         </div>
 
+        </div><!-- /ix-step -->
+        <div class="ix-step" data-step-title="Anything else" hidden>
+          <h2 class="ix-steptitle">Anything we should know?</h2>
+          <p class="ix-stepsub">Artwork, deadlines, a programme you are replacing — this is the useful box.</p>
+          <div class="ix-review"></div>
+        <!-- STEP: ANYTHING ELSE -->
         <div class="cf-row-full">
           <div class="cf-group">
             <label class="cf-label" for="message">Additional Notes</label>
@@ -963,6 +992,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
 
+        </div><!-- /ix-step -->
+
+        <div class="ix-nav">
+          <button type="button" class="ix-btn ix-btn-ghost" data-ix-back hidden>&larr;&nbsp; Back</button>
+          <span class="ix-spacer"></span>
+          <button type="button" class="ix-btn ix-btn-primary" data-ix-next>Continue &nbsp;&rarr;</button>
+        </div>
       </form>
 
       <p class="cr-note">Prefer to pay now by card? <a href="shop.html">Shop and check out instantly</a> — both ways are welcome.</p>
@@ -1337,5 +1373,6 @@
 <script src="js/das-popups.js?v=5" defer></script>
 <script src="/js/das-nav.js?v=2"></script>
 <script src="/js/das-forms.js?v=1" defer></script>
+  <script src="/js/das-intake.js?v=1"></script>
 </body>
 </html>

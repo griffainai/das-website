@@ -541,6 +541,7 @@
 <style id="fzr-griffain-credit">.fbot-credit{display:inline-flex;align-items:center;gap:0.4rem;font-size:0.78rem;font-weight:600;letter-spacing:0.01em;color:currentColor;opacity:0.62;text-decoration:none;transition:opacity .2s ease}.fbot-credit:hover{opacity:1}.fbot-credit svg{width:14px;height:14px;flex-shrink:0}footer>.fbot-credit{display:flex;justify-content:center;width:100%;padding:0.1rem 0 1.5rem}</style>
   <link rel="stylesheet" href="/css/das-nav.css?v=12">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="/css/das-intake.css?v=1">
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to main content</a>
@@ -839,8 +840,19 @@
       <div id="cr-card-header" class="cr-card-header"></div>
 
       <!-- Contact form -->
-      <form id="contact-form" novalidate>
+      <form id="contact-form" class="ix" data-intake novalidate>
+        <div class="ix-progress">
+          <div class="ix-progress-head">
+            <span class="ix-progress-label"></span>
+            <span class="ix-of">Step 1 of 3</span>
+          </div>
+          <div class="ix-bar"><i></i></div>
+        </div>
 
+
+        <div class="ix-step" data-step-title="Your fleet">
+          <h2 class="ix-steptitle">Who are we building this for?</h2>
+          <p class="ix-stepsub">Two answers and we can size a program for you.</p>
         <!-- Row 1: Company + Fleet size -->
         <div class="cf-row">
           <div class="cf-group">
@@ -862,6 +874,10 @@
           </div>
         </div>
 
+        </div><!-- /ix-step -->
+        <div class="ix-step" data-step-title="Your details" hidden>
+          <h2 class="ix-steptitle">Who should we reply to?</h2>
+          <p class="ix-stepsub">A real person answers every enquiry — this is where it goes.</p>
         <!-- Row 2: First + Last name -->
         <div class="cf-row">
           <div class="cf-group">
@@ -886,6 +902,11 @@
           </div>
         </div>
 
+        </div><!-- /ix-step -->
+        <div class="ix-step" data-step-title="What you need" hidden>
+          <h2 class="ix-steptitle">What are you trying to solve?</h2>
+          <p class="ix-stepsub">The more specific you are, the more useful our first reply will be.</p>
+          <div class="ix-review"></div>
         <!-- Full row: Program Interest -->
         <div class="cf-row-full">
           <div class="cf-group">
@@ -965,6 +986,13 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
         </button>
 
+        </div><!-- /ix-step -->
+
+        <div class="ix-nav">
+          <button type="button" class="ix-btn ix-btn-ghost" data-ix-back hidden>&larr;&nbsp; Back</button>
+          <span class="ix-spacer"></span>
+          <button type="button" class="ix-btn ix-btn-primary" data-ix-next>Continue &nbsp;&rarr;</button>
+        </div>
       </form>
 
       <p class="cr-note">Never sold, never shared. · Rather talk now? <a href="tel:3026810995" style="color:#1A2E6E;font-weight:700;text-decoration:none">Call 302.681.0995</a><br>For order status or returns, visit our <a href="customer-service.html">customer service center</a>.</p>
@@ -1401,5 +1429,6 @@
 })();
 </script>
 <script src="/js/das-forms.js?v=1" defer></script>
+  <script src="/js/das-intake.js?v=1"></script>
 </body>
 </html>

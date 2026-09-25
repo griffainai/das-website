@@ -23,6 +23,10 @@
   "v": "1",
   "hash": "052eb1ca3047"
  },
+ "css/das-intake.css": {
+  "v": "1",
+  "hash": "1cb84e16ea0e"
+ },
  "css/das-nav.css": {
   "v": "12",
   "hash": "262bd5e75741"
@@ -70,6 +74,10 @@
  "js/das-ideas.js": {
   "v": "1",
   "hash": "2434771d7762"
+ },
+ "js/das-intake.js": {
+  "v": "1",
+  "hash": "b9148f2d985a"
  },
  "js/das-nav.js": {
   "v": "2",
